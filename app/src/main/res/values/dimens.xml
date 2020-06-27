@@ -8,4 +8,6 @@
     <dimen name="iv_size_30">30dp</dimen>
     <dimen name="iv_size_50">50dp</dimen>
     <dimen name="margin_5">5dp</dimen>
+    <dimen name="button_width_120">120dp</dimen>
+    <dimen name="button_width_100">100dp</dimen>
 </resources>

@@ -22,12 +22,14 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
     protected lateinit var mBinding: T
     protected lateinit var mViewModel: V
     protected lateinit var mContext: Context
-//    protected lateinit var mPref: PreferencesHelper
+//  protected lateinit var mPref: PreferencesHelper
     private lateinit var mManager: FragmentManager
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        LanguageManager.setLanguage(this@BaseActivity, HotSpotApp.prefs!!.getLanguage())
+
         mBinding = DataBindingUtil.setContentView(this@BaseActivity, getLayoutId())
         mViewModel = ViewModelProvider(this@BaseActivity).get(getViewModel())
         mManager = supportFragmentManager
