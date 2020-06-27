@@ -11,19 +11,19 @@ import com.ey.hotspot.app_core_lib.BaseActivity
 
 var toast: Toast? = null
 
-fun Activity.showMessage(message: String) {
+fun Activity.showMessage(message: String, lengthLong: Boolean = false) {
     if (toast != null){
         toast?.cancel()
     }
-    toast = Toast.makeText(this, message, Toast.LENGTH_SHORT)
+    toast = Toast.makeText(this, message, if (lengthLong) Toast.LENGTH_LONG else Toast.LENGTH_SHORT)
     toast?.show()
 }
 
-fun Fragment.showMessage(message: String) {
+fun Fragment.showMessage(message: String, lengthLong: Boolean = false) {
     if (toast != null){
         toast?.cancel()
     }
-    toast = Toast.makeText(this.activity, message, Toast.LENGTH_SHORT)
+    toast = Toast.makeText(this.activity, message, if (lengthLong) Toast.LENGTH_LONG else Toast.LENGTH_SHORT)
     toast?.show()
 }
 

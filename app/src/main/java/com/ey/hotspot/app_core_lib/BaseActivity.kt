@@ -3,7 +3,6 @@ package com.ey.hotspot.app_core_lib
 import android.content.Context
 import android.content.pm.ActivityInfo
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -31,13 +30,6 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
 //        mPref = PreferencesHelper
 //        createDialog()
         onBinding()
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item!!.itemId) {
-            android.R.id.home -> onBackPressed()
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     fun addFragment(fragment: Fragment, addToBackstack: Boolean, bundle: Bundle? = null) {
