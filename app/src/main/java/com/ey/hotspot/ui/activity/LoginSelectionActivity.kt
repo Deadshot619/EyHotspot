@@ -1,13 +1,13 @@
 package com.ey.hotspot.ui.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseActivity
 import com.ey.hotspot.databinding.ActivityLoginSelectionBinding
+import com.ey.hotspot.viewmodels.LoginSelectionViewModel
 
-class LoginSelectionActivity : BaseActivity() {
+class LoginSelectionActivity : BaseActivity<ActivityLoginSelectionBinding,LoginSelectionViewModel> (){
 
 
     private lateinit var binding: ActivityLoginSelectionBinding
@@ -16,5 +16,16 @@ class LoginSelectionActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login_selection)
+    }
+
+    override fun getLayoutId(): Int {
+       return R.layout.activity_login_selection
+    }
+
+    override fun getViewModel(): Class<LoginSelectionViewModel> {
+        return  LoginSelectionViewModel::class.java
+    }
+
+    override fun onBinding() {
     }
 }

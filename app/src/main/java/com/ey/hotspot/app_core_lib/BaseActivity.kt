@@ -10,6 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import com.ey.hotspot.R
+import android.content.Intent
+import android.os.Build
+import android.util.Log
+import com.ey.stringlocalization.utils.LanguageManager
+import com.ey.stringlocalization.utils.MyHotSpotSharedPreference
 
 abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatActivity(),
     UICallbacks<V> {
@@ -19,6 +24,7 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
     protected lateinit var mContext: Context
 //    protected lateinit var mPref: PreferencesHelper
     private lateinit var mManager: FragmentManager
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,4 +78,37 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
         }
         supportFragmentManager.popBackStack()
     }
+
+    fun restartApplication(context: Context?, thobeSharedPreference: MyHotSpotSharedPreference) {
+        Log.d("Langu", " --> " + thobeSharedPreference.getLanguage())
+        LanguageManager.setLanguage(context!!, thobeSharedPreference.getLanguage())
+        /**
+         * restart the application for API > 25 otherwise just recreate
+         */
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N_MR1) {
+            restartApp()
+        } else {
+            /**
+             * pop back fragment before activity recreating
+             */
+
+            recreate()
+        }
+    }
+
+    fun restartApp() {
+
+
+        val i = baseContext.packageManager
+            .getLaunchIntentForPackage(baseContext.packageName)
+        i!!.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        finish()
+        startActivity(i)
+    }
+
+
+
+
+
+
 }

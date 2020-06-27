@@ -3,6 +3,7 @@ package com.ey.hotspot.ui.activity
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseActivity
 import com.ey.hotspot.databinding.ActivitySplashBinding
+import com.ey.hotspot.viewmodels.SplashViewModel
 
 class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
 

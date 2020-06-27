@@ -1,4 +1,4 @@
-package com.ey.hotspot.ui.activity
+package com.ey.hotspot.viewmodels
 
 import android.app.Application
 import com.ey.hotspot.app_core_lib.BaseViewModel
