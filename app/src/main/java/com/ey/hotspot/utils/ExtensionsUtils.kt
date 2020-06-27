@@ -1,4 +1,4 @@
-package com.ey.hotspot.ui.utils
+package com.ey.hotspot.utils
 
 import android.app.Activity
 import android.content.Context

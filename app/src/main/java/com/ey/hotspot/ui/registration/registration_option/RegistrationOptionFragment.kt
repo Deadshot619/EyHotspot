@@ -1,10 +1,10 @@
-package com.ey.hotspot.ui.fragment
+package com.ey.hotspot.ui.registration.registration_option
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.ey.hotspot.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -50,7 +50,8 @@ class RegistrationOptionFragment : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            RegistrationOptionFragment().apply {
+            RegistrationOptionFragment()
+                .apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

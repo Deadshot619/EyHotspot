@@ -2,7 +2,7 @@ package com.ey.hotspot.app_core_lib
 
 import android.app.Application
 import android.content.SharedPreferences
-import androidx.preference.PreferenceManager
+import android.preference.PreferenceManager
 
 abstract class CoreApp : Application() {
 

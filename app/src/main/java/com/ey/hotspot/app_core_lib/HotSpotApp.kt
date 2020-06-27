@@ -3,9 +3,9 @@ package com.ey.hotspot.app_core_lib
 import android.content.Context
 import android.content.res.Configuration
 import android.os.Build
+import android.preference.PreferenceManager
 import android.util.Log
 import androidx.multidex.MultiDex
-import androidx.preference.PreferenceManager
 import com.ey.stringlocalization.utils.LanguageManager
 import com.ey.stringlocalization.utils.MyHotSpotSharedPreference
 
@@ -30,7 +30,7 @@ class HotSpotApp :CoreApp() {
 
             if (base != null) {
 
-                CoreApp.sharedPreferences =PreferenceManager.getDefaultSharedPreferences(base)
+                CoreApp.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(base)
                 prefs = MyHotSpotSharedPreference(base)
 
                 Log.d("Langu attachBase", prefs?.getLanguage())
@@ -50,6 +50,4 @@ class HotSpotApp :CoreApp() {
         Log.d("on configuration", prefs?.getLanguage())
         LanguageManager.setLanguage(applicationContext, prefs?.getLanguage())
     }
-
-
 }

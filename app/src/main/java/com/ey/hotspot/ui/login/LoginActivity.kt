@@ -1,7 +1,7 @@
-package com.ey.hotspot.ui.activity
+package com.ey.hotspot.ui.login
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.ey.hotspot.R
 
 class LoginActivity : AppCompatActivity() {
