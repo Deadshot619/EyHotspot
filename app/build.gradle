@@ -22,6 +22,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    //data binding
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -36,5 +41,13 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
 
+    //Material Design
+    implementation 'com.google.android.material:material:1.2.0-alpha03'
+
+//Facebook Login
+    implementation 'com.facebook.android:facebook-android-sdk:6.1.0'
+
+    //Google Sign in
+    implementation 'com.google.android.gms:play-services-auth:18.0.0'
 
 }
