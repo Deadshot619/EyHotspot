@@ -16,4 +16,37 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
+
+    <style name="TextAppearance.MyApp.Headline3" parent="TextAppearance.MaterialComponents.Headline3">
+
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/text_size_20</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:letterSpacing">0</item>
+
+    </style>
+
+
+
+    <style name="TextAppearance.MyApp.Headline5" parent="TextAppearance.MaterialComponents.Headline5">
+
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/text_size_15</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:letterSpacing">0</item>
+
+    </style>
+
+    <style name="TextAppearance.MyApp.Headline5_bold" parent="TextAppearance.MaterialComponents.Headline5">
+
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/text_size_15</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:letterSpacing">0</item>
+
+    </style>
+
 </resources>
