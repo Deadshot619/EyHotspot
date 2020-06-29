@@ -13,8 +13,5 @@ class EmailVerificationFragment : BaseFragment<FragmentEmailVerificationBinding,
     override fun getLayoutId() = R.layout.fragment_email_verification
     override fun getViewModel() = EmailVerificationViewModel::class.java
     override fun onBinding() {
-
-
-
     }
 }

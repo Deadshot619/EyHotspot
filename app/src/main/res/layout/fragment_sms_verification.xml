@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="@dimen/common_padding_start"
+        android:paddingTop="@dimen/common_padding_top"
+        android:paddingEnd="@dimen/common_padding_end"
+        tools:context=".ui.registration.sms_verification.SmsVerificationFragment">
+
+        <!--    Sms image  -->
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_sms"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="@dimen/common_margin_top"
+            android:src="@drawable/ic_baseline_email_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--        Mobile number verification label-->
+        <TextView
+            android:id="@+id/tv_mobile_no_verification_label"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_margin_top"
+            android:gravity="center"
+            android:text="@string/verification_method_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_sms" />
+
+        <!--        OTP sent label-->
+        <TextView
+            android:id="@+id/tv_otp_sent_label"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_margin_top"
+            android:gravity="center"
+            android:text="@string/link_sent_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_mobile_no_verification_label" />
+
+        <!-- OTP input-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/otp_input_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_margin_top"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_otp_sent_label">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_otp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--    Submit  -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_margin_top"
+            android:text="@string/submit_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/otp_input_layout" />
+
+        <!--        Resend label-->
+        <TextView
+            android:id="@+id/tv_resend_label"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_margin_top"
+            android:gravity="center"
+            android:text="@string/resend_label"
+            android:layout_marginStart="@dimen/common_margin_start"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toEndOf="@id/btn_submit"
+            app:layout_constraintTop_toTopOf="@id/btn_submit" />
+
+        <!--Sign In-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_sign_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_margin_top"
+            android:text="@string/sign_in_label"
+            app:layout_constraintVertical_bias="1"
+            android:layout_marginBottom="@dimen/common_margin_bottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_submit" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

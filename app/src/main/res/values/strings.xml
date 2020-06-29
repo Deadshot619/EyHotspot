@@ -3,7 +3,11 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="login_button">Login</string>
     <string name="registration_button">Register</string>
+
+
     <string name="sign_in_label">Sign In</string>
+    <string name="submit_label">Submit</string>
+
 
 
     <!--    Register User   -->
@@ -26,5 +30,12 @@
     <string name="link_sent_label">A verification link has been sent to </string>
     <string name="check_email_label">Please check your emial &amp; follow the link to activate your account</string>
     <string name="resend_link_label">Resend link?</string>
+
+    <!--Mobile Number verification-->
+    <string name="mobile_no_verification_label">Mobile number verification</string>
+    <string name="otp_sent_label">Please enter OTP sent to </string>
+    <string name="check_email_label">Please check your emial &amp; follow the link to activate your account</string>
+    <string name="resend_label">Resend</string>
+
 
 </resources>
