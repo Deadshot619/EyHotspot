@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="@dimen/common_padding_start"
+        android:paddingTop="@dimen/common_padding_top"
+        android:paddingEnd="@dimen/common_padding_end"
+        tools:context=".ui.registration.incomplete_registration.IncompleteRegistrationFragment">
+
+        <!--    User image  -->
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_user"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="@dimen/common_margin_top"
+            android:src="@drawable/ic_baseline_person_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--        Verification method-->
+        <TextView
+            android:id="@+id/tv_select_verification_method_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_margin_top"
+            android:gravity="center"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
+            android:text="@string/verification_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_user" />
+
+        <!--       already registered label-->
+        <TextView
+            android:id="@+id/tv_already_registered_label"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_margin_top"
+            android:gravity="center"
+            android:text="@string/link_sent_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_select_verification_method_label" />
+
+        <!--        check email label-->
+        <TextView
+            android:id="@+id/tv_complete_registration_label"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_margin_top"
+            android:gravity="center"
+            android:text="@string/check_email_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_already_registered_label" />
+
+
+        <!--otp on sms-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_otp_sms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_margin_top"
+            android:text="@string/otp_sms_label"
+            app:layout_constraintStart_toStartOf="@id/tv_complete_registration_label"
+            app:layout_constraintTop_toBottomOf="@id/tv_complete_registration_label" />
+
+        <!--Email Link-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_email_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_margin_top"
+            android:text="@string/email_link_label"
+            app:layout_constraintEnd_toEndOf="@id/tv_complete_registration_label"
+            app:layout_constraintTop_toBottomOf="@id/tv_complete_registration_label" />
+
+        <!--Sign In-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_sign_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_margin_top"
+            android:layout_marginBottom="@dimen/common_margin_bottom"
+            android:text="@string/sign_in_label"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_otp_sms"
+            app:layout_constraintVertical_bias="1" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

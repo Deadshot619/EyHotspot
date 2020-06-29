@@ -15,7 +15,7 @@
         android:paddingStart="@dimen/common_padding_start"
         android:paddingEnd="@dimen/common_padding_end">
 
-        <!--    User image  -->
+    <!--    User image  -->
        <androidx.appcompat.widget.AppCompatImageView
            android:id="@+id/iv_user"
            android:src="@drawable/ic_baseline_person_24"
