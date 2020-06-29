@@ -16,4 +16,9 @@
     <string name="captcha_label">Enter the message shown below</string>
     <string name="next_label">Next</string>
 
+    <!--    Registration Option    -->
+    <string name="verification_method_label">Select verification method</string>
+    <string name="otp_sms_label">OTP on SMS</string>
+    <string name="email_link_label">Email Link</string>
+
 </resources>
