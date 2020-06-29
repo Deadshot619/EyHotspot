@@ -10,6 +10,10 @@ import com.ey.hotspot.ui.login.LoginActivity
 class LoginSelectionFragment :
     BaseFragment<FragmentLoginSelectionBinding, LoginSelectionFragmentViewModel>() {
 
+    companion object {
+        fun newInstance() = LoginSelectionFragment()
+    }
+
     override fun getLayoutId() = R.layout.fragment_login_selection
     override fun getViewModel() = LoginSelectionFragmentViewModel::class.java
     override fun onBinding() {
@@ -22,5 +26,4 @@ class LoginSelectionFragment :
 
 
     }
-
 }

@@ -1,8 +1,11 @@
 package com.ey.hotspot.app_core_lib
 
 import android.content.Context
+import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -10,9 +13,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import com.ey.hotspot.R
-import android.content.Intent
-import android.os.Build
-import android.util.Log
 import com.ey.stringlocalization.utils.LanguageManager
 import com.ey.stringlocalization.utils.MyHotSpotSharedPreference
 
@@ -32,6 +32,7 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
 
         mBinding = DataBindingUtil.setContentView(this@BaseActivity, getLayoutId())
         mViewModel = ViewModelProvider(this@BaseActivity).get(getViewModel())
+
         mManager = supportFragmentManager
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         mContext = this@BaseActivity
@@ -99,18 +100,10 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
     }
 
     fun restartApp() {
-
-
         val i = baseContext.packageManager
             .getLaunchIntentForPackage(baseContext.packageName)
         i!!.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         finish()
         startActivity(i)
     }
-
-
-
-
-
-
 }

@@ -20,4 +20,16 @@
 
     <dimen name="text_size_20">20sp</dimen>
 
+
+    <dimen name="common_margin_top">16dp</dimen>
+    <dimen name="common_margin_bottom">16dp</dimen>
+    <dimen name="common_margin_start">16dp</dimen>
+    <dimen name="common_margin_end">16dp</dimen>
+    <dimen name="common_margin_between_fields">8dp</dimen>
+
+    <dimen name="common_padding_top">16dp</dimen>
+    <dimen name="common_padding_bottom">16dp</dimen>
+    <dimen name="common_padding_start">16dp</dimen>
+    <dimen name="common_padding_end">16dp</dimen>
+
 </resources>
