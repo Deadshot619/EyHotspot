@@ -21,4 +21,10 @@
     <string name="otp_sms_label">OTP on SMS</string>
     <string name="email_link_label">Email Link</string>
 
+    <!--Email verification-->
+    <string name="email_verification_label">Email verification</string>
+    <string name="link_sent_label">A verification link has been sent to </string>
+    <string name="check_email_label">Please check your emial &amp; follow the link to activate your account</string>
+    <string name="resend_link_label">Resend link?</string>
+
 </resources>

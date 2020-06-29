@@ -12,6 +12,6 @@ class RegistrationActivity : BaseActivity<ActivityRegistrationBinding, Registrat
 
     override fun onBinding() {
         //Add fragment to activity
-        addFragment(fragment = RegisterUserFragment(), addToBackstack = true, bundle = null)
+        addFragment(fragment = RegisterUserFragment.newInstance(), addToBackstack = true, bundle = null)
     }
 }
