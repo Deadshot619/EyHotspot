@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.ey.hotspot.ui.registration.register_user.RegisterUserViewModel" />
     </data>
 
     <ScrollView
@@ -37,6 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/common_margin_between_fields"
                 android:layout_marginEnd="@dimen/common_margin_end"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/tv_first_name_label"
                 app:layout_constraintTop_toBottomOf="@id/tv_first_name_label">
@@ -44,6 +47,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_first_name"
                     android:layout_width="match_parent"
+                    android:text="@={viewModel.firstName}"
                     android:layout_height="match_parent" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -68,6 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/common_margin_between_fields"
                 android:layout_marginEnd="@dimen/common_margin_end"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/tv_last_name_label"
                 app:layout_constraintTop_toBottomOf="@id/tv_last_name_label">
@@ -75,6 +80,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_last_name"
                     android:layout_width="match_parent"
+                    android:text="@={viewModel.lastName}"
                     android:layout_height="match_parent" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -99,12 +105,15 @@
                 android:layout_marginTop="@dimen/common_margin_between_fields"
                 android:layout_marginEnd="@dimen/common_margin_end"
                 app:layout_constraintEnd_toEndOf="parent"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+
                 app:layout_constraintStart_toStartOf="@id/tv_email_label"
                 app:layout_constraintTop_toBottomOf="@id/tv_email_label">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_email"
                     android:layout_width="match_parent"
+                    android:text="@={viewModel.emailId}"
                     android:layout_height="match_parent" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -115,7 +124,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/common_margin_top"
-                android:text="@string/email_id_label"
+                android:text="@string/mobile_number_label"
                 app:layout_constraintEnd_toEndOf="@id/email_input_layout"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="@id/email_input_layout"
@@ -128,6 +137,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/common_margin_between_fields"
                 android:layout_marginEnd="@dimen/common_margin_end"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/tv_mobile_no_label"
                 app:layout_constraintTop_toBottomOf="@id/tv_mobile_no_label">
@@ -135,6 +146,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_mobile_no"
                     android:layout_width="match_parent"
+                    android:text="@={viewModel.mobileNumber}"
                     android:layout_height="match_parent" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -144,6 +156,8 @@
                 android:id="@+id/tv_password_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+
                 android:layout_marginTop="@dimen/common_margin_top"
                 android:text="@string/password_label"
                 app:layout_constraintEnd_toEndOf="@id/mobile_no_layout"
@@ -158,6 +172,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/common_margin_between_fields"
                 android:layout_marginEnd="@dimen/common_margin_end"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/tv_password_label"
                 app:layout_constraintTop_toBottomOf="@id/tv_password_label">
@@ -165,6 +181,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_password"
                     android:layout_width="match_parent"
+                    android:text="@={viewModel.password}"
                     android:layout_height="match_parent" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -188,6 +205,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/common_margin_between_fields"
                 android:layout_marginEnd="@dimen/common_margin_end"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/tv_confirm_password_label"
                 app:layout_constraintTop_toBottomOf="@id/tv_confirm_password_label">
@@ -195,6 +214,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_confirm_password"
                     android:layout_width="match_parent"
+                    android:text="@={viewModel.confirmPassword}"
                     android:layout_height="match_parent" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -219,6 +239,8 @@
                 android:layout_marginTop="@dimen/common_margin_between_fields"
                 android:layout_marginEnd="@dimen/common_margin_end"
                 app:layout_constraintEnd_toEndOf="parent"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+
                 app:layout_constraintStart_toStartOf="@id/tv_captcha_label"
                 app:layout_constraintTop_toBottomOf="@id/tv_captcha_label">
 

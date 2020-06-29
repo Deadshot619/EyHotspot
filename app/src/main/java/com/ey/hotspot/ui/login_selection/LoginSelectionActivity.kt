@@ -13,6 +13,6 @@ class LoginSelectionActivity :
 
     override fun onBinding() {
         //Add fragment to activity
-        addFragment(fragment = LoginSelectionFragment(), addToBackstack = true, bundle = null)
+        addFragment(fragment = LoginSelectionFragment.newInstance(), addToBackstack = true, bundle = null)
     }
 }
