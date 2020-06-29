@@ -13,5 +13,4 @@ class LoginSelectionFragment : BaseFragment<FragmentLoginSelectionBinding, Login
 
 
     }
-
 }

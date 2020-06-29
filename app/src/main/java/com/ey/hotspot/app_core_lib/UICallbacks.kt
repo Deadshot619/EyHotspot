@@ -6,6 +6,8 @@ interface UICallbacks<V> {
 
     @LayoutRes
     fun getLayoutId(): Int
+
     fun getViewModel(): Class<V>
+
     fun onBinding()
 }

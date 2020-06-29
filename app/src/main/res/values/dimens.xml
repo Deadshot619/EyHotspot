@@ -10,4 +10,11 @@
     <dimen name="margin_5">5dp</dimen>
     <dimen name="button_width_120">120dp</dimen>
     <dimen name="button_width_100">100dp</dimen>
+
+    <dimen name="common_margin_top">16dp</dimen>
+    <dimen name="common_margin_bottom">16dp</dimen>
+    <dimen name="common_margin_start">16dp</dimen>
+    <dimen name="common_margin_end">16dp</dimen>
+    <dimen name="common_margin_between_fields">8dp</dimen>
+
 </resources>

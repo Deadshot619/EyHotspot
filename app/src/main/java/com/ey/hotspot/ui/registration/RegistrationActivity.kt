@@ -1,12 +1,17 @@
 package com.ey.hotspot.ui.registration
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.ey.hotspot.R
+import com.ey.hotspot.app_core_lib.BaseActivity
+import com.ey.hotspot.databinding.ActivityRegistrationBinding
+import com.ey.hotspot.ui.registration.register_user.RegisterUserFragment
 
-class RegistrationActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_registration)
+class RegistrationActivity : BaseActivity<ActivityRegistrationBinding, RegistrationActivityViewModel>() {
+
+    override fun getLayoutId() = R.layout.activity_registration
+    override fun getViewModel() = RegistrationActivityViewModel::class.java
+
+    override fun onBinding() {
+        //Add fragment to activity
+        addFragment(fragment = RegisterUserFragment(), addToBackstack = true, bundle = null)
     }
 }

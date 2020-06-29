@@ -11,6 +11,9 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
     protected val viewModelJob = Job()
     protected val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
+
+
+
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
