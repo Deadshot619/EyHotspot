@@ -1,4 +1,4 @@
-package com.ey.hotspot.ui.login.login_fragment.forgorpasswordmobile
+package com.ey.hotspot.ui.login.forgorpasswordmobile
 
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment

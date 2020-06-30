@@ -4,11 +4,11 @@
     <string name="login_button">Login</string>
     <string name="registration_button">Register</string>
 
-
+    <!--Common-->
     <string name="registration_label">Registration</string>
     <string name="sign_in_label">Sign In</string>
     <string name="submit_label">Submit</string>
-
+    <string name="next_label">Next</string>
 
 
     <!--    Register User   -->
@@ -19,7 +19,6 @@
     <string name="password_label">Password</string>
     <string name="confirm_password_label">Confirm Password</string>
     <string name="captcha_label">Enter the message shown below</string>
-    <string name="next_label">Next</string>
 
     <!--    Registration Option    -->
     <string name="verification_method_label">Select verification method</string>
@@ -43,7 +42,7 @@
     <string name="complete_registration_label">Complete your registration by selecting below option</string>
 
 
-
+    <!--Login-->
     <string name="welcome">Welcome</string>
     <string name="userName">Username</string>
     <string name="userpassword">Password</string>
@@ -55,7 +54,7 @@
    //Clustring
    <string name="maps_api_key">AIzaSyBqFJqQpuMaYT5mpVw0K3pu5XQqcpJ2_tQ</string>
    -->
-    <string name="maps_api_key">AIzaSyDQoLf9R4PKHdcR6TKEh5q8lnVu3QvwjxU</string>
+    <string name="maps_api_key" translatable="false">AIzaSyDQoLf9R4PKHdcR6TKEh5q8lnVu3QvwjxU</string>
     <string name="searchplace">Search</string>
     <string name="permission_description">Lorem ipsum dolor sit amet, ua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
     <string name="agree_terms">I Agree</string>

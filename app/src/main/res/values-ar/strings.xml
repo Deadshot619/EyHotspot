@@ -21,4 +21,42 @@
     <string name="change_password">غير كلمة السر</string>
     <string name="newPassword">كلمة سر جديدة</string>
     <string name="confirm_password">تأكيد كلمة المرور</string>
+
+    <!--Common-->
+    <string name="registration_label">التسجيل</string>
+    <string name="sign_in_label">تسجيل الدخول</string>
+    <string name="submit_label">إرسال</string>
+    <string name="next_label">التالى</string>
+
+
+    <!--    Register User   -->
+    <string name="first_name_label">الاسم الاول</string>
+    <string name="last_name_label">الكنية</string>
+    <string name="email_id_label">عنوان الايميل</string>
+    <string name="mobile_number_label">رقم الهاتف المحمول</string>
+    <string name="password_label">كلمه السر</string>
+    <string name="confirm_password_label">تأكيد كلمة المرور</string>
+    <string name="captcha_label">أدخل الرسالة الموضحة أدناه</string>
+
+    <!--    Registration Option    -->
+    <string name="verification_method_label">حدد طريقة التحقق</string>
+    <string name="otp_sms_label">OTP على الرسائل القصيرة</string>
+    <string name="email_link_label">رابط البريد الإلكتروني</string>
+
+    <!--Email verification-->
+    <string name="email_verification_label">تأكيد بواسطة البريد الالكتروني</string>
+    <string name="link_sent_label">تم إرسال رابط التحقق إلى %s</string>
+        <string name="check_email_label">يرجى التحقق من بريدك الإلكتروني واتبع الرابط لتفعيل حسابك</string>
+    <string name="resend_link_label">إعادة إرسال الرابط؟</string>
+
+    <!--Mobile Number verification-->
+    <string name="mobile_no_verification_label">التحقق من رقم الهاتف المحمول</string>
+    <string name="otp_sent_label">الرجاء إدخال OTP المرسلة إلى %s</string>
+    <string name="resend_label">إعادة إرسال</string>
+
+    <!--Incomplete registration-->
+    <string name="verification_label">التحقق</string>
+    <string name="already_registered_label">لقد سجلت بالفعل مع %s و %s</string>
+    <string name="complete_registration_label">أكمل تسجيلك بتحديد الخيار أدناه</string>
+
 </resources>

@@ -11,6 +11,8 @@ class RegistrationActivity : BaseActivity<ActivityRegistrationBinding, Registrat
     override fun getViewModel() = RegistrationActivityViewModel::class.java
 
     override fun onBinding() {
+        supportActionBar?.title = getString(R.string.registration_label)
+
         //Add fragment to activity
         addFragment(fragment = RegisterUserFragment.newInstance(), addToBackstack = true, bundle = null)
     }

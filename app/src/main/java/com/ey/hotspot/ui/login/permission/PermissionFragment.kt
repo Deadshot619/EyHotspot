@@ -1,4 +1,4 @@
-package com.ey.hotspot.ui.login.login_fragment.permission
+package com.ey.hotspot.ui.login.permission
 
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment

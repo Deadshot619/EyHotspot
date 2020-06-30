@@ -106,4 +106,10 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
         finish()
         startActivity(i)
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        if (mManager.fragments.isEmpty())
+            finish()
+    }
 }

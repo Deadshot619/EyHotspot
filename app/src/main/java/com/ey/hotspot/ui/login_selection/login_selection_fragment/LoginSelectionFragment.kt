@@ -6,6 +6,7 @@ import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentLoginSelectionBinding
 import com.ey.hotspot.ui.login.LoginActivity
+import com.ey.hotspot.ui.registration.RegistrationActivity
 
 class LoginSelectionFragment :
     BaseFragment<FragmentLoginSelectionBinding, LoginSelectionFragmentViewModel>() {
@@ -18,12 +19,21 @@ class LoginSelectionFragment :
     override fun getViewModel() = LoginSelectionFragmentViewModel::class.java
     override fun onBinding() {
 
-        mBinding.btLogin.setOnClickListener {
+        setUpListeners()
 
+    }
+
+
+    private fun setUpListeners(){
+        //Login
+        mBinding.btLogin.setOnClickListener {
             val loginIntent = Intent(activity, LoginActivity::class.java)
             startActivity(loginIntent)
         }
 
-
+        //Registration
+        mBinding.btnRegistration.setOnClickListener {
+            startActivity(Intent(activity, RegistrationActivity::class.java))
+        }
     }
 }
