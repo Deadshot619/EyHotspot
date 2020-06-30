@@ -1,9 +1,11 @@
 package com.ey.hotspot.ui.registration.register_user
 
+import android.os.Bundle
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentRegisterUserBinding
 import com.ey.hotspot.ui.registration.registration_option.RegistrationOptionFragment
+import com.ey.hotspot.utils.constants.OptionType
 import com.ey.hotspot.utils.replaceFragment
 import com.ey.hotspot.utils.validations.isEmailValid
 import com.ey.hotspot.utils.validations.isPasswordValid
@@ -35,12 +37,16 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
             //Next button
             btnNext.setOnClickListener {
                 if (validate())
-                    replaceFragment(RegistrationOptionFragment.newInstance(), true, null)
+                    replaceFragment(RegistrationOptionFragment.newInstance(), true, Bundle().apply {
+                        putString(RegistrationOptionFragment.TYPE_KEY, OptionType.TYPE_REGISTRATION.name)
+                    })
             }
 
             //Sign In button
             btnSignIn.setOnClickListener {
-                replaceFragment(RegistrationOptionFragment.newInstance(), true, null)
+                replaceFragment(RegistrationOptionFragment.newInstance(), true, Bundle().apply {
+                    putString(RegistrationOptionFragment.TYPE_KEY, OptionType.TYPE_REGISTRATION.name)
+                })
             }
         }
     }

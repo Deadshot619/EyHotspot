@@ -6,18 +6,11 @@ import com.ey.hotspot.databinding.ForgotPasswordEmailFragmentBinding
 
 class ForgotPasswordEmailFragment :
     BaseFragment<ForgotPasswordEmailFragmentBinding, ForgotPasswordEmailViewModel>() {
-    override fun getLayoutId(): Int {
 
-        return R.layout.forgot_password_email_fragment
-    }
-
-    override fun getViewModel(): Class<ForgotPasswordEmailViewModel> {
-
-        return ForgotPasswordEmailViewModel::class.java
-    }
+    override fun getLayoutId() = R.layout.forgot_password_email_fragment
+    override fun getViewModel() = ForgotPasswordEmailViewModel::class.java
 
     override fun onBinding() {
+
     }
-
-
 }

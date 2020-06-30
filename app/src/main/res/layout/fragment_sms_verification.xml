@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/common_margin_top"
             android:gravity="center"
-            android:text="@string/verification_method_label"
+            android:text="@string/mobile_no_verification_label"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_sms" />

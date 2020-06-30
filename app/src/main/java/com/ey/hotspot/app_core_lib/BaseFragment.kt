@@ -35,7 +35,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
      * This method is used to get data from Fragment arguments
      */
     protected fun getDataFromArguments(context: Fragment, key: String): String {
-        return context.arguments?.getString(key)!!
+        return context.arguments?.getString(key) ?: ""
         //Not a good way to do, due to tight coupling of fragment to activity
 //        return ReportsPageActivity().visitReportId
     }
