@@ -55,6 +55,12 @@
     <string name="reviews_label">Reviews</string>
     <string name="complaint_label">Complaint</string>
 
+    <!--Speed Test-->
+    <string name="speed_test_result_label">Speed Test Result</string>
+    <string name="download_label">Download</string>
+    <string name="comment_and_evaluate_label">Comment and Evaluate</string>
+    <string name="rate_wifi_label">Rate Wifi</string>
+
 
     <!--
    //Clustring

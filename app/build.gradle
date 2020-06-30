@@ -84,4 +84,7 @@ dependencies {
         implementation 'com.google.maps.android:android-maps-utils:2.0.0'
     }
 
+    //JSpeedtest Internet speed check library
+    implementation 'fr.bmartel:jspeedtest:1.32.1'
+
 }

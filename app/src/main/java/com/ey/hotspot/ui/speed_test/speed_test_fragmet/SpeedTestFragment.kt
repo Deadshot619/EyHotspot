@@ -18,4 +18,5 @@ class SpeedTestFragment : BaseFragment<FragmentSpeedTestBinding, SpeedTestFragme
 
 
     }
+
 }

@@ -8,5 +8,4 @@ interface Constants {
         const val ENGLISH_LANG: String  = "en"
         const val ARABIC_LANG: String  = "ar"
     }
-
 }

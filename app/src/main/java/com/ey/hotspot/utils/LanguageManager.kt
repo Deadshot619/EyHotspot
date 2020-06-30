@@ -20,15 +20,12 @@ object LanguageManager {
         val config = Configuration()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             setSystemLocale(config, locale)
-
         } else {
             setSystemLocaleLegacy(config, locale)
 
         }
         context.resources.updateConfiguration(config,context.resources.displayMetrics)
         return context
-
-
     }
 
 
@@ -41,7 +38,4 @@ object LanguageManager {
         config.setLayoutDirection(locale)
         config.setLocale(locale)
     }
-
-
-
 }

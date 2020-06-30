@@ -5,4 +5,5 @@ import com.ey.hotspot.app_core_lib.BaseViewModel
 
 class SpeedTestFragmentViewModel(application: Application) : BaseViewModel(application) {
 
+
 }

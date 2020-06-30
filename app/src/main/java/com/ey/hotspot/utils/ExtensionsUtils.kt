@@ -8,6 +8,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.ey.hotspot.app_core_lib.BaseActivity
+import java.math.BigDecimal
+import java.math.RoundingMode
 
 var toast: Toast? = null
 
@@ -50,5 +52,19 @@ fun AppCompatActivity.hideKeyboard() {
     val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     view?.let {
         imm.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+}
+
+/**
+ * This method will convert a value of Bits per second to Megabytes per second
+ */
+fun BigDecimal.convertBpsToMbps(): BigDecimal{
+    return try {
+        this/104857.toBigDecimal().setScale(
+            2,
+            RoundingMode.CEILING
+        )
+    }  catch (e: Exception){
+        BigDecimal.valueOf(0)
     }
 }

@@ -64,6 +64,12 @@
     <string name="reviews_label">المراجعات</string>
     <string name="complaint_label">شكوى</string>
 
+    <!--Speed Test-->
+    <string name="speed_test_result_label">نتيجة اختبار السرعة</string>
+    <string name="download_label">تحميل</string>
+    <string name="comment_and_evaluate_label">التعليق والتقييم</string>
+    <string name="rate_wifi_label">قيم واي فاي</string>
+
 
 
 </resources>
