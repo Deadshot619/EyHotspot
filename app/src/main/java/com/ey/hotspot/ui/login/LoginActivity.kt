@@ -1,7 +1,5 @@
 package com.ey.hotspot.ui.login
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseActivity
 import com.ey.hotspot.databinding.ActivityLoginBinding
@@ -19,6 +17,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
     }
 
     override fun onBinding() {
+
+        supportActionBar?.title = getString(R.string.login_button)
 
         addFragment(fragment = LoginFragment(), addToBackstack = true, bundle = null)
 

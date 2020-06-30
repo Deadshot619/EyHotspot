@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:cardCornerRadius="8dp"
+        android:layout_margin="8dp"
+        app:layout_constraintVertical_bias="0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+
+            <!--Wifi Name-->
+            <TextView
+                android:id="@+id/tv_wifi_name"
+                style="@style/TextAppearance.MaterialComponents.Headline5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Starbucks WiFi"
+                android:layout_marginEnd="@dimen/common_margin_end"
+                app:layout_constraintEnd_toStartOf="@+id/appCompatRatingBar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!--Username-->
+            <TextView
+                android:id="@+id/tv_username"
+                style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_margin_between_fields"
+                android:text="Osama Bin Laden"
+                android:layout_marginEnd="@dimen/common_margin_end"
+
+                app:layout_constraintEnd_toStartOf="@+id/iv_more"
+                app:layout_constraintStart_toStartOf="@id/tv_wifi_name"
+                app:layout_constraintTop_toBottomOf="@id/tv_wifi_name" />
+
+            <!--Review-->
+            <TextView
+                android:id="@+id/tv_review"
+                style="@style/TextAppearance.MaterialComponents.Body1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_margin_top"
+                android:text="Osama Bin Laden"
+                app:layout_constraintEnd_toEndOf="@+id/tv_username"
+                app:layout_constraintStart_toStartOf="@id/tv_wifi_name"
+                app:layout_constraintTop_toBottomOf="@id/tv_username" />
+
+            <!--Rating bar-->
+            <androidx.appcompat.widget.AppCompatRatingBar
+                android:id="@+id/appCompatRatingBar"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:rating="3"
+                app:layout_constraintEnd_toStartOf="@+id/iv_more"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!--Arrow-->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>
