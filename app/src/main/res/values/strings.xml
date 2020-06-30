@@ -50,6 +50,12 @@
     <string name="submit_button">Submit</string>
     <string name="forgotpassword">Forget Password?</string>
 
+    <!--Review & Complaint-->
+    <string name="reviews_and_complaint">Reviews and Complaint</string>
+    <string name="reviews_label">Reviews</string>
+    <string name="complaint_label">Complaint</string>
+
+
     <!--
    //Clustring
    <string name="maps_api_key">AIzaSyBqFJqQpuMaYT5mpVw0K3pu5XQqcpJ2_tQ</string>

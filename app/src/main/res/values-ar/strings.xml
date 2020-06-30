@@ -59,4 +59,11 @@
     <string name="already_registered_label">لقد سجلت بالفعل مع %s و %s</string>
     <string name="complete_registration_label">أكمل تسجيلك بتحديد الخيار أدناه</string>
 
+    <!--Review & Complaint-->
+    <string name="reviews_and_complaint">التعليقات والشكاوى</string>
+    <string name="reviews_label">المراجعات</string>
+    <string name="complaint_label">شكوى</string>
+
+
+
 </resources>

@@ -4,9 +4,6 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
-import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -15,8 +12,8 @@ import androidx.core.content.ContextCompat
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseActivity
 import com.ey.hotspot.databinding.ActivityHomeBinding
-import com.ey.hotspot.ui.home.fragment.HomeFragment
 import com.ey.hotspot.ui.home.models.MyClusterItems
+import com.ey.hotspot.ui.review_and_complaint.ReviewAndComplainActivity
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -266,7 +263,13 @@ class HomeActivity : BaseActivity<ActivityHomeBinding,HomeViewModel>(),OnMapRead
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return super.onOptionsItemSelected(item)
+        return when(item.itemId){
+            R.id.option_get_place -> {
+                startActivity(Intent(this, ReviewAndComplainActivity::class.java))
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
 
