@@ -14,7 +14,7 @@
     <!--    Register User   -->
     <string name="first_name_label">First Name</string>
     <string name="last_name_label">Last Name</string>
-    <string name="email_id_label">Email ID</string>
+    <string name="email_id_label">Email Id</string>
     <string name="mobile_number_label">Mobile Number</string>
     <string name="password_label">Password</string>
     <string name="confirm_password_label">Confirm Password</string>
@@ -48,7 +48,11 @@
     <string name="userpassword">Password</string>
     <string name="captchmsg">Enter the message shown below</string>
     <string name="submit_button">Submit</string>
-    <string name="forgotpassword">Forget Password?</string>
+    <string name="forgotpassword">Forgot Password</string>
+    <string name="email_id_hint">Enter Email Id</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="login_credentials_msg">Login to the portal with your credentials</string>
+
 
     <!--Review & Complaint-->
     <string name="reviews_and_complaint">Reviews and Complaint</string>
@@ -81,5 +85,10 @@
     <string name="btTextRateWifi">Rate Wifi</string>
     <string name="wifi_name">Wifi Name</string>
     <string name="issue_type">Issue type</string>
+    <string name="login_hotspot_msg">Don\'t have an account with Hotspot?</string>
+    <string name="get_started_msg">GET STARTED NOW!</string>
+    <string name="invalid_email">Invalid User Name</string>
+    <string name="verify_link_msg">"A verification link has been sent to "</string>
+    <string name="ok_label">OK</string>
 
 </resources>

@@ -9,9 +9,12 @@ import com.ey.hotspot.ui.home.HomeActivity
 import com.ey.hotspot.ui.registration.registration_option.RegistrationOptionFragment
 import com.ey.hotspot.utils.constants.OptionType
 import com.ey.hotspot.utils.replaceFragment
+import com.ey.hotspot.utils.validations.isEmailValid
+import com.ey.hotspot.utils.validations.isPasswordValid
+import com.ey.hotspot.utils.validations.isValidMobile
 
 
-class LoginFragment :BaseFragment<FragmentLoginBinding,LoginFragmentViewModel>() {
+class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>() {
 
 
     companion object {
@@ -23,33 +26,67 @@ class LoginFragment :BaseFragment<FragmentLoginBinding,LoginFragmentViewModel>()
     }
 
     override fun getViewModel(): Class<LoginFragmentViewModel> {
-       return LoginFragmentViewModel::class.java
+        return LoginFragmentViewModel::class.java
     }
 
     override fun onBinding() {
 
 
-         /*   val homeIntent = Intent(activity,HomeActivity::class.java)
-            startActivity(homeIntent)*/
+        mBinding.run {
+           lifecycleOwner = viewLifecycleOwner
+            viewModel = mViewModel
+        }
+        /*   val homeIntent = Intent(activity,HomeActivity::class.java)
+           startActivity(homeIntent)*/
 
-           // replaceFragment(SearchListFragment.newInstance(),true,null)
-           // replaceFragment(FavouriteFragment.newInstance(),true,null)
+        // replaceFragment(SearchListFragment.newInstance(),true,null)
+        // replaceFragment(FavouriteFragment.newInstance(),true,null)
 //            replaceFragment(SubmitComplaintFragment.newInstance(),true,null)
         setUpListeners()
     }
 
-    private fun setUpListeners(){
+    private fun setUpListeners() {
         //Submit
         mBinding.btnSubmit.setOnClickListener {
-            val homeIntent = Intent(activity,HomeActivity::class.java)
-            startActivity(homeIntent)
+
+            if (validate()) {
+                val homeIntent = Intent(activity, HomeActivity::class.java)
+                startActivity(homeIntent)
+
+            }
+
         }
 
         //Forgot Password
         mBinding.btnForgotPassword.setOnClickListener {
-            replaceFragment(fragment = RegistrationOptionFragment.newInstance(), addToBackStack = true, bundle = Bundle().apply {
-                putString(RegistrationOptionFragment.TYPE_KEY, OptionType.TYPE_FORGOT_PASSWORD.name)
-            })
+            replaceFragment(
+                fragment = RegistrationOptionFragment.newInstance(),
+                addToBackStack = true,
+                bundle = Bundle().apply {
+                    putString(
+                        RegistrationOptionFragment.TYPE_KEY,
+                        OptionType.TYPE_FORGOT_PASSWORD.name
+                    )
+                })
+        }
+    }
+
+
+    /**
+     * Method to validate input fields
+     */
+    private fun validate(): Boolean {
+        mViewModel.run {
+            mBinding.run {
+                return if (!emailId.isEmailValid()) {
+                    etLoginEmailId.error = resources.getString(R.string.invalid_email)
+                    false
+                } else if (password.trim().isEmpty()) {
+                    etLoginPassword.error = "Enter the password"
+                    false
+                } else
+                    true
+            }
         }
     }
 

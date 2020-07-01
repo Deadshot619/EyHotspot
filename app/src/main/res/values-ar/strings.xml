@@ -11,7 +11,7 @@
     <string name="userpassword">كلمه السر</string>
     <string name="captchmsg">أدخل الرسالة الموضحة أدناه</string>
     <string name="submit_button">إرسال</string>
-    <string name="forgotpassword">نسيت كلمة المرور؟</string>
+    <string name="forgotpassword">نسيت كلمة المرور</string>
     <string name="searchplace">بحث</string>
     <string name="permission_description">Lorem ipsum dolor sit na aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
     <string name="agree_terms">أنا موافق</string>
@@ -27,6 +27,15 @@
     <string name="sign_in_label">تسجيل الدخول</string>
     <string name="submit_label">إرسال</string>
     <string name="next_label">التالى</string>
+
+
+    <!--Login screen-->
+    <string name="email_id_hint">أدخل معرف البريد</string>
+    <string name="enter_password">أدخل كلمة المرور</string>
+    <string name="login_credentials_msg">تسجيل الدخول إلى البوابة باستخدام بيانات اعتمادك</string>
+    <string name="login_hotspot_msg">أليس لديك حساب على Hotspot؟</string>
+    <string name="get_started_msg">نبدأ الآن!</string>
+
 
 
     <!--    Register User   -->
@@ -77,4 +86,7 @@
     <string name="btTextRateWifi">معدل واي فاي</string>
     <string name="wifi_name">اسم واي فاي</string>
     <string name="issue_type">نوع القضية</string>
+    <string name="invalid_email">Invalid User Name</string>
+    <string name="verify_link_msg">"A verification link has been sent to "</string>
+    <string name="ok_label">حسنا</string>
 </resources>

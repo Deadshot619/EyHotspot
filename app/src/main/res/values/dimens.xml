@@ -32,5 +32,6 @@
     <dimen name="common_padding_start">16dp</dimen>
     <dimen name="common_padding_end">16dp</dimen>
     <dimen name="text_size_10">10sp</dimen>
+    <dimen name="margin_2">2dp</dimen>
 
 </resources>

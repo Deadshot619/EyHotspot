@@ -7,6 +7,8 @@ import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentLoginSelectionBinding
 import com.ey.hotspot.ui.login.LoginActivity
 import com.ey.hotspot.ui.registration.RegistrationActivity
+import com.ey.hotspot.ui.registration.email_verification.EmailVerificationFragment
+import com.ey.hotspot.utils.replaceFragment
 
 class LoginSelectionFragment :
     BaseFragment<FragmentLoginSelectionBinding, LoginSelectionFragmentViewModel>() {
@@ -24,11 +26,13 @@ class LoginSelectionFragment :
     }
 
 
-    private fun setUpListeners(){
+    private fun setUpListeners() {
         //Login
         mBinding.btLogin.setOnClickListener {
-            val loginIntent = Intent(activity, LoginActivity::class.java)
-            startActivity(loginIntent)
+            /*val loginIntent = Intent(activity, LoginActivity::class.java)
+            startActivity(loginIntent)*/
+
+            replaceFragment(EmailVerificationFragment.newInstance(), true, null)
         }
 
         //Registration
