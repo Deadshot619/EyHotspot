@@ -21,4 +21,9 @@
     <string name="change_password">غير كلمة السر</string>
     <string name="newPassword">كلمة سر جديدة</string>
     <string name="confirm_password">تأكيد كلمة المرور</string>
+    <string name="btTextNavigateNow">انتقل الآن</string>
+    <string name="btTextComment"><![CDATA[التعليق والتقييم]]></string>
+    <string name="btTextRateWifi">معدل واي فاي</string>
+    <string name="wifi_name">اسم واي فاي</string>
+    <string name="issue_type">نوع القضية</string>
 </resources>

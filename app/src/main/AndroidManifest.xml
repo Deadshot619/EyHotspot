@@ -9,40 +9,33 @@
     <application
         android:name=".app_core_lib.HotSpotApp"
         android:allowBackup="false"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.home.HomeActivity"></activity>
+        <activity android:name=".ui.profile.ProfileActivity"></activity>
+        <activity android:name=".ui.favourite.FavouriteActivity" />
+        <activity android:name=".ui.search.SearchActivity" />
+        <activity android:name=".ui.home.HomeActivity" />
         <activity android:name=".ui.login.LoginActivity" />
         <activity android:name=".ui.splash_screen.SplashActivity">
-
             <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-        </activity>
-        <activity android:name=".app_core_lib.BaseActivity" />
-        <activity android:name=".ui.registration.RegistrationActivity" />
-        <activity android:name=".ui.login_selection.LoginSelectionActivity">
-            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
         </activity>
-
-
-        <!--Google Map-->
-
+        <activity android:name=".app_core_lib.BaseActivity" />
+        <activity android:name=".ui.registration.RegistrationActivity" />
+        <activity android:name=".ui.login_selection.LoginSelectionActivity" /> <!-- Google Map -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
     </application>
 
 </manifest>

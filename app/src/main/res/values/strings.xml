@@ -10,7 +10,6 @@
     <string name="submit_label">Submit</string>
 
 
-
     <!--    Register User   -->
     <string name="first_name_label">First Name</string>
     <string name="last_name_label">Last Name</string>
@@ -43,7 +42,6 @@
     <string name="complete_registration_label">Complete your registration by selecting below option</string>
 
 
-
     <string name="welcome">Welcome</string>
     <string name="userName">Username</string>
     <string name="userpassword">Password</string>
@@ -65,5 +63,10 @@
     <string name="change_password">Change Password</string>
     <string name="newPassword">New Password</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="btTextNavigateNow">Navigate Now</string>
+    <string name="btTextComment"><![CDATA[Comment & Evaluate]]></string>
+    <string name="btTextRateWifi">Rate Wifi</string>
+    <string name="wifi_name">Wifi Name</string>
+    <string name="issue_type">Issue type</string>
 
 </resources>

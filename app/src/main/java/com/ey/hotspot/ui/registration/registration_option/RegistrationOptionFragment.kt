@@ -3,6 +3,7 @@ package com.ey.hotspot.ui.registration.registration_option
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentRegistrationOptionBinding
+import com.ey.hotspot.ui.login.login_fragment.LoginFragment
 import com.ey.hotspot.ui.registration.email_verification.EmailVerificationFragment
 import com.ey.hotspot.ui.registration.sms_verification.SmsVerificationFragment
 import com.ey.hotspot.utils.replaceFragment
@@ -35,6 +36,13 @@ class RegistrationOptionFragment : BaseFragment<FragmentRegistrationOptionBindin
             btnEmailLink.setOnClickListener {
                 replaceFragment(EmailVerificationFragment.newInstance(), true, null)
             }
+
+            btnSignIn.setOnClickListener {
+
+                replaceFragment(LoginFragment.newInstance(),true,null)
+            }
+
+
         }
     }
 }

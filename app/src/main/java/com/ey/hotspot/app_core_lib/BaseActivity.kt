@@ -1,11 +1,13 @@
 package com.ey.hotspot.app_core_lib
 
+import android.app.ActionBar
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -16,13 +18,15 @@ import com.ey.hotspot.R
 import com.ey.stringlocalization.utils.LanguageManager
 import com.ey.stringlocalization.utils.MyHotSpotSharedPreference
 
+
 abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatActivity(),
     UICallbacks<V> {
 
     protected lateinit var mBinding: T
     protected lateinit var mViewModel: V
     protected lateinit var mContext: Context
-//  protected lateinit var mPref: PreferencesHelper
+
+    //  protected lateinit var mPref: PreferencesHelper
     private lateinit var mManager: FragmentManager
 
 
@@ -74,7 +78,7 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
     /**
      * Method to remove fragment from backStack
      */
-    fun removeFragment(fragment: Fragment){
+    fun removeFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().apply {
             remove(fragment)
             commit()
@@ -106,4 +110,5 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
         finish()
         startActivity(i)
     }
+
 }

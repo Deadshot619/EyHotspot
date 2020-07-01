@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.login_selection.LoginSelectionActivity">
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/margin_20" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/margin_20" />
+
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ivAppLogo"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="@dimen/margin_20"
+                android:foregroundGravity="center"
+                android:scaleType="center"
+                android:src="@drawable/baseline_person_outline_black_36"
+                app:layout_constraintEnd_toEndOf="@+id/guideline_right"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.25"
+                app:shapeAppearanceOverlay="@style/circleImageView" />
+
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/margin_10"
+                app:layout_constraintBottom_toBottomOf="@+id/ivAppLogo"
+                app:layout_constraintEnd_toEndOf="@+id/guideline_right"
+                app:layout_constraintHorizontal_bias="0.4"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left"
+                app:layout_constraintTop_toTopOf="@+id/ivAppLogo"
+                app:layout_constraintVertical_bias="0.95">
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_editProfileImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|start"
+                    android:background="@drawable/circle"
+                    android:padding="@dimen/margin_5"
+                    android:src="@drawable/edit_icon_gray" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tvFirstNameTitle"
+                style="@style/TextAppearance.MyApp.Headline3_Profile_Bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/first_name_label"
+                android:textDirection="locale"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/guideline_right"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@+id/ivAppLogo"
+                app:layout_constraintVertical_bias="0.1" />
+
+
+            <TextView
+                android:id="@+id/tvFirstName"
+                style="@style/TextAppearance.MyApp.Headline3_Profile_Normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_10"
+                android:text="John"
+                android:textDirection="locale"
+                app:layout_constraintEnd_toEndOf="@+id/guideline_right"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@+id/tvFirstNameTitle"
+                app:layout_constraintVertical_bias="0.1" />
+
+
+            <ImageView
+                android:id="@+id/ivFirstName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:scaleType="fitXY"
+                android:src="@drawable/baseline_edit_black_36"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/guideline_right"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/tvFirstName"
+                app:layout_constraintTop_toBottomOf="@+id/ivAppLogo"
+                app:layout_constraintVertical_bias="0.1" />
+
+
+            <TextView
+                android:id="@+id/tvLastNameTitle"
+                style="@style/TextAppearance.MyApp.Headline3_Profile_Bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_20"
+                android:text="@string/last_name_label"
+                android:textDirection="locale"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/guideline_right"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@+id/tvFirstName"
+                app:layout_constraintVertical_bias="0.1" />
+
+
+            <TextView
+                android:id="@+id/tvLastName"
+                style="@style/TextAppearance.MyApp.Headline3_Profile_Normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_10"
+                android:text="John"
+                android:textDirection="locale"
+                app:layout_constraintEnd_toEndOf="@+id/guideline_right"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@+id/tvLastNameTitle"
+                app:layout_constraintVertical_bias="0.1" />
+
+
+            <ImageView
+                android:id="@+id/ivLastName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@drawable/baseline_edit_black_36"
+                app:layout_constraintBottom_toTopOf="@+id/ivEmailId"
+                app:layout_constraintEnd_toEndOf="@+id/guideline_right"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/tvLastName"
+                app:layout_constraintTop_toBottomOf="@+id/ivFirstName"
+                app:layout_constraintVertical_bias="0.1" />
+
+
+            <TextView
+                android:id="@+id/tvEmailIdTitle"
+                style="@style/TextAppearance.MyApp.Headline3_Profile_Bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_20"
+                android:text="@string/email_id_label"
+                android:textDirection="locale"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/guideline_right"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@+id/tvLastName"
+                app:layout_constraintVertical_bias="0.1" />
+
+
+            <TextView
+                android:id="@+id/tvEmailId"
+                style="@style/TextAppearance.MyApp.Headline3_Profile_Normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_10"
+                android:text="John@gmail.com"
+                android:textDirection="locale"
+                app:layout_constraintEnd_toEndOf="@+id/guideline_right"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@+id/tvEmailIdTitle"
+                app:layout_constraintVertical_bias="0.1" />
+
+
+            <ImageView
+                android:id="@+id/ivEmailId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/margin_20"
+                android:scaleType="fitXY"
+                android:src="@drawable/baseline_edit_black_36"
+                app:layout_constraintBottom_toTopOf="@+id/ivMobile"
+                app:layout_constraintEnd_toEndOf="@+id/guideline_right"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/tvEmailId"
+                app:layout_constraintTop_toBottomOf="@+id/ivLastName"
+                app:layout_constraintVertical_bias="0.1" />
+
+
+            <TextView
+                android:id="@+id/tvMobileTitle"
+                style="@style/TextAppearance.MyApp.Headline3_Profile_Bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_20"
+                android:text="@string/mobile_number_label"
+                android:textDirection="locale"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/guideline_right"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@+id/tvEmailId"
+                app:layout_constraintVertical_bias="0.1" />
+
+
+            <TextView
+                android:id="@+id/tvMobile"
+                style="@style/TextAppearance.MyApp.Headline3_Profile_Normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_10"
+                android:text="John@gmail.com"
+                android:textDirection="locale"
+                app:layout_constraintEnd_toEndOf="@+id/guideline_right"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@+id/tvMobileTitle"
+                app:layout_constraintVertical_bias="0.1" />
+
+
+            <ImageView
+                android:id="@+id/ivMobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/margin_20"
+                android:scaleType="fitXY"
+                android:src="@drawable/baseline_edit_black_36"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/guideline_right"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/tvMobile"
+                app:layout_constraintTop_toBottomOf="@+id/ivEmailId"
+                app:layout_constraintVertical_bias="0.1" />
+
+
+
+            <TextView
+                android:id="@+id/tvPasswordTitle"
+                style="@style/TextAppearance.MyApp.Headline3_Profile_Bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_20"
+                android:text="@string/password_label"
+                android:textDirection="locale"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/guideline_right"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@+id/tvMobile"
+                app:layout_constraintVertical_bias="0.1" />
+
+
+            <TextView
+                android:id="@+id/tvPassword"
+                style="@style/TextAppearance.MyApp.Headline3_Profile_Normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_10"
+                android:text="*****"
+                android:textDirection="locale"
+                app:layout_constraintEnd_toEndOf="@+id/guideline_right"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@+id/tvPasswordTitle"
+                app:layout_constraintVertical_bias="0.1" />
+
+
+            <ImageView
+                android:id="@+id/ivPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/margin_20"
+                android:scaleType="fitXY"
+                android:src="@drawable/baseline_edit_black_36"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/guideline_right"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/tvPassword"
+                app:layout_constraintTop_toBottomOf="@+id/ivEmailId"
+                app:layout_constraintVertical_bias="0.1" />
+
+
+            <Button
+                android:id="@+id/btSubmit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/submit_button"
+                android:textAllCaps="false"
+                android:layout_gravity="center"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text_size_15"
+                android:textDirection="locale"
+                app:layout_constraintTop_toBottomOf="@+id/tvPassword"
+                app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                style="@style/Widget.AppCompat.Button.Colored"/>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+</layout>
