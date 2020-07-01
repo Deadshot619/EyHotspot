@@ -60,7 +60,7 @@ fun AppCompatActivity.hideKeyboard() {
  */
 fun BigDecimal.convertBpsToMbps(): BigDecimal{
     return try {
-        this/104857.toBigDecimal().setScale(
+        (this/104857.toBigDecimal()).setScale(
             2,
             RoundingMode.CEILING
         )

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--Favourite-->
+    <item
+        android:id="@+id/favourite"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_favorite_border_24"
+        android:title=""/>
+
+    <!--Logs-->
+    <item
+        android:id="@+id/logs"
+        android:icon="@drawable/ic_baseline_chat_bubble_outline_24"
+        android:title=""/>
+
+
+    <item
+        android:id="@+id/dashboard"
+        android:icon="@drawable/ic_round_notifications_none_24"
+        android:title=""/>
+
+    <!--Speed Check-->
+    <item
+        android:id="@+id/speed_check"
+        android:icon="@drawable/ic_baseline_speed_24"
+        android:title=""/>
+
+    <!--Profile-->
+    <item
+        android:id="@+id/profile"
+        android:icon="@drawable/baseline_person_outline_black_36"
+        android:title=""/>
+
+</menu>
