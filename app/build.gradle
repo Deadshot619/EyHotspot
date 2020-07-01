@@ -86,5 +86,11 @@ dependencies {
 
     //JSpeedtest Internet speed check library
     implementation 'fr.bmartel:jspeedtest:1.32.1'
+    //Recyclearview
+    implementation "androidx.recyclerview:recyclerview-selection:1.1.0-rc01"
+
+    //CardView
+    implementation "androidx.cardview:cardview:1.0.0"
+
 
 }

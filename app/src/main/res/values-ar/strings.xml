@@ -72,4 +72,9 @@
 
 
 
+    <string name="btTextNavigateNow">انتقل الآن</string>
+    <string name="btTextComment"><![CDATA[التعليق والتقييم]]></string>
+    <string name="btTextRateWifi">معدل واي فاي</string>
+    <string name="wifi_name">اسم واي فاي</string>
+    <string name="issue_type">نوع القضية</string>
 </resources>

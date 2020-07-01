@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.login_selection.LoginSelectionActivity">
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/margin_60" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/margin_60" />
+
+
+        <TextView
+            android:id="@+id/tvWifiNameTitle"
+            style="@style/TextAppearance.MyApp.Headline5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="@dimen/margin_20"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/guideline_right"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left"
+            android:text="@string/wifi_name" />
+
+        <TextView
+            android:id="@+id/tvWifiName"
+            style="@style/TextAppearance.MyApp.Headline3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/tvWifiNameTitle"
+            app:layout_constraintEnd_toEndOf="@+id/guideline_right"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left"
+            android:text="Star Buckk Cafe" />
+
+
+        <LinearLayout
+            android:id="@+id/llSpinner"
+            android:layout_marginTop="@dimen/margin_30"
+            app:layout_constraintTop_toBottomOf="@+id/tvWifiName"
+            app:layout_constraintEnd_toEndOf="@+id/guideline_right"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+
+
+
+            <Spinner
+                android:id="@+id/complaintSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                style="@android:style/Widget.Holo.Light.Spinner"
+                android:padding="10dp"
+                android:paddingLeft="4dp"
+                android:layout_marginBottom="2dp" />
+
+        </LinearLayout>
+
+
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tyCommentBox"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:boxBackgroundColor="@color/colorWhite"
+            app:hintTextColor="@color/colorGrayLight"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/guideline_right"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@+id/llSpinner"
+            app:layout_constraintVertical_bias="0.1">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etComent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top|left"
+                android:minLines="5" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <Button
+            android:id="@+id/btSubmit"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="@dimen/button_width_100"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/margin_5"
+            android:paddingRight="@dimen/margin_5"
+            android:text="@string/submit_button"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textDirection="locale"
+            android:textSize="@dimen/text_size_15"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/guideline_right"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@+id/tyCommentBox"
+            app:layout_constraintVertical_bias="0.1" />
+
+
+        <Button
+            android:id="@+id/btCancel"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="@dimen/button_width_100"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/margin_5"
+            android:paddingRight="@dimen/margin_5"
+            android:text="@string/places_cancel"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textDirection="locale"
+            android:textSize="@dimen/text_size_15"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/guideline_right"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/btSubmit"
+            app:layout_constraintTop_toBottomOf="@+id/tyCommentBox"
+            app:layout_constraintVertical_bias="0.1" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

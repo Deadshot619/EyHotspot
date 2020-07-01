@@ -19,6 +19,7 @@
     <string name="password_label">Password</string>
     <string name="confirm_password_label">Confirm Password</string>
     <string name="captcha_label">Enter the message shown below</string>
+    <string name="next_label">Next</string>
 
     <!--    Registration Option    -->
     <string name="verification_method_label">Select verification method</string>
@@ -76,5 +77,10 @@
     <string name="change_password">Change Password</string>
     <string name="newPassword">New Password</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="btTextNavigateNow">Navigate Now</string>
+    <string name="btTextComment"><![CDATA[Comment & Evaluate]]></string>
+    <string name="btTextRateWifi">Rate Wifi</string>
+    <string name="wifi_name">Wifi Name</string>
+    <string name="issue_type">Issue type</string>
 
 </resources>

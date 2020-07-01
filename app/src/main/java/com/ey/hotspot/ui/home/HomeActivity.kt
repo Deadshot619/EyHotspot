@@ -59,7 +59,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding,HomeViewModel>(),OnMapRead
     override fun onBinding() {
 
 
-
         Places.initialize(applicationContext, getString(R.string.maps_api_key))
         placesClient = Places.createClient(this)
 

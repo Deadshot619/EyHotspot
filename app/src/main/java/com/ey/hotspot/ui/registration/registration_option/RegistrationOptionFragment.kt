@@ -5,6 +5,7 @@ import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentRegistrationOptionBinding
 import com.ey.hotspot.ui.login.forgorpasswordmobile.ForgotPasswordMobileFragment
 import com.ey.hotspot.ui.login.forgotpasswordemail.ForgotPasswordEmailFragment
+import com.ey.hotspot.ui.login.login_fragment.LoginFragment
 import com.ey.hotspot.ui.registration.email_verification.EmailVerificationFragment
 import com.ey.hotspot.ui.registration.sms_verification.SmsVerificationFragment
 import com.ey.hotspot.utils.constants.OptionType
@@ -53,6 +54,13 @@ class RegistrationOptionFragment :
                     replaceFragment(ForgotPasswordEmailFragment(), true, null)
 
             }
+
+            btnSignIn.setOnClickListener {
+
+                replaceFragment(LoginFragment.newInstance(),true,null)
+            }
+
+
         }
     }
 }
