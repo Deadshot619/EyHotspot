@@ -19,7 +19,6 @@
     <string name="password_label">Password</string>
     <string name="confirm_password_label">Confirm Password</string>
     <string name="captcha_label">Enter the message shown below</string>
-    <string name="next_label">Next</string>
 
     <!--    Registration Option    -->
     <string name="verification_method_label">Select verification method</string>
