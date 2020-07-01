@@ -10,8 +10,8 @@
 
     <!--Bottom Nav Bar-->
     <style name="CustomBottomNav" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
-        <item name="android:state_pressed">?attr/colorAccent</item>
-        <item name="android:state_checked">?attr/colorAccent</item>
+        <item name="itemTextColor">@color/bottom_nav_color</item>
+        <item name="itemIconTint">@color/bottom_nav_color</item>
         <item name="itemTextAppearanceActive">?attr/colorAccent</item>
     </style>
 
