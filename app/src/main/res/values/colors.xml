@@ -4,7 +4,13 @@
     <color name="colorPrimaryDark">#1B5E20</color>
     <color name="colorAccent">#FFC107</color>
 
-    <color name="colorOnPrimary">#FFFFFF</color>
+    <color name="colorSecondary">#FFFFFF</color>
+    <color name="colorSecondaryDark">#FFFFFF</color>
+
+
+    <color name="colorOnPrimary">@color/colorSecondary</color>
+    <color name="colorOnSecondary">@color/colorPrimary</color>
+
 
     <color name="colorWhite">#FFF</color>
     <color name="colorGrayLight">#bcbcbc</color>

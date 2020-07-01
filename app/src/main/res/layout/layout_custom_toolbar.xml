@@ -20,7 +20,7 @@
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_baseline_arrow_back_24"
                 android:visibility="gone"
-                android:tint="?attr/colorPrimary"
+                android:tint="?attr/colorOnSecondary"
                 android:padding="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
