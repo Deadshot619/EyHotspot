@@ -13,7 +13,7 @@ import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseActivity
 import com.ey.hotspot.databinding.ActivityHomeBinding
 import com.ey.hotspot.ui.home.models.MyClusterItems
-import com.ey.hotspot.ui.review_and_complaint.ReviewAndComplainActivity
+import com.ey.hotspot.ui.review_and_complaint.ReviewAndComplainFragment
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -264,7 +264,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding,HomeViewModel>(),OnMapRead
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
             R.id.option_get_place -> {
-                startActivity(Intent(this, ReviewAndComplainActivity::class.java))
+                startActivity(Intent(this, ReviewAndComplainFragment::class.java))
                 true
             }
             else -> super.onOptionsItemSelected(item)

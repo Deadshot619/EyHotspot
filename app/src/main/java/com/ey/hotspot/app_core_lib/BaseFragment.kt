@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.ey.hotspot.databinding.LayoutCustomToolbarBinding
 
 abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment(),
     UICallbacks<V> {
@@ -38,6 +39,30 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
         return context.arguments?.getString(key) ?: ""
         //Not a good way to do, due to tight coupling of fragment to activity
 //        return ReportsPageActivity().visitReportId
+    }
+
+    fun setToolbar(
+        toolbarBinding: LayoutCustomToolbarBinding,
+        title: String,
+        showUpButton: Boolean = false,
+        endButtonTitle: String = ""
+    ){
+            toolbarBinding.run {
+                //Toolbar title
+                tvTitle.text = title
+
+                //If true, show Back Button, else hide it
+                if (showUpButton) {
+                    btnBack.visibility = View.VISIBLE
+                    btnBack.setOnClickListener {
+                        activity?.onBackPressed()
+                    }
+                } else {
+                    btnBack.visibility = View.GONE
+                }
+
+                tvTextButton.text = ""
+            }
     }
 }
 

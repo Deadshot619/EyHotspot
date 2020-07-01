@@ -40,5 +40,5 @@
 
 
     <!--Toolbar-->
-    <dimen name="toolbar_height">100dp</dimen>
+    <dimen name="toolbar_height">90dp</dimen>
 </resources>

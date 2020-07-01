@@ -6,10 +6,10 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.ey.hotspot.ui.review_and_complaint.review_list.ReviewListFragment
 
 class ReviewAndComplainPagerAdapter(
-    activity: ReviewAndComplainActivity
-) : FragmentStateAdapter(activity) {
+    fragment: ReviewAndComplainFragment
+) : FragmentStateAdapter(fragment) {
 
-    override fun getItemCount(): Int = 2
+    override fun getItemCount(): Int = 3
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {

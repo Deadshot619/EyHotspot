@@ -64,7 +64,8 @@
     <!--Review & Complaint-->
     <string name="reviews_and_complaint">التعليقات والشكاوى</string>
     <string name="reviews_label">المراجعات</string>
-    <string name="complaint_label">شكوى</string>
+    <string name="complaint_label">شكاوي</string>
+    <string name="all_label">الكل</string>
 
     <!--Speed Test-->
     <string name="speed_test_result_label">نتيجة اختبار السرعة</string>

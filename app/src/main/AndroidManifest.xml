@@ -26,7 +26,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.review_and_complaint.ReviewAndComplainActivity" />
         <activity android:name=".ui.home.HomeActivity" />
         <activity android:name=".ui.profile.ProfileActivity" />
         <activity android:name=".ui.favourite.FavouriteActivity" />
