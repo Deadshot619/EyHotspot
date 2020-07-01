@@ -1,5 +1,6 @@
 package com.ey.hotspot.ui.review_and_complaint.review_list
 
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ey.hotspot.R
@@ -29,6 +30,7 @@ class ReviewListFragment : BaseFragment<FragmentReviewListBinding, ReviewListVie
 
         recyclerView.run {
             layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
+            addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
             this.adapter = mAdapter
         }
     }
