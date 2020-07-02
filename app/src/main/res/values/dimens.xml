@@ -21,12 +21,17 @@
     <dimen name="text_size_20">20sp</dimen>
 
 
+    <!--Margin-->
+    <dimen name="common_margin">16dp</dimen>
     <dimen name="common_margin_top">16dp</dimen>
     <dimen name="common_margin_bottom">16dp</dimen>
     <dimen name="common_margin_start">16dp</dimen>
     <dimen name="common_margin_end">16dp</dimen>
     <dimen name="common_margin_between_fields">8dp</dimen>
+    <dimen name="common_margin_24">24dp</dimen>
 
+
+    <!--Padding-->
     <dimen name="common_padding_top">16dp</dimen>
     <dimen name="common_padding_bottom">16dp</dimen>
     <dimen name="common_padding_start">16dp</dimen>
@@ -34,4 +39,7 @@
     <dimen name="text_size_10">10sp</dimen>
     <dimen name="margin_2">2dp</dimen>
 
+
+    <!--Toolbar-->
+    <dimen name="toolbar_height">90dp</dimen>
 </resources>

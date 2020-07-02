@@ -27,6 +27,8 @@
     <string name="sign_in_label">تسجيل الدخول</string>
     <string name="submit_label">إرسال</string>
     <string name="next_label">التالى</string>
+    <string name="mbps_label">%s ميغابت في الثانية</string>
+
 
 
     <!--Login screen-->
@@ -71,7 +73,8 @@
     <!--Review & Complaint-->
     <string name="reviews_and_complaint">التعليقات والشكاوى</string>
     <string name="reviews_label">المراجعات</string>
-    <string name="complaint_label">شكوى</string>
+    <string name="complaint_label">شكاوي</string>
+    <string name="all_label">الكل</string>
 
     <!--Speed Test-->
     <string name="speed_test_result_label">نتيجة اختبار السرعة</string>
