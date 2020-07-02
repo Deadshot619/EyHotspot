@@ -89,4 +89,5 @@
     <string name="invalid_email">Invalid User Name</string>
     <string name="verify_link_msg">"A verification link has been sent to "</string>
     <string name="ok_label">حسنا</string>
+    <string name="completeRegistration">Complete your registration by resending the link</string>
 </resources>
