@@ -67,6 +67,9 @@
     <string name="comment_and_evaluate_label">Comment and Evaluate</string>
     <string name="rate_wifi_label">Rate Wifi</string>
 
+    <!--Wifi Log List-->
+    <string name="wifi_log_list_label">Wifi Log List</string>
+
 
     <!--
    //Clustring

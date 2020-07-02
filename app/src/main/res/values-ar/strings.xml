@@ -82,6 +82,9 @@
     <string name="comment_and_evaluate_label">التعليق والتقييم</string>
     <string name="rate_wifi_label">قيم واي فاي</string>
 
+    <!--Wifi Log List-->
+    <string name="wifi_log_list_label">قائمة سجل واي فاي</string>
+
 
 
     <string name="btTextNavigateNow">انتقل الآن</string>
