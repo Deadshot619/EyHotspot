@@ -13,9 +13,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingStart="@dimen/common_padding_24"
-        android:paddingEnd="@dimen/common_padding_24">
+        android:layout_height="match_parent">
 
         <!--Toolbar-->
         <include
@@ -33,6 +31,8 @@
             tools:context="com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListFragment"
             android:orientation="horizontal"
             android:weightSum="3"
+            android:layout_marginStart="@dimen/common_margin_24"
+            android:layout_marginEnd="@dimen/common_margin_24"
             android:layout_marginTop="@dimen/common_margin_top"
             app:layout_constraintTop_toBottomOf="@id/toolbarLayout"
             app:layout_constraintStart_toStartOf="parent"
@@ -66,8 +66,8 @@
             app:listWifiLogList="@{viewModel.wifiLogList}"
             tools:listitem="@layout/item_wifi_log_list"
             app:layout_constraintTop_toBottomOf="@id/ll_header"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/ll_header"
+            app:layout_constraintEnd_toEndOf="@id/ll_header"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
