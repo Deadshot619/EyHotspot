@@ -20,17 +20,51 @@
 
 
 
-        <ImageView
-            android:id="@+id/iv"
-            android:layout_width="250dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="@dimen/margin_40"
-            android:layout_marginTop="@dimen/margin_10"
-            android:layout_marginEnd="@dimen/margin_40"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_launcher_background" />
+        <LinearLayout
+            android:background="@drawable/ic_login_header"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="200dp">
 
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/loginHeaderName"
+                android:gravity="center"
+                android:textSize="@dimen/txt_size_45"
+                android:textColor="@color/colorWhite"
+                android:layout_marginTop="@dimen/margin_20"
+                android:layout_gravity="center"/>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/loginHeaderNameSub"
+                android:gravity="center"
+                android:textSize="@dimen/txt_size_14"
+                android:textColor="@color/colorWhite"
+                android:layout_gravity="center"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_60"
+                android:text="@string/welcome"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_size_20"
+                android:textColor="@color/colorWhite"
+                android:layout_gravity="center"/>
+
+
+
+        </LinearLayout>
+
+        
         <TextView
             android:id="@+id/tvWelcome"
             style="@style/TextAppearance.MyApp.Headline5"
@@ -50,6 +84,8 @@
             android:layout_marginTop="@dimen/margin_10"
             android:layout_marginEnd="@dimen/margin_40"
             android:gravity="top|start"
+            app:startIconTint="@color/colorPrimarySub"
+
             app:boxBackgroundColor="@color/colorWhite"
             app:boxCornerRadiusBottomEnd="@dimen/margin_12"
             app:boxCornerRadiusBottomStart="@dimen/margin_12"
@@ -85,6 +121,8 @@
             app:boxCornerRadiusTopEnd="@dimen/margin_12"
             app:boxCornerRadiusTopStart="@dimen/margin_12"
             app:passwordToggleEnabled="true"
+            app:startIconTint="@color/colorPrimarySub"
+
             app:placeholderText="@string/enter_password"
             app:hintTextColor="@color/colorGrayLight"
             app:startIconDrawable="@drawable/baseline_lock_black_36">
@@ -125,7 +163,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/margin_20"
+            android:layout_marginTop="@dimen/margin_30"
             android:paddingBottom="@dimen/margin_10"
             android:paddingTop="@dimen/margin_10"
             android:paddingStart="@dimen/margin_60"
@@ -141,7 +179,6 @@
             style="@style/TextAppearance.MyApp.Headline3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_20"
             android:layout_marginTop="@dimen/margin_20"
             android:gravity="center"
             android:text="@string/login_hotspot_msg" />
@@ -155,7 +192,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_10"
             android:gravity="center"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/colorPrimarySub"
             android:text="@string/get_started_msg" />
 
     </LinearLayout>

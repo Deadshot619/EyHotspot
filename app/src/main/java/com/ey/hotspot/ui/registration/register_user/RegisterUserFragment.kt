@@ -1,5 +1,6 @@
 package com.ey.hotspot.ui.registration.register_user
 
+import android.graphics.Paint
 import android.os.Bundle
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
@@ -34,20 +35,15 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
      */
     private fun setUpListeners() {
         mBinding.run {
-            //Next button
-            btnNext.setOnClickListener {
-                if (validate())
-                    replaceFragment(RegistrationOptionFragment.newInstance(), true, Bundle().apply {
-                        putString(RegistrationOptionFragment.TYPE_KEY, OptionType.TYPE_REGISTRATION.name)
-                    })
-            }
 
             //Sign In button
-            btnSignIn.setOnClickListener {
+            btnGetStarted.setOnClickListener {
                 replaceFragment(RegistrationOptionFragment.newInstance(), true, Bundle().apply {
                     putString(RegistrationOptionFragment.TYPE_KEY, OptionType.TYPE_REGISTRATION.name)
                 })
             }
+
+            tvTermsCondition.paintFlags = tvTermsCondition.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG
         }
     }
 
@@ -60,10 +56,7 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
                 return if (firstName.trim().isEmpty()) {
                     edtFirstName.error = "Invalid First Name"
                     false
-                } else if (lastName.trim().isEmpty()) {
-                    edtLastName.error = "Invalid Last Name"
-                    false
-                } else if (!emailId.isEmailValid()) {
+                }  else if (!emailId.isEmailValid()) {
                     edtEmail.error = "Invalid Email Id"
                     false
                 } else if (!mobileNumber.isValidMobile()) {

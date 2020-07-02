@@ -16,7 +16,7 @@
     <string name="first_name_label">First Name</string>
     <string name="last_name_label">Last Name</string>
     <string name="email_id_label">Email Id</string>
-    <string name="mobile_number_label">Mobile Number</string>
+    <string name="mobile_number_label">Mobile Number.</string>
     <string name="password_label">Password</string>
     <string name="confirm_password_label">Confirm Password</string>
     <string name="captcha_label">Enter the message shown below</string>
@@ -39,7 +39,7 @@
 
     <!--Incomplete registration-->
     <string name="verification_label">Verification</string>
-    <string name="already_registered_label">You have already registered with %s &amp; %s</string>
+    <string name="already_registered_label">You have already registered with</string>
     <string name="complete_registration_label">Complete your registration by selecting below option</string>
 
 
@@ -51,7 +51,7 @@
     <string name="submit_button">Submit</string>
     <string name="forgotpassword">Forgot Password</string>
     <string name="email_id_hint">Enter Email Id</string>
-    <string name="enter_password">Enter Password</string>
+    <string name="enter_password">Enter the Password</string>
     <string name="login_credentials_msg">Login to the portal with your credentials</string>
 
 
@@ -76,7 +76,7 @@
     <string name="searchplace">Search</string>
     <string name="permission_description">Lorem ipsum dolor sit amet, ua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
     <string name="agree_terms">I Agree</string>
-    <string name="enter_register_mobile">Enter your registered mobile number</string>
+    <string name="enter_register_mobile">Enter your mobile number</string>
     <string name="back_to_login_msg">Back to login screen</string>
     <string name="enter_register_email">Enter  your registered email id</string>
     <string name="change_password">Change Password</string>
@@ -93,5 +93,19 @@
     <string name="verify_link_msg">"A verification link has been sent to "</string>
     <string name="ok_label">OK</string>
     <string name="completeRegistration">Complete your registration by resending the link</string>
+    <string name="first_last_name_label">Firstname           Lastname</string>
+    <string name="name_label">Name</string>
+    <string name="enter_confirm_password">Enter the password again!</string>
+    <string name="sign_agree_msg">By signing up  you agree to the  </string>
+    <string name="terms_condition"><![CDATA[terms & conditions]]></string>
+    <string name="get_started">" GET STARTED NOW"</string>
+    <string name="or">OR</string>
+    <string name="otp_title">Please enter OTP sent to +91 99999999</string>
+    <string name="resend_otp_label">RESEND OTP</string>
+    <string name="btn_verify">VERIFY</string>
+    <string name="receive_otp">Didn\'t received OTP?</string>
+    <string name="loginHeaderName">Hotspot</string>
+    <string name="loginHeaderNameSub">Connecting world...!</string>
+
 
 </resources>

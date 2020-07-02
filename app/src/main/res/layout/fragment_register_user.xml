@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.ey.hotspot.ui.registration.register_user.RegisterUserViewModel" />
@@ -18,258 +19,264 @@
             android:layout_height="wrap_content"
             tools:context=".ui.registration.register_user.RegisterUserFragment">
 
-            <!--First Name label-->
-            <TextView
-                android:id="@+id/tv_first_name_label"
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_left"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/common_margin_start"
-                android:layout_marginTop="@dimen/common_margin_top"
-                android:layout_marginEnd="@dimen/common_margin_end"
-                android:text="@string/first_name_label"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/margin_20" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/margin_20" />
+
 
             <!--First Name input-->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/first_name_input_layout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_margin_between_fields"
-                android:layout_marginEnd="@dimen/common_margin_end"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/tv_first_name_label"
-                app:layout_constraintTop_toBottomOf="@id/tv_first_name_label">
+                android:layout_width="0dp"
+                app:startIconTint="@color/colorPrimarySub"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_20"
+                app:hintTextColor="@color/colorGrayLight"
+                app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toTopOf="parent"
+                app:placeholderText="@string/name_label"
+                app:startIconDrawable="@drawable/baseline_person_outline_black_36">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_first_name"
                     android:layout_width="match_parent"
-                    android:text="@={viewModel.firstName}"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:hint="@string/first_last_name_label"
+                    android:text="@={viewModel.firstName}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
-
-            <!--Last Name label-->
-            <TextView
-                android:id="@+id/tv_last_name_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_margin_top"
-                android:text="@string/last_name_label"
-                app:layout_constraintEnd_toEndOf="@id/first_name_input_layout"
-                app:layout_constraintHorizontal_bias="0"
-                app:layout_constraintStart_toStartOf="@id/first_name_input_layout"
-                app:layout_constraintTop_toBottomOf="@id/first_name_input_layout" />
 
             <!--Last Name input-->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/last_name_input_layout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_margin_between_fields"
-                android:layout_marginEnd="@dimen/common_margin_end"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/tv_last_name_label"
-                app:layout_constraintTop_toBottomOf="@id/tv_last_name_label">
+                android:layout_width="0dp"
+                app:startIconTint="@color/colorPrimarySub"
+
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_20"
+                app:hintTextColor="@color/colorGrayLight"
+                app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@id/first_name_input_layout"
+                app:placeholderText="@string/mobile_number_label"
+                app:startIconDrawable="@drawable/baseline_settings_cell_black_36">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edt_last_name"
+                    android:id="@+id/edtMobileNo"
                     android:layout_width="match_parent"
-                    android:text="@={viewModel.lastName}"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:hint="@string/enter_register_mobile"
+                    android:text="@={viewModel.lastName}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!--Email Id label-->
-            <TextView
-                android:id="@+id/tv_email_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_margin_top"
-                android:text="@string/email_id_label"
-                app:layout_constraintEnd_toEndOf="@id/last_name_input_layout"
-                app:layout_constraintHorizontal_bias="0"
-                app:layout_constraintStart_toStartOf="@id/last_name_input_layout"
-                app:layout_constraintTop_toBottomOf="@id/last_name_input_layout" />
 
             <!--Email Id input-->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/email_input_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_margin_between_fields"
-                android:layout_marginEnd="@dimen/common_margin_end"
-                app:layout_constraintEnd_toEndOf="parent"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_marginTop="@dimen/margin_20"
+                android:text="@string/email_id_label"
+                app:startIconTint="@color/colorPrimarySub"
 
-                app:layout_constraintStart_toStartOf="@id/tv_email_label"
-                app:layout_constraintTop_toBottomOf="@id/tv_email_label">
+                app:hintTextColor="@color/colorGrayLight"
+                app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@id/last_name_input_layout"
+                app:placeholderText="@string/email_id_label"
+                app:startIconDrawable="@drawable/baseline_email_black_36">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_email"
                     android:layout_width="match_parent"
-                    android:text="@={viewModel.emailId}"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:hint="@string/email_id_hint"
+                    android:text="@={viewModel.emailId}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!--Mobile Number label-->
-            <TextView
-                android:id="@+id/tv_mobile_no_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_margin_top"
-                android:text="@string/mobile_number_label"
-                app:layout_constraintEnd_toEndOf="@id/email_input_layout"
-                app:layout_constraintHorizontal_bias="0"
-                app:layout_constraintStart_toStartOf="@id/email_input_layout"
-                app:layout_constraintTop_toBottomOf="@id/email_input_layout" />
-
-            <!--Mobile Number input-->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/mobile_no_layout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_margin_between_fields"
-                android:layout_marginEnd="@dimen/common_margin_end"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/tv_mobile_no_label"
-                app:layout_constraintTop_toBottomOf="@id/tv_mobile_no_label">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edt_mobile_no"
-                    android:layout_width="match_parent"
-                    android:text="@={viewModel.mobileNumber}"
-                    android:layout_height="match_parent" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!--Password label-->
-            <TextView
-                android:id="@+id/tv_password_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-
-                android:layout_marginTop="@dimen/common_margin_top"
-                android:text="@string/password_label"
-                app:layout_constraintEnd_toEndOf="@id/mobile_no_layout"
-                app:layout_constraintHorizontal_bias="0"
-                app:layout_constraintStart_toStartOf="@id/mobile_no_layout"
-                app:layout_constraintTop_toBottomOf="@id/mobile_no_layout" />
 
             <!--Password input-->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/password_input_layout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_margin_between_fields"
-                android:layout_marginEnd="@dimen/common_margin_end"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="0dp"
+                app:startIconTint="@color/colorPrimarySub"
 
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/tv_password_label"
-                app:layout_constraintTop_toBottomOf="@id/tv_password_label">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_20"
+                app:hintTextColor="@color/colorGrayLight"
+                app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@id/email_input_layout"
+                app:placeholderText="@string/password_label"
+                app:startIconDrawable="@drawable/baseline_lock_black_36">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_password"
                     android:layout_width="match_parent"
-                    android:text="@={viewModel.password}"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:hint="@string/enter_password"
+                    android:text="@={viewModel.password}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Confirm Password label-->
-            <TextView
-                android:id="@+id/tv_confirm_password_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_margin_top"
-                android:text="@string/confirm_password_label"
-                app:layout_constraintEnd_toEndOf="@id/password_input_layout"
-                app:layout_constraintHorizontal_bias="0"
-                app:layout_constraintStart_toStartOf="@id/password_input_layout"
-                app:layout_constraintTop_toBottomOf="@id/password_input_layout" />
 
             <!-- Confirm Password input-->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/confirm_password_input_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_margin_between_fields"
-                android:layout_marginEnd="@dimen/common_margin_end"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_marginTop="@dimen/margin_20"
+                app:hintTextColor="@color/colorGrayLight"
+                app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:startIconTint="@color/colorPrimarySub"
 
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/tv_confirm_password_label"
-                app:layout_constraintTop_toBottomOf="@id/tv_confirm_password_label">
+                app:layout_constraintTop_toBottomOf="@id/password_input_layout"
+                app:placeholderText="@string/confirm_password_label"
+                app:startIconDrawable="@drawable/baseline_lock_black_36">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_confirm_password"
                     android:layout_width="match_parent"
-                    android:text="@={viewModel.confirmPassword}"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:hint="@string/enter_confirm_password"
+                    android:text="@={viewModel.confirmPassword}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Captcha label-->
             <TextView
-                android:id="@+id/tv_captcha_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_margin_top"
-                android:text="@string/captcha_label"
-                app:layout_constraintEnd_toEndOf="@id/confirm_password_input_layout"
-                app:layout_constraintHorizontal_bias="0"
-                app:layout_constraintStart_toStartOf="@id/confirm_password_input_layout"
-                app:layout_constraintTop_toBottomOf="@id/confirm_password_input_layout" />
-
-            <!-- Captcha input-->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/captcha_input_layout"
+                android:id="@+id/tvSignAgree"
+                style="@style/TextAppearance.MyApp.Headline3_Profile_Normal_Dark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_margin_between_fields"
-                android:layout_marginEnd="@dimen/common_margin_end"
+                android:layout_marginTop="@dimen/margin_30"
+                android:gravity="center"
+                android:text="@string/sign_agree_msg"
+                app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@id/confirm_password_input_layout" />
+
+
+            <TextView
+                android:id="@+id/tvTermsCondition"
+                style="@style/TextAppearance.MyApp.Headline3_Profile_Bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/terms_condition"
+                app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@id/tvSignAgree" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnGetStarted"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_20"
+                android:background="@drawable/sign_btn_gradient"
+                android:paddingStart="@dimen/margin_60"
+                android:paddingTop="@dimen/margin_10"
+                android:paddingEnd="@dimen/margin_60"
+                android:paddingBottom="@dimen/margin_10"
+                android:text="@string/get_started"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text_size_15"
+                app:layout_constraintEnd_toEndOf="@+id/guideline_right"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@+id/tvTermsCondition" />
+
+
+            <LinearLayout
+                android:id="@+id/llOR"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_30"
+                android:orientation="horizontal"
+                android:weightSum="3"
                 app:layout_constraintEnd_toEndOf="parent"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnGetStarted">
 
-                app:layout_constraintStart_toStartOf="@id/tv_captcha_label"
-                app:layout_constraintTop_toBottomOf="@id/tv_captcha_label">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edt_captcha"
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@color/colorGrayLight" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+                <TextView
+                    style="@style/TextAppearance.MyApp.Headline3_Profile_Normal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/or" />
 
-            <!--Next-->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_next"
-                android:layout_width="wrap_content"
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@color/colorGrayLight" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_margin_top"
-                android:text="@string/next_label"
-                app:layout_constraintStart_toStartOf="@id/captcha_input_layout"
-                app:layout_constraintTop_toBottomOf="@id/captcha_input_layout" />
+                android:layout_marginTop="@dimen/margin_30"
+                android:layout_marginBottom="@dimen/margin_20"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                app:layout_constraintEnd_toEndOf="@+id/guideline_right"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@+id/llOR">
 
-            <!--Sign In-->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_sign_in"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_margin_top"
-                android:text="@string/sign_in_label"
-                app:layout_constraintEnd_toEndOf="@id/captcha_input_layout"
-                app:layout_constraintTop_toBottomOf="@id/captcha_input_layout" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="@dimen/margin_30"
+                    android:layout_height="@dimen/margin_30"
+                    android:layout_gravity="center"
+                    android:textDirection="locale"
+                    android:layout_marginEnd="@dimen/margin_10"
+                    android:src="@drawable/ic_facebook_" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="@dimen/margin_40"
+                    android:layout_height="@dimen/margin_40"
+                    android:layout_gravity="center"
+                    android:textDirection="locale"
+
+                    android:layout_marginStart="@dimen/margin_10"
+                    android:src="@drawable/ic_google_sign_in" />
+
+            </LinearLayout>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

@@ -6,6 +6,7 @@ import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentLoginBinding
 import com.ey.hotspot.ui.home.HomeActivity
+import com.ey.hotspot.ui.registration.register_user.RegisterUserFragment
 import com.ey.hotspot.ui.registration.registration_option.RegistrationOptionFragment
 import com.ey.hotspot.utils.constants.OptionType
 import com.ey.hotspot.utils.replaceFragment
@@ -39,10 +40,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
         /*   val homeIntent = Intent(activity,HomeActivity::class.java)
            startActivity(homeIntent)*/
 
-        // replaceFragment(SearchListFragment.newInstance(),true,null)
-        // replaceFragment(FavouriteFragment.newInstance(),true,null)
-//            replaceFragment(SubmitComplaintFragment.newInstance(),true,null)
-        setUpListeners()
+
+       replaceFragment(RegisterUserFragment.newInstance(),true,null)
+        //setUpListeners()
     }
 
     private fun setUpListeners() {

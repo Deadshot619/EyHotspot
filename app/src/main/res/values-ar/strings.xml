@@ -89,8 +89,21 @@
     <string name="btTextRateWifi">معدل واي فاي</string>
     <string name="wifi_name">اسم واي فاي</string>
     <string name="issue_type">نوع القضية</string>
-    <string name="invalid_email">Invalid User Name</string>
-    <string name="verify_link_msg">"A verification link has been sent to "</string>
+    <string name="invalid_email">اسم مستخدم غير صالح</string>
+    <string name="verify_link_msg">تم إرسال رابط التحقق إلى</string>
     <string name="ok_label">حسنا</string>
-    <string name="completeRegistration">Complete your registration by resending the link</string>
+    <string name="completeRegistration">أكمل تسجيلك بإعادة إرسال الرابط</string>
+    <string name="first_last_name_label">الاسم الاول الاسم الاخير</string>
+    <string name="name_label">اسم</string>
+    <string name="enter_confirm_password">أدخل كلمة المرور مرة أخرى!</string>
+    <string name="sign_agree_msg">بالتسجيل أنت توافق على</string>
+    <string name="terms_condition">البنود و الظروف</string>
+    <string name="get_started">نبدأ الآن</string>
+    <string name="or">أو</string>
+    <string name="otp_title">الرجاء إدخال كلمة المرور OTP المرسلة إلى +91 99999999</string>
+    <string name="resend_otp_label">إعادة إرسال OTP</string>
+    <string name="btn_verify">تحقق</string>
+    <string name="receive_otp">لم تتلق OTP؟</string>
+    <string name="loginHeaderName">نقطة اتصال</string>
+    <string name="loginHeaderNameSub">يربط العالم ...!</string>
 </resources>

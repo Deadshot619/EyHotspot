@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.ey.hotspot.ui.registration.email_verification.EmailVerificationViewModel" />
@@ -79,9 +80,9 @@
             style="@style/TextAppearance.MyApp.Headline3_Profile_Bold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_40"
+            android:layout_marginTop="@dimen/margin_10"
             android:gravity="center"
-            android:text="@string/check_email_label"
+            android:text="@string/otp_title"
             android:textStyle="normal"
             app:layout_constraintEnd_toEndOf="@id/guideline_right"
             app:layout_constraintStart_toStartOf="@id/guideline_left"
@@ -91,30 +92,85 @@
         <!--    check image  -->
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_check"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginTop="@dimen/margin_30"
-            android:src="@drawable/ic_email_verification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_mobile_verification"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_check_email_label" />
 
 
-        <!--        resend link label-->
+
+
+        <com.mukesh.OtpView
+            android:id="@+id/otpView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:textColor="@color/colorPrimary"
+            app:itemCount="6"
+            app:lineColor="@color/colorPrimary"
+            app:layout_constraintTop_toBottomOf="@+id/iv_check"
+            app:layout_constraintEnd_toEndOf="@+id/guideline_right"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left"
+            app:viewType="rectangle"
+            />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnVerify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20"
+            android:layout_marginBottom="@dimen/common_margin_bottom"
+            android:background="@drawable/sign_btn_gradient"
+            android:paddingStart="@dimen/margin_60"
+            android:paddingTop="@dimen/margin_10"
+            android:paddingEnd="@dimen/margin_60"
+            android:paddingBottom="@dimen/margin_10"
+            android:text="@string/btn_verify"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintEnd_toEndOf="@+id/guideline_right"
+            app:layout_constraintStart_toStartOf="@id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@+id/otpView" />
+
+
         <TextView
-            android:id="@+id/tv_resend_link_label"
-            style="@style/TextAppearance.MyApp.Headline3"
-            android:layout_width="0dp"
+            android:id="@+id/tvreceviedotp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/margin_20"
+            android:text="@string/receive_otp"
+            style="@style/TextAppearance.MyApp.Headline5_bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/tvTermsCondition"
+            app:layout_constraintTop_toBottomOf="@+id/btnVerify" />
+
+        <TextView
+            android:id="@+id/tvTermsCondition"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textColor="@color/colorPrimarySub"
+            android:layout_marginTop="@dimen/margin_20"
+            android:text="@string/resend_otp_label"
+            app:layout_constraintLeft_toRightOf="@+id/tvreceviedotp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnVerify" />
+
+
+        <TextView
+            android:id="@+id/tv_resend_link_label"
+            style="@style/TextAppearance.MyApp.Headline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:textAllCaps="true"
-            app:layout_constraintVertical_bias="0.2"
+            android:textColor="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:text="@string/resend_link_label"
             app:layout_constraintEnd_toEndOf="@id/guideline_right"
-            app:layout_constraintStart_toStartOf="@id/guideline_left"
-            app:layout_constraintTop_toBottomOf="@+id/iv_check" />
+
+            app:layout_constraintStart_toEndOf="@+id/tvreceviedotp"
+            app:layout_constraintTop_toBottomOf="@+id/iv_check"
+            app:layout_constraintVertical_bias="0.2" />
 
 
         <!--Sign In-->
@@ -123,13 +179,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/common_margin_bottom"
-            android:text="@string/sign_in_label"
-            android:paddingBottom="@dimen/margin_10"
-            android:paddingTop="@dimen/margin_10"
-            android:paddingStart="@dimen/margin_60"
-            android:paddingEnd="@dimen/margin_60"
-            android:textStyle="bold"
             android:background="@drawable/sign_btn_gradient"
+            android:paddingStart="@dimen/margin_60"
+            android:paddingTop="@dimen/margin_10"
+            android:paddingEnd="@dimen/margin_60"
+            android:paddingBottom="@dimen/margin_10"
+            android:text="@string/sign_in_label"
             android:textColor="@color/colorWhite"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
