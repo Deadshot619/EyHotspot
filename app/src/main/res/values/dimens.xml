@@ -17,7 +17,9 @@
     <dimen name="margin_30">30dp</dimen>
 
     <!--Text Size-->
-
+    <dimen name="text_size_14">14sp</dimen>
+    <dimen name="text_size_17">17sp</dimen>
+    <dimen name="text_size_18">18sp</dimen>
     <dimen name="text_size_20">20sp</dimen>
 
 
@@ -29,6 +31,7 @@
     <dimen name="common_margin_end">16dp</dimen>
     <dimen name="common_margin_between_fields">8dp</dimen>
     <dimen name="common_margin_24">24dp</dimen>
+    <dimen name="common_margin_8">8dp</dimen>
 
 
     <!--Padding-->
@@ -36,6 +39,11 @@
     <dimen name="common_padding_bottom">16dp</dimen>
     <dimen name="common_padding_start">16dp</dimen>
     <dimen name="common_padding_end">16dp</dimen>
+    <dimen name="common_padding_24">24dp</dimen>
+    <dimen name="common_padding_8">8dp</dimen>
+
+
+
     <dimen name="text_size_10">10sp</dimen>
     <dimen name="margin_2">2dp</dimen>
 

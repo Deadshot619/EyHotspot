@@ -31,8 +31,6 @@
     <style name="circleImageViewProfile" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">100%</item>
-
-
     </style>
 
     <style name="TextAppearance.MyApp.Headline3" parent="TextAppearance.MaterialComponents.Headline3">
@@ -101,5 +99,4 @@
     </style>
 
 
-    <dimen name="text_size_18">18sp</dimen>
 </resources>

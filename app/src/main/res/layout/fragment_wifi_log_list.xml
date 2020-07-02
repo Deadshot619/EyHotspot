@@ -1,21 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListViewModel" />
     </data>
+
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListFragment">
+        android:paddingStart="@dimen/common_padding_24"
+        android:paddingEnd="@dimen/common_padding_24">
 
-        <TextView
+        <!--Toolbar-->
+        <include
+            android:id="@+id/toolbarLayout"
+            layout="@layout/layout_custom_toolbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Hello" />
+
+        <LinearLayout
+            android:id="@+id/ll_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:context="com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListFragment"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:layout_marginTop="@dimen/common_margin_top"
+            app:layout_constraintTop_toBottomOf="@id/toolbarLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <!--Date-->
+            <TextView
+                android:id="@+id/tv_date_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="?attr/colorOnSecondary"
+                android:textSize="@dimen/text_size_14"
+                android:text="@string/date_label"/>
+
+            <!--Name-->
+            <TextView
+                android:id="@+id/tv_name_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/colorOnSecondary"
+                android:layout_weight="1.5"
+                android:textSize="@dimen/text_size_14"
+                android:text="@string/name_label"/>
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_wifi_log_list"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:listWifiLogList="@{viewModel.wifiLogList}"
+            tools:listitem="@layout/item_wifi_log_list"
+            app:layout_constraintTop_toBottomOf="@id/ll_header"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

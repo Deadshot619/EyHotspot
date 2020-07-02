@@ -16,7 +16,7 @@ object DataProvider : RemoteDataProvider {
         success: (JsonArray) -> Unit,
         error: (java.lang.Exception) -> Unit
     ) {
-        withContext(Dispatchers.IO){
+        withContext(Dispatchers.Main){
             try {
                 val result = mServices.register(/*request*/).await()
                 success(result)

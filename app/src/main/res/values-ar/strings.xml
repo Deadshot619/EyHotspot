@@ -84,6 +84,8 @@
 
     <!--Wifi Log List-->
     <string name="wifi_log_list_label">قائمة سجل واي فاي</string>
+    <string name="date_label">تاريخ</string>
+    <string name="name_label">اسم</string>
 
 
 

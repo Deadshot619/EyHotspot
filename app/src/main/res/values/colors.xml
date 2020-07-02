@@ -9,7 +9,7 @@
 
 
     <color name="colorOnPrimary">@color/colorSecondary</color>
-    <color name="colorOnSecondary">@color/colorPrimary</color>
+    <color name="colorOnSecondary">?attr/colorPrimaryDark</color>
 
 
     <color name="colorWhite">#FFF</color>
