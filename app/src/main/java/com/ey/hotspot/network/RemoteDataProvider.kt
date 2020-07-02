@@ -1,5 +1,10 @@
 package com.ey.hotspot.network
 
-interface RemoteDataProvider {
+import com.google.gson.JsonArray
 
+interface RemoteDataProvider {
+    suspend fun registerUser(
+        success: (JsonArray) -> Unit,
+        error: (Exception) -> Unit
+    )
 }

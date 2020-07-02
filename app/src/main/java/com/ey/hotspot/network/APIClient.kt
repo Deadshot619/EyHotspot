@@ -1,5 +1,6 @@
 package com.ey.hotspot.network
 
+import com.ey.hotspot.BuildConfig
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.Interceptor
@@ -11,7 +12,7 @@ class APIClient {
     companion object {
         fun getClient(): Retrofit {
             return Retrofit.Builder()
-//                .baseUrl(BuildConfig.BASE_URL)
+                .baseUrl(BuildConfig.BASE_URL)
                 .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .addConverterFactory(GsonConverterFactory.create(GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()))
 //                .client(getUnsafeOkHttpClient().build())
@@ -30,6 +31,4 @@ class APIClient {
         }
 
     }
-
-
 }

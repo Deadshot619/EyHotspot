@@ -32,6 +32,22 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    flavorDimensions "default"
+    productFlavors {
+        dev {
+            dimension "default"
+            applicationIdSuffix ".ey_hotspot"
+            versionNameSuffix ".1.debug"
+            buildConfigField "String", "BASE_URL", '"http://dev.eyhotspots.com/api/"'
+        }
+        production {
+            dimension "default"
+            applicationIdSuffix ".ey_hotspot"
+            buildConfigField "String", "BASE_URL", '"http://dev.eyhotspots.com/api/"'
+        }
+    }
+
 }
 
 dependencies {
