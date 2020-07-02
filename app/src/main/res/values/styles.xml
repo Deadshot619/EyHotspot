@@ -16,10 +16,10 @@
         <item name="itemTextColor">@color/bottom_nav_color</item>
         <item name="itemIconTint">@color/bottom_nav_color</item>
         <item name="itemTextAppearanceActive">?attr/colorAccent</item>
+        <item name="android:background">?attr/colorPrimaryDark</item>
     </style>
 
     <!--Circular image view-->
-
     <style name="circleImageView" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
