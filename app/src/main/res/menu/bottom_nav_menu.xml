@@ -11,7 +11,7 @@
     <!--Logs-->
     <item
         android:id="@+id/logs"
-        android:icon="@drawable/ic_baseline_chat_bubble_outline_24"
+        android:icon="@drawable/ic_wifi"
         android:title=""/>
 
 

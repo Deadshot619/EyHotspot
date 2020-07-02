@@ -37,6 +37,7 @@
 
 
     <!--Padding-->
+    <dimen name="common_padding">16dp</dimen>
     <dimen name="common_padding_top">16dp</dimen>
     <dimen name="common_padding_bottom">16dp</dimen>
     <dimen name="common_padding_start">16dp</dimen>

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ey.hotspot.databinding.ItemWifiLogListBinding
 
 
-class WifiLogListAdapter(/*val listener: OnClickListener*/) :
+class WifiLogListAdapter(val listener: OnClickListener) :
     ListAdapter<WifiLogListModel, WifiLogListAdapter.WifiLogListViewHolder>(
         DiffCallback
     ) {
@@ -42,7 +42,7 @@ class WifiLogListAdapter(/*val listener: OnClickListener*/) :
     }
 
     override fun onBindViewHolder(holder: WifiLogListViewHolder, position: Int) {
-        holder.bind(getItem(position) /*listener*/)
+        holder.bind(getItem(position), listener)
     }
 
 
@@ -53,12 +53,12 @@ class WifiLogListAdapter(/*val listener: OnClickListener*/) :
     class WifiLogListViewHolder(private var binding: ItemWifiLogListBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(
-            item: WifiLogListModel?/*,
-            listener: OnClickListener*/
+            item: WifiLogListModel?,
+            listener: OnClickListener
         ) {
             binding.run {
                 data = item
-//                clickListener = listener
+                clickListener = listener
 //                tvNumber.text = "$count"
                 executePendingBindings()
             }
@@ -70,9 +70,9 @@ class WifiLogListAdapter(/*val listener: OnClickListener*/) :
     /**
      * Interface to call in the [OnClickListener] & passed on to fragment to implement
      */
-    class OnClickListener(val clickListener: (viewAvailableIndustriesData: WifiLogListModel) -> Unit) {
-        fun onClick(viewAvailableIndustriesData: WifiLogListModel) =
-            clickListener(viewAvailableIndustriesData)
+    class OnClickListener(val clickListener: (data: WifiLogListModel) -> Unit) {
+        fun onClick(data: WifiLogListModel) =
+            clickListener(data)
     }
 
 }

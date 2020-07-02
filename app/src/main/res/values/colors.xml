@@ -20,6 +20,7 @@
 
     <color name="colorWhite">#FFF</color>
     <color name="colorGrayLight">#52525C</color>
+    <color name="colorLightestGray">#E5E5E5</color>
 
     <color name="colorBlack">#52525C</color>
 
