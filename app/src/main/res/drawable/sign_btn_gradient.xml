@@ -8,6 +8,7 @@
         android:centerColor="@color/colorSubAccent"
         android:endColor="@color/colorAccent"
         android:startColor="@color/colorPrimary"
+        android:centerX="0.7"
         />
     <corners android:radius="25dp" />
 </shape>

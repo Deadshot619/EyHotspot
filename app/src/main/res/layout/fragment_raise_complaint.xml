@@ -28,9 +28,9 @@
             android:id="@+id/tv_wifi_name"
             style="@style/Headline7"
             android:layout_width="0dp"
-            android:text="D-Link"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/common_margin_24"
+            android:text="D-Link"
             android:textColor="?attr/colorOnSecondary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
@@ -43,13 +43,12 @@
             android:id="@+id/chip_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Riyadh"
             android:textSize="@dimen/text_size_14"
             app:layout_constraintEnd_toEndOf="@id/tv_wifi_name"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="@id/tv_wifi_name"
             app:layout_constraintTop_toBottomOf="@id/tv_wifi_name"
-            />
+            android:text="Riyadh" />
 
         <!--Wifi Description-->
         <TextView
@@ -57,8 +56,8 @@
             style="@style/TextAppearance.MaterialComponents.Body1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="bleh bleh bleh"
             android:layout_marginTop="@dimen/common_margin_between_fields"
+            android:text="bleh bleh bleh"
             android:textColor="@color/colorGrayLight"
             app:layout_constraintEnd_toEndOf="@id/tv_wifi_name"
             app:layout_constraintHorizontal_bias="0"
@@ -79,12 +78,12 @@
         <!--Rating Bar-->
         <androidx.appcompat.widget.AppCompatRatingBar
             android:id="@+id/rating_bar"
+            style="@style/GradientRatingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/common_margin_24"
-            style="@style/GradientRatingBar"
-            android:rating="3"
             android:foregroundGravity="center"
+            android:rating="3"
             android:stepSize="1"
             app:layout_constraintEnd_toEndOf="@id/spinner_issue"
             app:layout_constraintStart_toStartOf="@id/spinner_issue"
@@ -97,7 +96,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/common_margin_24"
-            android:hint="@string/add_remarks_label"
+            android:hint="@string/explain_problem_label"
             app:layout_constraintEnd_toEndOf="@id/spinner_issue"
             app:layout_constraintStart_toStartOf="@id/spinner_issue"
             app:layout_constraintTop_toBottomOf="@id/rating_bar">
@@ -115,24 +114,29 @@
         <!--Cancel button-->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_cancel_button"
+            style="@style/OutlinedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_margin_24"
             android:text="@string/cancel_label"
-            style="@style/OutlinedButton"
-            app:layout_constraintTop_toBottomOf="@id/input_remarks_layout"
-            app:layout_constraintStart_toStartOf="@id/input_remarks_layout"
-            android:layout_marginTop="@dimen/common_margin_24"/>
+            app:layout_constraintEnd_toStartOf="@+id/btnsubmit_feedback"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_remarks_layout" />
 
         <!--Submit Feedback-->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnsubmit_feedback"
+            style="@style/GradientButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/NormalButton"
-            android:text="@string/submit_feedback_label"
-            app:layout_constraintTop_toBottomOf="@id/input_remarks_layout"
-            app:layout_constraintEnd_toEndOf="@id/input_remarks_layout"
-            android:layout_marginTop="@dimen/common_margin_24"/>
+            android:text="@string/raise_complaint_label"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_cancel_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_cancel_button"
+            app:layout_constraintTop_toTopOf="@+id/btn_cancel_button" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -84,6 +84,10 @@
     <string name="cancel_label">Cancel</string>
     <string name="submit_feedback_label">Submit Feedback</string>
 
+    <!--Raise Complaint-->
+    <string name="explain_problem_label">Explain your problem in detail here</string>
+    <string name="raise_complaint_label">Raise Complaint</string>
+
 
 
     <!--

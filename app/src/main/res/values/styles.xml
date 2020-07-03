@@ -10,9 +10,7 @@
         <item name="otpViewStyle">@style/OtpWidget.OtpView</item>
 
 
-
         <item name="fontFamily">@font/fira_sans</item>
-
 
 
     </style>
@@ -32,7 +30,7 @@
         <item name="boxCornerRadiusBottomStart">25dp</item>
         <item name="boxCornerRadiusBottomEnd">25dp</item>
         <item name="boxBackgroundColor">@color/colorLightestGray</item>
-<!--        <item name="boxStrokeColor">@color/colorLightestGray</item>-->
+        <!--        <item name="boxStrokeColor">@color/colorLightestGray</item>-->
         <item name="boxStrokeWidth">0dp</item>
         <item name="hintEnabled">false</item>
         <item name="boxStrokeWidthFocused">0dp</item>
@@ -56,16 +54,22 @@
         <item name="cornerRadius">25dp</item>
         <item name="android:paddingStart">30dp</item>
         <item name="android:paddingEnd">30dp</item>
-<!--        <item name="background">@drawable/sign_btn_gradient</item>-->
+        <item name="android:paddingTop">13dp</item>
+        <item name="android:paddingBottom">13dp</item>
+
+        <!--        <item name="background">@drawable/sign_btn_gradient</item>-->
     </style>
 
     <!--Outlined Button colored-->
-    <style name="NormalButton" parent="Widget.MaterialComponents.Button">
+    <style name="GradientButton" parent="Widget.MaterialComponents.Button">
         <item name="cornerRadius">25dp</item>
         <item name="android:paddingStart">30dp</item>
         <item name="android:paddingEnd">30dp</item>
-        <!--        <item name="background">@drawable/sign_btn_gradient</item>-->
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="android:background">@drawable/sign_btn_gradient</item>
+        <item name="backgroundTint">@null</item>
     </style>
+
 
     <style name="circleImageViewProfile" parent="">
         <item name="cornerFamily">rounded</item>
@@ -86,7 +90,6 @@
         <item name="android:letterSpacing">0</item>
 
     </style>
-
 
 
     <style name="TextAppearance.MyApp.Headline5" parent="TextAppearance.MaterialComponents.Headline5">
