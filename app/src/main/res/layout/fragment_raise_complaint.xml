@@ -43,7 +43,8 @@
             android:id="@+id/chip_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_14"
+            android:textSize="@dimen/text_size_12"
+            android:clickable="false"
             app:layout_constraintEnd_toEndOf="@id/tv_wifi_name"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="@id/tv_wifi_name"
@@ -53,41 +54,31 @@
         <!--Wifi Description-->
         <TextView
             android:id="@+id/tv_wifi_description"
-            style="@style/TextAppearance.MaterialComponents.Body1"
+            style="@style/TextAppearance.MaterialComponents.Body2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/common_margin_between_fields"
-            android:text="bleh bleh bleh"
+            android:text="bleh bleh bleh bleh bleh bleh bleh bleh bleh bleh bleh bleh bleh bleh bleh "
             android:textColor="@color/colorGrayLight"
             app:layout_constraintEnd_toEndOf="@id/tv_wifi_name"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="@id/tv_wifi_name"
             app:layout_constraintTop_toBottomOf="@id/chip_username"
-            tools:text="D-Zone Wifi" />
+            tools:text="bleh bleh bleh bleh bleh bleh bleh bleh bleh bleh bleh bleh bleh bleh bleh " />
 
         <!--Horizontal Line-->
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/spinner_issue"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:entries="@array/IssueType"
+            android:paddingStart="@dimen/common_padding_24"
+            android:paddingEnd="@dimen/common_padding_24"
+
             android:layout_marginTop="@dimen/common_margin_24"
             app:layout_constraintEnd_toEndOf="@id/tv_wifi_description"
             app:layout_constraintStart_toStartOf="@id/tv_wifi_description"
             app:layout_constraintTop_toBottomOf="@id/tv_wifi_description" />
-
-        <!--Rating Bar-->
-        <androidx.appcompat.widget.AppCompatRatingBar
-            android:id="@+id/rating_bar"
-            style="@style/GradientRatingBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/common_margin_24"
-            android:foregroundGravity="center"
-            android:rating="3"
-            android:stepSize="1"
-            app:layout_constraintEnd_toEndOf="@id/spinner_issue"
-            app:layout_constraintStart_toStartOf="@id/spinner_issue"
-            app:layout_constraintTop_toBottomOf="@id/spinner_issue" />
 
         <!--Remarks-->
         <com.google.android.material.textfield.TextInputLayout
@@ -99,7 +90,7 @@
             android:hint="@string/explain_problem_label"
             app:layout_constraintEnd_toEndOf="@id/spinner_issue"
             app:layout_constraintStart_toStartOf="@id/spinner_issue"
-            app:layout_constraintTop_toBottomOf="@id/rating_bar">
+            app:layout_constraintTop_toBottomOf="@id/spinner_issue">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
