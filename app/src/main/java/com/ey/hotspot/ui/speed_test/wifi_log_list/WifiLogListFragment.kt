@@ -26,7 +26,6 @@ class WifiLogListFragment : BaseFragment<FragmentWifiLogListBinding, WifiLogList
 
         setToolbar(toolbarBinding = mBinding.toolbarLayout, title = getString(R.string.wifi_log_list_label), showUpButton = true)
 
-
         setUpRecyclerView(mBinding.rvWifiLogList)
     }
 
