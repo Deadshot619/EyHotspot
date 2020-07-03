@@ -17,7 +17,7 @@ class RateWifiFragment : BaseFragment<FragmentRateWifiBinding, RateWifiViewModel
         mBinding.lifecycleOwner = viewLifecycleOwner
         mBinding.viewModel = mViewModel
 
-        setToolbar(toolbarBinding = mBinding.toolbarLayout, title = getString(R.string.rate_wifi_label), showUpButton = true)
+//        setToolbar(toolbarBinding = mBinding.toolbarLayout, title = getString(R.string.rate_wifi_label), showUpButton = true)
 
     }
 }

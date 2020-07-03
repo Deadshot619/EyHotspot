@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="2dp"
+        android:minHeight="?android:attr/actionBarSize">
+
+        <!--SearchBar-->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/CustomSearchBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/common_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_baseline_arrow_back_24_primary"
+                android:drawableEnd="@drawable/ic_baseline_search_24"
+                android:drawablePadding="@dimen/common_padding"
+                android:hint="@string/search_locations_label"
+                android:padding="@dimen/common_padding"
+                android:singleLine="true"
+                app:layout_constraintHorizontal_bias="0.3"
+                tools:hint="@string/search_locations_label" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </com.google.android.material.appbar.MaterialToolbar>
+</layout>

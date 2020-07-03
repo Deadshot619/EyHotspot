@@ -29,6 +29,8 @@
     <string name="next_label">التالى</string>
     <string name="mbps_label">%s ميغابت في الثانية</string>
 
+    <!--Toolbar-->
+    <string name="search_locations_label">مواقع البحث</string>
 
 
     <!--Login screen-->
