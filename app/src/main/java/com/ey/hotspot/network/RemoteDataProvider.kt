@@ -7,4 +7,11 @@ interface RemoteDataProvider {
         success: (JsonArray) -> Unit,
         error: (Exception) -> Unit
     )
+
+
+    suspend fun  registration(
+
+        sucess:(JsonArray) ->Unit,
+        error: (Exception) -> Unit
+    )
 }

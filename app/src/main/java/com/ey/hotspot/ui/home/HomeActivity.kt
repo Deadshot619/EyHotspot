@@ -1,12 +1,20 @@
 package com.ey.hotspot.ui.home
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
+import android.net.Uri
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.widget.AppCompatButton
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.ey.hotspot.R
@@ -18,17 +26,22 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.CameraPosition
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.net.PlacesClient
+import com.google.maps.android.clustering.Cluster
 import com.google.maps.android.clustering.ClusterManager
+import com.google.maps.android.clustering.view.DefaultClusterRenderer
 
-class HomeActivity : BaseActivity<ActivityHomeBinding,HomeViewModel>(),OnMapReadyCallback {
+
+class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), OnMapReadyCallback,
+    ClusterManager.OnClusterClickListener<MyClusterItems>,
+    ClusterManager.OnClusterInfoWindowClickListener<MyClusterItems>,
+    ClusterManager.OnClusterItemClickListener<MyClusterItems>,
+    ClusterManager.OnClusterItemInfoWindowClickListener<MyClusterItems> {
 
     private var map: GoogleMap? = null
     private var cameraPosition: CameraPosition? = null
@@ -43,6 +56,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding,HomeViewModel>(),OnMapRead
     private var lastKnownLocation: Location? = null
 
     private lateinit var mClusterManager: ClusterManager<MyClusterItems>
+    private var clickedVenueMarker: MyClusterItems? = null
 
 
     private val points = ArrayList<LatLng>()
@@ -53,7 +67,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding,HomeViewModel>(),OnMapRead
     }
 
     override fun getViewModel(): Class<HomeViewModel> {
-       return HomeViewModel::class.java
+        return HomeViewModel::class.java
     }
 
     override fun onBinding() {
@@ -127,14 +141,75 @@ class HomeActivity : BaseActivity<ActivityHomeBinding,HomeViewModel>(),OnMapRead
     }
 
     private fun setupClusters() {
+
+
+       /* mClusterManager = ClusterManager(this, map)
+
+        map?.setOnMarkerClickListener(mClusterManager);
+        map?.setInfoWindowAdapter(mClusterManager.getMarkerManager());
+        map?.setOnInfoWindowClickListener(mClusterManager);
+
+        mClusterManager.setOnClusterClickListener(this);
+        mClusterManager.setOnClusterItemClickListener(this);
+        mClusterManager.setOnClusterItemInfoWindowClickListener(this);
+
+        val renderer = ClusterItemRenderer(this, map, mClusterManager)
+        mClusterManager.renderer = renderer
+
+        setUpMarkerInfoWindows()
+        addItems()*/
+
+
         mClusterManager = ClusterManager(this, map)
         map?.setOnCameraIdleListener(mClusterManager)
         map?.setOnMarkerClickListener(mClusterManager)
+
+
+        val renderer = ClusterItemRenderer(this, map, mClusterManager)
+        mClusterManager.renderer = renderer
+
+        setUpMarkerInfoWindows()
+
+
         addItems()
     }
 
-    private fun addItems() {
+    private fun setUpMarkerInfoWindows() {
 
+
+        mClusterManager.markerCollection.setInfoWindowAdapter(object : InfoWindowAdapter {
+            override fun getInfoContents(p0: Marker?): View {
+                TODO("Not yet implemented")
+            }
+
+            override fun getInfoWindow(p0: Marker?): View {
+                val inflater =
+                    getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+                val view: View = inflater.inflate(R.layout.custom_marker_info_window, null)
+
+                val navigateButton =
+                    view.findViewById<View>(R.id.btNavigate) as AppCompatButton
+
+                val shareIt =  view.findViewById<View>(R.id.ivShareIT) as ImageView
+
+                shareIt.setOnClickListener {
+
+                    Toast.makeText(mContext, "Its toast!", Toast.LENGTH_SHORT).show()
+
+                }
+                navigateButton.setOnClickListener {
+
+                    Toast.makeText(mContext, "Its toast!", Toast.LENGTH_SHORT).show()
+
+
+                }
+                return view
+            }
+
+        })
+    }
+
+    private fun addItems() {
 
 
         var lat = lastKnownLocation!!.latitude
@@ -150,8 +225,8 @@ class HomeActivity : BaseActivity<ActivityHomeBinding,HomeViewModel>(),OnMapRead
         }
 
 
-        var latOne = lastKnownLocation!!.latitude+1.0
-        var lngOne = lastKnownLocation!!.longitude+1.0
+        var latOne = lastKnownLocation!!.latitude + 1.0
+        var lngOne = lastKnownLocation!!.longitude + 1.0
         for (i in 0..9) {
 
 
@@ -164,10 +239,10 @@ class HomeActivity : BaseActivity<ActivityHomeBinding,HomeViewModel>(),OnMapRead
             mClusterManager.addItem(offsetItem)
         }
 
-        var latTwo =lastKnownLocation!!.latitude+1.0
-        var lngTwo = lastKnownLocation!!.longitude+1
+        var latTwo = lastKnownLocation!!.latitude + 1.0
+        var lngTwo = lastKnownLocation!!.longitude + 1
 
-        for(i in 0..9){
+        for (i in 0..9) {
 
             val offset = i / 60.0
             lat = latTwo + offset
@@ -183,15 +258,15 @@ class HomeActivity : BaseActivity<ActivityHomeBinding,HomeViewModel>(),OnMapRead
     }
 
     private fun showNearbyWifis(points: ArrayList<LatLng>) {
+        val icon: BitmapDescriptor = BitmapDescriptorFactory.fromResource(R.drawable.ic_wifi_signal)
 
 
         for (location in points) {
 
             map?.addMarker(
                 MarkerOptions().position(location)
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_wifi))
-                    .alpha(0.7f).title("Nashik")
-
+                    .icon(icon)
+                    .title("Nashik")
             )
         }
     }
@@ -234,7 +309,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding,HomeViewModel>(),OnMapRead
     }
 
 
-
     private fun updateLocationUI() {
         if (map == null) {
             return
@@ -262,7 +336,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding,HomeViewModel>(),OnMapRead
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId){
+        return when (item.itemId) {
             R.id.option_get_place -> {
                 startActivity(Intent(this, ReviewAndComplainFragment::class.java))
                 true
@@ -279,5 +353,60 @@ class HomeActivity : BaseActivity<ActivityHomeBinding,HomeViewModel>(),OnMapRead
         private const val KEY_CAMERA_POSITION = "camera_position"
         private const val KEY_LOCATION = "location"
 
+    }
+
+    override fun onClusterClick(cluster: Cluster<MyClusterItems>?): Boolean {
+        return true
+    }
+
+    override fun onClusterInfoWindowClick(cluster: Cluster<MyClusterItems>?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onClusterItemClick(item: MyClusterItems?): Boolean {
+
+        clickedVenueMarker = item;
+        return false
+    }
+
+    override fun onClusterItemInfoWindowClick(item: MyClusterItems?) {
+
+        val gmmIntentUri = Uri.parse("geo:18.520430,73.856743")
+        val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+        mapIntent.setPackage("com.google.android.apps.maps")
+        mapIntent.resolveActivity(packageManager)?.let {
+            mContext.startActivity(mapIntent)
+        }
+
+
+    }
+
+
+    class ClusterItemRenderer(
+        context: Context, map: GoogleMap?,
+        clusterManager: ClusterManager<MyClusterItems>
+    ) : DefaultClusterRenderer<MyClusterItems>(context, map, clusterManager) {
+
+        override fun onBeforeClusterItemRendered(
+            item: MyClusterItems,
+            markerOptions: MarkerOptions
+        ) {
+
+            val icon: BitmapDescriptor =
+                BitmapDescriptorFactory.fromResource(R.drawable.ic_wifi_signal)
+            markerOptions.icon(icon)
+
+
+        }
+
+        override fun onClusterItemUpdated(item: MyClusterItems, marker: Marker) {
+
+
+            val icon: BitmapDescriptor =
+                BitmapDescriptorFactory.fromResource(R.drawable.ic_wifi_signal)
+
+
+            marker.setIcon(icon)
+        }
     }
 }

@@ -41,8 +41,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
            startActivity(homeIntent)*/
 
 
-       replaceFragment(RegisterUserFragment.newInstance(),true,null)
-        //setUpListeners()
+       //replaceFragment(RegisterUserFragment.newInstance(),true,null)
+        setUpListeners()
     }
 
     private fun setUpListeners() {
@@ -52,6 +52,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
             if (validate()) {
                 val homeIntent = Intent(activity, HomeActivity::class.java)
                 startActivity(homeIntent)
+
+                mViewModel.callLogin(mBinding.etLoginEmailId.toString(),mBinding.etLoginPassword.toString())
 
             }
 

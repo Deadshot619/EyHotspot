@@ -7,5 +7,12 @@ interface Constants {
         const val DELEGATE_ENGLISH_LANG = "en"
         const val ENGLISH_LANG: String  = "en"
         const val ARABIC_LANG: String  = "ar"
+
+
+        //APIS
+
+        const val  API_LOGIN ="login"
+
+        const val  API_REGISTRATION ="register"
     }
 }

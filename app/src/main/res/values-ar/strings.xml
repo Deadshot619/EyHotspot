@@ -85,7 +85,6 @@
     <!--Wifi Log List-->
     <string name="wifi_log_list_label">قائمة سجل واي فاي</string>
     <string name="date_label">تاريخ</string>
-    <string name="name_label">اسم</string>
 
 
 
@@ -111,4 +110,5 @@
     <string name="receive_otp">لم تتلق OTP؟</string>
     <string name="loginHeaderName">نقطة اتصال</string>
     <string name="loginHeaderNameSub">يربط العالم ...!</string>
+    <string name="navigate_label">التنقل</string>
 </resources>

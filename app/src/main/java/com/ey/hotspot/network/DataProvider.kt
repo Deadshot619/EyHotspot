@@ -16,11 +16,27 @@ object DataProvider : RemoteDataProvider {
         success: (JsonArray) -> Unit,
         error: (java.lang.Exception) -> Unit
     ) {
-        withContext(Dispatchers.Main){
+        withContext(Dispatchers.Main) {
             try {
                 val result = mServices.register(/*request*/).await()
                 success(result)
-            } catch (e: Exception){
+            } catch (e: Exception) {
+                error(e)
+            }
+        }
+    }
+
+
+    override suspend fun registration(
+
+        success: (JsonArray) -> Unit,
+        error: (java.lang.Exception) -> Unit
+    ) {
+
+        withContext(Dispatchers.Main) {
+            try {
+                val result = mServices.registration().await()
+            } catch (e: Exception) {
                 error(e)
             }
         }

@@ -70,7 +70,6 @@
     <!--Wifi Log List-->
     <string name="wifi_log_list_label">Wifi Log List</string>
     <string name="date_label">Date</string>
-    <string name="name_label">Name</string>
 
 
 
@@ -112,6 +111,7 @@
     <string name="receive_otp">Didn\'t received OTP?</string>
     <string name="loginHeaderName">Hotspot</string>
     <string name="loginHeaderNameSub">Connecting world...!</string>
+    <string name="navigate_label">NAVIGATING</string>
 
 
 </resources>
