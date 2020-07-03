@@ -3,6 +3,7 @@ package com.ey.hotspot.ui.home
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseActivity
 import com.ey.hotspot.databinding.ActivityBottomNavHomeBinding
+import com.ey.hotspot.ui.profile.fragment.ProfileFragment
 import com.ey.hotspot.ui.review_and_complaint.ReviewAndComplainFragment
 import com.ey.hotspot.ui.speed_test.speed_test_fragmet.SpeedTestFragment
 import com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListFragment
@@ -45,7 +46,7 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
 
                 //Profile
                 R.id.profile -> {
-//                    replaceFragment(MyVisitsFragment(), false)
+                    replaceFragment(ProfileFragment(), false)
                     return@setOnNavigationItemSelectedListener true
                 }
             }

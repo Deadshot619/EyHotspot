@@ -10,9 +10,7 @@
         <item name="otpViewStyle">@style/OtpWidget.OtpView</item>
 
 
-
         <item name="fontFamily">@font/fira_sans</item>
-
 
 
     </style>
@@ -25,16 +23,70 @@
         <item name="android:background">?attr/colorPrimaryDark</item>
     </style>
 
+    <!--    Search-Bar   -->
+    <style name="CustomSearchBar" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">25dp</item>
+        <item name="boxCornerRadiusTopEnd">25dp</item>
+        <item name="boxCornerRadiusBottomStart">25dp</item>
+        <item name="boxCornerRadiusBottomEnd">25dp</item>
+        <item name="boxBackgroundColor">@color/colorLightestGray</item>
+        <!--        <item name="boxStrokeColor">@color/colorLightestGray</item>-->
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="hintEnabled">false</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+    </style>
+
+    <!--    Custom TextField   -->
+    <style name="CustomTextField" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="hintTextColor">@color/colorPrimaryDark</item>
+        <item name="startIconTint">@color/colorPrimaryDark</item>
+    </style>
+
+
+
     <!--Circular image view-->
     <style name="circleImageView" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
 
+    <!--Rating Bar style-->
+    <style name="GradientRatingBar" parent="Widget.AppCompat.RatingBar">
+        <item name="android:progressDrawable">@drawable/rating_bar</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:isIndicator">false</item>
+    </style>
+
+    <!--Outlined Button uncolored-->
+    <style name="OutlinedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="cornerRadius">25dp</item>
+        <item name="android:paddingStart">30dp</item>
+        <item name="android:paddingEnd">30dp</item>
+        <item name="android:paddingTop">13dp</item>
+        <item name="android:paddingBottom">13dp</item>
+
+        <!--        <item name="background">@drawable/sign_btn_gradient</item>-->
+    </style>
+
+    <!--Outlined Button colored-->
+    <style name="GradientButton" parent="Widget.MaterialComponents.Button">
+        <item name="cornerRadius">25dp</item>
+        <item name="android:paddingStart">30dp</item>
+        <item name="android:paddingEnd">30dp</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="android:background">@drawable/sign_btn_gradient</item>
+        <item name="backgroundTint">@null</item>
+    </style>
+
 
     <style name="circleImageViewProfile" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">100%</item>
+    </style>
+
+
+    <style name="Headline7" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textSize">18sp</item>
     </style>
 
     <style name="TextAppearance.MyApp.Headline3" parent="TextAppearance.MaterialComponents.Headline3">
@@ -46,7 +98,6 @@
         <item name="android:letterSpacing">0</item>
 
     </style>
-
 
 
     <style name="TextAppearance.MyApp.Headline5" parent="TextAppearance.MaterialComponents.Headline5">

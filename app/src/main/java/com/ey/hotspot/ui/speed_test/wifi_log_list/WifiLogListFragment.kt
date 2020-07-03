@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentWifiLogListBinding
+import com.ey.hotspot.ui.speed_test.wifi_log.WifiLogFragment
+import com.ey.hotspot.utils.replaceFragment
 
 class WifiLogListFragment : BaseFragment<FragmentWifiLogListBinding, WifiLogListViewModel>() {
 
@@ -24,13 +26,14 @@ class WifiLogListFragment : BaseFragment<FragmentWifiLogListBinding, WifiLogList
 
         setToolbar(toolbarBinding = mBinding.toolbarLayout, title = getString(R.string.wifi_log_list_label), showUpButton = true)
 
-
         setUpRecyclerView(mBinding.rvWifiLogList)
     }
 
     private fun setUpRecyclerView(recyclerView: RecyclerView){
         //Setup Adapter
-        mAdapter = WifiLogListAdapter()
+        mAdapter = WifiLogListAdapter(WifiLogListAdapter.OnClickListener {
+            replaceFragment(WifiLogFragment(), true)
+        })
 
         recyclerView.run {
             layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)

@@ -8,11 +8,12 @@
     <color name="colorPrimarySub">#22672F</color>
     <color name="colorPrimary">#176E5A</color>
     <color name="colorPrimaryDark">#22672F</color>
-    <color name="colorAccent">#FFC107</color>
+    <color name="colorAccent">#F6CD51</color>
 
     <color name="colorSecondary">#FFFFFF</color>
     <color name="colorSecondaryDark">#FFFFFF</color>
 
+    <color name="colorEditText">#D5A00C</color>
 
     <color name="colorOnPrimary">@color/colorSecondary</color>
     <color name="colorOnSecondary">?attr/colorPrimaryDark</color>
@@ -21,6 +22,7 @@
     <color name="colorWhite">#FFF</color>
     <color name="colorGrayLight">#52525C</color>
     <color name="colorLightGray">#707070</color>
+    <color name="colorLightestGray">#E5E5E5</color>
 
     <color name="colorBlack">#52525C</color>
 
