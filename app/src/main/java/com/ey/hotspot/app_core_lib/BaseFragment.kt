@@ -8,7 +8,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.ey.hotspot.R
 import com.ey.hotspot.databinding.LayoutCustomToolbarBinding
+import com.ey.hotspot.databinding.LayoutCustomToolbarSearchbarBinding
+import com.ey.hotspot.utils.showKeyboard
+import com.ey.hotspot.utils.showMessage
 
 abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment(),
     UICallbacks<V> {
@@ -47,30 +51,60 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
         showUpButton: Boolean = false,
         endButtonTitle: String = "",
         showSettingButton: Boolean = false
-    ){
-            toolbarBinding.run {
-                //Toolbar title
-                tvTitle.text = title
+    ) {
+        toolbarBinding.run {
+            //Toolbar title
+            tvTitle.text = title
 
-                //If true, show Back Button, else hide it
-                if (showUpButton) {
-                    btnBack.visibility = View.VISIBLE
-                    btnBack.setOnClickListener {
-                        activity?.onBackPressed()
-                    }
-                } else {
-                    btnBack.visibility = View.GONE
+            //If true, show Back Button, else hide it
+            if (showUpButton) {
+                btnBack.visibility = View.VISIBLE
+                btnBack.setOnClickListener {
+                    activity?.onBackPressed()
                 }
+            } else {
+                btnBack.visibility = View.GONE
+            }
 
 //                Text Button
-                tvTextButton.text = ""
+            tvTextButton.text = ""
 
 //                Settings
-                if (showSettingButton){
-                    ivSettings.visibility = View.VISIBLE
+            if (showSettingButton) {
+                ivSettings.visibility = View.VISIBLE
+            } else {
+                ivSettings.visibility = View.GONE
+            }
+        }
+    }
+
+    protected fun setListenerOnSearchBar(
+        toolbarBinding: LayoutCustomToolbarSearchbarBinding,
+        showUpButton: Boolean = true,
+        searchFunction: (String) -> Unit    //method to run when search button is clicked
+    )  {
+        toolbarBinding.run {
+            //If true, show Back Button, else hide it
+            if (showUpButton) {
+                ivBack.visibility = View.VISIBLE
+                ivBack.setOnClickListener {
+                    activity?.onBackPressed()
+                }
+            } else {
+                ivBack.visibility = View.GONE
+//                etSearchBar.setPaddingRelative(24, etSearchBar.paddingTop, 56, etSearchBar.paddingTop)
+            }
+
+            //Search button
+            ivSearch.setOnClickListener {
+                if (etSearchBar.text.isNullOrEmpty()){
+                    showMessage(resources.getString(R.string.empty_query_alert_label))
+                    etSearchBar.requestFocus()
+                    activity?.showKeyboard()
                 } else {
-                    ivSettings.visibility = View.GONE
+                    searchFunction(etSearchBar.text.toString().trim())
                 }
             }
+        }
     }
 }

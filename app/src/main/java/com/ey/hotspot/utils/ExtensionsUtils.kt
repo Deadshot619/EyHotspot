@@ -55,6 +55,14 @@ fun AppCompatActivity.hideKeyboard() {
     }
 }
 
+fun Activity.showKeyboard() {
+    val view = this.currentFocus
+    val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    view?.let {
+        imm.showSoftInput(view, 0)
+    }
+}
+
 /**
  * This method will convert a value of Bits per second to Megabytes per second
  */

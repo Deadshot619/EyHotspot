@@ -5,6 +5,7 @@ import com.ey.hotspot.app_core_lib.BaseActivity
 import com.ey.hotspot.databinding.ActivityBottomNavHomeBinding
 import com.ey.hotspot.ui.profile.fragment.ProfileFragment
 import com.ey.hotspot.ui.review_and_complaint.ReviewAndComplainFragment
+import com.ey.hotspot.ui.speed_test.rate_wifi.RateWifiFragment
 import com.ey.hotspot.ui.speed_test.speed_test_fragmet.SpeedTestFragment
 import com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListFragment
 
@@ -22,7 +23,7 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
             when(item.itemId){
                 //Favourites
                 R.id.favourite -> {
-//                    replaceFragment(MyVisitsFragment(), false)
+                    replaceFragment(RateWifiFragment(), false)
                     return@setOnNavigationItemSelectedListener true
                 }
 

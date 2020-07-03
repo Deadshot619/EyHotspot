@@ -57,5 +57,6 @@
     <!--Toolbar-->
     <dimen name="toolbar_height">90dp</dimen>
     <dimen name="txt_size_45">46sp</dimen>
+    <dimen name="search_bar_padding">56dp</dimen>
 
 </resources>

@@ -10,30 +10,65 @@
         android:elevation="2dp"
         android:minHeight="?android:attr/actionBarSize">
 
-        <!--SearchBar-->
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/CustomSearchBar"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/common_margin"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="wrap_content">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tv_title"
+            <!--SearchBar-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_search"
+                style="@style/CustomSearchBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_baseline_arrow_back_24_primary"
-                android:drawableEnd="@drawable/ic_baseline_search_24"
-                android:drawablePadding="@dimen/common_padding"
-                android:hint="@string/search_locations_label"
-                android:padding="@dimen/common_padding"
-                android:singleLine="true"
-                app:layout_constraintHorizontal_bias="0.3"
-                tools:hint="@string/search_locations_label" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginTop="@dimen/common_margin"
+                android:layout_marginBottom="@dimen/common_margin"
+                android:layout_marginEnd="@dimen/common_margin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_search_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/search_locations_label"
+                    android:paddingStart="@dimen/search_bar_padding"
+                    android:paddingEnd="@dimen/search_bar_padding"
+                    android:singleLine="true"
+                    app:layout_constraintHorizontal_bias="0.3"
+                    tools:hint="@string/search_locations_label" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!--Back-->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:paddingStart="@dimen/common_padding"
+                android:clickable="true"
+                android:src="@drawable/ic_baseline_arrow_back_24_primary"
+                app:layout_constraintStart_toStartOf="@id/input_search"
+                app:layout_constraintTop_toTopOf="@id/input_search"
+                app:layout_constraintBottom_toBottomOf="@id/input_search"
+                android:focusable="true" />
+
+            <!--Search-->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_search"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:paddingEnd="@dimen/common_padding_24"
+                android:src="@drawable/search"
+                android:clickable="true"
+
+                app:layout_constraintEnd_toEndOf="@id/input_search"
+                app:layout_constraintTop_toTopOf="@id/input_search"
+                app:layout_constraintBottom_toBottomOf="@id/input_search"
+                android:focusable="true" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.appbar.MaterialToolbar>
 </layout>

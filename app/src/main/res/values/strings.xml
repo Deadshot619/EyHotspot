@@ -13,6 +13,7 @@
 
     <!--Toolbar-->
     <string name="search_locations_label">Search Locations</string>
+    <string name="empty_query_alert_label">Please enter a query</string>
 
     <!--    Register User   -->
     <string name="first_name_label">First Name</string>
