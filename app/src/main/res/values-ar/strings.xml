@@ -51,6 +51,11 @@
     <string name="confirm_password_label">تأكيد كلمة المرور</string>
     <string name="captcha_label">أدخل الرسالة الموضحة أدناه</string>
 
+    <!--My Profile-->
+    <string name="my_profile_label">ملفي</string>
+    <string name="update_profile_label">تحديث الملف</string>
+
+
     <!--    Registration Option    -->
     <string name="verification_method_label">حدد طريقة التحقق</string>
     <string name="otp_sms_label">OTP على الرسائل القصيرة</string>

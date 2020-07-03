@@ -13,6 +13,7 @@
     <color name="colorSecondary">#FFFFFF</color>
     <color name="colorSecondaryDark">#FFFFFF</color>
 
+    <color name="colorEditText">#D5A00C</color>
 
     <color name="colorOnPrimary">@color/colorSecondary</color>
     <color name="colorOnSecondary">?attr/colorPrimaryDark</color>

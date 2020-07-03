@@ -23,6 +23,11 @@
     <string name="confirm_password_label">Confirm Password</string>
     <string name="captcha_label">Enter the message shown below</string>
 
+    <!--My Profile-->
+    <string name="my_profile_label">My Profile</string>
+    <string name="update_profile_label">Update Profile</string>
+
+
     <!--    Registration Option    -->
     <string name="verification_method_label">Select verification method</string>
     <string name="otp_sms_label">OTP on SMS</string>

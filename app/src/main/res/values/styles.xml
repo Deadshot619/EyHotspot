@@ -36,6 +36,14 @@
         <item name="boxStrokeWidthFocused">0dp</item>
     </style>
 
+    <!--    Custom TextField   -->
+    <style name="CustomTextField" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="hintTextColor">@color/colorPrimaryDark</item>
+        <item name="startIconTint">@color/colorPrimaryDark</item>
+    </style>
+
+
+
     <!--Circular image view-->
     <style name="circleImageView" parent="">
         <item name="cornerFamily">rounded</item>
