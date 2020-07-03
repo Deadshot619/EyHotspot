@@ -41,11 +41,12 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
 //        return ReportsPageActivity().visitReportId
     }
 
-    fun setToolbar(
+    protected fun setToolbar(
         toolbarBinding: LayoutCustomToolbarBinding,
         title: String,
         showUpButton: Boolean = false,
-        endButtonTitle: String = ""
+        endButtonTitle: String = "",
+        showSettingButton: Boolean = false
     ){
             toolbarBinding.run {
                 //Toolbar title
@@ -61,8 +62,15 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
                     btnBack.visibility = View.GONE
                 }
 
+//                Text Button
                 tvTextButton.text = ""
+
+//                Settings
+                if (showSettingButton){
+                    ivSettings.visibility = View.VISIBLE
+                } else {
+                    ivSettings.visibility = View.GONE
+                }
             }
     }
 }
-
