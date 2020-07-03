@@ -92,6 +92,10 @@
     <string name="start_time_label">وقت البدء</string>
     <string name="end_time_label">وقت النهاية</string>
 
+    <!--Rate Wifi-->
+    <string name="add_remarks_label">أضف ملاحظاتك / ملاحظاتك هنا</string>
+    <string name="cancel_label">إلغاء</string>
+    <string name="submit_feedback_label">إرسال ملاحظات</string>
 
 
     <string name="btTextNavigateNow">انتقل الآن</string>

@@ -4,13 +4,10 @@
     >
     <!--make a gradient background-->
     <gradient
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:angle="0"
         android:centerColor="@color/colorSubAccent"
         android:endColor="@color/colorAccent"
         android:startColor="@color/colorPrimary"
-
-
         />
     <corners android:radius="25dp" />
 </shape>

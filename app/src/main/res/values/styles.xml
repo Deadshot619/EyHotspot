@@ -31,6 +31,28 @@
         <item name="cornerSize">50%</item>
     </style>
 
+    <!--Rating Bar style-->
+    <style name="GradientRatingBar" parent="Widget.AppCompat.RatingBar">
+        <item name="android:progressDrawable">@drawable/rating_bar</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:isIndicator">false</item>
+    </style>
+
+    <!--Outlined Button un colored-->
+    <style name="OutlinedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="cornerRadius">25dp</item>
+        <item name="android:paddingStart">30dp</item>
+        <item name="android:paddingEnd">30dp</item>
+<!--        <item name="background">@drawable/sign_btn_gradient</item>-->
+    </style>
+
+    <!--Outlined Button un colored-->
+    <style name="NormalButton" parent="Widget.MaterialComponents.Button">
+        <item name="cornerRadius">25dp</item>
+        <item name="android:paddingStart">30dp</item>
+        <item name="android:paddingEnd">30dp</item>
+        <!--        <item name="background">@drawable/sign_btn_gradient</item>-->
+    </style>
 
     <style name="circleImageViewProfile" parent="">
         <item name="cornerFamily">rounded</item>
