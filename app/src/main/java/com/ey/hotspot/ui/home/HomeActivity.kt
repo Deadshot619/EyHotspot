@@ -192,6 +192,8 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), OnMapRe
 
                 val shareIt =  view.findViewById<View>(R.id.ivShareIT) as ImageView
 
+
+                //TODO  Remaining click listener
                 shareIt.setOnClickListener {
 
                     Toast.makeText(mContext, "Its toast!", Toast.LENGTH_SHORT).show()
