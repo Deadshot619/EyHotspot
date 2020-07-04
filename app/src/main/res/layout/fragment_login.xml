@@ -1,199 +1,209 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
             name="viewModel"
             type="com.ey.hotspot.ui.login.login_fragment.LoginFragmentViewModel" />
-
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:orientation="vertical"
-        tools:context=".ui.login_selection.LoginSelectionActivity">
+        android:layout_height="match_parent">
 
+        <!--        Background header-->
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_bg_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_login_header"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-
-
-        <LinearLayout
-            android:background="@drawable/ic_login_header"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="200dp">
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/loginHeaderName"
-                android:gravity="center"
-                android:textSize="@dimen/txt_size_45"
-                android:textColor="@color/colorWhite"
-                android:layout_marginTop="@dimen/margin_20"
-                android:layout_gravity="center"/>
-
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/loginHeaderNameSub"
-                android:gravity="center"
-                android:textSize="@dimen/txt_size_14"
-                android:textColor="@color/colorWhite"
-                android:layout_gravity="center"/>
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_60"
-                android:text="@string/welcome"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:textSize="@dimen/text_size_20"
-                android:textColor="@color/colorWhite"
-                android:layout_gravity="center"/>
-
-
-
-        </LinearLayout>
-
-        
+        <!--        Hotspot-->
         <TextView
-            android:id="@+id/tvWelcome"
-            style="@style/TextAppearance.MyApp.Headline5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_20"
-            android:layout_marginTop="@dimen/margin_20"
-            android:gravity="center"
-            android:text="@string/login_credentials_msg" />
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_40"
-            android:layout_marginTop="@dimen/margin_10"
-            android:layout_marginEnd="@dimen/margin_40"
-            android:gravity="top|start"
-            app:startIconTint="@color/colorPrimarySub"
-
-            app:boxBackgroundColor="@color/colorWhite"
-            app:boxCornerRadiusBottomEnd="@dimen/margin_12"
-            app:boxCornerRadiusBottomStart="@dimen/margin_12"
-            app:boxCornerRadiusTopEnd="@dimen/margin_12"
-            app:boxCornerRadiusTopStart="@dimen/margin_12"
-            app:hintTextColor="@color/colorGrayLight"
-            app:placeholderText="@string/email_id_hint"
-            app:startIconDrawable="@drawable/ic_baseline_person_24">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etLoginEmailId"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="top|start"
-                android:hint="@string/email_id_label"
-                android:text="@={viewModel.emailId}"
-                android:inputType="textEmailAddress"
-                android:maxLength="120"
-                android:maxLines="1" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_40"
-            android:layout_marginTop="@dimen/margin_10"
-            android:layout_marginEnd="@dimen/margin_40"
-            app:boxBackgroundColor="@color/colorWhite"
-            app:boxCornerRadiusBottomEnd="@dimen/margin_12"
-            app:boxCornerRadiusBottomStart="@dimen/margin_12"
-            app:boxCornerRadiusTopEnd="@dimen/margin_12"
-            app:boxCornerRadiusTopStart="@dimen/margin_12"
-            app:passwordToggleEnabled="true"
-            app:startIconTint="@color/colorPrimarySub"
-
-            app:placeholderText="@string/enter_password"
-            app:hintTextColor="@color/colorGrayLight"
-            app:startIconDrawable="@drawable/baseline_lock_black_36">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etLoginPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="top|start"
-                android:hint="@string/userpassword"
-                android:text="@={viewModel.password}"
-                    android:inputType="textPassword"
-                android:maxLength="120"
-                android:maxLines="1" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-
-        <TextView
-            android:id="@+id/btn_forgot_password"
-            style="@style/TextAppearance.MyApp.Headline5"
+            android:id="@+id/tv_hotspot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginStart="@dimen/margin_40"
-            android:layout_marginTop="@dimen/margin_20"
-            android:layout_marginEnd="@dimen/margin_40"
-            android:text="@string/forgotpassword" />
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_submit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/margin_30"
-            android:paddingBottom="@dimen/margin_10"
-            android:paddingTop="@dimen/margin_10"
-            android:paddingStart="@dimen/margin_60"
-            android:paddingEnd="@dimen/margin_60"
-            android:text="@string/sign_in_label"
-            android:background="@drawable/sign_btn_gradient"
+            android:layout_marginTop="@dimen/common_margin_24"
+            android:text="@string/loginHeaderName"
             android:textColor="@color/colorWhite"
-            android:textSize="@dimen/text_size_15" />
+            android:textSize="@dimen/txt_size_45"
+            app:layout_constraintEnd_toEndOf="@id/iv_bg_header"
+            app:layout_constraintStart_toStartOf="@id/iv_bg_header"
+            app:layout_constraintTop_toTopOf="@id/iv_bg_header" />
 
-
-        </LinearLayout>
+        <!--        Hotspot-->
         <TextView
-            style="@style/TextAppearance.MyApp.Headline3"
-            android:layout_width="match_parent"
+            android:id="@+id/tv_connecting_world"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_20"
-            android:gravity="center"
-            android:text="@string/login_hotspot_msg" />
+            android:text="@string/loginHeaderNameSub"
+            android:textColor="@color/colorLightestGray"
+            android:textSize="@dimen/txt_size_14"
+            app:layout_constraintEnd_toEndOf="@id/tv_hotspot"
+            app:layout_constraintStart_toStartOf="@id/tv_hotspot"
+            app:layout_constraintTop_toBottomOf="@id/tv_hotspot" />
+
+        <!--        Welcome     -->
+        <TextView
+            android:id="@+id/tv_welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/welcome"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text_size_18"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/iv_bg_header"
+            app:layout_constraintEnd_toEndOf="@id/tv_hotspot"
+            app:layout_constraintStart_toStartOf="@id/tv_hotspot"
+            app:layout_constraintTop_toBottomOf="@id/tv_connecting_world"
+            app:layout_constraintVertical_bias="0.7" />
+
+        <!--        Login to Portal     -->
+        <TextView
+            android:id="@+id/tv_login_portal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_margin_48"
+            android:text="@string/login_credentials_msg"
+            android:textColor="@color/textColorHeadline"
+            android:textSize="@dimen/text_size_14"
+            app:layout_constraintEnd_toEndOf="@id/tv_hotspot"
+            app:layout_constraintStart_toStartOf="@id/tv_hotspot"
+            app:layout_constraintTop_toBottomOf="@id/iv_bg_header"
+            app:layout_constraintVertical_bias="0.7" />
+
+        <!--EmailId Hint-->
+        <TextView
+            android:id="@+id/tv_email_id_hint"
+            style="@style/EditTextHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/email_id_label"
+            app:layout_constraintBottom_toTopOf="@id/input_email_id"
+            app:layout_constraintEnd_toEndOf="@id/input_email_id"
+            app:layout_constraintStart_toStartOf="@id/input_email_id"
+            app:layout_constraintTop_toTopOf="@id/input_email_id" />
+
+        <!--Email Id-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_email_id"
+            style="@style/CustomTextField"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/common_margin_32"
+            android:layout_marginTop="@dimen/common_margin_64"
+            android:layout_marginEnd="@dimen/common_margin_32"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_login_portal">
+
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/CustomEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/email_id_bitmap"
+                android:hint="@string/email_id_hint" />
+        </com.google.android.material.textfield.TextInputLayout>
 
 
+        <!--Password Hint-->
+        <TextView
+            android:id="@+id/tv_password_hint"
+            style="@style/EditTextHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/password_label"
+            app:layout_constraintBottom_toTopOf="@id/password_input_layout"
+            app:layout_constraintEnd_toEndOf="@id/password_input_layout"
+            app:layout_constraintStart_toStartOf="@id/password_input_layout"
+            app:layout_constraintTop_toTopOf="@id/password_input_layout" />
+
+        <!--Password input-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/password_input_layout"
+            style="@style/CustomTextField"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="@dimen/common_margin_32"
+            app:layout_constraintEnd_toEndOf="@id/input_email_id"
+            app:layout_constraintStart_toStartOf="@id/input_email_id"
+            app:layout_constraintTop_toBottomOf="@id/input_email_id">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_password"
+                style="@style/CustomEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/password_bitmap"
+                android:hint="@string/enter_password" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:id="@+id/tvGetStartedNow"
+            android:id="@+id/tv_forgot_password"
+            style="@style/TextAppearance.MyApp.Headline5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_margin"
+            android:text="@string/forgotpassword"
+            app:layout_constraintEnd_toEndOf="@id/password_input_layout"
+            app:layout_constraintTop_toBottomOf="@id/password_input_layout" />
+
+
+        <!--        Sign  In-->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_sign_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_margin_32"
+            android:background="@drawable/sign_btn_gradient"
+            android:paddingStart="@dimen/margin_60"
+            android:paddingTop="@dimen/margin_10"
+            android:paddingEnd="@dimen/margin_60"
+            android:paddingBottom="@dimen/margin_10"
+            android:text="@string/sign_in_label"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text_size_15"
+            app:layout_constraintEnd_toEndOf="@id/password_input_layout"
+            app:layout_constraintStart_toStartOf="@id/password_input_layout"
+            app:layout_constraintTop_toBottomOf="@id/tv_forgot_password" />
+
+        <!--        Don't have account-->
+        <TextView
+            android:id="@+id/tv_dont_have_account"
             style="@style/TextAppearance.MyApp.Headline3"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_margin_32"
+            android:gravity="center"
+            android:text="@string/login_hotspot_msg"
+            app:layout_constraintBottom_toTopOf="@+id/tv_get_started"
+            app:layout_constraintEnd_toEndOf="@id/btn_sign_in"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@id/btn_sign_in"
+            app:layout_constraintTop_toBottomOf="@+id/btn_sign_in"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <!--        Get Started-->
+        <TextView
+            android:id="@+id/tv_get_started"
+            style="@style/TextAppearance.MyApp.Headline3"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_10"
-            android:gravity="center"
+            android:text="@string/get_started_msg"
             android:textColor="@color/colorPrimarySub"
-            android:text="@string/get_started_msg" />
-
-    </LinearLayout>
-
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/tv_dont_have_account"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@id/tv_dont_have_account"
+            app:layout_constraintTop_toBottomOf="@+id/tv_dont_have_account" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
