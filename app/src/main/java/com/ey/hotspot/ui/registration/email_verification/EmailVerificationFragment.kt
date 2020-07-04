@@ -1,12 +1,6 @@
 package com.ey.hotspot.ui.registration.email_verification
 
 import android.annotation.SuppressLint
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
@@ -24,7 +18,7 @@ class EmailVerificationFragment :
     override fun getViewModel() = EmailVerificationViewModel::class.java
     override fun onBinding() {
 
-        setToolbar(toolbarBinding = mBinding.toolbarLayout, title = getString(R.string.registration_label), showUpButton = true)
+        setUpToolbar(toolbarBinding = mBinding.toolbarLayout, title = getString(R.string.registration_label), showUpButton = true)
 
 
         mBinding.run {

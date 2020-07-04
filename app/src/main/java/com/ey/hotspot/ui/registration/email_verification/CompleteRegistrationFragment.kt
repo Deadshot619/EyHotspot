@@ -1,12 +1,6 @@
 package com.ey.hotspot.ui.registration.email_verification
 
 import android.annotation.SuppressLint
-import androidx.lifecycle.ViewModelProviders
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
@@ -29,7 +23,7 @@ class CompleteRegistrationFragment : BaseFragment<CompleteRegistrationFragmentBi
     }
 
     override fun onBinding() {
-        setToolbar(toolbarBinding = mBinding.toolbarLayout, title = getString(R.string.my_profile_label), showUpButton = true)
+        setUpToolbar(toolbarBinding = mBinding.toolbarLayout, title = getString(R.string.my_profile_label), showUpButton = true)
 
         mBinding.run {
             lifecycleOwner = viewLifecycleOwner

@@ -57,7 +57,7 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
 
     private fun setUpUIData() {
 
-        setToolbar(toolbarBinding = mBinding.toolbarLayout, title = getString(R.string.register_with_us), showUpButton = true)
+        setUpToolbar(toolbarBinding = mBinding.toolbarLayout, title = getString(R.string.register_with_us), showUpButton = true)
         tvTermsCondition.paintFlags = tvTermsCondition.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG
 
         setUpFacebookLogin()
