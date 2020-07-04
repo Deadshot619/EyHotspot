@@ -19,6 +19,6 @@ class RateWifiFragment : BaseFragment<FragmentRateWifiBinding, RateWifiViewModel
 
 //        setToolbar(toolbarBinding = mBinding.toolbarLayout, title = getString(R.string.rate_wifi_label), showUpButton = true)
 
-        setListenerOnSearchBar(mBinding.toolbarLayout){}
+        setUpSearchBar(mBinding.toolbarLayout, false){}
     }
 }

@@ -18,7 +18,7 @@ class ReviewAndComplainFragment : BaseFragment<FragmentReviewAndComplainBinding,
     override fun onBinding() {
 //        supportActionBar?.title = getString(R.string.reviews_and_complaint)
 
-        setToolbar(toolbarBinding = mBinding.toolbarLayout, title = getString(R.string.reviews_and_complaint),showUpButton = true)
+        setUpToolbar(toolbarBinding = mBinding.toolbarLayout, title = getString(R.string.reviews_and_complaint),showUpButton = true)
 
 
         setUpViewpager(viewPager = mBinding.viewpager)

@@ -45,7 +45,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
 //        return ReportsPageActivity().visitReportId
     }
 
-    protected fun setToolbar(
+    protected fun setUpToolbar(
         toolbarBinding: LayoutCustomToolbarBinding,
         title: String,
         showUpButton: Boolean = false,
@@ -78,11 +78,11 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
         }
     }
 
-    protected fun setListenerOnSearchBar(
+    protected fun setUpSearchBar(
         toolbarBinding: LayoutCustomToolbarSearchbarBinding,
         showUpButton: Boolean = true,
         searchFunction: (String) -> Unit    //method to run when search button is clicked
-    )  {
+    ) {
         toolbarBinding.run {
             //If true, show Back Button, else hide it
             if (showUpButton) {
@@ -90,14 +90,19 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
                 ivBack.setOnClickListener {
                     activity?.onBackPressed()
                 }
-            } else {
+            } else {    //If false, hide up button & lower the padding of edittext
                 ivBack.visibility = View.GONE
-//                etSearchBar.setPaddingRelative(24, etSearchBar.paddingTop, 56, etSearchBar.paddingTop)
+                etSearchBar.setPaddingRelative(
+                    resources.getDimensionPixelSize(R.dimen.search_bar_padding_start_no_drawable),
+                    etSearchBar.paddingTop,
+                    resources.getDimensionPixelSize(R.dimen.search_bar_padding),
+                    etSearchBar.paddingTop
+                )
             }
 
             //Search button
             ivSearch.setOnClickListener {
-                if (etSearchBar.text.isNullOrEmpty()){
+                if (etSearchBar.text.isNullOrEmpty()) {
                     showMessage(resources.getString(R.string.empty_query_alert_label))
                     etSearchBar.requestFocus()
                     activity?.showKeyboard()
