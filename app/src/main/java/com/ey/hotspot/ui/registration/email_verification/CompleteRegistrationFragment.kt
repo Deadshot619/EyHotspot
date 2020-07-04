@@ -23,8 +23,8 @@ class CompleteRegistrationFragment : BaseFragment<CompleteRegistrationFragmentBi
     }
 
     override fun onBinding() {
-        setUpToolbar(toolbarBinding = mBinding.toolbarLayout, title = getString(R.string.my_profile_label), showUpButton = true)
 
+        setUpToolbar(toolbarBinding = mBinding.toolbarLayout, title = getString(R.string.my_profile_label), showUpButton = true)
         mBinding.run {
             lifecycleOwner = viewLifecycleOwner
             viewModel = mViewModel

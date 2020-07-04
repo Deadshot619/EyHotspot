@@ -35,6 +35,9 @@ class SearchListFragment : BaseFragment<SearchListFragmentBinding, SearchListVie
     }
 
     override fun onBinding() {
+
+        setUpSearchBar(mBinding.toolbarLayout,true,{})
+
         rvSearchList.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = usersAdapter
@@ -44,13 +47,10 @@ class SearchListFragment : BaseFragment<SearchListFragmentBinding, SearchListVie
     }
 
     private fun sendData(): ArrayList<SearchList> {
-
         val list = arrayListOf<SearchList>()
-
         for(i in 0..9){
             list.add(SearchList("Avator","prashantj@gmail.com","prashant",1,"KK"))
         }
-
         return list;
     }
 

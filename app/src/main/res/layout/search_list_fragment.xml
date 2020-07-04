@@ -13,7 +13,6 @@
         tools:context=".ui.login_selection.LoginSelectionActivity">
 
 
-
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_left"
             android:layout_width="wrap_content"
@@ -29,8 +28,6 @@
             app:layout_constraintGuide_end="@dimen/margin_20" />
 
 
-
-
         <!--Toolbar-->
         <include
             android:id="@+id/toolbarLayout"
@@ -40,17 +37,17 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvSearchList"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginTop="@dimen/margin_20"
             android:layout_marginBottom="@dimen/margin_10"
-            android:layout_marginTop="@dimen/margin_10"
-            app:layout_constraintTop_toBottomOf="@+id/toolbarLayout"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/guideline_right"
             app:layout_constraintStart_toStartOf="@+id/guideline_left"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/tvRecentSearchTitle" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

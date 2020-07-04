@@ -23,8 +23,8 @@ class OTPVerificationFragment :
 
     override fun onBinding() {
 
-        setUpToolbar(toolbarBinding = mBinding.toolbarLayout, title = getString(R.string.otp_label), showUpButton = true)
 
+        setUpToolbar(toolbarBinding = mBinding.toolbarLayout, title = getString(R.string.otp_label), showUpButton = true)
         mBinding.otpView.setOtpCompletionListener {
             val otp: String = it
 

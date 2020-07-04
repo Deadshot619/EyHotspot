@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/margin_60"
+    android:layout_margin="@dimen/margin_2"
+    android:background="@color/colorLightestGray"
+    android:orientation="horizontal">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+
+        android:layout_margin="@dimen/margin_20"
+
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/tv_suggestion_item_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.3"
+            android:gravity="left|center_vertical"
+            android:textSize="16sp"
+            tools:text="Watch movie" />
+
+        <ImageView
+            android:id="@+id/iv_suggestion_item_icon"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_50"
+            android:layout_gravity="center"
+            android:layout_weight="1.7"
+            android:scaleType="centerInside"
+            android:src="@drawable/tiltarrow"
+            tools:src="@drawable/tiltarrow" />
+
+    </LinearLayout>
+
+</FrameLayout>

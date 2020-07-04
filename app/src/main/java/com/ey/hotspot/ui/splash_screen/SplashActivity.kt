@@ -11,8 +11,20 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
     override fun getLayoutId(): Int = R.layout.activity_splash
     override fun getViewModel(): Class<SplashViewModel> = SplashViewModel::class.java
     override fun onBinding() {
-        startActivity(Intent(this, BottomNavHomeActivity::class.java))
-        finish()
+
+
+        mBinding.btArabic.setOnClickListener {
+
+            startActivity(Intent(this, BottomNavHomeActivity::class.java))
+            finish()
+        }
+
+        mBinding.btEnglish.setOnClickListener {
+            startActivity(Intent(this, BottomNavHomeActivity::class.java))
+            finish()
+
+        }
+
     }
 
 }

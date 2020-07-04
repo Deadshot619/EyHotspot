@@ -137,4 +137,8 @@
     <string name="register_with_us">سجل معنا</string>
     <string name="skip">تخطى</string>
     <string name="otp_label">OTP</string>
+    <string name="recently_search_label">البحث الأخير</string>
+    <string name="rate_now_label">قيم الآن</string>
+    <string name="arabic">عربى</string>
+    <string name="english">الإنجليزية</string>
 </resources>

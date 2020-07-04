@@ -17,10 +17,7 @@ class EmailVerificationFragment :
     override fun getLayoutId() = R.layout.fragment_email_verification
     override fun getViewModel() = EmailVerificationViewModel::class.java
     override fun onBinding() {
-
         setUpToolbar(toolbarBinding = mBinding.toolbarLayout, title = getString(R.string.registration_label), showUpButton = true)
-
-
         mBinding.run {
             lifecycleOwner = viewLifecycleOwner
             viewModel = mViewModel

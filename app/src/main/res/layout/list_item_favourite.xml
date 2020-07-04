@@ -5,12 +5,11 @@
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_5"
     android:foreground="?android:attr/selectableItemBackground"
     app:cardBackgroundColor="@android:color/white"
     app:cardCornerRadius="4dp"
     app:cardElevation="4dp"
-    android:layout_margin="@dimen/margin_10"
-
     app:cardUseCompatPadding="true"
     app:ignore="NamespaceTypo">
 
@@ -18,117 +17,135 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_10"
-
+        android:layout_margin="@dimen/margin_5"
         android:orientation="vertical">
 
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
 
-            <TextView
-                android:id="@+id/tvWifiName"
-                style="@style/TextAppearance.MyApp.Headline3"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="0.2"
-                android:gravity="start"
-                android:text="StarBucksWIfi"
-                android:textStyle="bold" />
+                android:layout_marginTop="@dimen/margin_5"
+                android:orientation="horizontal"
+                android:weightSum="3">
 
 
+                <TextView
+                    android:id="@+id/tvWifiName"
+                    style="@style/TextAppearance.MyApp.Headline3_Profile_Large"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="D-Zone Wifi"
+                    android:textStyle="bold" />
 
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_20"
+                    android:layout_weight="1.25"
+                    android:src="@drawable/ic_fill_heart" />
 
-            <ImageView
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_20"
+                    android:layout_weight="1.25"
+                    android:src="@drawable/ic_group" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_weight="1.8"
-                android:src="@drawable/baseline_favorite_black_36" />
-        </LinearLayout>
+                android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_marginTop="@dimen/margin_10"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2">
 
-            <TextView
-                android:id="@+id/tvOwnerName"
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvOwnerName"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_2"
+                    android:outlineAmbientShadowColor="@color/colorGrayLight"
+                    android:outlineSpotShadowColor="@color/colorGrayLight"
+                    android:paddingTop="@dimen/margin_2"
+                    android:paddingBottom="@dimen/margin_2"
+                    android:text="RIYADH" />
+
+                <TextView
+                    android:id="@+id/tvStreetAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Olya St,Akaria Mall, Food Court,Riyadh 12244" />
+
+                <View
+
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/margin_5"
+                    android:layout_weight="1"
+                    android:background="@color/colorGrayLight" />
+
+
+                <TextView
+                    android:id="@+id/tvVia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="via Al Urubah Rd Arrival arround" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="0.2"
-                android:gravity="start"
-                android:text="Mobily Riyadh" />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_weight="1.8"
-                android:src="@drawable/baseline_share_black_36" />
-
-        </LinearLayout>
-        <TextView
-            android:id="@+id/tvStartTime"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="0.2"
-            android:gravity="start"
-            android:text="Start Now- Reach time 9:56AM" />
+                android:layout_marginTop="@dimen/margin_10"
+                android:layout_marginBottom="@dimen/margin_10"
+                android:orientation="horizontal"
+                android:weightSum="3">
 
 
-
-        <LinearLayout
-            android:layout_marginTop="@dimen/margin_10"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-
-            <Button
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-
-                android:text="@string/btTextNavigateNow"
-                android:textAllCaps="false"
-                android:textColor="@color/colorWhite"
-                android:textDirection="locale"
-                android:textSize="@dimen/text_size_10" />
+                <ImageView
+                    android:id="@+id/ivShareIT"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/margin_30"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.6"
+                    android:scaleType="fitStart"
+                    android:src="@drawable/baseline_share_24" />
 
 
-            <Button
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:text="@string/btTextComment"
-                android:textAllCaps="false"
-                android:textColor="@color/colorWhite"
-                android:textDirection="locale"
-                android:textSize="@dimen/text_size_10" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btRateNow"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="@dimen/margin_5"
+                    android:layout_weight="1.1"
+                    android:outlineAmbientShadowColor="@color/colorPrimarySub"
+                    android:text="@string/rate_now_label"
+                    android:textColor="@color/colorPrimarySub"
+                    android:textSize="@dimen/text_size_15"
+                    card_view:cornerRadius="@dimen/margin_20" />
 
-            <Button
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/btTextRateWifi"
-                android:textAllCaps="false"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/text_size_10" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btNavigate"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/margin_30"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/margin_5"
+                    android:layout_weight="1.1"
+                    android:background="@drawable/sign_btn_gradient"
+                    android:text="@string/navigate_now_label"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/text_size_15" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
