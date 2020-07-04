@@ -4,8 +4,9 @@ import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseActivity
 import com.ey.hotspot.databinding.ActivityBottomNavHomeBinding
 import com.ey.hotspot.ui.profile.fragment.ProfileFragment
+import com.ey.hotspot.ui.registration.register_user.RegisterUserFragment
 import com.ey.hotspot.ui.review_and_complaint.ReviewAndComplainFragment
-import com.ey.hotspot.ui.speed_test.rate_wifi.RateWifiFragment
+import com.ey.hotspot.ui.search.searchlist.SearchListFragment
 import com.ey.hotspot.ui.speed_test.speed_test_fragmet.SpeedTestFragment
 import com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListFragment
 
@@ -18,12 +19,12 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
         setBottomNavListener()
     }
 
-    private fun setBottomNavListener(){
+    private fun setBottomNavListener() {
         mBinding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
-            when(item.itemId){
+            when (item.itemId) {
                 //Favourites
                 R.id.favourite -> {
-                    replaceFragment(RateWifiFragment(), false)
+//                    replaceFragment(MyVisitsFragment(), false)
                     return@setOnNavigationItemSelectedListener true
                 }
 
@@ -35,7 +36,8 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
 
                 //home
                 R.id.dashboard -> {
-                    replaceFragment(WifiLogListFragment(), false)
+
+                    replaceFragment(RegisterUserFragment(), false)
                     return@setOnNavigationItemSelectedListener true
                 }
 

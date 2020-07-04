@@ -45,7 +45,7 @@
                 android:id="@+id/tv_text_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="SKIP"
+                tools:text="@string/skip"
                 style="@style/TextAppearance.MaterialComponents.Body1"
                 android:layout_marginEnd="@dimen/common_margin_24"
                 app:layout_constraintEnd_toEndOf="parent"

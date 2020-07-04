@@ -13,4 +13,7 @@ interface APIInterface {
 
     @POST(Constants.API_REGISTRATION)
     fun registration():Deferred<JsonArray>
+
+    @POST(Constants.API_NEARBYWIFILIST)
+    fun  getNearByWifiList():Deferred<JsonArray>
 }

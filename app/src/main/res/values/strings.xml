@@ -4,6 +4,14 @@
     <string name="login_button">Login</string>
     <string name="registration_button">Register</string>
 
+    <!--Social Login And API KEYEs-->
+    <string name="google_client_id">1010233238210-9ug8s9bhjbbsskrn4hete9deb89u1dh4.apps.googleusercontent.com</string>
+
+
+    <string name="facebook_app_id">807473699785521</string>
+    <string name="fb_login_protocol_scheme">fb807473699785521</string>
+
+
     <!--Common-->
     <string name="registration_label">Registration</string>
     <string name="sign_in_label">Sign In</string>
@@ -95,7 +103,6 @@
     <string name="raise_complaint_label">Raise Complaint</string>
 
 
-
     <!--
    //Clustring
    <string name="maps_api_key">AIzaSyBqFJqQpuMaYT5mpVw0K3pu5XQqcpJ2_tQ</string>
@@ -134,6 +141,10 @@
     <string name="loginHeaderName">Hotspot</string>
     <string name="loginHeaderNameSub">Connecting world...!</string>
     <string name="navigate_label">NAVIGATING</string>
+    <string name="navigate_now_label">NAVIGATE NOW</string>
+    <string name="register_with_us">Register With Us</string>
+    <string name="skip">SKIP</string>
+    <string name="otp_label">OTP</string>
 
 
     <!--Demo issue type string-->

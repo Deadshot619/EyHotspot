@@ -133,4 +133,8 @@
     <string name="loginHeaderName">نقطة اتصال</string>
     <string name="loginHeaderNameSub">يربط العالم ...!</string>
     <string name="navigate_label">التنقل</string>
+    <string name="navigate_now_label">التنقل الآن</string>
+    <string name="register_with_us">سجل معنا</string>
+    <string name="skip">تخطى</string>
+    <string name="otp_label">OTP</string>
 </resources>
