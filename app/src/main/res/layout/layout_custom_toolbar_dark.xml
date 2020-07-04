@@ -34,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="Registration"
-                app:layout_constraintHorizontal_bias="0.3"
+                app:layout_constraintHorizontal_bias="0.5"
                 style="@style/TextAppearance.MaterialComponents.Headline6"
                 android:textColor="?attr/colorOnPrimary"
                 app:layout_constraintStart_toEndOf="@id/btn_back"
