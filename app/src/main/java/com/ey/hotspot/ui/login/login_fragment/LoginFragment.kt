@@ -5,14 +5,11 @@ import android.os.Bundle
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentLoginBinding
-import com.ey.hotspot.ui.home.HomeActivity
-import com.ey.hotspot.ui.registration.register_user.RegisterUserFragment
+import com.ey.hotspot.ui.home.BottomNavHomeActivity
 import com.ey.hotspot.ui.registration.registration_option.RegistrationOptionFragment
 import com.ey.hotspot.utils.constants.OptionType
 import com.ey.hotspot.utils.replaceFragment
 import com.ey.hotspot.utils.validations.isEmailValid
-import com.ey.hotspot.utils.validations.isPasswordValid
-import com.ey.hotspot.utils.validations.isValidMobile
 
 
 class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>() {
@@ -34,33 +31,33 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
 
         mBinding.run {
-           lifecycleOwner = viewLifecycleOwner
+            lifecycleOwner = viewLifecycleOwner
             viewModel = mViewModel
         }
         /*   val homeIntent = Intent(activity,HomeActivity::class.java)
            startActivity(homeIntent)*/
 
 
-       //replaceFragment(RegisterUserFragment.newInstance(),true,null)
+        //replaceFragment(RegisterUserFragment.newInstance(),true,null)
         setUpListeners()
     }
 
     private fun setUpListeners() {
         //Submit
-        mBinding.btnSubmit.setOnClickListener {
+        mBinding.btnSignIn.setOnClickListener {
 
             if (validate()) {
-                val homeIntent = Intent(activity, HomeActivity::class.java)
+                val homeIntent = Intent(activity, BottomNavHomeActivity::class.java)
                 startActivity(homeIntent)
 
-                mViewModel.callLogin(mBinding.etLoginEmailId.toString(),mBinding.etLoginPassword.toString())
+                mViewModel.callLogin(mViewModel.emailId, mViewModel.password)
 
             }
 
         }
 
         //Forgot Password
-        mBinding.btnForgotPassword.setOnClickListener {
+        mBinding.tvForgotPassword.setOnClickListener {
             replaceFragment(
                 fragment = RegistrationOptionFragment.newInstance(),
                 addToBackStack = true,
@@ -81,10 +78,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
         mViewModel.run {
             mBinding.run {
                 return if (!emailId.isEmailValid()) {
-                    etLoginEmailId.error = resources.getString(R.string.invalid_email)
+                    etEmailId.error = resources.getString(R.string.invalid_email)
                     false
                 } else if (password.trim().isEmpty()) {
-                    etLoginPassword.error = "Enter the password"
+                    etPassword.error = "Enter the password"
                     false
                 } else
                     true

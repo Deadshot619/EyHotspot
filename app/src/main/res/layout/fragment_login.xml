@@ -104,8 +104,10 @@
             app:layout_constraintTop_toBottomOf="@id/tv_login_portal">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_email_id"
                 style="@style/CustomEditText"
                 android:layout_width="match_parent"
+                android:text="@={viewModel.emailId}"
                 android:layout_height="wrap_content"
                 android:background="@drawable/email_id_bitmap"
                 android:hint="@string/email_id_hint" />
@@ -137,10 +139,11 @@
             app:layout_constraintTop_toBottomOf="@id/input_email_id">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edt_password"
+                android:id="@+id/et_password"
                 style="@style/CustomEditText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:text="@={viewModel.password}"
                 android:background="@drawable/password_bitmap"
                 android:hint="@string/enter_password" />
 
@@ -197,7 +200,7 @@
             style="@style/TextAppearance.MyApp.Headline3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_10"
+            android:layout_marginTop="@dimen/common_margin_between_fields"
             android:text="@string/get_started_msg"
             android:textColor="@color/colorPrimarySub"
             app:layout_constraintBottom_toBottomOf="parent"
