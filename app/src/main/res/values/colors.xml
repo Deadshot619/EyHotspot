@@ -26,6 +26,6 @@
 
     <color name="colorBlack">#52525C</color>
 
-    <color name="textColorToolbar">#52525C</color>
+    <color name="textColorHeadline">#52525C</color>
 
 </resources>

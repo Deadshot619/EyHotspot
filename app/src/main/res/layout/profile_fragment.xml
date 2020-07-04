@@ -22,44 +22,58 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-        <!--First Name-->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_first_name"
-            style="@style/CustomTextField"
+        <!--Name Hint-->
+        <TextView
+            android:id="@+id/tv_name_hint"
+            style="@style/EditTextHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/name_label"
+            app:layout_constraintBottom_toTopOf="@id/iv_name"
+            app:layout_constraintEnd_toEndOf="@id/iv_name"
+            app:layout_constraintStart_toStartOf="@id/iv_name"
+            app:layout_constraintTop_toTopOf="@id/iv_name" />
+
+        <!--Name View-->
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/common_margin_24"
-            android:hint="@string/first_name_label"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbarLayout"
-            app:startIconDrawable="@drawable/ic_baseline_person_24">
+            android:layout_marginTop="@dimen/margin_20"
+            android:scaleType="fitXY"
+            android:src="@drawable/user_bitmap"
+            app:layout_constraintEnd_toEndOf="@id/input_mobile_no"
+            app:layout_constraintStart_toStartOf="@id/input_mobile_no"
+            app:layout_constraintTop_toBottomOf="@+id/toolbarLayout" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorEditText" />
-        </com.google.android.material.textfield.TextInputLayout>
+        <!--First Name-->
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_first_name"
+            style="@style/CustomEditTextFirstName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/first_name_label"
+            android:singleLine="true"
+            app:layout_constraintBottom_toBottomOf="@id/iv_name"
+            app:layout_constraintEnd_toStartOf="@+id/edt_last_name"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toEndOf="@+id/iv_name"
+            app:layout_constraintStart_toStartOf="@id/iv_name"
+            app:layout_constraintTop_toTopOf="@id/iv_name" />
 
         <!--Last Name-->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_last_name"
-            style="@style/CustomTextField"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_last_name"
+            style="@style/CustomEditTextLastName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/common_margin_24"
             android:hint="@string/last_name_label"
-            app:layout_constraintEnd_toEndOf="@id/input_first_name"
-            app:layout_constraintStart_toStartOf="@id/input_first_name"
-            app:layout_constraintTop_toBottomOf="@id/input_first_name"
-            app:startIconDrawable="@drawable/ic_baseline_person_24">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorEditText" />
-        </com.google.android.material.textfield.TextInputLayout>
-
+            app:layout_constraintBottom_toBottomOf="@id/iv_name"
+            app:layout_constraintEnd_toEndOf="@id/iv_name"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/edt_first_name"
+            app:layout_constraintTop_toTopOf="@id/iv_name" />
 
         <!--EmailId Hint-->
         <TextView
@@ -80,11 +94,11 @@
             style="@style/CustomTextField"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/common_margin_24"
             app:hintEnabled="false"
-            app:layout_constraintEnd_toEndOf="@id/input_last_name"
-            app:layout_constraintStart_toStartOf="@id/input_last_name"
-            app:layout_constraintTop_toBottomOf="@id/input_last_name"
+            android:layout_margin="@dimen/common_margin_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_name"
             >
 
             <com.google.android.material.textfield.TextInputEditText
