@@ -16,7 +16,7 @@
     <color name="colorEditText">#D5A00C</color>
 
     <color name="colorOnPrimary">@color/colorSecondary</color>
-    <color name="colorOnSecondary">?attr/colorPrimaryDark</color>
+    <color name="colorOnSecondary">#22672F</color>
 
 
     <color name="colorWhite">#FFF</color>
@@ -26,5 +26,6 @@
 
     <color name="colorBlack">#52525C</color>
 
+    <color name="textColorToolbar">#52525C</color>
 
 </resources>

@@ -3,8 +3,7 @@ package com.ey.hotspot.ui.speed_test.speed_test_fragmet
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentSpeedTestBinding
-import com.ey.hotspot.ui.speed_test.test_result.TestResultsFragment
-import com.ey.hotspot.utils.replaceFragment
+import com.ey.hotspot.utils.constants.setUpToolbar
 
 class SpeedTestFragment : BaseFragment<FragmentSpeedTestBinding, SpeedTestFragmentViewModel>() {
 
@@ -18,15 +17,21 @@ class SpeedTestFragment : BaseFragment<FragmentSpeedTestBinding, SpeedTestFragme
         mBinding.lifecycleOwner = viewLifecycleOwner
         mBinding.viewModel = mViewModel
 
+        activity?.setUpToolbar(
+            mBinding.toolbarLayout,
+            resources.getString(R.string.speed_test_label),
+            true,
+            showTextButton = true
+        )
 
         setUpListeners()
     }
 
-    fun setUpListeners(){
+    fun setUpListeners() {
         //Go
-        mBinding.btnGo.setOnClickListener {
-            replaceFragment(TestResultsFragment(), true)
-        }
+//        mBinding.btnGo.setOnClickListener {
+//            replaceFragment(TestResultsFragment(), true)
+//        }
     }
 
 }

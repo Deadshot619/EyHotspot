@@ -63,7 +63,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
                     activity?.onBackPressed()
                 }
             } else {
-                btnBack.visibility = View.GONE
+                btnBack.visibility = View.INVISIBLE
             }
 
 //                Text Button

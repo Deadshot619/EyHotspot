@@ -7,12 +7,21 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorOnPrimary">@color/colorOnPrimary</item>
 
+        <item name="colorSecondary">@color/colorSecondary</item>
+
         <item name="otpViewStyle">@style/OtpWidget.OtpView</item>
 
 
         <item name="fontFamily">@font/fira_sans</item>
 
 
+    </style>
+
+    <style name="ReverseToolbarTheme" parent="ThemeOverlay.MaterialComponents.Toolbar.Primary">
+<!--        <item name="colorPrimary">@color/colorPrimary</item>-->
+        <item name="colorSecondary">@color/colorPrimary</item>
+        <item name="colorOnSecondary">@color/colorSecondaryDark</item>
+        <item name="android:textColor">@color/colorSecondaryDark</item>
     </style>
 
     <!--Bottom Nav Bar-->
@@ -76,6 +85,19 @@
         <item name="android:textColor">?attr/colorOnPrimary</item>
         <item name="android:background">@drawable/sign_btn_gradient</item>
         <item name="backgroundTint">@null</item>
+    </style>
+
+<!--    Outline Button toolbar-->
+    <style name="OutlinedButtonToolbar" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="cornerRadius">20dp</item>
+        <item name="android:paddingStart">0dp</item>
+        <item name="android:paddingEnd">0dp</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:textColor">@color/colorOnPrimary</item>
+        <item name="strokeColor">@color/colorOnPrimary</item>
+
+        <!--        <item name="background">@drawable/sign_btn_gradient</item>-->
     </style>
 
 

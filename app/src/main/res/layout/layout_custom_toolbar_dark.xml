@@ -7,7 +7,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorSecondary"
+        android:background="?attr/colorPrimary"
         android:minHeight="?android:attr/actionBarSize">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,7 +21,7 @@
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_baseline_arrow_back_24_primary"
                 android:visibility="gone"
-                android:backgroundTint="?attr/colorOnSecondary"
+                android:tint="@color/colorSecondary"
                 android:padding="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -36,36 +36,25 @@
                 tools:text="Registration"
                 app:layout_constraintHorizontal_bias="0.3"
                 style="@style/TextAppearance.MaterialComponents.Headline6"
-                android:textColor="@color/textColorToolbar"
+                android:textColor="?attr/colorOnPrimary"
                 app:layout_constraintStart_toEndOf="@id/btn_back"
                 app:layout_constraintEnd_toStartOf="@id/tv_text_button"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent" />
 
             <!--Text button-->
-            <TextView
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/tv_text_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="@string/skip"
-                style="@style/TextAppearance.MaterialComponents.Body1"
+                android:text="@string/retest_label"
+                style="@style/OutlinedButtonToolbar"
+                android:textSize="@dimen/text_size_12"
                 android:layout_marginEnd="@dimen/common_margin_24"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent" />
 
-            <!--Settings-->
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/iv_settings"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:src="@drawable/settings"
-                android:layout_marginEnd="@dimen/common_margin_24"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.appbar.MaterialToolbar>
 </layout>

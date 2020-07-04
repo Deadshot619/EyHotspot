@@ -14,37 +14,24 @@
         android:layout_height="match_parent"
         tools:context=".ui.speed_test.speed_test_fragmet.SpeedTestFragment">
 
-        <TextView
-            android:id="@+id/btn_go"
-            android:layout_width="wrap_content"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_bg_view"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="GO"
-            android:textSize="30dp"
-            android:padding="50dp"
-            android:layout_marginTop="50dp"
+            android:src="@drawable/speedtestbg"
+            android:scaleType="fitXY"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <!--Wifi Name-->
-        <TextView
-            android:id="@+id/tv_wifi_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Wifi : Allahu Akhbar"
-            app:layout_constraintTop_toBottomOf="@id/btn_go"
+        <!--Toolbar-->
+        <include
+            android:id="@+id/toolbarLayout"
+            layout="@layout/layout_custom_toolbar_dark"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <!--Number of users connected-->
-        <TextView
-            android:id="@+id/tv_users_connected"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="No. of users connected : 69"
-            app:layout_constraintTop_toBottomOf="@id/tv_wifi_name"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
 
 
 

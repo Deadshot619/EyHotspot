@@ -78,6 +78,12 @@
     <string name="all_label">All</string>
 
     <!--Speed Test-->
+    <string name="speed_test_label">Speed Test</string>
+    <string name="users_connected_label">Users Connected</string>
+    <string name="go_label">Go</string>
+    <string name="download_speed_label">Download Speed</string>
+    <string name="retest_label">Retest</string>
+
     <string name="speed_test_result_label">Speed Test Result</string>
     <string name="download_label">Download</string>
     <string name="comment_and_evaluate_label">Comment and Evaluate</string>
