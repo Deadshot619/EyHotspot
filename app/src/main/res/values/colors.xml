@@ -28,4 +28,6 @@
 
     <color name="textColorHeadline">#52525C</color>
 
+    <color name="navBarBottom">#0B463A</color>
+
 </resources>

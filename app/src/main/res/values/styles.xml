@@ -22,7 +22,7 @@
         <item name="itemTextColor">@color/bottom_nav_color</item>
         <item name="itemIconTint">@color/bottom_nav_color</item>
         <item name="itemTextAppearanceActive">?attr/colorAccent</item>
-        <item name="android:background">?attr/colorPrimaryDark</item>
+        <item name="android:background">@color/navBarBottom</item>
     </style>
 
     <!--    Search-Bar   -->
@@ -48,8 +48,9 @@
     <!--    Custom Edittext-->
     <style name="CustomEditText" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:paddingStart">@dimen/custom_edt_dimen</item>
-        <item name="android:paddingEnd">@dimen/custom_edt_dimen</item>
+        <item name="android:paddingEnd">@dimen/common_padding_24</item>
         <item name="android:textColor">@color/colorEditText</item>
+        <item name="android:singleLine">true</item>
     </style>
 
     <!--EditText hint       //should be applied on textview-->
