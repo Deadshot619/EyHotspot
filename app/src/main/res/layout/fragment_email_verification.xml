@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.ey.hotspot.ui.registration.email_verification.EmailVerificationViewModel" />
@@ -17,6 +18,7 @@
         android:paddingTop="@dimen/common_padding_top"
         android:paddingEnd="@dimen/common_padding_end"
         tools:context=".ui.registration.email_verification.EmailVerificationFragment">
+
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_left"
@@ -33,6 +35,14 @@
             app:layout_constraintGuide_end="@dimen/margin_50" />
 
 
+        <!--Toolbar-->
+        <include
+            android:id="@+id/toolbarLayout"
+            layout="@layout/layout_custom_toolbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <!--    Email image  -->
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_email"
@@ -43,7 +53,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbarLayout" />
 
         <!--        Email verification label-->
         <TextView
@@ -79,7 +89,7 @@
             style="@style/TextAppearance.MyApp.Headline3_Profile_Bold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_40"
+            android:layout_marginTop="@dimen/margin_20"
             android:gravity="center"
             android:text="@string/check_email_label"
             android:textStyle="normal"
@@ -93,7 +103,6 @@
             android:id="@+id/iv_check"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:layout_marginTop="@dimen/margin_30"
             android:src="@drawable/ic_email_verification"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -107,14 +116,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textColor="@color/colorPrimarySub"
-            android:textAllCaps="true"
-            app:layout_constraintVertical_bias="0.2"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:text="@string/resend_link_label"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimarySub"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/guideline_right"
             app:layout_constraintStart_toStartOf="@id/guideline_left"
-            app:layout_constraintTop_toBottomOf="@+id/iv_check" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_check"
+            app:layout_constraintVertical_bias="0.2" />
 
 
         <!--Sign In-->
@@ -122,15 +131,15 @@
             android:id="@+id/btn_sign_in"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/common_margin_bottom"
-            android:text="@string/sign_in_label"
-            android:paddingBottom="@dimen/margin_10"
-            android:paddingTop="@dimen/margin_10"
-            android:paddingStart="@dimen/margin_60"
-            android:paddingEnd="@dimen/margin_60"
-            android:textStyle="bold"
+            android:layout_marginBottom="@dimen/margin_20"
             android:background="@drawable/sign_btn_gradient"
+            android:paddingStart="@dimen/margin_60"
+            android:paddingTop="@dimen/margin_10"
+            android:paddingEnd="@dimen/margin_60"
+            android:paddingBottom="@dimen/margin_10"
+            android:text="@string/sign_in_label"
             android:textColor="@color/colorWhite"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

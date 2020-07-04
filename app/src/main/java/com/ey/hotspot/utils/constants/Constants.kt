@@ -14,5 +14,6 @@ interface Constants {
         const val  API_LOGIN ="login"
 
         const val  API_REGISTRATION ="register"
+        const val API_NEARBYWIFILIST=""
     }
 }

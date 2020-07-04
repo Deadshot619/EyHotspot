@@ -41,4 +41,21 @@ object DataProvider : RemoteDataProvider {
             }
         }
     }
+
+
+    override suspend fun getNearbyWifiList(
+        success: (JsonArray) -> Unit,
+        error: (Exception) -> Unit
+    ) {
+
+        withContext(Dispatchers.Main) {
+
+            try {
+                val result = mServices.getNearByWifiList().await()
+            } catch (e: Exception) {
+                error(e)
+            }
+        }
+
+    }
 }

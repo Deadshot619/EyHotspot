@@ -93,7 +93,7 @@
             app:boxCornerRadiusTopStart="@dimen/margin_12"
             app:hintTextColor="@color/colorGrayLight"
             app:placeholderText="@string/email_id_hint"
-            app:startIconDrawable="@drawable/baseline_person_outline_black_36">
+            app:startIconDrawable="@drawable/ic_baseline_person_24">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etLoginEmailId"

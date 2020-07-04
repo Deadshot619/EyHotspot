@@ -29,37 +29,16 @@
             app:layout_constraintGuide_end="@dimen/margin_20" />
 
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tlSearch"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:boxBackgroundColor="@color/colorWhite"
-            android:hint="@string/searchplace"
-            android:layout_marginTop="@dimen/margin_10"
-            android:layout_marginBottom="@dimen/margin_10"
-            android:layout_marginEnd="@dimen/margin_20"
-            android:layout_marginStart="@dimen/margin_20"
-            app:startIconDrawable="@drawable/baseline_search_black_36"
-            app:boxCornerRadiusTopStart="@dimen/margin_12"
-            app:boxCornerRadiusBottomStart="@dimen/margin_12"
-            app:boxCornerRadiusTopEnd="@dimen/margin_12"
-            app:boxCornerRadiusBottomEnd="@dimen/margin_12"
-            app:hintTextColor="@color/colorGrayLight"
-            app:layout_constraintStart_toStartOf="@+id/guideline_left"
-            app:layout_constraintEnd_toEndOf="@+id/guideline_right"
-            app:layout_constraintTop_toTopOf="parent"
-            >
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etLoginPassword"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/margin_50"
-                android:gravity="top|start"
-                android:inputType="text"
-                android:maxLength="120"
-                android:maxLines="1" />
-        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--Toolbar-->
+        <include
+            android:id="@+id/toolbarLayout"
+            layout="@layout/layout_custom_toolbar_searchbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvSearchList"
@@ -67,7 +46,7 @@
             android:layout_height="0dp"
             android:layout_marginBottom="@dimen/margin_10"
             android:layout_marginTop="@dimen/margin_10"
-            app:layout_constraintTop_toBottomOf="@+id/tlSearch"
+            app:layout_constraintTop_toBottomOf="@+id/toolbarLayout"
             app:layout_constraintEnd_toEndOf="@+id/guideline_right"
             app:layout_constraintStart_toStartOf="@+id/guideline_left"
             app:layout_constraintBottom_toBottomOf="parent"

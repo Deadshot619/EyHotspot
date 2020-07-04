@@ -14,4 +14,10 @@ interface RemoteDataProvider {
         sucess:(JsonArray) ->Unit,
         error: (Exception) -> Unit
     )
+
+
+    suspend fun  getNearbyWifiList(
+        success: (JsonArray) -> Unit,
+        error: (Exception) -> Unit
+    )
 }

@@ -17,6 +17,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/margin_20"
             tools:context=".ui.registration.register_user.RegisterUserFragment">
 
             <androidx.constraintlayout.widget.Guideline
@@ -33,21 +34,29 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_end="@dimen/margin_20" />
 
+            <!--Toolbar-->
+            <include
+                android:id="@+id/toolbarLayout"
+                layout="@layout/layout_custom_toolbar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
 
             <!--First Name input-->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/first_name_input_layout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="0dp"
-                app:startIconTint="@color/colorPrimarySub"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_20"
                 app:hintTextColor="@color/colorGrayLight"
                 app:layout_constraintEnd_toEndOf="@id/guideline_right"
                 app:layout_constraintStart_toStartOf="@id/guideline_left"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbarLayout"
                 app:placeholderText="@string/name_label"
-                app:startIconDrawable="@drawable/baseline_person_outline_black_36">
+                app:startIconDrawable="@drawable/ic_baseline_person_24"
+                app:startIconTint="@color/colorPrimarySub">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_first_name"
@@ -64,16 +73,16 @@
                 android:id="@+id/last_name_input_layout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="0dp"
-                app:startIconTint="@color/colorPrimarySub"
-
                 android:layout_height="wrap_content"
+
                 android:layout_marginTop="@dimen/margin_20"
                 app:hintTextColor="@color/colorGrayLight"
                 app:layout_constraintEnd_toEndOf="@id/guideline_right"
                 app:layout_constraintStart_toStartOf="@id/guideline_left"
                 app:layout_constraintTop_toBottomOf="@id/first_name_input_layout"
                 app:placeholderText="@string/mobile_number_label"
-                app:startIconDrawable="@drawable/baseline_settings_cell_black_36">
+                app:startIconDrawable="@drawable/ic_sharp_phone_iphone_24"
+                app:startIconTint="@color/colorPrimarySub">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtMobileNo"
@@ -93,14 +102,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_20"
                 android:text="@string/email_id_label"
-                app:startIconTint="@color/colorPrimarySub"
-
                 app:hintTextColor="@color/colorGrayLight"
+
                 app:layout_constraintEnd_toEndOf="@id/guideline_right"
                 app:layout_constraintStart_toStartOf="@id/guideline_left"
                 app:layout_constraintTop_toBottomOf="@id/last_name_input_layout"
                 app:placeholderText="@string/email_id_label"
-                app:startIconDrawable="@drawable/baseline_email_black_36">
+                app:startIconDrawable="@drawable/ic_outline_email_24"
+                app:startIconTint="@color/colorPrimarySub">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_email"
@@ -117,16 +126,16 @@
                 android:id="@+id/password_input_layout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="0dp"
-                app:startIconTint="@color/colorPrimarySub"
-
                 android:layout_height="wrap_content"
+
                 android:layout_marginTop="@dimen/margin_20"
                 app:hintTextColor="@color/colorGrayLight"
                 app:layout_constraintEnd_toEndOf="@id/guideline_right"
                 app:layout_constraintStart_toStartOf="@id/guideline_left"
                 app:layout_constraintTop_toBottomOf="@id/email_input_layout"
                 app:placeholderText="@string/password_label"
-                app:startIconDrawable="@drawable/baseline_lock_black_36">
+                app:startIconDrawable="@drawable/baseline_lock_black_36"
+                app:startIconTint="@color/colorPrimarySub">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_password"
@@ -148,11 +157,11 @@
                 app:hintTextColor="@color/colorGrayLight"
                 app:layout_constraintEnd_toEndOf="@id/guideline_right"
                 app:layout_constraintStart_toStartOf="@id/guideline_left"
-                app:startIconTint="@color/colorPrimarySub"
-
                 app:layout_constraintTop_toBottomOf="@id/password_input_layout"
+
                 app:placeholderText="@string/confirm_password_label"
-                app:startIconDrawable="@drawable/baseline_lock_black_36">
+                app:startIconDrawable="@drawable/baseline_lock_black_36"
+                app:startIconTint="@color/colorPrimarySub">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_confirm_password"
@@ -246,10 +255,10 @@
 
 
             <LinearLayout
+
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_30"
-                android:layout_marginBottom="@dimen/margin_20"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="2"
@@ -259,21 +268,25 @@
 
 
                 <com.google.android.material.imageview.ShapeableImageView
-                    android:layout_width="@dimen/margin_30"
+
+                    android:id="@+id/ivFacebookSignIn"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/margin_30"
                     android:layout_gravity="center"
-                    android:textDirection="locale"
-                    android:layout_marginEnd="@dimen/margin_10"
-                    android:src="@drawable/ic_facebook_" />
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_facebook_"
+                    android:textDirection="locale" />
 
                 <com.google.android.material.imageview.ShapeableImageView
-                    android:layout_width="@dimen/margin_40"
-                    android:layout_height="@dimen/margin_40"
+                    android:id="@+id/ivGoogleSignIn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/margin_30"
                     android:layout_gravity="center"
-                    android:textDirection="locale"
-
                     android:layout_marginStart="@dimen/margin_10"
-                    android:src="@drawable/ic_google_sign_in" />
+                    android:layout_weight="1"
+
+                    android:src="@drawable/ic_google_sign_in"
+                    android:textDirection="locale" />
 
             </LinearLayout>
 

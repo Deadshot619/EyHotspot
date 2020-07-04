@@ -34,6 +34,15 @@
             app:layout_constraintGuide_end="@dimen/margin_50" />
 
 
+        <!--Toolbar-->
+        <include
+            android:id="@+id/toolbarLayout"
+            layout="@layout/layout_custom_toolbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
         <!--    Email image  -->
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_email"
@@ -44,7 +53,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbarLayout" />
 
         <!--        Email verification label-->
         <TextView
@@ -100,8 +109,6 @@
             app:layout_constraintTop_toBottomOf="@id/tv_check_email_label" />
 
 
-
-
         <com.mukesh.OtpView
             android:id="@+id/otpView"
             android:layout_width="wrap_content"
@@ -109,12 +116,12 @@
             android:inputType="textPassword"
             android:textColor="@color/colorPrimary"
             app:itemCount="6"
-            app:lineColor="@color/colorPrimary"
-            app:layout_constraintTop_toBottomOf="@+id/iv_check"
             app:layout_constraintEnd_toEndOf="@+id/guideline_right"
             app:layout_constraintStart_toStartOf="@+id/guideline_left"
-            app:viewType="rectangle"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/iv_check"
+            app:lineColor="@color/colorPrimary"
+            app:viewType="rectangle" />
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnVerify"
             android:layout_width="wrap_content"
@@ -135,12 +142,12 @@
 
         <TextView
             android:id="@+id/tvreceviedotp"
+            style="@style/TextAppearance.MyApp.Headline5_bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_marginTop="@dimen/margin_20"
+            android:gravity="center"
             android:text="@string/receive_otp"
-            style="@style/TextAppearance.MyApp.Headline5_bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/tvTermsCondition"
             app:layout_constraintTop_toBottomOf="@+id/btnVerify" />
@@ -149,10 +156,10 @@
             android:id="@+id/tvTermsCondition"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textColor="@color/colorPrimarySub"
             android:layout_marginTop="@dimen/margin_20"
+            android:gravity="center"
             android:text="@string/resend_otp_label"
+            android:textColor="@color/colorPrimarySub"
             app:layout_constraintLeft_toRightOf="@+id/tvreceviedotp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnVerify" />
@@ -178,7 +185,7 @@
             android:id="@+id/btn_sign_in"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/common_margin_bottom"
+            android:layout_marginBottom="@dimen/margin_20"
             android:background="@drawable/sign_btn_gradient"
             android:paddingStart="@dimen/margin_60"
             android:paddingTop="@dimen/margin_10"
