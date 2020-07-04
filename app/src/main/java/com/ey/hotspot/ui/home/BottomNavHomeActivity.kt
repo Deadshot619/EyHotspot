@@ -6,9 +6,7 @@ import com.ey.hotspot.databinding.ActivityBottomNavHomeBinding
 import com.ey.hotspot.ui.profile.fragment.ProfileFragment
 import com.ey.hotspot.ui.registration.register_user.RegisterUserFragment
 import com.ey.hotspot.ui.review_and_complaint.ReviewAndComplainFragment
-import com.ey.hotspot.ui.search.searchlist.SearchListFragment
 import com.ey.hotspot.ui.speed_test.speed_test_fragmet.SpeedTestFragment
-import com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListFragment
 
 class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomNavHomeViewModel>() {
 
@@ -35,8 +33,7 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
                 }
 
                 //home
-                R.id.dashboard -> {
-
+                R.id.home -> {
                     replaceFragment(RegisterUserFragment(), false)
                     return@setOnNavigationItemSelectedListener true
                 }
