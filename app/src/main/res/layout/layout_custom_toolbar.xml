@@ -36,7 +36,7 @@
                 tools:text="Registration"
                 app:layout_constraintHorizontal_bias="0.3"
                 style="@style/TextAppearance.MaterialComponents.Headline6"
-                android:textColor="@color/textColorToolbar"
+                android:textColor="@color/textColorHeadline"
                 app:layout_constraintStart_toEndOf="@id/btn_back"
                 app:layout_constraintEnd_toStartOf="@id/tv_text_button"
                 app:layout_constraintTop_toTopOf="parent"
