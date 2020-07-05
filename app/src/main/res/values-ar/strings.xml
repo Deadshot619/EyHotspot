@@ -141,4 +141,11 @@
     <string name="rate_now_label">قيم الآن</string>
     <string name="arabic">عربى</string>
     <string name="english">الإنجليزية</string>
+    <string name="save_settings_label">احفظ التغييرات</string>
+    <string name="notification_label">تنبيه</string>
+    <string name="dummytext">Lorem lpsum هو ببساطة نص وهمي</string>
+    <string name="language_label">لغة</string>
+    <string name="gps_status_label">كشف GPS</string>
+    <string name="get_wifi_label">احصل على سجل WIFI</string>
+    <string name="notifications_label">إشعارات</string>
 </resources>

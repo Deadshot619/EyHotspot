@@ -149,6 +149,13 @@
     <string name="rate_now_label">RATE NOW</string>
     <string name="arabic">ARABIC</string>
     <string name="english">ENGLISH</string>
+    <string name="save_settings_label">SAVE SETTINGS</string>
+    <string name="notification_label">NOTIFICATION</string>
+    <string name="dummytext">Lorem lpsum is simply dummy text</string>
+    <string name="language_label">LANGUAGE</string>
+    <string name="gps_status_label">GPS DETECTION</string>
+    <string name="get_wifi_label">GET WIFI LOG</string>
+    <string name="notifications_label">NOTIFICATIONS</string>
 
 
     <!--Demo issue type string-->

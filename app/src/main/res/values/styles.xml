@@ -159,6 +159,17 @@
 
     </style>
 
+
+    <style name="TextAppearance.MyApp.Headline3_Setting_Normal" parent="TextAppearance.MaterialComponents.Headline3">
+
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">@dimen/txt_size_16</item>
+        <item name="android:textColor">@color/colorPrimarySub</item>
+        <item name="android:letterSpacing">0</item>
+
+    </style>
+
+
     <style name="button_overlay">
         <item name="colorSurface">@android:color/white</item>
     </style>

@@ -62,7 +62,6 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:theme="@style/SelectorTheme"
-            app:checkedButton="@id/btArabic"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/guideline_right"
             app:layout_constraintStart_toStartOf="@id/guideline_left"
