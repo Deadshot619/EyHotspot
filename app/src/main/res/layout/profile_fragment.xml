@@ -58,7 +58,6 @@
             app:layout_constraintEnd_toStartOf="@+id/edt_last_name"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toEndOf="@+id/iv_name"
             app:layout_constraintStart_toStartOf="@id/iv_name"
             app:layout_constraintTop_toTopOf="@id/iv_name" />
 
