@@ -85,6 +85,8 @@
 
         <!--        check email label-->
         <TextView
+            android:textDirection="locale"
+
             android:id="@+id/tv_check_email_label"
             style="@style/TextAppearance.MyApp.Headline3_Profile_Bold"
             android:layout_width="0dp"
@@ -118,6 +120,8 @@
             android:gravity="center"
             android:text="@string/resend_link_label"
             android:textAllCaps="true"
+            android:textDirection="locale"
+
             android:textColor="@color/colorPrimarySub"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/guideline_right"
@@ -140,6 +144,8 @@
             android:text="@string/sign_in_label"
             android:textColor="@color/colorWhite"
             android:textStyle="bold"
+            android:textDirection="locale"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

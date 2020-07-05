@@ -1,6 +1,7 @@
 package com.ey.hotspot.ui.home.fragment
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
@@ -28,6 +29,7 @@ import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.maps.android.clustering.Cluster
 import com.google.maps.android.clustering.ClusterManager
 import com.google.maps.android.clustering.view.DefaultClusterRenderer
+import kotlinx.android.synthetic.main.custom_marker_info_window.view.*
 
 
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(), OnMapReadyCallback,
@@ -86,13 +88,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
     override fun onMapReady(map: GoogleMap) {
         this.map = map
 
-
         // Prompt the user for permission.
         getLocationPermission()
-
         // Turn on the My Location layer and the related control on the map.
         updateLocationUI()
-
         // Get the current location of the device and set the position of the map.
         getDeviceLocation()
     }
@@ -139,18 +138,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
     private fun setupClusters() {
 
-
         mClusterManager = ClusterManager(activity, map)
+
+
+        mClusterManager.setOnClusterClickListener(this);
+        mClusterManager.setOnClusterItemClickListener(this);
+        mClusterManager.setOnClusterItemInfoWindowClickListener(this);
+
         map?.setOnCameraIdleListener(mClusterManager)
         map?.setOnMarkerClickListener(mClusterManager)
-
 
         val renderer = ClusterItemRenderer(requireActivity(), map, mClusterManager)
         mClusterManager.renderer = renderer
 
         setUpMarkerInfoWindows()
-
-
         addItems()
     }
 
@@ -164,28 +165,27 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             }
 
             override fun getInfoWindow(p0: Marker?): View {
-                val inflater =
-                    requireActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+                /* val inflater =
+                     requireActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+ */
+
+
+                val inflater = requireActivity().getLayoutInflater()
+
+                @SuppressLint("InflateParams")
                 val view: View = inflater.inflate(R.layout.custom_marker_info_window, null)
-
-                val navigateButton =
-                    view.findViewById<View>(R.id.btNavigate) as AppCompatButton
-
-                val shareIt = view.findViewById<View>(R.id.ivShareIT) as ImageView
+                val navigateButton = view.btNavigate
+                val wifiTitle = view.tvWifiNameTitle
 
 
-                //TODO  Remaining click listener
-                shareIt.setOnClickListener {
+                wifiTitle.setText(clickedVenueMarker?.title)
 
-                    Toast.makeText(activity, "Its toast!", Toast.LENGTH_SHORT).show()
+                wifiTitle.setOnClickListener {
 
+                    Toast.makeText(requireActivity(), "HELLO", Toast.LENGTH_SHORT).show()
                 }
-                navigateButton.setOnClickListener {
-
-                    Toast.makeText(activity, "Its toast!", Toast.LENGTH_SHORT).show()
 
 
-                }
                 return view
             }
 
@@ -260,7 +260,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
     private fun getLocationPermission() {
 
         if (ContextCompat.checkSelfPermission(
-               requireActivity(),
+                requireActivity(),
                 Manifest.permission.ACCESS_FINE_LOCATION
             )
             == PackageManager.PERMISSION_GRANTED
@@ -316,19 +316,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
 
     override fun onClusterClick(cluster: Cluster<MyClusterItems>?): Boolean {
-        TODO("Not yet implemented")
+        return true
     }
 
     override fun onClusterInfoWindowClick(cluster: Cluster<MyClusterItems>?) {
-        TODO("Not yet implemented")
+
+
     }
 
     override fun onClusterItemClick(item: MyClusterItems?): Boolean {
-        TODO("Not yet implemented")
+        clickedVenueMarker = item;
+        return false
     }
 
     override fun onClusterItemInfoWindowClick(item: MyClusterItems?) {
-        TODO("Not yet implemented")
+
     }
 
     companion object {

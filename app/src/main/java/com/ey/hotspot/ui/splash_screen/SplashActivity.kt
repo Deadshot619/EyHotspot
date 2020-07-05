@@ -18,8 +18,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
 
         mBinding.btArabic.setOnClickListener {
 
-            startActivity(Intent(this, BottomNavHomeActivity::class.java))
-            finish()
 
             val langType = HotSpotApp.prefs!!.getLanguage()
             if (langType == Constants.ENGLISH_LANG) {
@@ -27,18 +25,24 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
                 restartApplication(this, HotSpotApp.prefs!!)
             }
 
+            startActivity(Intent(this, BottomNavHomeActivity::class.java))
+            finish()
+
+
 
         }
 
         mBinding.btEnglish.setOnClickListener {
-            startActivity(Intent(this, BottomNavHomeActivity::class.java))
-            finish()
 
             val langType = HotSpotApp.prefs!!.getLanguage()
             if (langType == Constants.ARABIC_LANG) {
                 HotSpotApp.prefs!!.setLanguage(Constants.ENGLISH_LANG)
                 restartApplication(this, HotSpotApp.prefs!!)
             }
+
+            startActivity(Intent(this, BottomNavHomeActivity::class.java))
+            finish()
+
 
         }
     }

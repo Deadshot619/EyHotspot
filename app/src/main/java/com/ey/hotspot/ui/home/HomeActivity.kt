@@ -1,6 +1,7 @@
 package com.ey.hotspot.ui.home
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -35,6 +36,7 @@ import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.maps.android.clustering.Cluster
 import com.google.maps.android.clustering.ClusterManager
 import com.google.maps.android.clustering.view.DefaultClusterRenderer
+import kotlinx.android.synthetic.main.custom_marker_info_window.view.*
 
 
 class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), OnMapReadyCallback,
@@ -143,24 +145,29 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), OnMapRe
     private fun setupClusters() {
 
 
-       /* mClusterManager = ClusterManager(this, map)
+        /* mClusterManager = ClusterManager(this, map)
 
-        map?.setOnMarkerClickListener(mClusterManager);
-        map?.setInfoWindowAdapter(mClusterManager.getMarkerManager());
-        map?.setOnInfoWindowClickListener(mClusterManager);
+         map?.setOnMarkerClickListener(mClusterManager);
+         map?.setInfoWindowAdapter(mClusterManager.getMarkerManager());
+         map?.setOnInfoWindowClickListener(mClusterManager);
+
+         mClusterManager.setOnClusterClickListener(this);
+         mClusterManager.setOnClusterItemClickListener(this);
+         mClusterManager.setOnClusterItemInfoWindowClickListener(this);
+
+         val renderer = ClusterItemRenderer(this, map, mClusterManager)
+         mClusterManager.renderer = renderer
+
+         setUpMarkerInfoWindows()
+         addItems()*/
+
+
+        mClusterManager = ClusterManager(this, map)
 
         mClusterManager.setOnClusterClickListener(this);
         mClusterManager.setOnClusterItemClickListener(this);
         mClusterManager.setOnClusterItemInfoWindowClickListener(this);
 
-        val renderer = ClusterItemRenderer(this, map, mClusterManager)
-        mClusterManager.renderer = renderer
-
-        setUpMarkerInfoWindows()
-        addItems()*/
-
-
-        mClusterManager = ClusterManager(this, map)
         map?.setOnCameraIdleListener(mClusterManager)
         map?.setOnMarkerClickListener(mClusterManager)
 
@@ -169,8 +176,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), OnMapRe
         mClusterManager.renderer = renderer
 
         setUpMarkerInfoWindows()
-
-
         addItems()
     }
 
@@ -190,25 +195,19 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), OnMapRe
                 val navigateButton =
                     view.findViewById<View>(R.id.btNavigate) as AppCompatButton
 
-                val shareIt =  view.findViewById<View>(R.id.ivShareIT) as ImageView
+                val shareIt = view.findViewById<View>(R.id.ivShareIT) as ImageView
+
+                val wifiTitle = view.findViewById<View>(R.id.tvWifiNameTitle) as TextView
 
 
-                //TODO  Remaining click listener
-                shareIt.setOnClickListener {
+                wifiTitle.setText(clickedVenueMarker?.title)
 
-                    Toast.makeText(mContext, "Its toast!", Toast.LENGTH_SHORT).show()
-
-                }
-                navigateButton.setOnClickListener {
-
-                    Toast.makeText(mContext, "Its toast!", Toast.LENGTH_SHORT).show()
-
-
-                }
                 return view
             }
 
         })
+
+
     }
 
     private fun addItems() {
@@ -373,12 +372,12 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), OnMapRe
 
     override fun onClusterItemInfoWindowClick(item: MyClusterItems?) {
 
-        val gmmIntentUri = Uri.parse("geo:18.520430,73.856743")
-        val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
-        mapIntent.setPackage("com.google.android.apps.maps")
-        mapIntent.resolveActivity(packageManager)?.let {
-            mContext.startActivity(mapIntent)
-        }
+        /*  val gmmIntentUri = Uri.parse("geo:18.520430,73.856743")
+          val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+          mapIntent.setPackage("com.google.android.apps.maps")
+          mapIntent.resolveActivity(packageManager)?.let {
+              mContext.startActivity(mapIntent)
+          }*/
 
 
     }
@@ -411,4 +410,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), OnMapRe
             marker.setIcon(icon)
         }
     }
+
+
 }

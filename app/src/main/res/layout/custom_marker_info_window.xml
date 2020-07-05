@@ -2,13 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/margin_5"
     android:background="@drawable/rounded_layout"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_10"
         android:orientation="vertical">
 
@@ -22,23 +21,29 @@
 
 
             <TextView
+                android:id="@+id/tvWifiNameTitle"
                 style="@style/TextAppearance.MyApp.Headline3_Profile_Large"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
+                android:layout_weight="2"
                 android:textStyle="bold"
-                android:text="D-Zone Wifi" />
+                android:text=" WIfif Name +4  having ddummy data added this is the case"
+                android:textDirection="locale"
+                 />
 
             <ImageView
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="@dimen/margin_20"
-                android:layout_weight="1.25"
+                android:layout_weight="0.5"
+                android:textDirection="locale"
                 android:src="@drawable/ic_fill_heart" />
 
             <ImageView
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="@dimen/margin_20"
-                android:layout_weight="1.25"
+                android:layout_weight="0.5"
+                android:textDirection="locale"
+
                 android:src="@drawable/ic_group" />
 
         </LinearLayout>
@@ -54,11 +59,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_2"
-                android:text="RIYADH" />
+                android:text="RIYAD"
+                android:textDirection="locale" />
 
             <TextView
                 android:id="@+id/tvStreetAddress"
                 android:layout_width="match_parent"
+                android:textDirection="locale"
                 android:layout_height="wrap_content"
                 android:text="Olya St,Akaria Mall, Food Court,Riyadh 12244" />
 
@@ -67,6 +74,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_gravity="center"
+                android:textDirection="locale"
                 android:layout_margin="@dimen/margin_5"
                 android:layout_weight="1"
                 android:background="@color/colorGrayLight" />
@@ -74,26 +82,27 @@
 
             <TextView
                 android:id="@+id/tvVia"
+                android:textDirection="locale"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="via Al Urubah Rd Arrival arround" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="@dimen/margin_10"
-            android:layout_marginBottom="@dimen/margin_10"
+           android:paddingTop="@dimen/margin_10"
+            android:paddingBottom="@dimen/margin_10"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:weightSum="2"
             android:orientation="horizontal">
 
 
             <ImageView
                 android:id="@+id/ivShareIT"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/margin_30"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_gravity="center"
-                android:scaleType="fitStart"
                 android:src="@drawable/baseline_share_24" />
 
 
@@ -107,6 +116,7 @@
                 android:paddingTop="@dimen/margin_10"
                 android:paddingBottom="@dimen/margin_10"
                 android:text="@string/navigate_label"
+                android:textDirection="locale"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/text_size_15" />
 

@@ -6,8 +6,10 @@ import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.CompleteRegistrationFragmentBinding
 import kotlinx.android.synthetic.main.content_resend_link_dialog.view.*
+import kotlinx.android.synthetic.main.custom_confirm_settings_dialog.view.*
 
-class CompleteRegistrationFragment : BaseFragment<CompleteRegistrationFragmentBinding, CompleteRegistrationViewModel>() {
+class CompleteRegistrationFragment :
+    BaseFragment<CompleteRegistrationFragmentBinding, CompleteRegistrationViewModel>() {
 
     companion object {
         fun newInstance() = CompleteRegistrationFragment()
@@ -24,16 +26,23 @@ class CompleteRegistrationFragment : BaseFragment<CompleteRegistrationFragmentBi
 
     override fun onBinding() {
 
-        setUpToolbar(toolbarBinding = mBinding.toolbarLayout, title = getString(R.string.my_profile_label), showUpButton = true)
+        setUpToolbar(
+            toolbarBinding = mBinding.toolbarLayout,
+            title = getString(R.string.my_profile_label),
+            showUpButton = true
+        )
         mBinding.run {
             lifecycleOwner = viewLifecycleOwner
             viewModel = mViewModel
         }
 
 
-       mBinding.btnSignIn.setOnClickListener {
-           showConfirmDialog(resources.getString(R.string.verify_link_msg) +"prashant.jadhav@gmail.com", "")
-       }
+        mBinding.btnSignIn.setOnClickListener {
+            showConfirmDialog(
+                resources.getString(R.string.verify_link_msg) + "prashant.jadhav@gmail.com",
+                ""
+            )
+        }
 
     }
 
@@ -50,9 +59,7 @@ class CompleteRegistrationFragment : BaseFragment<CompleteRegistrationFragmentBi
         alertDialog.setCancelable(true)
         val txt_dialog_title = dialogView.tvEmailId
         val buttonOk = dialogView.btn_sign_in
-
-
-        txt_dialog_title.setText( str_msg)
+        txt_dialog_title.setText(str_msg)
 
         buttonOk.setOnClickListener {
             alertDialog.dismiss()

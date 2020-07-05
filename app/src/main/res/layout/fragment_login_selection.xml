@@ -89,7 +89,7 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/ivFacebookSignIn"
-            app:srcCompat="@drawable/ic_facebook"
+            app:srcCompat="@drawable/ic_facebook_"
             android:layout_width="@dimen/iv_size_50"
             android:layout_height="@dimen/iv_size_50"
             app:shapeAppearanceOverlay="@style/circleImageView"
@@ -104,7 +104,7 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/ivGoogleSignIn"
-            app:srcCompat="@drawable/ic_google"
+            app:srcCompat="@drawable/ic_google_sign_in"
             android:layout_width="@dimen/iv_size_50"
             android:layout_height="@dimen/iv_size_50"
             app:shapeAppearanceOverlay="@style/circleImageView"

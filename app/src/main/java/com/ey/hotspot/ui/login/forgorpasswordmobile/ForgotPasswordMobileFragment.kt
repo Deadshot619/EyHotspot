@@ -27,6 +27,13 @@ class ForgotPasswordMobileFragment :
     }
 
     override fun onBinding() {
+
+        setUpToolbar(
+            toolbarBinding = mBinding.toolbarLayout,
+            title = getString(R.string.forgotpassword),
+            showUpButton = true
+        )
+
         setUpListeners()
     }
 
@@ -39,7 +46,10 @@ class ForgotPasswordMobileFragment :
             //Next button
             btnSubmit.setOnClickListener {
                 replaceFragment(SmsVerificationFragment.newInstance(), true, Bundle().apply {
-                    putString(RegistrationOptionFragment.TYPE_KEY, OptionType.TYPE_FORGOT_PASSWORD.name)
+                    putString(
+                        RegistrationOptionFragment.TYPE_KEY,
+                        OptionType.TYPE_FORGOT_PASSWORD.name
+                    )
                 })
             }
         }

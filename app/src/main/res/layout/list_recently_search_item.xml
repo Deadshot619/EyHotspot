@@ -13,28 +13,28 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-
         android:layout_margin="@dimen/margin_20"
-
         android:gravity="center"
         android:orientation="horizontal"
         android:weightSum="2">
 
         <TextView
             android:id="@+id/tv_suggestion_item_title"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.3"
+            android:layout_weight="1.7"
             android:gravity="left|center_vertical"
             android:textSize="16sp"
+            android:textDirection="locale"
+
             tools:text="Watch movie" />
 
         <ImageView
             android:id="@+id/iv_suggestion_item_icon"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="@dimen/margin_50"
             android:layout_gravity="center"
-            android:layout_weight="1.7"
+            android:layout_weight="0.3"
             android:scaleType="centerInside"
             android:src="@drawable/tiltarrow"
             tools:src="@drawable/tiltarrow" />

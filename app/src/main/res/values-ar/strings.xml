@@ -42,7 +42,6 @@
     <string name="get_started_msg">نبدأ الآن!</string>
 
 
-
     <!--    Register User   -->
     <string name="first_name_label">الاسم الاول</string>
     <string name="last_name_label">الكنية</string>
@@ -65,7 +64,7 @@
     <!--Email verification-->
     <string name="email_verification_label">تأكيد بواسطة البريد الالكتروني</string>
     <string name="link_sent_label">تم إرسال رابط التحقق إلى %s</string>
-        <string name="check_email_label">يرجى التحقق من بريدك الإلكتروني واتبع الرابط لتفعيل حسابك</string>
+    <string name="check_email_label">يرجى التحقق من بريدك الإلكتروني واتبع الرابط لتفعيل حسابك</string>
     <string name="resend_link_label">إعادة إرسال الرابط؟</string>
 
     <!--Mobile Number verification-->
@@ -153,4 +152,9 @@
     <string name="gps_status_label">كشف GPS</string>
     <string name="get_wifi_label">احصل على سجل WIFI</string>
     <string name="notifications_label">إشعارات</string>
+    <string name="setting_label">اعداداتي</string>
+    <string name="setting_title_label">أنت متأكد من أنك تريد حفظ الإعدادات.</string>
+    <string name="setting_saving_msg">lorem lpsum is simply dummy text of the  printing and typesetting industries. Lorem</string>
+    <string name="no_label">لا</string>
+    <string name="yes_label">نعم</string>
 </resources>

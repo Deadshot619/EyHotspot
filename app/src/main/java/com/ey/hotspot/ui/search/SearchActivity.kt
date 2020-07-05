@@ -203,7 +203,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchActivityViewMod
 
             map?.addMarker(
                 MarkerOptions().position(location)
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_wifi))
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_wifi_signal))
                     .alpha(0.7f).title("Nashik")
 
             )
