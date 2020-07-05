@@ -12,9 +12,7 @@ import android.text.Layout;
 import android.text.StaticLayout;
 import android.util.AttributeSet;
 
-import com.nmesgroup.dipulse.tetra.R;
-import com.nmesgroup.dipulse.tetra.view.speedviewlib.components.note.Note;
-import com.nmesgroup.dipulse.tetra.view.speedviewlib.util.OnPrintTickLabel;
+import com.ey.hotspot.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,7 +26,7 @@ import java.util.List;
 public abstract class Speedometer extends Gauge {
 
     /**
-     * needle point to {@link #currentSpeed}, cannot be null
+     * needle point to {@link }, cannot be null
      */
     private Indicator indicator;
     private boolean withIndicatorLight = false;
@@ -339,7 +337,7 @@ public abstract class Speedometer extends Gauge {
 
     /**
      * change indicator's color,
-     * this option will ignore when using {@link ImageIndicator}.
+     * this option will ignore when using {@link }.
      *
      * @param indicatorColor new color.
      */
@@ -461,7 +459,7 @@ public abstract class Speedometer extends Gauge {
     }
 
     /**
-     * change the start of speedometer (at {@link #minSpeed}).<br>
+     * change the start of speedometer (at {@link #}).<br>
      * this method will recreate ticks, and if you have set custom tick,
      * it will be removed, by calling {@link #setTickNumber(int)} method.
      *
@@ -479,7 +477,7 @@ public abstract class Speedometer extends Gauge {
     }
 
     /**
-     * change the end of speedometer (at {@link #maxSpeed}).<br>
+     * change the end of speedometer (at {@link #}).<br>
      * this method will recreate ticks, and if you have set custom tick,
      * it will be removed, by calling {@link #setTickNumber(int)} method.
      *
@@ -660,7 +658,7 @@ public abstract class Speedometer extends Gauge {
     /**
      * change indicator width, this eventId have several meaning
      * between {@link Indicator.Indicators}, it will be ignore
-     * if using {@link ImageIndicator}.
+     * if using {@link }.
      *
      * @param indicatorWidth new width in pixel.
      */
