@@ -86,7 +86,7 @@ open class PointerSpeedometer @JvmOverloads constructor(
     }
 
     override fun defaultSpeedometerValues() {
-        super.setIndicator(NormalIndicator(context))
+        super.setIndicator(NormalSmallIndicator(context))
         super.setBackgroundCircleColor(0)
 
     }
@@ -111,8 +111,8 @@ open class PointerSpeedometer @JvmOverloads constructor(
             a.getColor(R.styleable.PointerSpeedometer_sv_speedometerColor, speedometerColor)
         pointerColor = a.getColor(R.styleable.PointerSpeedometer_sv_pointerColor, pointerColor)
         withPointer = a.getBoolean(R.styleable.PointerSpeedometer_sv_withPointer, withPointer)
-//        centerCircleRadius =
-//            a.getDimension(R.styleable.PointerSpeedometer_sv_centerCircleRadius, centerCircleRadius)
+        centerCircleRadius =
+            a.getDimension(R.styleable.PointerSpeedometer_sv_centerCircleRadius, centerCircleRadius)
         circlePaint.color =
             a.getColor(R.styleable.PointerSpeedometer_sv_centerCircleColor, circlePaint.color)
         a.recycle()

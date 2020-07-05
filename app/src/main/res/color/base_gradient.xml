@@ -5,5 +5,4 @@
     android:centerColor="@color/colorSubAccent"
     android:endColor="@color/colorAccent"
     android:startColor="@color/colorPrimary"
-
     />

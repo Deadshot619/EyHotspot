@@ -17,5 +17,8 @@ class TestResultsFragment : BaseFragment<FragmentTestResultsBinding, TestResults
         mBinding.viewModel = mViewModel
 
 
+        val imageIndicator = ImageIndicator(requireContext(), resources.getDrawable(R.drawable.speed_indicator_bitmap))
+        mBinding.imageSpeedometer.setIndicator(imageIndicator)
+        mBinding.imageSpeedometer.speedTo(80f)
     }
 }

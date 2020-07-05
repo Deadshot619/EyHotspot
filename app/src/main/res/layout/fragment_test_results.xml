@@ -38,6 +38,42 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+<!--            <com.ey.hotspot.ui.speed_test.test_result.PointerSpeedometer
+                android:id="@+id/progress1C"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="24dp"
+                app:layout_constraintBottom_toBottomOf="@id/iv_bg_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toolbarLayout"
+                app:sv_centerCircleColor="#0000ff"
+                app:sv_endDegree="360"
+                app:sv_indicatorColor="#0000ff"
+                app:sv_indicatorWidth="4dp"
+                app:sv_pointerColor="@android:color/transparent"
+                app:sv_speedTextColor="@android:color/transparent"
+                app:sv_speedometerColor="@color/base_gradient"
+                app:sv_speedometerWidth="10dp"
+                app:sv_startDegree="180"
+                app:sv_withTremble="false"
+                app:sv_indicator="NormalSmallIndicator"/>-->
+
+            <com.ey.hotspot.ui.speed_test.test_result.ImageSpeedometer
+               android:id="@+id/image_speedometer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@id/iv_bg_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toolbarLayout"
+                app:sv_image="@drawable/rectangle_shape"
+                app:sv_speedTextColor="@android:color/transparent"
+                app:sv_unitTextColor="@android:color/transparent"
+                />
             <!--Number Of users-->
             <TextView
                 android:id="@+id/tv_number_of_users"
