@@ -61,6 +61,7 @@
                 app:sv_withTremble="false"
                 app:sv_startDegree="180"
                 app:sv_endDegree="360"
+
                 app:sv_indicator="KiteIndicator"/>
 
             <!--<com.github.anastr.speedviewlib.ImageSpeedometer

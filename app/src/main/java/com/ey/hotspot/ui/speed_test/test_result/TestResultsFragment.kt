@@ -19,7 +19,8 @@ class TestResultsFragment : BaseFragment<FragmentTestResultsBinding, TestResults
 
 
         val imageIndicator = ImageIndicator(requireContext(), resources.getDrawable(R.drawable.speed_indicator_bitmap, null))
-        mBinding.imageSpeedometer.indicator = imageIndicator
-        mBinding.imageSpeedometer.speedTo(80f)
+//        mBinding.imageSpeedometer.indicator = imageIndicator
+//        mBinding.imageSpeedometer.speedTo(80f)
+        mBinding.progress1C.speedTo(80f)
     }
 }
