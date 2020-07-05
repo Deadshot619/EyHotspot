@@ -6,6 +6,9 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorOnPrimary">@color/colorOnPrimary</item>
+
+        <item name="colorSecondary">@color/colorSecondary</item>
+
         <item name="otpViewStyle">@style/OtpWidget.OtpView</item>
         <item name="fontFamily">@font/fira_sans</item>
 
@@ -17,7 +20,7 @@
         <item name="itemTextColor">@color/bottom_nav_color</item>
         <item name="itemIconTint">@color/bottom_nav_color</item>
         <item name="itemTextAppearanceActive">?attr/colorAccent</item>
-        <item name="android:background">?attr/colorPrimaryDark</item>
+        <item name="android:background">@color/navBarBottom</item>
     </style>
 
     <!--    Search-Bar   -->
@@ -37,6 +40,36 @@
     <style name="CustomTextField" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="hintTextColor">@color/colorPrimaryDark</item>
         <item name="startIconTint">@color/colorPrimaryDark</item>
+        <item name="hintEnabled">false</item>
+    </style>
+
+    <!--    Custom Edittext-->
+    <style name="CustomEditText" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:paddingStart">@dimen/custom_edt_dimen</item>
+        <item name="android:paddingEnd">@dimen/common_padding_24</item>
+        <item name="android:textColor">@color/colorEditText</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <!--EditText hint       //should be applied on textview-->
+    <style name="EditTextHint">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textSize">@dimen/text_size_12</item>
+        <item name="layout_constraintHorizontal_bias">0.15</item>
+    </style>
+
+    <!--    Custom EditText for name field              //First Name-->
+    <style name="CustomEditTextFirstName" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:layout_marginStart">@dimen/common_margin_32</item>
+        <item name="android:textColor">@color/colorEditText</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <!--    Custom EditText for name field          //Last Name-->
+    <style name="CustomEditTextLastName" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:layout_marginEnd">@dimen/common_margin</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/colorEditText</item>
     </style>
 
 
@@ -72,6 +105,27 @@
         <item name="android:textColor">?attr/colorOnPrimary</item>
         <item name="android:background">@drawable/sign_btn_gradient</item>
         <item name="backgroundTint">@null</item>
+    </style>
+
+    <!--    Outline Button toolbar-->
+    <style name="OutlinedButtonToolbar" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="cornerRadius">20dp</item>
+        <item name="android:paddingStart">0dp</item>
+        <item name="android:paddingEnd">0dp</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:textColor">@color/colorOnPrimary</item>
+        <item name="strokeColor">@color/colorOnPrimary</item>
+
+        <!--        <item name="background">@drawable/sign_btn_gradient</item>-->
+    </style>
+
+    <!--Chip style text view-->
+    <style name="ChipStyleTextView">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:background">@drawable/chip_style_background</item>
+        <item name="android:textSize">@dimen/text_size_10</item>
+        <item name="android:textColor">@color/textColorHeadline</item>
     </style>
 
 
@@ -121,7 +175,7 @@
 
         <item name="android:textStyle">normal</item>
         <item name="android:textAllCaps">false</item>
-        <item name="android:textSize">@dimen/text_size_18</item>
+        <item name="android:textSize">@dimen/text_size_20</item>
         <item name="android:textColor">@color/colorGrayLight</item>
         <item name="android:letterSpacing">0</item>
 
@@ -142,8 +196,8 @@
 
         <item name="android:textStyle">normal</item>
         <item name="android:textAllCaps">false</item>
-        <item name="android:textSize">@dimen/text_size_18</item>
-        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
+        <item name="android:textColor">@color/textColorHeadline</item>
         <item name="android:letterSpacing">0</item>
 
     </style>
@@ -153,7 +207,7 @@
 
         <item name="android:textStyle">bold</item>
         <item name="android:textAllCaps">false</item>
-        <item name="android:textSize">@dimen/text_size_15</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
         <item name="android:textColor">@color/colorBlack</item>
         <item name="android:letterSpacing">0</item>
 

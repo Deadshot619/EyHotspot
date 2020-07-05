@@ -43,134 +43,199 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-            <!--First Name input-->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/first_name_input_layout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            <!--Name Hint-->
+            <TextView
+                android:id="@+id/tv_name_hint"
+                style="@style/EditTextHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/name_label"
+                app:layout_constraintBottom_toTopOf="@id/iv_name"
+                app:layout_constraintEnd_toEndOf="@id/iv_name"
+                app:layout_constraintStart_toStartOf="@id/iv_name"
+                app:layout_constraintTop_toTopOf="@id/iv_name" />
+
+            <!--Name View-->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_20"
-                app:hintTextColor="@color/colorGrayLight"
-                app:layout_constraintEnd_toEndOf="@id/guideline_right"
-                app:layout_constraintStart_toStartOf="@id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@+id/toolbarLayout"
-                app:placeholderText="@string/name_label"
-                app:startIconDrawable="@drawable/ic_baseline_person_24"
-                app:startIconTint="@color/colorPrimarySub">
+                android:layout_marginTop="@dimen/common_margin_24"
+                android:scaleType="fitXY"
+                android:src="@drawable/user_bitmap"
+                app:layout_constraintEnd_toEndOf="@id/input_mobile_number"
+                app:layout_constraintStart_toStartOf="@id/input_mobile_number"
+                app:layout_constraintTop_toBottomOf="@+id/toolbarLayout" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edt_first_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/first_last_name_label"
-                    android:text="@={viewModel.firstName}" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <!--Last Name input-->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/last_name_input_layout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            <!--First Name-->
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_first_name"
+                style="@style/CustomEditTextFirstName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:hint="@string/first_name_label"
+                android:singleLine="true"
+                app:layout_constraintBottom_toBottomOf="@id/iv_name"
+                app:layout_constraintEnd_toStartOf="@+id/edt_last_name"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toEndOf="@+id/iv_name"
+                app:layout_constraintStart_toStartOf="@id/iv_name"
+                app:layout_constraintTop_toTopOf="@id/iv_name" />
 
-                android:layout_marginTop="@dimen/margin_20"
-                app:hintTextColor="@color/colorGrayLight"
+            <!--Last Name-->
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_last_name"
+                style="@style/CustomEditTextLastName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/last_name_label"
+                app:layout_constraintBottom_toBottomOf="@id/iv_name"
+                app:layout_constraintEnd_toEndOf="@id/iv_name"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/edt_first_name"
+                app:layout_constraintTop_toTopOf="@id/iv_name" />
+
+
+            <!--Mobile Number Hint-->
+            <TextView
+                android:id="@+id/tv_mobile_number_hint"
+                style="@style/EditTextHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mobile_number_label"
+                app:layout_constraintBottom_toTopOf="@id/input_mobile_number"
+                app:layout_constraintEnd_toEndOf="@id/input_mobile_number"
+                app:layout_constraintStart_toStartOf="@id/input_mobile_number"
+                app:layout_constraintTop_toTopOf="@id/input_mobile_number" />
+
+            <!--Mobile Number input-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_mobile_number"
+                style="@style/CustomTextField"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_margin_24"
                 app:layout_constraintEnd_toEndOf="@id/guideline_right"
                 app:layout_constraintStart_toStartOf="@id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@id/first_name_input_layout"
-                app:placeholderText="@string/mobile_number_label"
-                app:startIconDrawable="@drawable/ic_sharp_phone_iphone_24"
-                app:startIconTint="@color/colorPrimarySub">
+                app:layout_constraintTop_toBottomOf="@id/iv_name">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtMobileNo"
+                    style="@style/CustomEditText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@drawable/mobile_number_bitmap"
                     android:hint="@string/enter_register_mobile"
                     android:text="@={viewModel.lastName}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
 
+            <!--EmailId Hint-->
+            <TextView
+                android:id="@+id/tv_email_id_hint"
+                style="@style/EditTextHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/email_id_label"
+                app:layout_constraintBottom_toTopOf="@id/email_input_layout"
+                app:layout_constraintEnd_toEndOf="@id/email_input_layout"
+                app:layout_constraintStart_toStartOf="@id/email_input_layout"
+                app:layout_constraintTop_toTopOf="@id/email_input_layout" />
+
             <!--Email Id input-->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/email_input_layout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                style="@style/CustomTextField"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_20"
-                android:text="@string/email_id_label"
-                app:hintTextColor="@color/colorGrayLight"
-
+                android:layout_marginTop="@dimen/common_margin_24"
                 app:layout_constraintEnd_toEndOf="@id/guideline_right"
                 app:layout_constraintStart_toStartOf="@id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@id/last_name_input_layout"
-                app:placeholderText="@string/email_id_label"
-                app:startIconDrawable="@drawable/ic_outline_email_24"
-                app:startIconTint="@color/colorPrimarySub">
+                app:layout_constraintTop_toBottomOf="@id/input_mobile_number">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_email"
+                    style="@style/CustomEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/email_id_bitmap"
                     android:hint="@string/email_id_hint"
                     android:text="@={viewModel.emailId}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!--Password Hint-->
+            <TextView
+                android:id="@+id/tv_password_hint"
+                style="@style/EditTextHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/password_label"
+                app:layout_constraintBottom_toTopOf="@id/password_input_layout"
+                app:layout_constraintEnd_toEndOf="@id/password_input_layout"
+                app:layout_constraintStart_toStartOf="@id/password_input_layout"
+                app:layout_constraintTop_toTopOf="@id/password_input_layout" />
 
             <!--Password input-->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/password_input_layout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                style="@style/CustomTextField"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
 
-                android:layout_marginTop="@dimen/margin_20"
-                app:hintTextColor="@color/colorGrayLight"
+                android:layout_marginTop="@dimen/common_margin_24"
                 app:layout_constraintEnd_toEndOf="@id/guideline_right"
                 app:layout_constraintStart_toStartOf="@id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@id/email_input_layout"
-                app:placeholderText="@string/password_label"
-                app:startIconDrawable="@drawable/baseline_lock_black_36"
-                app:startIconTint="@color/colorPrimarySub">
+                app:layout_constraintTop_toBottomOf="@id/email_input_layout">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_password"
+                    style="@style/CustomEditText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@drawable/password_bitmap"
+
                     android:hint="@string/enter_password"
                     android:text="@={viewModel.password}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!--Confirm Password Hint-->
+            <TextView
+                android:id="@+id/tv_confirm_password_hint"
+                style="@style/EditTextHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/confirm_password_label"
+                app:layout_constraintBottom_toTopOf="@id/confirm_password_input_layout"
+                app:layout_constraintEnd_toEndOf="@id/confirm_password_input_layout"
+                app:layout_constraintStart_toStartOf="@id/confirm_password_input_layout"
+                app:layout_constraintTop_toTopOf="@id/confirm_password_input_layout" />
 
             <!-- Confirm Password input-->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/confirm_password_input_layout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                style="@style/CustomTextField"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_20"
-                app:hintTextColor="@color/colorGrayLight"
+                android:layout_marginTop="@dimen/common_margin_24"
                 app:layout_constraintEnd_toEndOf="@id/guideline_right"
                 app:layout_constraintStart_toStartOf="@id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@id/password_input_layout"
-
-                app:placeholderText="@string/confirm_password_label"
-                app:startIconDrawable="@drawable/baseline_lock_black_36"
-                app:startIconTint="@color/colorPrimarySub">
+                app:layout_constraintTop_toBottomOf="@id/password_input_layout">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_confirm_password"
+                    style="@style/CustomEditText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@drawable/password_bitmap"
                     android:hint="@string/enter_confirm_password"
                     android:text="@={viewModel.confirmPassword}" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
 
             <TextView
                 android:id="@+id/tvSignAgree"
@@ -201,7 +266,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="@dimen/margin_20"
+                android:layout_marginTop="@dimen/common_margin_24"
                 android:background="@drawable/sign_btn_gradient"
                 android:paddingStart="@dimen/margin_60"
                 android:paddingTop="@dimen/margin_10"
@@ -228,68 +293,55 @@
 
 
                 <View
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_gravity="center"
-                    android:layout_weight="1"
+                    android:layout_weight="1.2"
                     android:background="@color/colorGrayLight" />
 
                 <TextView
                     style="@style/TextAppearance.MyApp.Headline3_Profile_Normal"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_weight="1"
+                    android:layout_weight="0.6"
                     android:gravity="center"
                     android:text="@string/or" />
 
                 <View
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_gravity="center"
-                    android:layout_weight="1"
+                    android:layout_weight="1.2"
                     android:background="@color/colorGrayLight" />
 
 
             </LinearLayout>
 
+            <!--Facebook-->
+            <com.google.android.material.imageview.ShapeableImageView
 
-            <LinearLayout
+                android:id="@+id/ivFacebookSignIn"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/ic_facebook_"
+                app:layout_constraintBottom_toBottomOf="@+id/ivGoogleSignIn"
+                app:layout_constraintEnd_toStartOf="@+id/ivGoogleSignIn"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/ivGoogleSignIn" />
 
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_30"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:weightSum="2"
-                app:layout_constraintEnd_toEndOf="@+id/guideline_right"
-                app:layout_constraintStart_toStartOf="@id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@+id/llOR">
-
-
-                <com.google.android.material.imageview.ShapeableImageView
-
-                    android:id="@+id/ivFacebookSignIn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/margin_30"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:src="@drawable/ic_facebook_"
-                    android:textDirection="locale" />
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/ivGoogleSignIn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/margin_30"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="@dimen/margin_10"
-                    android:layout_weight="1"
-
-                    android:src="@drawable/ic_google_sign_in"
-                    android:textDirection="locale" />
-
-            </LinearLayout>
-
+            <!--Google-->
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ivGoogleSignIn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="@dimen/common_margin_24"
+                android:src="@drawable/ic_google_sign_in"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/ivFacebookSignIn"
+                app:layout_constraintTop_toBottomOf="@id/llOR" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

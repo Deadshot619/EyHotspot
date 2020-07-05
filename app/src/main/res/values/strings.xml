@@ -27,7 +27,7 @@
     <string name="first_name_label">First Name</string>
     <string name="last_name_label">Last Name</string>
     <string name="email_id_label">Email Id</string>
-    <string name="mobile_number_label">Mobile Number.</string>
+    <string name="mobile_number_label">Mobile Number</string>
     <string name="password_label">Password</string>
     <string name="confirm_password_label">Confirm Password</string>
     <string name="captcha_label">Enter the message shown below</string>
@@ -78,6 +78,12 @@
     <string name="all_label">All</string>
 
     <!--Speed Test-->
+    <string name="speed_test_label">Speed Test</string>
+    <string name="users_connected_label">Users Connected</string>
+    <string name="go_label">Go</string>
+    <string name="download_speed_label">Download Speed</string>
+    <string name="retest_label">Retest</string>
+
     <string name="speed_test_result_label">Speed Test Result</string>
     <string name="download_label">Download</string>
     <string name="comment_and_evaluate_label">Comment and Evaluate</string>
@@ -131,7 +137,7 @@
     <string name="first_last_name_label">Firstname           Lastname</string>
     <string name="enter_confirm_password">Enter the password again!</string>
     <string name="sign_agree_msg">By signing up  you agree to the  </string>
-    <string name="terms_condition"><![CDATA[terms & conditions]]></string>
+    <string name="terms_condition"><u>terms &amp; conditions</u></string>
     <string name="get_started">" GET STARTED NOW"</string>
     <string name="or">OR</string>
     <string name="otp_title">Please enter OTP sent to +91 99999999</string>

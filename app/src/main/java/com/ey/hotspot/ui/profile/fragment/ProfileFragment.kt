@@ -13,7 +13,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
 
     override fun onBinding() {
 
-        setUpToolbar(toolbarBinding = mBinding.toolbarLayout, title = getString(R.string.my_profile_label), showUpButton = true, showSettingButton = true)
+        setUpToolbar(toolbarBinding = mBinding.toolbarLayout, title = getString(R.string.my_profile_label), showUpButton = false, showSettingButton = true)
 
     }
 }

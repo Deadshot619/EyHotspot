@@ -7,6 +7,7 @@ import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.ActivitySplashBinding
 import com.ey.hotspot.ui.home.BottomNavHomeActivity
 import com.ey.stringlocalization.utils.Constants
+import com.ey.hotspot.ui.login.LoginActivity
 
 class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
 
@@ -40,7 +41,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
             }
 
         }
-
     }
 
 }

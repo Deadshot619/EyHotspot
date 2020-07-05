@@ -19,8 +19,10 @@
     <dimen name="margin_30">30dp</dimen>
 
     <!--Text Size-->
+    <dimen name="text_size_10">10sp</dimen>
     <dimen name="text_size_12">12sp</dimen>
     <dimen name="text_size_14">14sp</dimen>
+    <dimen name="text_size_16">16sp</dimen>
     <dimen name="text_size_17">17sp</dimen>
     <dimen name="text_size_18">18sp</dimen>
     <dimen name="text_size_20">20sp</dimen>
@@ -35,6 +37,9 @@
     <dimen name="common_margin_end">16dp</dimen>
     <dimen name="common_margin_between_fields">8dp</dimen>
     <dimen name="common_margin_24">24dp</dimen>
+    <dimen name="common_margin_32">32dp</dimen>
+    <dimen name="common_margin_48">48dp</dimen>
+    <dimen name="common_margin_64">64dp</dimen>
     <dimen name="common_margin_8">8dp</dimen>
 
 
@@ -50,7 +55,6 @@
 
 
 
-    <dimen name="text_size_10">10sp</dimen>
     <dimen name="margin_2">2dp</dimen>
 
 
@@ -60,5 +64,8 @@
     <dimen name="search_bar_padding">56dp</dimen>
     <dimen name="search_bar_padding_start_no_drawable">24dp</dimen>
     <dimen name="txt_size_50">50dp</dimen>
+
+    <!--EditText-->
+    <dimen name="custom_edt_dimen">48dp</dimen>
 
 </resources>

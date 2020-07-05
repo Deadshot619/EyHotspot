@@ -15,7 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.settings.SettingsActivity"></activity>
+        <activity android:name=".ui.settings.SettingsActivity"/>
         <activity android:name=".ui.login.otpverification.OTPVerificationActivity" /> <!-- Activities -->
         <activity android:name=".ui.splash_screen.SplashActivity">
             <intent-filter>
@@ -28,8 +28,10 @@
         <activity android:name=".ui.home.HomeActivity" />
         <activity android:name=".ui.profile.ProfileActivity" />
         <activity android:name=".ui.favourite.FavouriteActivity" />
-        <activity android:name=".ui.search.SearchActivity"></activity>
-        <activity android:name=".ui.login.LoginActivity" />
+        <activity android:name=".ui.search.SearchActivity"/>
+        <activity android:name=".ui.login.LoginActivity" >
+
+        </activity>
         <activity android:name=".app_core_lib.BaseActivity" />
         <activity android:name=".ui.registration.RegistrationActivity" />
         <activity android:name=".ui.login_selection.LoginSelectionActivity" /> <!-- Meta-data  Google Map -->
@@ -60,6 +62,11 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
+
+
+
+
+
     </application>
 
 </manifest>
