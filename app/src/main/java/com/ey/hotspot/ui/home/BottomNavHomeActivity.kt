@@ -5,10 +5,8 @@ import com.ey.hotspot.app_core_lib.BaseActivity
 import com.ey.hotspot.databinding.ActivityBottomNavHomeBinding
 import com.ey.hotspot.ui.favourite.fragment.FavouriteFragment
 import com.ey.hotspot.ui.profile.fragment.ProfileFragment
-import com.ey.hotspot.ui.registration.register_user.RegisterUserFragment
 import com.ey.hotspot.ui.review_and_complaint.ReviewAndComplainFragment
-import com.ey.hotspot.ui.search.recentlysearch.RecentlySearchFragment
-import com.ey.hotspot.ui.speed_test.speed_test_fragmet.SpeedTestFragment
+import com.ey.hotspot.ui.speed_test.test_result.TestResultsFragment
 
 class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomNavHomeViewModel>() {
 
@@ -42,7 +40,7 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
 
                 //Speed Test
                 R.id.speed_check -> {
-                    replaceFragment(SpeedTestFragment(), false)
+                    replaceFragment(TestResultsFragment(), false)
                     return@setOnNavigationItemSelectedListener true
                 }
 
