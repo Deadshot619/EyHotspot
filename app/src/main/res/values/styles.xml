@@ -122,6 +122,14 @@
         <!--        <item name="background">@drawable/sign_btn_gradient</item>-->
     </style>
 
+    <!--Chip style text view-->
+    <style name="ChipStyleTextView">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:background">@drawable/chip_style_background</item>
+        <item name="android:textSize">@dimen/text_size_10</item>
+        <item name="android:textColor">@color/textColorHeadline</item>
+    </style>
+
 
     <style name="circleImageViewProfile" parent="">
         <item name="cornerFamily">rounded</item>

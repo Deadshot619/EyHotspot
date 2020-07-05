@@ -19,6 +19,7 @@
     <dimen name="margin_30">30dp</dimen>
 
     <!--Text Size-->
+    <dimen name="text_size_10">10sp</dimen>
     <dimen name="text_size_12">12sp</dimen>
     <dimen name="text_size_14">14sp</dimen>
     <dimen name="text_size_16">16sp</dimen>
@@ -54,7 +55,6 @@
 
 
 
-    <dimen name="text_size_10">10sp</dimen>
     <dimen name="margin_2">2dp</dimen>
 
 
