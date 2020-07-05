@@ -120,7 +120,8 @@ dependencies {
     //OTP
     implementation 'com.github.mukeshsolanki:android-otpview-pinview:2.1.0'
 
-//    implementation 'com.github.anastr:speedviewlib:1.5.2'
+    //SpeedView
+    implementation 'com.github.anastr:speedviewlib:1.5.2'
 
 
 
