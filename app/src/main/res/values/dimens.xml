@@ -30,12 +30,14 @@
 
 
     <!--Margin-->
+    <dimen name="common_margin_between_fields_6">6dp</dimen>
+    <dimen name="common_margin_between_fields">8dp</dimen>
+    <dimen name="common_margin_12">12dp</dimen>
     <dimen name="common_margin">16dp</dimen>
     <dimen name="common_margin_top">16dp</dimen>
     <dimen name="common_margin_bottom">16dp</dimen>
     <dimen name="common_margin_start">16dp</dimen>
     <dimen name="common_margin_end">16dp</dimen>
-    <dimen name="common_margin_between_fields">8dp</dimen>
     <dimen name="common_margin_24">24dp</dimen>
     <dimen name="common_margin_32">32dp</dimen>
     <dimen name="common_margin_48">48dp</dimen>

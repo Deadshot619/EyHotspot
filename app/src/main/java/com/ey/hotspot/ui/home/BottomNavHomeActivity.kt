@@ -6,6 +6,7 @@ import com.ey.hotspot.databinding.ActivityBottomNavHomeBinding
 import com.ey.hotspot.ui.favourite.fragment.FavouriteFragment
 import com.ey.hotspot.ui.profile.fragment.ProfileFragment
 import com.ey.hotspot.ui.review_and_complaint.ReviewAndComplainFragment
+import com.ey.hotspot.ui.search.searchlist.SearchListFragment
 import com.ey.hotspot.ui.speed_test.test_result.TestResultsFragment
 
 class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomNavHomeViewModel>() {
@@ -22,7 +23,7 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
             when (item.itemId) {
                 //Favourites
                 R.id.favourite -> {
-//                    replaceFragment(MyVisitsFragment(), false)
+                    replaceFragment(FavouriteFragment(), false)
                     return@setOnNavigationItemSelectedListener true
                 }
 
@@ -34,7 +35,7 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
 
                 //home
                 R.id.home -> {
-                    replaceFragment(FavouriteFragment(), false)
+                    replaceFragment(SearchListFragment(), false)
                     return@setOnNavigationItemSelectedListener true
                 }
 
