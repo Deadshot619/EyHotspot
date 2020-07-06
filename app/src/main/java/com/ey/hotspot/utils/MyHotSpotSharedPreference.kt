@@ -1,10 +1,11 @@
-package com.ey.stringlocalization.utils
+package com.ey.hotspot.utils
 
 import android.content.Context
 import android.util.Log
 import com.ey.hotspot.app_core_lib.CoreApp
 import com.ey.stringlocalization.utils.Constants.Companion.DELEGATE_ENGLISH_LANG
 import com.ey.stringlocalization.utils.Constants.Companion.LANGUAGE_SELECTED
+import com.ey.stringlocalization.utils.LANGUAGE
 
 class MyHotSpotSharedPreference (context: Context) {
 

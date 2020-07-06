@@ -1,13 +1,19 @@
 package com.ey.hotspot.ui.home
 
+import android.content.Intent
+import androidx.core.content.ContextCompat
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseActivity
 import com.ey.hotspot.databinding.ActivityBottomNavHomeBinding
+import com.ey.hotspot.service.WifiService
 import com.ey.hotspot.ui.favourite.fragment.FavouriteFragment
 import com.ey.hotspot.ui.profile.fragment.ProfileFragment
 import com.ey.hotspot.ui.review_and_complaint.ReviewAndComplainFragment
 import com.ey.hotspot.ui.search.searchlist.SearchListFragment
 import com.ey.hotspot.ui.speed_test.test_result.TestResultsFragment
+import com.ey.hotspot.utils.CHANNEL_ID
+import com.ey.hotspot.utils.channel_name
+import com.ey.hotspot.utils.createNotificationChannel
 
 class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomNavHomeViewModel>() {
 
@@ -16,6 +22,20 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
     override fun onBinding() {
 
         setBottomNavListener()
+
+        startWifiCheckService()
+    }
+
+    private fun startWifiCheckService() {
+        //Create Notification channel
+        createNotificationChannel(
+            this,
+            CHANNEL_ID,
+            channel_name
+        )
+
+        //Start foreground service
+        ContextCompat.startForegroundService(this, Intent(this, WifiService::class.java))
     }
 
     private fun setBottomNavListener() {
