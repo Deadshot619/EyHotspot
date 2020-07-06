@@ -15,6 +15,16 @@
         android:paddingEnd="@dimen/common_padding_end"
         tools:context=".ui.registration.incomplete_registration.IncompleteRegistrationFragment">
 
+
+        <!--Toolbar-->
+        <include
+            android:id="@+id/toolbarLayout"
+            layout="@layout/layout_custom_toolbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
         <!--    User image  -->
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_user"
@@ -24,16 +34,16 @@
             android:src="@drawable/ic_baseline_person_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbarLayout" />
 
         <!--        Verification method-->
         <TextView
             android:id="@+id/tv_select_verification_method_label"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/common_margin_top"
             android:gravity="center"
-            style="@style/TextAppearance.MaterialComponents.Headline6"
             android:text="@string/verification_label"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

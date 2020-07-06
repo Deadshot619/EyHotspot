@@ -5,6 +5,8 @@ import androidx.appcompat.app.AlertDialog
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentEmailVerificationBinding
+import com.ey.hotspot.ui.login.login_fragment.LoginFragment
+import com.ey.hotspot.utils.replaceFragment
 import kotlinx.android.synthetic.main.content_resend_link_dialog.view.*
 
 class EmailVerificationFragment :
@@ -33,6 +35,11 @@ class EmailVerificationFragment :
 
             showConfirmDialog(resources.getString(R.string.verify_link_msg) +"prashant.jadhav@gmail.com", "")
 
+        }
+
+        mBinding.btnSignIn.setOnClickListener {
+
+            replaceFragment(fragment = LoginFragment.newInstance(),addToBackStack = false,bundle = null)
         }
     }
 

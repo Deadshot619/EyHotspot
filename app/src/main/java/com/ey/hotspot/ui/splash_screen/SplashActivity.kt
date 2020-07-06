@@ -25,7 +25,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
                 restartApplication(this, HotSpotApp.prefs!!)
             }
 
-            startActivity(Intent(this, BottomNavHomeActivity::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
             finish()
 
 
@@ -40,7 +40,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
                 restartApplication(this, HotSpotApp.prefs!!)
             }
 
-            startActivity(Intent(this, BottomNavHomeActivity::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
             finish()
 
 

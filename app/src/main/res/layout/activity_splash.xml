@@ -89,7 +89,6 @@
                 android:backgroundTint="@color/background_selector"
                 android:text="@string/english"
                 app:cornerRadius="@dimen/margin_20"
-
                 android:textColor="@color/colorEditText"
                 app:strokeColor="@color/colorEditText" />
 

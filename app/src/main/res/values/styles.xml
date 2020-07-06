@@ -238,6 +238,9 @@
 
     <style name="ShapeAppearance.MyApp.MediumComponent" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">20dp</item>
+        <item name="cornerSize">30dp</item>
+        <item name="boxCornerRadiusTopEnd">20dp</item>
+        <item name="boxCornerRadiusBottomEnd">20dp</item>
+
     </style>
 </resources>

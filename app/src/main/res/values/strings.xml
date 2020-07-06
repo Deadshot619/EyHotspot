@@ -167,6 +167,7 @@
     <string name="setting_saving_msg">lorem lpsum is simply dummy text of the  printing and typesetting industries. Lorem</string>
     <string name="no_label">NO</string>
     <string name="yes_label">YES</string>
+    <string name="permission_label">Permission</string>
 
 
     <!--Demo issue type string-->

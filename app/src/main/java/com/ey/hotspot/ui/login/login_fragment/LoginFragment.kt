@@ -6,6 +6,7 @@ import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentLoginBinding
 import com.ey.hotspot.ui.home.BottomNavHomeActivity
+import com.ey.hotspot.ui.registration.register_user.RegisterUserFragment
 import com.ey.hotspot.ui.registration.registration_option.RegistrationOptionFragment
 import com.ey.hotspot.utils.constants.OptionType
 import com.ey.hotspot.utils.replaceFragment
@@ -68,6 +69,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
                     )
                 })
         }
+
+        //Register New user
+        mBinding.tvGetStarted.setOnClickListener {
+
+            replaceFragment(fragment = RegisterUserFragment.newInstance(),addToBackStack = true,bundle = null)
+        }
     }
 
 
@@ -81,7 +88,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
                     etEmailId.error = resources.getString(R.string.invalid_email)
                     false
                 } else if (password.trim().isEmpty()) {
-                    etPassword.error = "Enter the password"
+                    etPassword.error = resources.getString(R.string.enter_password)
                     false
                 } else
                     true

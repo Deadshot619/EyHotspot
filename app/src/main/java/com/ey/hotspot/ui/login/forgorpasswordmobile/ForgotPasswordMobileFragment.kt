@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentForgotPasswordMobileBinding
+import com.ey.hotspot.ui.login.otpverification.fragment.OTPVerificationFragment
 import com.ey.hotspot.ui.registration.registration_option.RegistrationOptionFragment
 import com.ey.hotspot.ui.registration.sms_verification.SmsVerificationFragment
 import com.ey.hotspot.utils.constants.OptionType
@@ -45,7 +46,7 @@ class ForgotPasswordMobileFragment :
         mBinding.run {
             //Next button
             btnSubmit.setOnClickListener {
-                replaceFragment(SmsVerificationFragment.newInstance(), true, Bundle().apply {
+                replaceFragment(OTPVerificationFragment.newInstance(), true, Bundle().apply {
                     putString(
                         RegistrationOptionFragment.TYPE_KEY,
                         OptionType.TYPE_FORGOT_PASSWORD.name

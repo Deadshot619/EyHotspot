@@ -57,7 +57,7 @@ class RegistrationOptionFragment :
 
             btnSignIn.setOnClickListener {
 
-                replaceFragment(LoginFragment.newInstance(),true,null)
+                replaceFragment(LoginFragment.newInstance(), false, null)
             }
 
 

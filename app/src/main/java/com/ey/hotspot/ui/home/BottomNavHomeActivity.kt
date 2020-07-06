@@ -16,6 +16,7 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
     override fun getViewModel() = BottomNavHomeViewModel::class.java
     override fun onBinding() {
 
+        replaceFragment(HomeFragment(), false)
         setBottomNavListener()
     }
 
@@ -24,7 +25,7 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
             when (item.itemId) {
                 //Favourites
                 R.id.favourite -> {
-//                    replaceFragment(MyVisitsFragment(), false)
+                    replaceFragment(FavouriteFragment(), false)
                     return@setOnNavigationItemSelectedListener true
                 }
 
@@ -37,8 +38,6 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
                 //home
                 R.id.home -> {
 
-                 /*   val intd = Intent(this, HomeActivity::class.java)
-                    startActivity(intd)*/
                     replaceFragment(HomeFragment(), false)
                     return@setOnNavigationItemSelectedListener true
                 }

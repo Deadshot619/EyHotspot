@@ -315,7 +315,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         mBinding.customPop.btNavigate.setOnClickListener {
             val gmmIntentUri = Uri.parse("geo:18.520430,73.856743")
             val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
-            mapIntent.setPackage("com.google.android.apps.maps")
+           // mapIntent.setPackage("com.google.android.apps.maps")
             mapIntent.resolveActivity(requireActivity().packageManager)?.let {
                 requireActivity().startActivity(mapIntent)
             }

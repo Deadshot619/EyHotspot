@@ -32,6 +32,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
+            style="@style/TextAppearance.MyApp.Headline3_Profile_Normal"
             app:layout_constraintTop_toBottomOf="@+id/iv_user"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -40,7 +41,10 @@
 
 
         <!--otp on sms-->
-        <com.google.android.material.button.MaterialButton
+        <androidx.appcompat.widget.AppCompatButton
+            android:paddingEnd="@dimen/margin_20"
+            android:paddingStart="@dimen/margin_20"
+            android:background="@drawable/sign_btn_gradient"
             android:id="@+id/btn_otp_sms"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -50,7 +54,10 @@
             app:layout_constraintTop_toBottomOf="@id/tv_select_verification_method_label" />
 
         <!--Email Link-->
-        <com.google.android.material.button.MaterialButton
+        <androidx.appcompat.widget.AppCompatButton
+            android:paddingEnd="@dimen/margin_20"
+            android:paddingStart="@dimen/margin_20"
+            android:background="@drawable/sign_btn_gradient"
             android:id="@+id/btn_email_link"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -60,12 +67,15 @@
             app:layout_constraintTop_toBottomOf="@id/tv_select_verification_method_label" />
 
         <!--Sign In-->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_sign_in"
+        <androidx.appcompat.widget.AppCompatButton
+            android:paddingEnd="@dimen/margin_30"
+            android:paddingStart="@dimen/margin_30"
+            android:background="@drawable/sign_btn_gradient"            android:id="@+id/btn_sign_in"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/common_margin_top"
             android:text="@string/sign_in_label"
+            android:visibility="gone"
             app:layout_constraintVertical_bias="1"
             android:layout_marginBottom="@dimen/common_margin_bottom"
             app:layout_constraintEnd_toEndOf="parent"

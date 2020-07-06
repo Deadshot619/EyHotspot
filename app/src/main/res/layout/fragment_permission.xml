@@ -9,9 +9,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:layout_gravity="center"
+        android:orientation="vertical"
         tools:context=".ui.login_selection.LoginSelectionActivity">
+
+
+        <!--Toolbar-->
+        <include
+            android:id="@+id/toolbarLayout"
+            layout="@layout/layout_custom_toolbar" />
 
 
         <TextView
@@ -19,39 +25,38 @@
             style="@style/TextAppearance.MyApp.Headline3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margin_20"
             android:layout_marginStart="@dimen/margin_20"
             android:layout_marginTop="@dimen/margin_50"
+            android:layout_marginEnd="@dimen/margin_20"
             android:gravity="center"
             android:text="@string/permission_description" />
 
 
-
-
-
         <CheckBox
-            android:layout_marginTop="@dimen/margin_10"
-            android:layout_marginStart="@dimen/margin_20"
             android:id="@+id/simpleCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/agree_terms"/>
+            android:layout_marginStart="@dimen/margin_20"
+            android:layout_marginTop="@dimen/margin_10"
+            android:text="@string/agree_terms" />
 
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_submit"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/margin_20"
+            android:paddingEnd="@dimen/margin_30"
+            android:paddingStart="@dimen/margin_30"
+            android:background="@drawable/sign_btn_gradient"
+            android:text="@string/submit_button"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textDirection="locale"
 
-            <Button
-                android:id="@+id/btn_submit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/submit_button"
-                android:textAllCaps="false"
-                android:layout_gravity="center"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/text_size_15"
-                android:textDirection="locale"
-                android:layout_marginTop="@dimen/margin_20"
-                style="@style/Widget.AppCompat.Button.Colored"/>
-
+            android:textSize="@dimen/text_size_15" />
 
 
     </LinearLayout>

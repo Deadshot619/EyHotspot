@@ -8,6 +8,8 @@ import android.widget.Toast
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentRegisterUserBinding
+import com.ey.hotspot.ui.home.BottomNavHomeActivity
+import com.ey.hotspot.ui.login.permission.PermissionFragment
 import com.ey.hotspot.ui.registration.registration_option.RegistrationOptionFragment
 import com.ey.hotspot.utils.constants.OptionType
 import com.ey.hotspot.utils.replaceFragment
@@ -99,12 +101,17 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
 
             //Sign In button
             btnGetStarted.setOnClickListener {
-                replaceFragment(RegistrationOptionFragment.newInstance(), true, Bundle().apply {
-                    putString(
-                        RegistrationOptionFragment.TYPE_KEY,
-                        OptionType.TYPE_REGISTRATION.name
-                    )
-                })
+                if (validate()) {
+                    val homeIntent = Intent(activity, BottomNavHomeActivity::class.java)
+                    startActivity(homeIntent)
+
+
+                }
+            }
+
+            tvTermsCondition.setOnClickListener {
+
+                replaceFragment(fragment = PermissionFragment.newInstance(),addToBackStack = true,bundle = null)
             }
 
 
@@ -118,6 +125,8 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
             ivGoogleSignIn.setOnClickListener {
                 signIn()
             }
+
+
 
         }
     }

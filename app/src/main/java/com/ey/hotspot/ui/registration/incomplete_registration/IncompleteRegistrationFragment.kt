@@ -28,6 +28,12 @@ class IncompleteRegistrationFragment : BaseFragment<FragmentIncompleteRegistrati
      * Method to setup click listeners
      */
     private fun setUpListeners() {
+
+        setUpToolbar(
+            toolbarBinding = mBinding.toolbarLayout,
+            title = getString(R.string.permission_label),
+            showUpButton = true
+        )
         mBinding.run {
             //Next button
             btnOtpSms.setOnClickListener {
