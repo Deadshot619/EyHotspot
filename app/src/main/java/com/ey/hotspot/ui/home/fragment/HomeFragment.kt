@@ -1,18 +1,17 @@
 package com.ey.hotspot.ui.home.fragment
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
+import android.net.Uri
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.widget.ImageView
 import android.widget.Toast
-import androidx.appcompat.widget.AppCompatButton
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentHomeBinding
@@ -21,6 +20,7 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.GoogleMap.OnMapClickListener
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
@@ -29,7 +29,6 @@ import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.maps.android.clustering.Cluster
 import com.google.maps.android.clustering.ClusterManager
 import com.google.maps.android.clustering.view.DefaultClusterRenderer
-import kotlinx.android.synthetic.main.custom_marker_info_window.view.*
 
 
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(), OnMapReadyCallback,
@@ -72,6 +71,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
     override fun onBinding() {
 
+        // Prompt the user for permission.
+        getLocationPermission()
 
         Places.initialize(requireActivity(), getString(R.string.maps_api_key))
         placesClient = Places.createClient(requireActivity())
@@ -87,13 +88,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
     override fun onMapReady(map: GoogleMap) {
         this.map = map
-
-        // Prompt the user for permission.
-        getLocationPermission()
+        setUpClickListener()
         // Turn on the My Location layer and the related control on the map.
         updateLocationUI()
         // Get the current location of the device and set the position of the map.
         getDeviceLocation()
+    }
+
+    private fun setUpClickListener() {
+
+        this.map?.setOnMapClickListener(OnMapClickListener {
+            mBinding.customPop.llCustomPopMain.visibility = View.GONE
+        })
     }
 
     private fun getDeviceLocation() {
@@ -151,47 +157,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         val renderer = ClusterItemRenderer(requireActivity(), map, mClusterManager)
         mClusterManager.renderer = renderer
 
-        setUpMarkerInfoWindows()
         addItems()
     }
-
-
-    private fun setUpMarkerInfoWindows() {
-
-
-        mClusterManager.markerCollection.setInfoWindowAdapter(object : GoogleMap.InfoWindowAdapter {
-            override fun getInfoContents(p0: Marker?): View {
-                TODO("Not yet implemented")
-            }
-
-            override fun getInfoWindow(p0: Marker?): View {
-                /* val inflater =
-                     requireActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
- */
-
-
-                val inflater = requireActivity().getLayoutInflater()
-
-                @SuppressLint("InflateParams")
-                val view: View = inflater.inflate(R.layout.custom_marker_info_window, null)
-                val navigateButton = view.btNavigate
-                val wifiTitle = view.tvWifiNameTitle
-
-
-                wifiTitle.setText(clickedVenueMarker?.title)
-
-                wifiTitle.setOnClickListener {
-
-                    Toast.makeText(requireActivity(), "HELLO", Toast.LENGTH_SHORT).show()
-                }
-
-
-                return view
-            }
-
-        })
-    }
-
 
     private fun addItems() {
 
@@ -316,20 +283,53 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
 
     override fun onClusterClick(cluster: Cluster<MyClusterItems>?): Boolean {
+
+        Log.d("Cluster", "onClusterClick")
         return true
     }
 
     override fun onClusterInfoWindowClick(cluster: Cluster<MyClusterItems>?) {
 
+        Log.d("Cluster", "onClusterInfoWindowClick")
 
     }
 
     override fun onClusterItemClick(item: MyClusterItems?): Boolean {
+
+        Log.d("Cluster", "onClusterItemClick")
+
         clickedVenueMarker = item;
+
+        mBinding.customPop.llCustomPopMain.visibility = View.VISIBLE
+
+        mBinding.customPop.tvWifiNameTitle.setText(clickedVenueMarker?.title)
+
+
+
+        mBinding.customPop.tvWifiNameTitle.setOnClickListener {
+
+            val dummy: String = "something"
+            Toast.makeText(requireActivity(), "HELLO", Toast.LENGTH_SHORT).show()
+        }
+
+        mBinding.customPop.btNavigate.setOnClickListener {
+            val gmmIntentUri = Uri.parse("geo:18.520430,73.856743")
+            val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+            mapIntent.setPackage("com.google.android.apps.maps")
+            mapIntent.resolveActivity(requireActivity().packageManager)?.let {
+                requireActivity().startActivity(mapIntent)
+            }
+
+        }
+
+
+
         return false
     }
 
     override fun onClusterItemInfoWindowClick(item: MyClusterItems?) {
+        Log.d("Cluster", "onClusterItemInfoWindowClick")
+
 
     }
 
