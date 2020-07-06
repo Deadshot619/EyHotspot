@@ -2,7 +2,6 @@ package com.ey.hotspot.ui.registration.register_user
 
 import android.content.Intent
 import android.graphics.Paint
-import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.ey.hotspot.R
@@ -10,8 +9,6 @@ import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentRegisterUserBinding
 import com.ey.hotspot.ui.home.BottomNavHomeActivity
 import com.ey.hotspot.ui.login.permission.PermissionFragment
-import com.ey.hotspot.ui.registration.registration_option.RegistrationOptionFragment
-import com.ey.hotspot.utils.constants.OptionType
 import com.ey.hotspot.utils.replaceFragment
 import com.ey.hotspot.utils.validations.isEmailValid
 import com.ey.hotspot.utils.validations.isPasswordValid
@@ -60,7 +57,7 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
     private fun setUpUIData() {
 
         setUpToolbar(toolbarBinding = mBinding.toolbarLayout, title = getString(R.string.register_with_us), showUpButton = true)
-        tvTermsCondition.paintFlags = tvTermsCondition.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG
+        tvTermsCondition.paintFlags = tvTermsCondition.paintFlags or Paint.UNDERLINE_TEXT_FLAG
 
         setUpFacebookLogin()
         setuPGoogelSignIn()

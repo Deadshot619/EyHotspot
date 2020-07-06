@@ -109,6 +109,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-places:17.0.0'
     implementation 'com.google.android.libraries.places:places:2.3.0'
 
+    //map clustering
     dependencies {
         implementation 'com.google.maps.android:android-maps-utils:2.0.0'
     }
@@ -127,6 +128,8 @@ dependencies {
     //OTP
     implementation 'com.github.mukeshsolanki:android-otpview-pinview:2.1.0'
 
+
+//    implementation 'com.github.anastr:speedviewlib:1.5.2'
 
 
 

@@ -96,6 +96,8 @@
         <item name="android:paddingEnd">30dp</item>
         <item name="android:paddingTop">13dp</item>
         <item name="android:paddingBottom">13dp</item>
+        <item name="android:letterSpacing">0</item>
+
 
         <!--        <item name="background">@drawable/sign_btn_gradient</item>-->
     </style>
@@ -103,11 +105,13 @@
     <!--Outlined Button colored-->
     <style name="GradientButton" parent="Widget.MaterialComponents.Button">
         <item name="cornerRadius">25dp</item>
-        <item name="android:paddingStart">30dp</item>
-        <item name="android:paddingEnd">30dp</item>
+        <item name="android:paddingStart">20dp</item>
+        <item name="android:paddingEnd">20dp</item>
         <item name="android:textColor">?attr/colorOnPrimary</item>
         <item name="android:background">@drawable/sign_btn_gradient</item>
         <item name="backgroundTint">@null</item>
+        <item name="android:letterSpacing">0</item>
+
     </style>
 
     <!--    Outline Button toolbar-->
@@ -119,9 +123,24 @@
         <item name="android:paddingBottom">0dp</item>
         <item name="android:textColor">@color/colorOnPrimary</item>
         <item name="strokeColor">@color/colorOnPrimary</item>
+        <item name="android:letterSpacing">0</item>
 
         <!--        <item name="background">@drawable/sign_btn_gradient</item>-->
     </style>
+
+    <!--Outlined Button uncolored Normal-->
+    <style name="OutlinedButtonNormal" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="cornerRadius">25dp</item>
+        <item name="android:paddingStart">15dp</item>
+        <item name="android:paddingEnd">15dp</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="strokeColor">@color/colorPrimary</item>
+        <item name="android:letterSpacing">0</item>
+        <!--        <item name="background">@drawable/sign_btn_gradient</item>-->
+    </style>
+
+
 
     <!--Chip style text view-->
     <style name="ChipStyleTextView">
