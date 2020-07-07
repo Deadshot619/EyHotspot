@@ -38,6 +38,7 @@ class SettingsFragment : BaseFragment<SettingsFragmentBinding, SettingsViewModel
             showUpButton = true
         )
 
+        /*Submit click*/
         mBinding.btnSubmit.setOnClickListener {
 
             showConfirmDialog("", "")
