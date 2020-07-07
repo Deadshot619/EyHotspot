@@ -131,8 +131,8 @@
     <!--Outlined Button uncolored Normal-->
     <style name="OutlinedButtonNormal" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="cornerRadius">25dp</item>
-        <item name="android:paddingStart">15dp</item>
-        <item name="android:paddingEnd">15dp</item>
+        <item name="android:paddingStart">@dimen/margin_10</item>
+        <item name="android:paddingEnd">@dimen/margin_10</item>
         <item name="android:paddingTop">0dp</item>
         <item name="android:paddingBottom">0dp</item>
         <item name="strokeColor">@color/colorPrimary</item>
@@ -262,4 +262,10 @@
         <item name="boxCornerRadiusBottomEnd">20dp</item>
 
     </style>
+
+    <style name="ShapeAppearanceOverlay.FloatingActionButton" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@null</item>
+    </style>
+
 </resources>

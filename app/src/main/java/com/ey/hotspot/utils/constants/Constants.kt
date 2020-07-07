@@ -11,9 +11,17 @@ interface Constants {
 
         //APIS
 
-        const val  API_LOGIN ="login"
 
+        //POST
+        const val  API_LOGIN ="login"
         const val  API_REGISTRATION ="register"
         const val API_NEARBYWIFILIST=""
+        const val API_USER_LIST=""
+        const val API_LOGOUT=""
+        const val API_REFRESH_TOKEN=""
+        const val API_UPDATE_PROFILE=""
+
+        //GET
+        const val API_GET_USER_LIST="getProfile"
     }
 }

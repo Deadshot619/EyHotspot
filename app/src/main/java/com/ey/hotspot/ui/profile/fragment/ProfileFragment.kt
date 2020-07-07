@@ -3,6 +3,9 @@ package com.ey.hotspot.ui.profile.fragment
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.ProfileFragmentBinding
+import com.ey.hotspot.ui.settings.fragments.SettingsFragment
+import com.ey.hotspot.utils.replaceFragment
+import kotlinx.android.synthetic.main.profile_fragment.*
 
 class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>() {
 
@@ -13,7 +16,20 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
 
     override fun onBinding() {
 
-        setUpToolbar(toolbarBinding = mBinding.toolbarLayout, title = getString(R.string.my_profile_label), showUpButton = false, showSettingButton = true)
+        setUpToolbar(
+            toolbarBinding = mBinding.toolbarLayout,
+            title = getString(R.string.my_profile_label),
+            showUpButton = false,
+            showSettingButton = true
+        )
 
+        mBinding.toolbarLayout.ivSettings.setOnClickListener {
+
+            replaceFragment(
+                fragment = SettingsFragment.newInstance(),
+                addToBackStack = true,
+                bundle = null
+            )
+        }
     }
 }

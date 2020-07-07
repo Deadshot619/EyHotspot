@@ -22,8 +22,13 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
     override fun onBinding() {
 
         setBottomNavListener()
-
         startWifiCheckService()
+        setUpDefaultFragment()
+    }
+
+    private fun setUpDefaultFragment() {
+
+        replaceFragment(fragment = HomeFragment(), addToBackstack = false, bundle = null)
     }
 
     private fun startWifiCheckService() {

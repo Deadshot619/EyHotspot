@@ -25,6 +25,12 @@ class RegistrationOptionFragment :
     override fun getLayoutId() = R.layout.fragment_registration_option
     override fun getViewModel() = RegistrationOptionViewModel::class.java
     override fun onBinding() {
+
+        setUpToolbar(
+            toolbarBinding = mBinding.toolbarLayout,
+            title = getString(R.string.registration_label),
+            showUpButton = true
+        )
         TYPE_VALUE = getDataFromArguments(this, TYPE_KEY)
 //        if (TYPE_VALUE == OptionType.TYPE_REGISTRATION.name)
 //            else

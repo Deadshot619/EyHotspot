@@ -31,7 +31,7 @@ class IncompleteRegistrationFragment : BaseFragment<FragmentIncompleteRegistrati
 
         setUpToolbar(
             toolbarBinding = mBinding.toolbarLayout,
-            title = getString(R.string.permission_label),
+            title = getString(R.string.registration_label),
             showUpButton = true
         )
         mBinding.run {
