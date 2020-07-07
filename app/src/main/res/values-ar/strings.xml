@@ -158,4 +158,9 @@
     <string name="no_label">لا</string>
     <string name="yes_label">نعم</string>
     <string name="permission_label">الإذن</string>
+    <string name="invalid_firstName">الاسم الأول غير صالح</string>
+    <string name="invalid_email_label">البريد الإلكتروني غير صالح</string>
+    <string name="invalid_mobile">رقم الجوال غير صالح</string>
+    <string name="invalid_password">رمز مرور خاطئ</string>
+    <string name="pwd_not_match">كلمة المرور غير مطابقة</string>
 </resources>

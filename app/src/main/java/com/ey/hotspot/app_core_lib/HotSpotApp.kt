@@ -30,7 +30,7 @@ class HotSpotApp :CoreApp() {
 
             if (base != null) {
 
-                CoreApp.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(base)
+                CoreApp.sharedPreferences = androidx.preference.PreferenceManager.getDefaultSharedPreferences(base)
                 prefs = MyHotSpotSharedPreference(base)
 
                 Log.d("Langu attachBase", prefs?.getLanguage())

@@ -15,6 +15,6 @@ abstract class CoreApp : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        sharedPreferences = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this)
     }
 }

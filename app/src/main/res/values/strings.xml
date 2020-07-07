@@ -168,6 +168,11 @@
     <string name="no_label">NO</string>
     <string name="yes_label">YES</string>
     <string name="permission_label">Permission</string>
+    <string name="invalid_firstName">Invalid First Name</string>
+    <string name="invalid_email_label">Invalid Email Id</string>
+    <string name="invalid_mobile">Invalid Mobile Number</string>
+    <string name="invalid_password">Invalid Password</string>
+    <string name="pwd_not_match">Passwords do not match</string>
 
 
     <!--Demo issue type string-->

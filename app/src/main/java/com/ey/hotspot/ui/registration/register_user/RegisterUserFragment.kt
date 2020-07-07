@@ -187,23 +187,23 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
         mViewModel.run {
             mBinding.run {
                 return if (firstName.trim().isEmpty()) {
-                    edtFirstName.error = "Invalid First Name"
+                    edtFirstName.error = resources.getString(R.string.invalid_firstName)
                     false
                 } else if (!emailId.isEmailValid()) {
-                    edtEmail.error = "Invalid Email Id"
+                    edtEmail.error = resources.getString(R.string.invalid_email_label)
                     false
                 } else if (!mobileNumber.isValidMobile()) {
-                    edtMobileNo.error = "Invalid Mobile Number"
+                    edtMobileNo.error = resources.getString(R.string.invalid_mobile)
                     false
                 } else if (password.trim().isEmpty()) {
-                    edtPassword.error = "Invalid Password"
+                    edtPassword.error =  resources.getString(R.string.invalid_password)
                     false
                 } else if (confirmPassword.trim().isEmpty()) {
-                    edtConfirmPassword.error = "Passwords do not match"
+                    edtConfirmPassword.error = resources.getString(R.string.pwd_not_match)
                     false
                 } else if (!password.isPasswordValid(confirmPassword)) {
-                    edtPassword.error = "Passwords do not match"
-                    edtConfirmPassword.error = "Passwords do not match"
+                    edtPassword.error = resources.getString(R.string.pwd_not_match)
+                    edtConfirmPassword.error = resources.getString(R.string.pwd_not_match)
                     false
                 } else true
             }
