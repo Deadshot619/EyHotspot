@@ -9,13 +9,14 @@ import android.net.Uri
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentHomeBinding
 import com.ey.hotspot.ui.home.models.MyClusterItems
+import com.ey.hotspot.utils.isLocationEnabled
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -84,6 +85,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         val myMAPF = childFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment?
         myMAPF?.getMapAsync(this)
+
+        if (!requireActivity().isLocationEnabled()) {
+            checkGPSEnable()
+        }
     }
 
     override fun onMapReady(map: GoogleMap) {
@@ -315,7 +320,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         mBinding.customPop.btNavigate.setOnClickListener {
             val gmmIntentUri = Uri.parse("geo:18.520430,73.856743")
             val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
-           // mapIntent.setPackage("com.google.android.apps.maps")
+            // mapIntent.setPackage("com.google.android.apps.maps")
             mapIntent.resolveActivity(requireActivity().packageManager)?.let {
                 requireActivity().startActivity(mapIntent)
             }
@@ -371,4 +376,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         }
     }
 
+
+    private fun checkGPSEnable() {
+        AlertDialog.Builder(requireContext())
+            .setMessage("Your GPS seems to be disabled, do you want to enable it?")
+            .setCancelable(false)
+            .setPositiveButton("Yes") { dialog, id ->
+                startActivity(Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS))
+            }
+            .setNegativeButton("No") { dialog, id ->
+                dialog.cancel()
+            }
+            .show()
+    }
 }

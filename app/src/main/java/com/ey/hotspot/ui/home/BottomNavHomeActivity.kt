@@ -1,6 +1,9 @@
 package com.ey.hotspot.ui.home
 
 import android.content.Intent
+import android.net.Uri
+import android.os.Build
+import android.provider.Settings
 import androidx.core.content.ContextCompat
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseActivity
@@ -14,6 +17,12 @@ import com.ey.hotspot.ui.speed_test.test_result.TestResultsFragment
 import com.ey.hotspot.utils.CHANNEL_ID
 import com.ey.hotspot.utils.channel_name
 import com.ey.hotspot.utils.createNotificationChannel
+import com.google.android.material.snackbar.Snackbar
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 
 class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomNavHomeViewModel>() {
 
@@ -22,13 +31,16 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
     override fun onBinding() {
 
         setBottomNavListener()
+
         startWifiCheckService()
-        setUpDefaultFragment()
-    }
 
-    private fun setUpDefaultFragment() {
+        //Set Home as initial fragment
+        /*mBinding.bottomNavigation.menu.run{
+            performIdentifierAction(R.id.home, 2)
+            getItem(2).isChecked = true
+        }*/
 
-        replaceFragment(fragment = HomeFragment(), addToBackstack = false, bundle = null)
+//        checkPermission()
     }
 
     private fun startWifiCheckService() {
@@ -79,5 +91,102 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
             }
             false
         }
+    }
+
+    //    @RequiresApi(Build.VERSION_CODES.Q)
+    private fun checkPermission() {
+        Dexter.withContext(this)
+            .withPermissions(
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    android.Manifest.permission.ACCESS_BACKGROUND_LOCATION
+                    android.Manifest.permission.ACCESS_FINE_LOCATION
+                    android.Manifest.permission.ACCESS_COARSE_LOCATION
+                } else {
+                    android.Manifest.permission.ACCESS_FINE_LOCATION
+                    android.Manifest.permission.ACCESS_COARSE_LOCATION
+                }
+            )
+            .withListener(object : MultiplePermissionsListener {
+                override fun onPermissionsChecked(p0: MultiplePermissionsReport?) {
+                    if (p0!!.areAllPermissionsGranted()) {
+                        //Set Home as initial fragment
+                        mBinding.bottomNavigation.menu.run {
+                            performIdentifierAction(R.id.home, 2)
+                            getItem(2).isChecked = true
+                        }
+                    } else if (p0.isAnyPermissionPermanentlyDenied) {
+                        Snackbar.make(
+                            mBinding.root,
+                            "You need to provide Location/GPS permission for this app to run smoothly",
+                            Snackbar.LENGTH_LONG
+                        )
+                            .setAction("Open") {
+                                val intent =
+                                    Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                                        data = Uri.fromParts(
+                                            "package",
+                                            applicationContext.packageName,
+                                            null
+                                        )
+                                    }
+                                this@BottomNavHomeActivity.startActivity(intent)
+                            }
+                            .show()
+                    }
+                }
+
+                override fun onPermissionRationaleShouldBeShown(
+                    p0: MutableList<PermissionRequest>?,
+                    p1: PermissionToken?
+                ) {
+                    p1?.continuePermissionRequest()
+                }
+
+            }).check()
+//            .withListener(object : PermissionListener {
+//                override fun onPermissionGranted(p0: PermissionGrantedResponse?) {
+//                    //Set Home as initial fragment
+//                    mBinding.bottomNavigation.menu.run {
+//                        performIdentifierAction(R.id.home, 2)
+//                        getItem(2).isChecked = true
+//                    }
+//                }
+//
+//                override fun onPermissionRationaleShouldBeShown(
+//                    p0: PermissionRequest?,
+//                    p1: PermissionToken?
+//                ) {
+//                    p1?.continuePermissionRequest()
+//                }
+//
+//                override fun onPermissionDenied(p0: PermissionDeniedResponse?) {
+//                    if (p0?.isPermanentlyDenied!!) {
+//                        Snackbar.make(
+//                            mBinding.root,
+//                            "You need to provide Location/GPS permission for this app to run smoothly",
+//                            Snackbar.LENGTH_LONG
+//                        )
+//                            .setAction("Open") {
+//                                val intent =
+//                                    Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+//                                        data = Uri.fromParts(
+//                                            "package",
+//                                            applicationContext.packageName,
+//                                            null
+//                                        )
+//                                    }
+//                                this@BottomNavHomeActivity.startActivity(intent)
+//                            }
+//                            .show()
+//                    } else {
+//                        Toast.makeText(
+//                            this@BottomNavHomeActivity,
+//                            "You need to accept this permission to view wifi locations",
+//                            Toast.LENGTH_LONG
+//                        ).show()
+//                    }
+//                }
+//
+//            }).check()
     }
 }
