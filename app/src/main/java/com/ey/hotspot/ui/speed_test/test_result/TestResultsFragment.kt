@@ -3,7 +3,7 @@ package com.ey.hotspot.ui.speed_test.test_result
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentTestResultsBinding
-import com.github.anastr.speedviewlib.components.indicators.ImageIndicator
+import com.ey.hotspot.speedTestLib.components.indicators.ImageIndicator
 
 class TestResultsFragment : BaseFragment<FragmentTestResultsBinding, TestResultsViewModel>() {
 
@@ -18,7 +18,7 @@ class TestResultsFragment : BaseFragment<FragmentTestResultsBinding, TestResults
         mBinding.viewModel = mViewModel
 
 
-        val imageIndicator = ImageIndicator(requireContext(), resources.getDrawable(R.drawable.speed_indicator_bitmap, null))
+        val imageIndicator = ImageIndicator(requireContext(), resources.getDrawable(R.drawable.speedmark, null))
 //        mBinding.imageSpeedometer.indicator = imageIndicator
 //        mBinding.imageSpeedometer.speedTo(80f)
         mBinding.progress1C.speedTo(80f)

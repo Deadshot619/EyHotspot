@@ -38,7 +38,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.github.anastr.speedviewlib.TubeSpeedometer
+            <com.ey.hotspot.speedTestLib.SpeedView
                 android:id="@+id/progress1C"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -50,24 +50,24 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/toolbarLayout"
-                app:sv_centerCircleColor="#00ffff"
+                app:sv_centerCircleColor="#D1A00D"
+                app:sv_centerCircleRadius="14dp"
+                app:sv_indicatorWidth="16dp"
                 app:sv_indicatorColor="@color/colorAccent"
-                app:sv_indicatorWidth="10dp"
                 app:sv_pointerColor="@android:color/transparent"
                 app:sv_speedTextColor="@android:color/transparent"
                 app:sv_speedometerColor="@color/colorWhite"
                 app:sv_speedometerBackColor="@color/base_gradient"
-                app:sv_speedometerWidth="10dp"
+                app:sv_speedometerWidth="1dp"
                 app:sv_withTremble="false"
                 app:sv_startDegree="180"
                 app:sv_endDegree="360"
-
                 app:sv_indicator="KiteIndicator"/>
 
-            <!--<com.github.anastr.speedviewlib.ImageSpeedometer
+           <!-- <com.ey.hotspot.speedTestLib.ImageSpeedometer
                android:id="@+id/image_speedometer"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="@id/iv_bg_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
