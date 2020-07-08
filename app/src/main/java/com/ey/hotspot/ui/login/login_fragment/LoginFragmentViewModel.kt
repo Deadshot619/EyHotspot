@@ -25,7 +25,7 @@ class LoginFragmentViewModel(application: Application): BaseViewModel(applicatio
 /*        val loginRequestModel = LoginRequestModel(email, password)*/
 
         coroutineScope.launch {
-            DataProvider.registerUser(
+            DataProvider.login(
                 /*request = loginRequestModel,*/
                 success = {
                     _loginResponse.value = it

@@ -75,6 +75,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/first_name_label"
                 android:singleLine="true"
+                android:text="@={viewModel.firstName}"
                 app:layout_constraintBottom_toBottomOf="@id/iv_name"
                 app:layout_constraintEnd_toStartOf="@+id/edt_last_name"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -89,6 +90,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/last_name_label"
+                android:text="@={viewModel.lastName}"
                 app:layout_constraintBottom_toBottomOf="@id/iv_name"
                 app:layout_constraintEnd_toEndOf="@id/iv_name"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -126,7 +128,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/mobile_number_bitmap"
                     android:hint="@string/enter_register_mobile"
-                    android:text="@={viewModel.lastName}" />
+                    android:text="@={viewModel.mobileNumber}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

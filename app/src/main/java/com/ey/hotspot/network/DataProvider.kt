@@ -1,6 +1,10 @@
 package com.ey.hotspot.network
 
+import android.app.DownloadManager
+import com.ey.hotspot.ui.registration.register_user.model.Register
+import com.ey.hotspot.ui.registration.register_user.model.RegisterResponse
 import com.google.gson.JsonArray
+import com.google.gson.JsonObject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -12,13 +16,13 @@ object DataProvider : RemoteDataProvider {
     }
 
     override suspend fun registerUser(
-        /*request: Request,*/       //If there's a request
-        success: (JsonArray) -> Unit,
+        request: Register,      //If there's a request
+        success: (RegisterResponse) -> Unit,
         error: (java.lang.Exception) -> Unit
     ) {
         withContext(Dispatchers.Main) {
             try {
-                val result = mServices.register(/*request*/).await()
+                val result = mServices.register(request).await()
                 success(result)
             } catch (e: Exception) {
                 error(e)
@@ -27,7 +31,7 @@ object DataProvider : RemoteDataProvider {
     }
 
 
-    override suspend fun registration(
+    override suspend fun login(
 
         success: (JsonArray) -> Unit,
         error: (java.lang.Exception) -> Unit
@@ -35,7 +39,7 @@ object DataProvider : RemoteDataProvider {
 
         withContext(Dispatchers.Main) {
             try {
-                val result = mServices.registration().await()
+                val result = mServices.login().await()
             } catch (e: Exception) {
                 error(e)
             }
