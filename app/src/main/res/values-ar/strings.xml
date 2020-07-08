@@ -89,6 +89,7 @@
     <string name="go_label">اذهب</string>
     <string name="download_speed_label">سرعة التنزيل</string>
     <string name="retest_label">إعادة الاختبار</string>
+
     <string name="speed_test_result_label">نتيجة اختبار السرعة</string>
     <string name="download_label">تحميل</string>
     <string name="comment_and_evaluate_label">التعليق والتقييم</string>

@@ -27,9 +27,12 @@
     <dimen name="text_size_18">18sp</dimen>
     <dimen name="text_size_20">20sp</dimen>
     <dimen name="text_size_22">22sp</dimen>
+    <dimen name="text_size_24">24sp</dimen>
+    <dimen name="text_size_42">42sp</dimen>
 
 
     <!--Margin-->
+    <dimen name="common_margin_between_fields_4">4dp</dimen>
     <dimen name="common_margin_between_fields_6">6dp</dimen>
     <dimen name="common_margin_between_fields">8dp</dimen>
     <dimen name="common_margin_12">12dp</dimen>

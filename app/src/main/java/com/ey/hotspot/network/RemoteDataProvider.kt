@@ -13,7 +13,6 @@ interface RemoteDataProvider {
 
 
     suspend fun  login(
-
         success:(JsonArray) ->Unit,
         error: (Exception) -> Unit
     )

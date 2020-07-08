@@ -25,10 +25,14 @@ class TestResultsViewModel(application: Application) : BaseViewModel(application
     val errorText: LiveData<String>
         get() = _errorText
 
+    init {
+        onCheckSpeedClick()
+    }
+
     fun onCheckSpeedClick() {
         coroutineScope.launch {
             startDownload()
-            startUpload()
+//            startUpload()
         }
     }
 
