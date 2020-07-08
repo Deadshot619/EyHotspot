@@ -9,6 +9,7 @@ import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentRegisterUserBinding
 import com.ey.hotspot.ui.home.BottomNavHomeActivity
 import com.ey.hotspot.ui.login.permission.PermissionFragment
+import com.ey.hotspot.ui.registration.register_user.model.Register
 import com.ey.hotspot.utils.replaceFragment
 import com.ey.hotspot.utils.validations.isEmailValid
 import com.ey.hotspot.utils.validations.isPasswordValid
@@ -56,7 +57,11 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
 
     private fun setUpUIData() {
 
-        setUpToolbar(toolbarBinding = mBinding.toolbarLayout, title = getString(R.string.register_with_us), showUpButton = true)
+        setUpToolbar(
+            toolbarBinding = mBinding.toolbarLayout,
+            title = getString(R.string.register_with_us),
+            showUpButton = true
+        )
         tvTermsCondition.paintFlags = tvTermsCondition.paintFlags or Paint.UNDERLINE_TEXT_FLAG
 
         setUpFacebookLogin()
@@ -103,12 +108,30 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
                     startActivity(homeIntent)
 
 
+                    val register: Register = Register(
+                        mViewModel.firstName,
+                        mViewModel.lastName,
+                        "+91",
+                        mViewModel.mobileNumber,
+                        mViewModel.emailId,
+                        mViewModel.password,
+                        mViewModel.confirmPassword
+                    )
+
+
+                    mViewModel.registerUser(register)
+
+
                 }
             }
 
             tvTermsCondition.setOnClickListener {
 
-                replaceFragment(fragment = PermissionFragment.newInstance(),addToBackStack = true,bundle = null)
+                replaceFragment(
+                    fragment = PermissionFragment.newInstance(),
+                    addToBackStack = true,
+                    bundle = null
+                )
             }
 
 
@@ -122,7 +145,6 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
             ivGoogleSignIn.setOnClickListener {
                 signIn()
             }
-
 
 
         }
@@ -196,7 +218,7 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
                     edtMobileNo.error = resources.getString(R.string.invalid_mobile)
                     false
                 } else if (password.trim().isEmpty()) {
-                    edtPassword.error =  resources.getString(R.string.invalid_password)
+                    edtPassword.error = resources.getString(R.string.invalid_password)
                     false
                 } else if (confirmPassword.trim().isEmpty()) {
                     edtConfirmPassword.error = resources.getString(R.string.pwd_not_match)

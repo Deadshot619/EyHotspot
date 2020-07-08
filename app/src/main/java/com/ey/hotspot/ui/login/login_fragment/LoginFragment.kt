@@ -73,7 +73,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
         //Register New user
         mBinding.tvGetStarted.setOnClickListener {
 
-            replaceFragment(fragment = RegisterUserFragment.newInstance(),addToBackStack = true,bundle = null)
+            replaceFragment(
+                fragment = RegisterUserFragment.newInstance(),
+                addToBackStack = true,
+                bundle = null
+            )
         }
     }
 
