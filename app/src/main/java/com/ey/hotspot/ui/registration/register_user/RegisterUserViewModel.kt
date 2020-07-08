@@ -6,10 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ey.hotspot.app_core_lib.BaseViewModel
 import com.ey.hotspot.network.DataProvider
-import com.ey.hotspot.ui.registration.register_user.model.Register
-import com.ey.hotspot.ui.registration.register_user.model.RegisterResponse
-import com.google.gson.JsonArray
-import com.google.gson.JsonObject
+import com.ey.hotspot.network.request.RegisterRequest
+import com.ey.hotspot.network.response.RegisterResponse
 import kotlinx.coroutines.launch
 
 class RegisterUserViewModel(application: Application) : BaseViewModel(application) {
@@ -29,7 +27,7 @@ class RegisterUserViewModel(application: Application) : BaseViewModel(applicatio
         get() = _registrationResponse
 
 
-    fun registerUser(register: Register) {
+    fun registerUser(register: RegisterRequest) {
 
         coroutineScope.launch {
 

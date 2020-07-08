@@ -1,12 +1,12 @@
 package com.ey.hotspot.network
 
-import com.ey.hotspot.ui.registration.register_user.model.Register
-import com.ey.hotspot.ui.registration.register_user.model.RegisterResponse
+import com.ey.hotspot.network.request.RegisterRequest
+import com.ey.hotspot.network.response.RegisterResponse
 import com.google.gson.JsonArray
 
 interface RemoteDataProvider {
     suspend fun registerUser(
-        request: Register,
+        request: RegisterRequest,
         success: (RegisterResponse) -> Unit,
         error: (Exception) -> Unit
     )

@@ -1,10 +1,8 @@
 package com.ey.hotspot.network
 
-import android.app.DownloadManager
-import com.ey.hotspot.ui.registration.register_user.model.Register
-import com.ey.hotspot.ui.registration.register_user.model.RegisterResponse
+import com.ey.hotspot.network.request.RegisterRequest
+import com.ey.hotspot.network.response.RegisterResponse
 import com.google.gson.JsonArray
-import com.google.gson.JsonObject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -16,7 +14,7 @@ object DataProvider : RemoteDataProvider {
     }
 
     override suspend fun registerUser(
-        request: Register,      //If there's a request
+        request: RegisterRequest,      //If there's a request
         success: (RegisterResponse) -> Unit,
         error: (java.lang.Exception) -> Unit
     ) {

@@ -7,9 +7,9 @@ import android.widget.Toast
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentRegisterUserBinding
+import com.ey.hotspot.network.request.RegisterRequest
 import com.ey.hotspot.ui.home.BottomNavHomeActivity
 import com.ey.hotspot.ui.login.permission.PermissionFragment
-import com.ey.hotspot.ui.registration.register_user.model.Register
 import com.ey.hotspot.utils.replaceFragment
 import com.ey.hotspot.utils.validations.isEmailValid
 import com.ey.hotspot.utils.validations.isPasswordValid
@@ -108,15 +108,16 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
                     startActivity(homeIntent)
 
 
-                    val register: Register = Register(
-                        mViewModel.firstName,
-                        mViewModel.lastName,
-                        "+91",
-                        mViewModel.mobileNumber,
-                        mViewModel.emailId,
-                        mViewModel.password,
-                        mViewModel.confirmPassword
-                    )
+                    val register: RegisterRequest =
+                        RegisterRequest(
+                            mViewModel.firstName,
+                            mViewModel.lastName,
+                            "+91",
+                            mViewModel.mobileNumber,
+                            mViewModel.emailId,
+                            mViewModel.password,
+                            mViewModel.confirmPassword
+                        )
 
 
                     mViewModel.registerUser(register)

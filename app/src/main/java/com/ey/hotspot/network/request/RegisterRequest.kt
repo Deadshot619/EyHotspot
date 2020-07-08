@@ -1,9 +1,9 @@
-package com.ey.hotspot.ui.registration.register_user.model
+package com.ey.hotspot.network.request
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class Register(
+data class RegisterRequest(
 
     @SerializedName("first_name") @Expose
     val firstName: String,
