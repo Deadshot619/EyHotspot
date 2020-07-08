@@ -126,10 +126,9 @@ dependencies {
     //OTP
     implementation 'com.github.mukeshsolanki:android-otpview-pinview:2.1.0'
 
-    //SpeedView
-
-//    implementation 'com.github.anastr:speedviewlib:1.5.2'
-
+    //Chuck Interceptor
+    debugImplementation 'com.readystatesoftware.chuck:library:1.1.0'
+    releaseImplementation 'com.readystatesoftware.chuck:library-no-op:1.1.0'
 
 
 

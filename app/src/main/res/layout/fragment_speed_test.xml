@@ -34,7 +34,7 @@
 
 <!--            Bg Circle-->
             <ImageButton
-                android:background="null"
+                android:background="@android:color/transparent"
                 android:id="@+id/iv_go_bg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -1,10 +1,8 @@
 package com.ey.hotspot.network
 
-import android.app.DownloadManager
 import com.ey.hotspot.ui.registration.register_user.model.Register
 import com.ey.hotspot.ui.registration.register_user.model.RegisterResponse
 import com.google.gson.JsonArray
-import com.google.gson.JsonObject
 
 interface RemoteDataProvider {
     suspend fun registerUser(
@@ -16,7 +14,7 @@ interface RemoteDataProvider {
 
     suspend fun  login(
 
-        sucess:(JsonArray) ->Unit,
+        success:(JsonArray) ->Unit,
         error: (Exception) -> Unit
     )
 
