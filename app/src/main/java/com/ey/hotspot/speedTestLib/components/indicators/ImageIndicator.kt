@@ -1,4 +1,4 @@
-package com.ey.hotspot.ui.speed_test.test_result
+package com.ey.hotspot.speedTestLib.components.indicators
 
 import android.content.Context
 import android.graphics.Canvas
@@ -16,12 +16,11 @@ class ImageIndicator
  * @param context you can use `applicationContext`.
  * @param bitmapIndicator the indicator.
  */
-constructor(context: Context, private val bitmapIndicator: Drawable) :
-    Indicator<ImageIndicator>(context) {
+constructor(context: Context, private val bitmapIndicator: Drawable) : Indicator<ImageIndicator>(context) {
 
     override fun draw(canvas: Canvas, degree: Float) {
         canvas.save()
-        canvas.rotate(90f + degree, getCenterX(), getCenterY())
+        canvas.rotate(/*135f +*/ degree, getCenterX(), getCenterY())
         bitmapIndicator.draw(canvas)
         canvas.restore()
     }
@@ -31,5 +30,4 @@ constructor(context: Context, private val bitmapIndicator: Drawable) :
     }
 
     override fun setWithEffects(withEffects: Boolean) {}
-    override fun getDefaultIndicatorWidth(): Float  = dpTOpx(0F)
 }

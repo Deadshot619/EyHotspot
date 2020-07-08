@@ -59,8 +59,6 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-
-
 }
 
 dependencies {
@@ -128,6 +126,7 @@ dependencies {
     //OTP
     implementation 'com.github.mukeshsolanki:android-otpview-pinview:2.1.0'
 
+    //SpeedView
 
 //    implementation 'com.github.anastr:speedviewlib:1.5.2'
 
