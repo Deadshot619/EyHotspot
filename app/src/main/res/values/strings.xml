@@ -5,11 +5,18 @@
     <string name="registration_button">Register</string>
 
     <!--Social Login And API KEYEs-->
-    <string name="google_client_id">1010233238210-9ug8s9bhjbbsskrn4hete9deb89u1dh4.apps.googleusercontent.com</string>
+ <!--   <string name="google_client_id">1010233238210-9ug8s9bhjbbsskrn4hete9deb89u1dh4.apps.googleusercontent.com</string>
+-->
+
+    <string name="google_client_id">701065953910-ua0p0sl83t7r04n0fh317p17pnpfouem.apps.googleusercontent.com</string>
 
 
-    <string name="facebook_app_id">807473699785521</string>
+  <!--  <string name="facebook_app_id">807473699785521</string>
     <string name="fb_login_protocol_scheme">fb807473699785521</string>
+-->
+
+    <string name="facebook_app_id">2495789184045739</string>
+    <string name="fb_login_protocol_scheme">fb2495789184045739</string>
 
 
     <!--Common-->
@@ -109,11 +116,8 @@
     <string name="raise_complaint_label">Raise Complaint</string>
 
 
-    <!--
-   //Clustring
-   <string name="maps_api_key">AIzaSyBqFJqQpuMaYT5mpVw0K3pu5XQqcpJ2_tQ</string>
-   -->
-    <string name="maps_api_key" translatable="false">AIzaSyDQoLf9R4PKHdcR6TKEh5q8lnVu3QvwjxU</string>
+
+    <string name="maps_api_key" translatable="false">AIzaSyAyKP89tXni4J32JCJw60dVTShBXqR_ieU</string>
     <string name="searchplace">Search</string>
     <string name="permission_description">Lorem ipsum dolor sit amet, ua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
     <string name="agree_terms">I Agree</string>

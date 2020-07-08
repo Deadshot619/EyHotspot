@@ -46,7 +46,9 @@
             android:value="@string/google_maps_key" />
         <meta-data
             android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" /> <!-- Facebook Login -->
+            android:value="@integer/google_play_services_version" />
+
+        <!-- Facebook Login -->
         <!-- FacebookActivity -->
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
