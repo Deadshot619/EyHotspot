@@ -2,14 +2,17 @@ package com.ey.hotspot.ui.login.login_fragment
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentLoginBinding
 import com.ey.hotspot.ui.home.BottomNavHomeActivity
+import com.ey.hotspot.ui.login.login_fragment.model.LoginRequest
 import com.ey.hotspot.ui.registration.register_user.RegisterUserFragment
 import com.ey.hotspot.ui.registration.registration_option.RegistrationOptionFragment
 import com.ey.hotspot.utils.constants.OptionType
 import com.ey.hotspot.utils.replaceFragment
+import com.ey.hotspot.utils.showMessage
 import com.ey.hotspot.utils.validations.isEmailValid
 
 
@@ -35,12 +38,24 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
             lifecycleOwner = viewLifecycleOwner
             viewModel = mViewModel
         }
-        /*   val homeIntent = Intent(activity,HomeActivity::class.java)
-           startActivity(homeIntent)*/
-
-
-        //replaceFragment(RegisterUserFragment.newInstance(),true,null)
         setUpListeners()
+        setUpObservers()
+    }
+
+    private fun setUpObservers() {
+
+
+        mViewModel.loginResponse.observe(viewLifecycleOwner, Observer {
+
+            val homeIntent = Intent(activity, BottomNavHomeActivity::class.java)
+            startActivity(homeIntent)
+
+        })
+
+        mViewModel.errorText.observe(viewLifecycleOwner, Observer {
+
+            showMessage(it, false)
+        })
     }
 
     private fun setUpListeners() {
@@ -50,8 +65,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
             if (validate()) {
                 val homeIntent = Intent(activity, BottomNavHomeActivity::class.java)
                 startActivity(homeIntent)
-
-                mViewModel.callLogin(mViewModel.emailId, mViewModel.password)
+                val loginRequest: LoginRequest =
+                    LoginRequest(mViewModel.emailId, mViewModel.password)
+                mViewModel.callLogin(loginRequest)
 
             }
 

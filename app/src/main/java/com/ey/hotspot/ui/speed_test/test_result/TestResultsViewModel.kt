@@ -21,9 +21,6 @@ class TestResultsViewModel(application: Application) : BaseViewModel(application
     val uploadSpeed: LiveData<BigDecimal>
         get() = _uploadSpeed
 
-    private val _errorText = MutableLiveData<String>()
-    val errorText: LiveData<String>
-        get() = _errorText
 
     fun onCheckSpeedClick() {
         coroutineScope.launch {
