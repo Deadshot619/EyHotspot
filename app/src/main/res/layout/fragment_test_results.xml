@@ -38,7 +38,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.ey.hotspot.speedTestLib.SpeedView
+<!--            <com.ey.hotspot.speedTestLib.SpeedView
                 android:id="@+id/progress1C"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -62,20 +62,30 @@
                 app:sv_withTremble="false"
                 app:sv_startDegree="180"
                 app:sv_endDegree="360"
-                app:sv_indicator="KiteIndicator"/>
+                app:sv_indicator="KiteIndicator"/>-->
 
-           <!-- <com.ey.hotspot.speedTestLib.ImageSpeedometer
+            <com.ey.hotspot.speedTestLib.ImageSpeedometer
                android:id="@+id/image_speedometer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:scaleX="1.13"
+                app:layout_constraintVertical_bias="1"
                 app:layout_constraintBottom_toBottomOf="@id/iv_bg_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/toolbarLayout"
-                app:sv_image="@drawable/rectangle_shape"
+                app:sv_image="@drawable/speed_indicator_bitmap"
                 app:sv_speedTextColor="@android:color/transparent"
                 app:sv_unitTextColor="@android:color/transparent"
-                />-->
+                app:sv_indicator="KiteIndicator"
+                app:sv_withTremble="false"
+                app:sv_startDegree="180"
+                app:sv_endDegree="360"
+                app:sv_centerCircleColor="#D1A00D"
+                app:sv_centerCircleRadius="12dp"
+                app:sv_indicatorWidth="14dp"
+                app:sv_indicatorColor="@color/colorAccent"
+                />
 
             <!--Number Of users-->
             <TextView

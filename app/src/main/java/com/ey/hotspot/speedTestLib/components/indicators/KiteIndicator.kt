@@ -35,7 +35,7 @@ class KiteIndicator(context: Context) : Indicator<KiteIndicator>(context) {
 
     override fun updateIndicator() {
         indicatorPath.reset()
-        indicatorPath.moveTo(getCenterX(), getViewSize() / 7f + speedometer!!.padding.toFloat())
+        indicatorPath.moveTo(getCenterX(), getViewSize() / 5f + speedometer!!.padding.toFloat())
         bottomY = getViewSize() * .5f + speedometer!!.padding
 
         //left point

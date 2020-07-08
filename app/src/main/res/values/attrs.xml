@@ -155,6 +155,8 @@
 
     <declare-styleable name="ImageSpeedometer" parent="Speedometer">
         <attr name="sv_image" />
+        <attr name="sv_centerCircleColor" />
+        <attr name="sv_centerCircleRadius" />
     </declare-styleable>
 
     <declare-styleable name="LinearGauge" parent="Gauge">

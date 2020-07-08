@@ -68,8 +68,8 @@ open class SpeedView @JvmOverloads constructor(context: Context, attrs: Attribut
         }
         val a = context.theme.obtainStyledAttributes(attrs, R.styleable.SpeedView, 0, 0)
 
-        circlePaint.color = a.getColor(R.styleable.SpeedView_sv_centerCircleColor, circlePaint.color)
-        centerCircleRadius = a.getDimension(R.styleable.SpeedView_sv_centerCircleRadius, centerCircleRadius)
+        circlePaint.color = a.getColor(R.styleable.ImageSpeedometer_sv_centerCircleColor, circlePaint.color)
+        centerCircleRadius = a.getDimension(R.styleable.ImageSpeedometer_sv_centerCircleRadius, centerCircleRadius)
         val styleIndex = a.getInt(R.styleable.SpeedView_sv_sectionStyle, -1)
         if (styleIndex != -1)
             sections.forEach { it.style = Section.Style.values()[styleIndex] }
