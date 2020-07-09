@@ -75,7 +75,12 @@
     <string name="forgotpassword">Forgot Password</string>
     <string name="email_id_hint">Enter Email Id</string>
     <string name="enter_password">Enter the Password</string>
+    <string name="enter_captcha">Enter Captcha</string>
     <string name="login_credentials_msg">Login to the portal with your credentials</string>
+    <string name="connecting_kingdom_label">Connecting the \n Kingdom of Saudi Arabia…!</string>
+<!--    <string name="of_saudi_arabia">Connecting the Kingdom of Saudi Arabia...!</string>-->
+
+
 
 
     <!--Review & Complaint-->

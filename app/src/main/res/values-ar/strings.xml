@@ -37,9 +37,12 @@
     <!--Login screen-->
     <string name="email_id_hint">أدخل معرف البريد</string>
     <string name="enter_password">أدخل كلمة المرور</string>
+    <string name="enter_captcha">أدخل كلمة التحقق</string>
     <string name="login_credentials_msg">تسجيل الدخول إلى البوابة باستخدام بيانات اعتمادك</string>
     <string name="login_hotspot_msg">أليس لديك حساب على Hotspot؟</string>
     <string name="get_started_msg">نبدأ الآن!</string>
+    <string name="connecting_kingdom_label">ربط \n المملكة العربية السعودية …!</string>
+
 
 
     <!--    Register User   -->

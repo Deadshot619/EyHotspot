@@ -28,40 +28,40 @@
             android:orientation="vertical"
             app:layout_constraintGuide_end="@dimen/margin_60" />
 
-
+<!--        Hotspot-->
         <ImageView
             android:id="@+id/tvAppName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
             android:src="@drawable/ic_logo_splash"
+            app:layout_constraintVertical_bias="0.4"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
+<!--        Connecting World-->
         <TextView
             android:id="@+id/tvConnectingWorld"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:gravity="center"
-            android:text="@string/loginHeaderNameSub"
+            android:text="@string/connecting_kingdom_label"
             android:textColor="@color/colorWhite"
-            android:textSize="@dimen/text_size_20"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textStyle="normal"
+            android:layout_marginTop="@dimen/common_margin_between_fields"
+            android:textSize="@dimen/text_size_14"
+            app:layout_constraintEnd_toEndOf="@id/tvAppName"
+            app:layout_constraintStart_toStartOf="@id/tvAppName"
             app:layout_constraintTop_toBottomOf="@id/tvAppName" />
 
 
+<!--        Button Group-->
         <com.google.android.material.button.MaterialButtonToggleGroup
             android:id="@+id/clip_feed_switcher"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
-
+            app:layout_constraintVertical_bias="0.75"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/guideline_right"
             app:layout_constraintStart_toStartOf="@id/guideline_left"
