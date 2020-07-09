@@ -1,17 +1,9 @@
 package com.ey.hotspot.ui.search.searchlist
 
-import androidx.lifecycle.ViewModelProviders
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
-import com.ey.hotspot.databinding.SearchFragmentBinding
 import com.ey.hotspot.databinding.SearchListFragmentBinding
-import com.ey.hotspot.ui.registration.email_verification.EmailVerificationFragment
 import com.ey.hotspot.ui.search.searchlist.adapter.SearchListAdapter
 import com.ey.hotspot.ui.search.searchlist.model.SearchList
 import kotlinx.android.synthetic.main.search_list_fragment.*
@@ -36,7 +28,7 @@ class SearchListFragment : BaseFragment<SearchListFragmentBinding, SearchListVie
 
     override fun onBinding() {
 
-        setUpSearchBar(mBinding.toolbarLayout,true,{})
+        setUpSearchBar(mBinding.toolbarLayout,true){}
 
         rvSearchList.apply {
             layoutManager = LinearLayoutManager(context)

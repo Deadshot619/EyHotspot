@@ -81,6 +81,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
     protected fun setUpSearchBar(
         toolbarBinding: LayoutCustomToolbarSearchbarBinding,
         showUpButton: Boolean = true,
+        enableSearchButton: Boolean = true,
         searchFunction: (String) -> Unit    //method to run when search button is clicked
     ) {
         toolbarBinding.run {
@@ -100,16 +101,17 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
                 )
             }
 
-            //Search button
-            ivSearch.setOnClickListener {
-                if (etSearchBar.text.isNullOrEmpty()) {
-                    showMessage(resources.getString(R.string.empty_query_alert_label))
-                    etSearchBar.requestFocus()
-                    activity?.showKeyboard()
-                } else {
-                    searchFunction(etSearchBar.text.toString().trim())
+            if (enableSearchButton)
+                //Search button
+                ivSearch.setOnClickListener {
+                    if (etSearchBar.text.isNullOrEmpty()) {
+                        showMessage(resources.getString(R.string.empty_query_alert_label))
+                        etSearchBar.requestFocus()
+                        activity?.showKeyboard()
+                    } else {
+                        searchFunction(etSearchBar.text.toString().trim())
+                    }
                 }
-            }
         }
     }
 }

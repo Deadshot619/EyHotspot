@@ -35,12 +35,12 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
         startWifiCheckService()
 
         //Set Home as initial fragment
-        /*mBinding.bottomNavigation.menu.run{
+        mBinding.bottomNavigation.menu.run{
             performIdentifierAction(R.id.home, 2)
             getItem(2).isChecked = true
-        }*/
+        }
 
-//        checkPermission()
+        checkPermission()
     }
 
     private fun startWifiCheckService() {
@@ -93,7 +93,6 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
         }
     }
 
-    //    @RequiresApi(Build.VERSION_CODES.Q)
     private fun checkPermission() {
         Dexter.withContext(this)
             .withPermissions(
@@ -110,10 +109,10 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
                 override fun onPermissionsChecked(p0: MultiplePermissionsReport?) {
                     if (p0!!.areAllPermissionsGranted()) {
                         //Set Home as initial fragment
-                        mBinding.bottomNavigation.menu.run {
+                        /*mBinding.bottomNavigation.menu.run {
                             performIdentifierAction(R.id.home, 2)
                             getItem(2).isChecked = true
-                        }
+                        }*/
                     } else if (p0.isAnyPermissionPermanentlyDenied) {
                         Snackbar.make(
                             mBinding.root,
@@ -143,50 +142,5 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
                 }
 
             }).check()
-//            .withListener(object : PermissionListener {
-//                override fun onPermissionGranted(p0: PermissionGrantedResponse?) {
-//                    //Set Home as initial fragment
-//                    mBinding.bottomNavigation.menu.run {
-//                        performIdentifierAction(R.id.home, 2)
-//                        getItem(2).isChecked = true
-//                    }
-//                }
-//
-//                override fun onPermissionRationaleShouldBeShown(
-//                    p0: PermissionRequest?,
-//                    p1: PermissionToken?
-//                ) {
-//                    p1?.continuePermissionRequest()
-//                }
-//
-//                override fun onPermissionDenied(p0: PermissionDeniedResponse?) {
-//                    if (p0?.isPermanentlyDenied!!) {
-//                        Snackbar.make(
-//                            mBinding.root,
-//                            "You need to provide Location/GPS permission for this app to run smoothly",
-//                            Snackbar.LENGTH_LONG
-//                        )
-//                            .setAction("Open") {
-//                                val intent =
-//                                    Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
-//                                        data = Uri.fromParts(
-//                                            "package",
-//                                            applicationContext.packageName,
-//                                            null
-//                                        )
-//                                    }
-//                                this@BottomNavHomeActivity.startActivity(intent)
-//                            }
-//                            .show()
-//                    } else {
-//                        Toast.makeText(
-//                            this@BottomNavHomeActivity,
-//                            "You need to accept this permission to view wifi locations",
-//                            Toast.LENGTH_LONG
-//                        ).show()
-//                    }
-//                }
-//
-//            }).check()
     }
 }

@@ -75,7 +75,12 @@
     <string name="forgotpassword">Forgot Password</string>
     <string name="email_id_hint">Enter Email Id</string>
     <string name="enter_password">Enter the Password</string>
+    <string name="enter_captcha">Enter Captcha</string>
     <string name="login_credentials_msg">Login to the portal with your credentials</string>
+    <string name="connecting_kingdom_label">Connecting the \n Kingdom of Saudi Arabia…!</string>
+<!--    <string name="of_saudi_arabia">Connecting the Kingdom of Saudi Arabia...!</string>-->
+
+
 
 
     <!--Review & Complaint-->
@@ -144,7 +149,7 @@
     <string name="terms_condition"><u>terms &amp; conditions</u></string>
     <string name="get_started">" GET STARTED NOW"</string>
     <string name="or">OR</string>
-    <string name="otp_title">Please enter OTP sent to +91 99999999</string>
+    <string name="otp_title">Please enter OTP sent to \n+91 99999999</string>
     <string name="resend_otp_label">RESEND OTP</string>
     <string name="btn_verify">VERIFY</string>
     <string name="receive_otp">Didn\'t received OTP?</string>

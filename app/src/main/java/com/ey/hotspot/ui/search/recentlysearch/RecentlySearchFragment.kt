@@ -6,10 +6,7 @@ import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.RecentlySearchFragmentBinding
 import com.ey.hotspot.ui.search.recentlysearch.adapter.RecentlySearchListAdapter
 import com.ey.hotspot.ui.search.recentlysearch.model.RecentlySearch
-import com.ey.hotspot.ui.search.searchlist.adapter.SearchListAdapter
-import com.ey.hotspot.ui.search.searchlist.model.SearchList
 import kotlinx.android.synthetic.main.recently_search_fragment.*
-import kotlinx.android.synthetic.main.search_list_fragment.*
 
 class RecentlySearchFragment :
     BaseFragment<RecentlySearchFragmentBinding, RecentlySearchViewModel>() {
@@ -26,7 +23,7 @@ class RecentlySearchFragment :
     }
 
     override fun onBinding() {
-        setUpSearchBar(mBinding.toolbarLayout, true, {})
+        setUpSearchBar(mBinding.toolbarLayout, true){}
 
 
         rvRecentlySearchView.apply {
