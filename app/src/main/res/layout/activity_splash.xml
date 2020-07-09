@@ -57,7 +57,7 @@
 
 
         <com.google.android.material.button.MaterialButtonToggleGroup
-            android:id="@+id/clip_feed_switcher"
+            android:id="@+id/mbLanguageSelection"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"

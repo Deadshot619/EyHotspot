@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.ey.hotspot.ui.profile.fragment.ProfileViewModel" />
+            type="com.ey.hotspot.ui.profile.updateprofile.UpdateProfileViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -139,7 +139,7 @@
             app:layout_constraintTop_toBottomOf="@id/input_mobile_no">
 
             <com.google.android.material.textfield.TextInputEditText
-                    style="@style/CustomEditText"
+                style="@style/CustomEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/email_id_bitmap"

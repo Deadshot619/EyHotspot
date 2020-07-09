@@ -8,6 +8,11 @@ interface Constants {
         const val ENGLISH_LANG: String = "en"
         const val ARABIC_LANG: String = "ar"
 
+        //SharedPreference
+
+        const val  ACCESS_TOKEN:String="access_token"
+        const val  APP_LOGGED_IN:String ="app_logged_in"
+
 
         //APIS
 
@@ -16,9 +21,9 @@ interface Constants {
         const val API_LOGIN = "login"
         const val API_REGISTRATION = "register"
         const val API_GET_PROFILE = "getProfile"
-        const val API_LOGOUT = ""
-        const val API_REFRESH_TOKEN = ""
-        const val API_UPDATE_PROFILE = ""
+        const val API_LOGOUT = "logout"
+        const val API_REFRESH_TOKEN = "refreshToken"
+        const val API_UPDATE_PROFILE = "updateProfile"
 
         //GET
         const val API_GET_USER_LIST = "userList"

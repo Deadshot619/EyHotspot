@@ -3,12 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.ey.hotspot.ui.home.fragment.HomeFragmentViewModel" />
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
 
         android:id="@+id/homeFragmentID"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         tools:context=".ui.login_selection.LoginSelectionActivity">
 
 

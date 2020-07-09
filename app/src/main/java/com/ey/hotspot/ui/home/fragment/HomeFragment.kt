@@ -72,6 +72,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
     override fun onBinding() {
 
+        mBinding.run {
+            lifecycleOwner = viewLifecycleOwner
+            viewModel = mViewModel
+        }
+
         // Prompt the user for permission.
         getLocationPermission()
 
@@ -89,6 +94,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         if (!requireActivity().isLocationEnabled()) {
             checkGPSEnable()
         }
+
+        getNearByWifiList()
+    }
+
+    private fun getNearByWifiList() {
+
+
+
     }
 
     override fun onMapReady(map: GoogleMap) {

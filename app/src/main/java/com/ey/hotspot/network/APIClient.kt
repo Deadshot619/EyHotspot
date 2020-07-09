@@ -32,6 +32,7 @@ class APIClient {
             override fun intercept(chain: Interceptor.Chain): Response {
                 val request = chain.request()
                 request.newBuilder()
+
                     .addHeader("Content-Type", "application/json;charset=utf-8")
                     .addHeader("Accept", "application/json")
                     .build()

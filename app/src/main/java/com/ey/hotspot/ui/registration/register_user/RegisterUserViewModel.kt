@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ey.hotspot.app_core_lib.BaseViewModel
+import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.network.DataProvider
 import com.ey.hotspot.network.request.RegisterRequest
 import com.ey.hotspot.network.response.RegisterResponse
@@ -35,7 +36,7 @@ class RegisterUserViewModel(application: Application) : BaseViewModel(applicatio
                 request = register,
                 success = {
                     _registrationResponse.value = it
-                    Log.d("SuccessReponse", it.accessToken)
+                    updateSharedPreference(it)
                 }, error = {
                     Log.d(
                         "ErrorResponse", it.message
@@ -47,5 +48,13 @@ class RegisterUserViewModel(application: Application) : BaseViewModel(applicatio
 
 
     }
+
+    private fun updateSharedPreference(registerResponse: RegisterResponse) {
+
+        HotSpotApp.prefs!!.saveAccessToken(registerResponse.accessToken)
+        HotSpotApp.prefs!!.setAppLoggedInStatus(true)
+
+    }
+
 
 }
