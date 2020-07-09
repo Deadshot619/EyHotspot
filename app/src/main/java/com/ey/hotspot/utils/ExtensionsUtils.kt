@@ -2,15 +2,24 @@ package com.ey.hotspot.utils
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.location.LocationManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.ey.hotspot.app_core_lib.BaseActivity
+import com.google.android.material.snackbar.Snackbar
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import java.math.BigDecimal
 import java.math.RoundingMode
 
@@ -100,3 +109,52 @@ fun BigDecimal.convertBpsToMbps(): BigDecimal {
         BigDecimal.valueOf(0)
     }
 }
+
+fun Activity.checkLocationPermission(view: View, func: (Unit) -> Unit) {
+    Dexter.withContext(this)
+        .withPermissions(
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                android.Manifest.permission.ACCESS_BACKGROUND_LOCATION
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+                android.Manifest.permission.ACCESS_COARSE_LOCATION
+            } else {
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+                android.Manifest.permission.ACCESS_COARSE_LOCATION
+            }
+        )
+        .withListener(object : MultiplePermissionsListener {
+            override fun onPermissionsChecked(p0: MultiplePermissionsReport?) {
+                if (p0!!.areAllPermissionsGranted()) {
+                    //run function
+                    func(Unit)
+                } else if (p0.isAnyPermissionPermanentlyDenied) {
+                    Snackbar.make(
+                        view,
+                        "You need to provide Location/GPS permission for this app to run smoothly",
+                        Snackbar.LENGTH_LONG
+                    )
+                        .setAction("Open") {
+                            val intent =
+                                Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                                    data = Uri.fromParts(
+                                        "package",
+                                        applicationContext.packageName,
+                                        null
+                                    )
+                                }
+                            applicationContext.startActivity(intent)
+                        }
+                        .show()
+                }
+            }
+
+            override fun onPermissionRationaleShouldBeShown(
+                p0: MutableList<PermissionRequest>?,
+                p1: PermissionToken?
+            ) {
+                p1?.continuePermissionRequest()
+            }
+
+        }).check()
+}
+

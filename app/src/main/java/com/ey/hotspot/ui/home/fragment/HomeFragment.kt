@@ -1,22 +1,21 @@
 package com.ey.hotspot.ui.home.fragment
 
-import android.Manifest
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.location.Location
 import android.net.Uri
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentHomeBinding
 import com.ey.hotspot.ui.home.models.MyClusterItems
+import com.ey.hotspot.ui.search.recentlysearch.RecentlySearchFragment
+import com.ey.hotspot.utils.checkLocationPermission
 import com.ey.hotspot.utils.isLocationEnabled
+import com.ey.hotspot.utils.replaceFragment
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -72,8 +71,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
     override fun onBinding() {
 
+        //Toolbar
+        setUpSearchBar(mBinding.toolbarLayout, showUpButton = false, enableSearchButton = false){}
+
+        mBinding.toolbarLayout.etSearchBar.isFocusable = false
+
         // Prompt the user for permission.
-        getLocationPermission()
+
+        activity?.checkLocationPermission(view = mBinding.root, func = {
+            locationPermissionGranted = true
+            if (!requireActivity().isLocationEnabled()) {
+                checkGPSEnable()
+            }
+            updateLocationUI()
+        })
 
         Places.initialize(requireActivity(), getString(R.string.maps_api_key))
         placesClient = Places.createClient(requireActivity())
@@ -86,9 +97,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             .findFragmentById(R.id.map) as SupportMapFragment?
         myMAPF?.getMapAsync(this)
 
-        if (!requireActivity().isLocationEnabled()) {
-            checkGPSEnable()
-        }
+
     }
 
     override fun onMapReady(map: GoogleMap) {
@@ -105,6 +114,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         this.map?.setOnMapClickListener(OnMapClickListener {
             mBinding.customPop.llCustomPopMain.visibility = View.GONE
         })
+
+//        Searchbar
+        mBinding.toolbarLayout.etSearchBar.setOnClickListener {
+            replaceFragment(RecentlySearchFragment(), true)
+        }
     }
 
     private fun getDeviceLocation() {
@@ -229,44 +243,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
     }
 
 
-    private fun getLocationPermission() {
-
-        if (ContextCompat.checkSelfPermission(
-                requireActivity(),
-                Manifest.permission.ACCESS_FINE_LOCATION
-            )
-            == PackageManager.PERMISSION_GRANTED
-        ) {
-            locationPermissionGranted = true
-        } else {
-            ActivityCompat.requestPermissions(
-                requireActivity(), arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                HomeFragment.PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION
-            )
-        }
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>,
-        grantResults: IntArray
-    ) {
-        locationPermissionGranted = false
-        when (requestCode) {
-            HomeFragment.PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION -> {
-
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.isNotEmpty() &&
-                    grantResults[0] == PackageManager.PERMISSION_GRANTED
-                ) {
-                    locationPermissionGranted = true
-                }
-            }
-        }
-        updateLocationUI()
-    }
-
-
     private fun updateLocationUI() {
         if (map == null) {
             return
@@ -279,7 +255,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                 map?.isMyLocationEnabled = false
                 map?.uiSettings?.isMyLocationButtonEnabled = false
                 lastKnownLocation = null
-                getLocationPermission()
             }
         } catch (e: SecurityException) {
             Log.e("Exception: %s", e.message, e)
