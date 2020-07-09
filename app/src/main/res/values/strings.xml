@@ -149,7 +149,7 @@
     <string name="terms_condition"><u>terms &amp; conditions</u></string>
     <string name="get_started">" GET STARTED NOW"</string>
     <string name="or">OR</string>
-    <string name="otp_title">Please enter OTP sent to +91 99999999</string>
+    <string name="otp_title">Please enter OTP sent to \n+91 99999999</string>
     <string name="resend_otp_label">RESEND OTP</string>
     <string name="btn_verify">VERIFY</string>
     <string name="receive_otp">Didn\'t received OTP?</string>

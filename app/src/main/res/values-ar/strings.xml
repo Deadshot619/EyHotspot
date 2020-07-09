@@ -134,7 +134,7 @@
     <string name="terms_condition">البنود و الظروف</string>
     <string name="get_started">نبدأ الآن</string>
     <string name="or">أو</string>
-    <string name="otp_title">الرجاء إدخال كلمة المرور OTP المرسلة إلى +91 99999999</string>
+    <string name="otp_title">الرجاء إدخال كلمة المرور OTP المرسلة إلى n\ +91 99999999</string>
     <string name="resend_otp_label">إعادة إرسال OTP</string>
     <string name="btn_verify">تحقق</string>
     <string name="receive_otp">لم تتلق OTP؟</string>
