@@ -1,8 +1,10 @@
 package com.ey.hotspot.ui.speed_test.test_result
 
+import androidx.lifecycle.Observer
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentTestResultsBinding
+import com.ey.hotspot.utils.constants.setUpToolbar
 
 class TestResultsFragment : BaseFragment<FragmentTestResultsBinding, TestResultsViewModel>() {
 
@@ -16,10 +18,28 @@ class TestResultsFragment : BaseFragment<FragmentTestResultsBinding, TestResults
         mBinding.lifecycleOwner = viewLifecycleOwner
         mBinding.viewModel = mViewModel
 
+        activity?.setUpToolbar(
+            mBinding.toolbarLayout,
+            resources.getString(R.string.speed_test_label),
+            true,
+            showTextButton = true
+        )
 
-//        val imageIndicator = ImageIndicator(requireContext(), resources.getDrawable(R.drawable.speedmark, null))
-//        mBinding.imageSpeedometer.indicator = imageIndicator
-        mBinding.imageSpeedometer.speedTo(80f)
-//        mBinding.progress1C.speedTo(80f)
+        setUpListeners()
+        setUpObservers()
+    }
+
+    private fun setUpListeners(){
+//        Toolbar retest button
+        mBinding.toolbarLayout.tvTextButton.setOnClickListener {
+            mViewModel.onCheckSpeedClick()
+        }
+    }
+
+    private fun setUpObservers() {
+        //Download Speed
+        mViewModel.downloadSpeed.observe(viewLifecycleOwner, Observer {
+            mBinding.imageSpeedometer.speedTo(it.toFloat(), 500)
+        })
     }
 }

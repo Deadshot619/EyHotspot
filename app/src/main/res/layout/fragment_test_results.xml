@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.ey.hotspot.ui.speed_test.test_result.TestResultsViewModel" />
@@ -38,54 +39,85 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-<!--            <com.ey.hotspot.speedTestLib.SpeedView
-                android:id="@+id/progress1C"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="24dp"
-                app:layout_constraintBottom_toBottomOf="@id/iv_bg_view"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/toolbarLayout"
-                app:sv_centerCircleColor="#D1A00D"
-                app:sv_centerCircleRadius="14dp"
-                app:sv_indicatorWidth="16dp"
-                app:sv_indicatorColor="@color/colorAccent"
-                app:sv_pointerColor="@android:color/transparent"
-                app:sv_speedTextColor="@android:color/transparent"
-                app:sv_speedometerColor="@color/colorWhite"
-                app:sv_speedometerBackColor="@color/base_gradient"
-                app:sv_speedometerWidth="1dp"
-                app:sv_withTremble="false"
-                app:sv_startDegree="180"
-                app:sv_endDegree="360"
-                app:sv_indicator="KiteIndicator"/>-->
+            <!--            <com.ey.hotspot.speedTestLib.SpeedView
+                            android:id="@+id/progress1C"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginEnd="24dp"
+                            app:layout_constraintBottom_toBottomOf="@id/iv_bg_view"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/toolbarLayout"
+                            app:sv_centerCircleColor="#D1A00D"
+                            app:sv_centerCircleRadius="14dp"
+                            app:sv_indicatorWidth="16dp"
+                            app:sv_indicatorColor="@color/colorAccent"
+                            app:sv_pointerColor="@android:color/transparent"
+                            app:sv_speedTextColor="@android:color/transparent"
+                            app:sv_speedometerColor="@color/colorWhite"
+                            app:sv_speedometerBackColor="@color/base_gradient"
+                            app:sv_speedometerWidth="1dp"
+                            app:sv_withTremble="false"
+                            app:sv_startDegree="180"
+                            app:sv_endDegree="360"
+                            app:sv_indicator="KiteIndicator"/>-->
 
+            <!--            Speedometer-->
             <com.ey.hotspot.speedTestLib.ImageSpeedometer
-               android:id="@+id/image_speedometer"
+                android:id="@+id/image_speedometer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:scaleX="1.12"
-                app:layout_constraintVertical_bias="1"
+                app:chainUseRtl="true"
                 app:layout_constraintBottom_toBottomOf="@id/iv_bg_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/toolbarLayout"
-                app:sv_image="@drawable/speed_indicator_bitmap"
-                app:sv_speedTextColor="@android:color/transparent"
-                app:sv_unitTextColor="@android:color/transparent"
-                app:sv_indicator="KiteIndicator"
-                app:sv_withTremble="false"
-                app:sv_startDegree="180"
-                app:sv_endDegree="360"
+                app:layout_constraintVertical_bias="1"
                 app:sv_centerCircleColor="#D1A00D"
                 app:sv_centerCircleRadius="12dp"
-                app:sv_indicatorWidth="14dp"
+                app:sv_startDegree="170"
+                app:sv_endDegree="370"
+                app:sv_image="@drawable/speed_indicator_bitmap"
+                app:sv_indicator="KiteIndicator"
                 app:sv_indicatorColor="@color/colorAccent"
+                app:sv_indicatorWidth="14dp"
+                app:sv_speedTextColor="@android:color/transparent"
+                app:sv_unitTextColor="@android:color/transparent"
+                app:sv_withTremble="false"
+
                 />
+
+            <!--Download Speed value-->
+            <TextView
+                android:id="@+id/tv_download_speed_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/common_margin_between_fields_4"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text_size_24"
+                android:textStyle="bold"
+                tools:text="@string/mbps_label"
+                app:bindSpeedValue="@{viewModel.downloadSpeed}"
+                app:layout_constraintBottom_toTopOf="@id/tv_download_speed"
+                app:layout_constraintEnd_toEndOf="@id/tv_download_speed"
+                app:layout_constraintStart_toStartOf="@id/tv_download_speed" />
+
+            <!--Download Speed-->
+            <TextView
+                android:id="@+id/tv_download_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/download_speed_label"
+                android:textColor="@color/colorWhite"
+                app:layout_constraintBottom_toBottomOf="@id/image_speedometer"
+                app:layout_constraintEnd_toEndOf="@id/image_speedometer"
+                app:layout_constraintStart_toStartOf="@id/image_speedometer"
+                app:layout_constraintTop_toTopOf="@id/image_speedometer"
+                app:layout_constraintVertical_bias="0.9" />
 
             <!--Number Of users-->
             <TextView
@@ -149,11 +181,11 @@
             <!--UserName-->
             <TextView
                 android:id="@+id/chip_username"
+                style="@style/ChipStyleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Riyadh"
-                style="@style/ChipStyleTextView"
                 android:layout_marginTop="@dimen/common_margin_between_fields"
+                android:text="Riyadh"
                 app:layout_constraintEnd_toEndOf="@id/tv_wifi_ssid"
                 app:layout_constraintStart_toStartOf="@id/tv_wifi_ssid"
                 app:layout_constraintTop_toBottomOf="@id/tv_wifi_ssid" />
@@ -168,10 +200,10 @@
                 android:text="Hola Hola Hola Hola Hola Hola "
                 android:textColor="@color/colorLightGray"
                 android:textSize="@dimen/text_size_16"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/chip_username"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/chip_username" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

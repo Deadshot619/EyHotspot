@@ -13,7 +13,7 @@ import com.ey.hotspot.ui.favourite.fragment.FavouriteFragment
 import com.ey.hotspot.ui.home.fragment.HomeFragment
 import com.ey.hotspot.ui.profile.fragment.ProfileFragment
 import com.ey.hotspot.ui.review_and_complaint.ReviewAndComplainFragment
-import com.ey.hotspot.ui.speed_test.test_result.TestResultsFragment
+import com.ey.hotspot.ui.speed_test.speed_test_fragmet.SpeedTestFragment
 import com.ey.hotspot.utils.CHANNEL_ID
 import com.ey.hotspot.utils.channel_name
 import com.ey.hotspot.utils.createNotificationChannel
@@ -79,7 +79,7 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
 
                 //Speed Test
                 R.id.speed_check -> {
-                    replaceFragment(TestResultsFragment(), false)
+                    replaceFragment(SpeedTestFragment(), false)
                     return@setOnNavigationItemSelectedListener true
                 }
 

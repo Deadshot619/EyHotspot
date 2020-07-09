@@ -16,7 +16,7 @@ class KiteIndicator(context: Context) : Indicator<KiteIndicator>(context) {
     private val indicatorPath = Path()
     private var bottomY: Float = 0.toFloat()
     private val moveLeftToRight = 50
-
+    private val moveTopToBottom = 0
 
     init {
         width = dpTOpx(12f)
@@ -35,17 +35,17 @@ class KiteIndicator(context: Context) : Indicator<KiteIndicator>(context) {
 
     override fun updateIndicator() {
         indicatorPath.reset()
-        indicatorPath.moveTo(getCenterX(), getViewSize() / 5f + speedometer!!.padding.toFloat())
+        indicatorPath.moveTo(getCenterX() - moveTopToBottom, getViewSize() / 5f + speedometer!!.padding.toFloat())
         bottomY = getViewSize() * .5f + speedometer!!.padding
 
         //left point
-        indicatorPath.lineTo(getCenterX() - width, bottomY - moveLeftToRight - 10)
+        indicatorPath.lineTo(getCenterX() - width - moveTopToBottom, bottomY - moveLeftToRight )
 
 //      bottom point
-        indicatorPath.lineTo(getCenterX(), bottomY + width - moveLeftToRight)
+        indicatorPath.lineTo(getCenterX() - moveTopToBottom, bottomY + width - moveLeftToRight)
 
 //        Right point
-        indicatorPath.lineTo(getCenterX() + width, bottomY - moveLeftToRight - 10)
+        indicatorPath.lineTo(getCenterX() + width - moveTopToBottom, bottomY - moveLeftToRight)
 
         indicatorPaint.color = color
     }

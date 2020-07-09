@@ -22,10 +22,14 @@ class TestResultsViewModel(application: Application) : BaseViewModel(application
         get() = _uploadSpeed
 
 
+    init {
+        onCheckSpeedClick()
+    }
+
     fun onCheckSpeedClick() {
         coroutineScope.launch {
             startDownload()
-            startUpload()
+//            startUpload()
         }
     }
 

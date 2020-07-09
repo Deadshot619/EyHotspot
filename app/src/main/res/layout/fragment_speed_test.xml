@@ -33,7 +33,7 @@
 
 
 <!--            Bg Circle-->
-            <ImageButton
+            <!--<ImageButton
                 android:background="@android:color/transparent"
                 android:id="@+id/iv_go_bg"
                 android:layout_width="wrap_content"
@@ -44,6 +44,25 @@
                 app:layout_constraintStart_toStartOf="@id/iv_bg_view"
                 app:layout_constraintEnd_toEndOf="@id/iv_bg_view"
                 android:src="@drawable/go_bg"
+                />-->
+
+            <!--GO-->
+            <TextView
+                android:id="@+id/tv_go"
+                android:text="@string/go_label"
+                android:textSize="@dimen/text_size_42"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:background="@drawable/go_bg"
+                android:textColor="@color/colorAccent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintVertical_bias="1"
+                app:layout_constraintBottom_toBottomOf="@id/iv_bg_view"
+                app:layout_constraintTop_toBottomOf="@id/toolbarLayout"
+                app:layout_constraintStart_toStartOf="@id/iv_bg_view"
+                app:layout_constraintEnd_toEndOf="@id/iv_bg_view"
                 />
 
             <!--Toolbar-->
