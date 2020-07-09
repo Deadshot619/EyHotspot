@@ -5,9 +5,8 @@ import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseActivity
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.ActivitySplashBinding
-import com.ey.hotspot.ui.home.BottomNavHomeActivity
-import com.ey.stringlocalization.utils.Constants
 import com.ey.hotspot.ui.login.LoginActivity
+import com.ey.hotspot.utils.constants.Constants
 
 class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
 

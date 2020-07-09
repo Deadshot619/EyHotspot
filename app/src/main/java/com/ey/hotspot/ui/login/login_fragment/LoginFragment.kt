@@ -6,8 +6,8 @@ import androidx.lifecycle.Observer
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentLoginBinding
+import com.ey.hotspot.network.request.LoginRequest
 import com.ey.hotspot.ui.home.BottomNavHomeActivity
-import com.ey.hotspot.ui.login.login_fragment.model.LoginRequest
 import com.ey.hotspot.ui.registration.register_user.RegisterUserFragment
 import com.ey.hotspot.ui.registration.registration_option.RegistrationOptionFragment
 import com.ey.hotspot.utils.constants.OptionType
@@ -66,7 +66,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
                 val homeIntent = Intent(activity, BottomNavHomeActivity::class.java)
                 startActivity(homeIntent)
                 val loginRequest: LoginRequest =
-                    LoginRequest(mViewModel.emailId, mViewModel.password)
+                    LoginRequest(
+                        mViewModel.emailId,
+                        mViewModel.password
+                    )
                 mViewModel.callLogin(loginRequest)
 
             }

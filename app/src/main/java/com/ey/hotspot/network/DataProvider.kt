@@ -1,12 +1,9 @@
 package com.ey.hotspot.network
 
+import com.ey.hotspot.network.request.LoginRequest
 import com.ey.hotspot.network.request.RegisterRequest
+import com.ey.hotspot.network.response.LoginResponse
 import com.ey.hotspot.network.response.RegisterResponse
-import android.app.DownloadManager
-import com.ey.hotspot.ui.login.login_fragment.model.LoginRequest
-import com.ey.hotspot.ui.login.login_fragment.model.LoginResponse
-import com.ey.hotspot.ui.registration.register_user.model.Register
-import com.ey.hotspot.ui.registration.register_user.model.RegisterResponse
 import com.google.gson.JsonArray
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

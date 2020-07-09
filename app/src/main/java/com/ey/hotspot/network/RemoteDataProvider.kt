@@ -1,11 +1,9 @@
 package com.ey.hotspot.network
 
+import com.ey.hotspot.network.request.LoginRequest
 import com.ey.hotspot.network.request.RegisterRequest
+import com.ey.hotspot.network.response.LoginResponse
 import com.ey.hotspot.network.response.RegisterResponse
-import com.ey.hotspot.ui.login.login_fragment.model.LoginRequest
-import com.ey.hotspot.ui.login.login_fragment.model.LoginResponse
-import com.ey.hotspot.ui.registration.register_user.model.Register
-import com.ey.hotspot.ui.registration.register_user.model.RegisterResponse
 import com.google.gson.JsonArray
 
 interface RemoteDataProvider {
@@ -17,7 +15,7 @@ interface RemoteDataProvider {
 
 
     suspend fun  login(
-        request:LoginRequest,
+        request: LoginRequest,
         success:(LoginResponse) ->Unit,
         error: (Exception) -> Unit
     )

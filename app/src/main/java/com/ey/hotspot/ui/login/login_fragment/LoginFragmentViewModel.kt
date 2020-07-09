@@ -5,9 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ey.hotspot.app_core_lib.BaseViewModel
 import com.ey.hotspot.network.DataProvider
-import com.ey.hotspot.ui.login.login_fragment.model.LoginRequest
-import com.ey.hotspot.ui.login.login_fragment.model.LoginResponse
-import com.google.gson.JsonArray
+import com.ey.hotspot.network.request.LoginRequest
+import com.ey.hotspot.network.response.LoginResponse
 import kotlinx.coroutines.launch
 
 class LoginFragmentViewModel(application: Application) : BaseViewModel(application) {

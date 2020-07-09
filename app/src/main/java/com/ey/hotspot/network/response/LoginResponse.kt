@@ -1,4 +1,4 @@
-package com.ey.hotspot.ui.login.login_fragment.model
+package com.ey.hotspot.network.response
 
 import com.google.gson.annotations.SerializedName
 
