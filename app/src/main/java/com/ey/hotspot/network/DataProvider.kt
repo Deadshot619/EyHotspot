@@ -2,6 +2,11 @@ package com.ey.hotspot.network
 
 import com.ey.hotspot.network.request.RegisterRequest
 import com.ey.hotspot.network.response.RegisterResponse
+import android.app.DownloadManager
+import com.ey.hotspot.ui.login.login_fragment.model.LoginRequest
+import com.ey.hotspot.ui.login.login_fragment.model.LoginResponse
+import com.ey.hotspot.ui.registration.register_user.model.Register
+import com.ey.hotspot.ui.registration.register_user.model.RegisterResponse
 import com.google.gson.JsonArray
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -30,14 +35,14 @@ object DataProvider : RemoteDataProvider {
 
 
     override suspend fun login(
-
-        success: (JsonArray) -> Unit,
+        request: LoginRequest,
+        success: (LoginResponse) -> Unit,
         error: (java.lang.Exception) -> Unit
     ) {
 
         withContext(Dispatchers.Main) {
             try {
-                val result = mServices.login().await()
+                val result = mServices.login(request).await()
             } catch (e: Exception) {
                 error(e)
             }
@@ -45,7 +50,7 @@ object DataProvider : RemoteDataProvider {
     }
 
 
-    override suspend fun getNearbyWifiList(
+    override suspend fun getUserList(
         success: (JsonArray) -> Unit,
         error: (Exception) -> Unit
     ) {
@@ -53,7 +58,7 @@ object DataProvider : RemoteDataProvider {
         withContext(Dispatchers.Main) {
 
             try {
-                val result = mServices.getNearByWifiList().await()
+                val result = mServices.getUserList().await()
             } catch (e: Exception) {
                 error(e)
             }

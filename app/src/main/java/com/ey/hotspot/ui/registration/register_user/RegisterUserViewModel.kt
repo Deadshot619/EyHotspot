@@ -40,9 +40,12 @@ class RegisterUserViewModel(application: Application) : BaseViewModel(applicatio
                     Log.d(
                         "ErrorResponse", it.message
                     )
+                    _errorText.value = it.message
                 }
             )
         }
+
+
     }
 
 }

@@ -11,6 +11,7 @@ import com.ey.hotspot.network.request.RegisterRequest
 import com.ey.hotspot.ui.home.BottomNavHomeActivity
 import com.ey.hotspot.ui.login.permission.PermissionFragment
 import com.ey.hotspot.utils.replaceFragment
+import com.ey.hotspot.utils.showMessage
 import com.ey.hotspot.utils.validations.isEmailValid
 import com.ey.hotspot.utils.validations.isPasswordValid
 import com.ey.hotspot.utils.validations.isValidMobile
@@ -53,6 +54,25 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
         }
         setUpUIData()
         setUpListeners()
+        setUpObservers()
+    }
+
+    private fun setUpObservers() {
+
+        mViewModel.errorText.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+
+            showMessage(it, true)
+
+
+        })
+
+        mViewModel.registrationResponse.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+
+            val homeIntent = Intent(activity, BottomNavHomeActivity::class.java)
+            startActivity(homeIntent)
+
+
+        })
     }
 
     private fun setUpUIData() {
@@ -104,8 +124,6 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
             //Sign In button
             btnGetStarted.setOnClickListener {
                 if (validate()) {
-                    val homeIntent = Intent(activity, BottomNavHomeActivity::class.java)
-                    startActivity(homeIntent)
 
 
                     val register: RegisterRequest =

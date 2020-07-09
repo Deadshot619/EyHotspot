@@ -23,7 +23,7 @@ class HomeFragmentViewModel(application: Application): BaseViewModel(application
 /*        val loginRequestModel = LoginRequestModel(email, password)*/
 
         coroutineScope.launch {
-            DataProvider.getNearbyWifiList(
+            DataProvider.getUserList(
                 /*request = loginRequestModel,*/
                 success = {
                     _nearByWifiList.value = it
