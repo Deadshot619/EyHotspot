@@ -29,19 +29,29 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Starbucks WiFi" />
 
+        <TextView
+            android:id="@+id/tv_wifi_provider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="AmazeNet"
+            style="@style/ChipStyleTextView"
+            app:layout_constraintTop_toBottomOf="@id/tv_wifi_name"
+            app:layout_constraintStart_toStartOf="@id/tv_wifi_name"
+            android:layout_marginTop="@dimen/common_margin_between_fields_4"/>
+
         <!--Username-->
         <TextView
             android:id="@+id/tv_username"
             style="@style/TextAppearance.MaterialComponents.Subtitle2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/common_margin_between_fields"
+            android:layout_marginStart="@dimen/common_margin"
             android:text="@{data.username}"
-            app:layout_constraintEnd_toEndOf="@id/tv_wifi_name"
-            app:layout_constraintStart_toStartOf="@id/tv_wifi_name"
-            app:layout_constraintTop_toBottomOf="@id/tv_wifi_name"
+            android:textAllCaps="true"
+            app:layout_constraintStart_toEndOf="@id/tv_wifi_provider"
+            app:layout_constraintTop_toTopOf="@id/tv_wifi_provider"
             tools:targetApi="              "
-            tools:text="Osama Bin Laden" />
+            tools:text="Riyadh" />
 
         <!--Review-->
         <TextView

@@ -103,7 +103,7 @@
     <string name="date_label">تاريخ</string>
     <string name="name_label">اسم</string>
     <string name="date_wifi_log_label">تاريخ: %s</string>
-    <string name="connecting_logs_label">ربط السجلات</string>
+    <string name="connection_logs_label">سجلات الاتصال</string>
     <string name="speed_test_logs_label">سجلات اختبار السرعة</string>
     <string name="start_time_label">وقت البدء</string>
     <string name="end_time_label">وقت النهاية</string>

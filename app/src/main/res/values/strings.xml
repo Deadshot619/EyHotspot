@@ -106,7 +106,7 @@
     <string name="date_label">Date</string>
     <string name="name_label">Name</string>
     <string name="date_wifi_log_label">Date: %s</string>
-    <string name="connecting_logs_label">Connecting Logs</string>
+    <string name="connection_logs_label">Connection Logs</string>
     <string name="speed_test_logs_label">Speed test Logs</string>
     <string name="start_time_label">Start time</string>
     <string name="end_time_label">End time</string>

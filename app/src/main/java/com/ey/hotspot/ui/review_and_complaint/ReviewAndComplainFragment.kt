@@ -40,9 +40,8 @@ class ReviewAndComplainFragment : BaseFragment<FragmentReviewAndComplainBinding,
     private fun setUpTabLayoutMediator(tabLayout: TabLayout, viewPager: ViewPager2){
         TabLayoutMediator(tabLayout, viewPager){ tab, position ->
             when (position) {
-                0 -> tab.text = getString(R.string.all_label)
-                1 -> tab.text = getString(R.string.reviews_label)
-                2 -> tab.text = getString(R.string.complaint_label)
+                0 -> tab.text = getString(R.string.reviews_label)
+                1 -> tab.text = getString(R.string.complaint_label)
             }
         }.attach()
     }
