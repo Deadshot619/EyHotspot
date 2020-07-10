@@ -89,6 +89,9 @@
     <string name="complaint_label">Complaints</string>
     <string name="all_label">All</string>
 
+    <!--Favourite Wifi-->
+    <string name="favoutite_wifi_label">Favourite Wifi</string>
+
     <!--Speed Test-->
     <string name="speed_test_label">Speed Test</string>
     <string name="users_connected_label">Users Connected</string>

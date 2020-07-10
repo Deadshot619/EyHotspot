@@ -9,7 +9,7 @@ import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseActivity
 import com.ey.hotspot.databinding.ActivityBottomNavHomeBinding
 import com.ey.hotspot.service.WifiService
-import com.ey.hotspot.ui.favourite.fragment.FavouriteFragment
+import com.ey.hotspot.ui.favourite.FavouriteFragment
 import com.ey.hotspot.ui.home.fragment.HomeFragment
 import com.ey.hotspot.ui.profile.fragment.ProfileFragment
 import com.ey.hotspot.ui.review_and_complaint.ReviewAndComplainFragment

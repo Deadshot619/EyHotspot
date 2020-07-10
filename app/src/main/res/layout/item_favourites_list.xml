@@ -4,7 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="data"
+            type="com.ey.hotspot.ui.favourite.model.FavouriteItem" />
 
+        <variable
+            name="clickListener"
+            type="com.ey.hotspot.ui.favourite.FavouriteListAdapter.OnClickListener" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -145,6 +151,7 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_rate_now"
                 android:text="@string/rate_now_label"
+                android:onClick="@{() -> clickListener.onClickRateNow()}"
                 style="@style/OutlinedButtonNormal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

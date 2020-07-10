@@ -86,6 +86,9 @@
     <string name="complaint_label">شكاوي</string>
     <string name="all_label">الكل</string>
 
+    <!--Favourite Wifi-->
+    <string name="favoutite_wifi_label">واي فاي المفضلة</string>
+
     <!--Speed Test-->
     <string name="speed_test_label">اختبار السرعة</string>
     <string name="users_connected_label">المستخدمون متصلون</string>
