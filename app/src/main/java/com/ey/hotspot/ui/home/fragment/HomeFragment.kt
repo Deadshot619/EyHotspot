@@ -1,17 +1,13 @@
 package com.ey.hotspot.ui.home.fragment
 
-import android.Manifest
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.location.Location
 import android.net.Uri
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentHomeBinding
@@ -57,9 +53,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
     private lateinit var mClusterManager: ClusterManager<MyClusterItems>
     private var clickedVenueMarker: MyClusterItems? = null
 
-
     private val points = ArrayList<LatLng>()
-
 
     override fun getLayoutId(): Int {
 
@@ -93,6 +87,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                 checkGPSEnable()
             }
             updateLocationUI()
+//            getDeviceLocation()
         })
 
         Places.initialize(requireActivity(), getString(R.string.maps_api_key))
@@ -111,10 +106,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
     }
 
     private fun getNearByWifiList() {
-
-
-
-
     }
 
     override fun onMapReady(map: GoogleMap) {
@@ -156,11 +147,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                                     ), HomeFragment.DEFAULT_ZOOM.toFloat()
                                 )
                             )
-
                             setupClusters()
                             showNearbyWifis(points);
-
-
                         }
                     } else {
                         map?.moveCamera(
@@ -168,7 +156,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                                 .newLatLngZoom(defaultLocation, HomeFragment.DEFAULT_ZOOM.toFloat())
                         )
                         map?.uiSettings?.isMyLocationButtonEnabled = false
-
                     }
                 }
             }
