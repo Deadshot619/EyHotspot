@@ -119,6 +119,8 @@
     <!--Raise Complaint-->
     <string name="explain_problem_label">اشرح مشكلتك بالتفصيل هنا</string>
     <string name="raise_complaint_label">رفع شكوى</string>
+<!--    <string name="comment_and_evaluate_label">التعليق والتقييم</string>-->
+
 
 
     <string name="btTextNavigateNow">انتقل الآن</string>

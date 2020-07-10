@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FavouriteFragmentBinding
-import com.ey.hotspot.ui.speed_test.rate_wifi.RateWifiFragment
+import com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment
 import com.ey.hotspot.utils.replaceFragment
 
 class FavouriteFragment : BaseFragment<FavouriteFragmentBinding, FavouriteViewModel>() {
@@ -35,7 +35,7 @@ class FavouriteFragment : BaseFragment<FavouriteFragmentBinding, FavouriteViewMo
         mAdapter = FavouriteListAdapter(object : FavouriteListAdapter.OnClickListener {
             //Rate Now button
             override fun onClickRateNow() {
-                replaceFragment(RateWifiFragment(), true)
+                replaceFragment(RaiseComplaintFragment(), true)
             }
         })
 

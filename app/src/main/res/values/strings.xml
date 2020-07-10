@@ -122,6 +122,7 @@
     <!--Raise Complaint-->
     <string name="explain_problem_label">Explain your problem in detail here</string>
     <string name="raise_complaint_label">Raise Complaint</string>
+<!--    <string name="comment_and_evaluate_label">Comment and Evaluate</string>-->
 
 
 
