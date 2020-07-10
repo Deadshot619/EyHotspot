@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/first_name_label"
             android:singleLine="true"
-            android:text="@{viewModel.profileResponse.success.firstname}"
+            android:text="@{viewModel.profileResponse.data.firstname}"
             app:layout_constraintBottom_toBottomOf="@id/iv_name"
             app:layout_constraintEnd_toStartOf="@+id/edt_last_name"
             app:layout_constraintHorizontal_bias="0.5"
@@ -69,7 +69,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="@string/last_name_label"
-            android:text="@{viewModel.profileResponse.success.lastname}"
+            android:text="@{viewModel.profileResponse.data.lastname}"
             app:layout_constraintBottom_toBottomOf="@id/iv_name"
             app:layout_constraintEnd_toEndOf="@id/iv_name"
             app:layout_constraintHorizontal_bias="0.5"
@@ -109,7 +109,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/mobile_number_label"
-                android:text="@{viewModel.profileResponse.success.mobile_no}"
+                android:text="@{viewModel.profileResponse.data.mobile_no}"
                 android:background="@drawable/mobile_number_bitmap"
                 />
         </com.google.android.material.textfield.TextInputLayout>
@@ -143,7 +143,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/email_id_bitmap"
-                android:text="@{viewModel.profileResponse.success.email}"
+                android:text="@{viewModel.profileResponse.data.email}"
                 android:hint="@string/email_id_label" />
         </com.google.android.material.textfield.TextInputLayout>
 

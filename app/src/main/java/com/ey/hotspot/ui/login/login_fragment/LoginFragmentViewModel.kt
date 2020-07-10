@@ -45,6 +45,7 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
                     _loginResponse.value = it
 
                     Log.d("LoginSuccess", it.data.accessToken)
+                    _errorText.value = it.message
 
                     updateSharedPreference(it.data)
                     Log.d(

@@ -66,8 +66,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
         mBinding.btnSignIn.setOnClickListener {
 
             if (validate()) {
-                val homeIntent = Intent(activity, BottomNavHomeActivity::class.java)
-                startActivity(homeIntent)
+
                 val loginRequest: LoginRequest =
                     LoginRequest(
                         mViewModel.emailId,

@@ -11,7 +11,6 @@ import com.ey.hotspot.ui.login.logout.RefreshToken
 import com.ey.hotspot.ui.profile.fragment.model.ProfileResponse
 import com.ey.hotspot.ui.profile.updateprofile.model.UpdateProfileRequest
 import com.ey.hotspot.ui.profile.updateprofile.model.UpdateProfileResponse
-import com.ey.hotspot.ui.registration.register_user.model.RegistrationResponse
 import com.google.gson.JsonArray
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -73,7 +72,7 @@ object DataProvider : RemoteDataProvider {
     }
 
     override suspend fun getProfile(
-        success: (ProfileResponse) -> Unit,
+        success: (BaseResponse<ProfileResponse>) -> Unit,
         error: (Exception) -> Unit
     ) {
         withContext(Dispatchers.Main) {
@@ -122,12 +121,12 @@ object DataProvider : RemoteDataProvider {
 
     override suspend fun updateProfile(
         request: UpdateProfileRequest,
-        success: (UpdateProfileResponse) -> Unit,
+        success: (BaseResponse<Any>) -> Unit,
         error: (Exception) -> Unit
     ) {
 
         try {
-            val result = mServices.updateProfile("", request).await()
+            val result = mServices.updateProfile("Bearer  "+HotSpotApp.prefs!!.getAccessToken()!!, request).await()
             success(result)
         } catch (e: Exception) {
             error(e)

@@ -10,7 +10,6 @@ import com.ey.hotspot.ui.login.logout.RefreshToken
 import com.ey.hotspot.ui.profile.fragment.model.ProfileResponse
 import com.ey.hotspot.ui.profile.updateprofile.model.UpdateProfileRequest
 import com.ey.hotspot.ui.profile.updateprofile.model.UpdateProfileResponse
-import com.ey.hotspot.ui.registration.register_user.model.RegistrationResponse
 import com.ey.hotspot.utils.constants.Constants
 import com.google.gson.JsonArray
 import kotlinx.coroutines.Deferred
@@ -36,7 +35,7 @@ interface APIInterface {
     @GET(Constants.API_GET_PROFILE)
     fun getProfile(
         @Header("Authorization") token: String = "Bearer  " + HotSpotApp.prefs!!.getAccessToken()
-    ): Deferred<ProfileResponse>
+    ): Deferred<BaseResponse<ProfileResponse>>
 
 
     @POST(Constants.API_LOGOUT)
@@ -55,5 +54,5 @@ interface APIInterface {
     fun updateProfile(
         @Header("Authorization") token: String = "Bearer  " + HotSpotApp.prefs!!.getAccessToken(),
         @Body updateProfileRequest: UpdateProfileRequest
-    ): Deferred<UpdateProfileResponse>
+    ): Deferred<BaseResponse<Any>>
 }

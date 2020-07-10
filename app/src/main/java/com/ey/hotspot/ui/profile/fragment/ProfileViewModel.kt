@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ey.hotspot.app_core_lib.BaseViewModel
 import com.ey.hotspot.network.DataProvider
+import com.ey.hotspot.network.response.BaseResponse
 import com.ey.hotspot.ui.profile.fragment.model.ProfileResponse
-import com.ey.hotspot.ui.profile.fragment.model.Success
 import com.ey.hotspot.ui.profile.updateprofile.model.UpdateProfileRequest
 import com.ey.hotspot.ui.profile.updateprofile.model.UpdateProfileResponse
 import kotlinx.coroutines.launch
@@ -20,13 +20,13 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
     var emailId = ""
 
 
-    protected val _profileResponse = MutableLiveData<ProfileResponse>()
-    val profileResponse: LiveData<ProfileResponse>
+    protected val _profileResponse = MutableLiveData<BaseResponse<ProfileResponse>>()
+    val profileResponse: LiveData<BaseResponse<ProfileResponse>>
         get() = _profileResponse
 
-    private val _updateProfileResponse = MutableLiveData<UpdateProfileResponse>()
+    private val _updateProfileResponse = MutableLiveData<BaseResponse<Any>>()
 
-    val updateProfileResponse: LiveData<UpdateProfileResponse>
+    val updateProfileResponse: LiveData<BaseResponse<Any>>
         get() = _updateProfileResponse
 
 
@@ -36,7 +36,7 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
             DataProvider.getProfile(success = {
 
                 _profileResponse.value = it
-                setUPdata(it)
+                setUPdata(it.data)
             }, error = {
                 _errorText.value = it.message
             })
@@ -54,7 +54,6 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
                 success = {
 
                     _updateProfileResponse.value = it
-                    setUpUpdateData()
                 }, error = {
                     _errorText.value = it.message
                 }
@@ -62,17 +61,15 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
         }
     }
 
-    private fun setUpUpdateData() {
 
-    }
 
 
     private fun setUPdata(profileResponse: ProfileResponse) {
 
-        firstName = profileResponse.success.firstname
-        lastName = profileResponse.success.lastname
-        emailId = profileResponse.success.email
-        mobileNo= profileResponse.success.mobile_no
+        firstName = profileResponse.firstname
+        lastName = profileResponse.lastname
+        emailId = profileResponse.email
+        mobileNo= profileResponse.mobile_no
 
     }
 }

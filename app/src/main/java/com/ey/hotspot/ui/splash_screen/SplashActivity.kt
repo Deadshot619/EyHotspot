@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
+import android.util.Log
 import android.view.View
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseActivity
@@ -37,6 +38,9 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
 
         if (HotSpotApp.prefs!!.getAppLoggedInStatus() == true) {
 
+            Log.d(
+                "GetAccessToken", HotSpotApp.prefs!!.getAccessToken()
+            )
             mBinding.mbLanguageSelection.visibility = View.GONE
 
             startActivity(Intent(this, BottomNavHomeActivity::class.java))

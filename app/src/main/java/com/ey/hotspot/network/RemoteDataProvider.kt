@@ -9,7 +9,6 @@ import com.ey.hotspot.ui.login.logout.RefreshToken
 import com.ey.hotspot.ui.profile.fragment.model.ProfileResponse
 import com.ey.hotspot.ui.profile.updateprofile.model.UpdateProfileRequest
 import com.ey.hotspot.ui.profile.updateprofile.model.UpdateProfileResponse
-import com.ey.hotspot.ui.registration.register_user.model.RegistrationResponse
 import com.google.gson.JsonArray
 
 interface RemoteDataProvider {
@@ -33,7 +32,7 @@ interface RemoteDataProvider {
     )
 
     suspend fun getProfile(
-        success: (ProfileResponse) -> Unit,
+        success: (BaseResponse<ProfileResponse>) -> Unit,
         error: (Exception) -> Unit
     )
 
@@ -49,7 +48,7 @@ interface RemoteDataProvider {
 
     suspend fun  updateProfile(
         request:UpdateProfileRequest,
-        success:(UpdateProfileResponse) ->Unit,
+        success:(BaseResponse<Any>) ->Unit,
         error: (Exception) -> Unit
     )
 

@@ -69,13 +69,19 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
     private fun setUpObserver() {
 
         mViewModel.profileResponse.observe(viewLifecycleOwner, Observer {
-            showMessage(it.success.firstname, true)
+            //showMessage(it.success.firstname, true)
 
         })
 
 
         mViewModel.updateProfileResponse.observe(viewLifecycleOwner, Observer {
-            showMessage(it.toString(), true)
+
+            if (it.status == true) {
+
+                showMessage(it.message, true)
+            } else {
+                showMessage(it.message, true)
+            }
         })
         mViewModel.errorText.observe(viewLifecycleOwner, Observer {
 
