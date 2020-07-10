@@ -8,7 +8,7 @@ import com.ey.hotspot.app_core_lib.BaseViewModel
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.network.DataProvider
 import com.ey.hotspot.network.request.RegisterRequest
-import com.ey.hotspot.network.response.RegisterResponse
+import com.ey.hotspot.ui.registration.register_user.model.RegistrationResponse
 import kotlinx.coroutines.launch
 
 class RegisterUserViewModel(application: Application) : BaseViewModel(application) {
@@ -22,9 +22,9 @@ class RegisterUserViewModel(application: Application) : BaseViewModel(applicatio
     var coutrycode = ""
 
 
-    private val _registrationResponse = MutableLiveData<RegisterResponse>()
+    private val _registrationResponse = MutableLiveData<RegistrationResponse>()
 
-    val registrationResponse: LiveData<RegisterResponse>
+    val registrationResponse: LiveData<RegistrationResponse>
         get() = _registrationResponse
 
 
@@ -35,8 +35,11 @@ class RegisterUserViewModel(application: Application) : BaseViewModel(applicatio
             DataProvider.registerUser(
                 request = register,
                 success = {
-                    _registrationResponse.value = it
-                    updateSharedPreference(it)
+
+
+                    _errorText.value = it.message
+
+
                 }, error = {
                     Log.d(
                         "ErrorResponse", it.message
@@ -49,12 +52,7 @@ class RegisterUserViewModel(application: Application) : BaseViewModel(applicatio
 
     }
 
-    private fun updateSharedPreference(registerResponse: RegisterResponse) {
 
-        HotSpotApp.prefs!!.saveAccessToken(registerResponse.accessToken)
-        HotSpotApp.prefs!!.setAppLoggedInStatus(true)
-
-    }
 
 
 }

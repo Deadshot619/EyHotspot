@@ -112,9 +112,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
     private fun getNearByWifiList() {
 
-
-
-
     }
 
     override fun onMapReady(map: GoogleMap) {

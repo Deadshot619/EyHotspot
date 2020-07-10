@@ -1,18 +1,17 @@
 package com.ey.hotspot.network
 
 import android.util.Log
-import com.ey.hotspot.app_core_lib.CoreApp
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.network.request.LoginRequest
 import com.ey.hotspot.network.request.RegisterRequest
+import com.ey.hotspot.network.response.BaseResponse
 import com.ey.hotspot.network.response.LoginResponse
-import com.ey.hotspot.network.response.RegisterResponse
 import com.ey.hotspot.ui.login.logout.LogoutResponse
 import com.ey.hotspot.ui.login.logout.RefreshToken
 import com.ey.hotspot.ui.profile.fragment.model.ProfileResponse
-import com.ey.hotspot.ui.profile.fragment.model.Success
 import com.ey.hotspot.ui.profile.updateprofile.model.UpdateProfileRequest
 import com.ey.hotspot.ui.profile.updateprofile.model.UpdateProfileResponse
+import com.ey.hotspot.ui.registration.register_user.model.RegistrationResponse
 import com.google.gson.JsonArray
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -26,7 +25,7 @@ object DataProvider : RemoteDataProvider {
 
     override suspend fun registerUser(
         request: RegisterRequest,      //If there's a request
-        success: (RegisterResponse) -> Unit,
+        success: (BaseResponse<Any>) -> Unit,
         error: (java.lang.Exception) -> Unit
     ) {
         withContext(Dispatchers.Main) {
@@ -42,8 +41,8 @@ object DataProvider : RemoteDataProvider {
 
     override suspend fun login(
         request: LoginRequest,
-        success: (LoginResponse) -> Unit,
-        error: (java.lang.Exception) -> Unit
+        success: (BaseResponse<LoginResponse>) -> Unit,
+        error: (Exception) -> Unit
     ) {
 
         withContext(Dispatchers.Main) {

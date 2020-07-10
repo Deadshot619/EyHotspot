@@ -8,11 +8,10 @@ import com.ey.hotspot.app_core_lib.BaseViewModel
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.network.DataProvider
 import com.ey.hotspot.network.request.LoginRequest
+import com.ey.hotspot.network.response.BaseResponse
 import com.ey.hotspot.network.response.LoginResponse
-import com.ey.hotspot.network.response.RegisterResponse
 import com.ey.hotspot.ui.login.logout.LogoutResponse
 import com.ey.hotspot.ui.login.logout.RefreshToken
-import com.ey.hotspot.utils.constants.Constants
 import kotlinx.coroutines.launch
 
 class LoginFragmentViewModel(application: Application) : BaseViewModel(application) {
@@ -21,8 +20,8 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
     var emailId = ""
     var password = ""
 
-    private val _loginResponse = MutableLiveData<LoginResponse>()
-    val loginResponse: LiveData<LoginResponse>
+    private val _loginResponse = MutableLiveData<BaseResponse<LoginResponse>>()
+    val loginResponse: LiveData<BaseResponse<LoginResponse>>
         get() = _loginResponse
 
 
@@ -45,9 +44,9 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
                 success = {
                     _loginResponse.value = it
 
-                    Log.d("LoginSuccess", it.accessToken)
+                    Log.d("LoginSuccess", it.data.accessToken)
 
-                    updateSharedPreference(it)
+                    updateSharedPreference(it.data)
                     Log.d(
                         "GetAccessToken", HotSpotApp.prefs!!.getAccessToken()
                     )

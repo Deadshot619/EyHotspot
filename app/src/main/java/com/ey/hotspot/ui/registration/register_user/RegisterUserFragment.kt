@@ -9,6 +9,7 @@ import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentRegisterUserBinding
 import com.ey.hotspot.network.request.RegisterRequest
 import com.ey.hotspot.ui.home.BottomNavHomeActivity
+import com.ey.hotspot.ui.login.LoginActivity
 import com.ey.hotspot.ui.login.permission.PermissionFragment
 import com.ey.hotspot.utils.replaceFragment
 import com.ey.hotspot.utils.showMessage
@@ -61,15 +62,26 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
 
         mViewModel.errorText.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
 
+
             showMessage(it, true)
 
-
+            val homeIntent = Intent(activity, LoginActivity::class.java)
+            startActivity(homeIntent)
         })
 
         mViewModel.registrationResponse.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
 
-            val homeIntent = Intent(activity, BottomNavHomeActivity::class.java)
-            startActivity(homeIntent)
+           /* showMessage(it.message, true)
+            if (it.status == true) {
+                showMessage(it.message, true)
+                val homeIntent = Intent(activity, LoginActivity::class.java)
+                startActivity(homeIntent)
+
+            } else {
+                showMessage(it.message, true)
+            }*/
+
+
 
 
         })
@@ -130,7 +142,7 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
                         RegisterRequest(
                             mViewModel.firstName,
                             mViewModel.lastName,
-                            "+91",
+                            "91",
                             mViewModel.mobileNumber,
                             mViewModel.emailId,
                             mViewModel.password,
