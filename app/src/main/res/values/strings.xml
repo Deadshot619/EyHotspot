@@ -43,7 +43,8 @@
     <!--My Profile-->
     <string name="my_profile_label">My Profile</string>
     <string name="update_profile_label">Update Profile</string>
-
+    <string name="retrieving_profile_details_label">Retrieving Profile Info…</string>
+    <string name="updating_profile_label">Updating Profile Info…</string>
 
     <!--    Registration Option    -->
     <string name="verification_method_label">Select verification method</string>

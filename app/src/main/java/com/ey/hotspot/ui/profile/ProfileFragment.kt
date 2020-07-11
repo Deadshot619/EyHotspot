@@ -7,6 +7,7 @@ import com.ey.hotspot.databinding.ProfileFragmentBinding
 import com.ey.hotspot.ui.profile.fragment.model.UpdateProfileRequest
 import com.ey.hotspot.ui.settings.fragments.SettingsFragment
 import com.ey.hotspot.utils.replaceFragment
+import com.ey.hotspot.utils.showMessage
 import com.ey.hotspot.utils.validations.isEmailValid
 import com.ey.hotspot.utils.validations.isValidMobile
 
@@ -61,6 +62,8 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
                 )
             }
 
+
+
         }
 
 
@@ -69,8 +72,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
     private fun setUpObserver() {
 
         mViewModel.profileResponse.observe(viewLifecycleOwner, Observer {
-            //showMessage(it.success.firstname, true)
-
+            showMessage(it.message, true)
         })
     }
 

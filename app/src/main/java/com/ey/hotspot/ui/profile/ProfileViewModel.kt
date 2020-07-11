@@ -3,6 +3,7 @@ package com.ey.hotspot.ui.profile
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseViewModel
 import com.ey.hotspot.network.DataProvider
 import com.ey.hotspot.network.response.BaseResponse
@@ -27,6 +28,9 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
 
     //Method to retrieve Profile Details
     private fun getProfileDetails() {
+        //Show dialog
+        setDialogVisibility(true,  appInstance.getString(R.string.retrieving_profile_details_label))
+
         coroutineScope.launch {
             DataProvider.getProfile(success = {
 
@@ -39,6 +43,9 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
                         mobileNo = it.data.mobile_no,
                         emailId = it.data.email
                     )
+
+                //Hide dialog
+                setDialogVisibility(false)
             }, error = {
                 checkError(it)
             })
@@ -48,6 +55,7 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
 
     //Method to update User Profile Details
     fun updateProfile(updateProfileRequest: UpdateProfileRequest) {
+        setDialogVisibility(true, appInstance.getString(R.string.updating_profile_label))
 
         coroutineScope.launch {
 
@@ -55,9 +63,12 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
                 request = updateProfileRequest,
                 success = {
 
-//                    _profileResponse.value = it.data
+                    _errorText.value = it.message
+
+
+                    setDialogVisibility(false)
                 }, error = {
-                                        checkError(it)
+                    checkError(it)
                 }
             )
         }

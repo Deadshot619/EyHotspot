@@ -10,6 +10,8 @@ import kotlinx.coroutines.Job
 
 
 open class BaseViewModel(application: Application) : AndroidViewModel(application) {
+    protected val appInstance: Application by lazy { application }
+
     private val viewModelJob = Job()
     protected val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
