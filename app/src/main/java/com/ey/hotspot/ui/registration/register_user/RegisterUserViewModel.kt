@@ -5,7 +5,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ey.hotspot.app_core_lib.BaseViewModel
-import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.network.DataProvider
 import com.ey.hotspot.network.request.RegisterRequest
 import com.ey.hotspot.ui.registration.register_user.model.RegistrationResponse
@@ -44,7 +43,7 @@ class RegisterUserViewModel(application: Application) : BaseViewModel(applicatio
                     Log.d(
                         "ErrorResponse", it.message
                     )
-                    _errorText.value = it.message
+                    checkError(it)
                 }
             )
         }

@@ -25,6 +25,7 @@
     <string name="submit_label">Submit</string>
     <string name="next_label">Next</string>
     <string name="mbps_label">%s Mbps</string>
+    <string name="loading_label">Loading…</string>
 
     <!--Toolbar-->
     <string name="search_locations_label">Search Locations</string>
@@ -42,7 +43,8 @@
     <!--My Profile-->
     <string name="my_profile_label">My Profile</string>
     <string name="update_profile_label">Update Profile</string>
-
+    <string name="retrieving_profile_details_label">Retrieving Profile Info…</string>
+    <string name="updating_profile_label">Updating Profile Info…</string>
 
     <!--    Registration Option    -->
     <string name="verification_method_label">Select verification method</string>
@@ -192,6 +194,7 @@
     <string name="yes_label">YES</string>
     <string name="permission_label">Permission</string>
     <string name="invalid_firstName">Invalid First Name</string>
+    <string name="invalid_last_name_label">Invalid Last Name</string>
     <string name="invalid_email_label">Invalid Email Id</string>
     <string name="invalid_mobile">Invalid Mobile Number</string>
     <string name="invalid_password">Invalid Password</string>

@@ -10,14 +10,52 @@ import kotlinx.coroutines.Job
 
 
 open class BaseViewModel(application: Application) : AndroidViewModel(application) {
-    protected val viewModelJob = Job()
+    protected val appInstance: Application by lazy { application }
+
+    private val viewModelJob = Job()
     protected val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-
+    /*  Error Text  */
     protected val _errorText = MutableLiveData<String>()
-
     val errorText: LiveData<String>
         get() = _errorText
+
+    //    Dialog Message
+    private val _dialogMessage = MutableLiveData<String>()
+    val dialogMessage: LiveData<String>
+        get() = _dialogMessage
+
+    //    Dialog Visibility
+    private val _dialogVisibility = MutableLiveData<Boolean>()
+    val dialogVisibility: LiveData<Boolean>
+        get() = _dialogVisibility
+
+    /**
+     * Method to check for error/exception
+     *
+     * @param e Takes an Exception as argument
+     */
+    protected fun checkError(e: Exception) {
+        _dialogVisibility.value = false
+        e.message?.let {
+            if (it.contains("500") || it.contains("Socket"))
+                _errorText.value = "No Internet Connection $it"
+            else
+                _errorText.value = it
+        }
+    }
+
+    /**
+     * Method to show/hide dialog & set its message
+     *
+     * @param show Determine whether to show/hide the dialog
+     * @param message The message to be shown in dialog
+     */
+    protected fun setDialogVisibility(show: Boolean, message: String? = null){
+        _dialogVisibility.value = show
+        _dialogMessage.value = message
+    }
+
 
 
     override fun onCleared() {

@@ -28,6 +28,8 @@
     <string name="submit_label">إرسال</string>
     <string name="next_label">التالى</string>
     <string name="mbps_label">%s ميغابت في الثانية</string>
+    <string name="loading_label">جار التحميل…</string>
+
 
     <!--Toolbar-->
     <string name="search_locations_label">مواقع البحث</string>
@@ -57,7 +59,8 @@
     <!--My Profile-->
     <string name="my_profile_label">ملفي</string>
     <string name="update_profile_label">تحديث الملف</string>
-
+    <string name="retrieving_profile_details_label">جارٍ استرداد معلومات الملف الشخصي …</string>
+    <string name="updating_profile_label">جارٍ تحديث معلومات الملف الشخصي …</string>
 
     <!--    Registration Option    -->
     <string name="verification_method_label">حدد طريقة التحقق</string>
@@ -180,6 +183,7 @@
     <string name="yes_label">نعم</string>
     <string name="permission_label">الإذن</string>
     <string name="invalid_firstName">الاسم الأول غير صالح</string>
+    <string name="invalid_last_name_label">الاسم الأخير غير صالح</string>
     <string name="invalid_email_label">البريد الإلكتروني غير صالح</string>
     <string name="invalid_mobile">رقم الجوال غير صالح</string>
     <string name="invalid_password">رمز مرور خاطئ</string>

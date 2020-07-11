@@ -47,9 +47,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
         mViewModel.loginResponse.observe(viewLifecycleOwner, Observer {
 
-            if (it.status == true) {
+            if (it.status) {
                 val homeIntent = Intent(activity, BottomNavHomeActivity::class.java)
                 startActivity(homeIntent)
+                activity?.finish()
             } else {
                 showMessage(it.message, true)
             }

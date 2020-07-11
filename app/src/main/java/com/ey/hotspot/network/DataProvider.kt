@@ -86,9 +86,6 @@ object DataProvider : RemoteDataProvider {
                 val result = mServices.getProfile().await()
                 success(result)
 
-                Log.d(
-                    "GetAccessToken", HotSpotApp.prefs!!.getAccessToken()
-                )
             } catch (e: Exception) {
                 error(e)
             }
