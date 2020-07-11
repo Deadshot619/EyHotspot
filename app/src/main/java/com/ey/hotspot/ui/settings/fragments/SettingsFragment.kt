@@ -1,17 +1,12 @@
 package com.ey.hotspot.ui.settings.fragments
 
 import android.annotation.SuppressLint
-import androidx.lifecycle.ViewModelProviders
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.SettingsFragmentBinding
-import kotlinx.android.synthetic.main.content_resend_link_dialog.view.*
+import com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListFragment
+import com.ey.hotspot.utils.replaceFragment
 import kotlinx.android.synthetic.main.custom_confirm_settings_dialog.view.*
 
 class SettingsFragment : BaseFragment<SettingsFragmentBinding, SettingsViewModel>() {
@@ -20,15 +15,8 @@ class SettingsFragment : BaseFragment<SettingsFragmentBinding, SettingsViewModel
         fun newInstance() = SettingsFragment()
     }
 
-    override fun getLayoutId(): Int {
-
-        return R.layout.settings_fragment
-    }
-
-    override fun getViewModel(): Class<SettingsViewModel> {
-
-        return SettingsViewModel::class.java
-    }
+    override fun getLayoutId() = R.layout.settings_fragment
+    override fun getViewModel() = SettingsViewModel::class.java
 
     override fun onBinding() {
 
@@ -38,12 +26,19 @@ class SettingsFragment : BaseFragment<SettingsFragmentBinding, SettingsViewModel
             showUpButton = true
         )
 
-        /*Submit click*/
-        mBinding.btnSubmit.setOnClickListener {
+        setUpListeners()
+    }
 
-            showConfirmDialog("", "")
+    private fun setUpListeners(){
+        //Wifi Log List
+        mBinding.llWifiLogList.setOnClickListener {
+            replaceFragment(WifiLogListFragment(), true)
         }
 
+        /*Submit click*/
+        mBinding.btnSubmit.setOnClickListener {
+            showConfirmDialog("", "")
+        }
     }
 
 

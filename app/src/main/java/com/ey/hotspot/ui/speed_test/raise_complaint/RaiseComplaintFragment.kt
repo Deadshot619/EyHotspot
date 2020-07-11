@@ -16,7 +16,7 @@ class RaiseComplaintFragment : BaseFragment<FragmentRaiseComplaintBinding, Raise
         mBinding.lifecycleOwner = viewLifecycleOwner
         mBinding.viewModel = mViewModel
 
-        setUpToolbar(toolbarBinding = mBinding.toolbarLayout, title = getString(R.string.rate_wifi_label), showUpButton = true)
+        setUpToolbar(toolbarBinding = mBinding.toolbarLayout, title = getString(R.string.comment_and_evaluate_label), showUpButton = true)
 
     }
 

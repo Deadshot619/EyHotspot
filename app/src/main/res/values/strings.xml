@@ -78,9 +78,6 @@
     <string name="enter_captcha">Enter Captcha</string>
     <string name="login_credentials_msg">Login to the portal with your credentials</string>
     <string name="connecting_kingdom_label">Connecting the \n Kingdom of Saudi Arabia…!</string>
-<!--    <string name="of_saudi_arabia">Connecting the Kingdom of Saudi Arabia...!</string>-->
-
-
 
 
     <!--Review & Complaint-->
@@ -88,6 +85,9 @@
     <string name="reviews_label">Reviews</string>
     <string name="complaint_label">Complaints</string>
     <string name="all_label">All</string>
+
+    <!--Favourite Wifi-->
+    <string name="favoutite_wifi_label">Favourite Wifi</string>
 
     <!--Speed Test-->
     <string name="speed_test_label">Speed Test</string>
@@ -106,7 +106,7 @@
     <string name="date_label">Date</string>
     <string name="name_label">Name</string>
     <string name="date_wifi_log_label">Date: %s</string>
-    <string name="connecting_logs_label">Connecting Logs</string>
+    <string name="connection_logs_label">Connection Logs</string>
     <string name="speed_test_logs_label">Speed test Logs</string>
     <string name="start_time_label">Start time</string>
     <string name="end_time_label">End time</string>
@@ -119,8 +119,22 @@
     <!--Raise Complaint-->
     <string name="explain_problem_label">Explain your problem in detail here</string>
     <string name="raise_complaint_label">Raise Complaint</string>
+<!--    <string name="comment_and_evaluate_label">Comment and Evaluate</string>-->
 
 
+    <!--WiFi Service-->
+    <string name="wifi_service_label">WiFi Service</string>
+    <string name="wifi_connected_label">WiFi Connected</string>
+    <string name="wifi_disconnected_label">WiFi Disconnected</string>
+    <string name="checking_wifi_connection_label">Checking for wifi connection</string>
+    <string name="calculating_wifi_speed_label">"WiFi connected : %s, Speed : Calculating…"</string>
+    <string name="calculated_wifi_speed_label">"WiFi connected : %s, Speed : %s Mbps"</string>
+    <string name="no_internet_connection_label">"No Internet Connection"</string>
+
+
+    <!--    Location Permission     -->
+    <string name="provide_location_permission_label">You need to provide Location/GPS permission for this app to run smoothly</string>
+    <string name="open_label">Open</string>
 
     <string name="maps_api_key" translatable="false">AIzaSyAyKP89tXni4J32JCJw60dVTShBXqR_ieU</string>
     <string name="searchplace">Search</string>

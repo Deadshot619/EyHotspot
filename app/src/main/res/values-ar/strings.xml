@@ -86,6 +86,9 @@
     <string name="complaint_label">شكاوي</string>
     <string name="all_label">الكل</string>
 
+    <!--Favourite Wifi-->
+    <string name="favoutite_wifi_label">واي فاي المفضلة</string>
+
     <!--Speed Test-->
     <string name="speed_test_label">اختبار السرعة</string>
     <string name="users_connected_label">المستخدمون متصلون</string>
@@ -103,7 +106,7 @@
     <string name="date_label">تاريخ</string>
     <string name="name_label">اسم</string>
     <string name="date_wifi_log_label">تاريخ: %s</string>
-    <string name="connecting_logs_label">ربط السجلات</string>
+    <string name="connection_logs_label">سجلات الاتصال</string>
     <string name="speed_test_logs_label">سجلات اختبار السرعة</string>
     <string name="start_time_label">وقت البدء</string>
     <string name="end_time_label">وقت النهاية</string>
@@ -116,6 +119,20 @@
     <!--Raise Complaint-->
     <string name="explain_problem_label">اشرح مشكلتك بالتفصيل هنا</string>
     <string name="raise_complaint_label">رفع شكوى</string>
+<!--    <string name="comment_and_evaluate_label">التعليق والتقييم</string>-->
+
+    <!--WiFi Service-->
+    <string name="wifi_service_label">خدمة واي فاي</string>
+    <string name="wifi_connected_label">تم توصيل WiFi</string>
+    <string name="wifi_disconnected_label">تم قطع اتصال WiFi</string>
+    <string name="checking_wifi_connection_label">التحقق من اتصال WiFi</string>
+    <string name="calculating_wifi_speed_label">اتصال WiFi : %s ، السرعة: حساب …</string>
+    <string name="calculated_wifi_speed_label">اتصال WiFi:٪ s ، السرعة:٪ s ميغابت في الثانية</string>
+    <string name="no_internet_connection_label">لا يوجد اتصال بالإنترنت</string>
+
+    <!--    Location Permission     -->
+    <string name="provide_location_permission_label">تحتاج إلى تقديم إذن الموقع / GPS حتى يعمل هذا التطبيق بسلاسة</string>
+    <string name="open_label">افتح</string>
 
 
     <string name="btTextNavigateNow">انتقل الآن</string>

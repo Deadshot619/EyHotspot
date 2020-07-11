@@ -9,7 +9,7 @@ import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseActivity
 import com.ey.hotspot.databinding.ActivityBottomNavHomeBinding
 import com.ey.hotspot.service.WifiService
-import com.ey.hotspot.ui.favourite.fragment.FavouriteFragment
+import com.ey.hotspot.ui.favourite.FavouriteFragment
 import com.ey.hotspot.ui.home.fragment.HomeFragment
 import com.ey.hotspot.ui.profile.fragment.ProfileFragment
 import com.ey.hotspot.ui.review_and_complaint.ReviewAndComplainFragment
@@ -17,6 +17,7 @@ import com.ey.hotspot.ui.speed_test.speed_test_fragmet.SpeedTestFragment
 import com.ey.hotspot.utils.CHANNEL_ID
 import com.ey.hotspot.utils.channel_name
 import com.ey.hotspot.utils.createNotificationChannel
+import com.ey.hotspot.utils.wifi_notification_key
 import com.google.android.material.snackbar.Snackbar
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
@@ -32,10 +33,12 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
 
         setBottomNavListener()
 
-        startWifiCheckService()
+        //Start service only if it isn't running already
+        if (!WifiService.isRunning)
+            startWifiCheckService()
 
         //Set Home as initial fragment
-        mBinding.bottomNavigation.menu.run{
+        mBinding.bottomNavigation.menu.run {
             performIdentifierAction(R.id.home, 2)
             getItem(2).isChecked = true
         }
@@ -52,7 +55,9 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
         )
 
         //Start foreground service
-        ContextCompat.startForegroundService(this, Intent(this, WifiService::class.java))
+        ContextCompat.startForegroundService(this, Intent(this, WifiService::class.java).apply {
+            putExtra(wifi_notification_key, getString(R.string.checking_wifi_connection_label))
+        })
     }
 
     private fun setBottomNavListener() {

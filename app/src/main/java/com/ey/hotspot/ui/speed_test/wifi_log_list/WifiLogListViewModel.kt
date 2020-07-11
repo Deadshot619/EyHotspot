@@ -4,18 +4,34 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ey.hotspot.app_core_lib.BaseViewModel
-
+import com.ey.hotspot.database.WifiInfoDatabase
+import com.ey.hotspot.database.WifiInfoDatabaseDao
+import com.ey.hotspot.database.WifiInformationTable
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 class WifiLogListViewModel(application: Application) : BaseViewModel(application) {
 
-    private val _wifiLogList = MutableLiveData<List<WifiLogListModel>>(
-        listOf(
-            WifiLogListModel(1, "09-11-2001", "Osama Bin Laden"),
-            WifiLogListModel(2, "69-69-0420", "George Bush")
-        )
+    var database: WifiInfoDatabaseDao = WifiInfoDatabase.getInstance(application).wifiInfoDatabaseDao
 
-    )
-    val wifiLogList: LiveData<List<WifiLogListModel>>
+    private val _wifiLogList = MutableLiveData<List<WifiInformationTable>>()
+    val wifiLogList: LiveData<List<WifiInformationTable>>
         get() = _wifiLogList
 
+    init {
+        getDataFromDb()
+    }
 
+    private fun getDataFromDb(){
+        coroutineScope.launch {
+            retrieveDataFromDb(database)
+        }
+    }
+
+    private suspend fun retrieveDataFromDb(wifiInfoDatabaseDao: WifiInfoDatabaseDao) {
+        withContext(Dispatchers.IO){
+            _wifiLogList.postValue(wifiInfoDatabaseDao.getAllWifiInfoData())
+        }
+    }
 }
+
