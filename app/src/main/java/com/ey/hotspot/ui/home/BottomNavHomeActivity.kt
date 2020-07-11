@@ -1,9 +1,6 @@
 package com.ey.hotspot.ui.home
 
 import android.content.Intent
-import android.net.Uri
-import android.os.Build
-import android.provider.Settings
 import androidx.core.content.ContextCompat
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseActivity
@@ -11,19 +8,13 @@ import com.ey.hotspot.databinding.ActivityBottomNavHomeBinding
 import com.ey.hotspot.service.WifiService
 import com.ey.hotspot.ui.favourite.FavouriteFragment
 import com.ey.hotspot.ui.home.fragment.HomeFragment
-import com.ey.hotspot.ui.profile.fragment.ProfileFragment
+import com.ey.hotspot.ui.profile.ProfileFragment
 import com.ey.hotspot.ui.review_and_complaint.ReviewAndComplainFragment
 import com.ey.hotspot.ui.speed_test.speed_test_fragmet.SpeedTestFragment
 import com.ey.hotspot.utils.CHANNEL_ID
 import com.ey.hotspot.utils.channel_name
 import com.ey.hotspot.utils.createNotificationChannel
 import com.ey.hotspot.utils.wifi_notification_key
-import com.google.android.material.snackbar.Snackbar
-import com.karumi.dexter.Dexter
-import com.karumi.dexter.MultiplePermissionsReport
-import com.karumi.dexter.PermissionToken
-import com.karumi.dexter.listener.PermissionRequest
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 
 class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomNavHomeViewModel>() {
 

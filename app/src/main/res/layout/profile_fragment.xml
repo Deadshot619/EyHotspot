@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.ey.hotspot.ui.profile.fragment.ProfileViewModel" />
+            type="com.ey.hotspot.ui.profile.ProfileViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

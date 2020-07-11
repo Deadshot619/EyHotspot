@@ -1,4 +1,4 @@
-package com.ey.hotspot.ui.profile.fragment
+package com.ey.hotspot.ui.profile
 
 import androidx.lifecycle.Observer
 import com.ey.hotspot.R
@@ -77,8 +77,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
 
         mViewModel.updateProfileResponse.observe(viewLifecycleOwner, Observer {
 
-            if (it.status == true) {
-
+            if (it.status) {
                 showMessage(it.message, true)
             } else {
                 showMessage(it.message, true)
