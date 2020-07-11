@@ -21,9 +21,16 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 class WifiService : Service() {
-    lateinit var connec: ConnectivityManager
-    lateinit var wifiManager: WifiManager
-    lateinit var database: WifiInfoDatabaseDao
+    companion object{
+        //Variable to indicate whether the service is running
+        private var _isRunning = false
+        val isRunning: Boolean
+            get() = _isRunning
+    }
+
+    private lateinit var connec: ConnectivityManager
+    private lateinit var wifiManager: WifiManager
+    private lateinit var database: WifiInfoDatabaseDao
 
     private val WIFI_SERVICE_ID = 1
 
@@ -31,6 +38,9 @@ class WifiService : Service() {
 
     override fun onCreate() {
         super.onCreate()
+
+        //indicate Service is running
+        _isRunning = true
 
         //Get connectivity Manager
         connec = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -71,7 +81,11 @@ class WifiService : Service() {
         return null
     }
 
-
+    override fun onDestroy() {
+        super.onDestroy()
+        //indicate EService is not running
+        _isRunning = false
+    }
 
     private var networkCallbackWiFi = object : ConnectivityManager.NetworkCallback() {
         override fun onLost(network: Network?) {
@@ -85,7 +99,13 @@ class WifiService : Service() {
             //Start Service
             ContextCompat.startForegroundService(
                 applicationContext,
-                Intent(applicationContext, WifiService::class.java)
+                Intent(applicationContext, WifiService::class.java).apply {
+                    putExtra(
+                        wifi_notification_key,
+//                                    "No Internet Connection"
+                        getString(R.string.wifi_disconnected_label)
+                    )
+                }
             )
 
             //Update data in table

@@ -131,6 +131,7 @@
     <string name="calculated_wifi_speed_label">"WiFi connected : %s, Speed : %s Mbps"</string>
     <string name="no_internet_connection_label">"No Internet Connection"</string>
 
+
     <!--    Location Permission     -->
     <string name="provide_location_permission_label">You need to provide Location/GPS permission for this app to run smoothly</string>
     <string name="open_label">Open</string>
