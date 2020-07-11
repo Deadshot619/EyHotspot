@@ -1,12 +1,10 @@
 package com.ey.hotspot.ui.favourite
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseActivity
 import com.ey.hotspot.databinding.ActivityFavouriteBinding
 
-class FavouriteActivity : BaseActivity<ActivityFavouriteBinding,FavouriteViewModel>() {
+class FavouriteActivity : BaseActivity<ActivityFavouriteBinding,FavouriteActivityViewModel>() {
 
 
     override fun getLayoutId(): Int {
@@ -14,8 +12,8 @@ class FavouriteActivity : BaseActivity<ActivityFavouriteBinding,FavouriteViewMod
         return R.layout.activity_favourite
     }
 
-    override fun getViewModel(): Class<FavouriteViewModel> {
-        return FavouriteViewModel::class.java
+    override fun getViewModel(): Class<FavouriteActivityViewModel> {
+        return FavouriteActivityViewModel::class.java
     }
 
     override fun onBinding() {

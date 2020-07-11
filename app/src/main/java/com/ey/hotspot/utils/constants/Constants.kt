@@ -26,6 +26,8 @@ interface Constants {
         const val API_UPDATE_PROFILE = "updateProfile"
         const val API_GET_HOTPSOT="getHotspots"
         const val API_GET_USER_HOTSPOT_LIST="getUsersHotspots"
+        const val API_MARK_FAVOURITE="markFavourites"
+        const val API_FAVOURITE_LIST="getFavourites"
 
         //GET
         const val API_GET_USER_LIST = "userList"

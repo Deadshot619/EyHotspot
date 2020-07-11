@@ -5,7 +5,11 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.ey.hotspot.ui.favourite.fragment.FavouriteViewModel" />
     </data>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

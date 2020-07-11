@@ -5,6 +5,9 @@ import com.ey.hotspot.network.request.LoginRequest
 import com.ey.hotspot.network.request.RegisterRequest
 import com.ey.hotspot.network.response.BaseResponse
 import com.ey.hotspot.network.response.LoginResponse
+import com.ey.hotspot.ui.favourite.model.GetFavouriteItem
+import com.ey.hotspot.ui.favourite.model.MarkFavouriteRequest
+import com.ey.hotspot.ui.favourite.model.MarkFavouriteResponse
 import com.ey.hotspot.ui.home.models.GetHotSpotRequest
 import com.ey.hotspot.ui.home.models.GetHotSpotResponse
 import com.ey.hotspot.ui.home.models.GetUserHotSpotResponse
@@ -69,5 +72,18 @@ interface APIInterface {
     fun getUserHotSpot(
         @Header("Authorization") token: String = "Bearer  " + HotSpotApp.prefs!!.getAccessToken(),
         @Body getHotSpotRequest: GetHotSpotRequest
-        ):Deferred<BaseResponse<List<GetUserHotSpotResponse>>>
+    ): Deferred<BaseResponse<List<GetUserHotSpotResponse>>>
+
+
+    @POST(Constants.API_MARK_FAVOURITE)
+    fun markFavourite(
+        @Header("Authorization") token: String = "Bearer  " + HotSpotApp.prefs!!.getAccessToken(),
+        @Body markFavouriteRequest: MarkFavouriteRequest
+    ): Deferred<BaseResponse<MarkFavouriteResponse>>
+
+
+    @POST(Constants.API_FAVOURITE_LIST)
+    fun  getFavourite(
+        @Header("Authorization") token: String = "Bearer  " + HotSpotApp.prefs!!.getAccessToken()
+    ):Deferred<BaseResponse<List<GetFavouriteItem>>>
 }

@@ -5,25 +5,29 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ey.hotspot.R
+import com.ey.hotspot.ui.favourite.model.GetFavouriteItem
 import com.ey.hotspot.ui.search.searchlist.model.SearchList
 import kotlinx.android.synthetic.main.item_favourites_list.view.*
 
-class FavouriteAdapter(var searchList:ArrayList<SearchList>):
+class FavouriteAdapter(var searchList: ArrayList<GetFavouriteItem>) :
     RecyclerView.Adapter<FavouriteAdapter.FavouriteListViewHolder>() {
 
 
-    open fun updateUsers(newUsers: List<SearchList>) {
+    open fun updateUsers(newUsers: List<GetFavouriteItem>) {
         searchList.clear()
         searchList.addAll(newUsers)
         notifyDataSetChanged()
     }
 
 
-
     override fun onCreateViewHolder(
         parent: ViewGroup,
-        viewType: Int): FavouriteAdapter.FavouriteListViewHolder {
-        return FavouriteListViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_favourites_list, parent, false))
+        viewType: Int
+    ): FavouriteAdapter.FavouriteListViewHolder {
+        return FavouriteListViewHolder(
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_favourites_list, parent, false)
+        )
 
     }
 
@@ -34,16 +38,29 @@ class FavouriteAdapter(var searchList:ArrayList<SearchList>):
     override fun onBindViewHolder(holder: FavouriteAdapter.FavouriteListViewHolder, position: Int) {
         holder.bind(searchList[position])
 
+        holder.markFavourite.setOnClickListener {
+
+
+        }
+
     }
 
-    class FavouriteListViewHolder(view: View) : RecyclerView.ViewHolder(view){
+    class giFavouriteListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
 
-        private val userName = view.tv_wifi_ssid
-        private val userEmail = view.tv_username
-        fun bind(country: SearchList) {
-            userName.text = country.firstName + " " + country.lastName
-            userEmail.text = country.email
+        val providerName = view.tv_wifi_ssid
+        val name = view.tv_username
+        val navigate = view.btn_navigate_now
+        val markFavourite = view.iv_favourites
+        fun bind(country: GetFavouriteItem) {
+
+            providerName.text = country.provider_name
+            name.text = country.name
+            if (country.favourite) {
+                markFavourite.resources.getDrawable(R.drawable.ic_fill_heart)
+            } else {
+                markFavourite.resources.getDrawable(R.drawable.ic_gray_heart)
+            }
         }
     }
 }

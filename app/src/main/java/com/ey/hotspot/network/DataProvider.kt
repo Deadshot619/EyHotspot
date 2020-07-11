@@ -6,6 +6,9 @@ import com.ey.hotspot.network.request.LoginRequest
 import com.ey.hotspot.network.request.RegisterRequest
 import com.ey.hotspot.network.response.BaseResponse
 import com.ey.hotspot.network.response.LoginResponse
+import com.ey.hotspot.ui.favourite.model.GetFavouriteItem
+import com.ey.hotspot.ui.favourite.model.MarkFavouriteRequest
+import com.ey.hotspot.ui.favourite.model.MarkFavouriteResponse
 import com.ey.hotspot.ui.home.models.GetHotSpotRequest
 import com.ey.hotspot.ui.home.models.GetHotSpotResponse
 import com.ey.hotspot.ui.home.models.GetUserHotSpotResponse
@@ -173,6 +176,40 @@ object DataProvider : RemoteDataProvider {
             error(e)
         }
 
+    }
+
+    override suspend fun markFavourite(
+        request: MarkFavouriteRequest,
+        success: (BaseResponse<MarkFavouriteResponse>) -> Unit,
+        error: (Exception) -> Unit
+    ) {
+
+        try {
+
+            val result =
+                mServices.markFavourite("Bearer  " + HotSpotApp.prefs!!.getAccessToken()!!, request)
+                    .await()
+
+            success(result)
+
+        } catch (e: Exception) {
+            error(e)
+        }
+    }
+
+    override suspend fun getFavourite(
+        success: (BaseResponse<List<GetFavouriteItem>>) -> Unit,
+        error: (Exception) -> Unit
+    ) {
+
+        try {
+            val result =
+                mServices.getFavourite("Bearer  " + HotSpotApp.prefs!!.getAccessToken()!!).await()
+            success(result)
+
+        } catch (e: Exception) {
+            error(e)
+        }
     }
 
 
