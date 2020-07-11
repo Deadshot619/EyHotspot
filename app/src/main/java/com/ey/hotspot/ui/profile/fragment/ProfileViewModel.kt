@@ -7,8 +7,7 @@ import com.ey.hotspot.app_core_lib.BaseViewModel
 import com.ey.hotspot.network.DataProvider
 import com.ey.hotspot.network.response.BaseResponse
 import com.ey.hotspot.ui.profile.fragment.model.ProfileResponse
-import com.ey.hotspot.ui.profile.updateprofile.model.UpdateProfileRequest
-import com.ey.hotspot.ui.profile.updateprofile.model.UpdateProfileResponse
+import com.ey.hotspot.ui.profile.fragment.model.UpdateProfileRequest
 import kotlinx.coroutines.launch
 
 class ProfileViewModel(application: Application) : BaseViewModel(application) {

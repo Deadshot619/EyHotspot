@@ -6,11 +6,13 @@ import com.ey.hotspot.network.request.LoginRequest
 import com.ey.hotspot.network.request.RegisterRequest
 import com.ey.hotspot.network.response.BaseResponse
 import com.ey.hotspot.network.response.LoginResponse
+import com.ey.hotspot.ui.home.models.GetHotSpotRequest
+import com.ey.hotspot.ui.home.models.GetHotSpotResponse
+import com.ey.hotspot.ui.home.models.GetUserHotSpotResponse
 import com.ey.hotspot.ui.login.logout.LogoutResponse
 import com.ey.hotspot.ui.login.logout.RefreshToken
 import com.ey.hotspot.ui.profile.fragment.model.ProfileResponse
-import com.ey.hotspot.ui.profile.updateprofile.model.UpdateProfileRequest
-import com.ey.hotspot.ui.profile.updateprofile.model.UpdateProfileResponse
+import com.ey.hotspot.ui.profile.fragment.model.UpdateProfileRequest
 import com.google.gson.JsonArray
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -90,7 +92,10 @@ object DataProvider : RemoteDataProvider {
         }
     }
 
-    override suspend fun logout(success: (LogoutResponse) -> Unit, error: (Exception) -> Unit) {
+    override suspend fun logout(
+        success: (BaseResponse<LogoutResponse>) -> Unit,
+        error: (Exception) -> Unit
+    ) {
 
         withContext(Dispatchers.Main) {
 
@@ -105,7 +110,10 @@ object DataProvider : RemoteDataProvider {
         }
     }
 
-    override suspend fun refreshToken(success: (RefreshToken) -> Unit, error: (Exception) -> Unit) {
+    override suspend fun refreshToken(
+        success: (BaseResponse<RefreshToken>) -> Unit,
+        error: (Exception) -> Unit
+    ) {
 
 
         withContext(Dispatchers.Main) {
@@ -126,11 +134,45 @@ object DataProvider : RemoteDataProvider {
     ) {
 
         try {
-            val result = mServices.updateProfile("Bearer  "+HotSpotApp.prefs!!.getAccessToken()!!, request).await()
+            val result =
+                mServices.updateProfile("Bearer  " + HotSpotApp.prefs!!.getAccessToken()!!, request)
+                    .await()
             success(result)
         } catch (e: Exception) {
             error(e)
         }
+    }
+
+    override suspend fun getHotspot(
+        request: GetHotSpotRequest,
+        success: (BaseResponse<List<GetHotSpotResponse>>) -> Unit,
+        error: (Exception) -> Unit
+    ) {
+        try {
+            val result =
+                mServices.getHotSpots("Bearer  " + HotSpotApp.prefs!!.getAccessToken()!!, request)
+                    .await()
+            success(result)
+        } catch (e: Exception) {
+            error(e)
+        }
+    }
+
+    override suspend fun getUserHotSpot(
+        request: GetHotSpotRequest,
+        success: (BaseResponse<List<GetUserHotSpotResponse>>) -> Unit,
+        error: (Exception) -> Unit
+    ) {
+        try {
+            val result = mServices.getUserHotSpot(
+                "Bearer  " + HotSpotApp.prefs!!.getAccessToken()!!,
+                request
+            ).await()
+            success(result)
+        } catch (e: Exception) {
+            error(e)
+        }
+
     }
 
 

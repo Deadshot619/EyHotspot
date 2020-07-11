@@ -1,4 +1,4 @@
-package com.ey.hotspot.ui.profile.updateprofile.model
+package com.ey.hotspot.ui.profile.fragment.model
 
 import com.google.gson.annotations.SerializedName
 

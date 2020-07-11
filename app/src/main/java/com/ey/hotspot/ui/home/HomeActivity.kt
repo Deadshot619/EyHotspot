@@ -85,6 +85,8 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), OnMapRe
             .findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
 
+
+
     }
 
     override fun onMapReady(map: GoogleMap) {

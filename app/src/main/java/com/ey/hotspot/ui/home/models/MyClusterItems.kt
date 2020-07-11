@@ -11,6 +11,7 @@ class MyClusterItems : ClusterItem {
     private val mSnippet: String
 
 
+
     constructor(lat: Double, lng: Double) {
         mPosition = LatLng(lat, lng)
         mTitle = "";

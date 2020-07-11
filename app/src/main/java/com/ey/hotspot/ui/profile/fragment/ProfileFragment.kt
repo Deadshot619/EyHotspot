@@ -4,7 +4,7 @@ import androidx.lifecycle.Observer
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.ProfileFragmentBinding
-import com.ey.hotspot.ui.profile.updateprofile.model.UpdateProfileRequest
+import com.ey.hotspot.ui.profile.fragment.model.UpdateProfileRequest
 import com.ey.hotspot.ui.settings.fragments.SettingsFragment
 import com.ey.hotspot.utils.replaceFragment
 import com.ey.hotspot.utils.showMessage
@@ -54,12 +54,13 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
 
         mBinding.btnUpdateProfile.setOnClickListener {
 
-            val updateProfileRequest: UpdateProfileRequest = UpdateProfileRequest(
-                mViewModel.firstName, mViewModel.lastName,
-                mViewModel.mobileNo,
-                "91", mViewModel.emailId
+            val updateProfileRequest: UpdateProfileRequest =
+                UpdateProfileRequest(
+                    mViewModel.firstName, mViewModel.lastName,
+                    mViewModel.mobileNo,
+                    "91", mViewModel.emailId
 
-            )
+                )
             mViewModel.updateProfile(updateProfileRequest)
         }
 

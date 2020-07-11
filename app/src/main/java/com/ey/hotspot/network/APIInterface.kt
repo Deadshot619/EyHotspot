@@ -5,11 +5,13 @@ import com.ey.hotspot.network.request.LoginRequest
 import com.ey.hotspot.network.request.RegisterRequest
 import com.ey.hotspot.network.response.BaseResponse
 import com.ey.hotspot.network.response.LoginResponse
+import com.ey.hotspot.ui.home.models.GetHotSpotRequest
+import com.ey.hotspot.ui.home.models.GetHotSpotResponse
+import com.ey.hotspot.ui.home.models.GetUserHotSpotResponse
 import com.ey.hotspot.ui.login.logout.LogoutResponse
 import com.ey.hotspot.ui.login.logout.RefreshToken
 import com.ey.hotspot.ui.profile.fragment.model.ProfileResponse
-import com.ey.hotspot.ui.profile.updateprofile.model.UpdateProfileRequest
-import com.ey.hotspot.ui.profile.updateprofile.model.UpdateProfileResponse
+import com.ey.hotspot.ui.profile.fragment.model.UpdateProfileRequest
 import com.ey.hotspot.utils.constants.Constants
 import com.google.gson.JsonArray
 import kotlinx.coroutines.Deferred
@@ -41,13 +43,13 @@ interface APIInterface {
     @POST(Constants.API_LOGOUT)
     fun logOut(
         @Header("Authorization") token: String = "Bearer  " + HotSpotApp.prefs!!.getAccessToken()
-    ): Deferred<LogoutResponse>
+    ): Deferred<BaseResponse<LogoutResponse>>
 
 
     @POST(Constants.API_REFRESH_TOKEN)
     fun refreshToken(
         @Header("Authorization") token: String = "Bearer  " + HotSpotApp.prefs!!.getAccessToken()
-    ): Deferred<RefreshToken>
+    ): Deferred<BaseResponse<RefreshToken>>
 
 
     @POST(Constants.API_UPDATE_PROFILE)
@@ -55,4 +57,17 @@ interface APIInterface {
         @Header("Authorization") token: String = "Bearer  " + HotSpotApp.prefs!!.getAccessToken(),
         @Body updateProfileRequest: UpdateProfileRequest
     ): Deferred<BaseResponse<Any>>
+
+
+    @POST(Constants.API_GET_HOTPSOT)
+    fun getHotSpots(
+        @Header("Authorization") token: String = "Bearer  " + HotSpotApp.prefs!!.getAccessToken(),
+        @Body getHotSpotRequest: GetHotSpotRequest
+    ): Deferred<BaseResponse<List<GetHotSpotResponse>>>
+
+    @POST(Constants.API_GET_USER_HOTSPOT_LIST)
+    fun getUserHotSpot(
+        @Header("Authorization") token: String = "Bearer  " + HotSpotApp.prefs!!.getAccessToken(),
+        @Body getHotSpotRequest: GetHotSpotRequest
+        ):Deferred<BaseResponse<List<GetUserHotSpotResponse>>>
 }

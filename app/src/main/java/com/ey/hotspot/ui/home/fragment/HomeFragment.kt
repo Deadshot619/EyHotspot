@@ -1,25 +1,25 @@
 package com.ey.hotspot.ui.home.fragment
 
-import android.Manifest
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.location.Location
 import android.net.Uri
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentHomeBinding
+import com.ey.hotspot.ui.home.models.GetHotSpotRequest
+import com.ey.hotspot.ui.home.models.GetHotSpotResponse
 import com.ey.hotspot.ui.home.models.MyClusterItems
 import com.ey.hotspot.ui.search.recentlysearch.RecentlySearchFragment
 import com.ey.hotspot.utils.checkLocationPermission
 import com.ey.hotspot.utils.isLocationEnabled
 import com.ey.hotspot.utils.replaceFragment
+import com.ey.hotspot.utils.showMessage
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -81,7 +81,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         }
 
         //Toolbar
-        setUpSearchBar(mBinding.toolbarLayout, showUpButton = false, enableSearchButton = false){}
+        setUpSearchBar(mBinding.toolbarLayout, showUpButton = false, enableSearchButton = false) {}
 
         mBinding.toolbarLayout.etSearchBar.isFocusable = false
 
@@ -106,12 +106,50 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             .findFragmentById(R.id.map) as SupportMapFragment?
         myMAPF?.getMapAsync(this)
 
+        setUpObservers()
+    }
 
-        getNearByWifiList()
+    private fun setUpObservers() {
+
+        mViewModel.getHotSpotResponse.observe(viewLifecycleOwner, Observer {
+
+            if (it.status == true) {
+
+                showMessage("" + it.data.size, true)
+                setupClusters()
+                addItems(it.data)
+
+            } else {
+                showMessage(it.message, true)
+            }
+        })
+
+
+        mViewModel.getUserHotSpotResponse.observe(viewLifecycleOwner, Observer {
+
+            if(it.status == true){
+
+
+            }else{
+                showMessage(it.message,true)
+            }
+        })
+
+
+        mViewModel.errorText.observe(viewLifecycleOwner, Observer {
+
+            showMessage(it, true)
+        })
     }
 
     private fun getNearByWifiList() {
 
+        val GetHotSpotRequest: GetHotSpotRequest = GetHotSpotRequest(
+            19.1403509,
+            72.8096671, "", true
+        )
+
+        mViewModel.getHotSpotResponse(GetHotSpotRequest)
     }
 
     override fun onMapReady(map: GoogleMap) {
@@ -154,9 +192,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                                 )
                             )
 
-                            setupClusters()
-                            showNearbyWifis(points);
 
+
+                            getNearByWifiList()
+                            //  showNearbyWifis(points);
 
                         }
                     } else {
@@ -190,53 +229,66 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         val renderer = ClusterItemRenderer(requireActivity(), map, mClusterManager)
         mClusterManager.renderer = renderer
 
-        addItems()
+
     }
 
-    private fun addItems() {
+    private fun addItems(getHotSpotResponse: List<GetHotSpotResponse>) {
 
 
-        var lat = lastKnownLocation!!.latitude
-        var lng = lastKnownLocation!!.longitude
-        for (i in 0..9) {
-            val offset = i / 60.0
-            lat = lat + offset
-            lng = lng + offset
-            val title = "Wifi Name  +$i"
-            val snippet = ""
-            val offsetItem = MyClusterItems(lat, lng, title, snippet)
-            mClusterManager.addItem(offsetItem)
+        for (location in getHotSpotResponse) {
+
+            val offsetItems =
+                MyClusterItems(
+                    location.lat,
+                    location.lng,
+                    location.provider_name,
+                    location.navigate_url
+                )
+            mClusterManager.addItem(offsetItems)
         }
 
 
-        var latOne = lastKnownLocation!!.latitude + 1.0
-        var lngOne = lastKnownLocation!!.longitude + 1.0
-        for (i in 0..9) {
+        /* var lat = lastKnownLocation!!.latitude
+         var lng = lastKnownLocation!!.longitude
+         for (i in 0..9) {
+             val offset = i / 60.0
+             lat = lat + offset
+             lng = lng + offset
+             val title = "Wifi Name  +$i"
+             val snippet = ""
+             val offsetItem = MyClusterItems(lat, lng, title, snippet)
+             mClusterManager.addItem(offsetItem)
+         }
 
 
-            val offset = i / 60.0
-            lat = latOne + offset
-            lng = lngOne + offset
-            val title = "Wifi Name  +$i"
-            val snippet = ""
-            val offsetItem = MyClusterItems(lat, lng, title, snippet)
-            mClusterManager.addItem(offsetItem)
-        }
+         var latOne = lastKnownLocation!!.latitude + 1.0
+         var lngOne = lastKnownLocation!!.longitude + 1.0
+         for (i in 0..9) {
 
-        var latTwo = lastKnownLocation!!.latitude + 1.0
-        var lngTwo = lastKnownLocation!!.longitude + 1
 
-        for (i in 0..9) {
+             val offset = i / 60.0
+             lat = latOne + offset
+             lng = lngOne + offset
+             val title = "Wifi Name  +$i"
+             val snippet = ""
+             val offsetItem = MyClusterItems(lat, lng, title, snippet)
+             mClusterManager.addItem(offsetItem)
+         }
 
-            val offset = i / 60.0
-            lat = latTwo + offset
-            lng = lngTwo + offset
-            val title = "Wifi Name  +$i"
-            val snippet = ""
-            val offsetItem = MyClusterItems(lat, lng, title, snippet)
-            mClusterManager.addItem(offsetItem)
+         var latTwo = lastKnownLocation!!.latitude + 1.0
+         var lngTwo = lastKnownLocation!!.longitude + 1
 
-        }
+         for (i in 0..9) {
+
+             val offset = i / 60.0
+             lat = latTwo + offset
+             lng = lngTwo + offset
+             val title = "Wifi Name  +$i"
+             val snippet = ""
+             val offsetItem = MyClusterItems(lat, lng, title, snippet)
+             mClusterManager.addItem(offsetItem)
+
+         }*/
 
 
     }
@@ -307,17 +359,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         }
 
         mBinding.customPop.btNavigate.setOnClickListener {
-            val gmmIntentUri = Uri.parse("geo:18.520430,73.856743")
-            val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
-            // mapIntent.setPackage("com.google.android.apps.maps")
-            mapIntent.resolveActivity(requireActivity().packageManager)?.let {
-                requireActivity().startActivity(mapIntent)
-            }
+            /* val gmmIntentUri = Uri.parse("geo:18.520430,73.856743")
+             val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+             // mapIntent.setPackage("com.google.android.apps.maps")
+             mapIntent.resolveActivity(requireActivity().packageManager)?.let {
+                 requireActivity().startActivity(mapIntent)
+             }*/
+
+
+            val url = clickedVenueMarker?.snippet
+            val i = Intent(Intent.ACTION_VIEW)
+            i.data = Uri.parse(url)
+            startActivity(i)
 
         }
-
-
-
         return false
     }
 

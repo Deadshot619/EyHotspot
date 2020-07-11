@@ -24,6 +24,8 @@ interface Constants {
         const val API_LOGOUT = "logout"
         const val API_REFRESH_TOKEN = "refreshToken"
         const val API_UPDATE_PROFILE = "updateProfile"
+        const val API_GET_HOTPSOT="getHotspots"
+        const val API_GET_USER_HOTSPOT_LIST="getUsersHotspots"
 
         //GET
         const val API_GET_USER_LIST = "userList"

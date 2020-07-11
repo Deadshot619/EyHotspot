@@ -25,13 +25,13 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
         get() = _loginResponse
 
 
-    private val _logoutResponse = MutableLiveData<LogoutResponse>()
-    val logoutResponse: LiveData<LogoutResponse>
+    private val _logoutResponse = MutableLiveData<BaseResponse<LogoutResponse>>()
+    val logoutResponse: LiveData<BaseResponse<LogoutResponse>>
         get() = _logoutResponse
 
 
-    private val _refreshTokenResponse = MutableLiveData<RefreshToken>()
-    val refreshTokenResponse: LiveData<RefreshToken>
+    private val _refreshTokenResponse = MutableLiveData<BaseResponse<RefreshToken>>()
+    val refreshTokenResponse: LiveData<BaseResponse<RefreshToken>>
         get() = _refreshTokenResponse
 
 
