@@ -11,7 +11,6 @@ import com.ey.hotspot.network.request.RegisterRequest
 import com.ey.hotspot.ui.login.LoginActivity
 import com.ey.hotspot.ui.login.permission.PermissionFragment
 import com.ey.hotspot.utils.replaceFragment
-import com.ey.hotspot.utils.showMessage
 import com.ey.hotspot.utils.validations.isEmailValid
 import com.ey.hotspot.utils.validations.isPasswordValid
 import com.ey.hotspot.utils.validations.isValidMobile
@@ -60,10 +59,6 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
     private fun setUpObservers() {
 
         mViewModel.errorText.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-
-
-            showMessage(it, true)
-
             val homeIntent = Intent(activity, LoginActivity::class.java)
             startActivity(homeIntent)
         })

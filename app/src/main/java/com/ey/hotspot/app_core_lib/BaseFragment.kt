@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.ey.hotspot.R
 import com.ey.hotspot.databinding.LayoutCustomToolbarBinding
@@ -19,6 +20,8 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
 
     protected lateinit var mBinding: T
     protected lateinit var mViewModel: V
+    //Custom Loading Dialog
+    private val dialog: LoadingDialog by lazy { LoadingDialog(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,7 +36,33 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setUpObservers()
         onBinding()
+    }
+
+    /**
+     * Method to set up Observers
+     */
+    private fun setUpObservers(){
+//        Error Text
+        mViewModel.errorText.observe(viewLifecycleOwner, Observer {
+            showMessage(it, true)
+        })
+
+        //Dialog Visibility
+        mViewModel.dialogVisibility.observe(viewLifecycleOwner, Observer { show ->
+            dialog.run {
+                if (show) show() else hide()
+            }
+        })
+
+        //Dialog Message
+        mViewModel.dialogMessage.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                dialog.setMessage(it)
+            }
+        })
     }
 
     /**

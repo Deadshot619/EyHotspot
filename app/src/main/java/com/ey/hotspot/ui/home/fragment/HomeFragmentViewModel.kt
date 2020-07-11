@@ -9,7 +9,6 @@ import com.ey.hotspot.network.response.BaseResponse
 import com.ey.hotspot.ui.home.models.GetHotSpotRequest
 import com.ey.hotspot.ui.home.models.GetHotSpotResponse
 import com.ey.hotspot.ui.home.models.GetUserHotSpotResponse
-import com.google.gson.JsonArray
 import kotlinx.coroutines.launch
 
 class HomeFragmentViewModel(application: Application) : BaseViewModel(application) {
@@ -36,7 +35,7 @@ class HomeFragmentViewModel(application: Application) : BaseViewModel(applicatio
                     _getHotSpotResponse.value = it
                 }, error = {
 
-                    _errorText.value = it.message
+                    checkError(it)
 
                 }
             )
@@ -54,7 +53,8 @@ class HomeFragmentViewModel(application: Application) : BaseViewModel(applicatio
 
                 }, error = {
 
-                    _errorText.value = it.message
+                    checkError(it)
+
                 }
             )
         }

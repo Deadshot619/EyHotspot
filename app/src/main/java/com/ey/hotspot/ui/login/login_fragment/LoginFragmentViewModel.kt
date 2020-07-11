@@ -37,24 +37,30 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
 
     //Call this method from fragment/layout
     fun callLogin(loginRequest: LoginRequest) {
+        setDialogVisibility(true)
 
         coroutineScope.launch {
             DataProvider.login(
                 request = loginRequest,
                 success = {
-                    _loginResponse.value = it
 
-                    Log.d("LoginSuccess", it.data.accessToken)
-                    _errorText.value = it.message
+                    if (it.status) {
+                        _loginResponse.value = it
 
-                    updateSharedPreference(it.data)
-                    Log.d(
-                        "GetAccessToken", HotSpotApp.prefs!!.getAccessToken()
-                    )
+                        Log.d("LoginSuccess", it.data.accessToken)
+                        _errorText.value = it.message
 
+                        updateSharedPreference(it.data)
+
+                        Log.d(
+                            "GetAccessToken", HotSpotApp.prefs!!.getAccessToken()
+                        )
+                    }
+
+                    setDialogVisibility(false)
                 },
                 error = {
-                    _errorText.value = it.message
+                    checkError(it)
                 }
             )
         }
@@ -69,7 +75,7 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
                     _logoutResponse.value = it
                 },
                 error = {
-                    _errorText.value = it.message
+                    checkError(it)
                 }
             )
         }
@@ -82,7 +88,7 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
                 success = {
                     _refreshTokenResponse.value = it
                 }, error = {
-                    _errorText.value = it.message
+                    checkError(it)
                 }
             )
         }
@@ -91,8 +97,8 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
 
     private fun updateSharedPreference(loginResponse: LoginResponse) {
 
-        HotSpotApp.prefs!!.saveAccessToken(loginResponse.accessToken)
-        HotSpotApp.prefs!!.setAppLoggedInStatus(true)
+        HotSpotApp.prefs?.saveAccessToken(loginResponse.accessToken)
+        HotSpotApp.prefs?.setAppLoggedInStatus(true)
 
     }
 }

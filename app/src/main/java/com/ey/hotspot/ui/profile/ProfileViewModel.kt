@@ -40,7 +40,7 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
                         emailId = it.data.email
                     )
             }, error = {
-                _errorText.value = it.message
+                checkError(it)
             })
         }
     }
@@ -57,7 +57,7 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
 
 //                    _profileResponse.value = it.data
                 }, error = {
-                    _errorText.value = it.message
+                                        checkError(it)
                 }
             )
         }
