@@ -6,6 +6,7 @@ import com.ey.hotspot.network.request.LoginRequest
 import com.ey.hotspot.network.request.RegisterRequest
 import com.ey.hotspot.network.response.BaseResponse
 import com.ey.hotspot.network.response.LoginResponse
+import com.ey.hotspot.ui.favourite.model.MarkFavouriteRequest
 import com.ey.hotspot.ui.home.models.GetHotSpotRequest
 import com.ey.hotspot.ui.home.models.GetHotSpotResponse
 import com.ey.hotspot.ui.home.models.GetUserHotSpotResponse
@@ -173,6 +174,10 @@ object DataProvider : RemoteDataProvider {
             error(e)
         }
 
+    }
+
+    override suspend fun markFavourite(request: MarkFavouriteRequest) {
+        TODO("Not yet implemented")
     }
 
 

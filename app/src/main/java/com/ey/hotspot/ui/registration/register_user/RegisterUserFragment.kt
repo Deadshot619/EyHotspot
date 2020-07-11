@@ -8,7 +8,6 @@ import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentRegisterUserBinding
 import com.ey.hotspot.network.request.RegisterRequest
-import com.ey.hotspot.ui.home.BottomNavHomeActivity
 import com.ey.hotspot.ui.login.LoginActivity
 import com.ey.hotspot.ui.login.permission.PermissionFragment
 import com.ey.hotspot.utils.replaceFragment
@@ -241,6 +240,9 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
             mBinding.run {
                 return if (firstName.trim().isEmpty()) {
                     edtFirstName.error = resources.getString(R.string.invalid_firstName)
+                    false
+                } else if (lastName.trim().isEmpty()) {
+                    edtLastName.error = resources.getString(R.string.invalid_last_name_label)
                     false
                 } else if (!emailId.isEmailValid()) {
                     edtEmail.error = resources.getString(R.string.invalid_email_label)

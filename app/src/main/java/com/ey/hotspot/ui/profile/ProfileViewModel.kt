@@ -6,36 +6,39 @@ import androidx.lifecycle.MutableLiveData
 import com.ey.hotspot.app_core_lib.BaseViewModel
 import com.ey.hotspot.network.DataProvider
 import com.ey.hotspot.network.response.BaseResponse
+import com.ey.hotspot.ui.profile.fragment.model.ProfileDataModel
 import com.ey.hotspot.ui.profile.fragment.model.ProfileResponse
 import com.ey.hotspot.ui.profile.fragment.model.UpdateProfileRequest
 import kotlinx.coroutines.launch
 
 class ProfileViewModel(application: Application) : BaseViewModel(application) {
 
+    //Variable to hold profile data
+    val profileData = MutableLiveData<ProfileDataModel>()
 
-    var firstName = ""
-    var lastName = ""
-    var mobileNo = ""
-    var emailId = ""
-
-
-    protected val _profileResponse = MutableLiveData<BaseResponse<ProfileResponse>>()
+    private val _profileResponse = MutableLiveData<BaseResponse<ProfileResponse>>()
     val profileResponse: LiveData<BaseResponse<ProfileResponse>>
         get() = _profileResponse
 
-    private val _updateProfileResponse = MutableLiveData<BaseResponse<Any>>()
+    init {
+        getProfileDetails()
+    }
 
-    val updateProfileResponse: LiveData<BaseResponse<Any>>
-        get() = _updateProfileResponse
 
-
-    fun getProfileDetails() {
-
+    //Method to retrieve Profile Details
+    private fun getProfileDetails() {
         coroutineScope.launch {
             DataProvider.getProfile(success = {
 
                 _profileResponse.value = it
-                setUPdata(it.data)
+
+                if (it.status)
+                    profileData.value = ProfileDataModel(
+                        firstName = it.data.firstname,
+                        lastName = it.data.lastname,
+                        mobileNo = it.data.mobile_no,
+                        emailId = it.data.email
+                    )
             }, error = {
                 _errorText.value = it.message
             })
@@ -43,7 +46,7 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
     }
 
 
-
+    //Method to update User Profile Details
     fun updateProfile(updateProfileRequest: UpdateProfileRequest) {
 
         coroutineScope.launch {
@@ -52,7 +55,7 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
                 request = updateProfileRequest,
                 success = {
 
-                    _updateProfileResponse.value = it
+//                    _profileResponse.value = it.data
                 }, error = {
                     _errorText.value = it.message
                 }
@@ -61,14 +64,4 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
     }
 
 
-
-
-    private fun setUPdata(profileResponse: ProfileResponse) {
-
-        firstName = profileResponse.firstname
-        lastName = profileResponse.lastname
-        emailId = profileResponse.email
-        mobileNo= profileResponse.mobile_no
-
-    }
 }

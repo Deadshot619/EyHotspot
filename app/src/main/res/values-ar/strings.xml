@@ -180,6 +180,7 @@
     <string name="yes_label">نعم</string>
     <string name="permission_label">الإذن</string>
     <string name="invalid_firstName">الاسم الأول غير صالح</string>
+    <string name="invalid_last_name_label">الاسم الأخير غير صالح</string>
     <string name="invalid_email_label">البريد الإلكتروني غير صالح</string>
     <string name="invalid_mobile">رقم الجوال غير صالح</string>
     <string name="invalid_password">رمز مرور خاطئ</string>
