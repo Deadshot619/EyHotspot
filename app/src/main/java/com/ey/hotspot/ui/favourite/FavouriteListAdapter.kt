@@ -6,28 +6,28 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ey.hotspot.databinding.ItemFavouritesListBinding
-import com.ey.hotspot.ui.search.searchlist.model.SearchList
+import com.ey.hotspot.ui.favourite.model.GetFavouriteItem
 
 
 class FavouriteListAdapter(val listener: OnClickListener) :
-    ListAdapter<SearchList, FavouriteListAdapter.FavouriteListViewHolder>(
+    ListAdapter<GetFavouriteItem, FavouriteListAdapter.FavouriteListViewHolder>(
         DiffCallback
     ) {
     /**
-     * Allows the RecyclerView to determine which items have changed when the [List] of [SearchList]
+     * Allows the RecyclerView to determine which items have changed when the [List] of [GetFavouriteItem]
      * has been updated.
      */
-    companion object DiffCallback : DiffUtil.ItemCallback<SearchList>() {
+    companion object DiffCallback : DiffUtil.ItemCallback<GetFavouriteItem>() {
         override fun areItemsTheSame(
-            oldItem: SearchList,
-            newItem: SearchList
+            oldItem: GetFavouriteItem,
+            newItem: GetFavouriteItem
         ): Boolean {
             return oldItem === newItem
         }
 
         override fun areContentsTheSame(
-            oldItem: SearchList,
-            newItem: SearchList
+            oldItem: GetFavouriteItem,
+            newItem: GetFavouriteItem
         ): Boolean {
             return oldItem.id == newItem.id
         }
@@ -49,16 +49,16 @@ class FavouriteListAdapter(val listener: OnClickListener) :
 
     /**
      * The [FavouriteListViewHolder] constructor takes the binding variable from the associated
-     * layout, which nicely gives it access to the full [SearchList] information.
+     * layout, which nicely gives it access to the full [GetFavouriteItem] information.
      */
     class FavouriteListViewHolder(private var binding: ItemFavouritesListBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(
-            item: SearchList?,
+            item: GetFavouriteItem?,
             listener: OnClickListener
         ) {
             binding.run {
-//                data = item
+                data = item
                 clickListener = listener
 //                tvNumber.text = "$count"
                 executePendingBindings()

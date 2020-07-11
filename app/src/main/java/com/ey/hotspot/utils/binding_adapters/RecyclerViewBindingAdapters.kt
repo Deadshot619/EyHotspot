@@ -4,9 +4,9 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ey.hotspot.database.WifiInformationTable
 import com.ey.hotspot.ui.favourite.FavouriteListAdapter
+import com.ey.hotspot.ui.favourite.model.GetFavouriteItem
 import com.ey.hotspot.ui.review_and_complaint.review_list.ReviewListAdapter
 import com.ey.hotspot.ui.review_and_complaint.review_list.ReviewListModel
-import com.ey.hotspot.ui.search.searchlist.model.SearchList
 import com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListAdapter
 
 /**
@@ -30,7 +30,7 @@ fun bindWifiLogList(recyclerView: RecyclerView, data: List<WifiInformationTable>
 
 //Favourite List
 @BindingAdapter("listFavouriteWifiList")
-fun bindFavouriteWifiList(recyclerView: RecyclerView, data: List<SearchList>?){
+fun bindFavouriteWifiList(recyclerView: RecyclerView, data: List<GetFavouriteItem>?){
     val adapter = recyclerView.adapter as FavouriteListAdapter
     adapter.submitList(data)
 }
