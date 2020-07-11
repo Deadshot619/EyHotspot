@@ -70,9 +70,10 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
     }
 
     private fun setUpObserver() {
-
         mViewModel.profileResponse.observe(viewLifecycleOwner, Observer {
-            showMessage(it.message, true)
+                it.getContentIfNotHandled()?.let {content ->
+                    showMessage(content.message, false)
+                }
         })
     }
 
@@ -99,4 +100,8 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
         } ?: return false
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+    }
 }

@@ -10,6 +10,7 @@ import com.ey.hotspot.network.response.BaseResponse
 import com.ey.hotspot.ui.profile.fragment.model.ProfileDataModel
 import com.ey.hotspot.ui.profile.fragment.model.ProfileResponse
 import com.ey.hotspot.ui.profile.fragment.model.UpdateProfileRequest
+import com.ey.hotspot.utils.Event
 import kotlinx.coroutines.launch
 
 class ProfileViewModel(application: Application) : BaseViewModel(application) {
@@ -17,8 +18,8 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
     //Variable to hold profile data
     val profileData = MutableLiveData<ProfileDataModel>()
 
-    private val _profileResponse = MutableLiveData<BaseResponse<ProfileResponse>>()
-    val profileResponse: LiveData<BaseResponse<ProfileResponse>>
+    private val _profileResponse = MutableLiveData<Event<BaseResponse<ProfileResponse>>>()
+    val profileResponse: LiveData<Event<BaseResponse<ProfileResponse>>>
         get() = _profileResponse
 
     init {
@@ -34,7 +35,7 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
         coroutineScope.launch {
             DataProvider.getProfile(success = {
 
-                _profileResponse.value = it
+                _profileResponse.value = Event(it)
 
                 if (it.status)
                     profileData.value = ProfileDataModel(

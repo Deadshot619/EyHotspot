@@ -1,6 +1,5 @@
 package com.ey.hotspot.network
 
-import android.util.Log
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.network.request.LoginRequest
 import com.ey.hotspot.network.request.RegisterRequest
@@ -84,9 +83,6 @@ object DataProvider : RemoteDataProvider {
                 val result = mServices.getProfile().await()
                 success(result)
 
-                Log.d(
-                    "GetAccessToken", HotSpotApp.prefs!!.getAccessToken()
-                )
             } catch (e: Exception) {
                 error(e)
             }
