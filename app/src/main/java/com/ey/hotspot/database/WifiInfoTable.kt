@@ -17,8 +17,8 @@ data class WifiInformationTable(
     @ColumnInfo(name = "connected_on")
     val connectedOn: Calendar,
 
-//    @ColumnInfo(name = "disconnected_on")
-//    val disconnectedOn: String,
+    @ColumnInfo(name = "disconnected_on")
+    val disconnectedOn: Calendar? = null,
 
     @ColumnInfo(name = "download_speed")
     val downloadSpeed: String

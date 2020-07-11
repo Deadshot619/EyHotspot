@@ -121,6 +121,14 @@
     <string name="raise_complaint_label">رفع شكوى</string>
 <!--    <string name="comment_and_evaluate_label">التعليق والتقييم</string>-->
 
+    <!--WiFi Service-->
+    <string name="wifi_service_label">خدمة واي فاي</string>
+    <string name="wifi_connected_label">تم توصيل WiFi</string>
+    <string name="wifi_disconnected_label">تم قطع اتصال WiFi</string>
+    <string name="checking_wifi_connection_label">التحقق من اتصال WiFi</string>
+    <string name="calculating_wifi_speed_label">اتصال WiFi : %s ، السرعة: حساب …</string>
+    <string name="calculated_wifi_speed_label">اتصال WiFi:٪ s ، السرعة:٪ s ميغابت في الثانية</string>
+    <string name="no_internet_connection_label">لا يوجد اتصال بالإنترنت</string>
 
 
     <string name="btTextNavigateNow">انتقل الآن</string>

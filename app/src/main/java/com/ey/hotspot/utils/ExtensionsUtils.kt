@@ -110,6 +110,12 @@ fun BigDecimal.convertBpsToMbps(): BigDecimal {
     }
 }
 
+/**
+ * Method to check if Location Permission is permitted
+ *
+ * @param view The view from which it is called. Used to show SnackBar on
+ * @param func The function to be executed when permission is granted
+ */
 fun Activity.checkLocationPermission(view: View, func: (Unit) -> Unit) {
     Dexter.withContext(this)
         .withPermissions(

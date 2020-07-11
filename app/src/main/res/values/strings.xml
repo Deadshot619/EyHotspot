@@ -125,7 +125,15 @@
 <!--    <string name="comment_and_evaluate_label">Comment and Evaluate</string>-->
 
 
-
+    <!--WiFi Service-->
+    <string name="wifi_service_label">WiFi Service</string>
+    <string name="wifi_connected_label">WiFi Connected</string>
+    <string name="wifi_disconnected_label">WiFi Disconnected</string>
+    <string name="checking_wifi_connection_label">Checking for wifi connection</string>
+    <string name="calculating_wifi_speed_label">"WiFi connected : %s, Speed : Calculating…"</string>
+    <string name="calculated_wifi_speed_label">"WiFi connected : %s, Speed : %s Mbps"</string>
+    <string name="no_internet_connection_label">"No Internet Connection"</string>
+    
     <string name="maps_api_key" translatable="false">AIzaSyAyKP89tXni4J32JCJw60dVTShBXqR_ieU</string>
     <string name="searchplace">Search</string>
     <string name="permission_description">Lorem ipsum dolor sit amet, ua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
