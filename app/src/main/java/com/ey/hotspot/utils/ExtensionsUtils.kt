@@ -13,6 +13,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseActivity
 import com.google.android.material.snackbar.Snackbar
 import com.karumi.dexter.Dexter
@@ -136,10 +137,10 @@ fun Activity.checkLocationPermission(view: View, func: (Unit) -> Unit) {
                 } else if (p0.isAnyPermissionPermanentlyDenied) {
                     Snackbar.make(
                         view,
-                        "You need to provide Location/GPS permission for this app to run smoothly",
+                        getString(R.string.provide_location_permission_label),
                         Snackbar.LENGTH_LONG
                     )
-                        .setAction("Open") {
+                        .setAction(getString(R.string.open_label)) {
                             val intent =
                                 Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
                                     data = Uri.fromParts(

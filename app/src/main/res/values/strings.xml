@@ -78,9 +78,6 @@
     <string name="enter_captcha">Enter Captcha</string>
     <string name="login_credentials_msg">Login to the portal with your credentials</string>
     <string name="connecting_kingdom_label">Connecting the \n Kingdom of Saudi Arabia…!</string>
-<!--    <string name="of_saudi_arabia">Connecting the Kingdom of Saudi Arabia...!</string>-->
-
-
 
 
     <!--Review & Complaint-->
@@ -133,7 +130,11 @@
     <string name="calculating_wifi_speed_label">"WiFi connected : %s, Speed : Calculating…"</string>
     <string name="calculated_wifi_speed_label">"WiFi connected : %s, Speed : %s Mbps"</string>
     <string name="no_internet_connection_label">"No Internet Connection"</string>
-    
+
+    <!--    Location Permission     -->
+    <string name="provide_location_permission_label">You need to provide Location/GPS permission for this app to run smoothly</string>
+    <string name="open_label">Open</string>
+
     <string name="maps_api_key" translatable="false">AIzaSyAyKP89tXni4J32JCJw60dVTShBXqR_ieU</string>
     <string name="searchplace">Search</string>
     <string name="permission_description">Lorem ipsum dolor sit amet, ua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
