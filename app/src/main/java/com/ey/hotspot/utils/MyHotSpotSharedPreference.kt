@@ -35,8 +35,8 @@ class MyHotSpotSharedPreference(context: Context) {
     }
 
     /*Get Access token*/
-    fun getAccessToken(): String? {
-        return CoreApp.sharedPreferences.getString(ACCESS_TOKEN, "")
+    fun getAccessToken(): String {
+        return CoreApp.sharedPreferences.getString(ACCESS_TOKEN, "") ?: ""
     }
 
 

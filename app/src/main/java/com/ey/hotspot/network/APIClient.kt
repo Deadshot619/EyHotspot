@@ -2,6 +2,7 @@ package com.ey.hotspot.network
 
 import com.ey.hotspot.BuildConfig
 import com.ey.hotspot.app_core_lib.CoreApp
+import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.readystatesoftware.chuck.ChuckInterceptor
@@ -35,6 +36,7 @@ class APIClient {
 
                     .addHeader("Content-Type", "application/json;charset=utf-8")
                     .addHeader("Accept", "application/json")
+                    .addHeader("Authorization", "Bearer ${HotSpotApp.prefs?.getAccessToken()!!}")
                     .build()
                 return chain.proceed(request)
             }
@@ -75,6 +77,7 @@ class APIClient {
                 val builder = OkHttpClient.Builder()
                 builder.sslSocketFactory(sslSocketFactory, trustAllCerts[0] as X509TrustManager)
                 builder.hostnameVerifier { hostname, session -> true }
+//                builder.addInterceptor(HeaderInterceptor())
 //                builder.addNetworkInterceptor(StethoInterceptor())
                 builder.addNetworkInterceptor(ChuckInterceptor(CoreApp.instance))
                 builder.connectTimeout(1, TimeUnit.MINUTES)
