@@ -27,17 +27,28 @@ class FavouriteFragment : BaseFragment<FavouriteFragmentBinding, FavouriteViewMo
         mBinding.lifecycleOwner = viewLifecycleOwner
         mBinding.viewModel = mViewModel
 
-        setUpToolbar(toolbarBinding = mBinding.toolbarLayout, title = getString(R.string.favoutite_wifi_label), showUpButton = false)
+        setUpToolbar(
+            toolbarBinding = mBinding.toolbarLayout,
+            title = getString(R.string.favoutite_wifi_label),
+            showUpButton = false
+        )
 
         setUpRecyclerView(mBinding.rvFavouriteWifiList)
     }
 
-    private fun setUpRecyclerView(recyclerView: RecyclerView){
+    private fun setUpRecyclerView(recyclerView: RecyclerView) {
         //Setup Adapter
         mAdapter = FavouriteListAdapter(object : FavouriteListAdapter.OnClickListener {
             //Rate Now button
             override fun onClickRateNow(data: GetFavouriteItem) {
-                replaceFragment(RateWifiFragment.newInstance(), true)
+                replaceFragment(
+                    fragment = RateWifiFragment.newInstance(
+                        wifiSsid = data.name,
+                        wifiProvider = data.provider_name,
+                        location = data.location
+                    ),
+                    addToBackStack = true
+                )
             }
 
             //Report
