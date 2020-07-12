@@ -1,7 +1,6 @@
 package com.ey.hotspot.ui.favourite
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ey.hotspot.R
@@ -43,14 +42,17 @@ class FavouriteViewModel(application: Application) : BaseViewModel(application) 
         getFavouriteList()
     }
 
-    fun markFavouriteItem(markFavouriteRequest: MarkFavouriteRequest) {
+    fun markFavouriteItem(locationId: Int) {
         setDialogVisibility(true,appInstance.getString(R.string.adding_favourite_list))
         coroutineScope.launch {
             DataProvider.markFavourite(
-                request = markFavouriteRequest,
+                request = MarkFavouriteRequest(locationId = locationId),
                 success = {
 
-                    _markFavouriteResponse.value = it
+                    if (it.status)
+                        getFavouriteList()
+
+                    showToastFromViewModel(it.message)
                     setDialogVisibility(false)
                 }, error = {
                     checkError(it)

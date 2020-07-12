@@ -3,7 +3,6 @@ package com.ey.hotspot.ui.home.fragment
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseViewModel
 import com.ey.hotspot.network.DataProvider
 import com.ey.hotspot.network.response.BaseResponse
@@ -36,18 +35,15 @@ class HomeFragmentViewModel(application: Application) : BaseViewModel(applicatio
 
     fun getHotSpotResponse(getHotSpotRequest: GetHotSpotRequest) {
 
-        setDialogVisibility(true, appInstance.getString(R.string.gettting_hotspots_list))
         coroutineScope.launch {
             DataProvider.getHotspot(
                 request = getHotSpotRequest,
                 success = {
 
                     _getHotSpotResponse.value = it
-                    setDialogVisibility(false)
                 }, error = {
 
                     checkError(it)
-                    setDialogVisibility(false)
 
                 }
             )
@@ -56,7 +52,6 @@ class HomeFragmentViewModel(application: Application) : BaseViewModel(applicatio
 
 
     fun getUserHotSpotResponse(getHotSpotRequest: GetHotSpotRequest) {
-        setDialogVisibility(true, appInstance.getString(R.string.gettting_hotspots_list))
 
         coroutineScope.launch {
             DataProvider.getUserHotSpot(
@@ -64,33 +59,27 @@ class HomeFragmentViewModel(application: Application) : BaseViewModel(applicatio
                 success = {
                     _getUserHotSpotResponse.value = it
 
-                    setDialogVisibility(false)
                 }, error = {
 
                     checkError(it)
-                    setDialogVisibility(false)
                 }
             )
         }
     }
 
     fun markFavouriteItem(markFavouriteRequest: MarkFavouriteRequest) {
-        setDialogVisibility(true,appInstance.getString(R.string.adding_favourite_list))
         coroutineScope.launch {
             DataProvider.markFavourite(
                 request = markFavouriteRequest,
                 success = {
 
                     _markFavouriteResponse.value = it
-                    setDialogVisibility(false)
                 }, error = {
                     checkError(it)
-                    setDialogVisibility(false)
                 }
 
             )
         }
-
     }
 
 }
