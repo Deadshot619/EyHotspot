@@ -8,7 +8,6 @@ import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentRegisterUserBinding
 import com.ey.hotspot.network.request.RegisterRequest
-import com.ey.hotspot.ui.login.LoginActivity
 import com.ey.hotspot.ui.login.permission.PermissionFragment
 import com.ey.hotspot.ui.registration.email_verification.EmailVerificationFragment
 import com.ey.hotspot.utils.replaceFragment
@@ -62,20 +61,21 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
 
         mViewModel.toastMessage.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
 
+            it.getContentIfNotHandled()?.run {
+                if(this.contains("Validation errors.")){
+                    showMessage(this,true)
+                }else{
 
+                    showMessage(this, true)
 
-            if(it.contains("Validation errors.")){
-                showMessage(it,true)
-            }else{
-
-                showMessage(it, true)
-
-                replaceFragment(
-                    fragment = EmailVerificationFragment.newInstance(),
-                    addToBackStack = true,
-                    bundle = null
-                )
+                    replaceFragment(
+                        fragment = EmailVerificationFragment.newInstance(),
+                        addToBackStack = true,
+                        bundle = null
+                    )
+                }
             }
+
 
 
         })
