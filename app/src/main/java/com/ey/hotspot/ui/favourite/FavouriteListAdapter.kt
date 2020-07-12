@@ -72,7 +72,10 @@ class FavouriteListAdapter(val listener: OnClickListener) :
      * Interface to call in the [OnClickListener] & passed on to fragment to implement
      */
     interface OnClickListener{
-        fun onClickRateNow()
+        fun onClickRateNow(data: GetFavouriteItem)
+        fun onClickReport(data: GetFavouriteItem)
+        fun onClickAddFavourite(data: GetFavouriteItem)
+        fun onClickNavigate(data: GetFavouriteItem)
     }
 
 }

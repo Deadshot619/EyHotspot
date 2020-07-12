@@ -47,6 +47,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_favorite_filled_gray"
                 android:layout_margin="@dimen/common_margin_32"
+                app:bindAddFavourite="@{data.favourite}"
                 app:layout_constraintTop_toTopOf="@id/iv_flag"
                 app:layout_constraintEnd_toStartOf="@id/iv_flag"
                 app:layout_constraintStart_toEndOf="@id/tv_wifi_ssid"
@@ -59,6 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_group"
+                android:onClick="@{() -> clickListener.onClickReport(data)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
@@ -152,7 +154,7 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_rate_now"
                 android:text="@string/rate_now_label"
-                android:onClick="@{() -> clickListener.onClickRateNow()}"
+                android:onClick="@{() -> clickListener.onClickRateNow(data)}"
                 style="@style/OutlinedButtonNormal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
