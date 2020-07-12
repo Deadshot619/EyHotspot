@@ -53,7 +53,13 @@ class FavouriteFragment : BaseFragment<FavouriteFragmentBinding, FavouriteViewMo
 
             //Report
             override fun onClickReport(data: GetFavouriteItem) {
-                replaceFragment(RaiseComplaintFragment.newInstance(), true)
+                replaceFragment(
+                    RaiseComplaintFragment.newInstance(
+                        wifiSsid = data.name,
+                        wifiProvider = data.provider_name,
+                        location = data.location
+                    ), true
+                )
             }
 
             //Favourite
