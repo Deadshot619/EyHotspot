@@ -86,4 +86,19 @@ interface APIInterface {
     fun  getFavourite(
         @Header("Authorization") token: String = "Bearer  " + HotSpotApp.prefs!!.getAccessToken()
     ):Deferred<BaseResponse<List<GetFavouriteItem>>>
+
+//    Reviews & Complaints
+    @POST(Constants.API_GET_REVIEWS_AND_COMPLAINTS)
+    fun fetchReviewsAndComplaints() : Deferred<BaseResponse<Any>>
+
+    @POST(Constants.API_GET_COMPLAINTS_ISSUE_TYPES)
+    fun fetchComplaintsIssueType() : Deferred<BaseResponse<Any>>
+
+    @POST(Constants.API_ADD_REVIEW)
+    fun apiAddReview(): Deferred<BaseResponse<Any>>
+
+    @POST(Constants.API_ADD_COMPLAINT)
+    fun apiAddComplaint(): Deferred<BaseResponse<Any>>
+
+
 }

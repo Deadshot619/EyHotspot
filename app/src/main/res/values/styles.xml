@@ -8,6 +8,7 @@
         <item name="colorOnPrimary">@color/colorOnPrimary</item>
 
         <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
 
         <item name="otpViewStyle">@style/OtpWidget.OtpView</item>
         <item name="fontFamily">@font/fira_sans</item>

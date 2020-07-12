@@ -1,7 +1,6 @@
 package com.ey.hotspot.ui.registration.register_user
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ey.hotspot.R
@@ -40,12 +39,13 @@ class RegisterUserViewModel(application: Application) : BaseViewModel(applicatio
                 success = {
 
 
-                    _errorText.value = it.message
+                    showToastFromViewModel(it.message)
+
                     setDialogVisibility(false)
 
                 }, error = {
 
-                    setDialogVisibility(false)
+
                     checkError(it)
                 }
             )
@@ -53,6 +53,8 @@ class RegisterUserViewModel(application: Application) : BaseViewModel(applicatio
 
 
     }
+
+
 
 
 }

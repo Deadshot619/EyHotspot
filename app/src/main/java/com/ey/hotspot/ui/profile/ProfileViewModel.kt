@@ -64,7 +64,7 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
                 request = updateProfileRequest,
                 success = {
 
-                    _errorText.value = it.message
+                    showToastFromViewModel(it.message)
 
 
                     setDialogVisibility(false)

@@ -1,6 +1,7 @@
 package com.ey.hotspot.utils.binding_adapters
 
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
 import com.ey.hotspot.R
 import java.math.BigDecimal
@@ -21,3 +22,13 @@ fun bindFormatDateTime(textView: TextView, value: Calendar?){
         SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z").format(value.time)
     } ?: "-"
 }
+
+//Indicate when the WiFi is favourite
+@BindingAdapter("bindAddFavourite")
+fun bindAddFavourite(appCompatImageView: AppCompatImageView, isFavourite: Boolean){
+    if (isFavourite)
+        appCompatImageView.setImageResource(R.drawable.ic_favorite_filled_red)
+    else
+        appCompatImageView.setImageResource(R.drawable.ic_favorite_filled_gray)
+}
+

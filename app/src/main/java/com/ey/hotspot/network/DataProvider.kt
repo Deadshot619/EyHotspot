@@ -1,6 +1,5 @@
 package com.ey.hotspot.network
 
-import android.util.Log
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.network.request.LoginRequest
 import com.ey.hotspot.network.request.RegisterRequest
@@ -206,6 +205,68 @@ object DataProvider : RemoteDataProvider {
 
         } catch (e: Exception) {
             error(e)
+        }
+    }
+
+    /**
+     * Reviews & Complaints Module
+     */
+    override suspend fun getReviewsAndComplaints(
+        success: (BaseResponse<Any>) -> Unit,
+        error: (Exception) -> Unit
+    ) {
+        withContext(Dispatchers.Main) {
+            try {
+                val result = mServices.fetchReviewsAndComplaints().await()
+                success(result)
+            } catch (e: Exception) {
+                error(e)
+            }
+        }
+    }
+
+    override suspend fun getComplaintsIssuesTypes(
+        success: (BaseResponse<Any>) -> Unit,
+        error: (Exception) -> Unit
+    ) {
+        withContext(Dispatchers.Main) {
+            try {
+                val result = mServices.fetchComplaintsIssueType().await()
+                success(result)
+            } catch (e: Exception) {
+                error(e)
+            }
+        }
+    }
+
+    override suspend fun addReviews(
+//        request:
+        success: (BaseResponse<Any>) -> Unit,
+        error: (Exception) -> Unit
+    ) {
+
+        withContext(Dispatchers.Main) {
+            try {
+                val result = mServices.apiAddReview().await()
+                success(result)
+            } catch (e: Exception) {
+                error(e)
+            }
+        }
+    }
+
+    override suspend fun addComplaints(
+//        request:
+        success: (BaseResponse<Any>) -> Unit,
+        error: (Exception) -> Unit
+    ) {
+        withContext(Dispatchers.Main) {
+            try {
+                val result = mServices.apiAddComplaint().await()
+                success(result)
+            } catch (e: Exception) {
+                error(e)
+            }
         }
     }
 

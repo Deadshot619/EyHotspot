@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FavouriteFragmentBinding
+import com.ey.hotspot.ui.favourite.model.GetFavouriteItem
 import com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment
+import com.ey.hotspot.ui.speed_test.rate_wifi.RateWifiFragment
 import com.ey.hotspot.utils.replaceFragment
 
 class FavouriteFragment : BaseFragment<FavouriteFragmentBinding, FavouriteViewModel>() {
@@ -25,17 +27,49 @@ class FavouriteFragment : BaseFragment<FavouriteFragmentBinding, FavouriteViewMo
         mBinding.lifecycleOwner = viewLifecycleOwner
         mBinding.viewModel = mViewModel
 
-        setUpToolbar(toolbarBinding = mBinding.toolbarLayout, title = getString(R.string.favoutite_wifi_label), showUpButton = false)
+        setUpToolbar(
+            toolbarBinding = mBinding.toolbarLayout,
+            title = getString(R.string.favoutite_wifi_label),
+            showUpButton = false
+        )
 
         setUpRecyclerView(mBinding.rvFavouriteWifiList)
     }
 
-    private fun setUpRecyclerView(recyclerView: RecyclerView){
+    private fun setUpRecyclerView(recyclerView: RecyclerView) {
         //Setup Adapter
         mAdapter = FavouriteListAdapter(object : FavouriteListAdapter.OnClickListener {
             //Rate Now button
-            override fun onClickRateNow() {
-                replaceFragment(RaiseComplaintFragment(), true)
+            override fun onClickRateNow(data: GetFavouriteItem) {
+                replaceFragment(
+                    fragment = RateWifiFragment.newInstance(
+                        wifiSsid = data.name,
+                        wifiProvider = data.provider_name,
+                        location = data.location
+                    ),
+                    addToBackStack = true
+                )
+            }
+
+            //Report
+            override fun onClickReport(data: GetFavouriteItem) {
+                replaceFragment(
+                    RaiseComplaintFragment.newInstance(
+                        wifiSsid = data.name,
+                        wifiProvider = data.provider_name,
+                        location = data.location
+                    ), true
+                )
+            }
+
+            //Favourite
+            override fun onClickAddFavourite(data: GetFavouriteItem) {
+                TODO("Not yet implemented")
+            }
+
+            //Navigate Now
+            override fun onClickNavigate(data: GetFavouriteItem) {
+                TODO("Not yet implemented")
             }
         })
 

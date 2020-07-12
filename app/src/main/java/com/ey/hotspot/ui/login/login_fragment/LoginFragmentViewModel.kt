@@ -13,6 +13,7 @@ import com.ey.hotspot.network.response.LoginResponse
 import com.ey.hotspot.ui.login.logout.LogoutResponse
 import com.ey.hotspot.ui.login.logout.RefreshToken
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class LoginFragmentViewModel(application: Application) : BaseViewModel(application) {
 
@@ -47,14 +48,15 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
                     if (it.status) {
                         _loginResponse.value = it
 
-                        _errorText.value = it.message
+                        showToastFromViewModel(it.message)
+
+                        Timber.tag("Bearer_Token").d(it.data.accessToken)
 
                         updateSharedPreference(it.data)
-
-
+                    } else {
+                        setDialogVisibility(false)
                     }
 
-                    setDialogVisibility(false)
                 },
                 error = {
                     checkError(it)

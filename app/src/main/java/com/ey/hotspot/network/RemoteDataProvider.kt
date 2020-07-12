@@ -81,4 +81,29 @@ interface RemoteDataProvider {
         error: (Exception) -> Unit
     )
 
+    //Reviews & Complaints
+    suspend fun getReviewsAndComplaints(
+        success: (BaseResponse<Any>) -> Unit,
+        error: (Exception) -> Unit
+    )
+
+    suspend fun getComplaintsIssuesTypes(
+        success: (BaseResponse<Any>) -> Unit,
+        error: (Exception) -> Unit
+    )
+
+    suspend fun addReviews(
+//        request:
+        success: (BaseResponse<Any>) -> Unit,
+        error: (Exception) -> Unit
+    )
+
+    suspend fun addComplaints(
+//        request:
+        success: (BaseResponse<Any>) -> Unit,
+        error: (Exception) -> Unit
+    )
+
+
+
 }

@@ -54,7 +54,6 @@ class FavouriteViewModel(application: Application) : BaseViewModel(application) 
                     setDialogVisibility(false)
                 }, error = {
                     checkError(it)
-                    setDialogVisibility(false)
                 }
 
             )
@@ -76,7 +75,6 @@ class FavouriteViewModel(application: Application) : BaseViewModel(application) 
                 }, error = {
 
                     checkError(it)
-                    setDialogVisibility(false)
                 }
             )
         }

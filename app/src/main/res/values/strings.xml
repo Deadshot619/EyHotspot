@@ -117,6 +117,7 @@
     <string name="add_remarks_label">Add your remarks / feedbacks here</string>
     <string name="cancel_label">Cancel</string>
     <string name="submit_feedback_label">Submit Feedback</string>
+    <string name="enter_remark_error_label">Please provide feedback</string>
 
     <!--Raise Complaint-->
     <string name="explain_problem_label">Explain your problem in detail here</string>

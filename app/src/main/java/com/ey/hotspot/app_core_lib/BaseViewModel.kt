@@ -4,21 +4,27 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.ey.hotspot.utils.Event
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 
 
 open class BaseViewModel(application: Application) : AndroidViewModel(application) {
+    //create a local app instance
     protected val appInstance: Application by lazy { application }
 
     private val viewModelJob = Job()
     protected val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-    /*  Error Text  */
-    protected val _errorText = MutableLiveData<String>()
-    val errorText: LiveData<String>
-        get() = _errorText
+    /*  Toast message  */
+    protected val _toastMessage = MutableLiveData<Event<String?>>()
+    val toastMessage: LiveData<Event<String?>>
+        get() = _toastMessage
+
+    //used to store duration of toast message
+    var toastMessageDuration: Boolean = false
+        private set
 
     //    Dialog Message
     private val _dialogMessage = MutableLiveData<String>()
@@ -39,9 +45,9 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
         _dialogVisibility.value = false
         e.message?.let {
             if (it.contains("500") || it.contains("Socket"))
-                _errorText.value = "No Internet Connection $it"
+                showToastFromViewModel("No Internet Connection $it", true)
             else
-                _errorText.value = it
+                showToastFromViewModel(it, true)
         }
     }
 
@@ -56,7 +62,16 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
         _dialogMessage.value = message
     }
 
-
+    /**
+     * Method to show a toast from viewModel
+     *
+     * @param durationLong Determines duration of Toast
+     * @param message The message to be shown in Toast
+     */
+    protected fun showToastFromViewModel(message: String?, durationLong: Boolean = false){
+        _toastMessage.value = Event(message)
+        toastMessageDuration = durationLong
+    }
 
     override fun onCleared() {
         super.onCleared()

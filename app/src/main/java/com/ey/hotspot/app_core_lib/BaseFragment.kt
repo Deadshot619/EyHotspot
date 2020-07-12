@@ -46,8 +46,10 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
      */
     private fun setUpObservers(){
 //        Error Text
-        mViewModel.errorText.observe(viewLifecycleOwner, Observer {
-            showMessage(it, true)
+        mViewModel.toastMessage.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let {  msg ->
+                showMessage(msg, mViewModel.toastMessageDuration)
+            }
         })
 
         //Dialog Visibility
