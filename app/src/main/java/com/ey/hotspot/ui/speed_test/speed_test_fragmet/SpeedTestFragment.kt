@@ -22,7 +22,7 @@ class SpeedTestFragment : BaseFragment<FragmentSpeedTestBinding, SpeedTestFragme
         activity?.setUpToolbar(
             mBinding.toolbarLayout,
             resources.getString(R.string.speed_test_label),
-            true,
+            false,
             showTextButton = true
         )
 

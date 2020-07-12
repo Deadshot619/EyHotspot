@@ -52,9 +52,10 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
                         Timber.tag("Bearer_Token").d(it.data.accessToken)
 
                         updateSharedPreference(it.data)
+                    } else {
+                        setDialogVisibility(false)
                     }
 
-                    setDialogVisibility(false)
                 },
                 error = {
                     checkError(it)
