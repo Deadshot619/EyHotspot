@@ -215,11 +215,13 @@ object DataProvider : RemoteDataProvider {
         success: (BaseResponse<Any>) -> Unit,
         error: (Exception) -> Unit
     ) {
-        try {
-            val result = mServices.fetchReviewsAndComplaints().await()
-            success(result)
-        } catch (e: Exception) {
-            error(e)
+        withContext(Dispatchers.Main) {
+            try {
+                val result = mServices.fetchReviewsAndComplaints().await()
+                success(result)
+            } catch (e: Exception) {
+                error(e)
+            }
         }
     }
 
@@ -227,11 +229,13 @@ object DataProvider : RemoteDataProvider {
         success: (BaseResponse<Any>) -> Unit,
         error: (Exception) -> Unit
     ) {
-        try {
-            val result = mServices.fetchComplaintsIssueType().await()
-            success(result)
-        } catch (e: Exception) {
-            error(e)
+        withContext(Dispatchers.Main) {
+            try {
+                val result = mServices.fetchComplaintsIssueType().await()
+                success(result)
+            } catch (e: Exception) {
+                error(e)
+            }
         }
     }
 
@@ -240,11 +244,14 @@ object DataProvider : RemoteDataProvider {
         success: (BaseResponse<Any>) -> Unit,
         error: (Exception) -> Unit
     ) {
-        try {
-            val result = mServices.apiAddReview().await()
-            success(result)
-        } catch (e: Exception) {
-            error(e)
+
+        withContext(Dispatchers.Main) {
+            try {
+                val result = mServices.apiAddReview().await()
+                success(result)
+            } catch (e: Exception) {
+                error(e)
+            }
         }
     }
 
@@ -253,11 +260,13 @@ object DataProvider : RemoteDataProvider {
         success: (BaseResponse<Any>) -> Unit,
         error: (Exception) -> Unit
     ) {
-        try {
-            val result = mServices.apiAddComplaint().await()
-            success(result)
-        } catch (e: Exception) {
-            error(e)
+        withContext(Dispatchers.Main) {
+            try {
+                val result = mServices.apiAddComplaint().await()
+                success(result)
+            } catch (e: Exception) {
+                error(e)
+            }
         }
     }
 
