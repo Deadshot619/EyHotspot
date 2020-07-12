@@ -1,5 +1,8 @@
 package com.ey.hotspot.app_core_lib
 
+import android.content.Context
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +15,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.ey.hotspot.R
 import com.ey.hotspot.databinding.LayoutCustomToolbarBinding
 import com.ey.hotspot.databinding.LayoutCustomToolbarSearchbarBinding
+import com.ey.hotspot.utils.MyHotSpotSharedPreference
 import com.ey.hotspot.utils.showKeyboard
 import com.ey.hotspot.utils.showMessage
+import com.ey.stringlocalization.utils.LanguageManager
 
 abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment(),
     UICallbacks<V> {
@@ -143,4 +148,8 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
                 }
         }
     }
+
+
+
+
 }
