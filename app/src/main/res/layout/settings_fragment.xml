@@ -99,6 +99,7 @@
                         android:text="@string/language_label" />
 
                     <ImageView
+                        android:id="@+id/ivChangeLanguage"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.5"
