@@ -58,7 +58,7 @@ class SettingsFragment : BaseFragment<SettingsFragmentBinding, SettingsViewModel
 
         mBinding.ivChangeLanguage.setOnClickListener {
 
-            if (toggleChangeLanguage) {
+            /*if (toggleChangeLanguage) {
 
 
                 mBinding.ivChangeLanguage.resources.getDrawable(R.drawable.ic_active_switch)
@@ -80,6 +80,18 @@ class SettingsFragment : BaseFragment<SettingsFragmentBinding, SettingsViewModel
 
                 toggleChangeLanguage = true
             }
+*/
+
+            val langType = HotSpotApp.prefs!!.getLanguage()
+            if (langType == Constants.ENGLISH_LANG) {
+                HotSpotApp.prefs!!.setLanguage(Constants.ARABIC_LANG)
+                restartApplication(requireActivity(), HotSpotApp.prefs!!)
+            } else if (langType == Constants.ARABIC_LANG) {
+
+                HotSpotApp.prefs!!.setLanguage(Constants.ENGLISH_LANG)
+                restartApplication(requireActivity(), HotSpotApp.prefs!!)
+            }
+
         }
     }
 
