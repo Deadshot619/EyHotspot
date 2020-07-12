@@ -22,7 +22,7 @@ fun Activity.setUpToolbar(
 
             }
         } else {
-            btnBack.visibility = View.GONE
+            btnBack.visibility = View.INVISIBLE
         }
 
         //If true, show Text Button, else hide it
@@ -32,7 +32,7 @@ fun Activity.setUpToolbar(
 //                this@setUpToolbar.onBackPressed()
             }
         } else {
-            tvTextButton.visibility = View.GONE
+            tvTextButton.visibility = View.INVISIBLE
         }
     }
 }
