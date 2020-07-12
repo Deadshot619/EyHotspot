@@ -106,6 +106,7 @@
 
     <!--Wifi Log List-->
     <string name="wifi_log_list_label">قائمة سجل واي فاي</string>
+    <string name="wifi_log_label">سجل واي فاي</string>
     <string name="date_label">تاريخ</string>
     <string name="name_label">اسم</string>
     <string name="date_wifi_log_label">تاريخ: %s</string>

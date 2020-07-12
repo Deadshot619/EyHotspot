@@ -206,6 +206,8 @@
                     android:id="@+id/cv_speed_test_logs"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    app:cardUseCompatPadding="true"
                     app:layout_constraintTop_toBottomOf="@id/cv_connecting_logs"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

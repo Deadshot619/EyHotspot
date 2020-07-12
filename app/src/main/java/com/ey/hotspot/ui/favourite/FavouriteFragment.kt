@@ -1,6 +1,7 @@
 package com.ey.hotspot.ui.favourite
 
-import androidx.recyclerview.widget.DividerItemDecoration
+import android.content.Intent
+import android.net.Uri
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ey.hotspot.R
@@ -64,18 +65,22 @@ class FavouriteFragment : BaseFragment<FavouriteFragmentBinding, FavouriteViewMo
 
             //Favourite
             override fun onClickAddFavourite(data: GetFavouriteItem) {
-                TODO("Not yet implemented")
+                mViewModel.markFavouriteItem(data.hotspot_id)
             }
 
             //Navigate Now
             override fun onClickNavigate(data: GetFavouriteItem) {
-                TODO("Not yet implemented")
+                val url = data.navigate_url
+
+                val i = Intent(Intent.ACTION_VIEW)
+                i.data = Uri.parse(url)
+                startActivity(i)
             }
         })
 
         recyclerView.run {
             layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
-            addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
+//            addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
             this.adapter = mAdapter
         }
     }

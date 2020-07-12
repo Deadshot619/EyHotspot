@@ -60,14 +60,11 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
     private fun setUpObservers() {
 
         mViewModel.toastMessage.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-
             it.getContentIfNotHandled()?.run {
                 if(this.contains("Validation errors.")){
                     showMessage(this,true)
                 }else{
-
                     showMessage(this, true)
-
                     replaceFragment(
                         fragment = EmailVerificationFragment.newInstance(),
                         addToBackStack = true,
@@ -81,9 +78,7 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
         })
 
         mViewModel.registrationResponse.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-
-
-            if (it.status == true) {
+            if (it.status) {
                 replaceFragment(
                     fragment = EmailVerificationFragment.newInstance(),
                     addToBackStack = true,
@@ -92,8 +87,6 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
             } else {
                 showMessage(it.message, true)
             }
-
-
         })
     }
 

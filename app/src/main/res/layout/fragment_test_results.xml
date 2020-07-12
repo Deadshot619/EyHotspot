@@ -78,7 +78,7 @@
                 app:layout_constraintTop_toBottomOf="@id/toolbarLayout"
                 app:layout_constraintVertical_bias="1"
                 app:sv_centerCircleColor="#D1A00D"
-                app:sv_centerCircleRadius="12dp"
+                app:sv_centerCircleRadius="10dp"
                 app:sv_startDegree="170"
                 app:sv_endDegree="370"
                 app:sv_image="@drawable/speed_indicator_bitmap"
