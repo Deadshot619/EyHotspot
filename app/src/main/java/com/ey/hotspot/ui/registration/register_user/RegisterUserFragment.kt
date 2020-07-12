@@ -58,7 +58,7 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
 
     private fun setUpObservers() {
 
-        mViewModel.errorText.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+        mViewModel.toastMessage.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             val homeIntent = Intent(activity, LoginActivity::class.java)
             startActivity(homeIntent)
         })

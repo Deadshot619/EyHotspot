@@ -1,7 +1,6 @@
 package com.ey.hotspot.ui.login.login_fragment
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ey.hotspot.app_core_lib.BaseViewModel
@@ -47,14 +46,9 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
                     if (it.status) {
                         _loginResponse.value = it
 
-                        Log.d("LoginSuccess", it.data.accessToken)
-                        _errorText.value = it.message
+                        showToastFromViewModel(it.message)
 
                         updateSharedPreference(it.data)
-
-                        Log.d(
-                            "GetAccessToken", HotSpotApp.prefs!!.getAccessToken()
-                        )
                     }
 
                     setDialogVisibility(false)

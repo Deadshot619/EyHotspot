@@ -52,7 +52,7 @@ class FavouriteViewModel(application: Application) : BaseViewModel(application) 
                     _markFavouriteResponse.value = it
                     Log.d("MarkResponse", "" + it)
                 }, error = {
-                    _errorText.value = it.message
+                    showToastFromViewModel(it.message!!)
                     Log.d("MarkResponse", "" + it)
                 }
 
@@ -70,7 +70,7 @@ class FavouriteViewModel(application: Application) : BaseViewModel(application) 
                     _getFavouriteResponse.value = it
                     Log.d("GetFavourite", "" + it)
                 }, error = {
-                    _errorText.value = it.message
+                    showToastFromViewModel(it.message!!)
                     Log.d("GetFavourite", "" + it)
                 }
             )

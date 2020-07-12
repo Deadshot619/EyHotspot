@@ -55,11 +55,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
                 showMessage(it.message, true)
             }
         })
-
-        mViewModel.errorText.observe(viewLifecycleOwner, Observer {
-
-            showMessage(it, false)
-        })
     }
 
     private fun setUpListeners() {

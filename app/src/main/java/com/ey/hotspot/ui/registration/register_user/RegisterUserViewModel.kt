@@ -1,7 +1,6 @@
 package com.ey.hotspot.ui.registration.register_user
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ey.hotspot.app_core_lib.BaseViewModel
@@ -22,7 +21,6 @@ class RegisterUserViewModel(application: Application) : BaseViewModel(applicatio
 
 
     private val _registrationResponse = MutableLiveData<RegistrationResponse>()
-
     val registrationResponse: LiveData<RegistrationResponse>
         get() = _registrationResponse
 
@@ -36,13 +34,11 @@ class RegisterUserViewModel(application: Application) : BaseViewModel(applicatio
                 success = {
 
 
-                    _errorText.value = it.message
+                    showToastFromViewModel(it.message)
 
 
                 }, error = {
-                    Log.d(
-                        "ErrorResponse", it.message
-                    )
+
                     checkError(it)
                 }
             )
