@@ -47,14 +47,11 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
                     if (it.status) {
                         _loginResponse.value = it
 
-                        Log.d("LoginSuccess", it.data.accessToken)
                         _errorText.value = it.message
 
                         updateSharedPreference(it.data)
 
-                        Log.d(
-                            "GetAccessToken", HotSpotApp.prefs!!.getAccessToken()
-                        )
+
                     }
 
                     setDialogVisibility(false)

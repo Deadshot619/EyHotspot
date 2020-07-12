@@ -34,7 +34,6 @@ class OTPVerificationFragment :
             mBinding.otpView.setOtpCompletionListener {
                 val otp: String = it
 
-                Log.d("OTP", otp)
             }
 
             mBinding.btnVerify.setOnClickListener {

@@ -38,9 +38,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
 
         if (HotSpotApp.prefs!!.getAppLoggedInStatus() == true) {
 
-            Log.d(
-                "GetAccessToken", HotSpotApp.prefs!!.getAccessToken()
-            )
+
             mBinding.mbLanguageSelection.visibility = View.GONE
 
             startActivity(Intent(this, BottomNavHomeActivity::class.java))

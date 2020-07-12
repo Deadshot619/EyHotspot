@@ -2,6 +2,7 @@ package com.ey.hotspot.ui.home.models
 
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.clustering.ClusterItem
+import kotlin.properties.Delegates
 
 class MyClusterItems : ClusterItem {
 
@@ -10,20 +11,48 @@ class MyClusterItems : ClusterItem {
     private val mTitle: String
     private val mSnippet: String
 
+    var mIsFavourite by Delegates.notNull<Boolean>()
+    lateinit var mNavigateURL: String
 
+    var mItemID:Int = 0
 
-    constructor(lat: Double, lng: Double) {
+    constructor(lat: Double, lng: Double, mItemID: Int) {
         mPosition = LatLng(lat, lng)
         mTitle = "";
         mSnippet = "";
+        this.mItemID = mItemID
     }
 
-    constructor(lat: Double, lng: Double, title: String, snippet: String) {
+    constructor(
+        lat: Double,
+        lng: Double,
+        title: String,
+        snippet: String
+
+    ) {
         mPosition = LatLng(lat, lng)
         mTitle = title
         mSnippet = snippet
+
     }
 
+
+    constructor(
+        lat: Double,
+        lng: Double,
+        title: String,
+        snippet: String,
+        isfavourite: Boolean,
+        navigateURL: String,
+        itemId:Int
+    ) {
+        mPosition = LatLng(lat, lng)
+        mTitle = title
+        mSnippet = snippet
+        mIsFavourite = isfavourite
+        mNavigateURL = navigateURL
+        mItemID =itemId
+    }
 
 
     override fun getSnippet(): String? {

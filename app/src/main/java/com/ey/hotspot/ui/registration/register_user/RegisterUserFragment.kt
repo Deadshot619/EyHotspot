@@ -10,7 +10,9 @@ import com.ey.hotspot.databinding.FragmentRegisterUserBinding
 import com.ey.hotspot.network.request.RegisterRequest
 import com.ey.hotspot.ui.login.LoginActivity
 import com.ey.hotspot.ui.login.permission.PermissionFragment
+import com.ey.hotspot.ui.registration.email_verification.EmailVerificationFragment
 import com.ey.hotspot.utils.replaceFragment
+import com.ey.hotspot.utils.showMessage
 import com.ey.hotspot.utils.validations.isEmailValid
 import com.ey.hotspot.utils.validations.isPasswordValid
 import com.ey.hotspot.utils.validations.isValidMobile
@@ -59,23 +61,37 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
     private fun setUpObservers() {
 
         mViewModel.errorText.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            val homeIntent = Intent(activity, LoginActivity::class.java)
-            startActivity(homeIntent)
+
+
+
+            if(it.contains("Validation errors.")){
+                showMessage(it,true)
+            }else{
+
+                showMessage(it, true)
+
+                replaceFragment(
+                    fragment = EmailVerificationFragment.newInstance(),
+                    addToBackStack = true,
+                    bundle = null
+                )
+            }
+
+
         })
 
         mViewModel.registrationResponse.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
 
-           /* showMessage(it.message, true)
-            if (it.status == true) {
-                showMessage(it.message, true)
-                val homeIntent = Intent(activity, LoginActivity::class.java)
-                startActivity(homeIntent)
 
+            if (it.status == true) {
+                replaceFragment(
+                    fragment = EmailVerificationFragment.newInstance(),
+                    addToBackStack = true,
+                    bundle = null
+                )
             } else {
                 showMessage(it.message, true)
-            }*/
-
-
+            }
 
 
         })
@@ -113,10 +129,8 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
         FacebookSdk.addLoggingBehavior(LoggingBehavior.INCLUDE_ACCESS_TOKENS)
 
         if (isLoggedIn()) {
-            Log.d("LoggedIn? :", "YES")
             // Show the Activity with the logged in user
         } else {
-            Log.d("LoggedIn? :", "NO")
             // Show the Home Activity
         }
     }
@@ -182,7 +196,6 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
             object : FacebookCallback<LoginResult?> {
                 override fun onSuccess(loginResult: LoginResult?) {
                     accessToken = loginResult?.accessToken.toString()
-                    Log.d("TokenLoginFacebook", accessToken)
                     Toast.makeText(
                         requireActivity(),
                         "Login Success" + accessToken,

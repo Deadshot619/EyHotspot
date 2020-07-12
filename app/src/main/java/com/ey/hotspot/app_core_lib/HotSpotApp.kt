@@ -33,7 +33,6 @@ class HotSpotApp :CoreApp() {
                 CoreApp.sharedPreferences = androidx.preference.PreferenceManager.getDefaultSharedPreferences(base)
                 prefs = MyHotSpotSharedPreference(base)
 
-                Log.d("Langu attachBase", prefs?.getLanguage())
                 super.attachBaseContext(LanguageManager.setLanguage(base, prefs?.getLanguage()))
 
             }else
@@ -47,7 +46,6 @@ class HotSpotApp :CoreApp() {
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        Log.d("on configuration", prefs?.getLanguage())
         LanguageManager.setLanguage(applicationContext, prefs?.getLanguage())
     }
 }

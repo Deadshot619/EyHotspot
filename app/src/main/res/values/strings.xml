@@ -199,6 +199,10 @@
     <string name="invalid_mobile">Invalid Mobile Number</string>
     <string name="invalid_password">Invalid Password</string>
     <string name="pwd_not_match">Passwords do not match</string>
+    <string name="registering_new_user">Registering the new user</string>
+    <string name="gettting_hotspots_list">Getting the Hotspots List</string>
+    <string name="getting_favourite_hotspot_list">Getting favourite hotspot list</string>
+    <string name="adding_favourite_list">Adding your favourite List</string>
 
 
     <!--Demo issue type string-->

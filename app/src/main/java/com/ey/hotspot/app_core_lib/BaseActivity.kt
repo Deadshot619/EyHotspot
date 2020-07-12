@@ -83,7 +83,6 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
     }
 
     fun restartApplication(context: Context?, thobeSharedPreference: MyHotSpotSharedPreference) {
-        Log.d("Langu", " --> " + thobeSharedPreference.getLanguage())
         LanguageManager.setLanguage(context!!, thobeSharedPreference.getLanguage())
         /**
          * restart the application for API > 25 otherwise just recreate

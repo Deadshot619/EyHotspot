@@ -1,10 +1,12 @@
 package com.ey.hotspot.ui.registration.email_verification
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AlertDialog
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentEmailVerificationBinding
+import com.ey.hotspot.ui.login.LoginActivity
 import com.ey.hotspot.ui.login.login_fragment.LoginFragment
 import com.ey.hotspot.utils.replaceFragment
 import kotlinx.android.synthetic.main.content_resend_link_dialog.view.*
@@ -39,7 +41,11 @@ class EmailVerificationFragment :
 
         mBinding.btnSignIn.setOnClickListener {
 
-            replaceFragment(fragment = LoginFragment.newInstance(),addToBackStack = false,bundle = null)
+            //replaceFragment(fragment = LoginFragment.newInstance(),addToBackStack = false,bundle = null)
+
+            val homeIntent = Intent(activity, LoginActivity::class.java)
+            startActivity(homeIntent)
+
         }
     }
 

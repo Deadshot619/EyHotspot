@@ -124,8 +124,6 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchActivityViewMod
 
                         }
                     } else {
-                        Log.d(TAG, "Current location is null. Using defaults.")
-                        Log.e(TAG, "Exception: %s", task.exception)
                         map?.moveCamera(
                             CameraUpdateFactory
                                 .newLatLngZoom(defaultLocation, DEFAULT_ZOOM.toFloat())

@@ -4,6 +4,7 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseViewModel
 import com.ey.hotspot.network.DataProvider
 import com.ey.hotspot.network.response.BaseResponse
@@ -43,17 +44,17 @@ class FavouriteViewModel(application: Application) : BaseViewModel(application) 
     }
 
     fun markFavouriteItem(markFavouriteRequest: MarkFavouriteRequest) {
-
+        setDialogVisibility(true,appInstance.getString(R.string.adding_favourite_list))
         coroutineScope.launch {
             DataProvider.markFavourite(
                 request = markFavouriteRequest,
                 success = {
 
                     _markFavouriteResponse.value = it
-                    Log.d("MarkResponse", "" + it)
+                    setDialogVisibility(false)
                 }, error = {
-                    _errorText.value = it.message
-                    Log.d("MarkResponse", "" + it)
+                    checkError(it)
+                    setDialogVisibility(false)
                 }
 
             )
@@ -63,15 +64,19 @@ class FavouriteViewModel(application: Application) : BaseViewModel(application) 
 
     private fun getFavouriteList() {
 
+        setDialogVisibility(true, appInstance.getString(R.string.getting_favourite_hotspot_list))
+
         coroutineScope.launch {
             DataProvider.getFavourite(
                 success = {
 
                     _getFavouriteResponse.value = it
-                    Log.d("GetFavourite", "" + it)
+                    setDialogVisibility(false)
+
                 }, error = {
-                    _errorText.value = it.message
-                    Log.d("GetFavourite", "" + it)
+
+                    checkError(it)
+                    setDialogVisibility(false)
                 }
             )
         }

@@ -39,6 +39,7 @@
                     android:textDirection="locale" />
 
                 <ImageView
+                    android:id="@+id/ivFavourites"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/margin_20"
                     android:layout_weight="0.5"
