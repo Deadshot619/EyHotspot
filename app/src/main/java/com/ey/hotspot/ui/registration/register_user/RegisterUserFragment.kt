@@ -60,12 +60,14 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
 
     private fun setUpObservers() {
 
+
         mViewModel.registrationResponse.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
 
 
             if (it.status == true) {
 
                 showMessage(it.message, true)
+
                 replaceFragment(
                     fragment = EmailVerificationFragment.newInstance(),
                     addToBackStack = true,
@@ -74,8 +76,6 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
             } else {
                 showMessage(it.message, true)
             }
-
-
         })
     }
 

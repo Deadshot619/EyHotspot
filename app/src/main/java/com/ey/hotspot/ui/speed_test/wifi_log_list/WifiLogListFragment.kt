@@ -32,7 +32,7 @@ class WifiLogListFragment : BaseFragment<FragmentWifiLogListBinding, WifiLogList
     private fun setUpRecyclerView(recyclerView: RecyclerView){
         //Setup Adapter
         mAdapter = WifiLogListAdapter(WifiLogListAdapter.OnClickListener {
-            replaceFragment(WifiLogFragment(), true)
+            replaceFragment(WifiLogFragment.newInstance(it.wifiSsid), true)
         })
 
         recyclerView.run {

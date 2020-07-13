@@ -122,8 +122,8 @@ fun Activity.checkLocationPermission(view: View, func: (Unit) -> Unit) {
         .withPermissions(
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 android.Manifest.permission.ACCESS_BACKGROUND_LOCATION
-                android.Manifest.permission.ACCESS_FINE_LOCATION
-                android.Manifest.permission.ACCESS_COARSE_LOCATION
+//                android.Manifest.permission.ACCESS_FINE_LOCATION
+//                android.Manifest.permission.ACCESS_COARSE_LOCATION
             } else {
                 android.Manifest.permission.ACCESS_FINE_LOCATION
                 android.Manifest.permission.ACCESS_COARSE_LOCATION
