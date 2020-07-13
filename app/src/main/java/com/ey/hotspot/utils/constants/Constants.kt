@@ -18,6 +18,7 @@ interface Constants {
 
         //Header
         const val HEADER_AUTHORIZATION = "Authorization"
+        const val HEADER_X_LOCALIZATION = "X-localization"
 
         //POST
         const val API_LOGIN = "login"

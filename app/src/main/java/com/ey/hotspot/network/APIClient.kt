@@ -4,6 +4,7 @@ import com.ey.hotspot.BuildConfig
 import com.ey.hotspot.app_core_lib.CoreApp
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.utils.constants.Constants.Companion.HEADER_AUTHORIZATION
+import com.ey.hotspot.utils.constants.Constants.Companion.HEADER_X_LOCALIZATION
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.readystatesoftware.chuck.ChuckInterceptor
@@ -42,6 +43,7 @@ class APIClient {
 
                     request = request.newBuilder()
                         .header(HEADER_AUTHORIZATION, value)    //Add Auth header
+                        .header(HEADER_X_LOCALIZATION, "${HotSpotApp.prefs?.getLanguage()}")
                         .build()
 
                     chain.proceed(request)
