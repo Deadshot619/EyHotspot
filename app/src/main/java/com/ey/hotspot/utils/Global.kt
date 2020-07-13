@@ -1,3 +1,3 @@
-package com.ey.stringlocalization.utils
+package com.ey.hotspot.utils
 
 var LANGUAGE = "en"

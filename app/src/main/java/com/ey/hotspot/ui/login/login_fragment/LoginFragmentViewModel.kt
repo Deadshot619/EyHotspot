@@ -1,7 +1,6 @@
 package com.ey.hotspot.ui.login.login_fragment
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ey.hotspot.app_core_lib.BaseViewModel
@@ -11,7 +10,6 @@ import com.ey.hotspot.network.request.LoginRequest
 import com.ey.hotspot.network.response.BaseResponse
 import com.ey.hotspot.network.response.LoginResponse
 import com.ey.hotspot.ui.login.logout.LogoutResponse
-import com.ey.hotspot.ui.login.logout.RefreshToken
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -31,8 +29,8 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
         get() = _logoutResponse
 
 
-    private val _refreshTokenResponse = MutableLiveData<BaseResponse<RefreshToken>>()
-    val refreshTokenResponse: LiveData<BaseResponse<RefreshToken>>
+    private val _refreshTokenResponse = MutableLiveData<BaseResponse<LoginResponse>>()
+    val refreshTokenResponse: LiveData<BaseResponse<LoginResponse>>
         get() = _refreshTokenResponse
 
 
@@ -94,10 +92,13 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
     }
 
 
-    private fun updateSharedPreference(loginResponse: LoginResponse?) {
+    private fun updateSharedPreference(loginResponse: LoginResponse) {
 
-        HotSpotApp.prefs?.saveAccessToken(loginResponse?.accessToken)
-        HotSpotApp.prefs?.setAppLoggedInStatus(true)
+        HotSpotApp.prefs?.run {
+            saveAccessToken(loginResponse.accessToken)
+            setAppLoggedInStatus(true)
+            setUserDataPref(loginResponse)
+        }
 
     }
 }
