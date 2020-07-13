@@ -72,7 +72,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
     private fun setUpObserver() {
         mViewModel.profileResponse.observe(viewLifecycleOwner, Observer {
                 it.getContentIfNotHandled()?.let {content ->
-                    showMessage(content.message, false)
+                    //showMessage(content.message, false)
                 }
         })
     }

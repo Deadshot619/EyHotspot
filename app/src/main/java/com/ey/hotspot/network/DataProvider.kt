@@ -15,6 +15,7 @@ import com.ey.hotspot.ui.login.logout.LogoutResponse
 import com.ey.hotspot.ui.login.logout.RefreshToken
 import com.ey.hotspot.ui.profile.fragment.model.ProfileResponse
 import com.ey.hotspot.ui.profile.fragment.model.UpdateProfileRequest
+import com.ey.hotspot.ui.registration.register_user.model.RegistrationResponse
 import com.google.gson.JsonArray
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -28,7 +29,7 @@ object DataProvider : RemoteDataProvider {
 
     override suspend fun registerUser(
         request: RegisterRequest,      //If there's a request
-        success: (BaseResponse<Any>) -> Unit,
+        success: (BaseResponse<RegistrationResponse>) -> Unit,
         error: (java.lang.Exception) -> Unit
     ) {
         withContext(Dispatchers.Main) {
@@ -44,7 +45,7 @@ object DataProvider : RemoteDataProvider {
 
     override suspend fun login(
         request: LoginRequest,
-        success: (BaseResponse<LoginResponse>) -> Unit,
+        success: (BaseResponse<LoginResponse?>) -> Unit,
         error: (Exception) -> Unit
     ) {
 

@@ -21,8 +21,8 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
     var emailId = ""
     var password = ""
 
-    private val _loginResponse = MutableLiveData<BaseResponse<LoginResponse>>()
-    val loginResponse: LiveData<BaseResponse<LoginResponse>>
+    private val _loginResponse = MutableLiveData<BaseResponse<LoginResponse?>>()
+    val loginResponse: LiveData<BaseResponse<LoginResponse?>>
         get() = _loginResponse
 
 
@@ -45,17 +45,17 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
                 request = loginRequest,
                 success = {
 
-                    if (it.status) {
-                        _loginResponse.value = it
 
-                        showToastFromViewModel(it.message)
 
-                        Timber.tag("Bearer_Token").d(it.data.accessToken)
+                    _loginResponse.value =it
 
-                        updateSharedPreference(it.data)
-                    } else {
-                        setDialogVisibility(false)
-                    }
+                    Timber.tag("Bearer_Token").d(it.data?.accessToken)
+                    updateSharedPreference(it.data)
+
+                    setDialogVisibility(false)
+
+
+
 
                 },
                 error = {
@@ -94,9 +94,9 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
     }
 
 
-    private fun updateSharedPreference(loginResponse: LoginResponse) {
+    private fun updateSharedPreference(loginResponse: LoginResponse?) {
 
-        HotSpotApp.prefs?.saveAccessToken(loginResponse.accessToken)
+        HotSpotApp.prefs?.saveAccessToken(loginResponse?.accessToken)
         HotSpotApp.prefs?.setAppLoggedInStatus(true)
 
     }

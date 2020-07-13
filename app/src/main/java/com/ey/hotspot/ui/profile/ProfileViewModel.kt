@@ -43,6 +43,7 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
                         lastName = it.data.lastname,
                         mobileNo = it.data.mobile_no,
                         emailId = it.data.email
+
                     )
 
                 //Hide dialog

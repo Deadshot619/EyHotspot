@@ -75,6 +75,8 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/first_name_label"
                 android:singleLine="true"
+                android:textDirection="locale"
+
                 android:text="@={viewModel.firstName}"
                 app:layout_constraintBottom_toBottomOf="@id/iv_name"
                 app:layout_constraintEnd_toStartOf="@+id/edt_last_name"
@@ -90,6 +92,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/last_name_label"
+                android:textDirection="locale"
+
                 android:text="@={viewModel.lastName}"
                 app:layout_constraintBottom_toBottomOf="@id/iv_name"
                 app:layout_constraintEnd_toEndOf="@id/iv_name"
@@ -126,6 +130,8 @@
                     style="@style/CustomEditText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:textDirection="locale"
+
                     android:background="@drawable/mobile_number_bitmap"
                     android:hint="@string/enter_register_mobile"
                     android:text="@={viewModel.mobileNumber}" />
@@ -161,6 +167,7 @@
                     style="@style/CustomEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textDirection="locale"
                     android:background="@drawable/email_id_bitmap"
                     android:hint="@string/email_id_hint"
                     android:text="@={viewModel.emailId}" />
@@ -185,7 +192,6 @@
                 style="@style/CustomTextField"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-
                 android:layout_marginTop="@dimen/common_margin_32"
                 app:layout_constraintEnd_toEndOf="@id/guideline_right"
                 app:layout_constraintStart_toStartOf="@id/guideline_left"
@@ -196,8 +202,9 @@
                     style="@style/CustomEditText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/password_bitmap"
+                    android:textDirection="locale"
 
+                    android:background="@drawable/password_bitmap"
                     android:hint="@string/enter_password"
                     android:text="@={viewModel.password}" />
 
@@ -231,6 +238,8 @@
                     style="@style/CustomEditText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:textDirection="locale"
+
                     android:background="@drawable/password_bitmap"
                     android:hint="@string/enter_confirm_password"
                     android:text="@={viewModel.confirmPassword}" />
@@ -245,6 +254,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_30"
                 android:gravity="center"
+                android:textDirection="locale"
+
                 android:text="@string/sign_agree_msg"
                 app:layout_constraintEnd_toEndOf="@id/guideline_right"
                 app:layout_constraintStart_toStartOf="@id/guideline_left"
@@ -258,6 +269,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/terms_condition"
+                android:textDirection="locale"
+
                 app:layout_constraintEnd_toEndOf="@id/guideline_right"
                 app:layout_constraintStart_toStartOf="@id/guideline_left"
                 app:layout_constraintTop_toBottomOf="@id/tvSignAgree" />
@@ -274,6 +287,8 @@
                 android:paddingEnd="@dimen/margin_60"
                 android:paddingBottom="@dimen/margin_10"
                 android:text="@string/get_started"
+                android:textDirection="locale"
+
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/text_size_15"
                 app:layout_constraintEnd_toEndOf="@+id/guideline_right"
@@ -306,6 +321,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="0.6"
+                    android:textDirection="locale"
+
                     android:gravity="center"
                     android:text="@string/or" />
 
@@ -326,6 +343,8 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="@drawable/ic_facebook_"
+                android:textDirection="locale"
+
                 app:layout_constraintBottom_toBottomOf="@+id/ivGoogleSignIn"
                 app:layout_constraintEnd_toStartOf="@+id/ivGoogleSignIn"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -338,6 +357,8 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="@dimen/common_margin_24"
+                android:textDirection="locale"
+
                 android:src="@drawable/ic_google_sign_in"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"

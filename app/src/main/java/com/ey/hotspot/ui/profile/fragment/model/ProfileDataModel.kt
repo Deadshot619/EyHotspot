@@ -4,5 +4,8 @@ data class ProfileDataModel (
     var firstName: String = "",
     var lastName: String = "",
     var mobileNo: String = "",
-    var emailId: String = ""
+    var emailId: String = "",
+    var password:String="",
+    var confirmPassword:String=""
+
 )

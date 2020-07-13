@@ -2,6 +2,7 @@ package com.ey.hotspot.ui.registration.register_user
 
 import android.content.Intent
 import android.graphics.Paint
+import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.ey.hotspot.R
@@ -59,31 +60,12 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
 
     private fun setUpObservers() {
 
-        mViewModel.toastMessage.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-
-            it.getContentIfNotHandled()?.run {
-                if(this.contains("Validation errors.")){
-                    showMessage(this,true)
-                }else{
-
-                    showMessage(this, true)
-
-                    replaceFragment(
-                        fragment = EmailVerificationFragment.newInstance(),
-                        addToBackStack = true,
-                        bundle = null
-                    )
-                }
-            }
-
-
-
-        })
-
         mViewModel.registrationResponse.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
 
 
             if (it.status == true) {
+
+                showMessage(it.message, true)
                 replaceFragment(
                     fragment = EmailVerificationFragment.newInstance(),
                     addToBackStack = true,
@@ -191,17 +173,29 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
 
     private fun facebookSign() {
 
-        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("email"));
+        LoginManager.getInstance().logInWithReadPermissions(
+            this,
+            Arrays.asList("public_profile", "email")
+        );
         LoginManager.getInstance().registerCallback(callbackManager,
             object : FacebookCallback<LoginResult?> {
                 override fun onSuccess(loginResult: LoginResult?) {
                     accessToken = loginResult?.accessToken.toString()
-                    Toast.makeText(
-                        requireActivity(),
-                        "Login Success" + accessToken,
-                        Toast.LENGTH_LONG
-                    )
-                        .show()
+
+                    val request = GraphRequest.newMeRequest(
+                        loginResult!!.accessToken
+                    ) { `object`, response ->
+                        Log.v("LoginActivity", response.toString())
+
+                        // Application code
+                        val email = `object`.getString("email")
+                        Toast.makeText(requireActivity(), "" + email, Toast.LENGTH_SHORT).show()
+
+                    }
+                    val parameters = Bundle()
+                    parameters.putString("fields", "id,name,email")
+                    request.parameters = parameters
+                    request.executeAsync()
                 }
 
                 override fun onCancel() {

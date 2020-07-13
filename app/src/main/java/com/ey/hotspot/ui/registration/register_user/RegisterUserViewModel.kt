@@ -39,13 +39,10 @@ class RegisterUserViewModel(application: Application) : BaseViewModel(applicatio
                 success = {
 
 
-                    showToastFromViewModel(it.message)
-
+                    _registrationResponse.value = it
                     setDialogVisibility(false)
 
                 }, error = {
-
-
                     checkError(it)
                 }
             )
@@ -53,8 +50,6 @@ class RegisterUserViewModel(application: Application) : BaseViewModel(applicatio
 
 
     }
-
-
 
 
 }

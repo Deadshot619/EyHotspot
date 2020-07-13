@@ -14,19 +14,20 @@ import com.ey.hotspot.ui.login.logout.LogoutResponse
 import com.ey.hotspot.ui.login.logout.RefreshToken
 import com.ey.hotspot.ui.profile.fragment.model.ProfileResponse
 import com.ey.hotspot.ui.profile.fragment.model.UpdateProfileRequest
+import com.ey.hotspot.ui.registration.register_user.model.RegistrationResponse
 import com.google.gson.JsonArray
 
 interface RemoteDataProvider {
     suspend fun registerUser(
         request: RegisterRequest,
-        success: (BaseResponse<Any>) -> Unit,
+        success: (BaseResponse<RegistrationResponse>) -> Unit,
         error: (Exception) -> Unit
     )
 
 
     suspend fun login(
         request: LoginRequest,
-        success: (BaseResponse<LoginResponse>) -> Unit,
+        success: (BaseResponse<LoginResponse?>) -> Unit,
         error: (Exception) -> Unit
     )
 

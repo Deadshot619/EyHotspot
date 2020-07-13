@@ -50,12 +50,16 @@
                     android:layout_width="0dp"
                     android:layout_height="@dimen/margin_20"
                     android:layout_weight="0.5"
+                    android:textDirection="locale"
+
                     android:src="@drawable/ic_fill_heart" />
 
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="@dimen/margin_20"
                     android:layout_weight="0.5"
+                    android:textDirection="locale"
+
                     android:src="@drawable/ic_group" />
 
             </LinearLayout>
@@ -72,6 +76,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_2"
+                    android:textDirection="locale"
+
                     android:outlineAmbientShadowColor="@color/colorGrayLight"
                     android:outlineSpotShadowColor="@color/colorGrayLight"
                     android:paddingTop="@dimen/margin_2"
@@ -120,6 +126,8 @@
                     android:layout_height="@dimen/margin_30"
                     android:layout_gravity="center"
                     android:layout_weight="0.8"
+                    android:textDirection="locale"
+
                     android:src="@drawable/baseline_share_24" />
 
 
@@ -135,6 +143,8 @@
                     android:text="@string/rate_now_label"
                     android:textColor="@color/colorPrimarySub"
                     android:textSize="@dimen/text_size_15"
+                    android:textDirection="locale"
+
                     card_view:cornerRadius="@dimen/margin_20" />
 
 
@@ -147,6 +157,8 @@
                     android:layout_weight="1.1"
                     android:background="@drawable/sign_btn_gradient"
                     android:text="@string/navigate_now_label"
+                    android:textDirection="locale"
+
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/text_size_15" />
 

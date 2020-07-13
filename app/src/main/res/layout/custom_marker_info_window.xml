@@ -44,7 +44,7 @@
                     android:layout_height="@dimen/margin_20"
                     android:layout_weight="0.5"
                     android:textDirection="locale"
-                    android:src="@drawable/ic_fill_heart" />
+                    android:src="@drawable/ic_gray_heart" />
 
                 <ImageView
                     android:layout_width="0dp"

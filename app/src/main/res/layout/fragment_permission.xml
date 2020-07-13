@@ -29,6 +29,8 @@
             android:layout_marginTop="@dimen/margin_50"
             android:layout_marginEnd="@dimen/margin_20"
             android:gravity="center"
+            android:textDirection="locale"
+
             android:text="@string/permission_description" />
 
 
@@ -37,6 +39,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_20"
+            android:textDirection="locale"
+
             android:layout_marginTop="@dimen/margin_10"
             android:text="@string/agree_terms" />
 
@@ -49,6 +53,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/margin_20"
             android:paddingEnd="@dimen/margin_30"
+
             android:paddingStart="@dimen/margin_30"
             android:background="@drawable/sign_btn_gradient"
             android:text="@string/submit_button"

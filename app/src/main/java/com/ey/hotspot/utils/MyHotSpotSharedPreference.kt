@@ -26,7 +26,7 @@ class MyHotSpotSharedPreference(context: Context) {
     }
 
     /*save user access token for api calls*/
-    fun saveAccessToken(value: String) {
+    fun saveAccessToken(value: String?) {
         CoreApp.sharedPreferences.edit().putString(ACCESS_TOKEN, value).apply()
     }
 

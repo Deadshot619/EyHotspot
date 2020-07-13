@@ -15,6 +15,7 @@ import com.ey.hotspot.ui.login.logout.LogoutResponse
 import com.ey.hotspot.ui.login.logout.RefreshToken
 import com.ey.hotspot.ui.profile.fragment.model.ProfileResponse
 import com.ey.hotspot.ui.profile.fragment.model.UpdateProfileRequest
+import com.ey.hotspot.ui.registration.register_user.model.RegistrationResponse
 import com.ey.hotspot.utils.constants.Constants
 import com.google.gson.JsonArray
 import kotlinx.coroutines.Deferred
@@ -28,10 +29,10 @@ interface APIInterface {
 
 
     @POST(Constants.API_REGISTRATION)
-    fun register(@Body registerRequest: RegisterRequest): Deferred<BaseResponse<Any>>
+    fun register(@Body registerRequest: RegisterRequest): Deferred<BaseResponse<RegistrationResponse>>
 
     @POST(Constants.API_LOGIN)
-    fun login(@Body loginRequest: LoginRequest): Deferred<BaseResponse<LoginResponse>>
+    fun login(@Body loginRequest: LoginRequest): Deferred<BaseResponse<LoginResponse?>>
 
     @GET(Constants.API_GET_USER_LIST)
     fun getUserList(): Deferred<JsonArray>

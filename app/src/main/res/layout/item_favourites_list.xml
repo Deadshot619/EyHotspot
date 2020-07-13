@@ -32,6 +32,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 tools:text="D-zone"
+                android:textDirection="locale"
                 android:text="@{data.provider_name}"
                 android:textColor="@color/colorGrayLight"
                 style="@style/TextAppearance.MaterialComponents.Headline5"
@@ -47,6 +48,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_favorite_filled_gray"
                 android:layout_margin="@dimen/common_margin_32"
+                android:textDirection="locale"
                 app:bindAddFavourite="@{data.favourite}"
                 app:layout_constraintTop_toTopOf="@id/iv_flag"
                 app:layout_constraintEnd_toStartOf="@id/iv_flag"
@@ -59,6 +61,8 @@
                 android:id="@+id/iv_flag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textDirection="locale"
+
                 android:src="@drawable/ic_group"
                 android:onClick="@{() -> clickListener.onClickReport(data)}"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -73,6 +77,8 @@
                 tools:text="Riyadh"
                 android:text="@{data.location}"
                 android:layout_marginTop="@dimen/common_margin_between_fields_6"
+                android:textDirection="locale"
+
                 app:layout_constraintTop_toBottomOf="@id/tv_wifi_ssid"
                 app:layout_constraintStart_toStartOf="@id/tv_wifi_ssid"/>
 
@@ -83,6 +89,8 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_size_14"
                 android:layout_marginTop="@dimen/common_margin_12"
+                android:textDirection="locale"
+
                 app:layout_constraintTop_toBottomOf="@id/tv_username"
                 app:layout_constraintStart_toStartOf="@id/tv_username"
                 app:layout_constraintEnd_toEndOf="@id/iv_flag"
@@ -122,6 +130,7 @@
                 android:textSize="@dimen/text_size_14"
                 android:layout_marginTop="@dimen/common_margin_12"
                 android:layout_marginEnd="@dimen/common_margin"
+                android:textDirection="locale"
                 app:layout_constraintTop_toBottomOf="@id/view_horizontal"
                 app:layout_constraintStart_toStartOf="@id/tv_address"
                 app:layout_constraintEnd_toStartOf="@id/guideline"
@@ -134,6 +143,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/baseline_share_24"
+                android:textDirection="locale"
+
                 app:layout_constraintStart_toStartOf="@id/tv_road_to"
                 app:layout_constraintTop_toTopOf="@id/btn_rate_now"
                 app:layout_constraintBottom_toBottomOf="@id/btn_rate_now"/>
@@ -146,6 +157,8 @@
                 style="@style/GradientButton"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
+                android:textDirection="locale"
+
                 app:layout_constraintTop_toTopOf="@id/btn_rate_now"
                 app:layout_constraintBottom_toBottomOf="@id/btn_rate_now"
                 app:layout_constraintEnd_toEndOf="parent"/>
@@ -158,6 +171,8 @@
                 style="@style/OutlinedButtonNormal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textDirection="locale"
+
                 android:layout_marginTop="@dimen/common_margin_between_fields"
                 android:layout_marginEnd="@dimen/common_margin_between_fields"
                 app:layout_constraintTop_toBottomOf="@id/tv_road_to"

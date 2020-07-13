@@ -9,161 +9,257 @@
             type="com.ey.hotspot.ui.profile.ProfileViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!--Toolbar-->
-        <include
-            android:id="@+id/toolbarLayout"
-            layout="@layout/layout_custom_toolbar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!--Toolbar-->
+            <include
+                android:id="@+id/toolbarLayout"
+                layout="@layout/layout_custom_toolbar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
-        <!--Name Hint-->
-        <TextView
-            android:id="@+id/tv_name_hint"
-            style="@style/EditTextHint"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/name_label"
-            app:layout_constraintBottom_toTopOf="@id/iv_name"
-            app:layout_constraintEnd_toEndOf="@id/iv_name"
-            app:layout_constraintStart_toStartOf="@id/iv_name"
-            app:layout_constraintTop_toTopOf="@id/iv_name" />
-
-        <!--Name View-->
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/common_margin_32"
-            android:scaleType="fitXY"
-            android:src="@drawable/user_bitmap"
-            app:layout_constraintEnd_toEndOf="@id/input_mobile_no"
-            app:layout_constraintStart_toStartOf="@id/input_mobile_no"
-            app:layout_constraintTop_toBottomOf="@+id/toolbarLayout" />
-
-        <!--First Name-->
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt_first_name"
-            style="@style/CustomEditTextFirstName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/first_name_label"
-            android:singleLine="true"
-            android:text="@={viewModel.profileData.firstName}"
-            app:layout_constraintBottom_toBottomOf="@id/iv_name"
-            app:layout_constraintEnd_toStartOf="@+id/edt_last_name"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="@id/iv_name"
-            app:layout_constraintTop_toTopOf="@id/iv_name" />
-
-        <!--Last Name-->
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt_last_name"
-            style="@style/CustomEditTextLastName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/last_name_label"
-            android:text="@={viewModel.profileData.lastName}"
-            app:layout_constraintBottom_toBottomOf="@id/iv_name"
-            app:layout_constraintEnd_toEndOf="@id/iv_name"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/edt_first_name"
-            app:layout_constraintTop_toTopOf="@id/iv_name" />
-
-        <!--EmailId Hint-->
-        <TextView
-            android:id="@+id/tv_mobile_no_hint"
-            style="@style/EditTextHint"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/mobile_number_label"
-            app:layout_constraintBottom_toTopOf="@id/input_mobile_no"
-            app:layout_constraintEnd_toEndOf="@id/input_mobile_no"
-
-            app:layout_constraintStart_toStartOf="@id/input_mobile_no"
-            app:layout_constraintTop_toTopOf="@id/input_mobile_no" />
-
-        <!--Mobile No-->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_mobile_no"
-            style="@style/CustomTextField"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:hintEnabled="false"
-            android:layout_marginStart="@dimen/common_margin_24"
-            android:layout_marginEnd="@dimen/common_margin_24"
-            android:layout_marginTop="@dimen/common_margin_32"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_name"
-            >
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edt_mobile_no"
-                style="@style/CustomEditText"
-                android:layout_width="match_parent"
+            <!--Name Hint-->
+            <TextView
+                android:id="@+id/tv_name_hint"
+                style="@style/EditTextHint"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/mobile_number_label"
-                android:text="@={viewModel.profileData.mobileNo}"
-                android:background="@drawable/mobile_number_bitmap"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:text="@string/name_label"
+                app:layout_constraintBottom_toTopOf="@id/iv_name"
+                app:layout_constraintEnd_toEndOf="@id/iv_name"
+                app:layout_constraintStart_toStartOf="@id/iv_name"
+                app:layout_constraintTop_toTopOf="@id/iv_name" />
 
-        <!--EmailId Hint-->
-        <TextView
-            android:id="@+id/tv_email_id_hint"
-            style="@style/EditTextHint"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/email_id_label"
-            app:layout_constraintBottom_toTopOf="@id/input_email_id"
-            app:layout_constraintEnd_toEndOf="@id/input_email_id"
-            app:layout_constraintStart_toStartOf="@id/input_email_id"
-            app:layout_constraintTop_toTopOf="@id/input_email_id" />
+            <!--Name View-->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_margin_32"
+                android:scaleType="fitXY"
+                android:src="@drawable/user_bitmap"
+                app:layout_constraintEnd_toEndOf="@id/input_mobile_no"
+                app:layout_constraintStart_toStartOf="@id/input_mobile_no"
+                app:layout_constraintTop_toBottomOf="@+id/toolbarLayout" />
 
-        <!--Email Id-->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_email_id"
-            style="@style/CustomTextField"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/common_margin_32"
-            app:hintEnabled="false"
-            app:layout_constraintEnd_toEndOf="@id/input_mobile_no"
-            app:layout_constraintStart_toStartOf="@id/input_mobile_no"
-            app:layout_constraintTop_toBottomOf="@id/input_mobile_no">
-
+            <!--First Name-->
             <com.google.android.material.textfield.TextInputEditText
-              android:id="@+id/edt_email"
+                android:id="@+id/edt_first_name"
+                style="@style/CustomEditTextFirstName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/first_name_label"
+                android:singleLine="true"
+                android:textDirection="locale"
+
+                android:text="@={viewModel.profileData.firstName}"
+                app:layout_constraintBottom_toBottomOf="@id/iv_name"
+                app:layout_constraintEnd_toStartOf="@+id/edt_last_name"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="@id/iv_name"
+                app:layout_constraintTop_toTopOf="@id/iv_name" />
+
+            <!--Last Name-->
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_last_name"
+                style="@style/CustomEditTextLastName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/last_name_label"
+                android:textDirection="locale"
+
+                android:text="@={viewModel.profileData.lastName}"
+                app:layout_constraintBottom_toBottomOf="@id/iv_name"
+                app:layout_constraintEnd_toEndOf="@id/iv_name"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/edt_first_name"
+                app:layout_constraintTop_toTopOf="@id/iv_name" />
+
+            <!--EmailId Hint-->
+            <TextView
+                android:id="@+id/tv_mobile_no_hint"
+                style="@style/EditTextHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mobile_number_label"
+                app:layout_constraintBottom_toTopOf="@id/input_mobile_no"
+                app:layout_constraintEnd_toEndOf="@id/input_mobile_no"
+
+                app:layout_constraintStart_toStartOf="@id/input_mobile_no"
+                app:layout_constraintTop_toTopOf="@id/input_mobile_no" />
+
+            <!--Mobile No-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_mobile_no"
+                style="@style/CustomTextField"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/common_margin_24"
+                android:layout_marginTop="@dimen/common_margin_32"
+                android:layout_marginEnd="@dimen/common_margin_24"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_name">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edt_mobile_no"
                     style="@style/CustomEditText"
-                android:layout_width="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textDirection="locale"
+
+                    android:background="@drawable/mobile_number_bitmap"
+                    android:hint="@string/mobile_number_label"
+                    android:text="@={viewModel.profileData.mobileNo}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!--EmailId Hint-->
+            <TextView
+                android:id="@+id/tv_email_id_hint"
+                style="@style/EditTextHint"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/email_id_bitmap"
-                android:text="@={viewModel.profileData.emailId}"
-                android:hint="@string/email_id_label" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:text="@string/email_id_label"
+                app:layout_constraintBottom_toTopOf="@id/input_email_id"
+                app:layout_constraintEnd_toEndOf="@id/input_email_id"
+                app:layout_constraintStart_toStartOf="@id/input_email_id"
+                app:layout_constraintTop_toTopOf="@id/input_email_id" />
 
-        <!--Update Profile-->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_update_profile"
-            style="@style/GradientButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/common_margin_32"
-            android:paddingTop="0dp"
-            android:paddingBottom="0dp"
-            android:text="@string/update_profile_label"
-            android:textSize="@dimen/text_size_14"
-            app:layout_constraintEnd_toEndOf="@id/input_email_id"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintTop_toBottomOf="@id/input_email_id" />
+            <!--Email Id-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_email_id"
+                style="@style/CustomTextField"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_margin_32"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="@id/input_mobile_no"
+                app:layout_constraintStart_toStartOf="@id/input_mobile_no"
+                app:layout_constraintTop_toBottomOf="@id/input_mobile_no">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edt_email"
+                    style="@style/CustomEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textDirection="locale"
+
+                    android:background="@drawable/email_id_bitmap"
+                    android:hint="@string/email_id_label"
+                    android:text="@={viewModel.profileData.emailId}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <!--Password Hint-->
+            <TextView
+                android:id="@+id/tv_password_hint"
+                style="@style/EditTextHint"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/password_label"
+                app:layout_constraintBottom_toTopOf="@id/password_input_layout"
+                app:layout_constraintEnd_toEndOf="@id/password_input_layout"
+                app:layout_constraintStart_toStartOf="@id/password_input_layout"
+                app:layout_constraintTop_toTopOf="@id/password_input_layout" />
+
+
+            <!--Password input-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/password_input_layout"
+                style="@style/CustomTextField"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+
+                android:layout_marginTop="@dimen/common_margin_32"
+                app:layout_constraintEnd_toEndOf="@id/input_email_id"
+                app:layout_constraintStart_toStartOf="@id/input_email_id"
+                app:layout_constraintTop_toBottomOf="@id/input_email_id">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edt_password"
+                    style="@style/CustomEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/password_bitmap"
+                    android:hint="@string/enter_password"
+                    android:text="@={viewModel.profileData.password}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <!--Confirm Password Hint-->
+            <TextView
+                android:id="@+id/tv_confirm_password_hint"
+                style="@style/EditTextHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+
+                android:text="@string/confirm_password_label"
+                app:layout_constraintBottom_toTopOf="@id/confirm_password_input_layout"
+                app:layout_constraintEnd_toEndOf="@id/confirm_password_input_layout"
+                app:layout_constraintStart_toStartOf="@id/confirm_password_input_layout"
+                app:layout_constraintTop_toTopOf="@id/confirm_password_input_layout" />
+
+
+            <!-- Confirm Password input-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/confirm_password_input_layout"
+                style="@style/CustomTextField"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+
+                android:layout_marginTop="@dimen/common_margin_32"
+                app:layout_constraintEnd_toEndOf="@id/password_input_layout"
+                app:layout_constraintStart_toStartOf="@id/password_input_layout"
+                app:layout_constraintTop_toBottomOf="@id/password_input_layout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edt_confirm_password"
+                    style="@style/CustomEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/password_bitmap"
+                    android:hint="@string/enter_confirm_password"
+                    android:text="@={viewModel.profileData.confirmPassword}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <!--Update Profile-->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_update_profile"
+                style="@style/GradientButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_margin_32"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:text="@string/update_profile_label"
+                android:textSize="@dimen/text_size_14"
+                android:textDirection="locale"
+
+                app:layout_constraintEnd_toEndOf="@id/confirm_password_input_layout"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintTop_toBottomOf="@id/confirm_password_input_layout" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
 </layout>
