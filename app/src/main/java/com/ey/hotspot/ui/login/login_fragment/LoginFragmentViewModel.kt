@@ -44,14 +44,15 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
                 success = {
 
 
+                    if(it.status) {
+                        _loginResponse.value = it
 
-                    _loginResponse.value =it
+                        Timber.tag("Bearer_Token").d(it.data?.accessToken)
+                        updateSharedPreference(it.data!!)
 
-                    Timber.tag("Bearer_Token").d(it.data?.accessToken)
-                    updateSharedPreference(it.data)
-
-                    setDialogVisibility(false)
-
+                    }else{
+                        setDialogVisibility(false)
+                    }
 
 
 
