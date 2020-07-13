@@ -35,6 +35,7 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
         }
 
 
+//        showMessage(HotSpotApp.prefs?.getUserDataPref()?.accessToken ?: "")
     }
 
     private fun startWifiCheckService() {

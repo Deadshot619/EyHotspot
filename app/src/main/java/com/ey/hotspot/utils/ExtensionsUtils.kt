@@ -16,6 +16,8 @@ import androidx.fragment.app.Fragment
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseActivity
 import com.google.android.material.snackbar.Snackbar
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
@@ -165,3 +167,11 @@ fun Activity.checkLocationPermission(view: View, func: (Unit) -> Unit) {
         }).check()
 }
 
+/**
+ * This method will a json string as input & return an object of specified type
+ */
+inline fun <reified T> Gson.fromJson(json: String) = try{
+    fromJson<T>(json, object: TypeToken<T>() {}.type)
+}catch (e: java.lang.Exception){
+    null
+}

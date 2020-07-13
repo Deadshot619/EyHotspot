@@ -10,12 +10,14 @@ interface Constants {
 
         //SharedPreference
 
-        const val  ACCESS_TOKEN:String="access_token"
-        const val  APP_LOGGED_IN:String ="app_logged_in"
-
+        const val ACCESS_TOKEN: String = "access_token"
+        const val APP_LOGGED_IN: String = "app_logged_in"
+        const val USER_DATA = "user_data"
 
         //APIS
 
+        //Header
+        const val HEADER_AUTHORIZATION = "Authorization"
 
         //POST
         const val API_LOGIN = "login"
@@ -24,10 +26,10 @@ interface Constants {
         const val API_LOGOUT = "logout"
         const val API_REFRESH_TOKEN = "refreshToken"
         const val API_UPDATE_PROFILE = "updateProfile"
-        const val API_GET_HOTPSOT="getHotspots"
-        const val API_GET_USER_HOTSPOT_LIST="getUsersHotspots"
-        const val API_MARK_FAVOURITE="markFavourites"
-        const val API_FAVOURITE_LIST="getFavourites"
+        const val API_GET_HOTPSOT = "getHotspots"
+        const val API_GET_USER_HOTSPOT_LIST = "getUsersHotspots"
+        const val API_MARK_FAVOURITE = "markFavourites"
+        const val API_FAVOURITE_LIST = "getFavourites"
         const val API_ADD_REVIEW = "addReview"
         const val API_ADD_COMPLAINT = "addComplaint"
 

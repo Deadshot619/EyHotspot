@@ -11,7 +11,6 @@ import com.ey.hotspot.ui.home.models.GetHotSpotRequest
 import com.ey.hotspot.ui.home.models.GetHotSpotResponse
 import com.ey.hotspot.ui.home.models.GetUserHotSpotResponse
 import com.ey.hotspot.ui.login.logout.LogoutResponse
-import com.ey.hotspot.ui.login.logout.RefreshToken
 import com.ey.hotspot.ui.profile.fragment.model.ProfileResponse
 import com.ey.hotspot.ui.profile.fragment.model.UpdateProfileRequest
 import com.google.gson.JsonArray
@@ -46,8 +45,8 @@ interface RemoteDataProvider {
         error: (Exception) -> Unit
     )
 
-    suspend fun refreshToken(
-        success: (BaseResponse<RefreshToken>) -> Unit,
+     suspend fun refreshToken(
+        success: (BaseResponse<LoginResponse>) -> Unit,
         error: (Exception) -> Unit
     )
 

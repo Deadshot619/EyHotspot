@@ -1,6 +1,5 @@
 package com.ey.hotspot.network
 
-import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.network.request.LoginRequest
 import com.ey.hotspot.network.request.RegisterRequest
 import com.ey.hotspot.network.response.BaseResponse
@@ -12,7 +11,6 @@ import com.ey.hotspot.ui.home.models.GetHotSpotRequest
 import com.ey.hotspot.ui.home.models.GetHotSpotResponse
 import com.ey.hotspot.ui.home.models.GetUserHotSpotResponse
 import com.ey.hotspot.ui.login.logout.LogoutResponse
-import com.ey.hotspot.ui.login.logout.RefreshToken
 import com.ey.hotspot.ui.profile.fragment.model.ProfileResponse
 import com.ey.hotspot.ui.profile.fragment.model.UpdateProfileRequest
 import com.google.gson.JsonArray
@@ -110,20 +108,15 @@ object DataProvider : RemoteDataProvider {
     }
 
     override suspend fun refreshToken(
-        success: (BaseResponse<RefreshToken>) -> Unit,
+        success: (BaseResponse<LoginResponse>) -> Unit,
         error: (Exception) -> Unit
     ) {
-
-
-        withContext(Dispatchers.Main) {
             try {
-
-                val result = mServices.refreshToken().await()
+                val result = mServices.refreshTokenAsync().await()
                 success(result)
             } catch (e: Exception) {
                 error(e)
             }
-        }
     }
 
     override suspend fun updateProfile(
@@ -134,7 +127,7 @@ object DataProvider : RemoteDataProvider {
 
         try {
             val result =
-                mServices.updateProfile("Bearer  " + HotSpotApp.prefs!!.getAccessToken()!!, request)
+                mServices.updateProfile(request)
                     .await()
             success(result)
         } catch (e: Exception) {
@@ -149,7 +142,7 @@ object DataProvider : RemoteDataProvider {
     ) {
         try {
             val result =
-                mServices.getHotSpots("Bearer  " + HotSpotApp.prefs!!.getAccessToken()!!, request)
+                mServices.getHotSpots(request)
                     .await()
             success(result)
         } catch (e: Exception) {
@@ -164,7 +157,7 @@ object DataProvider : RemoteDataProvider {
     ) {
         try {
             val result = mServices.getUserHotSpot(
-                "Bearer  " + HotSpotApp.prefs!!.getAccessToken()!!,
+
                 request
             ).await()
             success(result)
@@ -183,7 +176,7 @@ object DataProvider : RemoteDataProvider {
         try {
 
             val result =
-                mServices.markFavourite("Bearer  " + HotSpotApp.prefs!!.getAccessToken()!!, request)
+                mServices.markFavourite(request)
                     .await()
 
             success(result)
@@ -200,7 +193,7 @@ object DataProvider : RemoteDataProvider {
 
         try {
             val result =
-                mServices.getFavourite("Bearer  " + HotSpotApp.prefs!!.getAccessToken()!!).await()
+                mServices.getFavourite().await()
             success(result)
 
         } catch (e: Exception) {
