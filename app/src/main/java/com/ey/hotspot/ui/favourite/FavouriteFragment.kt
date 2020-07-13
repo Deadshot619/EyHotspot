@@ -65,7 +65,7 @@ class FavouriteFragment : BaseFragment<FavouriteFragmentBinding, FavouriteViewMo
 
             //Favourite
             override fun onClickAddFavourite(data: GetFavouriteItem) {
-                mViewModel.markFavouriteItem(data.hotspot_id)
+                mViewModel.markFavouriteItem(data.id)
             }
 
             //Navigate Now
