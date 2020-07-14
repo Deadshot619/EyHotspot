@@ -20,7 +20,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
 
         supportActionBar?.title = getString(R.string.login_button)
 
-        addFragment(fragment = LoginFragment(), addToBackstack = true, bundle = null)
+        replaceFragment(fragment = LoginFragment(), addToBackstack = false, bundle = null)
 
     }
 }

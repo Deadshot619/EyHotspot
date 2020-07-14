@@ -4,7 +4,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
-import android.util.Log
 import android.view.View
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseActivity
@@ -62,7 +61,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
                 restartApplication(this, HotSpotApp.prefs!!)
             }
 
-            startActivity(Intent(this, BottomNavHomeActivity::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
             finish()
 
 
