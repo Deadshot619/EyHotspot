@@ -82,7 +82,7 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
     fun refreshToken() {
 
         coroutineScope.launch {
-            DataProvider.refreshToken(
+            DataProvider.refreshTokenAsync(
                 success = {
                     _refreshTokenResponse.value = it
                 }, error = {

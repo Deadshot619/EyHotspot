@@ -157,7 +157,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
                     val request = GraphRequest.newMeRequest(
                         loginResult!!.accessToken
                     ) { `object`, response ->
-                        Log.v("LoginActivity", response.toString())
 
                         // Application code
                         val email = `object`.getString("email")

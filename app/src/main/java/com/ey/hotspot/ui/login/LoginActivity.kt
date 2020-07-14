@@ -23,5 +23,4 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
         addFragment(fragment = LoginFragment(), addToBackstack = true, bundle = null)
 
     }
-
 }

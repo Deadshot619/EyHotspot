@@ -59,4 +59,15 @@ class MyHotSpotSharedPreference(context: Context) {
     fun getUserDataPref(): LoginResponse?{
         return Gson().fromJson<LoginResponse>(CoreApp.sharedPreferences.getString(USER_DATA, "") ?: "")
     }
+
+    fun deleteUserData(){
+        CoreApp.sharedPreferences.edit().remove(USER_DATA).apply()
+    }
+
+    /**
+     * Method to clear all shared pref data
+     */
+    fun clearSharedPrefData(){
+        CoreApp.sharedPreferences.edit().clear().apply()
+    }
 }

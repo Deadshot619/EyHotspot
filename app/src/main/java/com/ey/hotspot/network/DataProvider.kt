@@ -108,7 +108,7 @@ object DataProvider : RemoteDataProvider {
         }
     }
 
-    override suspend fun refreshToken(
+    override suspend fun refreshTokenAsync(
         success: (BaseResponse<LoginResponse>) -> Unit,
         error: (Exception) -> Unit
     ) {
@@ -118,6 +118,18 @@ object DataProvider : RemoteDataProvider {
             } catch (e: Exception) {
                 error(e)
             }
+    }
+
+    override fun refreshToken(
+        success: (BaseResponse<LoginResponse>) -> Unit,
+        error: (Exception) -> Unit
+    ) {
+        try {
+            val result: BaseResponse<LoginResponse> = mServices.refreshToken()
+            success(result)
+        } catch (e: Exception) {
+            error(e)
+        }
     }
 
     override suspend fun updateProfile(
