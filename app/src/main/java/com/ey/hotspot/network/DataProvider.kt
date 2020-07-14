@@ -2,6 +2,7 @@ package com.ey.hotspot.network
 
 import com.ey.hotspot.network.request.LoginRequest
 import com.ey.hotspot.network.request.RegisterRequest
+import com.ey.hotspot.network.request.SocialLoginRequest
 import com.ey.hotspot.network.response.BaseResponse
 import com.ey.hotspot.network.response.LoginResponse
 import com.ey.hotspot.ui.favourite.model.GetFavouriteItem
@@ -112,12 +113,12 @@ object DataProvider : RemoteDataProvider {
         success: (BaseResponse<LoginResponse>) -> Unit,
         error: (Exception) -> Unit
     ) {
-            try {
-                val result = mServices.refreshTokenAsync().await()
-                success(result)
-            } catch (e: Exception) {
-                error(e)
-            }
+        try {
+            val result = mServices.refreshTokenAsync().await()
+            success(result)
+        } catch (e: Exception) {
+            error(e)
+        }
     }
 
     override suspend fun updateProfile(
@@ -257,6 +258,23 @@ object DataProvider : RemoteDataProvider {
         withContext(Dispatchers.Main) {
             try {
                 val result = mServices.apiAddComplaint().await()
+                success(result)
+            } catch (e: Exception) {
+                error(e)
+            }
+        }
+    }
+
+    override suspend fun socialLogin(
+        request: SocialLoginRequest,
+        success: (BaseResponse<LoginResponse?>) -> Unit,
+        error: (Exception) -> Unit
+    ) {
+
+        withContext(Dispatchers.Main) {
+
+            try {
+                val result = mServices.socialLogin(request).await()
                 success(result)
             } catch (e: Exception) {
                 error(e)

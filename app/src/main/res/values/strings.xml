@@ -205,6 +205,12 @@
     <string name="gettting_hotspots_list">Getting the Hotspots List</string>
     <string name="getting_favourite_hotspot_list">Getting favourite hotspot list</string>
     <string name="adding_favourite_list">Adding your favourite List</string>
+    <string name="adding_in_favourite_list">Adding in your favourite list</string>
+    <string name="removing_from_favourite_list">Removing from your favourite list</string>
+    <string name="insufficient_data">Insufficient data</string>
+    <string name="google_provider">google</string>
+    <string name="google_sign_failed">Google Sign in failed</string>
+    <string name="facebook">facebook</string>
 
 
     <!--Demo issue type string-->

@@ -193,4 +193,10 @@
     <string name="gettting_hotspots_list">الحصول على قائمة النقاط الساخنة</string>
     <string name="getting_favourite_hotspot_list">الحصول على قائمة النقاط الساخنة المفضلة</string>
     <string name="adding_favourite_list">إضافة قائمتك المفضلة</string>
+    <string name="adding_in_favourite_list">إضافة في قائمتك المفضلة</string>
+    <string name="removing_from_favourite_list">إزالة من قائمة المفضلة لديك</string>
+    <string name="insufficient_data">البيانات غير كافية</string>
+    <string name="google_provider">google</string>
+    <string name="google_sign_failed">فشل تسجيل الدخول جوجل</string>
+    <string name="facebook">facebook</string>
 </resources>

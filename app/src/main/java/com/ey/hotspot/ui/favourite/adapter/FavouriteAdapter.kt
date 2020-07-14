@@ -57,9 +57,9 @@ class FavouriteAdapter(var searchList: ArrayList<GetFavouriteItem>) :
             providerName.text = country.provider_name
             name.text = country.name
             if (country.favourite) {
-                markFavourite.resources.getDrawable(R.drawable.ic_fill_heart)
+                markFavourite.setImageResource(R.drawable.ic_fill_heart)
             } else {
-                markFavourite.resources.getDrawable(R.drawable.ic_gray_heart)
+                markFavourite.setImageResource(R.drawable.ic_gray_heart)
             }
         }
     }

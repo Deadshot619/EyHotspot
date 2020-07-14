@@ -22,6 +22,8 @@ interface Constants {
 
         //POST
         const val API_LOGIN = "login"
+        const val API_SOCIAL_LOGIN="socialLogin"
+
         const val API_REGISTRATION = "register"
         const val API_GET_PROFILE = "getProfile"
         const val API_LOGOUT = "logout"

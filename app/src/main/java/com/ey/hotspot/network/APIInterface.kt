@@ -2,6 +2,7 @@ package com.ey.hotspot.network
 
 import com.ey.hotspot.network.request.LoginRequest
 import com.ey.hotspot.network.request.RegisterRequest
+import com.ey.hotspot.network.request.SocialLoginRequest
 import com.ey.hotspot.network.response.BaseResponse
 import com.ey.hotspot.network.response.LoginResponse
 import com.ey.hotspot.ui.favourite.model.GetFavouriteItem
@@ -30,6 +31,9 @@ interface APIInterface {
 
     @POST(Constants.API_LOGIN)
     fun login(@Body loginRequest: LoginRequest): Deferred<BaseResponse<LoginResponse?>>
+
+    @POST(Constants.API_SOCIAL_LOGIN)
+    fun socialLogin(@Body socialLoginRequest: SocialLoginRequest):Deferred<BaseResponse<LoginResponse?>>
 
     @GET(Constants.API_GET_USER_LIST)
     fun getUserList(): Deferred<JsonArray>

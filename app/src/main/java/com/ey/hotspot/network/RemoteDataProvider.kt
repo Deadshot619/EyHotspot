@@ -2,6 +2,7 @@ package com.ey.hotspot.network
 
 import com.ey.hotspot.network.request.LoginRequest
 import com.ey.hotspot.network.request.RegisterRequest
+import com.ey.hotspot.network.request.SocialLoginRequest
 import com.ey.hotspot.network.response.BaseResponse
 import com.ey.hotspot.network.response.LoginResponse
 import com.ey.hotspot.ui.favourite.model.GetFavouriteItem
@@ -101,6 +102,13 @@ interface RemoteDataProvider {
     suspend fun addComplaints(
 //        request:
         success: (BaseResponse<Any>) -> Unit,
+        error: (Exception) -> Unit
+    )
+
+
+    suspend fun  socialLogin(
+        request:SocialLoginRequest,
+        success: (BaseResponse<LoginResponse?>) -> Unit,
         error: (Exception) -> Unit
     )
 

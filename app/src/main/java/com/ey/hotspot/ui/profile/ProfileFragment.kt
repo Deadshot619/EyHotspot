@@ -7,7 +7,6 @@ import com.ey.hotspot.databinding.ProfileFragmentBinding
 import com.ey.hotspot.ui.profile.fragment.model.UpdateProfileRequest
 import com.ey.hotspot.ui.settings.fragments.SettingsFragment
 import com.ey.hotspot.utils.replaceFragment
-import com.ey.hotspot.utils.showMessage
 import com.ey.hotspot.utils.validations.isEmailValid
 import com.ey.hotspot.utils.validations.isValidMobile
 
@@ -55,7 +54,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
                     UpdateProfileRequest(
                         firstName = mViewModel.profileData.value!!.firstName,
                         lastName = mViewModel.profileData.value!!.lastName,
-                        mobileNo = mViewModel.profileData.value!!.mobileNo,
+                        mobileNo = mViewModel.profileData.value?.mobileNo,
                         countryCode = "91",
                         email = mViewModel.profileData.value!!.emailId
                     )
@@ -92,10 +91,10 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
                 } else if (!emailId.isEmailValid()) {
                     edtEmail.error = resources.getString(R.string.invalid_email_label)
                     false
-                } else if (!mobileNo.isValidMobile()) {
+                } /*else if (mobileNo?.isValidMobile()) {
                     edtMobileNo.error = resources.getString(R.string.invalid_mobile)
                     false
-                } else true
+                } */else true
             }
         } ?: return false
     }

@@ -2,6 +2,7 @@ package com.ey.hotspot.ui.login.login_fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils.isEmpty
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -9,6 +10,7 @@ import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentLoginBinding
 import com.ey.hotspot.network.request.LoginRequest
+import com.ey.hotspot.network.request.SocialLoginRequest
 import com.ey.hotspot.ui.home.BottomNavHomeActivity
 import com.ey.hotspot.ui.registration.register_user.RegisterUserFragment
 import com.ey.hotspot.ui.registration.registration_option.RegistrationOptionFragment
@@ -25,6 +27,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import org.json.JSONObject
 import java.util.*
 
 
@@ -83,6 +86,20 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
                 val homeIntent = Intent(activity, BottomNavHomeActivity::class.java)
                 startActivity(homeIntent)
                 activity?.finish()
+            } else {
+                showMessage(it.message, true)
+            }
+        })
+
+
+        mViewModel.socialLoginResponse.observe(viewLifecycleOwner, Observer {
+
+            if (it.status) {
+                showMessage(it.message, true)
+                val homeIntent = Intent(activity, BottomNavHomeActivity::class.java)
+                startActivity(homeIntent)
+                activity?.finish()
+
             } else {
                 showMessage(it.message, true)
             }
@@ -157,15 +174,22 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
                     val request = GraphRequest.newMeRequest(
                         loginResult!!.accessToken
                     ) { `object`, response ->
-                        Log.v("LoginActivity", response.toString())
 
-                        // Application code
-                        val email = `object`.getString("email")
-                        Toast.makeText(requireActivity(), "" + email, Toast.LENGTH_SHORT).show()
+                        if (checkFacebookResponse(`object`)) {
 
+                            val socialLoginRequest: SocialLoginRequest = SocialLoginRequest(
+                                `object`.getString("first_name"), `object`.getString("last_name"),
+                                `object`.getString("email"), resources.getString(R.string.facebook),
+                                `object`.getString("id"), accessToken
+                            )
+
+                            mViewModel.callSocialLogin(socialLoginRequest)
+                        } else {
+                            showMessage(resources.getString(R.string.insufficient_data), true)
+                        }
                     }
                     val parameters = Bundle()
-                    parameters.putString("fields", "id,name,email")
+                    parameters.putString("fields", "id,name,first_name,last_name,email")
                     request.parameters = parameters
                     request.executeAsync()
                 }
@@ -181,6 +205,47 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
                         .show()
                 }
             })
+    }
+
+    private fun checkFacebookResponse(jsonObject: JSONObject): Boolean {
+
+        var status: Boolean = false;
+        var id = "";
+        var firstName = "";
+        var lastName = "";
+        var email = ""
+        if (jsonObject.has("id")) {
+            id = jsonObject.getString("id")
+        }
+        if (jsonObject.has("first_name")) {
+            firstName = jsonObject.getString("first_name")
+        }
+        if (jsonObject.has("last_name")) {
+            lastName = jsonObject.getString("last_name")
+        }
+        if (jsonObject.has("email")) {
+            email = jsonObject.getString("email")
+        }
+
+
+        if ((id.isEmpty()) || (id.isBlank())) {
+            status = false
+        } else if ((firstName.isEmpty()) || (firstName.isBlank())) {
+            status = false
+
+        } else if ((lastName.isEmpty()) || (lastName.isBlank())) {
+            status = false
+
+        } else if ((email.isEmpty()) || (email.isBlank())) {
+            status = false
+
+        } else {
+            status = true
+        }
+
+        return status
+
+
     }
 
     private fun setUpFacebookLogin() {
@@ -228,6 +293,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
 
     private fun signIn() {
+
         val signInIntent = mGoogleSignInClient.signInIntent
         startActivityForResult(
             signInIntent, RC_SIGN_IN
@@ -278,24 +344,29 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
             )
             // Signed in successfully
             val googleId = account?.id ?: ""
-            Log.i("Google ID", googleId)
             val googleFirstName = account?.givenName ?: ""
-            Log.i("Google First Name", googleFirstName)
             val googleLastName = account?.familyName ?: ""
-            Log.i("Google Last Name", googleLastName)
             val googleEmail = account?.email ?: ""
-            Log.i("Google Email", googleEmail)
-            val googleProfilePicURL = account?.photoUrl.toString()
-            Log.i("Google Profile Pic URL", googleProfilePicURL)
             val googleIdToken = account?.idToken ?: ""
-            Log.i("Google ID Token", googleIdToken)
+
+
+            val socialLoginRequest: SocialLoginRequest = SocialLoginRequest(
+                googleFirstName,
+                googleLastName,
+                googleEmail,
+                resources.getString(R.string.google_provider),
+                googleId,
+                googleIdToken
+            )
+
+            mViewModel.callSocialLogin(socialLoginRequest)
+
 
         } catch (e: ApiException) {
-            // Sign in was unsuccessful
-            Log.e(
-                "failed code=", e.statusCode.toString()
-            )
+
+            showMessage(resources.getString(R.string.google_sign_failed), true)
         }
     }
+
 
 }

@@ -2,12 +2,14 @@ package com.ey.hotspot.ui.home.fragment
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.location.Location
 import android.net.Uri
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.lifecycle.Observer
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
@@ -57,6 +59,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
     private var lastKnownLocation: Location? = null
     private lateinit var mClusterManager: ClusterManager<MyClusterItems>
     private var clickedVenueMarker: MyClusterItems? = null
+
+
+    private var favouriteType: Boolean = false
 
 
     override fun getLayoutId(): Int {
@@ -139,6 +144,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             if (it.status == true) {
 
                 showMessage(it.message, true)
+
             } else {
                 showMessage(it.message, true)
             }
@@ -302,7 +308,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
         //TODO
     }
-
+        /* In this method  1. Showing  Custom Pop up window  along with toggle the mark as favourite option*/
     override fun onClusterItemClick(item: MyClusterItems?): Boolean {
 
 
@@ -315,17 +321,35 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
 
         if (clickedVenueMarker?.mIsFavourite == true) {
-            mBinding.customPop.ivFavourites.resources.getDrawable(R.drawable.ic_fill_heart)
+            mBinding.customPop.ivFavourites.setImageResource(R.drawable.ic_favorite_filled_red)
         } else {
-            mBinding.customPop.ivFavourites.resources.getDrawable(R.drawable.ic_gray_heart)
+            mBinding.customPop.ivFavourites.setImageResource(R.drawable.ic_favorite_filled_gray)
         }
 
         mBinding.customPop.ivFavourites.setOnClickListener {
 
+            val imgID1: Drawable.ConstantState? =
+                requireContext().getDrawable(R.drawable.ic_favorite_filled_gray)?.getConstantState()
+
+            val imgID2: Drawable.ConstantState? =
+                mBinding.customPop.ivFavourites.getDrawable().getConstantState()
+
+            if (imgID1 == imgID2) {
+                mBinding.customPop.ivFavourites.setImageResource(R.drawable.ic_favorite_filled_red)
+                favouriteType = true
+
+            } else {
+                mBinding.customPop.ivFavourites.setImageResource(R.drawable.ic_favorite_filled_gray)
+                favouriteType = false
+
+            }
+
+
             val markFavouriteRequest: MarkFavouriteRequest =
                 MarkFavouriteRequest(clickedVenueMarker!!.mItemID)
 
-            mViewModel.markFavouriteItem(markFavouriteRequest)
+            mViewModel.markFavouriteItem(markFavouriteRequest,favouriteType)
+
         }
 
         mBinding.customPop.btNavigate.setOnClickListener {

@@ -3,6 +3,7 @@ package com.ey.hotspot.ui.home.fragment
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseViewModel
 import com.ey.hotspot.network.DataProvider
 import com.ey.hotspot.network.response.BaseResponse
@@ -67,13 +68,20 @@ class HomeFragmentViewModel(application: Application) : BaseViewModel(applicatio
         }
     }
 
-    fun markFavouriteItem(markFavouriteRequest: MarkFavouriteRequest) {
+    fun markFavouriteItem(markFavouriteRequest: MarkFavouriteRequest,favouriteType:Boolean) {
+        if(favouriteType) {
+            setDialogVisibility(true, appInstance.getString(R.string.adding_in_favourite_list))
+        }else{
+            setDialogVisibility(true, appInstance.getString(R.string.removing_from_favourite_list))
+
+        }
         coroutineScope.launch {
             DataProvider.markFavourite(
                 request = markFavouriteRequest,
                 success = {
-
                     _markFavouriteResponse.value = it
+
+                    setDialogVisibility(false)
                 }, error = {
                     checkError(it)
                 }

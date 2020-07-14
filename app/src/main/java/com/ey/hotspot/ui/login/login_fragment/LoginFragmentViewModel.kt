@@ -1,12 +1,14 @@
 package com.ey.hotspot.ui.login.login_fragment
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ey.hotspot.app_core_lib.BaseViewModel
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.network.DataProvider
 import com.ey.hotspot.network.request.LoginRequest
+import com.ey.hotspot.network.request.SocialLoginRequest
 import com.ey.hotspot.network.response.BaseResponse
 import com.ey.hotspot.network.response.LoginResponse
 import com.ey.hotspot.ui.login.logout.LogoutResponse
@@ -34,6 +36,10 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
         get() = _refreshTokenResponse
 
 
+    private val _socialLoginRespinse = MutableLiveData<BaseResponse<LoginResponse?>>()
+    val socialLoginResponse: LiveData<BaseResponse<LoginResponse?>>
+        get() = _socialLoginRespinse
+
     //Call this method from fragment/layout
     fun callLogin(loginRequest: LoginRequest) {
         setDialogVisibility(true)
@@ -44,16 +50,15 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
                 success = {
 
 
-                    if(it.status) {
+                    if (it.status) {
                         _loginResponse.value = it
 
                         Timber.tag("Bearer_Token").d(it.data?.accessToken)
                         updateSharedPreference(it.data!!)
 
-                    }else{
+                    } else {
                         setDialogVisibility(false)
                     }
-
 
 
                 },
@@ -62,6 +67,29 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
                 }
             )
         }
+    }
+
+
+    fun callSocialLogin(socialLoginRequest: SocialLoginRequest) {
+        setDialogVisibility(true)
+        coroutineScope.launch {
+
+            DataProvider.socialLogin(
+                request = socialLoginRequest,
+                success = {
+                    setDialogVisibility(false)
+                    _socialLoginRespinse.value = it
+                    updateSharedPreference(it.data!!)
+
+                    Log.d("TOKEN",it.data.accessToken)
+
+                }, error = {
+                    checkError(it)
+                    setDialogVisibility(false)
+                }
+            )
+        }
+
     }
 
 
