@@ -47,7 +47,12 @@ interface RemoteDataProvider {
         error: (Exception) -> Unit
     )
 
-     suspend fun refreshToken(
+     suspend fun refreshTokenAsync(
+        success: (BaseResponse<LoginResponse>) -> Unit,
+        error: (Exception) -> Unit
+    )
+
+    fun refreshToken(
         success: (BaseResponse<LoginResponse>) -> Unit,
         error: (Exception) -> Unit
     )

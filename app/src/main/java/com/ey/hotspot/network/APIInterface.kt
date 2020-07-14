@@ -1,5 +1,6 @@
 package com.ey.hotspot.network
 
+import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.network.request.LoginRequest
 import com.ey.hotspot.network.request.RegisterRequest
 import com.ey.hotspot.network.request.SocialLoginRequest
@@ -20,6 +21,7 @@ import com.google.gson.JsonArray
 import kotlinx.coroutines.Deferred
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 
@@ -51,10 +53,14 @@ interface APIInterface {
 
     //Refresh Token
     @POST(Constants.API_REFRESH_TOKEN)
-    fun refreshTokenAsync(): Deferred<BaseResponse<LoginResponse>>
+    fun refreshTokenAsync(
+        @Header(Constants.HEADER_REFRESH_TOKEN) token: String = HotSpotApp.prefs?.getUserDataPref()?.refreshToken.toString()
+    ): Deferred<BaseResponse<LoginResponse>>
 
     @POST(Constants.API_REFRESH_TOKEN)
-    fun refreshToken(): Deferred<BaseResponse<LoginResponse>>
+    fun refreshToken(
+        @Header(Constants.HEADER_REFRESH_TOKEN) token: String = HotSpotApp.prefs?.getUserDataPref()?.refreshToken.toString()
+    ): BaseResponse<LoginResponse>
 
 
     @POST(Constants.API_UPDATE_PROFILE)
