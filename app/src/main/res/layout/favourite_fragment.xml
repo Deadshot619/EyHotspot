@@ -41,36 +41,6 @@
 -->
 
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_left"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="@dimen/margin_20" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_right"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_end="@dimen/margin_20" />
-
-
-        <!--
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvSearchList"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:textDirection="locale"
-
-                    android:layout_marginTop="@dimen/margin_20"
-                    android:layout_marginBottom="@dimen/margin_10"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/guideline_right"
-                    app:layout_constraintStart_toStartOf="@+id/guideline_left"
-                    app:layout_constraintTop_toBottomOf="@+id/toolbarLayout" />
-        -->
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvFavouriteWifiList"
             android:layout_width="0dp"
@@ -82,15 +52,17 @@
             app:listFavouriteWifiList="@{viewModel.getFavouriteResponse.data}"
             tools:listitem="@layout/item_favourites_list" />
 
-
-        <include
-            android:id="@+id/custom_empty_layout"
-            layout="@layout/custom_empty_message_layout"
+<!--        Empty List Error Text-->
+        <TextView
+            android:id="@+id/tv_empty_list_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:bindShowTextViewListEmpty="@{viewModel.getFavouriteResponse.data}"
+            app:bindShowEmptyListMessage="@{viewModel.getFavouriteResponse.message}"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/guideline_right"
-            app:layout_constraintStart_toEndOf="@id/guideline_left"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>

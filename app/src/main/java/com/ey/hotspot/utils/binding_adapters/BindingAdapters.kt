@@ -38,10 +38,10 @@ fun bindAddFavourite(appCompatImageView: AppCompatImageView, isFavourite: Boolea
  */
 @BindingAdapter("bindShowTextViewListEmpty", "bindShowEmptyListMessage")
 fun bindShowTextViewListEmpty(textView: TextView, list: List<Any>?, value: String?) {
-    if (list.isNullOrEmpty())
-        textView.visibility = View.GONE
-    else {
+    if (list.isNullOrEmpty()) {
         textView.visibility = View.VISIBLE
         textView.text = value
+    } else {
+        textView.visibility = View.VISIBLE
     }
 }
