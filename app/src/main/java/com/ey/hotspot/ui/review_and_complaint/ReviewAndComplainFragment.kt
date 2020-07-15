@@ -19,6 +19,7 @@ class ReviewAndComplainFragment : BaseFragment<FragmentReviewAndComplainBinding,
 
         setUpToolbar(toolbarBinding = mBinding.toolbarLayout, title = getString(R.string.reviews_and_complaint), showUpButton = false)
 
+        mBinding.toolbarLayout.toolbar.elevation = 0f
 
         setUpViewpager(viewPager = mBinding.viewpager)
 

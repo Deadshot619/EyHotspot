@@ -7,9 +7,6 @@ import android.location.Location
 import android.net.Uri
 import android.util.Log
 import android.view.View
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.lifecycle.Observer
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
@@ -21,10 +18,7 @@ import com.ey.hotspot.ui.home.models.GetHotSpotResponse
 import com.ey.hotspot.ui.home.models.GetUserHotSpotResponse
 import com.ey.hotspot.ui.home.models.MyClusterItems
 import com.ey.hotspot.ui.search.recentlysearch.RecentlySearchFragment
-import com.ey.hotspot.utils.checkLocationPermission
-import com.ey.hotspot.utils.isLocationEnabled
-import com.ey.hotspot.utils.replaceFragment
-import com.ey.hotspot.utils.showMessage
+import com.ey.hotspot.utils.*
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -93,7 +87,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         activity?.checkLocationPermission(view = mBinding.root, func = {
             locationPermissionGranted = true
             if (!requireActivity().isLocationEnabled()) {
-                checkGPSEnable()
+                activity?.turnOnGpsDialog()
             }
             updateLocationUI()
         })
@@ -116,8 +110,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
         mViewModel.getHotSpotResponse.observe(viewLifecycleOwner, Observer {
 
-            if (it.status == true) {
-
+            if (it.status) {
                 setupClusters()
                 setUpHotSpotData(it.data)
 
@@ -129,7 +122,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
         mViewModel.getUserHotSpotResponse.observe(viewLifecycleOwner, Observer {
 
-            if (it.status == true) {
+            if (it.status) {
 
                 setupClusters()
                 setUpUserHotSpotData(it.data)
@@ -203,7 +196,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
     private fun setUpClickListener() {
 
         this.map?.setOnMapClickListener(OnMapClickListener {
-            mBinding.customPop.llCustomPopMain.visibility = View.GONE
+            mBinding.customPop.cvMainLayout.visibility = View.GONE
         })
 
 //        Searchbar
@@ -239,8 +232,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                                     ), HomeFragment.DEFAULT_ZOOM.toFloat()
                                 )
                             )
-
-
                             getNearByWifiList()
                         }
                     } else {
@@ -320,15 +311,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
         //TODO
     }
-
-    /* In this method  1. Showing  Custom Pop up window  along with toggle the mark as favourite option*/
+        /* In this method  1. Showing  Custom Pop up window  along with toggle the mark as favourite option*/
     override fun onClusterItemClick(item: MyClusterItems?): Boolean {
 
 
         clickedVenueMarker = item;
 
-        mBinding.customPop.llCustomPopMain.visibility = View.VISIBLE
+        //Main cardview Layout
+        mBinding.customPop.cvMainLayout.visibility = View.VISIBLE
 
+        //Wifi Ssid
+        mBinding.customPop.tvWifiSsid.text = clickedVenueMarker?.title
         mBinding.customPop.tvWifiNameTitle.setText(clickedVenueMarker?.title)
         mBinding.customPop.tvOwenerName.setText(clickedVenueMarker?.mNavigateURL)
         mBinding.customPop.tvStreetAddress.setText(clickedVenueMarker?.mAddress)
@@ -367,7 +360,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
         }
 
-        mBinding.customPop.btNavigate.setOnClickListener {
+        //Navigate Now
+        mBinding.customPop.btnNavigateNow.setOnClickListener {
             val url = clickedVenueMarker?.snippet
 
             val i = Intent(Intent.ACTION_VIEW)
@@ -414,19 +408,5 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                 BitmapDescriptorFactory.fromResource(R.drawable.ic_wifi_signal)
             marker.setIcon(icon)
         }
-    }
-
-
-    private fun checkGPSEnable() {
-        AlertDialog.Builder(requireContext())
-            .setMessage("Your GPS seems to be disabled, do you want to enable it?")
-            .setCancelable(false)
-            .setPositiveButton("Yes") { dialog, id ->
-                startActivity(Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS))
-            }
-            .setNegativeButton("No") { dialog, id ->
-                dialog.cancel()
-            }
-            .show()
     }
 }

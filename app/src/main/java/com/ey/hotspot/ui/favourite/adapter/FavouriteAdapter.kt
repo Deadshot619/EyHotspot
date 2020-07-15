@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ey.hotspot.R
 import com.ey.hotspot.ui.favourite.model.GetFavouriteItem
-import com.ey.hotspot.ui.search.searchlist.model.SearchList
 import kotlinx.android.synthetic.main.item_favourites_list.view.*
 
 class FavouriteAdapter(var searchList: ArrayList<GetFavouriteItem>) :
@@ -49,7 +48,7 @@ class FavouriteAdapter(var searchList: ArrayList<GetFavouriteItem>) :
 
 
         val providerName = view.tv_wifi_ssid
-        val name = view.tv_username
+        val name = view.tv_location
         val navigate = view.btn_navigate_now
         val markFavourite = view.iv_favourites
         fun bind(country: GetFavouriteItem) {

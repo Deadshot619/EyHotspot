@@ -1,135 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
-
     </data>
 
-    <LinearLayout
-        android:id="@+id/llCustomPopMain"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_main_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_layout"
         android:visibility="gone"
-        android:orientation="vertical">
+        tools:visibility="visible"
+        app:cardCornerRadius="8dp"
+        android:elevation="1dp"
+        android:layout_margin="@dimen/common_margin">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_10"
-            android:orientation="vertical">
+            android:padding="@dimen/common_padding">
 
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <!--    Wifi Ssid   -->
+            <TextView
+                android:id="@+id/tv_wifi_ssid"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_5"
-                android:orientation="horizontal"
-                android:weightSum="3">
+                tools:text="D-zone"
+                android:textDirection="locale"
+                android:textColor="@color/colorGrayLight"
+                style="@style/TextAppearance.MaterialComponents.Headline5"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/iv_favourites"
+                />
 
-
-                <TextView
-                    android:id="@+id/tvWifiNameTitle"
-                    style="@style/TextAppearance.MyApp.Headline3_Profile_Large"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:textStyle="bold"
-                    android:textDirection="locale" />
-
-                <ImageView
-                    android:id="@+id/ivFavourites"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/margin_20"
-                    android:layout_weight="0.5"
-                    android:textDirection="locale"
-                    android:src="@drawable/ic_favorite_filled_gray" />
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/margin_20"
-                    android:layout_weight="0.5"
-                    android:textDirection="locale"
-
-                    android:src="@drawable/ic_group" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <!--heart-->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_favourites"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:src="@drawable/ic_favorite_filled_gray"
+                android:layout_margin="@dimen/common_margin_32"
+                android:textDirection="locale"
+                app:layout_constraintTop_toTopOf="@id/iv_flag"
+                app:layout_constraintEnd_toStartOf="@id/iv_flag"
+                app:layout_constraintStart_toEndOf="@id/tv_wifi_ssid"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintBottom_toBottomOf="@id/iv_flag"/>
 
-
-                <TextView
-                    android:id="@+id/tvOwenerName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_2"
-                    android:text="RIYAD"
-                    android:textDirection="locale" />
-
-                <TextView
-                    android:id="@+id/tvStreetAddress"
-                    android:layout_width="match_parent"
-                    android:textDirection="locale"
-                    android:layout_height="wrap_content"
-                    android:text="Olya St,Akaria Mall, Food Court,Riyadh 12244" />
-
-                <View
-
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_gravity="center"
-                    android:textDirection="locale"
-                    android:layout_margin="@dimen/margin_5"
-                    android:layout_weight="1"
-                    android:background="@color/colorGrayLight" />
-
-
-                <TextView
-                    android:id="@+id/tvVia"
-                    android:textDirection="locale"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:text="via Al Urubah Rd Arrival arround" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:paddingTop="@dimen/margin_10"
-                android:paddingBottom="@dimen/margin_10"
-                android:layout_width="match_parent"
+            <!--Flag-->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_flag"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:weightSum="2"
-                android:orientation="horizontal">
+                android:textDirection="locale"
+                android:src="@drawable/ic_group"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <!-- Service Provider Name-->
+            <TextView
+                android:id="@+id/tv_service_provider"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/ChipStyleTextView"
+                tools:text="AmazeNet"
+                android:textAllCaps="false"
+                android:layout_marginTop="@dimen/common_margin_between_fields_6"
+                app:layout_constraintTop_toBottomOf="@id/tv_wifi_ssid"
+                app:layout_constraintStart_toStartOf="@id/tv_wifi_ssid"/>
+
+            <!--Location-->
+            <TextView
+                android:id="@+id/tv_location"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_14"
+                android:layout_marginTop="@dimen/common_margin_12"
+                android:textAllCaps="true"
+                app:layout_constraintTop_toBottomOf="@id/tv_service_provider"
+                app:layout_constraintStart_toStartOf="@id/tv_service_provider"
+                app:layout_constraintEnd_toEndOf="@id/iv_flag"
+                tools:text="Riyadh"
+                android:textColor="@color/colorLightGray"
+                />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintGuide_percent="0.5"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!--Share-->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_share"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_share_24"
+                android:textDirection="locale"
+
+                app:layout_constraintStart_toStartOf="@id/tv_location"
+                app:layout_constraintTop_toTopOf="@id/btn_rate_now"
+                app:layout_constraintBottom_toBottomOf="@id/btn_rate_now"/>
 
 
-                <ImageView
-                    android:id="@+id/ivShareIT"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:src="@drawable/baseline_share_24" />
+            <!--Navigate Now-->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_navigate_now"
+                android:text="@string/navigate_now_label"
+                style="@style/GradientButton"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:textDirection="locale"
+
+                app:layout_constraintTop_toTopOf="@id/btn_rate_now"
+                app:layout_constraintBottom_toBottomOf="@id/btn_rate_now"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <!--Rate Now-->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_rate_now"
+                android:text="@string/rate_now_label"
+                style="@style/OutlinedButtonNormal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textDirection="locale"
+
+                android:layout_marginTop="@dimen/common_margin_between_fields"
+                android:layout_marginEnd="@dimen/common_margin_between_fields"
+                app:layout_constraintTop_toBottomOf="@id/tv_location"
+                app:layout_constraintEnd_toStartOf="@id/btn_navigate_now"/>
 
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btNavigate"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/sign_btn_gradient"
-                    android:paddingTop="@dimen/margin_15"
-                    android:paddingBottom="@dimen/margin_15"
-                    android:text="@string/navigate_label"
-                    android:textDirection="locale"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/txt_size_16" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
-            </LinearLayout>
 
-        </LinearLayout>
-    </LinearLayout>
 </layout>

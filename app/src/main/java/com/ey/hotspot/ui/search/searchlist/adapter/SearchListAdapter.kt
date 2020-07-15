@@ -39,7 +39,7 @@ class SearchListAdapter(var searchList:ArrayList<SearchList>):RecyclerView.Adapt
 
 
         private val userName = view.tv_wifi_ssid
-        private val userEmail = view.tv_username
+        private val userEmail = view.tv_location
         fun bind(country: SearchList) {
             userName.text = country.firstName + " " + country.lastName
             userEmail.text = country.email
