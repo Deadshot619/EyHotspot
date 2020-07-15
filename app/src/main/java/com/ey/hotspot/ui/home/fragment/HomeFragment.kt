@@ -311,7 +311,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
         //TODO
     }
-        /* In this method  1. Showing  Custom Pop up window  along with toggle the mark as favourite option*/
+
+    /* In this method  1. Showing  Custom Pop up window  along with toggle the mark as favourite option*/
     override fun onClusterItemClick(item: MyClusterItems?): Boolean {
 
 
@@ -322,9 +323,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
         //Wifi Ssid
         mBinding.customPop.tvWifiSsid.text = clickedVenueMarker?.title
-        mBinding.customPop.tvWifiNameTitle.setText(clickedVenueMarker?.title)
-        mBinding.customPop.tvOwenerName.setText(clickedVenueMarker?.mNavigateURL)
-        mBinding.customPop.tvStreetAddress.setText(clickedVenueMarker?.mAddress)
+        mBinding.customPop.tvServiceProvider.text = clickedVenueMarker?.mNavigateURL
+        mBinding.customPop.tvLocation.text = clickedVenueMarker?.mAddress
 
 
 
