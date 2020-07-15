@@ -165,8 +165,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                     location.provider_name,
                     location.navigate_url,
                     location.favourite,
-                    location.navigate_url,
-                    location.id
+                    location.name,
+                    location.id,
+                    location.location
 
                 )
             mClusterManager.addItem(offsetItems)
@@ -221,14 +222,25 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                         // Set the map's camera position to the current location of the device.
                         lastKnownLocation = task.result
                         if (lastKnownLocation != null) {
-                            map?.moveCamera(
+                            /*map?.moveCamera(
                                 CameraUpdateFactory.newLatLngZoom(
                                     LatLng(
                                         lastKnownLocation!!.latitude,
                                         lastKnownLocation!!.longitude
                                     ), HomeFragment.DEFAULT_ZOOM.toFloat()
                                 )
+                            )*/
+
+                            map?.moveCamera(
+                                CameraUpdateFactory.newLatLngZoom(
+                                    LatLng(
+                                        19.1431,
+                                        72.8105
+                                    ), HomeFragment.DEFAULT_ZOOM.toFloat()
+                                )
                             )
+
+
                             getNearByWifiList()
                         }
                     } else {
@@ -308,7 +320,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
         //TODO
     }
-        /* In this method  1. Showing  Custom Pop up window  along with toggle the mark as favourite option*/
+
+    /* In this method  1. Showing  Custom Pop up window  along with toggle the mark as favourite option*/
     override fun onClusterItemClick(item: MyClusterItems?): Boolean {
 
 
@@ -317,6 +330,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         mBinding.customPop.llCustomPopMain.visibility = View.VISIBLE
 
         mBinding.customPop.tvWifiNameTitle.setText(clickedVenueMarker?.title)
+        mBinding.customPop.tvOwenerName.setText(clickedVenueMarker?.mNavigateURL)
+        mBinding.customPop.tvStreetAddress.setText(clickedVenueMarker?.mAddress)
 
 
 
@@ -348,7 +363,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             val markFavouriteRequest: MarkFavouriteRequest =
                 MarkFavouriteRequest(clickedVenueMarker!!.mItemID)
 
-            mViewModel.markFavouriteItem(markFavouriteRequest,favouriteType)
+            mViewModel.markFavouriteItem(markFavouriteRequest, favouriteType)
 
         }
 
@@ -371,7 +386,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
     companion object {
         private val TAG = HomeFragment::class.java.simpleName
-        private const val DEFAULT_ZOOM = 7
+        private const val DEFAULT_ZOOM = 12
 
     }
 

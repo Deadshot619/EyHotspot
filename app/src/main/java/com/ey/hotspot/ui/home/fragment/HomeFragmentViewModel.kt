@@ -70,9 +70,9 @@ class HomeFragmentViewModel(application: Application) : BaseViewModel(applicatio
 
     fun markFavouriteItem(markFavouriteRequest: MarkFavouriteRequest,favouriteType:Boolean) {
         if(favouriteType) {
-            setDialogVisibility(true, appInstance.getString(R.string.adding_in_favourite_list))
+            setDialogVisibility(true,null)
         }else{
-            setDialogVisibility(true, appInstance.getString(R.string.removing_from_favourite_list))
+            setDialogVisibility(true, null)
 
         }
         coroutineScope.launch {

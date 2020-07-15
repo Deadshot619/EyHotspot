@@ -199,4 +199,5 @@
     <string name="google_provider">google</string>
     <string name="google_sign_failed">فشل تسجيل الدخول جوجل</string>
     <string name="facebook">facebook</string>
+    <string name="no_data_available">لا تتوافر بيانات</string>
 </resources>

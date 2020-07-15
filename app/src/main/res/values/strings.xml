@@ -211,6 +211,7 @@
     <string name="google_provider">google</string>
     <string name="google_sign_failed">Google Sign in failed</string>
     <string name="facebook">facebook</string>
+    <string name="no_data_available">No data available</string>
 
 
     <!--Demo issue type string-->

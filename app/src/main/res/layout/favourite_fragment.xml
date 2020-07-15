@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.ey.hotspot.ui.favourite.FavouriteViewModel" />
 
-<!--        <variable-->
-<!--            name="viewModel"-->
-<!--            type="com.ey.hotspot.ui.favourite.fragment.FavouriteViewModel" />-->
+        <!--        <variable-->
+        <!--            name="viewModel"-->
+        <!--            type="com.ey.hotspot.ui.favourite.fragment.FavouriteViewModel" />-->
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,7 +29,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_left"
             android:layout_width="wrap_content"
@@ -44,32 +44,40 @@
             app:layout_constraintGuide_end="@dimen/margin_20" />
 
 
-<!--
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvSearchList"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:textDirection="locale"
+        <!--
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvSearchList"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:textDirection="locale"
 
-            android:layout_marginTop="@dimen/margin_20"
-            android:layout_marginBottom="@dimen/margin_10"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/guideline_right"
-            app:layout_constraintStart_toStartOf="@+id/guideline_left"
-            app:layout_constraintTop_toBottomOf="@+id/toolbarLayout" />
--->
+                    android:layout_marginTop="@dimen/margin_20"
+                    android:layout_marginBottom="@dimen/margin_10"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/guideline_right"
+                    app:layout_constraintStart_toStartOf="@+id/guideline_left"
+                    app:layout_constraintTop_toBottomOf="@+id/toolbarLayout" />
+        -->
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvFavouriteWifiList"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:listFavouriteWifiList="@{viewModel.getFavouriteResponse.data}"
-            tools:listitem="@layout/item_favourites_list"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbarLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbarLayout"
+            app:listFavouriteWifiList="@{viewModel.getFavouriteResponse.data}"
+            tools:listitem="@layout/item_favourites_list" />
 
+
+        <include
+            android:id="@+id/custom_empty_layout"
+            layout="@layout/custom_empty_message_layout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guideline_right"
+            app:layout_constraintStart_toEndOf="@id/guideline_left"
+            app:layout_constraintTop_toTopOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

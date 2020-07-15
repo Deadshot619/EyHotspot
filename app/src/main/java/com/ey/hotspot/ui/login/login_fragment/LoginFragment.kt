@@ -2,8 +2,6 @@ package com.ey.hotspot.ui.login.login_fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils.isEmpty
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.ey.hotspot.R
@@ -14,6 +12,7 @@ import com.ey.hotspot.network.request.SocialLoginRequest
 import com.ey.hotspot.ui.home.BottomNavHomeActivity
 import com.ey.hotspot.ui.registration.register_user.RegisterUserFragment
 import com.ey.hotspot.ui.registration.registration_option.RegistrationOptionFragment
+import com.ey.hotspot.utils.captcha.TextCaptcha
 import com.ey.hotspot.utils.constants.OptionType
 import com.ey.hotspot.utils.replaceFragment
 import com.ey.hotspot.utils.showMessage
@@ -73,6 +72,16 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
         setUpFacebookLogin()
         setuPGoogelSignIn()
+        setUpCaptcha()
+    }
+
+    private fun setUpCaptcha() {
+
+
+        val textCaptcha =
+            TextCaptcha(100, 50, 4, TextCaptcha.TextOptions.LETTERS_ONLY)
+        mBinding.ivCaptcha.setImageBitmap(textCaptcha.getImage());
+
     }
 
     private fun setUpObservers() {

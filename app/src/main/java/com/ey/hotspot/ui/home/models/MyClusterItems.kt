@@ -13,6 +13,7 @@ class MyClusterItems : ClusterItem {
 
     var mIsFavourite by Delegates.notNull<Boolean>()
     lateinit var mNavigateURL: String
+    lateinit var mAddress:String
 
     var mItemID:Int = 0
 
@@ -44,7 +45,8 @@ class MyClusterItems : ClusterItem {
         snippet: String,
         isfavourite: Boolean,
         navigateURL: String,
-        itemId:Int
+        itemId:Int,
+        address:String
     ) {
         mPosition = LatLng(lat, lng)
         mTitle = title
@@ -52,6 +54,7 @@ class MyClusterItems : ClusterItem {
         mIsFavourite = isfavourite
         mNavigateURL = navigateURL
         mItemID =itemId
+        mAddress=address
     }
 
 
@@ -67,4 +70,6 @@ class MyClusterItems : ClusterItem {
     override fun getPosition(): LatLng {
         return mPosition
     }
+
+
 }

@@ -43,7 +43,7 @@ class FavouriteViewModel(application: Application) : BaseViewModel(application) 
     }
 
     fun markFavouriteItem(locationId: Int) {
-        setDialogVisibility(true,appInstance.getString(R.string.adding_favourite_list))
+        setDialogVisibility(true,null)
         coroutineScope.launch {
             DataProvider.markFavourite(
                 request = MarkFavouriteRequest(locationId = locationId),
@@ -65,13 +65,14 @@ class FavouriteViewModel(application: Application) : BaseViewModel(application) 
 
     private fun getFavouriteList() {
 
-        setDialogVisibility(true, appInstance.getString(R.string.getting_favourite_hotspot_list))
+        setDialogVisibility(true,null)
 
         coroutineScope.launch {
             DataProvider.getFavourite(
                 success = {
 
                     _getFavouriteResponse.value = it
+
                     setDialogVisibility(false)
 
                 }, error = {
