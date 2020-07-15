@@ -69,31 +69,28 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
-            <!--Location-->
+            <!-- Service Provider Name-->
             <TextView
-                android:id="@+id/tv_username"
+                android:id="@+id/tv_service_provider"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/ChipStyleTextView"
                 tools:text="Riyadh"
                 android:text="@{data.location}"
                 android:layout_marginTop="@dimen/common_margin_between_fields_6"
-                android:textDirection="locale"
-
                 app:layout_constraintTop_toBottomOf="@id/tv_wifi_ssid"
                 app:layout_constraintStart_toStartOf="@id/tv_wifi_ssid"/>
 
-            <!--Address-->
+            <!--Location-->
             <TextView
-                android:id="@+id/tv_address"
+                android:id="@+id/tv_location"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_size_14"
                 android:layout_marginTop="@dimen/common_margin_12"
-                android:textDirection="locale"
-
-                app:layout_constraintTop_toBottomOf="@id/tv_username"
-                app:layout_constraintStart_toStartOf="@id/tv_username"
+                android:textAllCaps="true"
+                app:layout_constraintTop_toBottomOf="@id/tv_service_provider"
+                app:layout_constraintStart_toStartOf="@id/tv_service_provider"
                 app:layout_constraintEnd_toEndOf="@id/iv_flag"
                 tools:text="hola hola hola hola hola hola hola hola hola hola hola "
                 android:text="@{data.location}"
@@ -107,9 +104,9 @@
                 android:layout_height="0.5dp"
                 android:background="@color/colorLightGray"
                 android:layout_marginTop="@dimen/common_margin_between_fields"
-                app:layout_constraintTop_toBottomOf="@id/tv_address"
-                app:layout_constraintStart_toStartOf="@id/tv_address"
-                app:layout_constraintEnd_toEndOf="@id/tv_address"/>
+                app:layout_constraintTop_toBottomOf="@id/tv_location"
+                app:layout_constraintStart_toStartOf="@id/tv_location"
+                app:layout_constraintEnd_toEndOf="@id/tv_location"/>
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline"
@@ -133,7 +130,7 @@
                 android:layout_marginEnd="@dimen/common_margin"
                 android:textDirection="locale"
                 app:layout_constraintTop_toBottomOf="@id/view_horizontal"
-                app:layout_constraintStart_toStartOf="@id/tv_address"
+                app:layout_constraintStart_toStartOf="@id/tv_location"
                 app:layout_constraintEnd_toStartOf="@id/guideline"
                 tools:text="hola hola hola hola hola hola hola hola hola hola hola "
                 />

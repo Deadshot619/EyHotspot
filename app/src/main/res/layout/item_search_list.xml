@@ -4,7 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="data"
+            type="com.ey.hotspot.ui.favourite.model.GetFavouriteItem" />
 
+        <variable
+            name="clickListener"
+            type="com.ey.hotspot.ui.favourite.FavouriteListAdapter.OnClickListener" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -26,6 +32,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 tools:text="D-zone"
+                android:textDirection="locale"
+                android:text="@{data.provider_name}"
                 android:textColor="@color/colorGrayLight"
                 style="@style/TextAppearance.MaterialComponents.Headline5"
                 app:layout_constraintTop_toTopOf="parent"
@@ -38,8 +46,11 @@
                 android:id="@+id/iv_favourites"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_fill_heart"
+                android:src="@drawable/ic_favorite_filled_gray"
                 android:layout_margin="@dimen/common_margin_32"
+                android:textDirection="locale"
+                app:bindAddFavourite="@{data.favourite}"
+                android:onClick="@{() -> clickListener.onClickAddFavourite(data)}"
                 app:layout_constraintTop_toTopOf="@id/iv_flag"
                 app:layout_constraintEnd_toStartOf="@id/iv_flag"
                 app:layout_constraintStart_toEndOf="@id/tv_wifi_ssid"
@@ -51,32 +62,37 @@
                 android:id="@+id/iv_flag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textDirection="locale"
                 android:src="@drawable/ic_group"
+                android:onClick="@{() -> clickListener.onClickReport(data)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
-            <!--Username-->
+            <!-- Service Provider Name-->
             <TextView
-                android:id="@+id/tv_username"
+                android:id="@+id/tv_service_provider"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/ChipStyleTextView"
                 tools:text="Riyadh"
-                android:layout_marginTop="@dimen/common_margin_between_fields"
+                android:text="@{data.location}"
+                android:layout_marginTop="@dimen/common_margin_between_fields_6"
                 app:layout_constraintTop_toBottomOf="@id/tv_wifi_ssid"
                 app:layout_constraintStart_toStartOf="@id/tv_wifi_ssid"/>
 
-            <!--Address-->
+            <!--Location-->
             <TextView
-                android:id="@+id/tv_address"
+                android:id="@+id/tv_location"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_size_14"
                 android:layout_marginTop="@dimen/common_margin_12"
-                app:layout_constraintTop_toBottomOf="@id/tv_username"
-                app:layout_constraintStart_toStartOf="@id/tv_username"
+                android:textAllCaps="true"
+                app:layout_constraintTop_toBottomOf="@id/tv_service_provider"
+                app:layout_constraintStart_toStartOf="@id/tv_service_provider"
                 app:layout_constraintEnd_toEndOf="@id/iv_flag"
-                tools:text="hola hola hola hola hola hola hola hola hola hola hola "
+                tools:text="Riyadh"
+                android:text="@{data.location}"
                 android:textColor="@color/colorLightGray"
                 />
 
@@ -87,9 +103,9 @@
                 android:layout_height="0.5dp"
                 android:background="@color/colorLightGray"
                 android:layout_marginTop="@dimen/common_margin_between_fields"
-                app:layout_constraintTop_toBottomOf="@id/tv_address"
-                app:layout_constraintStart_toStartOf="@id/tv_address"
-                app:layout_constraintEnd_toEndOf="@id/tv_address"/>
+                app:layout_constraintTop_toBottomOf="@id/tv_location"
+                app:layout_constraintStart_toStartOf="@id/tv_location"
+                app:layout_constraintEnd_toEndOf="@id/tv_location"/>
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline"
@@ -111,10 +127,11 @@
                 android:textSize="@dimen/text_size_14"
                 android:layout_marginTop="@dimen/common_margin_12"
                 android:layout_marginEnd="@dimen/common_margin"
+                android:textDirection="locale"
                 app:layout_constraintTop_toBottomOf="@id/view_horizontal"
-                app:layout_constraintStart_toStartOf="@id/tv_address"
+                app:layout_constraintStart_toStartOf="@id/tv_location"
                 app:layout_constraintEnd_toStartOf="@id/guideline"
-                tools:text="hola hola hola hola hola hola hola hola hola hola hola "
+                tools:text="Arrival Around"
                 />
 
             <!--heart-->
@@ -123,21 +140,41 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/baseline_share_24"
+                android:textDirection="locale"
+
                 app:layout_constraintStart_toStartOf="@id/tv_road_to"
-                app:layout_constraintTop_toTopOf="@id/btn_navigate_now"
-                app:layout_constraintBottom_toBottomOf="@id/btn_navigate_now"/>
+                app:layout_constraintTop_toTopOf="@id/btn_rate_now"
+                app:layout_constraintBottom_toBottomOf="@id/btn_rate_now"/>
 
 
             <!--Navigate Now-->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_navigate_now"
                 android:text="@string/navigate_now_label"
+                style="@style/GradientButton"
+                android:onClick="@{() -> clickListener.onClickNavigate(data)}"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:textDirection="locale"
+
+                app:layout_constraintTop_toTopOf="@id/btn_rate_now"
+                app:layout_constraintBottom_toBottomOf="@id/btn_rate_now"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <!--Rate Now-->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_rate_now"
+                android:text="@string/rate_now_label"
+                android:onClick="@{() -> clickListener.onClickRateNow(data)}"
                 style="@style/OutlinedButtonNormal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textDirection="locale"
+
                 android:layout_marginTop="@dimen/common_margin_between_fields"
+                android:layout_marginEnd="@dimen/common_margin_between_fields"
                 app:layout_constraintTop_toBottomOf="@id/tv_road_to"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintEnd_toStartOf="@id/btn_navigate_now"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,6 +11,7 @@ import android.provider.Settings
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.ey.hotspot.R
@@ -83,6 +84,11 @@ fun Activity.showKeyboard() {
     }
 }
 
+/**
+ * Method to check if GPS is Enabled/Disabled
+ *
+ * @return returns true if location is enabled, else false
+ */
 fun Activity.isLocationEnabled(): Boolean {
     return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
 // This is new method provided in API 28
@@ -165,6 +171,22 @@ fun Activity.checkLocationPermission(view: View, func: (Unit) -> Unit) {
             }
 
         }).check()
+}
+
+/**
+ * Method to show dialog to turn on the GPS
+ */
+fun Activity.turnOnGpsDialog() {
+    AlertDialog.Builder(this)
+        .setMessage("Your GPS seems to be disabled, do you want to enable it?")
+        .setCancelable(false)
+        .setPositiveButton(R.string.yes_label) { dialog, id ->
+            startActivity(Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS))
+        }
+        .setNegativeButton(getString(R.string.no_label)) { dialog, id ->
+            dialog.cancel()
+        }
+        .show()
 }
 
 /**
