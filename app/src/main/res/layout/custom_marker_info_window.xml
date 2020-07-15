@@ -65,7 +65,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/ChipStyleTextView"
-                tools:text="Riyadh"
+                tools:text="AmazeNet"
+                android:textAllCaps="false"
                 android:layout_marginTop="@dimen/common_margin_between_fields_6"
                 app:layout_constraintTop_toBottomOf="@id/tv_wifi_ssid"
                 app:layout_constraintStart_toStartOf="@id/tv_wifi_ssid"/>
