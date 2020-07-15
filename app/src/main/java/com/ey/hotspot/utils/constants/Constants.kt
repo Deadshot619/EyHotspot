@@ -8,8 +8,10 @@ interface Constants {
         const val ENGLISH_LANG: String = "en"
         const val ARABIC_LANG: String = "ar"
 
-        //SharedPreference
+        //Intent
+        const val AUTHENTICATION_FAILED = "authentication_failed"   //used when user's authticaition is failed while refreshing token
 
+        //SharedPreference
         const val ACCESS_TOKEN: String = "access_token"
         const val APP_LOGGED_IN: String = "app_logged_in"
         const val USER_DATA = "user_data"
@@ -36,7 +38,6 @@ interface Constants {
         const val API_FAVOURITE_LIST = "getFavourites"
         const val API_ADD_REVIEW = "addReview"
         const val API_ADD_COMPLAINT = "addComplaint"
-
 
         //GET
         const val UNAUTHORIZED = "unauthorized"

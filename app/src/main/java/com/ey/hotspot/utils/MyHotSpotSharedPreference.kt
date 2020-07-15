@@ -2,6 +2,7 @@ package com.ey.hotspot.utils
 
 import android.content.Context
 import com.ey.hotspot.app_core_lib.CoreApp
+import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.network.response.LoginResponse
 import com.ey.hotspot.utils.constants.Constants.Companion.ACCESS_TOKEN
 import com.ey.hotspot.utils.constants.Constants.Companion.APP_LOGGED_IN
@@ -35,6 +36,12 @@ class MyHotSpotSharedPreference(context: Context) {
         return getUserDataPref()?.accessToken ?: ""
     }
 
+    /**
+     * Returns the access token in the format "TokenType AccessToken" e.g: "Bearer xyz"
+       */
+    fun getAccessTypeAndToken(): String{
+        return "${HotSpotApp.prefs?.getUserDataPref()?.tokenType} ${HotSpotApp.prefs?.getUserDataPref()?.accessToken}"
+    }
 
     /*set app logged in status*/
     fun setAppLoggedInStatus(value: Boolean) {
