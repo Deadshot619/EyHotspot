@@ -12,7 +12,6 @@ import com.ey.hotspot.utils.validations.isValidMobile
 
 class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>() {
 
-
     override fun getLayoutId() = R.layout.profile_fragment
 
     override fun getViewModel() = ProfileViewModel::class.java
@@ -61,8 +60,6 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
                 )
             }
 
-
-
         }
 
 
@@ -70,9 +67,9 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
 
     private fun setUpObserver() {
         mViewModel.profileResponse.observe(viewLifecycleOwner, Observer {
-                it.getContentIfNotHandled()?.let {content ->
-                    //showMessage(content.message, false)
-                }
+            it.getContentIfNotHandled()?.let { content ->
+                //showMessage(content.message, false)
+            }
         })
     }
 
@@ -91,10 +88,10 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
                 } else if (!emailId.isEmailValid()) {
                     edtEmail.error = resources.getString(R.string.invalid_email_label)
                     false
-                } /*else if (mobileNo?.isValidMobile()) {
+                } else if (mobileNo.isValidMobile()) {
                     edtMobileNo.error = resources.getString(R.string.invalid_mobile)
                     false
-                } */else true
+                }  else true
             }
         } ?: return false
     }
