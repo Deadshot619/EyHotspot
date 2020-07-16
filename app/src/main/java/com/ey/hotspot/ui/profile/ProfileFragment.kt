@@ -12,6 +12,7 @@ import com.ey.hotspot.utils.validations.isValidMobile
 
 class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>() {
 
+
     override fun getLayoutId() = R.layout.profile_fragment
 
     override fun getViewModel() = ProfileViewModel::class.java
