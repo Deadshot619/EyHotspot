@@ -1,6 +1,5 @@
 package com.ey.hotspot.ui.speed_test.wifi_log_list
 
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ey.hotspot.R
@@ -37,7 +36,7 @@ class WifiLogListFragment : BaseFragment<FragmentWifiLogListBinding, WifiLogList
 
         recyclerView.run {
             layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
-            addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
+//            addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
             this.adapter = mAdapter
         }
     }

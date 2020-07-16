@@ -1,49 +1,87 @@
 package com.ey.hotspot.ui.search.searchlist
 
+import android.content.Intent
+import android.net.Uri
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.SearchListFragmentBinding
+import com.ey.hotspot.ui.home.models.GetUserHotSpotResponse
 import com.ey.hotspot.ui.search.searchlist.adapter.SearchListAdapter
-import com.ey.hotspot.ui.search.searchlist.model.SearchList
-import kotlinx.android.synthetic.main.search_list_fragment.*
+import com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment
+import com.ey.hotspot.ui.speed_test.rate_wifi.RateWifiFragment
+import com.ey.hotspot.utils.replaceFragment
 
 class SearchListFragment : BaseFragment<SearchListFragmentBinding, SearchListViewModel>() {
 
-    private val usersAdapter = SearchListAdapter(arrayListOf())
+//    private val usersAdapter = SearchListAdapter(arrayListOf())
+    private lateinit var mAdapter: SearchListAdapter
 
     companion object {
         fun newInstance() = SearchListFragment()
     }
 
-    override fun getLayoutId(): Int {
-
-        return R.layout.search_list_fragment
-    }
-
-    override fun getViewModel(): Class<SearchListViewModel> {
-
-        return SearchListViewModel::class.java
-    }
+    override fun getLayoutId() = R.layout.search_list_fragment
+    override fun getViewModel() = SearchListViewModel::class.java
 
     override fun onBinding() {
+        mBinding.lifecycleOwner = viewLifecycleOwner
+        mBinding.viewModel = mViewModel
 
-        setUpSearchBar(mBinding.toolbarLayout,true){}
-
-        rvSearchList.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = usersAdapter
-            usersAdapter.updateUsers(sendData())
+        setUpSearchBar(mBinding.toolbarLayout,true){
+            mViewModel.getUserHotSpotResponse(it)
         }
 
+        setUpRecyclerView(mBinding.rvSearchList)
     }
 
-    private fun sendData(): ArrayList<SearchList> {
-        val list = arrayListOf<SearchList>()
-        for(i in 0..9){
-            list.add(SearchList("Avator","prashantj@gmail.com","prashant",1,"KK"))
+    private fun setUpRecyclerView(recyclerView: RecyclerView){
+        //Setup Adapter
+        mAdapter = SearchListAdapter(object : SearchListAdapter.OnClickListener {
+            //Rate Now button
+            override fun onClickRateNow(data: GetUserHotSpotResponse) {
+                replaceFragment(
+                    fragment = RateWifiFragment.newInstance(
+                        wifiSsid = data.name,
+                        wifiProvider = data.provider_name,
+                        location = data.location
+                    ),
+                    addToBackStack = true
+                )
+            }
+
+            //Report
+            override fun onClickReport(data: GetUserHotSpotResponse) {
+                replaceFragment(
+                    RaiseComplaintFragment.newInstance(
+                        wifiSsid = data.name,
+                        wifiProvider = data.provider_name,
+                        location = data.location
+                    ), true
+                )
+            }
+
+            //Favourite
+            override fun onClickAddFavourite(data: GetUserHotSpotResponse) {
+//                mViewModel.markFavouriteItem(data.id)
+            }
+
+            //Navigate Now
+            override fun onClickNavigate(data: GetUserHotSpotResponse) {
+                val url = data.navigate_url
+
+                val i = Intent(Intent.ACTION_VIEW)
+                i.data = Uri.parse(url)
+                startActivity(i)
+            }
+        })
+
+        recyclerView.run {
+            layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
+//            addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
+            this.adapter = mAdapter
         }
-        return list;
     }
 
 

@@ -1,48 +1,83 @@
 package com.ey.hotspot.ui.search.searchlist.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.ey.hotspot.R
-import com.ey.hotspot.ui.search.searchlist.model.SearchList
-import kotlinx.android.synthetic.main.item_search_list.view.*
-
-class SearchListAdapter(var searchList:ArrayList<SearchList>):RecyclerView.Adapter<SearchListAdapter.SearchListViewHolder>() {
+import com.ey.hotspot.databinding.ItemSearchListBinding
+import com.ey.hotspot.ui.home.models.GetUserHotSpotResponse
 
 
-   open fun updateUsers(newUsers: List<SearchList>) {
-        searchList.clear()
-        searchList.addAll(newUsers)
-        notifyDataSetChanged()
-    }
+class SearchListAdapter(val listener: OnClickListener) :
+    ListAdapter<GetUserHotSpotResponse, SearchListAdapter.SearchListViewHolder>(
+        DiffCallback
+    ) {
+    /**
+     * Allows the RecyclerView to determine which items have changed when the [List] of [GetUserHotSpotResponse]
+     * has been updated.
+     */
+    companion object DiffCallback : DiffUtil.ItemCallback<GetUserHotSpotResponse>() {
+        override fun areItemsTheSame(
+            oldItem: GetUserHotSpotResponse,
+            newItem: GetUserHotSpotResponse
+        ): Boolean {
+            return oldItem === newItem
+        }
 
-
-
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int): SearchListAdapter.SearchListViewHolder {
-        return SearchListViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_search_list, parent, false))
-
-    }
-
-    override fun getItemCount(): Int {
-        return searchList.size
-    }
-
-    override fun onBindViewHolder(holder: SearchListAdapter.SearchListViewHolder, position: Int) {
-        holder.bind(searchList[position])
-
-    }
-
-    class SearchListViewHolder(view: View) :RecyclerView.ViewHolder(view){
-
-
-        private val userName = view.tv_wifi_ssid
-        private val userEmail = view.tv_location
-        fun bind(country: SearchList) {
-            userName.text = country.firstName + " " + country.lastName
-            userEmail.text = country.email
+        override fun areContentsTheSame(
+            oldItem: GetUserHotSpotResponse,
+            newItem: GetUserHotSpotResponse
+        ): Boolean {
+            return oldItem.id == newItem.id
         }
     }
+
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchListViewHolder {
+        return SearchListViewHolder(
+            ItemSearchListBinding.inflate(
+                LayoutInflater.from(parent.context), parent, false
+            )
+        )
+    }
+
+    override fun onBindViewHolder(holder: SearchListViewHolder, position: Int) {
+        holder.bind(getItem(position), listener)
+    }
+
+
+    /**
+     * The [SearchListViewHolder] constructor takes the binding variable from the associated
+     * layout, which nicely gives it access to the full [GetUserHotSpotResponse] information.
+     */
+    class SearchListViewHolder(private var binding: ItemSearchListBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(
+            item: GetUserHotSpotResponse?,
+            listener: OnClickListener
+        ) {
+            binding.run {
+                data = item
+                clickListener = listener
+//                tvNumber.text = "$count"
+                executePendingBindings()
+            }
+        }
+
+    }
+
+
+
+    /**
+     * Interface to call in the [OnClickListener] & passed on to fragment to implement
+     */
+    interface OnClickListener{
+        fun onClickRateNow(data: GetUserHotSpotResponse)
+        fun onClickReport(data: GetUserHotSpotResponse)
+        fun onClickAddFavourite(data: GetUserHotSpotResponse)
+        fun onClickNavigate(data: GetUserHotSpotResponse)
+    }
+
+
 }
