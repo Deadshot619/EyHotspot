@@ -94,7 +94,7 @@ fun Activity.isLocationEnabled(): Boolean {
 // This is new method provided in API 28
         val lm =
             this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        lm.isLocationEnabled
+        lm !=null && lm.isLocationEnabled
     } else {
 // This is Deprecated in API 28
         val mode: Int = Settings.Secure.getInt(
@@ -130,8 +130,8 @@ fun Activity.checkLocationPermission(view: View, func: (Unit) -> Unit) {
         .withPermissions(
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 android.Manifest.permission.ACCESS_BACKGROUND_LOCATION
-//                android.Manifest.permission.ACCESS_FINE_LOCATION
-//                android.Manifest.permission.ACCESS_COARSE_LOCATION
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+                android.Manifest.permission.ACCESS_COARSE_LOCATION
             } else {
                 android.Manifest.permission.ACCESS_FINE_LOCATION
                 android.Manifest.permission.ACCESS_COARSE_LOCATION
@@ -189,6 +189,9 @@ fun Activity.turnOnGpsDialog() {
         .show()
 }
 
+
+
+
 /**
  * This method will a json string as input & return an object of specified type
  */
@@ -196,4 +199,26 @@ inline fun <reified T> Gson.fromJson(json: String) = try{
     fromJson<T>(json, object: TypeToken<T>() {}.type)
 }catch (e: java.lang.Exception){
     null
+}
+
+
+  fun Activity.turnGPSOn() {
+    val provider = Settings.Secure.getString(
+        getContentResolver(),
+        Settings.Secure.LOCATION_PROVIDERS_ALLOWED
+    )
+    if (!provider.contains("gps")) { //if gps is disabled
+        val poke = Intent()
+        poke.setClassName(
+            "com.android.settings",
+            "com.android.settings.widget.SettingsAppWidgetProvider"
+        )
+        poke.addCategory(Intent.CATEGORY_ALTERNATIVE)
+        poke.data = Uri.parse("3")
+        sendBroadcast(poke)
+    }
+
+
+
+
 }

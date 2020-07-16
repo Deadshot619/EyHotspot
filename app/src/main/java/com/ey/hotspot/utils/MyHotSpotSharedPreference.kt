@@ -7,6 +7,7 @@ import com.ey.hotspot.network.response.LoginResponse
 import com.ey.hotspot.utils.constants.Constants.Companion.ACCESS_TOKEN
 import com.ey.hotspot.utils.constants.Constants.Companion.APP_LOGGED_IN
 import com.ey.hotspot.utils.constants.Constants.Companion.DELEGATE_ENGLISH_LANG
+import com.ey.hotspot.utils.constants.Constants.Companion.ENABLED_GPS_LOCATION
 import com.ey.hotspot.utils.constants.Constants.Companion.LANGUAGE_SELECTED
 import com.ey.hotspot.utils.constants.Constants.Companion.USER_DATA
 import com.google.gson.Gson
@@ -38,8 +39,8 @@ class MyHotSpotSharedPreference(context: Context) {
 
     /**
      * Returns the access token in the format "TokenType AccessToken" e.g: "Bearer xyz"
-       */
-    fun getAccessTypeAndToken(): String{
+     */
+    fun getAccessTypeAndToken(): String {
         return "${HotSpotApp.prefs?.getUserDataPref()?.tokenType} ${HotSpotApp.prefs?.getUserDataPref()?.accessToken}"
     }
 
@@ -56,25 +57,38 @@ class MyHotSpotSharedPreference(context: Context) {
     /**
      * Set User Data in SharedPref
      */
-    fun setUserDataPref(userData: LoginResponse){
+    fun setUserDataPref(userData: LoginResponse) {
         CoreApp.sharedPreferences.edit().putString(USER_DATA, Gson().toJson(userData)).apply()
+    }
+
+
+    fun setGPSEnabledStatus(value: Boolean) {
+        CoreApp.sharedPreferences.edit().putBoolean(ENABLED_GPS_LOCATION, value).apply()
+
+    }
+
+    fun getGPSEnabledStatus(): Boolean? {
+        return CoreApp.sharedPreferences.getBoolean(ENABLED_GPS_LOCATION, false)
+
     }
 
     /**
      * Get User Data in SharedPref
      */
-    fun getUserDataPref(): LoginResponse?{
-        return Gson().fromJson<LoginResponse>(CoreApp.sharedPreferences.getString(USER_DATA, "") ?: "")
+    fun getUserDataPref(): LoginResponse? {
+        return Gson().fromJson<LoginResponse>(
+            CoreApp.sharedPreferences.getString(USER_DATA, "") ?: ""
+        )
     }
 
-    fun deleteUserData(){
+    fun deleteUserData() {
         CoreApp.sharedPreferences.edit().remove(USER_DATA).apply()
     }
 
     /**
      * Method to clear all shared pref data
      */
-    fun clearSharedPrefData(){
+    fun clearSharedPrefData() {
         CoreApp.sharedPreferences.edit().clear().apply()
     }
 }

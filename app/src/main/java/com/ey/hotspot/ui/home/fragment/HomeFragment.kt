@@ -1,10 +1,13 @@
 package com.ey.hotspot.ui.home.fragment
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.IntentSender
 import android.graphics.drawable.Drawable
 import android.location.Location
 import android.net.Uri
+import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
@@ -19,8 +22,11 @@ import com.ey.hotspot.ui.home.models.GetUserHotSpotResponse
 import com.ey.hotspot.ui.home.models.MyClusterItems
 import com.ey.hotspot.ui.search.recentlysearch.RecentlySearchFragment
 import com.ey.hotspot.utils.*
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.common.api.PendingResult
+import com.google.android.gms.common.api.Status
+import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.GoogleMap.OnMapClickListener
@@ -38,7 +44,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
     ClusterManager.OnClusterClickListener<MyClusterItems>,
     ClusterManager.OnClusterInfoWindowClickListener<MyClusterItems>,
     ClusterManager.OnClusterItemClickListener<MyClusterItems>,
-    ClusterManager.OnClusterItemInfoWindowClickListener<MyClusterItems> {
+    ClusterManager.OnClusterItemInfoWindowClickListener<MyClusterItems>,
+    GoogleApiClient.ConnectionCallbacks,
+    GoogleApiClient.OnConnectionFailedListener {
 
 
     private var map: GoogleMap? = null
@@ -57,6 +65,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
     private var favouriteType: Boolean = false
 
+    var mLocationRequest: LocationRequest? = null
+    lateinit var mGoogleApiClient: GoogleApiClient
+    var result: PendingResult<LocationSettingsResult>? = null
+    val REQUEST_LOCATION = 199
+
 
     override fun getLayoutId(): Int {
 
@@ -71,6 +84,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
     }
 
     override fun onBinding() {
+
+        //setUpGoogleAPIClient()
+
 
         mBinding.run {
             lifecycleOwner = viewLifecycleOwner
@@ -146,6 +162,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
     }
 
+    private fun setUpGoogleAPIClient() {
+
+        mGoogleApiClient = GoogleApiClient.Builder(requireActivity())
+            .addApi(LocationServices.API)
+            .addConnectionCallbacks(this)
+            .addOnConnectionFailedListener(this).build()
+        mGoogleApiClient.connect()
+    }
+
     private fun setUpUserHotSpotData(list: List<GetUserHotSpotResponse>) {
 
 
@@ -215,23 +240,28 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                         // Set the map's camera position to the current location of the device.
                         lastKnownLocation = task.result
                         if (lastKnownLocation != null) {
-                            /*map?.moveCamera(
-                                CameraUpdateFactory.newLatLngZoom(
-                                    LatLng(
-                                        lastKnownLocation!!.latitude,
-                                        lastKnownLocation!!.longitude
-                                    ), HomeFragment.DEFAULT_ZOOM.toFloat()
-                                )
-                            )*/
 
-                            map?.moveCamera(
-                                CameraUpdateFactory.newLatLngZoom(
-                                    LatLng(
-                                        19.1431,
-                                        72.8105
-                                    ), HomeFragment.DEFAULT_ZOOM.toFloat()
+
+                            if (checkLocSaveState()) {
+                                map?.moveCamera(
+                                    CameraUpdateFactory.newLatLngZoom(
+                                        LatLng(
+                                            lastKnownLocation!!.latitude,
+                                            lastKnownLocation!!.longitude
+                                        ), HomeFragment.DEFAULT_ZOOM.toFloat()
+                                    )
                                 )
-                            )
+                            } else {
+                                map?.moveCamera(
+                                    CameraUpdateFactory.newLatLngZoom(
+                                        LatLng(
+                                            19.1431,
+                                            72.8105
+                                        ), HomeFragment.DEFAULT_ZOOM.toFloat()
+                                    )
+                                )
+
+                            }
                             getNearByWifiList()
                         }
                     } else {
@@ -407,6 +437,70 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             val icon: BitmapDescriptor =
                 BitmapDescriptorFactory.fromResource(R.drawable.ic_wifi_signal)
             marker.setIcon(icon)
+        }
+    }
+
+
+    override fun onConnected(p0: Bundle?) {
+
+        mGoogleApiClient = GoogleApiClient.Builder(requireActivity())
+            .addApi(LocationServices.API).build()
+        mGoogleApiClient!!.connect()
+        mLocationRequest = LocationRequest.create()
+        mLocationRequest!!.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        mLocationRequest!!.interval = 30 * 1000.toLong()
+        mLocationRequest!!.fastestInterval = 5 * 1000.toLong()
+
+        val builder = LocationSettingsRequest.Builder()
+            .addLocationRequest(mLocationRequest!!)
+        builder.setAlwaysShow(true)
+
+        result =
+            LocationServices.SettingsApi.checkLocationSettings(mGoogleApiClient, builder.build())
+        result!!.setResultCallback { result ->
+            val status: Status = result.status
+            when (status.statusCode) {
+                LocationSettingsStatusCodes.SUCCESS -> {
+                    // Do something
+                }
+                LocationSettingsStatusCodes.RESOLUTION_REQUIRED ->
+                    try {
+
+                        status.startResolutionForResult(requireActivity(), REQUEST_LOCATION)
+                    } catch (e: IntentSender.SendIntentException) {
+                    }
+                LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE -> {
+                    // Do something
+                }
+            }
+        }
+    }
+
+    override fun onConnectionSuspended(p0: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onConnectionFailed(p0: ConnectionResult) {
+        TODO("Not yet implemented")
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        Log.d("onActivityResult()", Integer.toString(resultCode))
+        when (requestCode) {
+            REQUEST_LOCATION -> when (resultCode) {
+                Activity.RESULT_OK -> {
+
+                    Log.d("location", "Location enabled")
+                }
+                Activity.RESULT_CANCELED -> {
+
+                    Log.d("location", "Location not enabled, user canceled")
+                }
+                else -> {
+                }
+            }
         }
     }
 }

@@ -11,6 +11,8 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 
+    <uses-feature android:name="android.hardware.location.gps" />
+
     <!--disable
             android:usesCleartextTraffic="true"
     this once live-->

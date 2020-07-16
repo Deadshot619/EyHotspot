@@ -2,8 +2,10 @@ package com.ey.hotspot.app_core_lib
 
 import android.content.Context
 import android.content.Intent
+import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +27,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
 
     protected lateinit var mBinding: T
     protected lateinit var mViewModel: V
+
     //Custom Loading Dialog
     private val dialog: LoadingDialog by lazy { LoadingDialog(requireContext()) }
 
@@ -49,10 +52,10 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
     /**
      * Method to set up Observers
      */
-    private fun setUpObservers(){
+    private fun setUpObservers() {
 //        Error Text
         mViewModel.toastMessage.observe(viewLifecycleOwner, Observer {
-            it.getContentIfNotHandled()?.let {  msg ->
+            it.getContentIfNotHandled()?.let { msg ->
                 showMessage(msg, mViewModel.toastMessageDuration)
             }
         })
@@ -138,7 +141,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
             }
 
             if (enableSearchButton)
-                //Search button
+            //Search button
                 ivSearch.setOnClickListener {
                     if (etSearchBar.text.isNullOrEmpty()) {
                         showMessage(resources.getString(R.string.empty_query_alert_label))
@@ -152,6 +155,38 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
     }
 
 
+    open fun checkLocSaveState(): Boolean {
+
+        var status: Boolean = false
+        val lm =
+            requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        var gps_enabled = false
+        var network_enabled = false
+        try {
+            gps_enabled = lm != null && lm.isProviderEnabled(LocationManager.GPS_PROVIDER)
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
+        try {
+            network_enabled = lm != null && lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
+
+        if (gps_enabled && network_enabled) {
+            status = true
+        } else if (gps_enabled && network_enabled) {
+            status = false
+        } else if (gps_enabled && network_enabled) {
+            status = false
+        } else if (gps_enabled && network_enabled) {
+            status = false
+        }
+
+        Log.d("LocationSaveState", "" + status)
+        return status
+
+    }
 
 
 }

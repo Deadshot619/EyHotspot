@@ -3,6 +3,7 @@ package com.ey.hotspot.app_core_lib
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -21,7 +22,8 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
     protected lateinit var mBinding: T
     protected lateinit var mViewModel: V
     protected lateinit var mContext: Context
-//  protected lateinit var mPref: PreferencesHelper
+
+    //  protected lateinit var mPref: PreferencesHelper
     private lateinit var mManager: FragmentManager
 
 
@@ -73,7 +75,7 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
     /**
      * Method to remove fragment from backStack
      */
-    fun removeFragment(fragment: Fragment){
+    fun removeFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().apply {
             remove(fragment)
             commit()
@@ -110,4 +112,37 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
         if (supportFragmentManager.fragments.isEmpty())
             finish()
     }
+
+
+    open fun checkLocSaveState(): Boolean {
+
+        var status: Boolean = false
+        val lm =
+            getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        var gps_enabled = false
+        var network_enabled = false
+        try {
+            gps_enabled = lm != null && lm.isProviderEnabled(LocationManager.GPS_PROVIDER)
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
+        try {
+            network_enabled = lm != null && lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
+
+        if (gps_enabled && network_enabled) {
+            status = true
+        } else if (gps_enabled && network_enabled) {
+            status = false
+        } else if (gps_enabled && network_enabled) {
+            status = false
+        } else if (gps_enabled && network_enabled) {
+            status = false
+        }
+        return status
+
+    }
+
 }
