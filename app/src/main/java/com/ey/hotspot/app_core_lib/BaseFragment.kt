@@ -1,8 +1,7 @@
 package com.ey.hotspot.app_core_lib
 
 import android.content.Context
-import android.content.Intent
-import android.os.Build
+import android.location.LocationManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +17,6 @@ import com.ey.hotspot.databinding.LayoutCustomToolbarSearchbarBinding
 import com.ey.hotspot.utils.dialogs.LoadingDialog
 import com.ey.hotspot.utils.showKeyboard
 import com.ey.hotspot.utils.showMessage
-import com.ey.stringlocalization.utils.LanguageManager
 
 abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment(),
     UICallbacks<V> {
@@ -184,7 +182,6 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
             status = false
         }
 
-        Log.d("LocationSaveState", "" + status)
         return status
 
     }
