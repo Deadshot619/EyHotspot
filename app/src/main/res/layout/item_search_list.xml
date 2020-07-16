@@ -6,11 +6,11 @@
     <data>
         <variable
             name="data"
-            type="com.ey.hotspot.ui.favourite.model.GetFavouriteItem" />
+            type="com.ey.hotspot.ui.home.models.GetUserHotSpotResponse" />
 
         <variable
             name="clickListener"
-            type="com.ey.hotspot.ui.favourite.FavouriteListAdapter.OnClickListener" />
+            type="com.ey.hotspot.ui.search.searchlist.adapter.SearchListAdapter.OnClickListener" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 tools:text="D-zone"
                 android:textDirection="locale"
-                android:text="@{data.provider_name}"
+                android:text="@{data.name}"
                 android:textColor="@color/colorGrayLight"
                 style="@style/TextAppearance.MaterialComponents.Headline5"
                 app:layout_constraintTop_toTopOf="parent"
@@ -63,6 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textDirection="locale"
+
                 android:src="@drawable/ic_group"
                 android:onClick="@{() -> clickListener.onClickReport(data)}"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -75,7 +76,7 @@
                 android:layout_height="wrap_content"
                 style="@style/ChipStyleTextView"
                 tools:text="Riyadh"
-                android:text="@{data.location}"
+                android:text="@{data.provider_name}"
                 android:layout_marginTop="@dimen/common_margin_between_fields_6"
                 app:layout_constraintTop_toBottomOf="@id/tv_wifi_ssid"
                 app:layout_constraintStart_toStartOf="@id/tv_wifi_ssid"/>
@@ -91,21 +92,23 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_service_provider"
                 app:layout_constraintStart_toStartOf="@id/tv_service_provider"
                 app:layout_constraintEnd_toEndOf="@id/iv_flag"
-                tools:text="Riyadh"
+                tools:text="Mumbai"
                 android:text="@{data.location}"
                 android:textColor="@color/colorLightGray"
                 />
 
-            <!--Horizontal Line-->
-            <View
-                android:id="@+id/view_horizontal"
-                android:layout_width="0dp"
-                android:layout_height="0.5dp"
-                android:background="@color/colorLightGray"
-                android:layout_marginTop="@dimen/common_margin_between_fields"
-                app:layout_constraintTop_toBottomOf="@id/tv_location"
-                app:layout_constraintStart_toStartOf="@id/tv_location"
-                app:layout_constraintEnd_toEndOf="@id/tv_location"/>
+            <!--
+                        &lt;!&ndash;Horizontal Line&ndash;&gt;
+                        <View
+                            android:id="@+id/view_horizontal"
+                            android:layout_width="0dp"
+                            android:layout_height="0.5dp"
+                            android:background="@color/colorLightGray"
+                            android:layout_marginTop="@dimen/common_margin_between_fields"
+                            app:layout_constraintTop_toBottomOf="@id/tv_location"
+                            app:layout_constraintStart_toStartOf="@id/tv_location"
+                            app:layout_constraintEnd_toEndOf="@id/tv_location"/>
+            -->
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline"
@@ -117,22 +120,22 @@
                 app:layout_constraintGuide_percent="0.5"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/view_horizontal" />
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <!--    Road to  -->
-            <TextView
-                android:id="@+id/tv_road_to"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/text_size_14"
-                android:layout_marginTop="@dimen/common_margin_12"
-                android:layout_marginEnd="@dimen/common_margin"
-                android:textDirection="locale"
-                app:layout_constraintTop_toBottomOf="@id/view_horizontal"
-                app:layout_constraintStart_toStartOf="@id/tv_location"
-                app:layout_constraintEnd_toStartOf="@id/guideline"
-                tools:text="Arrival Around"
-                />
+            <!--            &lt;!&ndash;    Road to  &ndash;&gt;
+                        <TextView
+                            android:id="@+id/tv_road_to"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/text_size_14"
+                            android:layout_marginTop="@dimen/common_margin_12"
+                            android:layout_marginEnd="@dimen/common_margin"
+                            android:textDirection="locale"
+                            app:layout_constraintTop_toBottomOf="@id/view_horizontal"
+                            app:layout_constraintStart_toStartOf="@id/tv_location"
+                            app:layout_constraintEnd_toStartOf="@id/guideline"
+                            tools:text="hola hola hola hola hola hola hola hola hola hola hola "
+                            />-->
 
             <!--heart-->
             <androidx.appcompat.widget.AppCompatImageView
@@ -142,7 +145,7 @@
                 android:src="@drawable/baseline_share_24"
                 android:textDirection="locale"
 
-                app:layout_constraintStart_toStartOf="@id/tv_road_to"
+                app:layout_constraintStart_toStartOf="@id/tv_location"
                 app:layout_constraintTop_toTopOf="@id/btn_rate_now"
                 app:layout_constraintBottom_toBottomOf="@id/btn_rate_now"/>
 
@@ -173,7 +176,7 @@
 
                 android:layout_marginTop="@dimen/common_margin_between_fields"
                 android:layout_marginEnd="@dimen/common_margin_between_fields"
-                app:layout_constraintTop_toBottomOf="@id/tv_road_to"
+                app:layout_constraintTop_toBottomOf="@id/tv_location"
                 app:layout_constraintEnd_toStartOf="@id/btn_navigate_now"/>
 
 

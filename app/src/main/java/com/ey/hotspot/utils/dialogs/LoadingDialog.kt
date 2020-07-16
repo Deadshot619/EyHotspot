@@ -1,4 +1,4 @@
-package com.ey.hotspot.app_core_lib
+package com.ey.hotspot.utils.dialogs
 
 import android.content.Context
 import android.os.Bundle

@@ -108,8 +108,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(),
 
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
-
-
         }
     }
 

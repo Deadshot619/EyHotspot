@@ -15,7 +15,7 @@ data class ProfileResponse(
     @SerializedName("email_verified_at") val email_verified_at: String,
     @SerializedName("is_email_verified") val is_email_verified: String,
     @SerializedName("country_code") val country_code: Int?,
-    @SerializedName("mobile_no") val mobile_no: String?,
+    @SerializedName("mobile_no") val mobile_no: String = "",
     @SerializedName("otp") val otp: String,
     @SerializedName("is_mobile_verified") val is_mobile_verified: String,
     @SerializedName("mobile_verified_at") val mobile_verified_at: String,

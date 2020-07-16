@@ -59,7 +59,7 @@ class AuthInterceptor : Authenticator {
     //Method to redirect user to login screen
     private fun returnToLoginScreen() {
         //Clear Data
-        HotSpotApp.prefs?.deleteUserData()
+        HotSpotApp.prefs?.clearSharedPrefData()
 
         //Redirect user to Login Activity
         CoreApp.instance.startActivity(Intent(CoreApp.instance, LoginActivity::class.java).apply {

@@ -1,13 +1,12 @@
 package com.ey.hotspot.ui.search.recentlysearch.adapter
 
+//import kotlinx.android.synthetic.main.list_item_search_list.view.*view
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ey.hotspot.R
 import com.ey.hotspot.ui.search.recentlysearch.model.RecentlySearch
-import com.ey.hotspot.ui.search.searchlist.model.SearchList
-import kotlinx.android.synthetic.main.list_item_search_list.view.*
 import kotlinx.android.synthetic.main.list_recently_search_item.view.*
 
 class RecentlySearchListAdapter(var searchList: ArrayList<RecentlySearch>) :
@@ -48,7 +47,7 @@ class RecentlySearchListAdapter(var searchList: ArrayList<RecentlySearch>) :
 
 
         private val userName = view.tv_suggestion_item_title
-        private val userEmail = view.tvOwnerName
+//        private val userEmail = view.tvOwnerName
         fun bind(country: RecentlySearch) {
             userName.text = country.firstName
 

@@ -61,6 +61,8 @@
     <string name="update_profile_label">تحديث الملف</string>
     <string name="retrieving_profile_details_label">جارٍ استرداد معلومات الملف الشخصي …</string>
     <string name="updating_profile_label">جارٍ تحديث معلومات الملف الشخصي …</string>
+    <string name="logout_label">تسجيل خروج</string>
+
 
     <!--    Registration Option    -->
     <string name="verification_method_label">حدد طريقة التحقق</string>

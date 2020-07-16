@@ -29,6 +29,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Starbucks WiFi" />
 
+<!--        Wifi Provider-->
         <TextView
             android:id="@+id/tv_wifi_provider"
             android:layout_width="wrap_content"
@@ -39,9 +40,9 @@
             app:layout_constraintStart_toStartOf="@id/tv_wifi_name"
             android:layout_marginTop="@dimen/common_margin_between_fields_4"/>
 
-        <!--Username-->
+        <!--Location-->
         <TextView
-            android:id="@+id/tv_username"
+            android:id="@+id/tv_location"
             style="@style/TextAppearance.MaterialComponents.Subtitle2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -50,7 +51,6 @@
             android:textAllCaps="true"
             app:layout_constraintStart_toEndOf="@id/tv_wifi_provider"
             app:layout_constraintTop_toTopOf="@id/tv_wifi_provider"
-            tools:targetApi="              "
             tools:text="Riyadh" />
 
         <!--Review-->
@@ -61,9 +61,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/common_margin_between_fields"
             android:text="@{data.comments}"
-            app:layout_constraintEnd_toEndOf="@+id/tv_username"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_wifi_name"
-            app:layout_constraintTop_toBottomOf="@id/tv_username"
+            app:layout_constraintTop_toBottomOf="@id/tv_location"
             tools:text="Osama Bin Laden" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

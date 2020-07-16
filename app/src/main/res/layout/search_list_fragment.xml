@@ -4,29 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.ey.hotspot.ui.search.searchlist.SearchListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.login_selection.LoginSelectionActivity">
-
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_left"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="@dimen/margin_20" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_right"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_end="@dimen/margin_20" />
-
+        android:layout_height="match_parent">
 
         <!--Toolbar-->
         <include
@@ -42,11 +27,11 @@
             android:id="@+id/rvSearchList"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/margin_20"
-            android:layout_marginBottom="@dimen/margin_10"
+            app:listSearchWifiList="@{viewModel.getUserHotSpotResponse.data}"
+            tools:listitem="@layout/item_search_list"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/guideline_right"
-            app:layout_constraintStart_toStartOf="@+id/guideline_left"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbarLayout" />
 
 

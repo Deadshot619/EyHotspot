@@ -2,10 +2,8 @@ package com.ey.hotspot.app_core_lib
 
 import android.content.Context
 import android.content.Intent
-import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.ey.hotspot.R
 import com.ey.hotspot.databinding.LayoutCustomToolbarBinding
 import com.ey.hotspot.databinding.LayoutCustomToolbarSearchbarBinding
-import com.ey.hotspot.utils.MyHotSpotSharedPreference
+import com.ey.hotspot.utils.dialogs.LoadingDialog
 import com.ey.hotspot.utils.showKeyboard
 import com.ey.hotspot.utils.showMessage
 import com.ey.stringlocalization.utils.LanguageManager
@@ -27,9 +25,12 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
 
     protected lateinit var mBinding: T
     protected lateinit var mViewModel: V
-
     //Custom Loading Dialog
-    private val dialog: LoadingDialog by lazy { LoadingDialog(requireContext()) }
+    private val dialog: LoadingDialog by lazy {
+        LoadingDialog(
+            requireContext()
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,10 +53,10 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
     /**
      * Method to set up Observers
      */
-    private fun setUpObservers() {
+    private fun setUpObservers(){
 //        Error Text
         mViewModel.toastMessage.observe(viewLifecycleOwner, Observer {
-            it.getContentIfNotHandled()?.let { msg ->
+            it.getContentIfNotHandled()?.let {  msg ->
                 showMessage(msg, mViewModel.toastMessageDuration)
             }
         })

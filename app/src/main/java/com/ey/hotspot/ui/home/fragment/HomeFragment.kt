@@ -20,7 +20,7 @@ import com.ey.hotspot.ui.home.models.GetHotSpotRequest
 import com.ey.hotspot.ui.home.models.GetHotSpotResponse
 import com.ey.hotspot.ui.home.models.GetUserHotSpotResponse
 import com.ey.hotspot.ui.home.models.MyClusterItems
-import com.ey.hotspot.ui.search.recentlysearch.RecentlySearchFragment
+import com.ey.hotspot.ui.search.searchlist.SearchListFragment
 import com.ey.hotspot.utils.*
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
@@ -226,7 +226,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
 //        Searchbar
         mBinding.toolbarLayout.etSearchBar.setOnClickListener {
-            replaceFragment(RecentlySearchFragment(), true)
+            replaceFragment(SearchListFragment(), true)
         }
     }
 
