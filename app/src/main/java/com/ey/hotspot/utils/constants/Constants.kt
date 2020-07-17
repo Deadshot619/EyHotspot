@@ -17,6 +17,7 @@ interface Constants {
         const val APP_LOGGED_IN: String = "app_logged_in"
         const val USER_DATA = "user_data"
         const val ENABLED_GPS_LOCATION: String = "GPS_LOCATION"
+        const val REGISTRATION_TMP_TOKEN="registration_token"
         //APIS
 
         //Header
@@ -39,6 +40,8 @@ interface Constants {
         const val API_FAVOURITE_LIST = "getFavourites"
         const val API_ADD_REVIEW = "addReview"
         const val API_ADD_COMPLAINT = "addComplaint"
+        const val API_SEND_OTP="sendOTP"
+        const val API_VERIFY_OTP="verifyOTP"
 
         //GET
         const val UNAUTHORIZED = "unauthorized"

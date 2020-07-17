@@ -132,18 +132,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
         }
 
-        //Forgot Password
-        mBinding.tvForgotPassword.setOnClickListener {
-            replaceFragment(
-                fragment = RegistrationOptionFragment.newInstance(),
-                addToBackStack = true,
-                bundle = Bundle().apply {
-                    putString(
-                        RegistrationOptionFragment.TYPE_KEY,
-                        OptionType.TYPE_FORGOT_PASSWORD.name
-                    )
-                })
-        }
+
 
         //Register New user
         mBinding.tvGetStarted.setOnClickListener {

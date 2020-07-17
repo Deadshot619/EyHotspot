@@ -1,5 +1,6 @@
 package com.ey.hotspot.network
 
+import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.network.request.LoginRequest
 import com.ey.hotspot.network.request.RegisterRequest
 import com.ey.hotspot.network.request.SocialLoginRequest
@@ -12,6 +13,8 @@ import com.ey.hotspot.ui.home.models.GetHotSpotRequest
 import com.ey.hotspot.ui.home.models.GetHotSpotResponse
 import com.ey.hotspot.ui.home.models.GetUserHotSpotResponse
 import com.ey.hotspot.ui.login.logout.LogoutResponse
+import com.ey.hotspot.ui.login.otpverification.fragment.model.SendOTPRequest
+import com.ey.hotspot.ui.login.otpverification.fragment.model.VerifyOTPRequest
 import com.ey.hotspot.ui.profile.fragment.model.ProfileResponse
 import com.ey.hotspot.ui.profile.fragment.model.UpdateProfileRequest
 import com.ey.hotspot.ui.registration.register_user.model.RegistrationResponse
@@ -291,6 +294,37 @@ object DataProvider : RemoteDataProvider {
             } catch (e: Exception) {
                 error(e)
             }
+        }
+    }
+
+    override suspend fun sendOTP(
+        request: SendOTPRequest,
+        success: (BaseResponse<Any>) -> Unit,
+        error: (Exception) -> Unit
+    ) {
+
+        withContext(Dispatchers.Main) {
+            try {
+
+                val result = mServices.sendOTP( HotSpotApp.prefs!!.getRegistrationTempToken(),request).await()
+                success(result)
+            } catch (e: Exception) {
+                error(e)
+            }
+        }
+    }
+
+    override suspend fun verifyOTP(
+        request: VerifyOTPRequest,
+        success: (BaseResponse<Any>) -> Unit,
+        error: (Exception) -> Unit
+    ) {
+
+        try {
+            val result = mServices.verifyOTP(HotSpotApp.prefs!!.getRegistrationTempToken(),request).await()
+            success(result)
+        } catch (e: Exception) {
+            error(e)
         }
     }
 

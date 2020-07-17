@@ -5,9 +5,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseViewModel
+import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.network.DataProvider
 import com.ey.hotspot.network.request.RegisterRequest
 import com.ey.hotspot.network.response.BaseResponse
+import com.ey.hotspot.network.response.LoginResponse
 import com.ey.hotspot.ui.registration.register_user.model.RegistrationResponse
 import kotlinx.coroutines.launch
 
@@ -30,7 +32,6 @@ class RegisterUserViewModel(application: Application) : BaseViewModel(applicatio
 
     fun registerUser(register: RegisterRequest) {
 
-
         setDialogVisibility(true, appInstance.getString(R.string.registering_new_user))
         coroutineScope.launch {
 
@@ -40,6 +41,7 @@ class RegisterUserViewModel(application: Application) : BaseViewModel(applicatio
 
 
                     _registrationResponse.value = it
+                    saveRegistrationTokenInSharedPreference(it.data.tempToken)
                     setDialogVisibility(false)
 
                 }, error = {
@@ -48,6 +50,13 @@ class RegisterUserViewModel(application: Application) : BaseViewModel(applicatio
             )
         }
 
+
+    }
+
+
+    private fun saveRegistrationTokenInSharedPreference(tempToken: String) {
+
+        HotSpotApp.prefs!!.setRegistrationTempToken(tempToken)
 
     }
 

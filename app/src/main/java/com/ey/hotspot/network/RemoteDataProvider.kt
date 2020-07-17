@@ -12,6 +12,8 @@ import com.ey.hotspot.ui.home.models.GetHotSpotRequest
 import com.ey.hotspot.ui.home.models.GetHotSpotResponse
 import com.ey.hotspot.ui.home.models.GetUserHotSpotResponse
 import com.ey.hotspot.ui.login.logout.LogoutResponse
+import com.ey.hotspot.ui.login.otpverification.fragment.model.SendOTPRequest
+import com.ey.hotspot.ui.login.otpverification.fragment.model.VerifyOTPRequest
 import com.ey.hotspot.ui.profile.fragment.model.ProfileResponse
 import com.ey.hotspot.ui.profile.fragment.model.UpdateProfileRequest
 import com.ey.hotspot.ui.registration.register_user.model.RegistrationResponse
@@ -47,7 +49,7 @@ interface RemoteDataProvider {
         error: (Exception) -> Unit
     )
 
-     suspend fun refreshTokenAsync(
+    suspend fun refreshTokenAsync(
         success: (BaseResponse<LoginResponse>) -> Unit,
         error: (Exception) -> Unit
     )
@@ -82,7 +84,7 @@ interface RemoteDataProvider {
         error: (Exception) -> Unit
     )
 
-    suspend fun  getFavourite(
+    suspend fun getFavourite(
         success: (BaseResponse<List<GetFavouriteItem>>) -> Unit,
         error: (Exception) -> Unit
     )
@@ -111,12 +113,23 @@ interface RemoteDataProvider {
     )
 
 
-    suspend fun  socialLogin(
-        request:SocialLoginRequest,
+    suspend fun socialLogin(
+        request: SocialLoginRequest,
         success: (BaseResponse<LoginResponse?>) -> Unit,
         error: (Exception) -> Unit
     )
 
+    suspend fun sendOTP(
+        request: SendOTPRequest,
+        success: (BaseResponse<Any>) -> Unit,
+        error: (Exception) -> Unit
+    )
+
+    suspend fun verifyOTP(
+        request: VerifyOTPRequest,
+        success: (BaseResponse<Any>) -> Unit,
+        error: (Exception) -> Unit
+    )
 
 
 }

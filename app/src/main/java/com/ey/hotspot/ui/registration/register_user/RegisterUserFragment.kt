@@ -11,6 +11,7 @@ import com.ey.hotspot.databinding.FragmentRegisterUserBinding
 import com.ey.hotspot.network.request.RegisterRequest
 import com.ey.hotspot.ui.login.permission.PermissionFragment
 import com.ey.hotspot.ui.registration.email_verification.EmailVerificationFragment
+import com.ey.hotspot.ui.registration.registration_option.RegistrationOptionFragment
 import com.ey.hotspot.utils.replaceFragment
 import com.ey.hotspot.utils.showMessage
 import com.ey.hotspot.utils.validations.isEmailValid
@@ -69,9 +70,11 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
                 showMessage(it.message, true)
 
                 replaceFragment(
-                    fragment = EmailVerificationFragment.newInstance(),
-                    addToBackStack = true,
-                    bundle = null
+                    fragment = RegistrationOptionFragment.newInstance(
+                        emailID=mViewModel.emailId
+                    ),
+                    addToBackStack = true
+
                 )
             } else {
                 showMessage(it.message, true)

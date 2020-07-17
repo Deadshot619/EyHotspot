@@ -13,16 +13,15 @@ import com.ey.hotspot.ui.home.models.GetHotSpotRequest
 import com.ey.hotspot.ui.home.models.GetHotSpotResponse
 import com.ey.hotspot.ui.home.models.GetUserHotSpotResponse
 import com.ey.hotspot.ui.login.logout.LogoutResponse
+import com.ey.hotspot.ui.login.otpverification.fragment.model.SendOTPRequest
+import com.ey.hotspot.ui.login.otpverification.fragment.model.VerifyOTPRequest
 import com.ey.hotspot.ui.profile.fragment.model.ProfileResponse
 import com.ey.hotspot.ui.profile.fragment.model.UpdateProfileRequest
 import com.ey.hotspot.ui.registration.register_user.model.RegistrationResponse
 import com.ey.hotspot.utils.constants.Constants
 import com.google.gson.JsonArray
 import kotlinx.coroutines.Deferred
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
+import retrofit2.http.*
 
 
 interface APIInterface {
@@ -35,7 +34,7 @@ interface APIInterface {
     fun login(@Body loginRequest: LoginRequest): Deferred<BaseResponse<LoginResponse?>>
 
     @POST(Constants.API_SOCIAL_LOGIN)
-    fun socialLogin(@Body socialLoginRequest: SocialLoginRequest):Deferred<BaseResponse<LoginResponse?>>
+    fun socialLogin(@Body socialLoginRequest: SocialLoginRequest): Deferred<BaseResponse<LoginResponse?>>
 
     @GET(Constants.API_GET_USER_LIST)
     fun getUserList(): Deferred<JsonArray>
@@ -87,15 +86,15 @@ interface APIInterface {
 
 
     @POST(Constants.API_FAVOURITE_LIST)
-    fun  getFavourite(
-    ):Deferred<BaseResponse<List<GetFavouriteItem>>>
+    fun getFavourite(
+    ): Deferred<BaseResponse<List<GetFavouriteItem>>>
 
-//    Reviews & Complaints
+    //    Reviews & Complaints
     @POST(Constants.API_GET_REVIEWS_AND_COMPLAINTS)
-    fun fetchReviewsAndComplaints() : Deferred<BaseResponse<Any>>
+    fun fetchReviewsAndComplaints(): Deferred<BaseResponse<Any>>
 
     @POST(Constants.API_GET_COMPLAINTS_ISSUE_TYPES)
-    fun fetchComplaintsIssueType() : Deferred<BaseResponse<Any>>
+    fun fetchComplaintsIssueType(): Deferred<BaseResponse<Any>>
 
     @POST(Constants.API_ADD_REVIEW)
     fun apiAddReview(): Deferred<BaseResponse<Any>>
@@ -103,5 +102,16 @@ interface APIInterface {
     @POST(Constants.API_ADD_COMPLAINT)
     fun apiAddComplaint(): Deferred<BaseResponse<Any>>
 
+    @POST(Constants.API_SEND_OTP + "/" + "{id}?")
+    fun sendOTP(
+        @Path("id") id: String?, @Body
+        sendOTPRequest: SendOTPRequest
+    ): Deferred<BaseResponse<Any>>
 
+
+    @POST(Constants.API_VERIFY_OTP + "/" + "{id}?")
+    fun verifyOTP(
+        @Path("id") id: String?, @Body
+        verifyOTPRequest: VerifyOTPRequest
+    ): Deferred<BaseResponse<Any>>
 }

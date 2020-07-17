@@ -9,6 +9,7 @@ import com.ey.hotspot.utils.constants.Constants.Companion.APP_LOGGED_IN
 import com.ey.hotspot.utils.constants.Constants.Companion.DELEGATE_ENGLISH_LANG
 import com.ey.hotspot.utils.constants.Constants.Companion.ENABLED_GPS_LOCATION
 import com.ey.hotspot.utils.constants.Constants.Companion.LANGUAGE_SELECTED
+import com.ey.hotspot.utils.constants.Constants.Companion.REGISTRATION_TMP_TOKEN
 import com.ey.hotspot.utils.constants.Constants.Companion.USER_DATA
 import com.google.gson.Gson
 
@@ -83,6 +84,16 @@ class MyHotSpotSharedPreference(context: Context) {
 
     fun deleteUserData() {
         CoreApp.sharedPreferences.edit().remove(USER_DATA).apply()
+    }
+
+
+    fun setRegistrationTempToken(tmp: String) {
+        CoreApp.sharedPreferences.edit().putString(REGISTRATION_TMP_TOKEN, tmp).apply()
+    }
+
+    fun getRegistrationTempToken(): String? {
+        return CoreApp.sharedPreferences.getString(REGISTRATION_TMP_TOKEN, "")
+
     }
 
     /**

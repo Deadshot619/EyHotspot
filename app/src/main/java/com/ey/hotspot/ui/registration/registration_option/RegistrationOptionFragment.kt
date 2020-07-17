@@ -1,11 +1,13 @@
 package com.ey.hotspot.ui.registration.registration_option
 
+import android.os.Bundle
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentRegistrationOptionBinding
 import com.ey.hotspot.ui.login.forgorpasswordmobile.ForgotPasswordMobileFragment
 import com.ey.hotspot.ui.login.forgotpasswordemail.ForgotPasswordEmailFragment
 import com.ey.hotspot.ui.login.login_fragment.LoginFragment
+import com.ey.hotspot.ui.login.otpverification.fragment.OTPVerificationFragment
 import com.ey.hotspot.ui.registration.email_verification.EmailVerificationFragment
 import com.ey.hotspot.ui.registration.sms_verification.SmsVerificationFragment
 import com.ey.hotspot.utils.constants.OptionType
@@ -15,9 +17,15 @@ class RegistrationOptionFragment :
     BaseFragment<FragmentRegistrationOptionBinding, RegistrationOptionViewModel>() {
 
     companion object {
-        fun newInstance() = RegistrationOptionFragment()
+        fun newInstance(emailID: String) = RegistrationOptionFragment().apply {
+            arguments = Bundle().apply {
+
+                putString(mEmailId, emailID)
+            }
+        }
 
         const val TYPE_KEY = "type_key"
+        const val mEmailId = "emailid"
     }
 
     lateinit var TYPE_VALUE: String
@@ -54,11 +62,18 @@ class RegistrationOptionFragment :
 
             //Sign In button
             btnEmailLink.setOnClickListener {
-                if (TYPE_VALUE == OptionType.TYPE_REGISTRATION.name)
-                    replaceFragment(EmailVerificationFragment.newInstance(), true, null)
-                else
-                    replaceFragment(ForgotPasswordEmailFragment(), true, null)
+                /* if (TYPE_VALUE == OptionType.TYPE_REGISTRATION.name)
 
+                 else
+                     replaceFragment(ForgotPasswordEmailFragment(), true, null)
+ */
+                replaceFragment(
+                    fragment = OTPVerificationFragment.newInstance(
+                        selectedOption = "email",
+                        selectedItem = arguments?.getString(mEmailId) ?: ""
+                    ),
+                    addToBackStack = true
+                )
             }
 
             btnSignIn.setOnClickListener {

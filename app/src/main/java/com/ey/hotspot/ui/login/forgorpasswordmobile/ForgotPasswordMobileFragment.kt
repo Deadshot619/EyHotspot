@@ -46,12 +46,12 @@ class ForgotPasswordMobileFragment :
         mBinding.run {
             //Next button
             btnSubmit.setOnClickListener {
-                replaceFragment(OTPVerificationFragment.newInstance(), true, Bundle().apply {
+               /* replaceFragment(OTPVerificationFragment.newInstance(), true, Bundle().apply {
                     putString(
                         RegistrationOptionFragment.TYPE_KEY,
                         OptionType.TYPE_FORGOT_PASSWORD.name
                     )
-                })
+                })*/
             }
         }
     }

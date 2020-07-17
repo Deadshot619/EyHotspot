@@ -168,7 +168,7 @@
     <string name="terms_condition"><u>terms &amp; conditions</u></string>
     <string name="get_started">" GET STARTED NOW"</string>
     <string name="or">OR</string>
-    <string name="otp_title">Please enter OTP sent to \n+91 99999999</string>
+    <string name="otp_title">Please enter OTP sent to</string>
     <string name="resend_otp_label">RESEND OTP</string>
     <string name="btn_verify">VERIFY</string>
     <string name="receive_otp">Didn\'t received OTP?</string>
@@ -213,6 +213,7 @@
     <string name="google_sign_failed">Google Sign in failed</string>
     <string name="facebook">facebook</string>
     <string name="no_data_available">No data available</string>
+    <string name="enter_valid_otp">Enter the valid otp</string>
 
 
     <!--Demo issue type string-->

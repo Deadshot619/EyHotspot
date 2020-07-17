@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.ey.hotspot.ui.registration.email_verification.EmailVerificationViewModel" />
+            type="com.ey.hotspot.ui.login.otpverification.fragment.OTPVerificationViewModel" />
 
     </data>
 
@@ -103,8 +103,8 @@
         <!--    check image  -->
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_check"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/margin_200"
+            android:layout_height="@dimen/margin_200"
             android:src="@drawable/ic_mobile_verification"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -118,8 +118,7 @@
             android:inputType="textPassword"
             android:textColor="@color/colorPrimary"
             android:textDirection="locale"
-            app:itemCount="6"
-
+            app:itemCount="4"
             app:layout_constraintEnd_toEndOf="@+id/guideline_right"
             app:layout_constraintStart_toStartOf="@+id/guideline_left"
             app:layout_constraintTop_toBottomOf="@+id/iv_check"
@@ -165,10 +164,10 @@
             android:id="@+id/tvTermsCondition"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/resend_otp_label"
-            android:textSize="@dimen/text_size_18"
-            android:textColor="@color/colorPrimarySub"
             android:layout_marginStart="@dimen/common_margin_between_fields_4"
+            android:text="@string/resend_otp_label"
+            android:textColor="@color/colorPrimarySub"
+            android:textSize="@dimen/text_size_18"
             app:layout_constraintBottom_toBottomOf="@+id/tvreceviedotp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -189,6 +188,7 @@
             android:paddingBottom="@dimen/margin_10"
             android:text="@string/sign_in_label"
             android:textColor="@color/colorWhite"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
