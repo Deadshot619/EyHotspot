@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseViewModel
+import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.network.DataProvider
 import com.ey.hotspot.network.response.BaseResponse
 import com.ey.hotspot.ui.profile.fragment.model.ProfileDataModel
@@ -23,7 +24,8 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
         get() = _profileResponse
 
     init {
-        getProfileDetails()
+        if(HotSpotApp.prefs?.getAppLoggedInStatus()!!)
+            getProfileDetails()
     }
 
 

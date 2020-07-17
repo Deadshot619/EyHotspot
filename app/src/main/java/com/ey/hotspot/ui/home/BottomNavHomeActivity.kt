@@ -74,6 +74,7 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
             when (item.itemId) {
                 //Favourites
                 R.id.favourite -> {
+                    clearFragmentBackstack()
                     if (HotSpotApp.prefs?.getAppLoggedInStatus()!!){
                         replaceFragment(FavouriteFragment(), false)
                         return@setOnNavigationItemSelectedListener true
@@ -86,6 +87,7 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
 
                 //Reviews & complaints
                 R.id.logs -> {
+                    clearFragmentBackstack()
                     if (HotSpotApp.prefs?.getAppLoggedInStatus()!!){
                         replaceFragment(ReviewAndComplainFragment(), false)
                         return@setOnNavigationItemSelectedListener true
@@ -98,18 +100,21 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
 
                 //home
                 R.id.home -> {
+                    clearFragmentBackstack()
                     replaceFragment(HomeFragment(), false)
                     return@setOnNavigationItemSelectedListener true
                 }
 
                 //Speed Test
                 R.id.speed_check -> {
+                    clearFragmentBackstack()
                     replaceFragment(SpeedTestFragment(), false)
                     return@setOnNavigationItemSelectedListener true
                 }
 
                 //Profile
                 R.id.profile -> {
+                    clearFragmentBackstack()
                     replaceFragment(ProfileFragment(), false)
                     return@setOnNavigationItemSelectedListener true
                 }
@@ -128,5 +133,6 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
             flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
         })
     }
+
 
 }

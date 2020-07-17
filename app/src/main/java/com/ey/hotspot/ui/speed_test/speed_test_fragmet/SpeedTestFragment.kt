@@ -32,7 +32,7 @@ class SpeedTestFragment : BaseFragment<FragmentSpeedTestBinding, SpeedTestFragme
     fun setUpListeners() {
         //Go
         mBinding.tvGo.setOnClickListener {
-            replaceFragment(TestResultsFragment(), true)
+            replaceFragment(TestResultsFragment(), false)
         }
     }
 
