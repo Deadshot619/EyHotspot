@@ -6,17 +6,35 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
+import com.ey.hotspot.app_core_lib.CoreApp
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.SearchListFragmentBinding
 import com.ey.hotspot.ui.home.models.GetUserHotSpotResponse
+import com.ey.hotspot.ui.login.LoginActivity
 import com.ey.hotspot.ui.search.searchlist.adapter.SearchListAdapter
 import com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment
 import com.ey.hotspot.ui.speed_test.rate_wifi.RateWifiFragment
+import com.ey.hotspot.utils.dialogs.YesNoDialog
 import com.ey.hotspot.utils.replaceFragment
 
 class SearchListFragment : BaseFragment<SearchListFragmentBinding, SearchListViewModel>() {
 
-//    private val usersAdapter = SearchListAdapter(arrayListOf())
+    private val dialog by lazy {
+        YesNoDialog(requireActivity()).apply {
+            //TODO 17/07/2020 : Extract String resources
+            setViews(
+                title = "Login Required",
+                description = "You need to login to access this feature",
+                yes = {
+                    goToLoginScreen()
+                },
+                no = {
+                    this.dismiss()
+                })
+        }
+    }
+
+    //    private val usersAdapter = SearchListAdapter(arrayListOf())
     private lateinit var mAdapter: SearchListAdapter
 
     companion object {
@@ -30,8 +48,8 @@ class SearchListFragment : BaseFragment<SearchListFragmentBinding, SearchListVie
         mBinding.lifecycleOwner = viewLifecycleOwner
         mBinding.viewModel = mViewModel
 
-        setUpSearchBar(mBinding.toolbarLayout,true){
-            if(HotSpotApp.prefs?.getAppLoggedInStatus()!!)
+        setUpSearchBar(mBinding.toolbarLayout, true) {
+            if (HotSpotApp.prefs?.getAppLoggedInStatus()!!)
                 mViewModel.getUserHotSpotResponse(it)
             else
                 mViewModel.getHotSpotResponse(it)
@@ -40,37 +58,49 @@ class SearchListFragment : BaseFragment<SearchListFragmentBinding, SearchListVie
         setUpRecyclerView(mBinding.rvSearchList)
     }
 
-    private fun setUpRecyclerView(recyclerView: RecyclerView){
+    private fun setUpRecyclerView(recyclerView: RecyclerView) {
         //Setup Adapter
         mAdapter = SearchListAdapter(object : SearchListAdapter.OnClickListener {
             //Rate Now button
             override fun onClickRateNow(data: GetUserHotSpotResponse) {
-                replaceFragment(
-                    fragment = RateWifiFragment.newInstance(
-                        locationId = data.id,
-                        wifiSsid = data.name,
-                        wifiProvider = data.provider_name,
-                        location = data.location
-                    ),
-                    addToBackStack = true
-                )
+
+                if (HotSpotApp.prefs?.getAppLoggedInStatus()!!)
+                    replaceFragment(
+                        fragment = RateWifiFragment.newInstance(
+                            locationId = data.id,
+                            wifiSsid = data.name,
+                            wifiProvider = data.provider_name,
+                            location = data.location
+                        ),
+                        addToBackStack = true
+                    )
+                else
+                    dialog.show()
+
             }
 
             //Report
             override fun onClickReport(data: GetUserHotSpotResponse) {
-                replaceFragment(
-                    RaiseComplaintFragment.newInstance(
-                        locationId = data.id,
-                        wifiSsid = data.name,
-                        wifiProvider = data.provider_name,
-                        location = data.location
-                    ), true
-                )
+
+                if (HotSpotApp.prefs?.getAppLoggedInStatus()!!)
+                    replaceFragment(
+                        RaiseComplaintFragment.newInstance(
+                            locationId = data.id,
+                            wifiSsid = data.name,
+                            wifiProvider = data.provider_name,
+                            location = data.location
+                        ), true
+                    )
+                else
+                    dialog.show()
             }
 
             //Favourite
             override fun onClickAddFavourite(data: GetUserHotSpotResponse) {
-//                mViewModel.markFavouriteItem(data.id)
+                if (HotSpotApp.prefs?.getAppLoggedInStatus()!!)
+                    mViewModel.markFavouriteItem(data.id)
+                else
+                    dialog.show()
             }
 
             //Navigate Now
@@ -89,4 +119,16 @@ class SearchListFragment : BaseFragment<SearchListFragmentBinding, SearchListVie
             this.adapter = mAdapter
         }
     }
+
+    private fun goToLoginScreen() {
+        //Clear Data
+        HotSpotApp.prefs?.clearSharedPrefData()
+
+        //Redirect user to Login Activity
+        CoreApp.instance.startActivity(Intent(CoreApp.instance, LoginActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+        })
+    }
+
 }

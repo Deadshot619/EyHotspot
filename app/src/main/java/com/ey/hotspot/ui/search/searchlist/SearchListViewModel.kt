@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.ey.hotspot.app_core_lib.BaseViewModel
 import com.ey.hotspot.network.DataProvider
 import com.ey.hotspot.network.response.BaseResponse
+import com.ey.hotspot.ui.favourite.model.MarkFavouriteRequest
 import com.ey.hotspot.ui.home.models.GetHotSpotRequest
 import com.ey.hotspot.ui.home.models.GetHotSpotResponse
 import com.ey.hotspot.ui.home.models.GetUserHotSpotResponse
@@ -25,6 +26,7 @@ class SearchListViewModel(application: Application): BaseViewModel(application){
     val getUserHotSpotResponse: LiveData<BaseResponse<List<GetUserHotSpotResponse>>>
         get() = _getUserHotSpotResponse
 
+    private var searchString = ""
 
     //Method to get hotspots list for non-logged in user
     fun getHotSpotResponse(value: String) {
@@ -34,8 +36,6 @@ class SearchListViewModel(application: Application): BaseViewModel(application){
             longitude = 72.8096671,
             locationEnabled = true
         )
-
-
 
         coroutineScope.launch {
             DataProvider.getHotspot(
@@ -60,6 +60,8 @@ class SearchListViewModel(application: Application): BaseViewModel(application){
 
     //Method to get hotspots list for logged in user
     fun getUserHotSpotResponse(value: String) {
+        searchString = value
+
         val request = GetHotSpotRequest(
             name = value,
             latitude = 19.1403509,
@@ -81,5 +83,24 @@ class SearchListViewModel(application: Application): BaseViewModel(application){
         }
     }
 
+
+    fun markFavouriteItem(locationId: Int) {
+        setDialogVisibility(true,null)
+        coroutineScope.launch {
+            DataProvider.markFavourite(
+                request = MarkFavouriteRequest(locationId = locationId),
+                success = {
+
+                    if (it.status)
+                        getUserHotSpotResponse(searchString)
+
+                    showToastFromViewModel(it.message)
+                    setDialogVisibility(false)
+                }, error = {
+                    checkError(it)
+                }
+            )
+        }
+    }
 
 }
