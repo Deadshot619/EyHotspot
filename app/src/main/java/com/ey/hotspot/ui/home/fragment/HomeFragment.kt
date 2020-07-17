@@ -21,6 +21,8 @@ import com.ey.hotspot.ui.home.models.GetHotSpotResponse
 import com.ey.hotspot.ui.home.models.GetUserHotSpotResponse
 import com.ey.hotspot.ui.home.models.MyClusterItems
 import com.ey.hotspot.ui.search.searchlist.SearchListFragment
+import com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment
+import com.ey.hotspot.ui.speed_test.rate_wifi.RateWifiFragment
 import com.ey.hotspot.utils.*
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
@@ -171,26 +173,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         mGoogleApiClient.connect()
     }
 
-    private fun setUpUserHotSpotData(list: List<GetUserHotSpotResponse>) {
-
-
-        for (location in list) {
-
-            val offsetItems =
-                MyClusterItems(
-                    location.lat,
-                    location.lng,
-                    location.provider_name,
-                    location.navigate_url,
-                    location.favourite,
-                    location.name,
-                    location.id,
-                    location.location
-
-                )
-            mClusterManager.addItem(offsetItems)
-        }
-    }
 
     private fun getNearByWifiList() {
 
@@ -382,12 +364,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
             }
 
-
-            mBinding.customPop.btnRateNow.setOnClickListener {
-
-            }
-
-
             val markFavouriteRequest: MarkFavouriteRequest =
                 MarkFavouriteRequest(clickedVenueMarker!!.mItemID)
 
@@ -404,7 +380,53 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             startActivity(i)
 
         }
+
+        mBinding.customPop.btnRateNow.setOnClickListener {
+            val wifiProvideer: String = clickedVenueMarker?.title!!
+            replaceFragment(
+                fragment = RateWifiFragment.newInstance(
+                    locationId = clickedVenueMarker!!.mItemID,
+                    wifiSsid = clickedVenueMarker!!.mNavigateURL,
+                    wifiProvider = wifiProvideer,
+                    location = clickedVenueMarker!!.mAddress
+                ),
+                addToBackStack = true
+            )
+        }
+
+        mBinding.customPop.ivFlag.setOnClickListener {
+
+            val wifiProvideer: String = clickedVenueMarker?.title!!
+            replaceFragment(
+                RaiseComplaintFragment.newInstance(
+                    locationId = clickedVenueMarker!!.mItemID,
+                    wifiSsid = clickedVenueMarker!!.mNavigateURL,
+                    wifiProvider = wifiProvideer,
+                    location = clickedVenueMarker!!.mAddress
+                ), true
+            )
+        }
+
+
         return false
+    }
+
+
+    private fun setUpUserHotSpotData(list: List<GetUserHotSpotResponse>) {
+        for (location in list) {
+            val offsetItems =
+                MyClusterItems(
+                    location.lat,
+                    location.lng,
+                    location.provider_name,
+                    location.navigate_url,
+                    location.favourite,
+                    location.name,
+                    location.id,
+                    location.location
+                )
+            mClusterManager.addItem(offsetItems)
+        }
     }
 
     override fun onClusterItemInfoWindowClick(item: MyClusterItems?) {
