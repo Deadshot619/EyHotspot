@@ -1,9 +1,6 @@
 package com.ey.hotspot.network
 
-import com.ey.hotspot.network.request.AddComplaintRequest
-import com.ey.hotspot.network.request.LoginRequest
-import com.ey.hotspot.network.request.RegisterRequest
-import com.ey.hotspot.network.request.SocialLoginRequest
+import com.ey.hotspot.network.request.*
 import com.ey.hotspot.network.response.BaseResponse
 import com.ey.hotspot.network.response.ComplaintIssuesTypes
 import com.ey.hotspot.network.response.LoginResponse
@@ -101,7 +98,7 @@ interface RemoteDataProvider {
     )
 
     suspend fun addReviews(
-//        request:
+        request: AddReviewRequest,
         success: (BaseResponse<Any>) -> Unit,
         error: (Exception) -> Unit
     )

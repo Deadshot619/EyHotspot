@@ -43,6 +43,7 @@ class SearchListFragment : BaseFragment<SearchListFragmentBinding, SearchListVie
             override fun onClickRateNow(data: GetUserHotSpotResponse) {
                 replaceFragment(
                     fragment = RateWifiFragment.newInstance(
+                        locationId = data.id,
                         wifiSsid = data.name,
                         wifiProvider = data.provider_name,
                         location = data.location

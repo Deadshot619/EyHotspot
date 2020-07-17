@@ -44,6 +44,7 @@ class FavouriteFragment : BaseFragment<FavouriteFragmentBinding, FavouriteViewMo
             override fun onClickRateNow(data: GetFavouriteItem) {
                 replaceFragment(
                     fragment = RateWifiFragment.newInstance(
+                        locationId = data.id,
                         wifiSsid = data.name,
                         wifiProvider = data.provider_name,
                         location = data.location

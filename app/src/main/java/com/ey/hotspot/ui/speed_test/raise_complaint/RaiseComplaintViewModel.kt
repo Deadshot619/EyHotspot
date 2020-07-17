@@ -46,12 +46,14 @@ class RaiseComplaintViewModel(application: Application) : BaseViewModel(applicat
     }
 
 
+    /**
+     * Method to add Complaint
+     */
     fun addComplaint() {
         val request = AddComplaintRequest(
             locationId = raiseComplaintData.value?.id ?: -1,
             issueType = raiseComplaintData.value?.issueType ?: "",
             complaint = raiseComplaintData.value?.feedback ?: ""
-
         )
 
         setDialogVisibility(true)
@@ -65,8 +67,6 @@ class RaiseComplaintViewModel(application: Application) : BaseViewModel(applicat
 
                     if (it.status)
                         _goBack.value = Event(true)
-
-
                 },
                 error ={
                     checkError(it)

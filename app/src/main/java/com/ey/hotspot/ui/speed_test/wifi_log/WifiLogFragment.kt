@@ -42,6 +42,7 @@ class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>()
         mBinding.btnRateNow.setOnClickListener {
             replaceFragment(
                 RateWifiFragment.newInstance(
+                    locationId = -1,
                     wifiSsid = arguments?.getString(WIFI_SSID)!!,
                     wifiProvider = "Bleh",
                     location = "bleh"
