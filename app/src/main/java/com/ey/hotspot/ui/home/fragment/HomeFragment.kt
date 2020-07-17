@@ -383,6 +383,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             }
 
 
+            mBinding.customPop.btnRateNow.setOnClickListener {
+
+            }
+
+
             val markFavouriteRequest: MarkFavouriteRequest =
                 MarkFavouriteRequest(clickedVenueMarker!!.mItemID)
 

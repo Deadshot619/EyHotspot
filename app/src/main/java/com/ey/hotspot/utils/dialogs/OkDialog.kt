@@ -22,7 +22,7 @@ class OkDialog(context: Context) : AppCompatDialog(context) {
 
     fun setViews(
         title: String,
-        okBtn: (Unit) -> Unit
+        okBtn: ((Unit) -> Unit)
     ) {
         mBinding.run {
             tvTitle.text = title

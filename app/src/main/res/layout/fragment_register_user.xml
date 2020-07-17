@@ -297,6 +297,7 @@
 
 
             <LinearLayout
+                android:visibility="gone"
                 android:id="@+id/llOR"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -344,6 +345,7 @@
                 android:layout_height="25dp"
                 android:src="@drawable/ic_facebook_"
                 android:textDirection="locale"
+                android:visibility="gone"
 
                 app:layout_constraintBottom_toBottomOf="@+id/ivGoogleSignIn"
                 app:layout_constraintEnd_toStartOf="@+id/ivGoogleSignIn"
@@ -358,6 +360,7 @@
                 android:layout_height="30dp"
                 android:layout_marginTop="@dimen/common_margin_24"
                 android:textDirection="locale"
+                android:visibility="gone"
 
                 android:src="@drawable/ic_google_sign_in"
                 app:layout_constraintEnd_toEndOf="parent"

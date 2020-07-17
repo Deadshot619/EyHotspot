@@ -12,6 +12,7 @@ import com.ey.hotspot.ui.registration.email_verification.EmailVerificationFragme
 import com.ey.hotspot.ui.registration.sms_verification.SmsVerificationFragment
 import com.ey.hotspot.utils.constants.OptionType
 import com.ey.hotspot.utils.replaceFragment
+import com.ey.hotspot.utils.showMessage
 
 class RegistrationOptionFragment :
     BaseFragment<FragmentRegistrationOptionBinding, RegistrationOptionViewModel>() {
@@ -54,10 +55,12 @@ class RegistrationOptionFragment :
         mBinding.run {
             //Next button
             btnOtpSms.setOnClickListener {
-                if (TYPE_VALUE == OptionType.TYPE_REGISTRATION.name)
-                    replaceFragment(SmsVerificationFragment.newInstance(), true, null)
-                else
-                    replaceFragment(ForgotPasswordMobileFragment(), true, null)
+                /*   if (TYPE_VALUE == OptionType.TYPE_REGISTRATION.name)
+                       replaceFragment(SmsVerificationFragment.newInstance(), true, null)
+                   else
+                       replaceFragment(ForgotPasswordMobileFragment(), true, null)
+         */
+                showMessage("Select Email Link Option for now.", true)
             }
 
             //Sign In button

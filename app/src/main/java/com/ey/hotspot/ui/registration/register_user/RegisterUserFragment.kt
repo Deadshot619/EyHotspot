@@ -10,8 +10,8 @@ import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentRegisterUserBinding
 import com.ey.hotspot.network.request.RegisterRequest
 import com.ey.hotspot.ui.login.permission.PermissionFragment
-import com.ey.hotspot.ui.registration.email_verification.EmailVerificationFragment
 import com.ey.hotspot.ui.registration.registration_option.RegistrationOptionFragment
+import com.ey.hotspot.utils.dialogs.OkDialog
 import com.ey.hotspot.utils.replaceFragment
 import com.ey.hotspot.utils.showMessage
 import com.ey.hotspot.utils.validations.isEmailValid
@@ -26,11 +26,26 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import com.google.gson.Gson
+import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_register_user.*
 import java.util.*
 
 
 class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterUserViewModel>() {
+
+
+    //Create 'OK' Dialog
+    val dialog by lazy {
+        OkDialog(requireContext()).apply {
+            setViews(
+                title = "",
+                okBtn = {
+                    this.dismiss()
+                }
+            )
+        }
+    }
 
     //Facebook Sign In
     lateinit var callbackManager: CallbackManager
@@ -71,13 +86,32 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
 
                 replaceFragment(
                     fragment = RegistrationOptionFragment.newInstance(
-                        emailID=mViewModel.emailId
+                        emailID = mViewModel.emailId
                     ),
                     addToBackStack = true
 
                 )
             } else {
-                showMessage(it.message, true)
+
+                try {
+
+
+                    val jsonStrinData = Gson().toJson(it.data)
+                    
+                    dialog.setViews(
+                        jsonStrinData
+                        , okBtn = {
+                            dialog.dismiss()
+                        }
+                    )
+                    dialog.show()
+
+                    showMessage(it.message, true)
+
+
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
             }
         })
     }
