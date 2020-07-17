@@ -263,9 +263,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
 
     private fun setupClusters() {
-
         mClusterManager = ClusterManager(activity, map)
-
 
         mClusterManager.setOnClusterClickListener(this);
         mClusterManager.setOnClusterItemClickListener(this);
@@ -276,8 +274,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
         val renderer = ClusterItemRenderer(requireActivity(), map, mClusterManager)
         mClusterManager.renderer = renderer
-
-
     }
 
     private fun setUpHotSpotData(getHotSpotResponse: List<GetHotSpotResponse>) {
@@ -327,7 +323,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
     /* In this method  1. Showing  Custom Pop up window  along with toggle the mark as favourite option*/
     override fun onClusterItemClick(item: MyClusterItems?): Boolean {
 
-
         clickedVenueMarker = item;
 
         //Main cardview Layout
@@ -338,8 +333,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         mBinding.customPop.tvServiceProvider.text = clickedVenueMarker?.mNavigateURL
         mBinding.customPop.tvLocation.text = clickedVenueMarker?.mAddress
 
-
-
         if (clickedVenueMarker?.mIsFavourite == true) {
             mBinding.customPop.ivFavourites.setImageResource(R.drawable.ic_favorite_filled_red)
         } else {
@@ -347,7 +340,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         }
 
         mBinding.customPop.ivFavourites.setOnClickListener {
-
             val imgID1: Drawable.ConstantState? =
                 requireContext().getDrawable(R.drawable.ic_favorite_filled_gray)?.getConstantState()
 
@@ -357,11 +349,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             if (imgID1 == imgID2) {
                 mBinding.customPop.ivFavourites.setImageResource(R.drawable.ic_favorite_filled_red)
                 favouriteType = true
-
             } else {
                 mBinding.customPop.ivFavourites.setImageResource(R.drawable.ic_favorite_filled_gray)
                 favouriteType = false
-
             }
 
             val markFavouriteRequest: MarkFavouriteRequest =

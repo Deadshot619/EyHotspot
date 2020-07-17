@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
+import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.SearchListFragmentBinding
 import com.ey.hotspot.ui.home.models.GetUserHotSpotResponse
 import com.ey.hotspot.ui.search.searchlist.adapter.SearchListAdapter
@@ -30,7 +31,10 @@ class SearchListFragment : BaseFragment<SearchListFragmentBinding, SearchListVie
         mBinding.viewModel = mViewModel
 
         setUpSearchBar(mBinding.toolbarLayout,true){
-            mViewModel.getUserHotSpotResponse(it)
+            if(HotSpotApp.prefs?.getAppLoggedInStatus()!!)
+                mViewModel.getUserHotSpotResponse(it)
+            else
+                mViewModel.getHotSpotResponse(it)
         }
 
         setUpRecyclerView(mBinding.rvSearchList)
@@ -85,7 +89,4 @@ class SearchListFragment : BaseFragment<SearchListFragmentBinding, SearchListVie
             this.adapter = mAdapter
         }
     }
-
-
-
 }
