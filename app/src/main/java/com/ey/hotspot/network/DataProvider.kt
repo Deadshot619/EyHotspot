@@ -1,9 +1,11 @@
 package com.ey.hotspot.network
 
+import com.ey.hotspot.network.request.AddComplaintRequest
 import com.ey.hotspot.network.request.LoginRequest
 import com.ey.hotspot.network.request.RegisterRequest
 import com.ey.hotspot.network.request.SocialLoginRequest
 import com.ey.hotspot.network.response.BaseResponse
+import com.ey.hotspot.network.response.ComplaintIssuesTypes
 import com.ey.hotspot.network.response.LoginResponse
 import com.ey.hotspot.ui.favourite.model.GetFavouriteItem
 import com.ey.hotspot.ui.favourite.model.MarkFavouriteRequest
@@ -233,7 +235,7 @@ object DataProvider : RemoteDataProvider {
     }
 
     override suspend fun getComplaintsIssuesTypes(
-        success: (BaseResponse<Any>) -> Unit,
+        success: (BaseResponse<ComplaintIssuesTypes>) -> Unit,
         error: (Exception) -> Unit
     ) {
         withContext(Dispatchers.Main) {
@@ -263,13 +265,13 @@ object DataProvider : RemoteDataProvider {
     }
 
     override suspend fun addComplaints(
-//        request:
+        request: AddComplaintRequest,
         success: (BaseResponse<Any>) -> Unit,
         error: (Exception) -> Unit
     ) {
         withContext(Dispatchers.Main) {
             try {
-                val result = mServices.apiAddComplaint().await()
+                val result = mServices.apiAddComplaint(request).await()
                 success(result)
             } catch (e: Exception) {
                 error(e)

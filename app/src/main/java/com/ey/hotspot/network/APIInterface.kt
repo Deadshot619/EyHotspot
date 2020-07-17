@@ -1,10 +1,12 @@
 package com.ey.hotspot.network
 
 import com.ey.hotspot.app_core_lib.HotSpotApp
+import com.ey.hotspot.network.request.AddComplaintRequest
 import com.ey.hotspot.network.request.LoginRequest
 import com.ey.hotspot.network.request.RegisterRequest
 import com.ey.hotspot.network.request.SocialLoginRequest
 import com.ey.hotspot.network.response.BaseResponse
+import com.ey.hotspot.network.response.ComplaintIssuesTypes
 import com.ey.hotspot.network.response.LoginResponse
 import com.ey.hotspot.ui.favourite.model.GetFavouriteItem
 import com.ey.hotspot.ui.favourite.model.MarkFavouriteRequest
@@ -94,14 +96,14 @@ interface APIInterface {
     @POST(Constants.API_GET_REVIEWS_AND_COMPLAINTS)
     fun fetchReviewsAndComplaints() : Deferred<BaseResponse<Any>>
 
-    @POST(Constants.API_GET_COMPLAINTS_ISSUE_TYPES)
-    fun fetchComplaintsIssueType() : Deferred<BaseResponse<Any>>
+    @GET(Constants.API_GET_COMPLAINTS_ISSUE_TYPES)
+    fun fetchComplaintsIssueType() : Deferred<BaseResponse<ComplaintIssuesTypes>>
 
     @POST(Constants.API_ADD_REVIEW)
     fun apiAddReview(): Deferred<BaseResponse<Any>>
 
     @POST(Constants.API_ADD_COMPLAINT)
-    fun apiAddComplaint(): Deferred<BaseResponse<Any>>
+    fun apiAddComplaint(@Body request: AddComplaintRequest): Deferred<BaseResponse<Any>>
 
 
 }

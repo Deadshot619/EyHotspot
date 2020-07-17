@@ -54,6 +54,7 @@ class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>()
         mBinding.ivFlag.setOnClickListener {
             replaceFragment(
                 RaiseComplaintFragment.newInstance(
+                    locationId = -1,
                     wifiSsid = arguments?.getString(WIFI_SSID)!!,
                     wifiProvider = "Bleh",
                     location = "bleh"
