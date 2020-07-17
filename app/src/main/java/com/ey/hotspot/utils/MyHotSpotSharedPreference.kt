@@ -24,8 +24,8 @@ class MyHotSpotSharedPreference(context: Context) {
 
 
     /** get saved App language Arabic or English */
-    fun getLanguage(): String? {
-        return CoreApp.sharedPreferences.getString(LANGUAGE_SELECTED, DELEGATE_ENGLISH_LANG)
+    fun getLanguage(): String {
+        return CoreApp.sharedPreferences.getString(LANGUAGE_SELECTED, DELEGATE_ENGLISH_LANG) ?: DELEGATE_ENGLISH_LANG
     }
 
     /*save user access token for api calls*/

@@ -89,7 +89,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/common_padding"
                     android:layout_marginEnd="@dimen/common_padding"
-                    android:entries="@array/IssueType"
+                    tools:entries="@array/IssueType"
                     android:dropDownSelector="@color/colorPrimary"
                     android:paddingStart="@dimen/common_padding_24"
                     android:paddingEnd="@dimen/common_padding_24"

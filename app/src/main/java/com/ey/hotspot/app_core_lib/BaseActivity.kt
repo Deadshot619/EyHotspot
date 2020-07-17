@@ -145,4 +145,8 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
 
     }
 
+    fun clearFragmentBackstack(){
+        for(i in 0..mManager.backStackEntryCount)
+            mManager.popBackStack()
+    }
 }

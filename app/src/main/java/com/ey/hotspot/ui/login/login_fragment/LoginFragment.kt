@@ -47,13 +47,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
         fun newInstance() = LoginFragment()
     }
 
-    override fun getLayoutId(): Int {
-        return R.layout.fragment_login
-    }
-
-    override fun getViewModel(): Class<LoginFragmentViewModel> {
-        return LoginFragmentViewModel::class.java
-    }
+    override fun getLayoutId() = R.layout.fragment_login
+    override fun getViewModel() = LoginFragmentViewModel::class.java
 
     override fun onBinding() {
 
@@ -92,9 +87,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
             if (it.status) {
 
                 showMessage(it.message, true)
-                val homeIntent = Intent(activity, BottomNavHomeActivity::class.java)
-                startActivity(homeIntent)
-                activity?.finish()
+                goToHomePage()
             } else {
                 showMessage(it.message, true)
             }
@@ -105,10 +98,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
             if (it.status) {
                 showMessage(it.message, true)
-                val homeIntent = Intent(activity, BottomNavHomeActivity::class.java)
-                startActivity(homeIntent)
-                activity?.finish()
-
+               goToHomePage()
             } else {
                 showMessage(it.message, true)
             }
@@ -136,7 +126,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
         //Register New user
         mBinding.tvGetStarted.setOnClickListener {
-
             replaceFragment(
                 fragment = RegisterUserFragment.newInstance(),
                 addToBackStack = true,
@@ -144,22 +133,31 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
             )
         }
 
-
+        //Facebook
         mBinding.ivFacebookSignIn.setOnClickListener {
-
             facebookSign()
         }
 
+        //Google
         mBinding.ivGoogleSignIn.setOnClickListener {
-
             signIn()
-
         }
+
+        //Skip button
+        mBinding.btnSkip.setOnClickListener {
+            mViewModel.setSkippedUserData()
+            goToHomePage()
+        }
+    }
+
+    //Method to redirect user to home page
+    private fun goToHomePage(){
+        startActivity(Intent(activity, BottomNavHomeActivity::class.java))
+        activity?.finish()
     }
 
 
     private fun facebookSign() {
-
         LoginManager.getInstance().logInWithReadPermissions(
             this,
             Arrays.asList("public_profile", "email")
@@ -234,11 +232,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
         } else if ((lastName.isEmpty()) || (lastName.isBlank())) {
             status = false
 
-        } else if ((email.isEmpty()) || (email.isBlank())) {
-            status = false
-
         } else {
-            status = true
+            status = !((email.isEmpty()) || (email.isBlank()))
         }
 
         return status

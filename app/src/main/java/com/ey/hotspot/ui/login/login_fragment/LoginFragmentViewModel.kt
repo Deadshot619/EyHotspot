@@ -122,12 +122,16 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
 
 
     private fun updateSharedPreference(loginResponse: LoginResponse) {
-
         HotSpotApp.prefs?.run {
             saveAccessToken(loginResponse.accessToken)
             setAppLoggedInStatus(true)
             setUserDataPref(loginResponse)
         }
+    }
 
+    fun setSkippedUserData(){
+        HotSpotApp.prefs?.run {
+            setAppLoggedInStatus(false)
+        }
     }
 }

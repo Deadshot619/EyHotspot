@@ -1,8 +1,10 @@
 package com.ey.hotspot.ui.profile
 
+import android.view.View
 import androidx.lifecycle.Observer
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
+import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.ProfileFragmentBinding
 import com.ey.hotspot.ui.profile.fragment.model.UpdateProfileRequest
 import com.ey.hotspot.ui.settings.fragments.SettingsFragment
@@ -33,6 +35,8 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
         setUpListener()
         setUpObserver()
 
+        if(!HotSpotApp.prefs?.getAppLoggedInStatus()!!)
+            mBinding.btnUpdateProfile.visibility = View.GONE
 
     }
 

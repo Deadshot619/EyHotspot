@@ -1,6 +1,7 @@
 package com.ey.hotspot.ui.speed_test.rate_wifi
 
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentRateWifiBinding
@@ -9,15 +10,17 @@ import com.ey.hotspot.utils.showMessage
 class RateWifiFragment : BaseFragment<FragmentRateWifiBinding, RateWifiViewModel>() {
 
     companion object {
-        fun newInstance(wifiSsid: String, wifiProvider: String, location: String) =
+        fun newInstance(locationId: Int, wifiSsid: String, wifiProvider: String, location: String) =
             RateWifiFragment().apply {
                 arguments = Bundle().apply {
+                    putInt(WIFI_ID, locationId)
                     putString(WIFI_SSID, wifiSsid)
                     putString(WIFI_PROVIDER, wifiProvider)
                     putString(LOCATION, location)
                 }
             }
 
+        private const val WIFI_ID = "wifi_id"
         private const val WIFI_SSID = "wifi_ssid"
         private const val WIFI_PROVIDER = "wifi_provider"
         private const val LOCATION = "location"
@@ -34,11 +37,14 @@ class RateWifiFragment : BaseFragment<FragmentRateWifiBinding, RateWifiViewModel
         setDataInView()
 
         setUpListeners()
+
+        setUpObservers()
     }
 
     //Method to set data in view
     private fun setDataInView(){
         mViewModel.rateWifiData.value?.run {
+            id = arguments?.getInt(WIFI_ID) ?: -1
             wifiSsid = arguments?.getString(WIFI_SSID) ?: ""
             wifiProvider = arguments?.getString(WIFI_PROVIDER) ?: ""
             wifiLocation = arguments?.getString(LOCATION) ?: ""
@@ -61,6 +67,15 @@ class RateWifiFragment : BaseFragment<FragmentRateWifiBinding, RateWifiViewModel
         }
     }
 
+    private fun setUpObservers() {
+        //Simon, Go Back
+        mViewModel.goBack.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let {status ->
+                if (status)
+                    activity?.onBackPressed()
+            }
+        })
+    }
 
     /**
      * Method to validate input fields
