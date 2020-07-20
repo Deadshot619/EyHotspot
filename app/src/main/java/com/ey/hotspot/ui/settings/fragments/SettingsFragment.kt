@@ -12,11 +12,11 @@ import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.FragmentSettingsBinding
 import com.ey.hotspot.ui.login.LoginActivity
 import com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListFragment
+import com.ey.hotspot.utils.LanguageManager
 import com.ey.hotspot.utils.MyHotSpotSharedPreference
 import com.ey.hotspot.utils.constants.Constants
 import com.ey.hotspot.utils.dialogs.YesNoDialog
 import com.ey.hotspot.utils.replaceFragment
-import com.ey.stringlocalization.utils.LanguageManager
 import kotlinx.android.synthetic.main.custom_confirm_settings_dialog.view.*
 
 class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel>() {

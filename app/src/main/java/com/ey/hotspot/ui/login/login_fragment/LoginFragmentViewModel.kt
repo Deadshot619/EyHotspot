@@ -125,6 +125,7 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
         HotSpotApp.prefs?.run {
             saveAccessToken(loginResponse.accessToken)
             setAppLoggedInStatus(true)
+            setSkipStatus(false)
             setUserDataPref(loginResponse)
         }
     }
@@ -132,6 +133,7 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
     fun setSkippedUserData(){
         HotSpotApp.prefs?.run {
             setAppLoggedInStatus(false)
+            setSkipStatus(true)
         }
     }
 }

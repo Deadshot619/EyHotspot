@@ -18,6 +18,8 @@ interface Constants {
         const val USER_DATA = "user_data"
         const val ENABLED_GPS_LOCATION: String = "GPS_LOCATION"
         const val REGISTRATION_TMP_TOKEN="registration_token"
+        const val SKIP_STATUS = "skip_status"
+
         //APIS
 
         //Header

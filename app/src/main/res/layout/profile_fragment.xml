@@ -143,6 +143,7 @@
                     style="@style/CustomEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textDirection="locale"
                     android:inputType="textEmailAddress"
                     android:background="@drawable/email_id_bitmap"
                     android:hint="@string/email_id_label"
@@ -180,6 +181,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="textPassword"
+                    android:textDirection="locale"
                     android:background="@drawable/password_bitmap"
                     android:hint="@string/enter_password"
                     android:text="@={viewModel.profileData.password}" />
