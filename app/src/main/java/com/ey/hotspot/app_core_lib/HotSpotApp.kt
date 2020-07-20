@@ -3,9 +3,8 @@ package com.ey.hotspot.app_core_lib
 import android.content.Context
 import android.content.res.Configuration
 import android.os.Build
-import android.preference.PreferenceManager
-import android.util.Log
 import androidx.multidex.MultiDex
+import com.ey.hotspot.utils.LanguageManager
 import com.ey.hotspot.utils.MyHotSpotSharedPreference
 import com.ey.stringlocalization.utils.LanguageManager
 import com.facebook.FacebookSdk

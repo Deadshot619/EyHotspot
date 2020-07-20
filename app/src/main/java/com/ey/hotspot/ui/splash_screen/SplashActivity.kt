@@ -1,16 +1,11 @@
 package com.ey.hotspot.ui.splash_screen
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.content.IntentSender.SendIntentException
-import android.location.LocationManager
 import android.os.Bundle
-import android.provider.Settings
 import android.util.Log
 import android.view.View
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseActivity
 import com.ey.hotspot.app_core_lib.HotSpotApp
@@ -26,7 +21,6 @@ import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.common.api.PendingResult
 import com.google.android.gms.common.api.Status
 import com.google.android.gms.location.*
-import java.util.logging.Handler
 
 
 class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(),
@@ -47,9 +41,10 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(),
 
 
         checkLocationPermission(mBinding.root) {
-            /* if (!isLocationEnabled())
-             turnOnGpsDialog()*/
+             if (!isLocationEnabled())
+                turnOnGpsDialog()
         }
+
         setUpGoogleAPIClient()
         checkappLoginStatus()
 
@@ -67,18 +62,21 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(),
 
 
     private fun checkappLoginStatus() {
+        when {
+            HotSpotApp.prefs?.getAppLoggedInStatus()!! -> { //If user is already logged in
+                mBinding.mbLanguageSelection.visibility = View.GONE
+                goToHomePage()
 
-        if (HotSpotApp.prefs!!.getAppLoggedInStatus() == true) {
-            mBinding.mbLanguageSelection.visibility = View.GONE
+            }
+            HotSpotApp.prefs?.getSkipStatus()!! -> {    //If user has skipped login
+                mBinding.mbLanguageSelection.visibility = View.GONE
+                goToHomePage()
 
-            startActivity(Intent(this, BottomNavHomeActivity::class.java))
-            finish()
-
-        } else {
-
-            mBinding.mbLanguageSelection.visibility = View.VISIBLE
-            setUpListeners()
-
+            }
+            else -> {   //Stay on splash screen & show select lang dialogue
+                mBinding.mbLanguageSelection.visibility = View.VISIBLE
+                setUpListeners()
+            }
         }
     }
 
@@ -93,8 +91,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(),
                 restartApplication(this, HotSpotApp.prefs!!)
             }
 
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
+            goToLoginPage()
         }
 
         //English
@@ -106,8 +103,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(),
                 restartApplication(this, HotSpotApp.prefs!!)
             }
 
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
+            goToLoginPage()
         }
     }
 
@@ -179,5 +175,15 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(),
         }
     }
 
+    //Method to redirect user to homepage
+    private fun goToHomePage() {
+        startActivity(Intent(this, BottomNavHomeActivity::class.java))
+        finish()
+    }
 
+    //Method to redirect user to homepage
+    private fun goToLoginPage() {
+        startActivity(Intent(this, LoginActivity::class.java))
+        finish()
+    }
 }

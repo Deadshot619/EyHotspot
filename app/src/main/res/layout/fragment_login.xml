@@ -103,17 +103,6 @@
                 app:layout_constraintTop_toBottomOf="@id/iv_bg_header"
                 app:layout_constraintVertical_bias="0.7" />
 
-            <!--EmailId Hint-->
-            <TextView
-                android:id="@+id/tv_email_id_hint"
-                style="@style/EditTextHint"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/email_id_label"
-                app:layout_constraintBottom_toTopOf="@id/input_email_id"
-                app:layout_constraintEnd_toEndOf="@id/input_email_id"
-                app:layout_constraintStart_toStartOf="@id/input_email_id"
-                app:layout_constraintTop_toTopOf="@id/input_email_id" />
 
             <!--Email Id-->
             <com.google.android.material.textfield.TextInputLayout
@@ -136,13 +125,50 @@
                     style="@style/CustomEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
+                    android:inputType="textEmailAddress"
                     android:background="@drawable/email_id_bitmap"
                     android:hint="@string/email_id_hint"
                     android:text="@={viewModel.emailId}"
                     android:textDirection="locale" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!--EmailId Hint-->
+            <TextView
+                android:id="@+id/tv_email_id_hint"
+                style="@style/EditTextHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/email_id_label"
+                app:layout_constraintBottom_toTopOf="@id/input_email_id"
+                app:layout_constraintEnd_toEndOf="@id/input_email_id"
+                app:layout_constraintStart_toStartOf="@id/input_email_id"
+                app:layout_constraintTop_toTopOf="@id/input_email_id" />
+
+            <!--Password input-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/password_input_layout"
+                style="@style/CustomTextField"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_margin_32"
+                app:passwordToggleEnabled="true"
+                android:textDirection="locale"
+                app:layout_constraintEnd_toEndOf="@id/input_email_id"
+                app:layout_constraintStart_toStartOf="@id/input_email_id"
+                app:layout_constraintTop_toBottomOf="@id/input_email_id">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_password"
+                    style="@style/CustomEditText"
+                    android:inputType="textPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/password_bitmap"
+                    android:hint="@string/enter_password"
+                    android:text="@={viewModel.password}"
+                    android:textDirection="locale" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <!--Password Hint-->
             <TextView
@@ -155,32 +181,6 @@
                 app:layout_constraintEnd_toEndOf="@id/password_input_layout"
                 app:layout_constraintStart_toStartOf="@id/password_input_layout"
                 app:layout_constraintTop_toTopOf="@id/password_input_layout" />
-
-            <!--Password input-->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/password_input_layout"
-                style="@style/CustomTextField"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_margin_32"
-
-                android:textDirection="locale"
-                app:layout_constraintEnd_toEndOf="@id/input_email_id"
-                app:layout_constraintStart_toStartOf="@id/input_email_id"
-                app:layout_constraintTop_toBottomOf="@id/input_email_id">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_password"
-                    style="@style/CustomEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/password_bitmap"
-
-                    android:hint="@string/enter_password"
-                    android:text="@={viewModel.password}"
-                    android:textDirection="locale" />
-
-            </com.google.android.material.textfield.TextInputLayout>
 
             <!--Forgot Password-->
             <TextView

@@ -1,4 +1,4 @@
-package com.ey.stringlocalization.utils
+package com.ey.hotspot.utils
 
 import android.annotation.TargetApi
 import android.content.Context

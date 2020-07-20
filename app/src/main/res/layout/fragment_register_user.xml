@@ -42,6 +42,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <!--Name View-->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_margin_32"
+                android:scaleType="fitXY"
+                android:src="@drawable/user_bitmap"
+                app:layout_constraintEnd_toEndOf="@id/input_mobile_number"
+                app:layout_constraintStart_toStartOf="@id/input_mobile_number"
+                app:layout_constraintTop_toBottomOf="@+id/toolbarLayout" />
 
             <!--Name Hint-->
             <TextView
@@ -55,17 +66,6 @@
                 app:layout_constraintStart_toStartOf="@id/iv_name"
                 app:layout_constraintTop_toTopOf="@id/iv_name" />
 
-            <!--Name View-->
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/iv_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_margin_32"
-                android:scaleType="fitXY"
-                android:src="@drawable/user_bitmap"
-                app:layout_constraintEnd_toEndOf="@id/input_mobile_number"
-                app:layout_constraintStart_toStartOf="@id/input_mobile_number"
-                app:layout_constraintTop_toBottomOf="@+id/toolbarLayout" />
 
             <!--First Name-->
             <com.google.android.material.textfield.TextInputEditText
@@ -101,19 +101,6 @@
                 app:layout_constraintStart_toEndOf="@+id/edt_first_name"
                 app:layout_constraintTop_toTopOf="@id/iv_name" />
 
-
-            <!--Mobile Number Hint-->
-            <TextView
-                android:id="@+id/tv_mobile_number_hint"
-                style="@style/EditTextHint"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/mobile_number_label"
-                app:layout_constraintBottom_toTopOf="@id/input_mobile_number"
-                app:layout_constraintEnd_toEndOf="@id/input_mobile_number"
-                app:layout_constraintStart_toStartOf="@id/input_mobile_number"
-                app:layout_constraintTop_toTopOf="@id/input_mobile_number" />
-
             <!--Mobile Number input-->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/input_mobile_number"
@@ -131,25 +118,26 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:textDirection="locale"
-
+                    android:inputType="phone"
                     android:background="@drawable/mobile_number_bitmap"
                     android:hint="@string/enter_register_mobile"
                     android:text="@={viewModel.mobileNumber}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
-
-            <!--EmailId Hint-->
+            <!--Mobile Number Hint-->
             <TextView
-                android:id="@+id/tv_email_id_hint"
+                android:id="@+id/tv_mobile_number_hint"
                 style="@style/EditTextHint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/email_id_label"
-                app:layout_constraintBottom_toTopOf="@id/email_input_layout"
-                app:layout_constraintEnd_toEndOf="@id/email_input_layout"
-                app:layout_constraintStart_toStartOf="@id/email_input_layout"
-                app:layout_constraintTop_toTopOf="@id/email_input_layout" />
+                android:text="@string/mobile_number_label"
+                app:layout_constraintBottom_toTopOf="@id/input_mobile_number"
+                app:layout_constraintEnd_toEndOf="@id/input_mobile_number"
+                app:layout_constraintStart_toStartOf="@id/input_mobile_number"
+                app:layout_constraintTop_toTopOf="@id/input_mobile_number" />
+
+
 
             <!--Email Id input-->
             <com.google.android.material.textfield.TextInputLayout
@@ -167,12 +155,49 @@
                     style="@style/CustomEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textDirection="locale"
+                    android:inputType="textEmailAddress"
                     android:background="@drawable/email_id_bitmap"
                     android:hint="@string/email_id_hint"
                     android:text="@={viewModel.emailId}" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
+            <!--EmailId Hint-->
+            <TextView
+                android:id="@+id/tv_email_id_hint"
+                style="@style/EditTextHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/email_id_label"
+                app:layout_constraintBottom_toTopOf="@id/email_input_layout"
+                app:layout_constraintEnd_toEndOf="@id/email_input_layout"
+                app:layout_constraintStart_toStartOf="@id/email_input_layout"
+                app:layout_constraintTop_toTopOf="@id/email_input_layout" />
+
+            <!--Password input-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/password_input_layout"
+                style="@style/CustomTextField"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_margin_32"
+                app:passwordToggleEnabled="true"
+                app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@id/email_input_layout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edt_password"
+                    style="@style/CustomEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="textPassword"
+                    android:background="@drawable/password_bitmap"
+                    android:hint="@string/enter_password"
+                    android:text="@={viewModel.password}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <!--Password Hint-->
             <TextView
@@ -186,27 +211,29 @@
                 app:layout_constraintStart_toStartOf="@id/password_input_layout"
                 app:layout_constraintTop_toTopOf="@id/password_input_layout" />
 
-            <!--Password input-->
+            <!-- Confirm Password input-->
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/password_input_layout"
+                android:id="@+id/confirm_password_input_layout"
                 style="@style/CustomTextField"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/common_margin_32"
+                app:passwordToggleEnabled="true"
                 app:layout_constraintEnd_toEndOf="@id/guideline_right"
                 app:layout_constraintStart_toStartOf="@id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@id/email_input_layout">
+                app:layout_constraintTop_toBottomOf="@id/password_input_layout">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edt_password"
+                    android:id="@+id/edt_confirm_password"
                     style="@style/CustomEditText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:textDirection="locale"
 
+                    android:inputType="textPassword"
                     android:background="@drawable/password_bitmap"
-                    android:hint="@string/enter_password"
-                    android:text="@={viewModel.password}" />
+                    android:hint="@string/enter_confirm_password"
+                    android:text="@={viewModel.confirmPassword}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -221,30 +248,6 @@
                 app:layout_constraintEnd_toEndOf="@id/confirm_password_input_layout"
                 app:layout_constraintStart_toStartOf="@id/confirm_password_input_layout"
                 app:layout_constraintTop_toTopOf="@id/confirm_password_input_layout" />
-
-            <!-- Confirm Password input-->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/confirm_password_input_layout"
-                style="@style/CustomTextField"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_margin_32"
-                app:layout_constraintEnd_toEndOf="@id/guideline_right"
-                app:layout_constraintStart_toStartOf="@id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@id/password_input_layout">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edt_confirm_password"
-                    style="@style/CustomEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textDirection="locale"
-
-                    android:background="@drawable/password_bitmap"
-                    android:hint="@string/enter_confirm_password"
-                    android:text="@={viewModel.confirmPassword}" />
-
-            </com.google.android.material.textfield.TextInputLayout>
 
 
             <TextView

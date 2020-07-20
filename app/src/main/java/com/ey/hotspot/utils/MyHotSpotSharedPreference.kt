@@ -10,6 +10,7 @@ import com.ey.hotspot.utils.constants.Constants.Companion.DELEGATE_ENGLISH_LANG
 import com.ey.hotspot.utils.constants.Constants.Companion.ENABLED_GPS_LOCATION
 import com.ey.hotspot.utils.constants.Constants.Companion.LANGUAGE_SELECTED
 import com.ey.hotspot.utils.constants.Constants.Companion.REGISTRATION_TMP_TOKEN
+import com.ey.hotspot.utils.constants.Constants.Companion.SKIP_STATUS
 import com.ey.hotspot.utils.constants.Constants.Companion.USER_DATA
 import com.google.gson.Gson
 
@@ -55,6 +56,18 @@ class MyHotSpotSharedPreference(context: Context) {
         return CoreApp.sharedPreferences.getBoolean(APP_LOGGED_IN, false)
     }
 
+    /*
+     *  Set this data when user has Skipped Sign In
+     */
+    fun setSkipStatus(value: Boolean) {
+        CoreApp.sharedPreferences.edit().putBoolean(SKIP_STATUS, value).apply()
+    }
+
+    //Return status of skipped user
+    fun getSkipStatus(): Boolean {
+        return CoreApp.sharedPreferences.getBoolean(SKIP_STATUS, false)
+    }
+
     /**
      * Set User Data in SharedPref
      */
@@ -82,7 +95,7 @@ class MyHotSpotSharedPreference(context: Context) {
         )
     }
 
-    fun deleteUserData() {
+    fun deleteUserDataPref() {
         CoreApp.sharedPreferences.edit().remove(USER_DATA).apply()
     }
 
