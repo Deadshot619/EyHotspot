@@ -103,17 +103,6 @@
                 app:layout_constraintTop_toBottomOf="@id/iv_bg_header"
                 app:layout_constraintVertical_bias="0.7" />
 
-            <!--EmailId Hint-->
-            <TextView
-                android:id="@+id/tv_email_id_hint"
-                style="@style/EditTextHint"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/email_id_label"
-                app:layout_constraintBottom_toTopOf="@id/input_email_id"
-                app:layout_constraintEnd_toEndOf="@id/input_email_id"
-                app:layout_constraintStart_toStartOf="@id/input_email_id"
-                app:layout_constraintTop_toTopOf="@id/input_email_id" />
 
             <!--Email Id-->
             <com.google.android.material.textfield.TextInputLayout
@@ -143,18 +132,17 @@
                     android:textDirection="locale" />
             </com.google.android.material.textfield.TextInputLayout>
 
-
-            <!--Password Hint-->
+            <!--EmailId Hint-->
             <TextView
-                android:id="@+id/tv_password_hint"
+                android:id="@+id/tv_email_id_hint"
                 style="@style/EditTextHint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/password_label"
-                app:layout_constraintBottom_toTopOf="@id/password_input_layout"
-                app:layout_constraintEnd_toEndOf="@id/password_input_layout"
-                app:layout_constraintStart_toStartOf="@id/password_input_layout"
-                app:layout_constraintTop_toTopOf="@id/password_input_layout" />
+                android:text="@string/email_id_label"
+                app:layout_constraintBottom_toTopOf="@id/input_email_id"
+                app:layout_constraintEnd_toEndOf="@id/input_email_id"
+                app:layout_constraintStart_toStartOf="@id/input_email_id"
+                app:layout_constraintTop_toTopOf="@id/input_email_id" />
 
             <!--Password input-->
             <com.google.android.material.textfield.TextInputLayout
@@ -181,6 +169,18 @@
                     android:textDirection="locale" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
+            <!--Password Hint-->
+            <TextView
+                android:id="@+id/tv_password_hint"
+                style="@style/EditTextHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/password_label"
+                app:layout_constraintBottom_toTopOf="@id/password_input_layout"
+                app:layout_constraintEnd_toEndOf="@id/password_input_layout"
+                app:layout_constraintStart_toStartOf="@id/password_input_layout"
+                app:layout_constraintTop_toTopOf="@id/password_input_layout" />
 
             <!--Forgot Password-->
             <TextView

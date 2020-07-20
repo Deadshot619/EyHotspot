@@ -27,18 +27,6 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-            <!--Name Hint-->
-            <TextView
-                android:id="@+id/tv_name_hint"
-                style="@style/EditTextHint"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/name_label"
-                app:layout_constraintBottom_toTopOf="@id/iv_name"
-                app:layout_constraintEnd_toEndOf="@id/iv_name"
-                app:layout_constraintStart_toStartOf="@id/iv_name"
-                app:layout_constraintTop_toTopOf="@id/iv_name" />
-
             <!--Name View-->
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_name"
@@ -69,6 +57,19 @@
                 app:layout_constraintStart_toStartOf="@id/iv_name"
                 app:layout_constraintTop_toTopOf="@id/iv_name" />
 
+            <!--Name Hint-->
+            <TextView
+                android:id="@+id/tv_name_hint"
+                style="@style/EditTextHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/name_label"
+                app:layout_constraintBottom_toTopOf="@id/iv_name"
+                app:layout_constraintEnd_toEndOf="@id/iv_name"
+                app:layout_constraintStart_toStartOf="@id/iv_name"
+                app:layout_constraintTop_toTopOf="@id/iv_name" />
+
+
             <!--Last Name-->
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edt_last_name"
@@ -84,18 +85,6 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/edt_first_name"
                 app:layout_constraintTop_toTopOf="@id/iv_name" />
-
-            <!--EmailId Hint-->
-            <TextView
-                android:id="@+id/tv_mobile_no_hint"
-                style="@style/EditTextHint"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/mobile_number_label"
-                app:layout_constraintBottom_toTopOf="@id/input_mobile_no"
-                app:layout_constraintEnd_toEndOf="@id/input_mobile_no"
-                app:layout_constraintStart_toStartOf="@id/input_mobile_no"
-                app:layout_constraintTop_toTopOf="@id/input_mobile_no" />
 
             <!--Mobile No-->
             <com.google.android.material.textfield.TextInputLayout
@@ -123,17 +112,18 @@
                     android:text="@={viewModel.profileData.mobileNo}" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!--EmailId Hint-->
+            <!--Mobile Hint-->
             <TextView
-                android:id="@+id/tv_email_id_hint"
+                android:id="@+id/tv_mobile_no_hint"
                 style="@style/EditTextHint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/email_id_label"
-                app:layout_constraintBottom_toTopOf="@id/input_email_id"
-                app:layout_constraintEnd_toEndOf="@id/input_email_id"
-                app:layout_constraintStart_toStartOf="@id/input_email_id"
-                app:layout_constraintTop_toTopOf="@id/input_email_id" />
+                android:text="@string/mobile_number_label"
+                app:layout_constraintBottom_toTopOf="@id/input_mobile_no"
+                app:layout_constraintEnd_toEndOf="@id/input_mobile_no"
+                app:layout_constraintStart_toStartOf="@id/input_mobile_no"
+                app:layout_constraintTop_toTopOf="@id/input_mobile_no" />
+
 
             <!--Email Id-->
             <com.google.android.material.textfield.TextInputLayout
@@ -159,19 +149,17 @@
                     android:text="@={viewModel.profileData.emailId}" />
             </com.google.android.material.textfield.TextInputLayout>
 
-
-            <!--Password Hint-->
+            <!--EmailId Hint-->
             <TextView
-                android:id="@+id/tv_password_hint"
+                android:id="@+id/tv_email_id_hint"
                 style="@style/EditTextHint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/password_label"
-                app:layout_constraintBottom_toTopOf="@id/password_input_layout"
-                app:layout_constraintEnd_toEndOf="@id/password_input_layout"
-                app:layout_constraintStart_toStartOf="@id/password_input_layout"
-                app:layout_constraintTop_toTopOf="@id/password_input_layout" />
-
+                android:text="@string/email_id_label"
+                app:layout_constraintBottom_toTopOf="@id/input_email_id"
+                app:layout_constraintEnd_toEndOf="@id/input_email_id"
+                app:layout_constraintStart_toStartOf="@id/input_email_id"
+                app:layout_constraintTop_toTopOf="@id/input_email_id" />
 
             <!--Password input-->
             <com.google.android.material.textfield.TextInputLayout
@@ -196,19 +184,17 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-
-            <!--Confirm Password Hint-->
+            <!--Password Hint-->
             <TextView
-                android:id="@+id/tv_confirm_password_hint"
+                android:id="@+id/tv_password_hint"
                 style="@style/EditTextHint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/confirm_password_label"
-                app:layout_constraintBottom_toTopOf="@id/confirm_password_input_layout"
-                app:layout_constraintEnd_toEndOf="@id/confirm_password_input_layout"
-                app:layout_constraintStart_toStartOf="@id/confirm_password_input_layout"
-                app:layout_constraintTop_toTopOf="@id/confirm_password_input_layout" />
-
+                android:text="@string/password_label"
+                app:layout_constraintBottom_toTopOf="@id/password_input_layout"
+                app:layout_constraintEnd_toEndOf="@id/password_input_layout"
+                app:layout_constraintStart_toStartOf="@id/password_input_layout"
+                app:layout_constraintTop_toTopOf="@id/password_input_layout" />
 
             <!-- Confirm Password input-->
             <com.google.android.material.textfield.TextInputLayout
@@ -233,6 +219,17 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!--Confirm Password Hint-->
+            <TextView
+                android:id="@+id/tv_confirm_password_hint"
+                style="@style/EditTextHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/confirm_password_label"
+                app:layout_constraintBottom_toTopOf="@id/confirm_password_input_layout"
+                app:layout_constraintEnd_toEndOf="@id/confirm_password_input_layout"
+                app:layout_constraintStart_toStartOf="@id/confirm_password_input_layout"
+                app:layout_constraintTop_toTopOf="@id/confirm_password_input_layout" />
 
             <!--Update Profile-->
             <com.google.android.material.button.MaterialButton
