@@ -18,6 +18,9 @@ import com.ey.hotspot.utils.replaceFragment
 import com.ey.hotspot.utils.showMessage
 import com.ey.hotspot.utils.validations.isEmailValid
 import com.facebook.*
+import com.facebook.FacebookSdk.getApplicationContext
+import com.facebook.appevents.AppEventsLogger
+import com.facebook.login.LoginBehavior
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -98,7 +101,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
             if (it.status) {
                 showMessage(it.message, true)
-               goToHomePage()
+                goToHomePage()
             } else {
                 showMessage(it.message, true)
             }
@@ -121,7 +124,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
             }
 
         }
-
 
 
         //Register New user
@@ -151,13 +153,16 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
     }
 
     //Method to redirect user to home page
-    private fun goToHomePage(){
+    private fun goToHomePage() {
         startActivity(Intent(activity, BottomNavHomeActivity::class.java))
         activity?.finish()
     }
 
 
     private fun facebookSign() {
+
+        LoginManager.getInstance().setLoginBehavior(LoginBehavior.NATIVE_WITH_FALLBACK)
+
         LoginManager.getInstance().logInWithReadPermissions(
             this,
             Arrays.asList("public_profile", "email")
@@ -244,15 +249,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
     private fun setUpFacebookLogin() {
 
 
-        callbackManager = CallbackManager.Factory.create()
-        FacebookSdk.setIsDebugEnabled(true)
-        FacebookSdk.addLoggingBehavior(LoggingBehavior.INCLUDE_ACCESS_TOKENS)
 
-        if (isLoggedIn()) {
-            // Show the Activity with the logged in user
-        } else {
-            // Show the Home Activity
-        }
+        callbackManager = CallbackManager.Factory.create()
+        FacebookSdk.setApplicationId(resources.getString(R.string.facebook_app_id))
+        FacebookSdk.setIsDebugEnabled(true)
+
+
     }
 
     private fun setuPGoogelSignIn() {
@@ -357,6 +359,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
         } catch (e: ApiException) {
 
+            e.printStackTrace()
             showMessage(resources.getString(R.string.google_sign_failed), true)
         }
     }

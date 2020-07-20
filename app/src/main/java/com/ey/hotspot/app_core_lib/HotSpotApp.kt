@@ -8,6 +8,8 @@ import android.util.Log
 import androidx.multidex.MultiDex
 import com.ey.hotspot.utils.MyHotSpotSharedPreference
 import com.ey.stringlocalization.utils.LanguageManager
+import com.facebook.FacebookSdk
+import com.facebook.FacebookSdk.setAutoLogAppEventsEnabled
 
 class HotSpotApp :CoreApp() {
 
@@ -20,6 +22,10 @@ class HotSpotApp :CoreApp() {
         super.onCreate()
         prefs = MyHotSpotSharedPreference(applicationContext)
         LanguageManager.setLanguage(applicationContext, prefs?.getLanguage())
+
+        FacebookSdk.fullyInitialize();
+        setAutoLogAppEventsEnabled(true);
+
 
     }
 

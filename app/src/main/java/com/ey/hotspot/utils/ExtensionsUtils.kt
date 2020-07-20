@@ -1,13 +1,19 @@
 package com.ey.hotspot.utils
 
 import android.app.Activity
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
 import android.location.LocationManager
+import android.media.tv.TvContract.Programs.Genres.encode
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Base64.encode
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -26,6 +32,11 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import java.math.BigDecimal
 import java.math.RoundingMode
+import java.net.URLEncoder.encode
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
+import java.util.*
+import  android.util.Base64
 
 
 var toast: Toast? = null
@@ -221,4 +232,21 @@ inline fun <reified T> Gson.fromJson(json: String) = try{
 
 
 
+}
+
+ fun Activity.calculateHashKey(yourPackageName: String) {
+     try {
+         val info: PackageInfo =getPackageManager()
+             .getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES)
+         for (signature in info.signatures) {
+             val md = MessageDigest.getInstance("SHA")
+             md.update(signature.toByteArray())
+             val hashKey = String(Base64.encode(md.digest(), 0))
+             Log.i("HASHKEY", "printHashKey() Hash Key: $hashKey")
+         }
+     } catch (e: NoSuchAlgorithmException) {
+         Log.e("HASHKEY", "printHashKey()", e)
+     } catch (e: java.lang.Exception) {
+         Log.e("HASHKEY", "printHashKey()", e)
+     }
 }

@@ -4,16 +4,13 @@
     <string name="login_button">Login</string>
     <string name="registration_button">Register</string>
 
-    <!--Social Login And API KEYEs-->
- <!--   <string name="google_client_id">1010233238210-9ug8s9bhjbbsskrn4hete9deb89u1dh4.apps.googleusercontent.com</string>
--->
+
+
 
     <string name="google_client_id">701065953910-ua0p0sl83t7r04n0fh317p17pnpfouem.apps.googleusercontent.com</string>
 
 
-  <!--  <string name="facebook_app_id">807473699785521</string>
-    <string name="fb_login_protocol_scheme">fb807473699785521</string>
--->
+
 
     <string name="facebook_app_id">2495789184045739</string>
     <string name="fb_login_protocol_scheme">fb2495789184045739</string>
