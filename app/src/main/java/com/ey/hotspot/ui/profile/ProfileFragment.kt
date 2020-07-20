@@ -102,6 +102,13 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
                     edtMobileNo.error = resources.getString(R.string.invalid_mobile)
                     isValid = false
                 }
+                if (password.isNotEmpty() || confirmPassword.isNotEmpty()){     //Check only if password are written
+                    if (password != confirmPassword){
+                        edtPassword.error = resources.getString(R.string.pwd_not_match)
+                        edtConfirmPassword.error = resources.getString(R.string.pwd_not_match)
+                        isValid = false
+                    }
+                }
             }
         } ?: return false
 
