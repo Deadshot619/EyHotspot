@@ -10,7 +10,6 @@ import com.ey.hotspot.ui.favourite.model.MarkFavouriteRequest
 import com.ey.hotspot.ui.favourite.model.MarkFavouriteResponse
 import com.ey.hotspot.ui.home.models.GetHotSpotRequest
 import com.ey.hotspot.ui.home.models.GetHotSpotResponse
-import com.ey.hotspot.ui.home.models.GetUserHotSpotResponse
 import com.ey.hotspot.ui.login.logout.LogoutResponse
 import com.ey.hotspot.ui.login.otpverification.fragment.model.SendOTPRequest
 import com.ey.hotspot.ui.login.otpverification.fragment.model.VerifyOTPRequest
@@ -70,7 +69,7 @@ interface APIInterface {
     @POST(Constants.API_GET_USER_HOTSPOT_LIST)
     fun getUserHotSpot(
         @Body getHotSpotRequest: GetHotSpotRequest
-    ): Deferred<BaseResponse<List<GetUserHotSpotResponse>>>
+    ): Deferred<BaseResponse<List<GetHotSpotResponse>>>
 
 
     @POST(Constants.API_MARK_FAVOURITE)

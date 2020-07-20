@@ -10,7 +10,6 @@ import com.ey.hotspot.ui.favourite.model.MarkFavouriteRequest
 import com.ey.hotspot.ui.favourite.model.MarkFavouriteResponse
 import com.ey.hotspot.ui.home.models.GetHotSpotRequest
 import com.ey.hotspot.ui.home.models.GetHotSpotResponse
-import com.ey.hotspot.ui.home.models.GetUserHotSpotResponse
 import com.ey.hotspot.ui.login.logout.LogoutResponse
 import com.ey.hotspot.ui.login.otpverification.fragment.model.SendOTPRequest
 import com.ey.hotspot.ui.login.otpverification.fragment.model.VerifyOTPRequest
@@ -145,9 +144,7 @@ object DataProvider : RemoteDataProvider {
         error: (Exception) -> Unit
     ) {
         try {
-            val result =
-                mServices.getHotSpots(request)
-                    .await()
+            val result = mServices.getHotSpots(request).await()
             success(result)
         } catch (e: Exception) {
             error(e)
@@ -156,7 +153,7 @@ object DataProvider : RemoteDataProvider {
 
     override suspend fun getUserHotSpot(
         request: GetHotSpotRequest,
-        success: (BaseResponse<List<GetUserHotSpotResponse>>) -> Unit,
+        success: (BaseResponse<List<GetHotSpotResponse>>) -> Unit,
         error: (Exception) -> Unit
     ) {
         try {
@@ -293,7 +290,9 @@ object DataProvider : RemoteDataProvider {
         withContext(Dispatchers.Main) {
             try {
 
-                val result = mServices.sendOTP( HotSpotApp.prefs!!.getRegistrationTempToken(),request).await()
+                val result =
+                    mServices.sendOTP(HotSpotApp.prefs!!.getRegistrationTempToken(), request)
+                        .await()
                 success(result)
             } catch (e: Exception) {
                 error(e)
@@ -308,7 +307,8 @@ object DataProvider : RemoteDataProvider {
     ) {
 
         try {
-            val result = mServices.verifyOTP(HotSpotApp.prefs!!.getRegistrationTempToken(),request).await()
+            val result =
+                mServices.verifyOTP(HotSpotApp.prefs!!.getRegistrationTempToken(), request).await()
             success(result)
         } catch (e: Exception) {
             error(e)
