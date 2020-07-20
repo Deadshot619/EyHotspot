@@ -168,7 +168,6 @@
                 style="@style/CustomTextField"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:passwordToggleEnabled="true"
 
                 android:layout_marginTop="@dimen/common_margin_32"
                 app:layout_constraintEnd_toEndOf="@id/input_email_id"
@@ -206,7 +205,6 @@
                 style="@style/CustomTextField"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:passwordToggleEnabled="true"
                 android:layout_marginTop="@dimen/common_margin_32"
                 app:layout_constraintEnd_toEndOf="@id/password_input_layout"
                 app:layout_constraintStart_toStartOf="@id/password_input_layout"

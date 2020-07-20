@@ -82,23 +82,30 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
      * Method to validate input fields
      */
     private fun validate(): Boolean {
+        var isValid = true
+
         mViewModel.profileData.value?.run {
             mBinding.run {
-                return if (firstName.trim().isEmpty()) {
+                if (firstName.trim().isEmpty()) {
                     edtFirstName.error = resources.getString(R.string.invalid_firstName)
-                    false
-                } else if (lastName.trim().isEmpty()) {
+                    isValid = false
+                }
+                if (lastName.trim().isEmpty()) {
                     edtLastName.error = resources.getString(R.string.invalid_last_name_label)
-                    false
-                } else if (!emailId.isEmailValid()) {
+                    isValid = false
+                }
+                if (!emailId.isEmailValid()) {
                     edtEmail.error = resources.getString(R.string.invalid_email_label)
-                    false
-                } else if (mobileNo.isValidMobile()) {
+                    isValid = false
+                }
+                if (!mobileNo.isValidMobile()) {
                     edtMobileNo.error = resources.getString(R.string.invalid_mobile)
-                    false
-                }  else true
+                    isValid = false
+                }
             }
         } ?: return false
+
+        return isValid
     }
 
     override fun onDestroyView() {
