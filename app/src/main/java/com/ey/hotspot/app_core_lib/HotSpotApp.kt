@@ -6,7 +6,6 @@ import android.os.Build
 import androidx.multidex.MultiDex
 import com.ey.hotspot.utils.LanguageManager
 import com.ey.hotspot.utils.MyHotSpotSharedPreference
-import com.ey.stringlocalization.utils.LanguageManager
 import com.facebook.FacebookSdk
 import com.facebook.FacebookSdk.setAutoLogAppEventsEnabled
 
