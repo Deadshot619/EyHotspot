@@ -33,8 +33,7 @@
             android:src="@drawable/ic_baseline_person_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-
-     app:layout_constraintTop_toBottomOf="@+id/toolbarLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbarLayout" />
 
         <!--        Select verification method-->
         <TextView
@@ -50,31 +49,36 @@
             app:layout_constraintTop_toBottomOf="@+id/iv_user" />
 
 
-        <!--otp on sms-->
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_otp_sms"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/common_margin_top"
-            android:background="@drawable/sign_btn_gradient"
-            android:paddingStart="@dimen/margin_20"
-            android:paddingEnd="@dimen/margin_20"
-            android:text="@string/otp_sms_label"
-            app:layout_constraintStart_toStartOf="@id/tv_select_verification_method_label"
-            app:layout_constraintTop_toBottomOf="@id/tv_select_verification_method_label" />
-
         <!--Email Link-->
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_email_link"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/common_margin_top"
+            android:layout_marginTop="@dimen/margin_20"
             android:background="@drawable/sign_btn_gradient"
             android:paddingStart="@dimen/margin_20"
             android:paddingEnd="@dimen/margin_20"
             android:text="@string/email_link_label"
-            app:layout_constraintEnd_toEndOf="@id/tv_select_verification_method_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_select_verification_method_label" />
+
+
+        <!--otp on sms-->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_otp_sms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20"
+            android:background="@drawable/sign_btn_gradient"
+            android:paddingStart="@dimen/margin_20"
+            android:paddingEnd="@dimen/margin_20"
+            android:text="@string/otp_sms_label"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_email_link" />
+
 
         <!--Sign In-->
         <androidx.appcompat.widget.AppCompatButton

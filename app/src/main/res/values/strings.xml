@@ -46,8 +46,8 @@
 
     <!--    Registration Option    -->
     <string name="verification_method_label">Select verification method</string>
-    <string name="otp_sms_label">OTP on SMS</string>
-    <string name="email_link_label">Email Link</string>
+    <string name="otp_sms_label">Verfiy OTP using SMS</string>
+    <string name="email_link_label">Verify OTP using Email</string>
 
     <!--Email verification-->
     <string name="email_verification_label">Email verification</string>

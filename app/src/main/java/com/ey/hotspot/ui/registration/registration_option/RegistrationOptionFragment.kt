@@ -18,15 +18,17 @@ class RegistrationOptionFragment :
     BaseFragment<FragmentRegistrationOptionBinding, RegistrationOptionViewModel>() {
 
     companion object {
-        fun newInstance(emailID: String) = RegistrationOptionFragment().apply {
+        fun newInstance(emailID: String, phoneNo: String) = RegistrationOptionFragment().apply {
             arguments = Bundle().apply {
 
                 putString(mEmailId, emailID)
+                putString(mPhoneNO, phoneNo)
             }
         }
 
         const val TYPE_KEY = "type_key"
         const val mEmailId = "emailid"
+        const val mPhoneNO = "phone_no"
     }
 
     lateinit var TYPE_VALUE: String
@@ -55,21 +57,18 @@ class RegistrationOptionFragment :
         mBinding.run {
             //Next button
             btnOtpSms.setOnClickListener {
-                /*   if (TYPE_VALUE == OptionType.TYPE_REGISTRATION.name)
-                       replaceFragment(SmsVerificationFragment.newInstance(), true, null)
-                   else
-                       replaceFragment(ForgotPasswordMobileFragment(), true, null)
-         */
-                showMessage("Select Email Link Option for now.", true)
+                replaceFragment(
+                    fragment = OTPVerificationFragment.newInstance(
+                        selectedOption = "sms",
+                        selectedItem = arguments?.getString(mPhoneNO) ?: ""
+                    ),
+                    addToBackStack = true
+                )
             }
 
             //Sign In button
             btnEmailLink.setOnClickListener {
-                /* if (TYPE_VALUE == OptionType.TYPE_REGISTRATION.name)
 
-                 else
-                     replaceFragment(ForgotPasswordEmailFragment(), true, null)
- */
                 replaceFragment(
                     fragment = OTPVerificationFragment.newInstance(
                         selectedOption = "email",

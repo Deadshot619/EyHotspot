@@ -66,8 +66,8 @@
 
     <!--    Registration Option    -->
     <string name="verification_method_label">حدد طريقة التحقق</string>
-    <string name="otp_sms_label">OTP على الرسائل القصيرة</string>
-    <string name="email_link_label">رابط البريد الإلكتروني</string>
+    <string name="otp_sms_label">Verfiy OTP باستخدام الرسائل القصيرة</string>
+    <string name="email_link_label">تحقق باستخدام البريد الإلكتروني</string>
 
     <!--Email verification-->
     <string name="email_verification_label">تأكيد بواسطة البريد الالكتروني</string>

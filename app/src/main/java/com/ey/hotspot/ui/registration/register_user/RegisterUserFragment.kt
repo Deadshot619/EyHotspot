@@ -86,7 +86,8 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
 
                 replaceFragment(
                     fragment = RegistrationOptionFragment.newInstance(
-                        emailID = mViewModel.emailId
+                        emailID = mViewModel.emailId,
+                        phoneNo = mViewModel.mobileNumber
                     ),
                     addToBackStack = true
 
@@ -97,7 +98,7 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
 
 
                     val jsonStrinData = Gson().toJson(it.data)
-                    
+
                     dialog.setViews(
                         jsonStrinData
                         , okBtn = {
@@ -275,33 +276,38 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
      * Method to validate input fields
      */
     private fun validate(): Boolean {
+        var status: Boolean = false
         mViewModel.run {
             mBinding.run {
-                return if (firstName.trim().isEmpty()) {
+                if (firstName.trim().isEmpty()) {
                     edtFirstName.error = resources.getString(R.string.invalid_firstName)
-                    false
+                    status = false
                 } else if (lastName.trim().isEmpty()) {
                     edtLastName.error = resources.getString(R.string.invalid_last_name_label)
-                    false
+                    status = false
                 } else if (!emailId.isEmailValid()) {
                     edtEmail.error = resources.getString(R.string.invalid_email_label)
-                    false
+                    status = false
                 } else if (!mobileNumber.isValidMobile()) {
                     edtMobileNo.error = resources.getString(R.string.invalid_mobile)
-                    false
+                    status = false
                 } else if (password.trim().isEmpty()) {
                     edtPassword.error = resources.getString(R.string.invalid_password)
-                    false
+                    status = false
                 } else if (confirmPassword.trim().isEmpty()) {
                     edtConfirmPassword.error = resources.getString(R.string.pwd_not_match)
-                    false
+                    status = false
                 } else if (!password.isPasswordValid(confirmPassword)) {
                     edtPassword.error = resources.getString(R.string.pwd_not_match)
                     edtConfirmPassword.error = resources.getString(R.string.pwd_not_match)
-                    false
-                } else true
+                    status = false
+                } else {
+                    status = true
+                }
             }
         }
+
+        return status
     }
 
 
