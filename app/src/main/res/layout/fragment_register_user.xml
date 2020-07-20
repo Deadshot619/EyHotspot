@@ -118,7 +118,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:textDirection="locale"
-
+                    android:inputType="phone"
                     android:background="@drawable/mobile_number_bitmap"
                     android:hint="@string/enter_register_mobile"
                     android:text="@={viewModel.mobileNumber}" />
@@ -155,7 +155,7 @@
                     style="@style/CustomEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textDirection="locale"
+                    android:inputType="textEmailAddress"
                     android:background="@drawable/email_id_bitmap"
                     android:hint="@string/email_id_hint"
                     android:text="@={viewModel.emailId}" />
@@ -181,6 +181,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/common_margin_32"
+                app:passwordToggleEnabled="true"
                 app:layout_constraintEnd_toEndOf="@id/guideline_right"
                 app:layout_constraintStart_toStartOf="@id/guideline_left"
                 app:layout_constraintTop_toBottomOf="@id/email_input_layout">
@@ -190,8 +191,7 @@
                     style="@style/CustomEditText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textDirection="locale"
-
+                    android:inputType="textPassword"
                     android:background="@drawable/password_bitmap"
                     android:hint="@string/enter_password"
                     android:text="@={viewModel.password}" />
@@ -218,6 +218,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/common_margin_32"
+                app:passwordToggleEnabled="true"
                 app:layout_constraintEnd_toEndOf="@id/guideline_right"
                 app:layout_constraintStart_toStartOf="@id/guideline_left"
                 app:layout_constraintTop_toBottomOf="@id/password_input_layout">
@@ -229,6 +230,7 @@
                     android:layout_height="match_parent"
                     android:textDirection="locale"
 
+                    android:inputType="textPassword"
                     android:background="@drawable/password_bitmap"
                     android:hint="@string/enter_confirm_password"
                     android:text="@={viewModel.confirmPassword}" />

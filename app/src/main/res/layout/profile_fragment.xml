@@ -13,9 +13,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/common_padding_8"
             android:layout_height="wrap_content">
 
             <!--Toolbar-->
@@ -106,7 +107,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textDirection="locale"
-
+                    android:inputType="phone"
                     android:background="@drawable/mobile_number_bitmap"
                     android:hint="@string/mobile_number_label"
                     android:text="@={viewModel.profileData.mobileNo}" />
@@ -142,8 +143,7 @@
                     style="@style/CustomEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textDirection="locale"
-
+                    android:inputType="textEmailAddress"
                     android:background="@drawable/email_id_bitmap"
                     android:hint="@string/email_id_label"
                     android:text="@={viewModel.profileData.emailId}" />
@@ -167,6 +167,7 @@
                 style="@style/CustomTextField"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                app:passwordToggleEnabled="true"
 
                 android:layout_marginTop="@dimen/common_margin_32"
                 app:layout_constraintEnd_toEndOf="@id/input_email_id"
@@ -178,6 +179,7 @@
                     style="@style/CustomEditText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:inputType="textPassword"
                     android:background="@drawable/password_bitmap"
                     android:hint="@string/enter_password"
                     android:text="@={viewModel.profileData.password}" />
@@ -202,7 +204,7 @@
                 style="@style/CustomTextField"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-
+                app:passwordToggleEnabled="true"
                 android:layout_marginTop="@dimen/common_margin_32"
                 app:layout_constraintEnd_toEndOf="@id/password_input_layout"
                 app:layout_constraintStart_toStartOf="@id/password_input_layout"
@@ -211,6 +213,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_confirm_password"
                     style="@style/CustomEditText"
+                    android:inputType="textPassword"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/password_bitmap"

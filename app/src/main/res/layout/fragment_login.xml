@@ -125,7 +125,7 @@
                     style="@style/CustomEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
+                    android:inputType="textEmailAddress"
                     android:background="@drawable/email_id_bitmap"
                     android:hint="@string/email_id_hint"
                     android:text="@={viewModel.emailId}"
@@ -151,7 +151,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/common_margin_32"
-
+                app:passwordToggleEnabled="true"
                 android:textDirection="locale"
                 app:layout_constraintEnd_toEndOf="@id/input_email_id"
                 app:layout_constraintStart_toStartOf="@id/input_email_id"
@@ -160,6 +160,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_password"
                     style="@style/CustomEditText"
+                    android:inputType="textPassword"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/password_bitmap"
