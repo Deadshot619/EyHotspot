@@ -100,7 +100,8 @@
                     android:layout_height="1dp"
                     android:background="@color/colorLightestGray" />
 
-                <!--                Notification-->
+<!--
+                &lt;!&ndash;                Notification&ndash;&gt;
                 <LinearLayout
                     style="@style/SettingsStyle"
                     android:layout_width="match_parent"
@@ -118,6 +119,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/colorLightestGray" />
+-->
 
 
                 <!--  Logout-->
