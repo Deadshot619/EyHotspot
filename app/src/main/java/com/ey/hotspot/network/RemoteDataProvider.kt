@@ -53,10 +53,6 @@ interface RemoteDataProvider {
         error: (Exception) -> Unit
     )
 
-    fun refreshToken(
-        success: (BaseResponse<LoginResponse>) -> Unit,
-        error: (Exception) -> Unit
-    )
 
     suspend fun updateProfile(
         request: UpdateProfileRequest,

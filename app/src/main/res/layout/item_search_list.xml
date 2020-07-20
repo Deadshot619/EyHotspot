@@ -6,7 +6,7 @@
     <data>
         <variable
             name="data"
-            type="com.ey.hotspot.ui.home.models.GetUserHotSpotResponse" />
+            type="com.ey.hotspot.ui.home.models.GetHotSpotResponse" />
 
         <variable
             name="clickListener"

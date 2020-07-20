@@ -1,10 +1,7 @@
 package com.ey.hotspot.network
 
-import com.ey.hotspot.network.request.*
 import com.ey.hotspot.app_core_lib.HotSpotApp
-import com.ey.hotspot.network.request.LoginRequest
-import com.ey.hotspot.network.request.RegisterRequest
-import com.ey.hotspot.network.request.SocialLoginRequest
+import com.ey.hotspot.network.request.*
 import com.ey.hotspot.network.response.BaseResponse
 import com.ey.hotspot.network.response.ComplaintIssuesTypes
 import com.ey.hotspot.network.response.LoginResponse
@@ -120,18 +117,6 @@ object DataProvider : RemoteDataProvider {
     ) {
         try {
             val result = mServices.refreshTokenAsync().await()
-            success(result)
-        } catch (e: Exception) {
-            error(e)
-        }
-    }
-
-    override fun refreshToken(
-        success: (BaseResponse<LoginResponse>) -> Unit,
-        error: (Exception) -> Unit
-    ) {
-        try {
-            val result: BaseResponse<LoginResponse> = mServices.refreshToken()
             success(result)
         } catch (e: Exception) {
             error(e)

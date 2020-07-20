@@ -9,7 +9,7 @@ import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.app_core_lib.CoreApp
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.SearchListFragmentBinding
-import com.ey.hotspot.ui.home.models.GetUserHotSpotResponse
+import com.ey.hotspot.ui.home.models.GetHotSpotResponse
 import com.ey.hotspot.ui.login.LoginActivity
 import com.ey.hotspot.ui.search.searchlist.adapter.SearchListAdapter
 import com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment
@@ -49,9 +49,9 @@ class SearchListFragment : BaseFragment<SearchListFragmentBinding, SearchListVie
         mBinding.viewModel = mViewModel
 
         setUpSearchBar(mBinding.toolbarLayout, true) {
-            if (HotSpotApp.prefs?.getAppLoggedInStatus()!!)
-                mViewModel.getUserHotSpotResponse(it)
-            else
+//            if (HotSpotApp.prefs?.getAppLoggedInStatus()!!)
+//                mViewModel.getUserHotSpotResponse(it)
+//            else
                 mViewModel.getHotSpotResponse(it)
         }
 
@@ -62,7 +62,7 @@ class SearchListFragment : BaseFragment<SearchListFragmentBinding, SearchListVie
         //Setup Adapter
         mAdapter = SearchListAdapter(object : SearchListAdapter.OnClickListener {
             //Rate Now button
-            override fun onClickRateNow(data: GetUserHotSpotResponse) {
+            override fun onClickRateNow(data: GetHotSpotResponse) {
 
                 if (HotSpotApp.prefs?.getAppLoggedInStatus()!!)
                     replaceFragment(
@@ -80,7 +80,7 @@ class SearchListFragment : BaseFragment<SearchListFragmentBinding, SearchListVie
             }
 
             //Report
-            override fun onClickReport(data: GetUserHotSpotResponse) {
+            override fun onClickReport(data: GetHotSpotResponse) {
 
                 if (HotSpotApp.prefs?.getAppLoggedInStatus()!!)
                     replaceFragment(
@@ -96,7 +96,7 @@ class SearchListFragment : BaseFragment<SearchListFragmentBinding, SearchListVie
             }
 
             //Favourite
-            override fun onClickAddFavourite(data: GetUserHotSpotResponse) {
+            override fun onClickAddFavourite(data: GetHotSpotResponse) {
                 if (HotSpotApp.prefs?.getAppLoggedInStatus()!!)
                     mViewModel.markFavouriteItem(data.id)
                 else
@@ -104,7 +104,7 @@ class SearchListFragment : BaseFragment<SearchListFragmentBinding, SearchListVie
             }
 
             //Navigate Now
-            override fun onClickNavigate(data: GetUserHotSpotResponse) {
+            override fun onClickNavigate(data: GetHotSpotResponse) {
                 val url = data.navigate_url
 
                 val i = Intent(Intent.ACTION_VIEW)

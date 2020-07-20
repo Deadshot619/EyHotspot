@@ -6,28 +6,28 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ey.hotspot.databinding.ItemSearchListBinding
-import com.ey.hotspot.ui.home.models.GetUserHotSpotResponse
+import com.ey.hotspot.ui.home.models.GetHotSpotResponse
 
 
 class SearchListAdapter(val listener: OnClickListener) :
-    ListAdapter<GetUserHotSpotResponse, SearchListAdapter.SearchListViewHolder>(
+    ListAdapter<GetHotSpotResponse, SearchListAdapter.SearchListViewHolder>(
         DiffCallback
     ) {
     /**
-     * Allows the RecyclerView to determine which items have changed when the [List] of [GetUserHotSpotResponse]
+     * Allows the RecyclerView to determine which items have changed when the [List] of [GetHotSpotResponse]
      * has been updated.
      */
-    companion object DiffCallback : DiffUtil.ItemCallback<GetUserHotSpotResponse>() {
+    companion object DiffCallback : DiffUtil.ItemCallback<GetHotSpotResponse>() {
         override fun areItemsTheSame(
-            oldItem: GetUserHotSpotResponse,
-            newItem: GetUserHotSpotResponse
+            oldItem: GetHotSpotResponse,
+            newItem: GetHotSpotResponse
         ): Boolean {
             return oldItem === newItem
         }
 
         override fun areContentsTheSame(
-            oldItem: GetUserHotSpotResponse,
-            newItem: GetUserHotSpotResponse
+            oldItem: GetHotSpotResponse,
+            newItem: GetHotSpotResponse
         ): Boolean {
             return oldItem.id == newItem.id
         }
@@ -49,12 +49,12 @@ class SearchListAdapter(val listener: OnClickListener) :
 
     /**
      * The [SearchListViewHolder] constructor takes the binding variable from the associated
-     * layout, which nicely gives it access to the full [GetUserHotSpotResponse] information.
+     * layout, which nicely gives it access to the full [GetHotSpotResponse] information.
      */
     class SearchListViewHolder(private var binding: ItemSearchListBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(
-            item: GetUserHotSpotResponse?,
+            item: GetHotSpotResponse?,
             listener: OnClickListener
         ) {
             binding.run {
@@ -73,10 +73,10 @@ class SearchListAdapter(val listener: OnClickListener) :
      * Interface to call in the [OnClickListener] & passed on to fragment to implement
      */
     interface OnClickListener{
-        fun onClickRateNow(data: GetUserHotSpotResponse)
-        fun onClickReport(data: GetUserHotSpotResponse)
-        fun onClickAddFavourite(data: GetUserHotSpotResponse)
-        fun onClickNavigate(data: GetUserHotSpotResponse)
+        fun onClickRateNow(data: GetHotSpotResponse)
+        fun onClickReport(data: GetHotSpotResponse)
+        fun onClickAddFavourite(data: GetHotSpotResponse)
+        fun onClickNavigate(data: GetHotSpotResponse)
     }
 
 

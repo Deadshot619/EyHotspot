@@ -55,11 +55,6 @@ interface APIInterface {
         @Header(Constants.HEADER_REFRESH_TOKEN) token: String = HotSpotApp.prefs?.getUserDataPref()?.refreshToken.toString()
     ): Deferred<BaseResponse<LoginResponse>>
 
-    @POST(Constants.API_REFRESH_TOKEN)
-    fun refreshToken(
-        @Header(Constants.HEADER_REFRESH_TOKEN) token: String = HotSpotApp.prefs?.getUserDataPref()?.refreshToken.toString()
-    ): BaseResponse<LoginResponse>
-
 
     @POST(Constants.API_UPDATE_PROFILE)
     fun updateProfile(
@@ -85,15 +80,15 @@ interface APIInterface {
 
 
     @POST(Constants.API_FAVOURITE_LIST)
-    fun  getFavourite(
-    ):Deferred<BaseResponse<List<GetFavouriteItem>>>
+    fun getFavourite(
+    ): Deferred<BaseResponse<List<GetFavouriteItem>>>
 
-//    Reviews & Complaints
+    //    Reviews & Complaints
     @POST(Constants.API_GET_REVIEWS_AND_COMPLAINTS)
-    fun fetchReviewsAndComplaints() : Deferred<BaseResponse<Any>>
+    fun fetchReviewsAndComplaints(): Deferred<BaseResponse<Any>>
 
     @GET(Constants.API_GET_COMPLAINTS_ISSUE_TYPES)
-    fun fetchComplaintsIssueType() : Deferred<BaseResponse<ComplaintIssuesTypes>>
+    fun fetchComplaintsIssueType(): Deferred<BaseResponse<ComplaintIssuesTypes>>
 
     @POST(Constants.API_ADD_REVIEW)
     fun apiAddReview(@Body request: AddReviewRequest): Deferred<BaseResponse<Any>>
@@ -101,16 +96,14 @@ interface APIInterface {
     @POST(Constants.API_ADD_COMPLAINT)
     fun apiAddComplaint(@Body request: AddComplaintRequest): Deferred<BaseResponse<Any>>
 
+    //OTP
     @POST(Constants.API_SEND_OTP + "/" + "{id}?")
     fun sendOTP(
-        @Path("id") id: String?, @Body
-        sendOTPRequest: SendOTPRequest
+        @Path("id") id: String?, @Body sendOTPRequest: SendOTPRequest
     ): Deferred<BaseResponse<Any>>
-
 
     @POST(Constants.API_VERIFY_OTP + "/" + "{id}?")
     fun verifyOTP(
-        @Path("id") id: String?, @Body
-        verifyOTPRequest: VerifyOTPRequest
+        @Path("id") id: String?, @Body verifyOTPRequest: VerifyOTPRequest
     ): Deferred<BaseResponse<Any>>
 }
