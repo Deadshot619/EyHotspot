@@ -74,8 +74,8 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
             when (item.itemId) {
                 //Favourites
                 R.id.favourite -> {
-                    clearFragmentBackstack()
                     if (HotSpotApp.prefs?.getAppLoggedInStatus()!!){
+                        clearFragmentBackstack()
                         replaceFragment(FavouriteFragment(), false)
                         return@setOnNavigationItemSelectedListener true
                     }else{
@@ -87,8 +87,8 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
 
                 //Reviews & complaints
                 R.id.logs -> {
-                    clearFragmentBackstack()
                     if (HotSpotApp.prefs?.getAppLoggedInStatus()!!){
+                        clearFragmentBackstack()
                         replaceFragment(ReviewAndComplainFragment(), false)
                         return@setOnNavigationItemSelectedListener true
                     }else{

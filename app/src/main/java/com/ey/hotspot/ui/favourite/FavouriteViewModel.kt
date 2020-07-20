@@ -3,7 +3,6 @@ package com.ey.hotspot.ui.favourite
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseViewModel
 import com.ey.hotspot.network.DataProvider
 import com.ey.hotspot.network.response.BaseResponse
@@ -28,7 +27,6 @@ class FavouriteViewModel(application: Application) : BaseViewModel(application) 
 
 
     private val _markFavouriteResponse = MutableLiveData<BaseResponse<MarkFavouriteResponse>>()
-
     val markFavouriteResponse: LiveData<BaseResponse<MarkFavouriteResponse>>
         get() = _markFavouriteResponse
 
@@ -57,10 +55,8 @@ class FavouriteViewModel(application: Application) : BaseViewModel(application) 
                 }, error = {
                     checkError(it)
                 }
-
             )
         }
-
     }
 
     private fun getFavouriteList() {
