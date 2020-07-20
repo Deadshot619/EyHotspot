@@ -203,4 +203,6 @@
     <string name="facebook">facebook</string>
     <string name="no_data_available">لا تتوافر بيانات</string>
     <string name="enter_valid_otp">أدخل ملف otp صالحًا</string>
+    <string name="invalid_confirm_password">تأكيد كلمة المرور غير صالحة</string>
+    <string name="pwd_confirm_pwd_empty">يجب ألا يكون حقل كلمة المرور وتأكيد كلمة المرور فارغًا</string>
 </resources>

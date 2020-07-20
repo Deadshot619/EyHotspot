@@ -10,12 +10,12 @@ import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentRegisterUserBinding
 import com.ey.hotspot.network.request.RegisterRequest
 import com.ey.hotspot.ui.login.permission.PermissionFragment
+import com.ey.hotspot.ui.registration.register_user.model.RegistrationResponse
 import com.ey.hotspot.ui.registration.registration_option.RegistrationOptionFragment
 import com.ey.hotspot.utils.dialogs.OkDialog
 import com.ey.hotspot.utils.replaceFragment
 import com.ey.hotspot.utils.showMessage
 import com.ey.hotspot.utils.validations.isEmailValid
-import com.ey.hotspot.utils.validations.isPasswordValid
 import com.ey.hotspot.utils.validations.isValidMobile
 import com.facebook.*
 import com.facebook.login.LoginManager
@@ -27,9 +27,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.google.gson.Gson
+import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_register_user.*
 import java.util.*
+import kotlin.text.StringBuilder
 
 
 class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterUserViewModel>() {
@@ -79,7 +81,6 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
 
         mViewModel.registrationResponse.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
 
-
             if (it.status == true) {
 
                 showMessage(it.message, true)
@@ -96,25 +97,57 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
 
                 try {
 
-
-                    val jsonStrinData = Gson().toJson(it.data)
-
                     dialog.setViews(
-                        jsonStrinData
+                        fetchErrorResponse(it.data).toString()
                         , okBtn = {
                             dialog.dismiss()
                         }
                     )
                     dialog.show()
 
-                    showMessage(it.message, true)
-
-
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
             }
         })
+    }
+
+    private fun fetchErrorResponse(registrationResponse: RegistrationResponse): StringBuilder {
+
+        val stringBuilder = StringBuilder()
+        val jsonStrinData = Gson().toJson(registrationResponse)
+        val convertedObject: JsonObject =
+            Gson().fromJson(jsonStrinData, JsonObject::class.java)
+        if (convertedObject.has("first_name")) {
+            stringBuilder.append(convertedObject.getAsJsonArray("first_name").get(0))
+            stringBuilder.append("\n");
+        }
+        if (convertedObject.has("last_name")) {
+            stringBuilder.append(convertedObject.getAsJsonArray("last_name").get(0))
+            stringBuilder.append("\n");
+
+        }
+        if (convertedObject.has("country_code")) {
+            stringBuilder.append(convertedObject.getAsJsonArray("country_code").get(0))
+            stringBuilder.append("\n");
+
+        }
+        if (convertedObject.has("mobile_no")) {
+            stringBuilder.append(convertedObject.getAsJsonArray("mobile_no").get(0))
+            stringBuilder.append("\n");
+
+        }
+        if (convertedObject.has("email")) {
+            stringBuilder.append(convertedObject.getAsJsonArray("email").get(0))
+            stringBuilder.append("\n");
+
+        }
+        if (convertedObject.has("password")) {
+            stringBuilder.append(convertedObject.getAsJsonArray("password").get(0))
+
+        }
+
+        return stringBuilder;
     }
 
     private fun setUpUIData() {
@@ -276,38 +309,87 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
      * Method to validate input fields
      */
     private fun validate(): Boolean {
-        var status: Boolean = false
-        mViewModel.run {
-            mBinding.run {
-                if (firstName.trim().isEmpty()) {
-                    edtFirstName.error = resources.getString(R.string.invalid_firstName)
-                    status = false
-                } else if (lastName.trim().isEmpty()) {
-                    edtLastName.error = resources.getString(R.string.invalid_last_name_label)
-                    status = false
-                } else if (!emailId.isEmailValid()) {
-                    edtEmail.error = resources.getString(R.string.invalid_email_label)
-                    status = false
-                } else if (!mobileNumber.isValidMobile()) {
-                    edtMobileNo.error = resources.getString(R.string.invalid_mobile)
-                    status = false
-                } else if (password.trim().isEmpty()) {
-                    edtPassword.error = resources.getString(R.string.invalid_password)
-                    status = false
-                } else if (confirmPassword.trim().isEmpty()) {
-                    edtConfirmPassword.error = resources.getString(R.string.pwd_not_match)
-                    status = false
-                } else if (!password.isPasswordValid(confirmPassword)) {
-                    edtPassword.error = resources.getString(R.string.pwd_not_match)
-                    edtConfirmPassword.error = resources.getString(R.string.pwd_not_match)
-                    status = false
-                } else {
-                    status = true
-                }
-            }
+        var firstName: Boolean = false
+        var lastName: Boolean = false
+        var mobileNo: Boolean = false
+        var emailId: Boolean = false
+        var password: Boolean = false
+        var confirmPassword: Boolean = false
+        var checkPasswordConfirmPassword = false
+
+
+        if (mViewModel.firstName.trim().isEmpty()) {
+            mBinding.edtFirstName.error = resources.getString(R.string.invalid_firstName)
+            firstName = false
+        } else {
+            firstName = true
         }
 
-        return status
+        if (mViewModel.lastName.trim().isEmpty()) {
+            mBinding.edtLastName.error = resources.getString(R.string.invalid_last_name_label)
+            lastName = false
+        } else {
+            lastName = true
+        }
+
+        if (!mViewModel.mobileNumber.isValidMobile()) {
+            edtMobileNo.error = resources.getString(R.string.invalid_mobile)
+            mobileNo = false
+        } else {
+            mobileNo = true
+        }
+
+        if (!mViewModel.emailId.isEmailValid()) {
+            mBinding.edtEmail.error = resources.getString(R.string.invalid_email_label)
+            emailId = false
+        } else {
+            emailId = true
+        }
+
+        if (mViewModel.password.trim().isEmpty()) {
+            mBinding.edtPassword.error = resources.getString(R.string.invalid_password)
+            password = false
+        } else {
+
+            password = true
+        }
+        if (mViewModel.confirmPassword.trim().isEmpty()) {
+            mBinding.edtConfirmPassword.error =
+                resources.getString(R.string.invalid_confirm_password)
+            confirmPassword = false
+        } else {
+            confirmPassword = true
+        }
+
+        if (mViewModel.password.equals(mViewModel.confirmPassword)) {
+
+            if ((mViewModel.password.isEmpty() && mViewModel.confirmPassword.isEmpty())) {
+                mBinding.edtPassword.error = resources.getString(R.string.pwd_confirm_pwd_empty)
+                mBinding.edtConfirmPassword.error =
+                    resources.getString(R.string.pwd_confirm_pwd_empty)
+                checkPasswordConfirmPassword = false
+            } else {
+                checkPasswordConfirmPassword = true
+                mBinding.edtPassword.error = null
+                mBinding.edtConfirmPassword.error = null
+            }
+
+        } else {
+            mBinding.edtPassword.error = resources.getString(R.string.pwd_not_match)
+            mBinding.edtConfirmPassword.error = resources.getString(R.string.pwd_not_match)
+            checkPasswordConfirmPassword = false
+        }
+        if (firstName == true && lastName == true &&
+            mobileNo == true && emailId == true &&
+            password == true && confirmPassword == true &&
+            checkPasswordConfirmPassword == true
+        ) {
+            return true
+        } else {
+            return false
+        }
+
+
     }
 
 

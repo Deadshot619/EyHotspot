@@ -41,7 +41,9 @@ class RegisterUserViewModel(application: Application) : BaseViewModel(applicatio
 
 
                     _registrationResponse.value = it
-                    saveRegistrationTokenInSharedPreference(it.data.tmp_token)
+                    if (it.status == true) {
+                        saveRegistrationTokenInSharedPreference(it.data.tmp_token)
+                    }
                     setDialogVisibility(false)
 
                 }, error = {

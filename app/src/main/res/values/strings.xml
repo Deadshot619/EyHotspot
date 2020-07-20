@@ -211,6 +211,8 @@
     <string name="facebook">facebook</string>
     <string name="no_data_available">No data available</string>
     <string name="enter_valid_otp">Enter the valid otp</string>
+    <string name="invalid_confirm_password">Invalid Confirm Password</string>
+    <string name="pwd_confirm_pwd_empty"><![CDATA[Password & Confirm Password field should not be empty]]></string>
 
 
     <!--Demo issue type string-->
