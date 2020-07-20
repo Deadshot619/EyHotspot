@@ -11,15 +11,11 @@ import com.ey.hotspot.network.request.LoginRequest
 import com.ey.hotspot.network.request.SocialLoginRequest
 import com.ey.hotspot.ui.home.BottomNavHomeActivity
 import com.ey.hotspot.ui.registration.register_user.RegisterUserFragment
-import com.ey.hotspot.ui.registration.registration_option.RegistrationOptionFragment
 import com.ey.hotspot.utils.captcha.TextCaptcha
-import com.ey.hotspot.utils.constants.OptionType
 import com.ey.hotspot.utils.replaceFragment
 import com.ey.hotspot.utils.showMessage
 import com.ey.hotspot.utils.validations.isEmailValid
 import com.facebook.*
-import com.facebook.FacebookSdk.getApplicationContext
-import com.facebook.appevents.AppEventsLogger
 import com.facebook.login.LoginBehavior
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
@@ -272,18 +268,22 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
      * Method to validate input fields
      */
     private fun validate(): Boolean {
+        var isValid = true
+
         mViewModel.run {
             mBinding.run {
-                return if (!emailId.isEmailValid()) {
+                if (!emailId.isEmailValid()) {
                     etEmailId.error = resources.getString(R.string.invalid_email)
-                    false
-                } else if (password.trim().isEmpty()) {
+                    isValid = false
+                }
+                if (password.trim().isEmpty()) {
                     etPassword.error = resources.getString(R.string.enter_password)
-                    false
-                } else
-                    true
+                    isValid = false
+                }
             }
         }
+
+        return isValid
     }
 
 

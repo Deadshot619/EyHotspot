@@ -13,12 +13,10 @@ import android.view.View
 import androidx.lifecycle.Observer
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
-import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.FragmentHomeBinding
 import com.ey.hotspot.ui.favourite.model.MarkFavouriteRequest
 import com.ey.hotspot.ui.home.models.GetHotSpotRequest
 import com.ey.hotspot.ui.home.models.GetHotSpotResponse
-import com.ey.hotspot.ui.home.models.GetUserHotSpotResponse
 import com.ey.hotspot.ui.home.models.MyClusterItems
 import com.ey.hotspot.ui.search.searchlist.SearchListFragment
 import com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment
@@ -72,23 +70,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
     var result: PendingResult<LocationSettingsResult>? = null
     val REQUEST_LOCATION = 199
 
-
-    override fun getLayoutId(): Int {
-
-        return R.layout.fragment_home
-
-
-    }
-
-    override fun getViewModel(): Class<HomeFragmentViewModel> {
-
-        return HomeFragmentViewModel::class.java
-    }
-
+    override fun getLayoutId() = R.layout.fragment_home
+    override fun getViewModel() = HomeFragmentViewModel::class.java
     override fun onBinding() {
 
         //setUpGoogleAPIClient()
-
 
         mBinding.run {
             lifecycleOwner = viewLifecycleOwner
@@ -101,7 +87,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         mBinding.toolbarLayout.etSearchBar.isFocusable = false
 
         // Prompt the user for permission.
-
         activity?.checkLocationPermission(view = mBinding.root, func = {
             locationPermissionGranted = true
             if (!requireActivity().isLocationEnabled()) {
@@ -130,21 +115,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
             if (it.status) {
                 setupClusters()
-                setUpHotSpotData(it.data)
-
-            } else {
-                showMessage(it.message, true)
-            }
-        })
-
-
-        mViewModel.getUserHotSpotResponse.observe(viewLifecycleOwner, Observer {
-
-            if (it.status) {
-
-                setupClusters()
-                setUpUserHotSpotData(it.data)
-
+                setUpHotSpotDataInCluster(it.data)
             } else {
                 showMessage(it.message, true)
             }
@@ -152,10 +123,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
         mViewModel.markFavouriteResponse.observe(viewLifecycleOwner, Observer {
 
-            if (it.status == true) {
-
+            if (it.status) {
                 showMessage(it.message, true)
-
             } else {
                 showMessage(it.message, true)
             }
@@ -181,13 +150,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             72.8096671, "", true
         )
 
-        if (HotSpotApp.prefs!!.getAppLoggedInStatus() == true) {
+        mViewModel.getHotSpotResponse(getHotSpotRequest)
 
-            mViewModel.getUserHotSpotResponse(getHotSpotRequest)
-        } else {
-            mViewModel.getHotSpotResponse(getHotSpotRequest)
-
-        }
 
     }
 
@@ -276,21 +240,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         mClusterManager.renderer = renderer
     }
 
-    private fun setUpHotSpotData(getHotSpotResponse: List<GetHotSpotResponse>) {
-        for (location in getHotSpotResponse) {
-
-            val offsetItems =
-                MyClusterItems(
-                    location.lat,
-                    location.lng,
-                    location.provider_name,
-                    location.navigate_url
-
-                )
-            mClusterManager.addItem(offsetItems)
-        }
-    }
-
     private fun updateLocationUI() {
         if (map == null) {
             return
@@ -316,7 +265,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
     }
 
     override fun onClusterInfoWindowClick(cluster: Cluster<MyClusterItems>?) {
-
         //TODO
     }
 
@@ -339,6 +287,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             mBinding.customPop.ivFavourites.setImageResource(R.drawable.ic_favorite_filled_gray)
         }
 
+        //Favourite
         mBinding.customPop.ivFavourites.setOnClickListener {
             val imgID1: Drawable.ConstantState? =
                 requireContext().getDrawable(R.drawable.ic_favorite_filled_gray)?.getConstantState()
@@ -401,8 +350,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         return false
     }
 
-
-    private fun setUpUserHotSpotData(list: List<GetUserHotSpotResponse>) {
+    /**
+     * Method to add items in clusters
+     */
+    private fun setUpHotSpotDataInCluster(list: List<GetHotSpotResponse>) {
         for (location in list) {
             val offsetItems =
                 MyClusterItems(
@@ -415,6 +366,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                     location.id,
                     location.location
                 )
+
             mClusterManager.addItem(offsetItems)
         }
     }
@@ -441,16 +393,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             item: MyClusterItems,
             markerOptions: MarkerOptions
         ) {
-
             val icon: BitmapDescriptor =
                 BitmapDescriptorFactory.fromResource(R.drawable.ic_wifi_signal)
             markerOptions.icon(icon)
-
-
         }
 
         override fun onClusterItemUpdated(item: MyClusterItems, marker: Marker) {
-
             val icon: BitmapDescriptor =
                 BitmapDescriptorFactory.fromResource(R.drawable.ic_wifi_signal)
             marker.setIcon(icon)

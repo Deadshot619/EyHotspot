@@ -9,7 +9,6 @@ import com.ey.hotspot.ui.favourite.model.MarkFavouriteRequest
 import com.ey.hotspot.ui.favourite.model.MarkFavouriteResponse
 import com.ey.hotspot.ui.home.models.GetHotSpotRequest
 import com.ey.hotspot.ui.home.models.GetHotSpotResponse
-import com.ey.hotspot.ui.home.models.GetUserHotSpotResponse
 import com.ey.hotspot.ui.login.logout.LogoutResponse
 import com.ey.hotspot.ui.login.otpverification.fragment.model.SendOTPRequest
 import com.ey.hotspot.ui.login.otpverification.fragment.model.VerifyOTPRequest
@@ -53,10 +52,6 @@ interface RemoteDataProvider {
         error: (Exception) -> Unit
     )
 
-    fun refreshToken(
-        success: (BaseResponse<LoginResponse>) -> Unit,
-        error: (Exception) -> Unit
-    )
 
     suspend fun updateProfile(
         request: UpdateProfileRequest,
@@ -73,7 +68,7 @@ interface RemoteDataProvider {
 
     suspend fun getUserHotSpot(
         request: GetHotSpotRequest,
-        success: (BaseResponse<List<GetUserHotSpotResponse>>) -> Unit,
+        success: (BaseResponse<List<GetHotSpotResponse>>) -> Unit,
         error: (Exception) -> Unit
     )
 

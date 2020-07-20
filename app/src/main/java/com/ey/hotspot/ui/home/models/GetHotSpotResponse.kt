@@ -16,6 +16,7 @@ data class GetHotSpotResponse(
     @SerializedName("provider_name") val provider_name: String,
     @SerializedName("provider_name_arabic") val provider_name_arabic: String,
     @SerializedName("distance") val distance: Double,
-    @SerializedName("navigate_url") val navigate_url: String
+    @SerializedName("navigate_url") val navigate_url: String,
+    @SerializedName("favourite") val favourite: Boolean = false
 ) {
 }

@@ -151,7 +151,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/common_margin_32"
-                app:passwordToggleEnabled="true"
                 android:textDirection="locale"
                 app:layout_constraintEnd_toEndOf="@id/input_email_id"
                 app:layout_constraintStart_toStartOf="@id/input_email_id"
