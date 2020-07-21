@@ -14,6 +14,7 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
     //create a local app instance
     protected val appInstance: Application by lazy { application }
 
+    //Create a viewModel Job
     private val viewModelJob = Job()
     protected val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 

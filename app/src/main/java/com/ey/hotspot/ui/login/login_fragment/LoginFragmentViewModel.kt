@@ -11,7 +11,7 @@ import com.ey.hotspot.network.request.LoginRequest
 import com.ey.hotspot.network.request.SocialLoginRequest
 import com.ey.hotspot.network.response.BaseResponse
 import com.ey.hotspot.network.response.LoginResponse
-import com.ey.hotspot.ui.login.logout.LogoutResponse
+import com.ey.hotspot.utils.Event
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -25,15 +25,10 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
     val loginResponse: LiveData<BaseResponse<LoginResponse?>>
         get() = _loginResponse
 
-
-    private val _logoutResponse = MutableLiveData<BaseResponse<LogoutResponse>>()
-    val logoutResponse: LiveData<BaseResponse<LogoutResponse>>
-        get() = _logoutResponse
-
-
-    private val _refreshTokenResponse = MutableLiveData<BaseResponse<LoginResponse>>()
-    val refreshTokenResponse: LiveData<BaseResponse<LoginResponse>>
-        get() = _refreshTokenResponse
+    //This variable will handle Login Errors
+    private val _loginError = MutableLiveData<Event<LoginResponse?>>()
+    val loginError: LiveData<Event<LoginResponse?>>
+        get() = _loginError
 
 
     private val _socialLoginRespinse = MutableLiveData<BaseResponse<LoginResponse?>>()
@@ -58,12 +53,13 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
 
                     } else {
                         setDialogVisibility(false)
+                        _loginError.value = Event(it.data)
                     }
 
 
                 },
                 error = {
-                    checkError(it)
+                        checkError(it)
                 }
             )
         }
@@ -90,34 +86,6 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
             )
         }
 
-    }
-
-
-    fun logOut() {
-        coroutineScope.launch {
-
-            DataProvider.logout(
-                success = {
-                    _logoutResponse.value = it
-                },
-                error = {
-                    checkError(it)
-                }
-            )
-        }
-    }
-
-    fun refreshToken() {
-
-        coroutineScope.launch {
-            DataProvider.refreshTokenAsync(
-                success = {
-                    _refreshTokenResponse.value = it
-                }, error = {
-                    checkError(it)
-                }
-            )
-        }
     }
 
 

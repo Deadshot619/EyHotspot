@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.ey.hotspot.ui.review_and_complaint.review_list.ReviewListViewModel" />
+            type="com.ey.hotspot.ui.review_and_complaint.complaint_list.ComplaintListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,13 +15,14 @@
         tools:context=".ui.review_and_complaint.review_list.ReviewListFragment"
         >
 
+
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_review_list"
+            android:id="@+id/rv_complaint_list"
             android:layout_width="0dp"
             android:layout_height="0dp"
             tools:listitem="@layout/item_review_list"
             tools:itemCount="3"
-            app:listReviewList="@{viewModel.reviewList}"
+            app:listComplaintList="@{viewModel.complaintList}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

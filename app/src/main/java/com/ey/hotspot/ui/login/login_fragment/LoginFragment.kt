@@ -13,6 +13,7 @@ import com.ey.hotspot.ui.home.BottomNavHomeActivity
 import com.ey.hotspot.ui.login.forgorpassword.ForgotPasswordFragment
 import com.ey.hotspot.ui.registration.register_user.RegisterUserFragment
 import com.ey.hotspot.utils.captcha.TextCaptcha
+import com.ey.hotspot.utils.dialogs.OkDialog
 import com.ey.hotspot.utils.replaceFragment
 import com.ey.hotspot.utils.showMessage
 import com.ey.hotspot.utils.validations.isEmailValid
@@ -32,6 +33,9 @@ import java.util.*
 
 class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>() {
 
+    val dialog by lazy { OkDialog(requireContext()).apply {
+        setViews { this.dismiss() }
+    } }
 
     //Facebook Sign In
     lateinit var callbackManager: CallbackManager
@@ -81,19 +85,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
     private fun setUpObservers() {
 
-
+        //Login Response
         mViewModel.loginResponse.observe(viewLifecycleOwner, Observer {
-
-            if (it.status) {
-
                 showMessage(it.message, true)
                 goToHomePage()
-            } else {
-                showMessage(it.message, true)
-            }
         })
 
-
+        //Social Login Response
         mViewModel.socialLoginResponse.observe(viewLifecycleOwner, Observer {
 
             if (it.status) {
@@ -101,6 +99,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
                 goToHomePage()
             } else {
                 showMessage(it.message, true)
+            }
+        })
+
+        //Login Error
+        mViewModel.loginError.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let {
+                dialog.setViews(/*   input error variables   */)
+                dialog.show()
             }
         })
     }
@@ -168,6 +174,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
     }
 
 
+    /*   FACEBOOK   */
     private fun facebookSign() {
 
         LoginManager.getInstance().setLoginBehavior(LoginBehavior.NATIVE_WITH_FALLBACK)
@@ -261,10 +268,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
         callbackManager = CallbackManager.Factory.create()
         FacebookSdk.setApplicationId(resources.getString(R.string.facebook_app_id))
         FacebookSdk.setIsDebugEnabled(true)
-
-
     }
 
+    /*   GOOGLE   */
     private fun setuPGoogelSignIn() {
 
         val gso =
@@ -294,6 +300,15 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
                 }
             }
         }
+
+/*
+        dialog.setViews(title = convertStringFromList(
+            listOf("hhh", "uuu"),
+            listOf("haha", "huhu")
+        ))
+        dialog.show()
+*/
+
 
         return isValid
     }

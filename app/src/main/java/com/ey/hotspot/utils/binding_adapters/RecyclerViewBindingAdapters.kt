@@ -3,11 +3,13 @@ package com.ey.hotspot.utils.binding_adapters
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ey.hotspot.database.WifiInformationTable
+import com.ey.hotspot.network.response.ComplaintsList
+import com.ey.hotspot.network.response.ReviewsList
 import com.ey.hotspot.ui.favourite.FavouriteListAdapter
 import com.ey.hotspot.ui.favourite.model.GetFavouriteItem
 import com.ey.hotspot.ui.home.models.GetHotSpotResponse
+import com.ey.hotspot.ui.review_and_complaint.complaint_list.ComplaintListAdapter
 import com.ey.hotspot.ui.review_and_complaint.review_list.ReviewListAdapter
-import com.ey.hotspot.ui.review_and_complaint.review_list.ReviewListModel
 import com.ey.hotspot.ui.search.searchlist.adapter.SearchListAdapter
 import com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListAdapter
 
@@ -18,8 +20,15 @@ import com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListAdapter
 
 //Review List
 @BindingAdapter("listReviewList")
-fun bindReviewList(recyclerView: RecyclerView, data: List<ReviewListModel>?){
+fun bindReviewList(recyclerView: RecyclerView, data: List<ReviewsList>?){
     val adapter = recyclerView.adapter as ReviewListAdapter
+    adapter.submitList(data)
+}
+
+//Complaints List
+@BindingAdapter("listComplaintList")
+fun bindComplaintList(recyclerView: RecyclerView, data: List<ComplaintsList>?){
+    val adapter = recyclerView.adapter as ComplaintListAdapter
     adapter.submitList(data)
 }
 

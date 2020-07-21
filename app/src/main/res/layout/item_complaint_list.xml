@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="com.ey.hotspot.network.response.ReviewsList" />
+            type="com.ey.hotspot.network.response.ComplaintsList" />
     </data>
 
 
@@ -29,7 +29,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Starbucks WiFi" />
 
-<!--        Wifi Provider-->
+        <!--        Wifi Provider-->
         <TextView
             android:id="@+id/tv_wifi_provider"
             android:layout_width="wrap_content"

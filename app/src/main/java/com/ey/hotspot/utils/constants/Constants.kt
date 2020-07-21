@@ -51,7 +51,8 @@ interface Constants {
         //GET
         const val UNAUTHORIZED = "unauthorized"
         const val API_GET_USER_LIST = "userList"
-        const val API_GET_REVIEWS_AND_COMPLAINTS = "getReviewsAndComplaints"
+        const val API_GET_REVIEWS = "getReviews"
+        const val API_GET_COMPLAINTS = "getComplaints"
         const val API_GET_COMPLAINTS_ISSUE_TYPES = "getComplaintIssueTypes"
 
     }

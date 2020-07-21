@@ -21,14 +21,16 @@ class OkDialog(context: Context) : AppCompatDialog(context) {
     }
 
     fun setViews(
-        title: String,
-        okBtn: ((Unit) -> Unit)
+        title: String? = null,
+        okBtn: ((Unit) -> Unit)? = null
     ) {
-        mBinding.run {
-            tvTitle.text = title
-            btnOk.setOnClickListener {
+
+        title?.let { mBinding.tvTitle.text = it }
+        okBtn?.let {
+            mBinding.btnOk.setOnClickListener {
                 okBtn(Unit)
             }
         }
+
     }
 }

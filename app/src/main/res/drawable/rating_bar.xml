@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--
     <item android:id="@android:id/background" android:drawable="@drawable/polygon1" />
-    <item android:id="@android:id/secondaryProgress" android:drawable="@drawable/fillstar" />
+    <item android:id="@android:id/secondaryProgress" android:drawable="@drawable/polygon1" />
     <item android:id="@android:id/progress" android:drawable="@drawable/fillstar" />
+    -->
+
+    <item android:id="@android:id/background">
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/fillstar"
+            android:tint="@color/colorLightestGray" />
+    </item>
+
+    <item android:id="@android:id/secondaryProgress">
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/fillstar"
+            android:tint="@color/colorLightestGray" />
+    </item>
+
+    <item android:id="@android:id/progress">
+        <bitmap android:src="@drawable/fillstar" />
+    </item>
+
+
 </layer-list>
