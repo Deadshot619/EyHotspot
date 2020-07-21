@@ -1,9 +1,7 @@
 package com.ey.hotspot.network
 
 import com.ey.hotspot.network.request.*
-import com.ey.hotspot.network.response.BaseResponse
-import com.ey.hotspot.network.response.ComplaintIssuesTypes
-import com.ey.hotspot.network.response.LoginResponse
+import com.ey.hotspot.network.response.*
 import com.ey.hotspot.ui.favourite.model.GetFavouriteItem
 import com.ey.hotspot.ui.favourite.model.MarkFavouriteRequest
 import com.ey.hotspot.ui.favourite.model.MarkFavouriteResponse
@@ -84,8 +82,13 @@ interface RemoteDataProvider {
     )
 
     //Reviews & Complaints
-    suspend fun getReviewsAndComplaints(
-        success: (BaseResponse<Any>) -> Unit,
+    suspend fun getReviews(     //Reviews
+        success: (BaseResponse<List<ReviewsList>>) -> Unit,
+        error: (Exception) -> Unit
+    )
+
+    suspend fun getCompaints(   //Compaints
+        success: (BaseResponse<List<ComplaintsList>>) -> Unit,
         error: (Exception) -> Unit
     )
 

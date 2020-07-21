@@ -2,9 +2,7 @@ package com.ey.hotspot.network
 
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.network.request.*
-import com.ey.hotspot.network.response.BaseResponse
-import com.ey.hotspot.network.response.ComplaintIssuesTypes
-import com.ey.hotspot.network.response.LoginResponse
+import com.ey.hotspot.network.response.*
 import com.ey.hotspot.ui.favourite.model.GetFavouriteItem
 import com.ey.hotspot.ui.favourite.model.MarkFavouriteRequest
 import com.ey.hotspot.ui.favourite.model.MarkFavouriteResponse
@@ -204,13 +202,30 @@ object DataProvider : RemoteDataProvider {
     /**
      * Reviews & Complaints Module
      */
-    override suspend fun getReviewsAndComplaints(
-        success: (BaseResponse<Any>) -> Unit,
+
+    //Reviews
+    override suspend fun getReviews(
+        success: (BaseResponse<List<ReviewsList>>) -> Unit,
         error: (Exception) -> Unit
     ) {
         withContext(Dispatchers.Main) {
             try {
-                val result = mServices.fetchReviewsAndComplaints().await()
+                val result = mServices.getReviewsAsync().await()
+                success(result)
+            } catch (e: Exception) {
+                error(e)
+            }
+        }
+    }
+
+    //Complaints
+    override suspend fun getCompaints(
+        success: (BaseResponse<List<ComplaintsList>>) -> Unit,
+        error: (Exception) -> Unit
+    ) {
+        withContext(Dispatchers.Main) {
+            try {
+                val result = mServices.getComplaintsAsync().await()
                 success(result)
             } catch (e: Exception) {
                 error(e)
@@ -307,7 +322,8 @@ object DataProvider : RemoteDataProvider {
 
         try {
             val result =
-                mServices.verifyOTP(HotSpotApp.prefs!!.getRegistrationTempToken(), request).await()
+                mServices.verifyOTP(HotSpotApp.prefs!!.getRegistrationTempToken(), request)
+                    .await()
             success(result)
         } catch (e: Exception) {
             error(e)

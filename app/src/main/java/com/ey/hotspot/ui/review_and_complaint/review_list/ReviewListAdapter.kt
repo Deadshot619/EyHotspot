@@ -6,26 +6,27 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ey.hotspot.databinding.ItemReviewListBinding
+import com.ey.hotspot.network.response.ReviewsList
 
 class ReviewListAdapter(/*val listener: OnClickListener*/) :
-    ListAdapter<ReviewListModel, ReviewListAdapter.ReviewListViewHolder>(
+    ListAdapter<ReviewsList, ReviewListAdapter.ReviewListViewHolder>(
         DiffCallback
     ) {
     /**
-     * Allows the RecyclerView to determine which items have changed when the [List] of [ReviewListModel]
+     * Allows the RecyclerView to determine which items have changed when the [List] of [ReviewsList]
      * has been updated.
      */
-    companion object DiffCallback : DiffUtil.ItemCallback<ReviewListModel>() {
+    companion object DiffCallback : DiffUtil.ItemCallback<ReviewsList>() {
         override fun areItemsTheSame(
-            oldItem: ReviewListModel,
-            newItem: ReviewListModel
+            oldItem: ReviewsList,
+            newItem: ReviewsList
         ): Boolean {
             return oldItem === newItem
         }
 
         override fun areContentsTheSame(
-            oldItem: ReviewListModel,
-            newItem: ReviewListModel
+            oldItem: ReviewsList,
+            newItem: ReviewsList
         ): Boolean {
             return oldItem.id == newItem.id
         }
@@ -47,12 +48,12 @@ class ReviewListAdapter(/*val listener: OnClickListener*/) :
 
     /**
      * The [ReviewListViewHolder] constructor takes the binding variable from the associated
-     * layout, which nicely gives it access to the full [ReviewListModel] information.
+     * layout, which nicely gives it access to the full [ReviewsList] information.
      */
     class ReviewListViewHolder(private var binding: ItemReviewListBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(
-            item: ReviewListModel?/*,
+            item: ReviewsList?/*,
             listener: OnClickListener*/
         ) {
             binding.run {
@@ -69,8 +70,8 @@ class ReviewListAdapter(/*val listener: OnClickListener*/) :
     /**
      * Interface to call in the [OnClickListener] & passed on to fragment to implement
      */
-    class OnClickListener(val clickListener: (viewAvailableIndustriesData: ReviewListModel) -> Unit) {
-        fun onClick(viewAvailableIndustriesData: ReviewListModel) =
+    class OnClickListener(val clickListener: (viewAvailableIndustriesData: ReviewsList) -> Unit) {
+        fun onClick(viewAvailableIndustriesData: ReviewsList) =
             clickListener(viewAvailableIndustriesData)
     }
 

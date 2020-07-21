@@ -59,7 +59,7 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
 
                 },
                 error = {
-                    checkError(it)
+                        checkError(it)
                 }
             )
         }

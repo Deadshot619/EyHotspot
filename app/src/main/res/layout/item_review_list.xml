@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="com.ey.hotspot.ui.review_and_complaint.review_list.ReviewListModel" />
+            type="com.ey.hotspot.network.response.ReviewsList" />
     </data>
 
 
@@ -23,7 +23,7 @@
             style="@style/TextAppearance.MaterialComponents.Headline6"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@{data.wifiSsid}"
+            android:text="@{data.location_name}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -35,6 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="AmazeNet"
+            android:text="@{data.provider_name}"
             style="@style/ChipStyleTextView"
             app:layout_constraintTop_toBottomOf="@id/tv_wifi_name"
             app:layout_constraintStart_toStartOf="@id/tv_wifi_name"
@@ -47,7 +48,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/common_margin"
-            android:text="@{data.username}"
+            android:text="@{data.location}"
             android:textAllCaps="true"
             app:layout_constraintStart_toEndOf="@id/tv_wifi_provider"
             app:layout_constraintTop_toTopOf="@id/tv_wifi_provider"
@@ -60,7 +61,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/common_margin_between_fields"
-            android:text="@{data.comments}"
+            android:text="@{data.description}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_wifi_name"
             app:layout_constraintTop_toBottomOf="@id/tv_location"
