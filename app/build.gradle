@@ -133,6 +133,4 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
 
-    implementation 'me.zhanghai.android.materialratingbar:library:1.4.0'
-
 }
