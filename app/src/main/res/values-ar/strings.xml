@@ -205,4 +205,12 @@
     <string name="enter_valid_otp">أدخل ملف otp صالحًا</string>
     <string name="invalid_confirm_password">تأكيد كلمة المرور غير صالحة</string>
     <string name="pwd_confirm_pwd_empty">يجب ألا يكون حقل كلمة المرور وتأكيد كلمة المرور فارغًا</string>
+    <string name="email_id_mobil_no">معرف البريد الإلكتروني / رقم الجوال</string>
+    <string name="enter_email_mobile">أدخل معرف البريد الإلكتروني الخاص بك / رقم الجوال</string>
+    <string name="send_otp">إرسال OTP</string>
+    <string name="verify_otp">تحقق OTP</string>
+    <string name="btnResendOTP">إعادة إرسال OTP</string>
+    <string name="verify_account">التحقق من الحساب</string>
+    <string name="secure_password">يرجى إنشاء كلمة مرور آمنة لبيانات اعتماد تسجيل الدخول الخاصة بك.</string>
+    <string name="password_reset_label">إعادة تعيين كلمة المرور</string>
 </resources>

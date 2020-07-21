@@ -19,6 +19,7 @@ interface Constants {
         const val ENABLED_GPS_LOCATION: String = "GPS_LOCATION"
         const val REGISTRATION_TMP_TOKEN="registration_token"
         const val SKIP_STATUS = "skip_status"
+        const val VERIFY_FORGOT_PASSWORD="verify_forgot_password"
 
         //APIS
 
@@ -44,6 +45,8 @@ interface Constants {
         const val API_ADD_COMPLAINT = "addComplaint"
         const val API_SEND_OTP="sendOTP"
         const val API_VERIFY_OTP="verifyOTP"
+        const val  API_FORGOT_PASSWORD="forgotPassword"
+        const val  API_FORGOT_PASSWORD_VERIFY_OTP="forgotPassword/verifyOtp"
 
         //GET
         const val UNAUTHORIZED = "unauthorized"

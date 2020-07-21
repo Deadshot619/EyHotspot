@@ -4,10 +4,14 @@ import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.ChangePasswordFragmentBinding
 import com.ey.hotspot.ui.login.login_fragment.LoginFragment
+import com.ey.hotspot.ui.login.verifyotp.VerifyOTPFragment
 import com.ey.hotspot.utils.replaceFragment
 
 class ChangePasswordFragment : BaseFragment<ChangePasswordFragmentBinding,ChangePasswordViewModel>() {
 
+    companion object {
+        fun newInstance() = ChangePasswordFragment()
+    }
 
 
     override fun getLayoutId(): Int {
@@ -20,6 +24,12 @@ class ChangePasswordFragment : BaseFragment<ChangePasswordFragmentBinding,Change
     }
 
     override fun onBinding() {
+
+        setUpToolbar(
+            toolbarBinding = mBinding.toolbarLayout,
+            title = getString(R.string.password_reset_label),
+            showUpButton = true
+        )
         setUpListeners()
     }
 
@@ -28,15 +38,7 @@ class ChangePasswordFragment : BaseFragment<ChangePasswordFragmentBinding,Change
      */
     private fun setUpListeners() {
         mBinding.run {
-            //Submit button
-            btnSubmit.setOnClickListener {
-                replaceFragment(LoginFragment(), true, null)
-            }
 
-            //Back to login screen
-            btnBackLoginScreen.setOnClickListener {
-                replaceFragment(LoginFragment(), true, null)
-            }
         }
     }
 

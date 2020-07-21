@@ -13,6 +13,10 @@ import com.ey.hotspot.ui.home.models.GetHotSpotResponse
 import com.ey.hotspot.ui.login.logout.LogoutResponse
 import com.ey.hotspot.ui.login.otpverification.fragment.model.SendOTPRequest
 import com.ey.hotspot.ui.login.otpverification.fragment.model.VerifyOTPRequest
+import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordRequest
+import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordResponse
+import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordVerifyOTPRequest
+import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordVerifyOTPResponse
 import com.ey.hotspot.ui.profile.fragment.model.ProfileResponse
 import com.ey.hotspot.ui.profile.fragment.model.UpdateProfileRequest
 import com.ey.hotspot.ui.registration.register_user.model.RegistrationResponse
@@ -306,6 +310,39 @@ object DataProvider : RemoteDataProvider {
         try {
             val result =
                 mServices.verifyOTP(HotSpotApp.prefs!!.getRegistrationTempToken(), request).await()
+            success(result)
+        } catch (e: Exception) {
+            error(e)
+        }
+    }
+
+    override suspend fun forgotPassword(
+        request: ForgotPasswordRequest,
+        success: (BaseResponse<ForgotPasswordResponse>) -> Unit,
+        error: (Exception) -> Unit
+    ) {
+
+        try {
+
+            val result = mServices.forgotPassword(request).await()
+            success(result)
+
+        } catch (e: Exception) {
+            error(e)
+        }
+
+    }
+
+    override suspend fun forgotPasswordVerifyOTP(
+        request: ForgotPasswordVerifyOTPRequest,
+        success: (BaseResponse<ForgotPasswordVerifyOTPResponse>) -> Unit,
+        error: (Exception) -> Unit
+    ) {
+
+        try {
+            val result = mServices.forgotPasswordVerifyOTP(
+                HotSpotApp.prefs!!.getRegistrationTempToken(), request
+            ).await()
             success(result)
         } catch (e: Exception) {
             error(e)

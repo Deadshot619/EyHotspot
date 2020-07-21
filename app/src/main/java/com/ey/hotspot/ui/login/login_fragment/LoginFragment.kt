@@ -10,6 +10,7 @@ import com.ey.hotspot.databinding.FragmentLoginBinding
 import com.ey.hotspot.network.request.LoginRequest
 import com.ey.hotspot.network.request.SocialLoginRequest
 import com.ey.hotspot.ui.home.BottomNavHomeActivity
+import com.ey.hotspot.ui.login.forgorpassword.ForgotPasswordFragment
 import com.ey.hotspot.ui.registration.register_user.RegisterUserFragment
 import com.ey.hotspot.utils.captcha.TextCaptcha
 import com.ey.hotspot.utils.replaceFragment
@@ -146,6 +147,18 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
             mViewModel.setSkippedUserData()
             goToHomePage()
         }
+
+
+        mBinding.tvForgotPassword.setOnClickListener {
+
+
+
+            replaceFragment(
+                fragment = ForgotPasswordFragment.newInstance(),
+                addToBackStack = true,
+                bundle = null
+            )
+        }
     }
 
     //Method to redirect user to home page
@@ -243,7 +256,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
     }
 
     private fun setUpFacebookLogin() {
-
 
 
         callbackManager = CallbackManager.Factory.create()

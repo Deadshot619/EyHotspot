@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.ey.hotspot.ui.login.verifyotp.VerifyOTPViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="@dimen/common_padding_start"
+        android:paddingTop="@dimen/common_padding_top"
+        android:paddingEnd="@dimen/common_padding_end"
+        tools:context=".ui.registration.email_verification.EmailVerificationFragment">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/margin_50" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/margin_50" />
+
+
+        <!--Toolbar-->
+        <include
+            android:id="@+id/toolbarLayout"
+            layout="@layout/layout_custom_toolbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <!--    Email image  -->
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_email"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="@dimen/common_margin_top"
+            android:src="@drawable/ic_baseline_email_24"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbarLayout" />
+
+        <!--        Email verification label-->
+        <TextView
+            android:id="@+id/tv_email_verification_label"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_margin_top"
+            android:gravity="center"
+            android:text="@string/verification_method_label"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_email" />
+
+        <!--        link sent label-->
+        <TextView
+            android:id="@+id/tv_link_sent_label"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_margin_top"
+            android:gravity="center"
+            android:text="@string/link_sent_label"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_email_verification_label" />
+
+        <!--        check email label-->
+        <TextView
+            android:id="@+id/tv_check_email_label"
+            style="@style/TextAppearance.MyApp.Headline3_Profile_Bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10"
+            android:gravity="center"
+            android:text="@string/otp_title"
+            android:textDirection="locale"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="@id/guideline_right"
+            app:layout_constraintStart_toStartOf="@id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@+id/tv_link_sent_label" />
+
+
+        <com.mukesh.OtpView
+            android:id="@+id/otpView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_30"
+            android:inputType="number"
+            android:src="@drawable/ic_mobile_verification"
+            android:textColor="@color/colorPrimary"
+            android:textDirection="locale"
+            app:itemCount="4"
+            app:layout_constraintEnd_toEndOf="@+id/guideline_right"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@+id/tv_check_email_label"
+            app:lineColor="@color/colorPrimary"
+            app:viewType="rectangle" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnVerify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_30"
+            android:layout_marginBottom="@dimen/common_margin_bottom"
+            android:background="@drawable/sign_btn_gradient"
+            android:paddingStart="@dimen/margin_60"
+            android:paddingTop="@dimen/margin_10"
+            android:paddingEnd="@dimen/margin_60"
+            android:paddingBottom="@dimen/margin_10"
+            android:text="@string/verify_otp"
+            android:textColor="@color/colorWhite"
+            android:textDirection="locale"
+            app:layout_constraintEnd_toEndOf="@+id/guideline_right"
+            app:layout_constraintStart_toStartOf="@id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@+id/otpView" />
+
+
+        <!--        Didnt receive OTP-->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btResendOTP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_30"
+            android:layout_marginBottom="@dimen/common_margin_bottom"
+            android:background="@drawable/sign_btn_gradient"
+            android:paddingStart="@dimen/margin_60"
+            android:paddingTop="@dimen/margin_10"
+            android:paddingEnd="@dimen/margin_60"
+            android:paddingBottom="@dimen/margin_10"
+            android:text="@string/btnResendOTP"
+            android:textColor="@color/colorWhite"
+            android:textDirection="locale"
+            app:layout_constraintEnd_toEndOf="@id/guideline_right"
+            app:layout_constraintStart_toStartOf="@id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@+id/btnVerify" />
+
+
+        <!--Sign In-->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_sign_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_20"
+            android:background="@drawable/sign_btn_gradient"
+            android:paddingStart="@dimen/margin_60"
+            android:paddingTop="@dimen/margin_10"
+            android:paddingEnd="@dimen/margin_60"
+            android:paddingBottom="@dimen/margin_10"
+            android:text="@string/sign_in_label"
+            android:textColor="@color/colorWhite"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btResendOTP"
+            app:layout_constraintVertical_bias="1" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

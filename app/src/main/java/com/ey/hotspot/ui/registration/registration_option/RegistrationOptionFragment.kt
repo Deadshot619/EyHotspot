@@ -4,15 +4,9 @@ import android.os.Bundle
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentRegistrationOptionBinding
-import com.ey.hotspot.ui.login.forgorpasswordmobile.ForgotPasswordMobileFragment
-import com.ey.hotspot.ui.login.forgotpasswordemail.ForgotPasswordEmailFragment
 import com.ey.hotspot.ui.login.login_fragment.LoginFragment
 import com.ey.hotspot.ui.login.otpverification.fragment.OTPVerificationFragment
-import com.ey.hotspot.ui.registration.email_verification.EmailVerificationFragment
-import com.ey.hotspot.ui.registration.sms_verification.SmsVerificationFragment
-import com.ey.hotspot.utils.constants.OptionType
 import com.ey.hotspot.utils.replaceFragment
-import com.ey.hotspot.utils.showMessage
 
 class RegistrationOptionFragment :
     BaseFragment<FragmentRegistrationOptionBinding, RegistrationOptionViewModel>() {
@@ -79,11 +73,8 @@ class RegistrationOptionFragment :
             }
 
             btnSignIn.setOnClickListener {
-
                 replaceFragment(LoginFragment.newInstance(), false, null)
             }
-
-
         }
     }
 }

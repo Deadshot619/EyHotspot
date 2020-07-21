@@ -12,6 +12,7 @@ import com.ey.hotspot.utils.constants.Constants.Companion.LANGUAGE_SELECTED
 import com.ey.hotspot.utils.constants.Constants.Companion.REGISTRATION_TMP_TOKEN
 import com.ey.hotspot.utils.constants.Constants.Companion.SKIP_STATUS
 import com.ey.hotspot.utils.constants.Constants.Companion.USER_DATA
+import com.ey.hotspot.utils.constants.Constants.Companion.VERIFY_FORGOT_PASSWORD
 import com.google.gson.Gson
 
 class MyHotSpotSharedPreference(context: Context) {
@@ -26,7 +27,8 @@ class MyHotSpotSharedPreference(context: Context) {
 
     /** get saved App language Arabic or English */
     fun getLanguage(): String {
-        return CoreApp.sharedPreferences.getString(LANGUAGE_SELECTED, DELEGATE_ENGLISH_LANG) ?: DELEGATE_ENGLISH_LANG
+        return CoreApp.sharedPreferences.getString(LANGUAGE_SELECTED, DELEGATE_ENGLISH_LANG)
+            ?: DELEGATE_ENGLISH_LANG
     }
 
     /*save user access token for api calls*/
@@ -106,6 +108,17 @@ class MyHotSpotSharedPreference(context: Context) {
 
     fun getRegistrationTempToken(): String? {
         return CoreApp.sharedPreferences.getString(REGISTRATION_TMP_TOKEN, "")
+
+    }
+
+    fun setVerifyForgotPasswordToken(token: String) {
+        CoreApp.sharedPreferences.edit().putString(VERIFY_FORGOT_PASSWORD, token).apply()
+
+    }
+
+    fun getVerifyForgotPasswordToken(): String? {
+        return CoreApp.sharedPreferences.getString(VERIFY_FORGOT_PASSWORD, "")
+
 
     }
 

@@ -13,6 +13,10 @@ import com.ey.hotspot.ui.home.models.GetHotSpotResponse
 import com.ey.hotspot.ui.login.logout.LogoutResponse
 import com.ey.hotspot.ui.login.otpverification.fragment.model.SendOTPRequest
 import com.ey.hotspot.ui.login.otpverification.fragment.model.VerifyOTPRequest
+import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordRequest
+import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordResponse
+import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordVerifyOTPRequest
+import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordVerifyOTPResponse
 import com.ey.hotspot.ui.profile.fragment.model.ProfileResponse
 import com.ey.hotspot.ui.profile.fragment.model.UpdateProfileRequest
 import com.ey.hotspot.ui.registration.register_user.model.RegistrationResponse
@@ -105,4 +109,18 @@ interface APIInterface {
     fun verifyOTP(
         @Path("id") id: String?, @Body verifyOTPRequest: VerifyOTPRequest
     ): Deferred<BaseResponse<Any>>
+
+
+    @POST(Constants.API_FORGOT_PASSWORD)
+    fun forgotPassword(
+        @Body forgotPasswordRequest: ForgotPasswordRequest
+    ): Deferred<BaseResponse<ForgotPasswordResponse>>
+
+
+    @POST(Constants.API_FORGOT_PASSWORD_VERIFY_OTP+"/"+"{id}?")
+    fun forgotPasswordVerifyOTP(
+        @Path("id") id:String?,
+
+        @Body forgotPasswordVerifyOTPRequest: ForgotPasswordVerifyOTPRequest
+    ): Deferred<BaseResponse<ForgotPasswordVerifyOTPResponse>>
 }

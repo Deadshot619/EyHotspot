@@ -213,6 +213,14 @@
     <string name="enter_valid_otp">Enter the valid otp</string>
     <string name="invalid_confirm_password">Invalid Confirm Password</string>
     <string name="pwd_confirm_pwd_empty"><![CDATA[Password & Confirm Password field should not be empty]]></string>
+    <string name="email_id_mobil_no">Email Id /Mobile No</string>
+    <string name="enter_email_mobile">Enter Your Email Id/Mobile No</string>
+    <string name="send_otp">SEND OTP</string>
+    <string name="verify_otp">VERIFY  OTP</string>
+    <string name="btnResendOTP">RESEND OTP</string>
+    <string name="verify_account">Verify Account</string>
+    <string name="secure_password">Please create a secure password for your login credentials.</string>
+    <string name="password_reset_label">Reset Password</string>
 
 
     <!--Demo issue type string-->

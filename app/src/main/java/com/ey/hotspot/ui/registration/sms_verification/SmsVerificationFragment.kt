@@ -35,7 +35,7 @@ class SmsVerificationFragment : BaseFragment<FragmentSmsVerificationBinding, Sms
 //                if (TYPE_VALUE == OptionType.TYPE_REGISTRATION.name)
                     replaceFragment(ChangePasswordFragment(), true, null)
 //                else
-//                    replaceFragment(ForgotPasswordMobileFragment(), true, null)
+//                    replaceFragment(ForgotPasswordFragment(), true, null)
             }
         }
     }
