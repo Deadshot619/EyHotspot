@@ -8,6 +8,7 @@ import com.ey.hotspot.network.response.ReviewsList
 import com.ey.hotspot.ui.favourite.FavouriteListAdapter
 import com.ey.hotspot.ui.favourite.model.GetFavouriteItem
 import com.ey.hotspot.ui.home.models.GetHotSpotResponse
+import com.ey.hotspot.ui.review_and_complaint.complaint_list.ComplaintListAdapter
 import com.ey.hotspot.ui.review_and_complaint.review_list.ReviewListAdapter
 import com.ey.hotspot.ui.search.searchlist.adapter.SearchListAdapter
 import com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListAdapter
@@ -27,8 +28,8 @@ fun bindReviewList(recyclerView: RecyclerView, data: List<ReviewsList>?){
 //Complaints List
 @BindingAdapter("listComplaintList")
 fun bindComplaintList(recyclerView: RecyclerView, data: List<ComplaintsList>?){
-    val adapter = recyclerView.adapter /*as ReviewListAdapter*/
-//    adapter.submitList(data)
+    val adapter = recyclerView.adapter as ComplaintListAdapter
+    adapter.submitList(data)
 }
 
 //Wifi Log List

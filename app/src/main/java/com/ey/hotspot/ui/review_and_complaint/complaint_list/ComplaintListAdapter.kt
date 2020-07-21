@@ -5,29 +5,29 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.ey.hotspot.databinding.ItemReviewListBinding
-import com.ey.hotspot.ui.review_and_complaint.review_list.ReviewListModel
+import com.ey.hotspot.databinding.ItemComplaintListBinding
+import com.ey.hotspot.network.response.ComplaintsList
 
 class ComplaintListAdapter(/*val listener: OnClickListener*/) :
-    ListAdapter<ReviewListModel, ComplaintListAdapter.ComplaintListViewHolder>(
+    ListAdapter<ComplaintsList, ComplaintListAdapter.ComplaintListViewHolder>(
         DiffCallback
     ) {
 
     /**
-     * Allows the RecyclerView to determine which items have changed when the [List] of [ReviewListModel]
+     * Allows the RecyclerView to determine which items have changed when the [List] of [ComplaintsList]
      * has been updated.
      */
-    companion object DiffCallback : DiffUtil.ItemCallback<ReviewListModel>() {
+    companion object DiffCallback : DiffUtil.ItemCallback<ComplaintsList>() {
         override fun areItemsTheSame(
-            oldItem: ReviewListModel,
-            newItem: ReviewListModel
+            oldItem: ComplaintsList,
+            newItem: ComplaintsList
         ): Boolean {
             return oldItem === newItem
         }
 
         override fun areContentsTheSame(
-            oldItem: ReviewListModel,
-            newItem: ReviewListModel
+            oldItem: ComplaintsList,
+            newItem: ComplaintsList
         ): Boolean {
             return oldItem.id == newItem.id
         }
@@ -36,7 +36,7 @@ class ComplaintListAdapter(/*val listener: OnClickListener*/) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComplaintListViewHolder {
         return ComplaintListViewHolder(
-            ItemReviewListBinding.inflate(
+            ItemComplaintListBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
             )
         )
@@ -49,16 +49,16 @@ class ComplaintListAdapter(/*val listener: OnClickListener*/) :
 
     /**
      * The [ComplaintListViewHolder] constructor takes the binding variable from the associated
-     * layout, which nicely gives it access to the full [ReviewListModel] information.
+     * layout, which nicely gives it access to the full [ComplaintsList] information.
      */
-    class ComplaintListViewHolder(private var binding: ItemReviewListBinding) :
+    class ComplaintListViewHolder(private var binding: ItemComplaintListBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(
-            item: ReviewListModel?/*,
+            item: ComplaintsList?/*,
             listener: OnClickListener*/
         ) {
             binding.run {
-//                data = item
+                data = item
 //                clickListener = listener
 //                tvNumber.text = "$count"
                 executePendingBindings()
@@ -71,8 +71,8 @@ class ComplaintListAdapter(/*val listener: OnClickListener*/) :
     /**
      * Interface to call in the [OnClickListener] & passed on to fragment to implement
      */
-    class OnClickListener(val clickListener: (viewAvailableIndustriesData: ReviewListModel) -> Unit) {
-        fun onClick(viewAvailableIndustriesData: ReviewListModel) =
+    class OnClickListener(val clickListener: (viewAvailableIndustriesData: ComplaintsList) -> Unit) {
+        fun onClick(viewAvailableIndustriesData: ComplaintsList) =
             clickListener(viewAvailableIndustriesData)
     }
 

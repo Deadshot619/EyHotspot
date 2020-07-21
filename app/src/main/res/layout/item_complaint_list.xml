@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.ey.hotspot.network.response.ComplaintsList" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="24dp">
+
+
+        <!--Wifi Name-->
+        <TextView
+            android:id="@+id/tv_wifi_name"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{data.location_name}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Starbucks WiFi" />
+
+        <!--        Wifi Provider-->
+        <TextView
+            android:id="@+id/tv_wifi_provider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="AmazeNet"
+            android:text="@{data.provider_name}"
+            style="@style/ChipStyleTextView"
+            app:layout_constraintTop_toBottomOf="@id/tv_wifi_name"
+            app:layout_constraintStart_toStartOf="@id/tv_wifi_name"
+            android:layout_marginTop="@dimen/common_margin_between_fields_4"/>
+
+        <!--Location-->
+        <TextView
+            android:id="@+id/tv_location"
+            style="@style/TextAppearance.MaterialComponents.Subtitle2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/common_margin"
+            android:text="@{data.location}"
+            android:textAllCaps="true"
+            app:layout_constraintStart_toEndOf="@id/tv_wifi_provider"
+            app:layout_constraintTop_toTopOf="@id/tv_wifi_provider"
+            tools:text="Riyadh" />
+
+        <!--Review-->
+        <TextView
+            android:id="@+id/tv_review"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_margin_between_fields"
+            android:text="@{data.description}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_wifi_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_location"
+            tools:text="Osama Bin Laden" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
