@@ -158,7 +158,6 @@ object DataProvider : RemoteDataProvider {
     ) {
         try {
             val result = mServices.getUserHotSpot(
-
                 request
             ).await()
             success(result)

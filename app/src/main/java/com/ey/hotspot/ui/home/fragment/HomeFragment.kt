@@ -357,8 +357,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         for (location in list) {
             val offsetItems =
                 MyClusterItems(
-                    location.lat,
-                    location.lng,
+                    location.lat.toDouble(),
+                    location.lng.toDouble(),
                     location.provider_name,
                     location.navigate_url,
                     location.favourite,

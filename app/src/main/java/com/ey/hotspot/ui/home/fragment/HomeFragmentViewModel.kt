@@ -33,6 +33,7 @@ class HomeFragmentViewModel(application: Application) : BaseViewModel(applicatio
                 success = {
 
                     _getHotSpotResponse.value = it
+
                 }, error = {
 
                     checkError(it)
