@@ -38,8 +38,6 @@ import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.maps.android.clustering.Cluster
 import com.google.maps.android.clustering.ClusterManager
 import com.google.maps.android.clustering.view.DefaultClusterRenderer
-
-
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(), OnMapReadyCallback,
     ClusterManager.OnClusterClickListener<MyClusterItems>,
     ClusterManager.OnClusterInfoWindowClickListener<MyClusterItems>,
@@ -47,45 +45,30 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
     ClusterManager.OnClusterItemInfoWindowClickListener<MyClusterItems>,
     GoogleApiClient.ConnectionCallbacks,
     GoogleApiClient.OnConnectionFailedListener {
-
-
     private var map: GoogleMap? = null
-
     private lateinit var placesClient: PlacesClient
-
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-
     private val defaultLocation = LatLng(-33.8523341, 151.2106085)
     private var locationPermissionGranted = false
-
     private var lastKnownLocation: Location? = null
     private lateinit var mClusterManager: ClusterManager<MyClusterItems>
     private var clickedVenueMarker: MyClusterItems? = null
-
-
     private var favouriteType: Boolean = false
-
     var mLocationRequest: LocationRequest? = null
     lateinit var mGoogleApiClient: GoogleApiClient
     var result: PendingResult<LocationSettingsResult>? = null
     val REQUEST_LOCATION = 199
-
     override fun getLayoutId() = R.layout.fragment_home
     override fun getViewModel() = HomeFragmentViewModel::class.java
     override fun onBinding() {
-
         //setUpGoogleAPIClient()
-
         mBinding.run {
             lifecycleOwner = viewLifecycleOwner
             viewModel = mViewModel
         }
-
         //Toolbar
         setUpSearchBar(mBinding.toolbarLayout, showUpButton = false, enableSearchButton = false) {}
-
         mBinding.toolbarLayout.etSearchBar.isFocusable = false
-
         // Prompt the user for permission.
         activity?.checkLocationPermission(view = mBinding.root, func = {
             locationPermissionGranted = true
@@ -94,25 +77,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             }
             updateLocationUI()
         })
-
         Places.initialize(requireActivity(), getString(R.string.maps_api_key))
         placesClient = Places.createClient(requireActivity())
-
         // Construct a FusedLocationProviderClient.
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(requireActivity())
-
         val myMAPF = childFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment?
         myMAPF?.getMapAsync(this)
-
         setUpObservers()
     }
-
     private fun setUpObservers() {
-
         mViewModel.getHotSpotResponse.observe(viewLifecycleOwner, Observer {
-
             if (it.status) {
                 setupClusters()
                 setUpHotSpotDataInCluster(it.data)
@@ -120,41 +96,28 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                 showMessage(it.message, true)
             }
         })
-
         mViewModel.markFavouriteResponse.observe(viewLifecycleOwner, Observer {
-
             if (it.status) {
                 showMessage(it.message, true)
             } else {
                 showMessage(it.message, true)
             }
         })
-
-
     }
-
     private fun setUpGoogleAPIClient() {
-
         mGoogleApiClient = GoogleApiClient.Builder(requireActivity())
             .addApi(LocationServices.API)
             .addConnectionCallbacks(this)
             .addOnConnectionFailedListener(this).build()
         mGoogleApiClient.connect()
     }
-
-
     private fun getNearByWifiList() {
-
         val getHotSpotRequest: GetHotSpotRequest = GetHotSpotRequest(
             19.1403509,
             72.8096671, "", true
         )
-
         mViewModel.getHotSpotResponse(getHotSpotRequest)
-
-
     }
-
     override fun onMapReady(map: GoogleMap) {
         this.map = map
         setUpClickListener()
@@ -163,21 +126,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         // Get the current location of the device and set the position of the map.
         getDeviceLocation()
     }
-
     private fun setUpClickListener() {
-
         this.map?.setOnMapClickListener(OnMapClickListener {
             mBinding.customPop.cvMainLayout.visibility = View.GONE
         })
-
 //        Searchbar
         mBinding.toolbarLayout.etSearchBar.setOnClickListener {
             replaceFragment(SearchListFragment(), true)
         }
     }
-
     private fun getDeviceLocation() {
-
         try {
             if (locationPermissionGranted) {
                 val locationResult = fusedLocationProviderClient.lastLocation
@@ -186,8 +144,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                         // Set the map's camera position to the current location of the device.
                         lastKnownLocation = task.result
                         if (lastKnownLocation != null) {
-
-
                             if (checkLocSaveState()) {
                                 map?.moveCamera(
                                     CameraUpdateFactory.newLatLngZoom(
@@ -206,7 +162,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                                         ), HomeFragment.DEFAULT_ZOOM.toFloat()
                                     )
                                 )
-
                             }
                             getNearByWifiList()
                         }
@@ -216,7 +171,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                                 .newLatLngZoom(defaultLocation, HomeFragment.DEFAULT_ZOOM.toFloat())
                         )
                         map?.uiSettings?.isMyLocationButtonEnabled = false
-
                     }
                 }
             }
@@ -224,22 +178,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             Log.e("Exception: %s", e.message, e)
         }
     }
-
-
     private fun setupClusters() {
         mClusterManager = ClusterManager(activity, map)
-
         mClusterManager.setOnClusterClickListener(this);
         mClusterManager.setOnClusterItemClickListener(this);
         mClusterManager.setOnClusterItemInfoWindowClickListener(this);
-
         map?.setOnCameraIdleListener(mClusterManager)
         map?.setOnMarkerClickListener(mClusterManager)
-
         val renderer = ClusterItemRenderer(requireActivity(), map, mClusterManager)
         mClusterManager.renderer = renderer
     }
-
     private fun updateLocationUI() {
         if (map == null) {
             return
@@ -257,44 +205,32 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             Log.e("Exception: %s", e.message, e)
         }
     }
-
-
     override fun onClusterClick(cluster: Cluster<MyClusterItems>?): Boolean {
-
         return true
     }
-
     override fun onClusterInfoWindowClick(cluster: Cluster<MyClusterItems>?) {
         //TODO
     }
-
     /* In this method  1. Showing  Custom Pop up window  along with toggle the mark as favourite option*/
     override fun onClusterItemClick(item: MyClusterItems?): Boolean {
-
         clickedVenueMarker = item;
-
         //Main cardview Layout
         mBinding.customPop.cvMainLayout.visibility = View.VISIBLE
-
         //Wifi Ssid
         mBinding.customPop.tvWifiSsid.text = clickedVenueMarker?.title
         mBinding.customPop.tvServiceProvider.text = clickedVenueMarker?.mNavigateURL
         mBinding.customPop.tvLocation.text = clickedVenueMarker?.mAddress
-
         if (clickedVenueMarker?.mIsFavourite == true) {
             mBinding.customPop.ivFavourites.setImageResource(R.drawable.ic_favorite_filled_red)
         } else {
             mBinding.customPop.ivFavourites.setImageResource(R.drawable.ic_favorite_filled_gray)
         }
-
         //Favourite
         mBinding.customPop.ivFavourites.setOnClickListener {
             val imgID1: Drawable.ConstantState? =
                 requireContext().getDrawable(R.drawable.ic_favorite_filled_gray)?.getConstantState()
-
             val imgID2: Drawable.ConstantState? =
                 mBinding.customPop.ivFavourites.getDrawable().getConstantState()
-
             if (imgID1 == imgID2) {
                 mBinding.customPop.ivFavourites.setImageResource(R.drawable.ic_favorite_filled_red)
                 favouriteType = true
@@ -302,24 +238,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                 mBinding.customPop.ivFavourites.setImageResource(R.drawable.ic_favorite_filled_gray)
                 favouriteType = false
             }
-
             val markFavouriteRequest: MarkFavouriteRequest =
                 MarkFavouriteRequest(clickedVenueMarker!!.mItemID)
-
             mViewModel.markFavouriteItem(markFavouriteRequest, favouriteType)
-
         }
-
         //Navigate Now
         mBinding.customPop.btnNavigateNow.setOnClickListener {
             val url = clickedVenueMarker?.snippet
-
             val i = Intent(Intent.ACTION_VIEW)
             i.data = Uri.parse(url)
             startActivity(i)
-
         }
-
         mBinding.customPop.btnRateNow.setOnClickListener {
             val wifiProvideer: String = clickedVenueMarker?.title!!
             replaceFragment(
@@ -332,9 +261,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                 addToBackStack = true
             )
         }
-
         mBinding.customPop.ivFlag.setOnClickListener {
-
             val wifiProvideer: String = clickedVenueMarker?.title!!
             replaceFragment(
                 RaiseComplaintFragment.newInstance(
@@ -345,11 +272,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                 ), true
             )
         }
-
-
         return false
     }
-
     /**
      * Method to add items in clusters
      */
@@ -366,29 +290,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                     location.id,
                     location.location
                 )
-
             mClusterManager.addItem(offsetItems)
         }
     }
-
     override fun onClusterItemInfoWindowClick(item: MyClusterItems?) {
-
         //TODO
-
     }
-
     companion object {
         private val TAG = HomeFragment::class.java.simpleName
         private const val DEFAULT_ZOOM = 12
-
     }
-
-
     class ClusterItemRenderer(
         context: Context, map: GoogleMap?,
         clusterManager: ClusterManager<MyClusterItems>
     ) : DefaultClusterRenderer<MyClusterItems>(context, map, clusterManager) {
-
         override fun onBeforeClusterItemRendered(
             item: MyClusterItems,
             markerOptions: MarkerOptions
@@ -397,17 +312,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                 BitmapDescriptorFactory.fromResource(R.drawable.ic_wifi_signal)
             markerOptions.icon(icon)
         }
-
         override fun onClusterItemUpdated(item: MyClusterItems, marker: Marker) {
             val icon: BitmapDescriptor =
                 BitmapDescriptorFactory.fromResource(R.drawable.ic_wifi_signal)
             marker.setIcon(icon)
         }
     }
-
-
     override fun onConnected(p0: Bundle?) {
-
         mGoogleApiClient = GoogleApiClient.Builder(requireActivity())
             .addApi(LocationServices.API).build()
         mGoogleApiClient!!.connect()
@@ -415,11 +326,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         mLocationRequest!!.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         mLocationRequest!!.interval = 30 * 1000.toLong()
         mLocationRequest!!.fastestInterval = 5 * 1000.toLong()
-
         val builder = LocationSettingsRequest.Builder()
             .addLocationRequest(mLocationRequest!!)
         builder.setAlwaysShow(true)
-
         result =
             LocationServices.SettingsApi.checkLocationSettings(mGoogleApiClient, builder.build())
         result!!.setResultCallback { result ->
@@ -430,7 +339,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                 }
                 LocationSettingsStatusCodes.RESOLUTION_REQUIRED ->
                     try {
-
                         status.startResolutionForResult(requireActivity(), REQUEST_LOCATION)
                     } catch (e: IntentSender.SendIntentException) {
                     }
@@ -440,27 +348,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             }
         }
     }
-
     override fun onConnectionSuspended(p0: Int) {
         TODO("Not yet implemented")
     }
-
     override fun onConnectionFailed(p0: ConnectionResult) {
         TODO("Not yet implemented")
     }
-
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         Log.d("onActivityResult()", Integer.toString(resultCode))
         when (requestCode) {
             REQUEST_LOCATION -> when (resultCode) {
                 Activity.RESULT_OK -> {
-
                     Log.d("location", "Location enabled")
                 }
                 Activity.RESULT_CANCELED -> {
-
                     Log.d("location", "Location not enabled, user canceled")
                 }
                 else -> {

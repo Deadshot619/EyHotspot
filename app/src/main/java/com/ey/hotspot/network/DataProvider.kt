@@ -157,10 +157,7 @@ object DataProvider : RemoteDataProvider {
         error: (Exception) -> Unit
     ) {
         try {
-            val result = mServices.getUserHotSpot(
-
-                request
-            ).await()
+            val result = mServices.getUserHotSpot(request).await()
             success(result)
         } catch (e: Exception) {
             error(e)
