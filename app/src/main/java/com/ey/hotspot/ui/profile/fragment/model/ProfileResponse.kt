@@ -5,17 +5,17 @@ import com.google.gson.annotations.SerializedName
 data class ProfileResponse(
     @SerializedName("id") val id: Int,
     @SerializedName("prefix") val prefix: String,
-    @SerializedName("firstname") val firstname: String,
+    @SerializedName("firstname") val firstname: String? = "",
     @SerializedName("firstname_arabic") val firstname_arabic: String,
-    @SerializedName("lastname") val lastname: String,
+    @SerializedName("lastname") val lastname: String? = "",
     @SerializedName("lastname_arabic") val lastname_arabic: String,
-    @SerializedName("email") val email: String,
+    @SerializedName("email") val email: String?="",
     @SerializedName("email_verification_key") val email_verification_email_verification_key: String,
     @SerializedName("verified") val verified: Int,
     @SerializedName("email_verified_at") val email_verified_at: String,
     @SerializedName("is_email_verified") val is_email_verified: String,
     @SerializedName("country_code") val country_code: Int?,
-    @SerializedName("mobile_no") val mobile_no: String = "",
+    @SerializedName("mobile_no") val mobile_no: String? = "",
     @SerializedName("otp") val otp: String,
     @SerializedName("is_mobile_verified") val is_mobile_verified: String,
     @SerializedName("mobile_verified_at") val mobile_verified_at: String,
@@ -40,6 +40,5 @@ data class ProfileResponse(
     @SerializedName("created_at") val created_at: String,
     @SerializedName("updated_at") val updated_at: String,
     @SerializedName("deleted_at") val deleted_at: String
-
 ) {
 }

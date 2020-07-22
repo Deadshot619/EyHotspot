@@ -9,17 +9,16 @@ interface Constants {
         const val ARABIC_LANG: String = "ar"
 
         //Intent
-        const val AUTHENTICATION_FAILED =
-            "authentication_failed"   //used when user's authticaition is failed while refreshing token
+        const val AUTHENTICATION_FAILED = "authentication_failed"   //used when user's authticaition is failed while refreshing token
 
         //SharedPreference
         const val ACCESS_TOKEN: String = "access_token"
         const val APP_LOGGED_IN: String = "app_logged_in"
         const val USER_DATA = "user_data"
         const val ENABLED_GPS_LOCATION: String = "GPS_LOCATION"
-        const val REGISTRATION_TMP_TOKEN="registration_token"
+        const val REGISTRATION_TMP_TOKEN = "registration_token"
         const val SKIP_STATUS = "skip_status"
-        const val VERIFY_FORGOT_PASSWORD="verify_forgot_password"
+        const val VERIFY_FORGOT_PASSWORD = "verify_forgot_password"
 
         //APIS
 
@@ -43,10 +42,10 @@ interface Constants {
         const val API_FAVOURITE_LIST = "getFavourites"
         const val API_ADD_REVIEW = "addReview"
         const val API_ADD_COMPLAINT = "addComplaint"
-        const val API_SEND_OTP="sendOTP"
-        const val API_VERIFY_OTP="verifyOTP"
-        const val  API_FORGOT_PASSWORD="forgotPassword"
-        const val  API_FORGOT_PASSWORD_VERIFY_OTP="forgotPassword/verifyOtp"
+        const val API_SEND_OTP = "sendOTP"
+        const val API_VERIFY_OTP = "verifyOTP"
+        const val API_FORGOT_PASSWORD = "forgotPassword"
+        const val API_FORGOT_PASSWORD_VERIFY_OTP = "forgotPassword/verifyOtp"
 
         //GET
         const val UNAUTHORIZED = "unauthorized"
