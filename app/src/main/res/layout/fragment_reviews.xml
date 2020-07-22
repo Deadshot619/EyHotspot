@@ -23,6 +23,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <!--    Add button  -->
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_add"
+            android:src="@drawable/ic_round_add_24"
+            android:elevation="10dp"
+            android:layout_marginEnd="@dimen/common_margin"
+            android:tint="?android:attr/colorPrimary"
+            android:padding="@dimen/common_padding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/toolbarLayout"
+            app:layout_constraintBottom_toBottomOf="@id/toolbarLayout"
+            app:layout_constraintEnd_toEndOf="@id/toolbarLayout"/>
 
         <!--Wifi Name-->
         <TextView
@@ -33,7 +46,7 @@
             android:layout_marginTop="@dimen/common_margin"
             android:layout_marginStart="@dimen/common_margin"
             android:layout_marginEnd="@dimen/common_margin"
-            android:text=""
+            android:text="@{viewModel.rateWifiData.wifiSsid}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbarLayout"
@@ -45,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="AmazeNet"
-            android:text=""
+            android:text="@{viewModel.rateWifiData.wifiProvider}"
             android:textAllCaps="false"
             style="@style/ChipStyleTextView"
             app:layout_constraintTop_toBottomOf="@id/tv_wifi_name"
@@ -60,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/common_margin"
             android:layout_marginEnd="@dimen/common_margin"
-            android:text=""
+            android:text="@{viewModel.rateWifiData.wifiLocation}"
             android:textAllCaps="false"
             app:layout_constraintStart_toEndOf="@id/tv_wifi_provider"
             app:layout_constraintTop_toTopOf="@id/tv_wifi_provider"
@@ -74,11 +87,25 @@
             android:layout_height="0dp"
             tools:listitem="@layout/item_reviews"
             tools:itemCount="3"
+            app:listLocationReviewList="@{viewModel.reviewListResponse.data}"
             android:layout_marginTop="@dimen/common_margin"
             app:layout_constraintTop_toBottomOf="@id/tv_wifi_provider"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!--        Empty List Error Text-->
+        <TextView
+            android:id="@+id/tv_empty_list_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:bindShowTextViewListEmpty="@{viewModel.reviewListResponse.data}"
+            app:bindShowEmptyListMessage="@{viewModel.reviewListResponse.message}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

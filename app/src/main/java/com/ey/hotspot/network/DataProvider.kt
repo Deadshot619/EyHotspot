@@ -236,6 +236,23 @@ object DataProvider : RemoteDataProvider {
         }
     }
 
+    //Reviews
+    override suspend fun getLocationReviews(
+        request: GetLocationReviewsRequest,
+        success: (BaseResponse<List<ReviewsList>>) -> Unit,
+        error: (Exception) -> Unit
+    ) {
+        withContext(Dispatchers.Main) {
+            try {
+                val result = mServices.getLocationReviewsAsync(request).await()
+                success(result)
+            } catch (e: Exception) {
+                error(e)
+            }
+        }
+    }
+
+
     override suspend fun getComplaintsIssuesTypes(
         success: (BaseResponse<ComplaintIssuesTypes>) -> Unit,
         error: (Exception) -> Unit

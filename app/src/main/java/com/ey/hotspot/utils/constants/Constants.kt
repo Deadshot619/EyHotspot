@@ -46,6 +46,7 @@ interface Constants {
         const val API_VERIFY_OTP = "verifyOTP"
         const val API_FORGOT_PASSWORD = "forgotPassword"
         const val API_FORGOT_PASSWORD_VERIFY_OTP = "forgotPassword/verifyOtp"
+        const val API_LOCATION_REVIEWS = "getLocationReviews"
 
         //GET
         const val UNAUTHORIZED = "unauthorized"
