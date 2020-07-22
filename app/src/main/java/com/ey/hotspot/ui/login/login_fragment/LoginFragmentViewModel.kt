@@ -53,7 +53,8 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
 
                     } else {
                         setDialogVisibility(false)
-                        _loginError.value = Event(it.data)
+//                        _loginError.value = Event(it.data)
+                        showToastFromViewModel(it.message)
                     }
 
 

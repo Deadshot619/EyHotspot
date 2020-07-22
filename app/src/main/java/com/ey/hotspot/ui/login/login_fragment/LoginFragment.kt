@@ -13,6 +13,7 @@ import com.ey.hotspot.ui.home.BottomNavHomeActivity
 import com.ey.hotspot.ui.login.forgorpassword.ForgotPasswordFragment
 import com.ey.hotspot.ui.registration.register_user.RegisterUserFragment
 import com.ey.hotspot.utils.captcha.TextCaptcha
+import com.ey.hotspot.utils.constants.convertStringFromList
 import com.ey.hotspot.utils.dialogs.OkDialog
 import com.ey.hotspot.utils.replaceFragment
 import com.ey.hotspot.utils.showMessage
@@ -104,8 +105,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
         //Login Error
         mViewModel.loginError.observe(viewLifecycleOwner, Observer {
-            it.getContentIfNotHandled()?.let {
-                dialog.setViews(/*   input error variables   */)
+            it.getContentIfNotHandled()?.let {response ->
+                dialog.setViews(convertStringFromList(response.email, response.password))
                 dialog.show()
             }
         })
