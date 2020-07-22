@@ -24,10 +24,25 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@{data.location_name}"
+            android:layout_marginEnd="@dimen/common_margin"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tv_date"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Starbucks WiFi" />
+
+        <!--    Date    -->
+        <TextView
+            android:id="@+id/tv_date"
+            style="@style/TextAppearance.MaterialComponents.Subtitle2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/common_margin"
+            app:bindExtractDateFromDateTime="@{data.created_at}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_wifi_name"
+            app:layout_constraintBottom_toBottomOf="@id/tv_wifi_name"
+            tools:text="Riyadh" />
 
 <!--        Wifi Provider-->
         <TextView
@@ -36,6 +51,7 @@
             android:layout_height="wrap_content"
             tools:text="AmazeNet"
             android:text="@{data.provider_name}"
+            android:textAllCaps="false"
             style="@style/ChipStyleTextView"
             app:layout_constraintTop_toBottomOf="@id/tv_wifi_name"
             app:layout_constraintStart_toStartOf="@id/tv_wifi_name"
@@ -45,14 +61,31 @@
         <TextView
             android:id="@+id/tv_location"
             style="@style/TextAppearance.MaterialComponents.Subtitle2"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/common_margin"
             android:text="@{data.location}"
-            android:textAllCaps="true"
+            android:textAllCaps="false"
             app:layout_constraintStart_toEndOf="@id/tv_wifi_provider"
             app:layout_constraintTop_toTopOf="@id/tv_wifi_provider"
+            app:layout_constraintBottom_toBottomOf="@id/tv_wifi_provider"
             tools:text="Riyadh" />
+
+        <!--Rating Bar-->
+        <androidx.appcompat.widget.AppCompatRatingBar
+            android:id="@+id/rating_bar"
+            style="@style/GradientRatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="1"
+            android:scaleY="1"
+            android:layout_marginTop="@dimen/common_margin_8"
+            android:rating="@{data.rating}"
+            android:stepSize="1"
+            tools:rating="3"
+            app:layout_constraintStart_toStartOf="@id/tv_wifi_provider"
+            app:layout_constraintTop_toBottomOf="@id/tv_wifi_provider" />
+
 
         <!--Review-->
         <TextView
@@ -64,7 +97,7 @@
             android:text="@{data.description}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_wifi_name"
-            app:layout_constraintTop_toBottomOf="@id/tv_location"
+            app:layout_constraintTop_toBottomOf="@id/rating_bar"
             tools:text="Osama Bin Laden" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

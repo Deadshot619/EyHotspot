@@ -45,3 +45,10 @@ fun bindShowTextViewListEmpty(textView: TextView, list: List<Any>?, value: Strin
         textView.visibility = View.GONE
     }
 }
+
+@BindingAdapter("bindExtractDateFromDateTime")
+fun bindExtractDateFromDateTime(textView: TextView, value: String?){
+    value?.let {
+        textView.text = it.substringBefore("T")
+    }
+}

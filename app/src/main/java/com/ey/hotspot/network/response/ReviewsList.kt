@@ -18,5 +18,5 @@ data class ReviewsList(
     @SerializedName("location_name_arabic") @Expose val location_name_arabic: String,
     @SerializedName("provider_name") @Expose val provider_name: String,
     @SerializedName("provider_name_arabic") @Expose val provider_name_arabic: String,
-    @SerializedName("rating") @Expose val rating: Int
+    @SerializedName("rating") @Expose val rating: Float
 )
