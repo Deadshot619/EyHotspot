@@ -13,16 +13,20 @@ import android.view.View
 import androidx.lifecycle.Observer
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
+import com.ey.hotspot.app_core_lib.CoreApp
+import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.FragmentHomeBinding
 import com.ey.hotspot.ui.favourite.model.MarkFavouriteRequest
 import com.ey.hotspot.ui.home.models.GetHotSpotRequest
 import com.ey.hotspot.ui.home.models.GetHotSpotResponse
 import com.ey.hotspot.ui.home.models.MyClusterItems
+import com.ey.hotspot.ui.login.LoginActivity
 import com.ey.hotspot.ui.review_and_complaint.reviews.ReviewsFragment
 import com.ey.hotspot.ui.search.searchlist.SearchListFragment
 import com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment
 import com.ey.hotspot.utils.*
 import com.ey.hotspot.utils.constants.setUpSearchBar
+import com.ey.hotspot.utils.dialogs.YesNoDialog
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.common.api.PendingResult
@@ -60,6 +64,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
     lateinit var mGoogleApiClient: GoogleApiClient
     var result: PendingResult<LocationSettingsResult>? = null
     val REQUEST_LOCATION = 199
+
+    private val dialog by lazy {
+        YesNoDialog(requireActivity()).apply {
+            setViews(
+                title = getString(R.string.login_required),
+                description = getString(R.string.need_to_login),
+                yes = {
+                    goToLoginScreen()
+                },
+                no = {
+                    this.dismiss()
+                })
+        }
+    }
+
+
     override fun getLayoutId() = R.layout.fragment_home
     override fun getViewModel() = HomeFragmentViewModel::class.java
     override fun onBinding() {
@@ -89,6 +109,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         myMAPF?.getMapAsync(this)
         setUpObservers()
     }
+
+
     private fun setUpObservers() {
         mViewModel.getHotSpotResponse.observe(viewLifecycleOwner, Observer {
             if (it.status) {
@@ -106,6 +128,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             }
         })
     }
+
     private fun setUpGoogleAPIClient() {
         mGoogleApiClient = GoogleApiClient.Builder(requireActivity())
             .addApi(LocationServices.API)
@@ -113,6 +136,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             .addOnConnectionFailedListener(this).build()
         mGoogleApiClient.connect()
     }
+
     private fun getNearByWifiList() {
         val getHotSpotRequest: GetHotSpotRequest = GetHotSpotRequest(
             19.1403509,
@@ -120,6 +144,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         )
         mViewModel.getHotSpotResponse(getHotSpotRequest)
     }
+
     override fun onMapReady(map: GoogleMap) {
         this.map = map
         setUpClickListener()
@@ -128,6 +153,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         // Get the current location of the device and set the position of the map.
         getDeviceLocation()
     }
+
     private fun setUpClickListener() {
         this.map?.setOnMapClickListener(OnMapClickListener {
             mBinding.customPop.cvMainLayout.visibility = View.GONE
@@ -216,8 +242,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
     /* In this method  1. Showing  Custom Pop up window  along with toggle the mark as favourite option*/
     override fun onClusterItemClick(item: MyClusterItems?): Boolean {
         clickedVenueMarker = item;
+
         //Main cardview Layout
         mBinding.customPop.cvMainLayout.visibility = View.VISIBLE
+
         //Wifi Ssid
         mBinding.customPop.tvWifiSsid.text = clickedVenueMarker?.title
         mBinding.customPop.tvServiceProvider.text = clickedVenueMarker?.mNavigateURL
@@ -227,52 +255,70 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         } else {
             mBinding.customPop.ivFavourites.setImageResource(R.drawable.ic_favorite_filled_gray)
         }
+
         //Favourite
         mBinding.customPop.ivFavourites.setOnClickListener {
-            val imgID1: Drawable.ConstantState? =
-                requireContext().getDrawable(R.drawable.ic_favorite_filled_gray)?.getConstantState()
-            val imgID2: Drawable.ConstantState? =
-                mBinding.customPop.ivFavourites.getDrawable().getConstantState()
-            if (imgID1 == imgID2) {
-                mBinding.customPop.ivFavourites.setImageResource(R.drawable.ic_favorite_filled_red)
-                favouriteType = true
+            if (HotSpotApp.prefs?.getAppLoggedInStatus()!!) {
+
+                val imgID1: Drawable.ConstantState? =
+                    requireContext().getDrawable(R.drawable.ic_favorite_filled_gray)
+                        ?.getConstantState()
+                val imgID2: Drawable.ConstantState? =
+                    mBinding.customPop.ivFavourites.getDrawable().getConstantState()
+                if (imgID1 == imgID2) {
+                    mBinding.customPop.ivFavourites.setImageResource(R.drawable.ic_favorite_filled_red)
+                    favouriteType = true
+                } else {
+                    mBinding.customPop.ivFavourites.setImageResource(R.drawable.ic_favorite_filled_gray)
+                    favouriteType = false
+                }
+                val markFavouriteRequest: MarkFavouriteRequest =
+                    MarkFavouriteRequest(clickedVenueMarker!!.mItemID)
+                mViewModel.markFavouriteItem(markFavouriteRequest, favouriteType)
             } else {
-                mBinding.customPop.ivFavourites.setImageResource(R.drawable.ic_favorite_filled_gray)
-                favouriteType = false
+                dialog.show()
             }
-            val markFavouriteRequest: MarkFavouriteRequest =
-                MarkFavouriteRequest(clickedVenueMarker!!.mItemID)
-            mViewModel.markFavouriteItem(markFavouriteRequest, favouriteType)
         }
         //Navigate Now
         mBinding.customPop.btnNavigateNow.setOnClickListener {
-            val url = clickedVenueMarker?.snippet
-            val i = Intent(Intent.ACTION_VIEW)
-            i.data = Uri.parse(url)
-            startActivity(i)
+                val url = clickedVenueMarker?.snippet
+                val i = Intent(Intent.ACTION_VIEW)
+                i.data = Uri.parse(url)
+                startActivity(i)
         }
+
+        //Rate Now
         mBinding.customPop.btnRateNow.setOnClickListener {
-            val wifiProvideer: String = clickedVenueMarker?.title!!
-            replaceFragment(
-                fragment = ReviewsFragment.newInstance(
-                    locationId = clickedVenueMarker!!.mItemID,
-                    wifiSsid = clickedVenueMarker!!.mNavigateURL,
-                    wifiProvider = wifiProvideer,
-                    location = clickedVenueMarker!!.mAddress
-                ),
-                addToBackStack = true
-            )
+            if (HotSpotApp.prefs?.getAppLoggedInStatus()!!) {
+
+                val wifiProvideer: String = clickedVenueMarker?.title!!
+                replaceFragment(
+                    fragment = ReviewsFragment.newInstance(
+                        locationId = clickedVenueMarker!!.mItemID,
+                        wifiSsid = clickedVenueMarker!!.mNavigateURL,
+                        wifiProvider = wifiProvideer,
+                        location = clickedVenueMarker!!.mAddress
+                    ),
+                    addToBackStack = true
+                )
+            } else
+                dialog.show()
         }
+
+        //Report
         mBinding.customPop.ivFlag.setOnClickListener {
-            val wifiProvideer: String = clickedVenueMarker?.title!!
-            replaceFragment(
-                RaiseComplaintFragment.newInstance(
-                    locationId = clickedVenueMarker!!.mItemID,
-                    wifiSsid = clickedVenueMarker!!.mNavigateURL,
-                    wifiProvider = wifiProvideer,
-                    location = clickedVenueMarker!!.mAddress
-                ), true
-            )
+            if (HotSpotApp.prefs?.getAppLoggedInStatus()!!) {
+
+                val wifiProvideer: String = clickedVenueMarker?.title!!
+                replaceFragment(
+                    RaiseComplaintFragment.newInstance(
+                        locationId = clickedVenueMarker!!.mItemID,
+                        wifiSsid = clickedVenueMarker!!.mNavigateURL,
+                        wifiProvider = wifiProvideer,
+                        location = clickedVenueMarker!!.mAddress
+                    ), true
+                )
+            } else dialog.show()
         }
         return false
     }
@@ -371,5 +417,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                 }
             }
         }
+    }
+
+    private fun goToLoginScreen() {
+        //Clear Data
+        HotSpotApp.prefs?.clearSharedPrefData()
+
+        //Redirect user to Login Activity
+        CoreApp.instance.startActivity(Intent(CoreApp.instance, LoginActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+        })
     }
 }

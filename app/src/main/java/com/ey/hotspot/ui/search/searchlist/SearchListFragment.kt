@@ -22,10 +22,9 @@ class SearchListFragment : BaseFragment<SearchListFragmentBinding, SearchListVie
 
     private val dialog by lazy {
         YesNoDialog(requireActivity()).apply {
-            //TODO 17/07/2020 : Extract String resources
             setViews(
-                title = "Login Required",
-                description = "You need to login to access this feature",
+                title = getString(R.string.login_required),
+                description = getString(R.string.need_to_login),
                 yes = {
                     goToLoginScreen()
                 },
