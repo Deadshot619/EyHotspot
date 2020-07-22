@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 class ChangePasswordViewModel(application: Application) : BaseViewModel(application) {
 
 
-    var emailId: String = ""
+    var emailId: String? = ""
     var password: String = ""
     var confirmPassword: String = ""
 

@@ -20,6 +20,7 @@ interface Constants {
         const val REGISTRATION_TMP_TOKEN="registration_token"
         const val SKIP_STATUS = "skip_status"
         const val VERIFY_FORGOT_PASSWORD="verify_forgot_password"
+        const val FORGOT_PASSWORD_FIELD="forgot_password_field"
 
         //APIS
 

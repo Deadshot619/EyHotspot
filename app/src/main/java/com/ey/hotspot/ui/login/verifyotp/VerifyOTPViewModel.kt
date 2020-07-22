@@ -15,7 +15,6 @@ import kotlinx.coroutines.launch
 class VerifyOTPViewModel(application: Application) : BaseViewModel(application) {
 
 
-
     private val _forgotPasswordVerifyOTPResponse =
         MutableLiveData<BaseResponse<ForgotPasswordVerifyOTPResponse>>()
     val forgotPasswordVerifyOTPResponse: LiveData<BaseResponse<ForgotPasswordVerifyOTPResponse>>
@@ -25,7 +24,6 @@ class VerifyOTPViewModel(application: Application) : BaseViewModel(application) 
     private val _resendOTPResponse = MutableLiveData<BaseResponse<ResendForgotPasswordOTP>>()
     val resendOTPResponse: LiveData<BaseResponse<ResendForgotPasswordOTP>>
         get() = _resendOTPResponse
-
 
 
     fun verifyForgotPasswordOTP(forgotPasswordVerifyOTPRequest: ForgotPasswordVerifyOTPRequest) {
@@ -38,9 +36,6 @@ class VerifyOTPViewModel(application: Application) : BaseViewModel(application) 
                 success = {
 
                     _forgotPasswordVerifyOTPResponse.value = it
-                    if (it.status == true) {
-                        saveVerifyForgotPassswordTokenInSharedPreference(it.data.tmpToken)
-                    }
                     setDialogVisibility(false)
                 }, error = {
                     checkError(it)
@@ -51,12 +46,13 @@ class VerifyOTPViewModel(application: Application) : BaseViewModel(application) 
     }
 
 
-    fun resendForgotPasswordOTP() {
+    fun resendForgotPasswordOTP(forgotPasswordResendOTPRequest: ForgotPasswordResendOTPRequest) {
 
         setDialogVisibility(true)
         coroutineScope.launch {
 
             DataProvider.resendForgotPasswordOTP(
+                request = forgotPasswordResendOTPRequest,
                 success = {
 
                     setDialogVisibility(false)
@@ -68,12 +64,5 @@ class VerifyOTPViewModel(application: Application) : BaseViewModel(application) 
         }
     }
 
-
-
-    private fun saveVerifyForgotPassswordTokenInSharedPreference(tempToken: String) {
-
-        HotSpotApp.prefs!!.setVerifyForgotPasswordToken(tempToken)
-        Log.d("VerifyForgotPassword", tempToken)
-    }
 
 }

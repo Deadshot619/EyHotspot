@@ -1,5 +1,6 @@
 package com.ey.hotspot.ui.login.changepassword
 
+import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
@@ -35,7 +36,15 @@ class ChangePasswordFragment :
     }
 
     companion object {
-        fun newInstance() = ChangePasswordFragment()
+        fun newInstance(otp: String) = ChangePasswordFragment().apply {
+
+            arguments = Bundle().apply {
+
+                putString(mOTP, otp)
+            }
+        }
+
+        public const val mOTP = "mOTP"
     }
 
 
@@ -67,13 +76,14 @@ class ChangePasswordFragment :
     private fun setUpDataViews() {
 
 
+        mViewModel.emailId = HotSpotApp.prefs!!.getForgotPasswordField()
+
     }
 
     private fun setUpObserver() {
         mViewModel.resetPassworResponse.observe(viewLifecycleOwner, Observer {
 
             if (it.status == true) {
-
                 replaceFragment(
                     fragment = LoginFragment.newInstance(),
                     addToBackStack = true,
@@ -122,6 +132,11 @@ class ChangePasswordFragment :
 
         }
 
+        if (convertedObject.has("otp")) {
+            stringBuilder.append(convertedObject.getAsJsonArray("otp").get(0))
+
+        }
+
         return stringBuilder;
 
     }
@@ -139,7 +154,10 @@ class ChangePasswordFragment :
                         mViewModel.emailId,
                         mViewModel.password,
                         mViewModel.confirmPassword,
-                        HotSpotApp.prefs!!.getVerifyForgotPasswordToken()
+                        HotSpotApp.prefs!!.getRegistrationTempToken(),
+                        arguments?.getString(
+                            mOTP
+                        ) ?: ""
                     )
 
                     mViewModel.callResetPassworAPI(resetPasswordRequest)
@@ -160,7 +178,7 @@ class ChangePasswordFragment :
 
 
 
-        if (!mViewModel.emailId.isEmailValid()) {
+        if (!mViewModel.emailId!!.isEmailValid()) {
             mBinding.edtEmail.error = resources.getString(R.string.invalid_email_label)
             emailId = false
         } else {

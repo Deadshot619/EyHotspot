@@ -74,7 +74,7 @@
     <string name="submit_button">Submit</string>
     <string name="forgotpassword">Forgot Password?</string>
     <string name="email_id_hint">Enter Email Id</string>
-    <string name="enter_password">Enter the Password</string>
+    <string name="enter_password">Enter  Password</string>
     <string name="enter_captcha">Enter Captcha</string>
     <string name="login_credentials_msg">Login to the portal with your credentials</string>
     <string name="connecting_kingdom_label">Connecting the \n Kingdom of Saudi Arabia…!</string>
@@ -213,15 +213,17 @@
     <string name="enter_valid_otp">Enter the valid otp</string>
     <string name="invalid_confirm_password">Invalid Confirm Password</string>
     <string name="pwd_confirm_pwd_empty"><![CDATA[Password & Confirm Password field should not be empty]]></string>
-    <string name="email_id_mobil_no">Email Id /Mobile No</string>
-    <string name="enter_email_mobile">Enter Your Email Id/Mobile No</string>
+    <string name="email_id_mobil_no">Email Id /Mobile Number</string>
+    <string name="enter_email_mobile">Enter Email Id or Mobile Number</string>
     <string name="send_otp">SEND OTP</string>
     <string name="verify_otp">VERIFY  OTP</string>
     <string name="btnResendOTP">RESEND OTP</string>
     <string name="verify_account">Verify Account</string>
-    <string name="secure_password">Please create a secure password for your login credentials.</string>
+    <string name="secure_password">Create New Password</string>
     <string name="password_reset_label">Reset Password</string>
     <string name="enter_email_or_password">Enter  email id or  mobile no</string>
+    <string name="sign_in_issue">HAVING  TROUBLE SIGINING  IN?</string>
+    <string name="reenter_confirm_password">Re-enter Password</string>
 
 
     <!--Demo issue type string-->

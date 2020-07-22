@@ -211,7 +211,9 @@
     <string name="verify_otp">تحقق OTP</string>
     <string name="btnResendOTP">إعادة إرسال OTP</string>
     <string name="verify_account">التحقق من الحساب</string>
-    <string name="secure_password">يرجى إنشاء كلمة مرور آمنة لبيانات اعتماد تسجيل الدخول الخاصة بك.</string>
+    <string name="secure_password">إنشاء كلمة مرور جديدة</string>
     <string name="password_reset_label">إعادة تعيين كلمة المرور</string>
     <string name="enter_email_or_password">أدخل معرف البريد الإلكتروني أو رقم الجوال</string>
+    <string name="sign_in_issue">هل تواجه مشاكل في التوقيع؟</string>
+    <string name="reenter_confirm_password">اعادة ادخال كلمة السر</string>
 </resources>

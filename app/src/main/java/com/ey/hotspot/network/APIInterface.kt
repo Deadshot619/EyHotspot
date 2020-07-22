@@ -135,7 +135,7 @@ interface APIInterface {
 
     @POST(Constants.API_RESEND_FORGOT_PASSWORD_OTP + "/" + "{id}")
     fun resendForgotPasswordOTP(
-        @Path("id") id: String?
+        @Path("id") id: String?,@Body forgotPasswordResendOTPRequest: ForgotPasswordResendOTPRequest
     ): Deferred<BaseResponse<ResendForgotPasswordOTP>>
 
     @GET(Constants.API_GET_COUNTRY_CODE_NAME)

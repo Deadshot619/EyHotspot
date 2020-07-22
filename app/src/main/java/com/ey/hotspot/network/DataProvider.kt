@@ -373,7 +373,7 @@ object DataProvider : RemoteDataProvider {
         try {
 
             val result = mServices.resetPassword(
-                HotSpotApp.prefs!!.getVerifyForgotPasswordToken(), request
+                HotSpotApp.prefs!!.getRegistrationTempToken(), request
             ).await()
 
             success(result)
@@ -383,13 +383,14 @@ object DataProvider : RemoteDataProvider {
     }
 
     override suspend fun resendForgotPasswordOTP(
+        request:ForgotPasswordResendOTPRequest,
         success: (BaseResponse<ResendForgotPasswordOTP>) -> Unit,
         error: (Exception) -> Unit
     ) {
 
         try {
             val result = mServices.resendForgotPasswordOTP(
-                HotSpotApp.prefs!!.getVerifyForgotPasswordToken()
+                HotSpotApp.prefs!!.getRegistrationTempToken(),request
             ).await()
 
             success(result)

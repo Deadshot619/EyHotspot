@@ -8,6 +8,7 @@ import com.ey.hotspot.utils.constants.Constants.Companion.ACCESS_TOKEN
 import com.ey.hotspot.utils.constants.Constants.Companion.APP_LOGGED_IN
 import com.ey.hotspot.utils.constants.Constants.Companion.DELEGATE_ENGLISH_LANG
 import com.ey.hotspot.utils.constants.Constants.Companion.ENABLED_GPS_LOCATION
+import com.ey.hotspot.utils.constants.Constants.Companion.FORGOT_PASSWORD_FIELD
 import com.ey.hotspot.utils.constants.Constants.Companion.LANGUAGE_SELECTED
 import com.ey.hotspot.utils.constants.Constants.Companion.REGISTRATION_TMP_TOKEN
 import com.ey.hotspot.utils.constants.Constants.Companion.SKIP_STATUS
@@ -111,15 +112,14 @@ class MyHotSpotSharedPreference(context: Context) {
 
     }
 
-    fun setVerifyForgotPasswordToken(token: String) {
-        CoreApp.sharedPreferences.edit().putString(VERIFY_FORGOT_PASSWORD, token).apply()
 
+
+    fun setForgotPasswordField(field: String) {
+        CoreApp.sharedPreferences.edit().putString(FORGOT_PASSWORD_FIELD, field).apply()
     }
 
-    fun getVerifyForgotPasswordToken(): String? {
-        return CoreApp.sharedPreferences.getString(VERIFY_FORGOT_PASSWORD, "")
-
-
+    fun getForgotPasswordField(): String? {
+        return CoreApp.sharedPreferences.getString(FORGOT_PASSWORD_FIELD, "")
     }
 
     /**

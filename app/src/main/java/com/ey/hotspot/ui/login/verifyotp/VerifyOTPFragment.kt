@@ -4,19 +4,34 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
+import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.VerifyOtpFragmentBinding
 import com.ey.hotspot.ui.login.changepassword.ChangePasswordFragment
 import com.ey.hotspot.ui.login.otpverification.fragment.OTPVerificationFragment
 import com.ey.hotspot.ui.login.otpverification.fragment.model.VerifyOTPRequest
-import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordRequest
-import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordVerifyOTPRequest
+import com.ey.hotspot.ui.login.verifyotp.model.*
 import com.ey.hotspot.ui.registration.email_verification.EmailVerificationFragment
+import com.ey.hotspot.utils.dialogs.OkDialog
 import com.ey.hotspot.utils.replaceFragment
 import com.ey.hotspot.utils.showMessage
+import com.google.gson.Gson
+import com.google.gson.JsonObject
 
 class VerifyOTPFragment :
     BaseFragment<VerifyOtpFragmentBinding, VerifyOTPViewModel>() {
 
+    //Create 'OK' Dialog
+    val dialog by lazy {
+        OkDialog(requireContext()).apply {
+            setViews(
+                title = "",
+                okBtn = {
+                    this.dismiss()
+                }
+            )
+        }
+    }
+    lateinit var otp: String
 
     companion object {
         fun newInstance(inputData: String) = VerifyOTPFragment().apply {
@@ -66,7 +81,7 @@ class VerifyOTPFragment :
 
     private fun setUpListener() {
 
-        var otp: String = ""
+
         mBinding.otpView.setOtpCompletionListener {
             otp = it
 
@@ -76,7 +91,10 @@ class VerifyOTPFragment :
 
             if (!(otp.isEmpty()) && (otp.length == 4)) {
                 val verifyOTPRequest: ForgotPasswordVerifyOTPRequest =
-                    ForgotPasswordVerifyOTPRequest(otp.toInt())
+                    ForgotPasswordVerifyOTPRequest(
+                        otp.toInt(),
+                        HotSpotApp.prefs!!.getForgotPasswordField()
+                    )
                 mViewModel.verifyForgotPasswordOTP(verifyOTPRequest)
             } else {
                 showMessage(requireActivity().getString(R.string.enter_valid_otp))
@@ -87,8 +105,12 @@ class VerifyOTPFragment :
 
         mBinding.btResendOTP.setOnClickListener {
 
-           
-            mViewModel.resendForgotPasswordOTP()
+            val forgotPasswordResendOTPRequest: ForgotPasswordResendOTPRequest =
+                ForgotPasswordResendOTPRequest(
+                    HotSpotApp.prefs!!.getForgotPasswordField()
+
+                )
+            mViewModel.resendForgotPasswordOTP(forgotPasswordResendOTPRequest)
 
         }
 
@@ -104,26 +126,84 @@ class VerifyOTPFragment :
                 showMessage(it.message, true)
 
                 replaceFragment(
-                    fragment = ChangePasswordFragment.newInstance(),
-                    addToBackStack = true,
-                    bundle = null
+                    fragment = ChangePasswordFragment.newInstance(
+                        otp = otp
+                    ),
+                    addToBackStack = true
+
                 )
 
             } else {
-                showMessage(it.message, true)
+                try {
+                    dialog.setViews(
+                        fetchErrorResponseVerifyOTP(it.data).toString()
+                        , okBtn = {
+                            dialog.dismiss()
+                        }
+                    )
+                    dialog.show()
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
             }
 
         })
 
         mViewModel.resendOTPResponse.observe(viewLifecycleOwner, Observer {
 
-            if(it.status == true){
+            if (it.status == true) {
 
+                showMessage(it.message, true)
 
-            }else{
-                showMessage(it.message,true)
+            } else {
+                try {
+                    dialog.setViews(
+                        fetchErrorResponse(it.data).toString()
+                        , okBtn = {
+                            dialog.dismiss()
+                        }
+                    )
+                    dialog.show()
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
             }
         })
+    }
+
+    private fun fetchErrorResponseVerifyOTP(data: ForgotPasswordVerifyOTPResponse): StringBuilder {
+
+        val stringBuilder = StringBuilder()
+        val jsonStrinData = Gson().toJson(data)
+        val convertedObject: JsonObject =
+            Gson().fromJson(jsonStrinData, JsonObject::class.java)
+
+        if (convertedObject.has("otp")) {
+            stringBuilder.append(convertedObject.getAsJsonArray("otp").get(0))
+            stringBuilder.append("\n");
+        }
+
+        if (convertedObject.has("email")) {
+            stringBuilder.append(convertedObject.getAsJsonArray("email").get(0))
+            stringBuilder.append("\n");
+        }
+        return stringBuilder;
+    }
+
+    private fun fetchErrorResponse(data: ResendForgotPasswordOTP): StringBuilder {
+
+
+        val stringBuilder = StringBuilder()
+        val jsonStrinData = Gson().toJson(data)
+        val convertedObject: JsonObject =
+            Gson().fromJson(jsonStrinData, JsonObject::class.java)
+
+        if (convertedObject.has("email_mobile")) {
+            stringBuilder.append(convertedObject.getAsJsonArray("email_mobile").get(0))
+            stringBuilder.append("\n");
+        }
+        return stringBuilder;
+
     }
 
 

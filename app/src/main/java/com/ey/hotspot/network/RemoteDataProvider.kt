@@ -152,6 +152,7 @@ interface RemoteDataProvider {
     )
 
     suspend fun resendForgotPasswordOTP(
+        request:ForgotPasswordResendOTPRequest,
         success: (BaseResponse<ResendForgotPasswordOTP>) -> Unit,
         error: (Exception) -> Unit
     )

@@ -12,9 +12,9 @@ import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordRequest
 import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordResponse
 import kotlinx.coroutines.launch
 
-class ForgotPasswordViewModel (application: Application): BaseViewModel(application) {
+class ForgotPasswordViewModel(application: Application) : BaseViewModel(application) {
 
-    var mEmailIdOrPassword:String=""
+    var mEmailIdOrPassword: String = ""
 
 
     private val _forgotPasswordResponse = MutableLiveData<BaseResponse<ForgotPasswordResponse>>()
@@ -34,6 +34,7 @@ class ForgotPasswordViewModel (application: Application): BaseViewModel(applicat
                     _forgotPasswordResponse.value = it
                     if (it.status == true) {
                         saveForgotPassswordTokenInSharedPreference(it.data.forgotTempToken)
+                        saveForgotPasswordEmail(it.data.email)
                     }
                     setDialogVisibility(false)
                 }, error = {
@@ -51,4 +52,10 @@ class ForgotPasswordViewModel (application: Application): BaseViewModel(applicat
         Log.d("ForgotPasswordTOken", tempToken)
     }
 
+
+    private fun saveForgotPasswordEmail(email: String) {
+
+        HotSpotApp.prefs!!.setForgotPasswordField(email)
+
+    }
 }
