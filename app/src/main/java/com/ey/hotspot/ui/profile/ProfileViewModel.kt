@@ -8,6 +8,7 @@ import com.ey.hotspot.app_core_lib.BaseViewModel
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.network.DataProvider
 import com.ey.hotspot.network.response.BaseResponse
+import com.ey.hotspot.network.response.CoutryCode
 import com.ey.hotspot.ui.profile.fragment.model.ProfileDataModel
 import com.ey.hotspot.ui.profile.fragment.model.ProfileResponse
 import com.ey.hotspot.ui.profile.fragment.model.UpdateProfileRequest
@@ -23,8 +24,13 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
     val profileResponse: LiveData<Event<BaseResponse<ProfileResponse>>>
         get() = _profileResponse
 
+
+    private val _getCoutryCodeList = MutableLiveData<BaseResponse<CoutryCode>>()
+    val getCountryCodeList: LiveData<BaseResponse<CoutryCode>>
+        get() = _getCoutryCodeList
+
     init {
-        if(HotSpotApp.prefs?.getAppLoggedInStatus()!!)
+        if (HotSpotApp.prefs?.getAppLoggedInStatus()!!)
             getProfileDetails()
     }
 
@@ -32,7 +38,7 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
     //Method to retrieve Profile Details
     private fun getProfileDetails() {
         //Show dialog
-        setDialogVisibility(true,  appInstance.getString(R.string.retrieving_profile_details_label))
+        setDialogVisibility(true, appInstance.getString(R.string.retrieving_profile_details_label))
 
         coroutineScope.launch {
             DataProvider.getProfile(success = {
@@ -76,6 +82,24 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
                 }
             )
         }
+    }
+
+
+    fun getCountryCodeList() {
+        setDialogVisibility(true)
+        coroutineScope.launch {
+
+            DataProvider.getCountryCode(
+                success = {
+                    _getCoutryCodeList.value = it
+                    setDialogVisibility(false)
+                },
+                error = {
+                    checkError(it)
+                }
+            )
+        }
+
     }
 
 

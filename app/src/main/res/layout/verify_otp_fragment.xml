@@ -91,7 +91,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_10"
             android:gravity="center"
-            android:text="@string/otp_title"
             android:textDirection="locale"
             android:textStyle="normal"
             app:layout_constraintEnd_toEndOf="@id/guideline_right"

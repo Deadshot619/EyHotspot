@@ -35,6 +35,7 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
     val socialLoginResponse: LiveData<BaseResponse<LoginResponse?>>
         get() = _socialLoginRespinse
 
+
     //Call this method from fragment/layout
     fun callLogin(loginRequest: LoginRequest) {
         setDialogVisibility(true)

@@ -47,6 +47,8 @@ interface Constants {
         const val API_VERIFY_OTP="verifyOTP"
         const val  API_FORGOT_PASSWORD="forgotPassword"
         const val  API_FORGOT_PASSWORD_VERIFY_OTP="forgotPassword/verifyOtp"
+        const val API_RESET_PASSWORD="resetPassword"
+        const val  API_RESEND_FORGOT_PASSWORD_OTP="forgotPassword/resendOtp"
 
         //GET
         const val UNAUTHORIZED = "unauthorized"
@@ -54,6 +56,7 @@ interface Constants {
         const val API_GET_REVIEWS = "getReviews"
         const val API_GET_COMPLAINTS = "getComplaints"
         const val API_GET_COMPLAINTS_ISSUE_TYPES = "getComplaintIssueTypes"
+        const val API_GET_COUNTRY_CODE_NAME="getCountryCodeList"
 
     }
 }

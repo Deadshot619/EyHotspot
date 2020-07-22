@@ -9,17 +9,11 @@ import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.network.DataProvider
 import com.ey.hotspot.network.response.BaseResponse
 import com.ey.hotspot.network.response.LoginResponse
-import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordRequest
-import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordResponse
-import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordVerifyOTPRequest
-import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordVerifyOTPResponse
+import com.ey.hotspot.ui.login.verifyotp.model.*
 import kotlinx.coroutines.launch
 
 class VerifyOTPViewModel(application: Application) : BaseViewModel(application) {
 
-    private val _forgotPasswordResponse = MutableLiveData<BaseResponse<ForgotPasswordResponse>>()
-    val forgotPasswordResponse: LiveData<BaseResponse<ForgotPasswordResponse>>
-        get() = _forgotPasswordResponse
 
 
     private val _forgotPasswordVerifyOTPResponse =
@@ -27,27 +21,11 @@ class VerifyOTPViewModel(application: Application) : BaseViewModel(application) 
     val forgotPasswordVerifyOTPResponse: LiveData<BaseResponse<ForgotPasswordVerifyOTPResponse>>
         get() = _forgotPasswordVerifyOTPResponse
 
-    fun callForgotPasswordAPI(forgotPasswordRequest: ForgotPasswordRequest) {
 
-        setDialogVisibility(true)
+    private val _resendOTPResponse = MutableLiveData<BaseResponse<ResendForgotPasswordOTP>>()
+    val resendOTPResponse: LiveData<BaseResponse<ResendForgotPasswordOTP>>
+        get() = _resendOTPResponse
 
-        coroutineScope.launch {
-
-            DataProvider.forgotPassword(
-                request = forgotPasswordRequest,
-                success = {
-                    _forgotPasswordResponse.value = it
-                    if (it.status == true) {
-                        saveForgotPassswordTokenInSharedPreference(it.data.forgotTempToken)
-                    }
-                    setDialogVisibility(false)
-                }, error = {
-                    checkError(it)
-                }
-            )
-        }
-
-    }
 
 
     fun verifyForgotPasswordOTP(forgotPasswordVerifyOTPRequest: ForgotPasswordVerifyOTPRequest) {
@@ -73,11 +51,23 @@ class VerifyOTPViewModel(application: Application) : BaseViewModel(application) 
     }
 
 
-    private fun saveForgotPassswordTokenInSharedPreference(tempToken: String) {
+    fun resendForgotPasswordOTP() {
 
-        HotSpotApp.prefs!!.setRegistrationTempToken(tempToken)
-        Log.d("ForgotPasswordTOken", tempToken)
+        setDialogVisibility(true)
+        coroutineScope.launch {
+
+            DataProvider.resendForgotPasswordOTP(
+                success = {
+
+                    setDialogVisibility(false)
+                    _resendOTPResponse.value = it
+                }, error = {
+                    checkError(it)
+                }
+            )
+        }
     }
+
 
 
     private fun saveVerifyForgotPassswordTokenInSharedPreference(tempToken: String) {

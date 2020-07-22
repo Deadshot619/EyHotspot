@@ -8,13 +8,12 @@ import com.ey.hotspot.ui.favourite.model.MarkFavouriteRequest
 import com.ey.hotspot.ui.favourite.model.MarkFavouriteResponse
 import com.ey.hotspot.ui.home.models.GetHotSpotRequest
 import com.ey.hotspot.ui.home.models.GetHotSpotResponse
+import com.ey.hotspot.ui.login.changepassword.model.ResetPasswordRequest
+import com.ey.hotspot.ui.login.changepassword.model.ResetPasswordResponse
 import com.ey.hotspot.ui.login.logout.LogoutResponse
 import com.ey.hotspot.ui.login.otpverification.fragment.model.SendOTPRequest
 import com.ey.hotspot.ui.login.otpverification.fragment.model.VerifyOTPRequest
-import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordRequest
-import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordResponse
-import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordVerifyOTPRequest
-import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordVerifyOTPResponse
+import com.ey.hotspot.ui.login.verifyotp.model.*
 import com.ey.hotspot.ui.profile.fragment.model.ProfileResponse
 import com.ey.hotspot.ui.profile.fragment.model.UpdateProfileRequest
 import com.ey.hotspot.ui.registration.register_user.model.RegistrationResponse
@@ -363,6 +362,53 @@ object DataProvider : RemoteDataProvider {
         } catch (e: Exception) {
             error(e)
         }
+    }
+
+    override suspend fun resetPassword(
+        request: ResetPasswordRequest,
+        success: (BaseResponse<ResetPasswordResponse>) -> Unit,
+        error: (Exception) -> Unit
+    ) {
+
+        try {
+
+            val result = mServices.resetPassword(
+                HotSpotApp.prefs!!.getVerifyForgotPasswordToken(), request
+            ).await()
+
+            success(result)
+        } catch (e: Exception) {
+            error(e)
+        }
+    }
+
+    override suspend fun resendForgotPasswordOTP(
+        success: (BaseResponse<ResendForgotPasswordOTP>) -> Unit,
+        error: (Exception) -> Unit
+    ) {
+
+        try {
+            val result = mServices.resendForgotPasswordOTP(
+                HotSpotApp.prefs!!.getVerifyForgotPasswordToken()
+            ).await()
+
+            success(result)
+        } catch (e: Exception) {
+            error(e)
+        }
+    }
+
+    override suspend fun getCountryCode(
+        success: (BaseResponse<CoutryCode>) -> Unit,
+        error: (Exception) -> Unit
+    ) {
+        try {
+            val result = mServices.getCountryList().await()
+            success(result)
+        } catch (e: Exception) {
+            error(e)
+        }
+
     }
 
 

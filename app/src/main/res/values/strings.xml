@@ -72,7 +72,7 @@
     <string name="userpassword">Password</string>
     <string name="captchmsg">Enter the message shown below</string>
     <string name="submit_button">Submit</string>
-    <string name="forgotpassword">Forgot Password</string>
+    <string name="forgotpassword">Forgot Password?</string>
     <string name="email_id_hint">Enter Email Id</string>
     <string name="enter_password">Enter the Password</string>
     <string name="enter_captcha">Enter Captcha</string>
@@ -221,6 +221,7 @@
     <string name="verify_account">Verify Account</string>
     <string name="secure_password">Please create a secure password for your login credentials.</string>
     <string name="password_reset_label">Reset Password</string>
+    <string name="enter_email_or_password">Enter  email id or  mobile no</string>
 
 
     <!--Demo issue type string-->

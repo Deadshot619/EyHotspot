@@ -105,7 +105,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
         //Login Error
         mViewModel.loginError.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let {
-                dialog.setViews(/*   input error variables   */)
+                dialog.setViews(
+
+                )
                 dialog.show()
             }
         })
@@ -156,8 +158,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
 
         mBinding.tvForgotPassword.setOnClickListener {
-
-
 
             replaceFragment(
                 fragment = ForgotPasswordFragment.newInstance(),
@@ -300,16 +300,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
                 }
             }
         }
-
-/*
-        dialog.setViews(title = convertStringFromList(
-            listOf("hhh", "uuu"),
-            listOf("haha", "huhu")
-        ))
-        dialog.show()
-*/
-
-
         return isValid
     }
 

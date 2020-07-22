@@ -96,7 +96,6 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
             } else {
 
                 try {
-
                     dialog.setViews(
                         fetchErrorResponse(it.data).toString()
                         , okBtn = {
@@ -104,7 +103,6 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
                         }
                     )
                     dialog.show()
-
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }

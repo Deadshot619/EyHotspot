@@ -11,7 +11,7 @@
     <string name="userpassword">كلمه السر</string>
     <string name="captchmsg">أدخل الرسالة الموضحة أدناه</string>
     <string name="submit_button">إرسال</string>
-    <string name="forgotpassword">نسيت كلمة المرور</string>
+    <string name="forgotpassword">هل نسيت كلمة المرور؟</string>
     <string name="searchplace">بحث</string>
     <string name="permission_description">Lorem ipsum dolor sit na aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
     <string name="agree_terms">أنا موافق</string>
@@ -213,4 +213,5 @@
     <string name="verify_account">التحقق من الحساب</string>
     <string name="secure_password">يرجى إنشاء كلمة مرور آمنة لبيانات اعتماد تسجيل الدخول الخاصة بك.</string>
     <string name="password_reset_label">إعادة تعيين كلمة المرور</string>
+    <string name="enter_email_or_password">أدخل معرف البريد الإلكتروني أو رقم الجوال</string>
 </resources>

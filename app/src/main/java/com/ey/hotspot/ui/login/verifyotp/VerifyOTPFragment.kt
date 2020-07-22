@@ -55,10 +55,12 @@ class VerifyOTPFragment :
 
     private fun setUpDataView() {
 
-        val forgotPasswordRequest: ForgotPasswordRequest =
-            ForgotPasswordRequest(arguments?.getString(mInputData) ?: "")
+        mBinding.tvCheckEmailLabel.setText(
+            resources.getString(R.string.otp_title) + " " + arguments?.getString(
+                mInputData
+            ) ?: ""
+        )
 
-        mViewModel.callForgotPasswordAPI(forgotPasswordRequest)
 
     }
 
@@ -83,9 +85,10 @@ class VerifyOTPFragment :
 
         }
 
-
-
         mBinding.btResendOTP.setOnClickListener {
+
+           
+            mViewModel.resendForgotPasswordOTP()
 
         }
 
@@ -93,25 +96,33 @@ class VerifyOTPFragment :
 
     private fun setUpObserver() {
 
-        mViewModel.forgotPasswordResponse.observe(viewLifecycleOwner, Observer {
-
-            if (it.status == true) {
-                showMessage(it.message, true)
-            } else {
-                showMessage(it.message, true)
-            }
-        })
-
 
         mViewModel.forgotPasswordVerifyOTPResponse.observe(viewLifecycleOwner, Observer {
 
             if (it.status == true) {
 
                 showMessage(it.message, true)
+
+                replaceFragment(
+                    fragment = ChangePasswordFragment.newInstance(),
+                    addToBackStack = true,
+                    bundle = null
+                )
+
             } else {
                 showMessage(it.message, true)
             }
 
+        })
+
+        mViewModel.resendOTPResponse.observe(viewLifecycleOwner, Observer {
+
+            if(it.status == true){
+
+
+            }else{
+                showMessage(it.message,true)
+            }
         })
     }
 
