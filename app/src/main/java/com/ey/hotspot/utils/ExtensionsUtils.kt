@@ -90,6 +90,14 @@ fun Activity.showKeyboard() {
     }
 }
 
+fun String?.parseToDouble(): Double{
+    return try {
+        this!!.toDouble()
+    } catch (e: Exception){
+        0.0
+    }
+}
+
 /**
  * Method to check if GPS is Enabled/Disabled
  *

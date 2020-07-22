@@ -18,9 +18,9 @@ import com.ey.hotspot.ui.favourite.model.MarkFavouriteRequest
 import com.ey.hotspot.ui.home.models.GetHotSpotRequest
 import com.ey.hotspot.ui.home.models.GetHotSpotResponse
 import com.ey.hotspot.ui.home.models.MyClusterItems
+import com.ey.hotspot.ui.review_and_complaint.reviews.ReviewsFragment
 import com.ey.hotspot.ui.search.searchlist.SearchListFragment
 import com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment
-import com.ey.hotspot.ui.speed_test.rate_wifi.RateWifiFragment
 import com.ey.hotspot.utils.*
 import com.ey.hotspot.utils.constants.setUpSearchBar
 import com.google.android.gms.common.ConnectionResult
@@ -39,6 +39,7 @@ import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.maps.android.clustering.Cluster
 import com.google.maps.android.clustering.ClusterManager
 import com.google.maps.android.clustering.view.DefaultClusterRenderer
+
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(), OnMapReadyCallback,
     ClusterManager.OnClusterClickListener<MyClusterItems>,
     ClusterManager.OnClusterInfoWindowClickListener<MyClusterItems>,
@@ -253,7 +254,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         mBinding.customPop.btnRateNow.setOnClickListener {
             val wifiProvideer: String = clickedVenueMarker?.title!!
             replaceFragment(
-                fragment = RateWifiFragment.newInstance(
+                fragment = ReviewsFragment.newInstance(
                     locationId = clickedVenueMarker!!.mItemID,
                     wifiSsid = clickedVenueMarker!!.mNavigateURL,
                     wifiProvider = wifiProvideer,
@@ -282,8 +283,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         for (location in list) {
             val offsetItems =
                 MyClusterItems(
-                    location.lat.toDouble(),
-                    location.lng.toDouble(),
+                    location.lat.parseToDouble(),
+                    location.lng.parseToDouble(),
                     location.provider_name,
                     location.navigate_url,
                     location.favourite,
