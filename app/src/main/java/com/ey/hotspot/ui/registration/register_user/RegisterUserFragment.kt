@@ -12,6 +12,7 @@ import com.ey.hotspot.network.request.RegisterRequest
 import com.ey.hotspot.ui.login.permission.PermissionFragment
 import com.ey.hotspot.ui.registration.register_user.model.RegistrationResponse
 import com.ey.hotspot.ui.registration.registration_option.RegistrationOptionFragment
+import com.ey.hotspot.utils.constants.convertStringFromList
 import com.ey.hotspot.utils.dialogs.OkDialog
 import com.ey.hotspot.utils.replaceFragment
 import com.ey.hotspot.utils.showMessage
@@ -79,7 +80,7 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
 
         mViewModel.registrationResponse.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
 
-            if (it.status == true) {
+            if (it.status) {
 
                 showMessage(it.message, true)
 
@@ -95,10 +96,15 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
 
                 try {
                     dialog.setViews(
-                        fetchErrorResponse(it.data).toString()
-                        , okBtn = {
-                            dialog.dismiss()
-                        }
+                        convertStringFromList(
+                            it.data.firstName,
+                            it.data.lastName,
+                            it.data.email,
+                            it.data.countryCode,
+                            it.data.mobileNo,
+                            it.data.password,
+                            it.data.confirmPassword
+                        )
                     )
                     dialog.show()
                 } catch (e: Exception) {

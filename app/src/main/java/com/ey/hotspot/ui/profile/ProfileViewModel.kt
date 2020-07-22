@@ -9,6 +9,7 @@ import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.network.DataProvider
 import com.ey.hotspot.network.response.BaseResponse
 import com.ey.hotspot.network.response.CoutryCode
+import com.ey.hotspot.network.response.UpdateProfileResponse
 import com.ey.hotspot.ui.profile.fragment.model.ProfileDataModel
 import com.ey.hotspot.ui.profile.fragment.model.ProfileResponse
 import com.ey.hotspot.ui.profile.fragment.model.UpdateProfileRequest
@@ -24,7 +25,12 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
     val profileResponse: LiveData<Event<BaseResponse<ProfileResponse>>>
         get() = _profileResponse
 
+    //This variable will handle Profile Errors
+    private val _profileError = MutableLiveData<Event<UpdateProfileResponse?>>()
+    val profileError: LiveData<Event<UpdateProfileResponse?>>
+        get() = _profileError
 
+    //Country Codes
     private val _getCoutryCodeList = MutableLiveData<BaseResponse<CoutryCode>>()
     val getCountryCodeList: LiveData<BaseResponse<CoutryCode>>
         get() = _getCoutryCodeList
@@ -75,6 +81,8 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
 
                     showToastFromViewModel(it.message)
 
+                    if (!it.status)
+                        _profileError.value = Event(it.data)
 
                     setDialogVisibility(false)
                 }, error = {

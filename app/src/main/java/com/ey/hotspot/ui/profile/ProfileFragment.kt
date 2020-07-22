@@ -8,12 +8,19 @@ import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.ProfileFragmentBinding
 import com.ey.hotspot.ui.profile.fragment.model.UpdateProfileRequest
 import com.ey.hotspot.ui.settings.fragments.SettingsFragment
+import com.ey.hotspot.utils.constants.convertStringFromList
+import com.ey.hotspot.utils.dialogs.OkDialog
 import com.ey.hotspot.utils.replaceFragment
 import com.ey.hotspot.utils.validations.isEmailValid
 import com.ey.hotspot.utils.validations.isValidMobile
 
 class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>() {
 
+    val dialog by lazy {
+        OkDialog(requireContext()).apply {
+            setViews { this.dismiss() }
+        }
+    }
 
     override fun getLayoutId() = R.layout.profile_fragment
 
@@ -35,7 +42,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
         setUpListener()
         setUpObserver()
 
-        if(!HotSpotApp.prefs?.getAppLoggedInStatus()!!)
+        if (!HotSpotApp.prefs?.getAppLoggedInStatus()!!)
             mBinding.btnUpdateProfile.visibility = View.GONE
 
     }
@@ -76,6 +83,25 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
                 //showMessage(content.message, false)
             }
         })
+
+
+        //Profile Error
+        mViewModel.profileError.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let { response ->
+                dialog.setViews(
+                    convertStringFromList(
+                        response.firstName,
+                        response.lastName,
+                        response.email,
+                        response.countryCode,
+                        response.mobileNo,
+                        response.password,
+                        response.confirmPassword
+                    )
+                )
+                dialog.show()
+            }
+        })
     }
 
     /**
@@ -102,8 +128,8 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
                     edtMobileNo.error = resources.getString(R.string.invalid_mobile)
                     isValid = false
                 }
-                if (password.isNotEmpty() || confirmPassword.isNotEmpty()){     //Check only if password are written
-                    if (password != confirmPassword){
+                if (password.isNotEmpty() || confirmPassword.isNotEmpty()) {     //Check only if password are written
+                    if (password != confirmPassword) {
                         edtPassword.error = resources.getString(R.string.pwd_not_match)
                         edtConfirmPassword.error = resources.getString(R.string.pwd_not_match)
                         isValid = false
@@ -114,7 +140,6 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
 
         return isValid
     }
-
 
 
     override fun onDestroyView() {
