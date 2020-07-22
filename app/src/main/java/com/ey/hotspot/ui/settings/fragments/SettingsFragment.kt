@@ -11,6 +11,7 @@ import com.ey.hotspot.app_core_lib.CoreApp
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.FragmentSettingsBinding
 import com.ey.hotspot.ui.login.LoginActivity
+import com.ey.hotspot.ui.profile.ProfileFragment
 import com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListFragment
 import com.ey.hotspot.utils.LanguageManager
 import com.ey.hotspot.utils.MyHotSpotSharedPreference
@@ -83,6 +84,11 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel
                 HotSpotApp.prefs!!.setLanguage(Constants.ENGLISH_LANG)
                 restartApplication(requireActivity(), HotSpotApp.prefs!!)
             }
+        }
+
+        //Profile
+        mBinding.llProfileList.setOnClickListener {
+            replaceFragment(fragment = ProfileFragment(), addToBackStack = true)
         }
 
         //Logout

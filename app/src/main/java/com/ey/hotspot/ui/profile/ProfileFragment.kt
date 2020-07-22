@@ -29,8 +29,8 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
         setUpToolbar(
             toolbarBinding = mBinding.toolbarLayout,
             title = getString(R.string.my_profile_label),
-            showUpButton = false,
-            showSettingButton = true
+            showUpButton = true,
+            showSettingButton = false
         )
         setUpListener()
         setUpObserver()

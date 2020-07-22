@@ -27,9 +27,15 @@
         android:title=""/>
 
     <!--Profile-->
-    <item
+    <!--<item
         android:id="@+id/profile"
         android:icon="@drawable/component23"
+        android:title=""/>-->
+
+    <!--Settings-->
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/settings"
         android:title=""/>
 
 </menu>
