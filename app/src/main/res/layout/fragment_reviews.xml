@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.ey.hotspot.ui.review_and_complaint.reviews.ReviewsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.review_and_complaint.review_list.ReviewListFragment"
+        >
+
+        <!--Toolbar-->
+        <include
+            android:id="@+id/toolbarLayout"
+            layout="@layout/layout_custom_toolbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <!--Wifi Name-->
+        <TextView
+            android:id="@+id/tv_wifi_name"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_margin"
+            android:layout_marginStart="@dimen/common_margin"
+            android:layout_marginEnd="@dimen/common_margin"
+            android:text=""
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbarLayout"
+            tools:text="Starbucks WiFi" />
+
+        <!--        Wifi Provider-->
+        <TextView
+            android:id="@+id/tv_wifi_provider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="AmazeNet"
+            android:text=""
+            android:textAllCaps="false"
+            style="@style/ChipStyleTextView"
+            app:layout_constraintTop_toBottomOf="@id/tv_wifi_name"
+            app:layout_constraintStart_toStartOf="@id/tv_wifi_name"
+            android:layout_marginTop="@dimen/common_margin_between_fields_4"/>
+
+        <!--Location-->
+        <TextView
+            android:id="@+id/tv_location"
+            style="@style/TextAppearance.MaterialComponents.Subtitle2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/common_margin"
+            android:layout_marginEnd="@dimen/common_margin"
+            android:text=""
+            android:textAllCaps="false"
+            app:layout_constraintStart_toEndOf="@id/tv_wifi_provider"
+            app:layout_constraintTop_toTopOf="@id/tv_wifi_provider"
+            app:layout_constraintBottom_toBottomOf="@id/tv_wifi_provider"
+            tools:text="Riyadh" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_review_list"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            tools:listitem="@layout/item_reviews"
+            tools:itemCount="3"
+            android:layout_marginTop="@dimen/common_margin"
+            app:layout_constraintTop_toBottomOf="@id/tv_wifi_provider"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

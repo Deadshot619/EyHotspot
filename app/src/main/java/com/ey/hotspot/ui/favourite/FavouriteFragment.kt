@@ -8,8 +8,8 @@ import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FavouriteFragmentBinding
 import com.ey.hotspot.ui.favourite.model.GetFavouriteItem
+import com.ey.hotspot.ui.review_and_complaint.reviews.ReviewsFragment
 import com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment
-import com.ey.hotspot.ui.speed_test.rate_wifi.RateWifiFragment
 import com.ey.hotspot.utils.constants.setUpSearchBar
 import com.ey.hotspot.utils.replaceFragment
 
@@ -54,7 +54,7 @@ class FavouriteFragment : BaseFragment<FavouriteFragmentBinding, FavouriteViewMo
             //Rate Now button
             override fun onClickRateNow(data: GetFavouriteItem) {
                 replaceFragment(
-                    fragment = RateWifiFragment.newInstance(
+                    fragment = ReviewsFragment.newInstance(
                         locationId = data.id,
                         wifiSsid = data.name,
                         wifiProvider = data.provider_name,

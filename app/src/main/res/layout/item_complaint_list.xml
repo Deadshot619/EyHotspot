@@ -84,7 +84,6 @@
             app:layout_constraintTop_toBottomOf="@id/tv_wifi_provider"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-
         <!--Review-->
         <TextView
             android:id="@+id/tv_review"
