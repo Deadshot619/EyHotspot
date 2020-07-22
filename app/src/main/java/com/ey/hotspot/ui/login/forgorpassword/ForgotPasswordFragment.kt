@@ -1,6 +1,5 @@
 package com.ey.hotspot.ui.login.forgorpassword
 
-import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
@@ -11,7 +10,6 @@ import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordResponse
 import com.ey.hotspot.utils.dialogs.OkDialog
 import com.ey.hotspot.utils.replaceFragment
 import com.ey.hotspot.utils.showMessage
-import com.ey.hotspot.utils.validations.isEmailValid
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 
@@ -70,30 +68,32 @@ class ForgotPasswordFragment :
     private fun setUpObserver() {
 
         mViewModel.forgotPasswordResponse.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let {
+                if (it.status) {
+                    showMessage(it.message, true)
+                    replaceFragment(
+                        fragment = VerifyOTPFragment.newInstance(
+                            inputData = mViewModel.mEmailIdOrPassword
+                        ),
+                        addToBackStack = true
 
-            if (it.status == true) {
-                showMessage(it.message, true)
-                replaceFragment(
-                    fragment = VerifyOTPFragment.newInstance(
-                        inputData = mViewModel.mEmailIdOrPassword
-                    ),
-                    addToBackStack = true
-
-                )
-            } else {
-                try {
-                    dialog.setViews(
-                        fetchErrorResponse(it.data).toString()
-                        , okBtn = {
-                            dialog.dismiss()
-                        }
                     )
-                    dialog.show()
-                } catch (e: Exception) {
-                    e.printStackTrace()
+                } else {
+                    try {
+                        dialog.setViews(
+                            fetchErrorResponse(it.data).toString()
+                            , okBtn = {
+                                dialog.dismiss()
+                            }
+                        )
+                        dialog.show()
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
                 }
             }
         })
+
     }
 
     private fun fetchErrorResponse(response: ForgotPasswordResponse): StringBuilder {

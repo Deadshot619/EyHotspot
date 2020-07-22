@@ -7,10 +7,10 @@ import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.VerifyOtpFragmentBinding
 import com.ey.hotspot.ui.login.changepassword.ChangePasswordFragment
-import com.ey.hotspot.ui.login.otpverification.fragment.OTPVerificationFragment
-import com.ey.hotspot.ui.login.otpverification.fragment.model.VerifyOTPRequest
-import com.ey.hotspot.ui.login.verifyotp.model.*
-import com.ey.hotspot.ui.registration.email_verification.EmailVerificationFragment
+import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordResendOTPRequest
+import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordVerifyOTPRequest
+import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordVerifyOTPResponse
+import com.ey.hotspot.ui.login.verifyotp.model.ResendForgotPasswordOTP
 import com.ey.hotspot.utils.dialogs.OkDialog
 import com.ey.hotspot.utils.replaceFragment
 import com.ey.hotspot.utils.showMessage
@@ -121,7 +121,7 @@ class VerifyOTPFragment :
 
         mViewModel.forgotPasswordVerifyOTPResponse.observe(viewLifecycleOwner, Observer {
 
-            if (it.status == true) {
+            if (it.status) {
 
                 showMessage(it.message, true)
 

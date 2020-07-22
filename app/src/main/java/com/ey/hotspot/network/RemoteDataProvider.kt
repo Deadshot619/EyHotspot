@@ -56,7 +56,7 @@ interface RemoteDataProvider {
 
     suspend fun updateProfile(
         request: UpdateProfileRequest,
-        success: (BaseResponse<Any>) -> Unit,
+        success: (BaseResponse<UpdateProfileResponse>) -> Unit,
         error: (Exception) -> Unit
     )
 

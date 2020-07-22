@@ -11,8 +11,8 @@ import com.ey.hotspot.service.WifiService
 import com.ey.hotspot.ui.favourite.FavouriteFragment
 import com.ey.hotspot.ui.home.fragment.HomeFragment
 import com.ey.hotspot.ui.login.LoginActivity
-import com.ey.hotspot.ui.profile.ProfileFragment
 import com.ey.hotspot.ui.review_and_complaint.ReviewAndComplainFragment
+import com.ey.hotspot.ui.settings.fragments.SettingsFragment
 import com.ey.hotspot.ui.speed_test.speed_test_fragmet.SpeedTestFragment
 import com.ey.hotspot.utils.CHANNEL_ID
 import com.ey.hotspot.utils.channel_name
@@ -113,9 +113,16 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
                 }
 
                 //Profile
-                R.id.profile -> {
+                /*R.id.profile -> {
                     clearFragmentBackstack()
                     replaceFragment(ProfileFragment(), false)
+                    return@setOnNavigationItemSelectedListener true
+                }*/
+
+                //Settings
+                R.id.settings -> {
+                    clearFragmentBackstack()
+                    replaceFragment(SettingsFragment(), false)
                     return@setOnNavigationItemSelectedListener true
                 }
             }

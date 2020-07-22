@@ -13,7 +13,6 @@ import com.ey.hotspot.utils.constants.Constants.Companion.LANGUAGE_SELECTED
 import com.ey.hotspot.utils.constants.Constants.Companion.REGISTRATION_TMP_TOKEN
 import com.ey.hotspot.utils.constants.Constants.Companion.SKIP_STATUS
 import com.ey.hotspot.utils.constants.Constants.Companion.USER_DATA
-import com.ey.hotspot.utils.constants.Constants.Companion.VERIFY_FORGOT_PASSWORD
 import com.google.gson.Gson
 
 class MyHotSpotSharedPreference(context: Context) {
@@ -66,7 +65,7 @@ class MyHotSpotSharedPreference(context: Context) {
         CoreApp.sharedPreferences.edit().putBoolean(SKIP_STATUS, value).apply()
     }
 
-    //Return status of skipped user
+    //Return status of skipped user, true if skipped, else false
     fun getSkipStatus(): Boolean {
         return CoreApp.sharedPreferences.getBoolean(SKIP_STATUS, false)
     }

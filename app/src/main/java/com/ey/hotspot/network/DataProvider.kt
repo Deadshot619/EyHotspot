@@ -125,7 +125,7 @@ object DataProvider : RemoteDataProvider {
 
     override suspend fun updateProfile(
         request: UpdateProfileRequest,
-        success: (BaseResponse<Any>) -> Unit,
+        success: (BaseResponse<UpdateProfileResponse>) -> Unit,
         error: (Exception) -> Unit
     ) {
 

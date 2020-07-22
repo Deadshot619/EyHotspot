@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
@@ -11,6 +12,7 @@ import com.ey.hotspot.app_core_lib.CoreApp
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.FragmentSettingsBinding
 import com.ey.hotspot.ui.login.LoginActivity
+import com.ey.hotspot.ui.profile.ProfileFragment
 import com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListFragment
 import com.ey.hotspot.utils.LanguageManager
 import com.ey.hotspot.utils.MyHotSpotSharedPreference
@@ -52,10 +54,12 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel
         setUpToolbar(
             toolbarBinding = mBinding.toolbarLayout,
             title = getString(R.string.setting_label),
-            showUpButton = true
+            showUpButton = false
         )
 
         setUpListeners()
+
+        hideViewsIfSkippedUser()
     }
 
     private fun setUpListeners() {
@@ -83,6 +87,11 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel
                 HotSpotApp.prefs!!.setLanguage(Constants.ENGLISH_LANG)
                 restartApplication(requireActivity(), HotSpotApp.prefs!!)
             }
+        }
+
+        //Profile
+        mBinding.llProfileList.setOnClickListener {
+            replaceFragment(fragment = ProfileFragment(), addToBackStack = true)
         }
 
         //Logout
@@ -153,4 +162,11 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel
         })
     }
 
+    private fun hideViewsIfSkippedUser(){
+        if(HotSpotApp.prefs!!.getSkipStatus())
+            mBinding.run {
+                llProfileList.visibility = View.GONE
+                llLogout.visibility = View.GONE
+            }
+    }
 }

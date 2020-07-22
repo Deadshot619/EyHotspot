@@ -59,7 +59,7 @@ interface APIInterface {
     @POST(Constants.API_UPDATE_PROFILE)
     fun updateProfile(
         @Body updateProfileRequest: UpdateProfileRequest
-    ): Deferred<BaseResponse<Any>>
+    ): Deferred<BaseResponse<UpdateProfileResponse>>
 
 
     @POST(Constants.API_GET_HOTPSOT)
