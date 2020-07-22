@@ -14,6 +14,7 @@ import com.ey.hotspot.ui.login.LoginActivity
 import com.ey.hotspot.ui.search.searchlist.adapter.SearchListAdapter
 import com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment
 import com.ey.hotspot.ui.speed_test.rate_wifi.RateWifiFragment
+import com.ey.hotspot.utils.constants.setUpSearchBar
 import com.ey.hotspot.utils.dialogs.YesNoDialog
 import com.ey.hotspot.utils.replaceFragment
 
@@ -48,7 +49,7 @@ class SearchListFragment : BaseFragment<SearchListFragmentBinding, SearchListVie
         mBinding.lifecycleOwner = viewLifecycleOwner
         mBinding.viewModel = mViewModel
 
-        setUpSearchBar(mBinding.toolbarLayout, true) {
+        activity?.setUpSearchBar(mBinding.toolbarLayout, true) {
 //            if (HotSpotApp.prefs?.getAppLoggedInStatus()!!)
 //                mViewModel.getUserHotSpotResponse(it)
 //            else

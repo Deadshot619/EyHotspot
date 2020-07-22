@@ -22,6 +22,7 @@ import com.ey.hotspot.ui.search.searchlist.SearchListFragment
 import com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment
 import com.ey.hotspot.ui.speed_test.rate_wifi.RateWifiFragment
 import com.ey.hotspot.utils.*
+import com.ey.hotspot.utils.constants.setUpSearchBar
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.common.api.PendingResult
@@ -67,7 +68,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             viewModel = mViewModel
         }
         //Toolbar
-        setUpSearchBar(mBinding.toolbarLayout, showUpButton = false, enableSearchButton = false) {}
+        activity?.setUpSearchBar(mBinding.toolbarLayout, showUpButton = false, enableSearchButton = false) {}
         mBinding.toolbarLayout.etSearchBar.isFocusable = false
         // Prompt the user for permission.
         activity?.checkLocationPermission(view = mBinding.root, func = {

@@ -11,11 +11,8 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.ey.hotspot.R
 import com.ey.hotspot.databinding.LayoutCustomToolbarBinding
-import com.ey.hotspot.databinding.LayoutCustomToolbarSearchbarBinding
 import com.ey.hotspot.utils.dialogs.LoadingDialog
-import com.ey.hotspot.utils.showKeyboard
 import com.ey.hotspot.utils.showMessage
 
 abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment(),
@@ -88,7 +85,8 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
         title: String,
         showUpButton: Boolean = false,
         endButtonTitle: String = "",
-        showSettingButton: Boolean = false
+        showSettingButton: Boolean = false,
+        showShadow: Boolean = true
     ) {
         toolbarBinding.run {
             //Toolbar title
@@ -113,45 +111,17 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
             } else {
                 ivSettings.visibility = View.GONE
             }
+
+            //Shadow
+            if (showShadow)
+                toolbar.elevation = 10f
+            else
+                toolbar.elevation = 0f
+
         }
     }
 
-    protected fun setUpSearchBar(
-        toolbarBinding: LayoutCustomToolbarSearchbarBinding,
-        showUpButton: Boolean = true,
-        enableSearchButton: Boolean = true,
-        searchFunction: (String) -> Unit    //method to run when search button is clicked
-    ) {
-        toolbarBinding.run {
-            //If true, show Back Button, else hide it
-            if (showUpButton) {
-                ivBack.visibility = View.VISIBLE
-                ivBack.setOnClickListener {
-                    activity?.onBackPressed()
-                }
-            } else {    //If false, hide up button & lower the padding of edittext
-                ivBack.visibility = View.GONE
-                etSearchBar.setPaddingRelative(
-                    resources.getDimensionPixelSize(R.dimen.search_bar_padding_start_no_drawable),
-                    etSearchBar.paddingTop,
-                    resources.getDimensionPixelSize(R.dimen.search_bar_padding),
-                    etSearchBar.paddingTop
-                )
-            }
 
-            if (enableSearchButton)
-            //Search button
-                ivSearch.setOnClickListener {
-                    if (etSearchBar.text.isNullOrEmpty()) {
-                        showMessage(resources.getString(R.string.empty_query_alert_label))
-                        etSearchBar.requestFocus()
-                        activity?.showKeyboard()
-                    } else {
-                        searchFunction(etSearchBar.text.toString().trim())
-                    }
-                }
-        }
-    }
 
 
     open fun checkLocSaveState(): Boolean {

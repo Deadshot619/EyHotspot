@@ -10,6 +10,7 @@ import com.ey.hotspot.databinding.FavouriteFragmentBinding
 import com.ey.hotspot.ui.favourite.model.GetFavouriteItem
 import com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment
 import com.ey.hotspot.ui.speed_test.rate_wifi.RateWifiFragment
+import com.ey.hotspot.utils.constants.setUpSearchBar
 import com.ey.hotspot.utils.replaceFragment
 
 class FavouriteFragment : BaseFragment<FavouriteFragmentBinding, FavouriteViewModel>() {
@@ -31,8 +32,15 @@ class FavouriteFragment : BaseFragment<FavouriteFragmentBinding, FavouriteViewMo
         setUpToolbar(
             toolbarBinding = mBinding.toolbarLayout,
             title = getString(R.string.favoutite_wifi_label),
-            showUpButton = false
+            showUpButton = false,
+            showShadow = false
         )
+
+        activity?.setUpSearchBar(
+            toolbarBinding = mBinding.toolbarLayout2,
+            showUpButton = false,
+            showShadow = false
+        ){}
 
         setUpRecyclerView(mBinding.rvFavouriteWifiList)
     }
