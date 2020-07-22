@@ -96,6 +96,8 @@
 <!--        <item name="android:gravity">center</item>-->
 
 <!--        <item name="android:maxHeight">42dp</item>-->
+        <item name="android:scaleX">2.5</item>
+        <item name="android:scaleY">2.5</item>
         <item name="android:isIndicator">false</item>
     </style>
 

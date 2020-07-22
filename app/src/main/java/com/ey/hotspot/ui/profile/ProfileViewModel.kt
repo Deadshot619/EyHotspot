@@ -47,10 +47,10 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
 
                 if (it.status)
                     profileData.value = ProfileDataModel(
-                        firstName = it.data.firstname,
-                        lastName = it.data.lastname,
-                        mobileNo = it.data.mobile_no,
-                        emailId = it.data.email
+                        firstName = it.data.firstname ?: "",
+                        lastName = it.data.lastname ?: "",
+                        mobileNo = it.data.mobile_no ?: "",
+                        emailId = it.data.email ?: ""
 
                     )
 

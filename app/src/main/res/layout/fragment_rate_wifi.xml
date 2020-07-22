@@ -86,7 +86,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/common_margin_32"
-
             android:rating="@={viewModel.rateWifiData.rating}"
             android:stepSize="1"
             tools:rating="3"

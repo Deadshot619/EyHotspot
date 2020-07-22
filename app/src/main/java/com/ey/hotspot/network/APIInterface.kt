@@ -80,15 +80,17 @@ interface APIInterface {
 
 
     @POST(Constants.API_FAVOURITE_LIST)
-    fun getFavourite(
-    ): Deferred<BaseResponse<List<GetFavouriteItem>>>
+    fun getFavouriteAsync(@Body request: GetFavoriteRequest): Deferred<BaseResponse<List<GetFavouriteItem>>>
 
     //    Reviews & Complaints
-    @GET(Constants.API_GET_REVIEWS)    //Reviews
+    @GET(Constants.API_GET_REVIEWS)    //Reviews List
     fun getReviewsAsync(): Deferred<BaseResponse<List<ReviewsList>>>
 
     @GET(Constants.API_GET_COMPLAINTS)    //Complaints
     fun getComplaintsAsync(): Deferred<BaseResponse<List<ComplaintsList>>>
+
+    @POST(Constants.API_LOCATION_REVIEWS)    //Location Reviews List
+    fun getLocationReviewsAsync(@Body request: GetLocationReviewsRequest): Deferred<BaseResponse<List<ReviewsList>>>
 
 
     @GET(Constants.API_GET_COMPLAINTS_ISSUE_TYPES)
@@ -99,6 +101,8 @@ interface APIInterface {
 
     @POST(Constants.API_ADD_COMPLAINT)
     fun apiAddComplaint(@Body request: AddComplaintRequest): Deferred<BaseResponse<Any>>
+
+
 
     //OTP
     @POST(Constants.API_SEND_OTP + "/" + "{id}?")

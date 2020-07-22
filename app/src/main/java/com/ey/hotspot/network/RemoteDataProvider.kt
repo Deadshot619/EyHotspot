@@ -80,6 +80,7 @@ interface RemoteDataProvider {
     )
 
     suspend fun getFavourite(
+        request: GetFavoriteRequest,
         success: (BaseResponse<List<GetFavouriteItem>>) -> Unit,
         error: (Exception) -> Unit
     )
@@ -92,6 +93,12 @@ interface RemoteDataProvider {
 
     suspend fun getCompaints(   //Compaints
         success: (BaseResponse<List<ComplaintsList>>) -> Unit,
+        error: (Exception) -> Unit
+    )
+
+    suspend fun getLocationReviews(     //Reviews
+        request: GetLocationReviewsRequest,
+        success: (BaseResponse<List<ReviewsList>>) -> Unit,
         error: (Exception) -> Unit
     )
 

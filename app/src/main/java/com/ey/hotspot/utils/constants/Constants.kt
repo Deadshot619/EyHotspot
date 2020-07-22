@@ -9,15 +9,14 @@ interface Constants {
         const val ARABIC_LANG: String = "ar"
 
         //Intent
-        const val AUTHENTICATION_FAILED =
-            "authentication_failed"   //used when user's authticaition is failed while refreshing token
+        const val AUTHENTICATION_FAILED = "authentication_failed"   //used when user's authticaition is failed while refreshing token
 
         //SharedPreference
         const val ACCESS_TOKEN: String = "access_token"
         const val APP_LOGGED_IN: String = "app_logged_in"
         const val USER_DATA = "user_data"
         const val ENABLED_GPS_LOCATION: String = "GPS_LOCATION"
-        const val REGISTRATION_TMP_TOKEN="registration_token"
+        const val REGISTRATION_TMP_TOKEN = "registration_token"
         const val SKIP_STATUS = "skip_status"
         const val VERIFY_FORGOT_PASSWORD="verify_forgot_password"
         const val FORGOT_PASSWORD_FIELD="forgot_password_field"
@@ -50,6 +49,7 @@ interface Constants {
         const val  API_FORGOT_PASSWORD_VERIFY_OTP="forgotPassword/verifyOtp"
         const val API_RESET_PASSWORD="resetPassword"
         const val  API_RESEND_FORGOT_PASSWORD_OTP="forgotPassword/resendOtp"
+        const val API_LOCATION_REVIEWS = "getLocationReviews"
 
         //GET
         const val UNAUTHORIZED = "unauthorized"

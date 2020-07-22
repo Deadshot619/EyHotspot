@@ -8,8 +8,9 @@ import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FavouriteFragmentBinding
 import com.ey.hotspot.ui.favourite.model.GetFavouriteItem
+import com.ey.hotspot.ui.review_and_complaint.reviews.ReviewsFragment
 import com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment
-import com.ey.hotspot.ui.speed_test.rate_wifi.RateWifiFragment
+import com.ey.hotspot.utils.constants.setUpSearchBar
 import com.ey.hotspot.utils.replaceFragment
 
 class FavouriteFragment : BaseFragment<FavouriteFragmentBinding, FavouriteViewModel>() {
@@ -21,18 +22,28 @@ class FavouriteFragment : BaseFragment<FavouriteFragmentBinding, FavouriteViewMo
         fun newInstance() = FavouriteFragment()
     }
 
-
     override fun getLayoutId() = R.layout.favourite_fragment
     override fun getViewModel() = FavouriteViewModel::class.java
     override fun onBinding() {
         mBinding.lifecycleOwner = viewLifecycleOwner
         mBinding.viewModel = mViewModel
 
+        //Normal Toolbar
         setUpToolbar(
             toolbarBinding = mBinding.toolbarLayout,
             title = getString(R.string.favoutite_wifi_label),
-            showUpButton = false
+            showUpButton = false,
+            showShadow = false
         )
+
+        //SearchBar
+        activity?.setUpSearchBar(
+            toolbarBinding = mBinding.toolbarLayout2,
+            showUpButton = false,
+            showShadow = false
+        ){
+            mViewModel.getFavouriteList(value = it)
+        }
 
         setUpRecyclerView(mBinding.rvFavouriteWifiList)
     }
@@ -43,7 +54,7 @@ class FavouriteFragment : BaseFragment<FavouriteFragmentBinding, FavouriteViewMo
             //Rate Now button
             override fun onClickRateNow(data: GetFavouriteItem) {
                 replaceFragment(
-                    fragment = RateWifiFragment.newInstance(
+                    fragment = ReviewsFragment.newInstance(
                         locationId = data.id,
                         wifiSsid = data.name,
                         wifiProvider = data.provider_name,

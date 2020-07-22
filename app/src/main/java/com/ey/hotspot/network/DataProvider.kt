@@ -186,13 +186,14 @@ object DataProvider : RemoteDataProvider {
     }
 
     override suspend fun getFavourite(
+        request: GetFavoriteRequest,
         success: (BaseResponse<List<GetFavouriteItem>>) -> Unit,
         error: (Exception) -> Unit
     ) {
 
         try {
             val result =
-                mServices.getFavourite().await()
+                mServices.getFavouriteAsync(request).await()
             success(result)
 
         } catch (e: Exception) {
@@ -233,6 +234,23 @@ object DataProvider : RemoteDataProvider {
             }
         }
     }
+
+    //Reviews
+    override suspend fun getLocationReviews(
+        request: GetLocationReviewsRequest,
+        success: (BaseResponse<List<ReviewsList>>) -> Unit,
+        error: (Exception) -> Unit
+    ) {
+        withContext(Dispatchers.Main) {
+            try {
+                val result = mServices.getLocationReviewsAsync(request).await()
+                success(result)
+            } catch (e: Exception) {
+                error(e)
+            }
+        }
+    }
+
 
     override suspend fun getComplaintsIssuesTypes(
         success: (BaseResponse<ComplaintIssuesTypes>) -> Unit,

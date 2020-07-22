@@ -8,20 +8,16 @@
 
     <item android:id="@android:id/background">
         <bitmap
-            android:gravity="center"
-            android:src="@drawable/fillstar"
-            android:tint="@color/colorLightestGray" />
+            android:src="@drawable/unfilled_star" />
     </item>
 
     <item android:id="@android:id/secondaryProgress">
         <bitmap
-            android:gravity="center"
-            android:src="@drawable/fillstar"
-            android:tint="@color/colorLightestGray" />
+            android:src="@drawable/unfilled_star" />
     </item>
 
     <item android:id="@android:id/progress">
-        <bitmap android:src="@drawable/fillstar" />
+        <bitmap android:src="@drawable/star" />
     </item>
 
 

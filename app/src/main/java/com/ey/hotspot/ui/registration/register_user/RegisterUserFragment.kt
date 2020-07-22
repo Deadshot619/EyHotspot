@@ -27,11 +27,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.google.gson.Gson
-import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_register_user.*
 import java.util.*
-import kotlin.text.StringBuilder
 
 
 class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterUserViewModel>() {
@@ -195,8 +193,6 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
             //Sign In button
             btnGetStarted.setOnClickListener {
                 if (validate()) {
-
-
                     val register: RegisterRequest =
                         RegisterRequest(
                             mViewModel.firstName,
@@ -216,7 +212,6 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
             }
 
             tvTermsCondition.setOnClickListener {
-
                 replaceFragment(
                     fragment = PermissionFragment.newInstance(),
                     addToBackStack = true,
@@ -227,7 +222,6 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
 
             //FacebookLogin
             ivFacebookSignIn.setOnClickListener {
-
                 facebookSign()
             }
 
@@ -360,7 +354,6 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
         }
 
         if (mViewModel.password.equals(mViewModel.confirmPassword)) {
-
             if ((mViewModel.password.isEmpty() && mViewModel.confirmPassword.isEmpty())) {
                 mBinding.edtPassword.error = resources.getString(R.string.pwd_confirm_pwd_empty)
                 mBinding.edtConfirmPassword.error =
@@ -371,12 +364,12 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
                 mBinding.edtPassword.error = null
                 mBinding.edtConfirmPassword.error = null
             }
-
         } else {
             mBinding.edtPassword.error = resources.getString(R.string.pwd_not_match)
             mBinding.edtConfirmPassword.error = resources.getString(R.string.pwd_not_match)
             checkPasswordConfirmPassword = false
         }
+
         if (firstName == true && lastName == true &&
             mobileNo == true && emailId == true &&
             password == true && confirmPassword == true &&

@@ -34,6 +34,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/search_locations_label"
                     android:paddingStart="@dimen/search_bar_padding"
+                    android:imeOptions="actionGo"
                     android:paddingEnd="@dimen/search_bar_padding"
                     android:singleLine="true"
                     app:layout_constraintHorizontal_bias="0.3"

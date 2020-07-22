@@ -29,6 +29,8 @@ class SearchListViewModel(application: Application): BaseViewModel(application){
             locationEnabled = true
         )
 
+        searchString = value
+
         coroutineScope.launch {
             DataProvider.getHotspot(
                 request = request,
