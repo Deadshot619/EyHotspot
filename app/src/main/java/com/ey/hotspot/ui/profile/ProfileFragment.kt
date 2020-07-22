@@ -115,6 +115,8 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
         return isValid
     }
 
+
+
     override fun onDestroyView() {
         super.onDestroyView()
 

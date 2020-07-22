@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
@@ -53,10 +54,12 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel
         setUpToolbar(
             toolbarBinding = mBinding.toolbarLayout,
             title = getString(R.string.setting_label),
-            showUpButton = true
+            showUpButton = false
         )
 
         setUpListeners()
+
+        hideViewsIfSkippedUser()
     }
 
     private fun setUpListeners() {
@@ -159,4 +162,11 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel
         })
     }
 
+    private fun hideViewsIfSkippedUser(){
+        if(HotSpotApp.prefs!!.getSkipStatus())
+            mBinding.run {
+                llProfileList.visibility = View.GONE
+                llLogout.visibility = View.GONE
+            }
+    }
 }

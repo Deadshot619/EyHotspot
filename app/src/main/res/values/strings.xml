@@ -178,8 +178,8 @@
     <string name="otp_label">OTP</string>
     <string name="recently_search_label">Recent  Search</string>
     <string name="rate_now_label">RATE NOW</string>
-    <string name="arabic">ARABIC</string>
-    <string name="english">ENGLISH</string>
+    <string name="arabic">Arabic</string>
+    <string name="english">English</string>
     <string name="save_settings_label">SAVE SETTINGS</string>
     <string name="notification_label">NOTIFICATION</string>
     <string name="dummytext">Lorem lpsum is simply dummy text</string>
