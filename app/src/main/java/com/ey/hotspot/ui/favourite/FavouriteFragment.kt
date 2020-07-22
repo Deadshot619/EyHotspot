@@ -22,13 +22,13 @@ class FavouriteFragment : BaseFragment<FavouriteFragmentBinding, FavouriteViewMo
         fun newInstance() = FavouriteFragment()
     }
 
-
     override fun getLayoutId() = R.layout.favourite_fragment
     override fun getViewModel() = FavouriteViewModel::class.java
     override fun onBinding() {
         mBinding.lifecycleOwner = viewLifecycleOwner
         mBinding.viewModel = mViewModel
 
+        //Normal Toolbar
         setUpToolbar(
             toolbarBinding = mBinding.toolbarLayout,
             title = getString(R.string.favoutite_wifi_label),
@@ -36,11 +36,14 @@ class FavouriteFragment : BaseFragment<FavouriteFragmentBinding, FavouriteViewMo
             showShadow = false
         )
 
+        //SearchBar
         activity?.setUpSearchBar(
             toolbarBinding = mBinding.toolbarLayout2,
             showUpButton = false,
             showShadow = false
-        ){}
+        ){
+            mViewModel.getFavouriteList(value = it)
+        }
 
         setUpRecyclerView(mBinding.rvFavouriteWifiList)
     }

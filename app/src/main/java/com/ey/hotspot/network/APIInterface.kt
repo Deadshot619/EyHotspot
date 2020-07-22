@@ -81,8 +81,7 @@ interface APIInterface {
 
 
     @POST(Constants.API_FAVOURITE_LIST)
-    fun getFavourite(
-    ): Deferred<BaseResponse<List<GetFavouriteItem>>>
+    fun getFavouriteAsync(@Body request: GetFavoriteRequest): Deferred<BaseResponse<List<GetFavouriteItem>>>
 
     //    Reviews & Complaints
     @GET(Constants.API_GET_REVIEWS)    //Reviews

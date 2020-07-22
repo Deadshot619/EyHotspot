@@ -187,13 +187,14 @@ object DataProvider : RemoteDataProvider {
     }
 
     override suspend fun getFavourite(
+        request: GetFavoriteRequest,
         success: (BaseResponse<List<GetFavouriteItem>>) -> Unit,
         error: (Exception) -> Unit
     ) {
 
         try {
             val result =
-                mServices.getFavourite().await()
+                mServices.getFavouriteAsync(request).await()
             success(result)
 
         } catch (e: Exception) {

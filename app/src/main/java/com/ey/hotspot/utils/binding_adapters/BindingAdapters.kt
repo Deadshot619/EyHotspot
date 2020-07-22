@@ -42,6 +42,6 @@ fun bindShowTextViewListEmpty(textView: TextView, list: List<Any>?, value: Strin
         textView.visibility = View.VISIBLE
         textView.text = value
     } else {
-        textView.visibility = View.VISIBLE
+        textView.visibility = View.GONE
     }
 }

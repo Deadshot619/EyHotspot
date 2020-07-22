@@ -81,6 +81,7 @@ interface RemoteDataProvider {
     )
 
     suspend fun getFavourite(
+        request: GetFavoriteRequest,
         success: (BaseResponse<List<GetFavouriteItem>>) -> Unit,
         error: (Exception) -> Unit
     )
