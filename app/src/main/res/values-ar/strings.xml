@@ -51,6 +51,7 @@
     <string name="first_name_label">الاسم الاول</string>
     <string name="last_name_label">الكنية</string>
     <string name="email_id_label">عنوان الايميل</string>
+    <string name="country_code_label">الرقم الدولي</string>
     <string name="mobile_number_label">رقم الهاتف المحمول</string>
     <string name="password_label">كلمه السر</string>
     <string name="confirm_password_label">تأكيد كلمة المرور</string>

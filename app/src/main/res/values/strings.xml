@@ -32,6 +32,7 @@
     <string name="first_name_label">First Name</string>
     <string name="last_name_label">Last Name</string>
     <string name="email_id_label">Email Id</string>
+    <string name="country_code_label">Country Code</string>
     <string name="mobile_number_label">Mobile Number</string>
     <string name="password_label">Password</string>
     <string name="confirm_password_label">Confirm Password</string>
