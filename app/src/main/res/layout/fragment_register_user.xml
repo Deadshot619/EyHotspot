@@ -60,7 +60,7 @@
                 style="@style/EditTextHint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/name_label"
+                android:text='@{String.format("%s *", @string/name_label)}'
                 app:layout_constraintBottom_toTopOf="@id/iv_name"
                 app:layout_constraintEnd_toEndOf="@id/iv_name"
                 app:layout_constraintStart_toStartOf="@id/iv_name"
@@ -168,7 +168,7 @@
                 style="@style/EditTextHint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/email_id_label"
+                android:text='@{String.format("%s *", @string/email_id_label)}'
                 app:layout_constraintBottom_toTopOf="@id/email_input_layout"
                 app:layout_constraintEnd_toEndOf="@id/email_input_layout"
                 app:layout_constraintStart_toStartOf="@id/email_input_layout"
@@ -204,7 +204,7 @@
                 style="@style/EditTextHint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/password_label"
+                android:text='@{String.format("%s *", @string/password_label)}'
                 app:layout_constraintBottom_toTopOf="@id/password_input_layout"
                 app:layout_constraintEnd_toEndOf="@id/password_input_layout"
                 app:layout_constraintStart_toStartOf="@id/password_input_layout"
@@ -241,7 +241,7 @@
                 style="@style/EditTextHint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/confirm_password_label"
+                android:text='@{String.format("%s *", @string/confirm_password_label)}'
                 app:layout_constraintBottom_toTopOf="@id/confirm_password_input_layout"
                 app:layout_constraintEnd_toEndOf="@id/confirm_password_input_layout"
                 app:layout_constraintStart_toStartOf="@id/confirm_password_input_layout"

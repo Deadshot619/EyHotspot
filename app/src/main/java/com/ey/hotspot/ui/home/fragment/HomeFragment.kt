@@ -13,18 +13,17 @@ import android.view.View
 import androidx.lifecycle.Observer
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
-import com.ey.hotspot.app_core_lib.CoreApp
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.FragmentHomeBinding
 import com.ey.hotspot.ui.favourite.model.MarkFavouriteRequest
 import com.ey.hotspot.ui.home.models.GetHotSpotRequest
 import com.ey.hotspot.ui.home.models.GetHotSpotResponse
 import com.ey.hotspot.ui.home.models.MyClusterItems
-import com.ey.hotspot.ui.login.LoginActivity
 import com.ey.hotspot.ui.review_and_complaint.reviews.ReviewsFragment
 import com.ey.hotspot.ui.search.searchlist.SearchListFragment
 import com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment
 import com.ey.hotspot.utils.*
+import com.ey.hotspot.utils.constants.goToLoginScreen
 import com.ey.hotspot.utils.constants.setUpSearchBar
 import com.ey.hotspot.utils.dialogs.YesNoDialog
 import com.google.android.gms.common.ConnectionResult
@@ -417,16 +416,5 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                 }
             }
         }
-    }
-
-    private fun goToLoginScreen() {
-        //Clear Data
-        HotSpotApp.prefs?.clearSharedPrefData()
-
-        //Redirect user to Login Activity
-        CoreApp.instance.startActivity(Intent(CoreApp.instance, LoginActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
-        })
     }
 }

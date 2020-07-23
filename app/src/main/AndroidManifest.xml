@@ -38,7 +38,8 @@
         <activity android:name=".ui.home.BottomNavHomeActivity" />
         <activity android:name=".ui.home.HomeActivity" />
         <activity android:name=".ui.search.SearchActivity"/>
-        <activity android:name=".ui.login.LoginActivity" >
+
+        <activity android:name=".ui.login.LoginActivity" android:launchMode="singleTask">
 
         </activity>
         <activity android:name=".app_core_lib.BaseActivity" />

@@ -20,6 +20,5 @@ abstract class CoreApp : Application() {
 
         if (BuildConfig.DEBUG)
             Timber.plant(Timber.DebugTree())
-
     }
 }

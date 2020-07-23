@@ -70,8 +70,11 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
             lifecycleOwner = viewLifecycleOwner
             viewModel = mViewModel
         }
+
         setUpUIData()
+
         setUpListeners()
+
         setUpObservers()
     }
 
@@ -309,7 +312,7 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
     private fun validate(): Boolean {
         var firstName: Boolean = false
         var lastName: Boolean = false
-        var mobileNo: Boolean = false
+        var mobileNo: Boolean = true
         var emailId: Boolean = false
         var password: Boolean = false
         var confirmPassword: Boolean = false
@@ -330,12 +333,13 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
             lastName = true
         }
 
-        if (!mViewModel.mobileNumber.isValidMobile()) {
-            edtMobileNo.error = resources.getString(R.string.invalid_mobile)
-            mobileNo = false
-        } else {
-            mobileNo = true
-        }
+        if (mViewModel.mobileNumber.trim().isNotEmpty())
+            if (!mViewModel.mobileNumber.isValidMobile()) {
+                edtMobileNo.error = resources.getString(R.string.invalid_mobile)
+                mobileNo = false
+            } else {
+                mobileNo = true
+            }
 
         if (!mViewModel.emailId.isEmailValid()) {
             mBinding.edtEmail.error = resources.getString(R.string.invalid_email_label)
