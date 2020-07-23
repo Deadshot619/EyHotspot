@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ey.hotspot.app_core_lib.BaseViewModel
 import com.ey.hotspot.network.DataProvider
+import com.ey.hotspot.network.response.BaseResponse
 import com.ey.hotspot.ui.favourite.model.MarkFavouriteRequest
 import com.ey.hotspot.ui.home.models.GetHotSpotRequest
 import com.ey.hotspot.ui.home.models.GetHotSpotResponse
@@ -13,8 +14,8 @@ import kotlinx.coroutines.launch
 class SearchListViewModel(application: Application): BaseViewModel(application){
 
     //Skipped user
-    private val _getHotSpotResponse = MutableLiveData<List<GetHotSpotResponse>>()
-    val getHotSpotResponse: LiveData<List<GetHotSpotResponse>>
+    private val _getHotSpotResponse = MutableLiveData<BaseResponse<List<GetHotSpotResponse>>>()
+    val getHotSpotResponse: LiveData<BaseResponse<List<GetHotSpotResponse>>>
         get() = _getHotSpotResponse
 
     //Variable to store search string
@@ -37,7 +38,7 @@ class SearchListViewModel(application: Application): BaseViewModel(application){
                 success = {
 
                     if (it.status){
-                        _getHotSpotResponse.value = it.data
+                        _getHotSpotResponse.value = it
                     } else {
                         showToastFromViewModel(it.message)
                     }
