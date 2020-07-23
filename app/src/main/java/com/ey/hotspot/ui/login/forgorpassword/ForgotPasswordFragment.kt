@@ -20,7 +20,6 @@ class ForgotPasswordFragment :
     val dialog by lazy {
         OkDialog(requireContext()).apply {
             setViews(
-                title = "",
                 okBtn = {
                     this.dismiss()
                 }
@@ -81,10 +80,7 @@ class ForgotPasswordFragment :
                 } else {
                     try {
                         dialog.setViews(
-                            fetchErrorResponse(it.data).toString()
-                            , okBtn = {
-                                dialog.dismiss()
-                            }
+                            it.message
                         )
                         dialog.show()
                     } catch (e: Exception) {

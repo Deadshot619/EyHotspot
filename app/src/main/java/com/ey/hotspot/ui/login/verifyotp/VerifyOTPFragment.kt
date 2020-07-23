@@ -141,10 +141,7 @@ class VerifyOTPFragment :
                 } else {
                     try {
                         dialog.setViews(
-                            fetchErrorResponseVerifyOTP(it.data).toString()
-                            , okBtn = {
-                                dialog.dismiss()
-                            }
+                            title = it.message
                         )
                         dialog.show()
                     } catch (e: Exception) {
