@@ -213,7 +213,7 @@
     <string name="email_id_mobil_no">معرف البريد الإلكتروني / رقم الجوال</string>
     <string name="enter_email_mobile">أدخل معرف البريد الإلكتروني الخاص بك / رقم الجوال</string>
     <string name="send_otp">إرسال OTP</string>
-    <string name="verify_otp">تحقق OTP</string>
+    <string name="verify_otp">تحقق </string>
     <string name="btnResendOTP">إعادة إرسال OTP</string>
     <string name="verify_account">التحقق من الحساب</string>
     <string name="secure_password">إنشاء كلمة مرور جديدة</string>
@@ -221,4 +221,7 @@
     <string name="enter_email_or_password">أدخل معرف البريد الإلكتروني أو رقم الجوال</string>
     <string name="sign_in_issue">هل تواجه مشاكل في التوقيع؟</string>
     <string name="reenter_confirm_password">اعادة ادخال كلمة السر</string>
+    <string name="sms_label">رسالة قصيرة</string>
+    <string name="email_label">البريد الإلكتروني</string>
+    <string name="choose_verify_option">حدد خيار التحقق</string>
 </resources>

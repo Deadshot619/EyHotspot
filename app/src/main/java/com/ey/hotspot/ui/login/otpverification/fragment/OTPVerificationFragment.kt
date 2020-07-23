@@ -84,7 +84,7 @@ class OTPVerificationFragment :
 
         mBinding.btnVerify.setOnClickListener {
 
-            if (!(otp.isEmpty()) && (otp.length == 4)) {
+            if (!(otp.isEmpty()) && (otp.length == 5)) {
                 val verifyOTPRequest: VerifyOTPRequest = VerifyOTPRequest(otp.toInt())
                 mViewModel.verfiyOTPRequest(verifyOTPRequest)
             } else {
@@ -100,6 +100,14 @@ class OTPVerificationFragment :
                 addToBackStack = false,
                 bundle = null
             )
+        }
+
+        mBinding.tvResendOTP.setOnClickListener {
+            val sendOTPRequest: SendOTPRequest = SendOTPRequest(
+                arguments?.getString(selectedType) ?: ""
+            )
+            mViewModel.callSendOTPRequest(sendOTPRequest)
+
         }
 
     }

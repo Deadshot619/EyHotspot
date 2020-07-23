@@ -80,77 +80,45 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
 
         mViewModel.registrationResponse.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
 
-            if (it.status) {
+            it.getContentIfNotHandled()?.let {
 
-                showMessage(it.message, true)
+                if (it.status) {
 
-                replaceFragment(
-                    fragment = RegistrationOptionFragment.newInstance(
-                        emailID = mViewModel.emailId,
-                        phoneNo = mViewModel.mobileNumber
-                    ),
-                    addToBackStack = true
+                    showMessage(it.message, true)
 
-                )
-            } else {
+                    replaceFragment(
+                        fragment = RegistrationOptionFragment.newInstance(
+                            emailID = mViewModel.emailId,
+                            phoneNo = mViewModel.mobileNumber
+                        ),
+                        addToBackStack = true
 
-                try {
-                    dialog.setViews(
-                        convertStringFromList(
-                            it.data.firstName,
-                            it.data.lastName,
-                            it.data.email,
-                            it.data.countryCode,
-                            it.data.mobileNo,
-                            it.data.password,
-                            it.data.confirmPassword
-                        )
                     )
-                    dialog.show()
-                } catch (e: Exception) {
-                    e.printStackTrace()
+                } else {
+
+                    try {
+                        dialog.setViews(
+                            convertStringFromList(
+                                it.data.firstName,
+                                it.data.lastName,
+                                it.data.email,
+                                it.data.countryCode,
+                                it.data.mobileNo,
+                                it.data.password,
+                                it.data.confirmPassword
+                            )
+                        )
+                        dialog.show()
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
                 }
             }
-        })
+            })
+
+
     }
 
-    private fun fetchErrorResponse(registrationResponse: RegistrationResponse): StringBuilder {
-
-        val stringBuilder = StringBuilder()
-        val jsonStrinData = Gson().toJson(registrationResponse)
-        val convertedObject: JsonObject =
-            Gson().fromJson(jsonStrinData, JsonObject::class.java)
-        if (convertedObject.has("first_name")) {
-            stringBuilder.append(convertedObject.getAsJsonArray("first_name").get(0))
-            stringBuilder.append("\n");
-        }
-        if (convertedObject.has("last_name")) {
-            stringBuilder.append(convertedObject.getAsJsonArray("last_name").get(0))
-            stringBuilder.append("\n");
-
-        }
-        if (convertedObject.has("country_code")) {
-            stringBuilder.append(convertedObject.getAsJsonArray("country_code").get(0))
-            stringBuilder.append("\n");
-
-        }
-        if (convertedObject.has("mobile_no")) {
-            stringBuilder.append(convertedObject.getAsJsonArray("mobile_no").get(0))
-            stringBuilder.append("\n");
-
-        }
-        if (convertedObject.has("email")) {
-            stringBuilder.append(convertedObject.getAsJsonArray("email").get(0))
-            stringBuilder.append("\n");
-
-        }
-        if (convertedObject.has("password")) {
-            stringBuilder.append(convertedObject.getAsJsonArray("password").get(0))
-
-        }
-
-        return stringBuilder;
-    }
 
     private fun setUpUIData() {
 

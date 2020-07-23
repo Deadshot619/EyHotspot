@@ -10,19 +10,20 @@ import com.ey.hotspot.network.DataProvider
 import com.ey.hotspot.network.response.BaseResponse
 import com.ey.hotspot.network.response.LoginResponse
 import com.ey.hotspot.ui.login.verifyotp.model.*
+import com.ey.hotspot.utils.Event
 import kotlinx.coroutines.launch
 
 class VerifyOTPViewModel(application: Application) : BaseViewModel(application) {
 
 
     private val _forgotPasswordVerifyOTPResponse =
-        MutableLiveData<BaseResponse<ForgotPasswordVerifyOTPResponse>>()
-    val forgotPasswordVerifyOTPResponse: LiveData<BaseResponse<ForgotPasswordVerifyOTPResponse>>
+        MutableLiveData<Event<BaseResponse<ForgotPasswordVerifyOTPResponse>>>()
+    val forgotPasswordVerifyOTPResponse: LiveData<Event<BaseResponse<ForgotPasswordVerifyOTPResponse>>>
         get() = _forgotPasswordVerifyOTPResponse
 
 
-    private val _resendOTPResponse = MutableLiveData<BaseResponse<ResendForgotPasswordOTP>>()
-    val resendOTPResponse: LiveData<BaseResponse<ResendForgotPasswordOTP>>
+    private val _resendOTPResponse = MutableLiveData<Event<BaseResponse<ResendForgotPasswordOTP>>>()
+    val resendOTPResponse: LiveData<Event<BaseResponse<ResendForgotPasswordOTP>>>
         get() = _resendOTPResponse
 
 
@@ -35,7 +36,7 @@ class VerifyOTPViewModel(application: Application) : BaseViewModel(application) 
                 request = forgotPasswordVerifyOTPRequest,
                 success = {
 
-                    _forgotPasswordVerifyOTPResponse.value = it
+                    _forgotPasswordVerifyOTPResponse.value = Event(it)
                     setDialogVisibility(false)
                 }, error = {
                     checkError(it)
@@ -56,7 +57,7 @@ class VerifyOTPViewModel(application: Application) : BaseViewModel(application) 
                 success = {
 
                     setDialogVisibility(false)
-                    _resendOTPResponse.value = it
+                    _resendOTPResponse.value = Event(it)
                 }, error = {
                     checkError(it)
                 }

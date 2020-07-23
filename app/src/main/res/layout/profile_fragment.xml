@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -79,13 +80,43 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/last_name_label"
                 android:textDirection="locale"
-
                 android:text="@={viewModel.profileData.lastName}"
                 app:layout_constraintBottom_toBottomOf="@id/iv_name"
                 app:layout_constraintEnd_toEndOf="@id/iv_name"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/edt_first_name"
                 app:layout_constraintTop_toTopOf="@id/iv_name" />
+
+
+
+            <!--Spinner-->
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinner_issue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/common_padding"
+                android:layout_marginEnd="@dimen/common_padding"
+                tools:entries="@array/CountryCode"
+                android:dropDownSelector="@color/colorPrimary"
+                android:paddingStart="@dimen/common_padding_24"
+                android:paddingEnd="@dimen/common_padding_24"
+                app:layout_constraintBottom_toBottomOf="@id/iv_countryCode"
+                app:layout_constraintEnd_toEndOf="@id/iv_countryCode"
+                app:layout_constraintStart_toStartOf="@id/iv_countryCode"
+                app:layout_constraintTop_toTopOf="@id/iv_countryCode" />
+
+            <!--Issue bg View-->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_countryCode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_margin_32"
+                android:scaleType="fitXY"
+                android:src="@drawable/mobile_number_bitmap"
+                app:layout_constraintEnd_toEndOf="@id/edt_last_name"
+                app:layout_constraintStart_toStartOf="@id/edt_first_name"
+                app:layout_constraintTop_toBottomOf="@id/edt_last_name" />
+
 
             <!--Mobile No-->
             <com.google.android.material.textfield.TextInputLayout
@@ -99,7 +130,7 @@
                 app:hintEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_name">
+                app:layout_constraintTop_toBottomOf="@id/iv_countryCode">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_mobile_no"

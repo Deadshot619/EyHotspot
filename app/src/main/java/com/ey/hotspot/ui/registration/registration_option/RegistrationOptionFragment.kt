@@ -1,12 +1,16 @@
 package com.ey.hotspot.ui.registration.registration_option
 
 import android.os.Bundle
+import android.widget.RadioButton
+import android.widget.RadioGroup
+import android.widget.Toast
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentRegistrationOptionBinding
 import com.ey.hotspot.ui.login.login_fragment.LoginFragment
 import com.ey.hotspot.ui.login.otpverification.fragment.OTPVerificationFragment
 import com.ey.hotspot.utils.replaceFragment
+import com.ey.hotspot.utils.showMessage
 
 class RegistrationOptionFragment :
     BaseFragment<FragmentRegistrationOptionBinding, RegistrationOptionViewModel>() {
@@ -26,6 +30,7 @@ class RegistrationOptionFragment :
     }
 
     lateinit var TYPE_VALUE: String
+     var selectedOption: String=""
 
     override fun getLayoutId() = R.layout.fragment_registration_option
     override fun getViewModel() = RegistrationOptionViewModel::class.java
@@ -49,32 +54,41 @@ class RegistrationOptionFragment :
      */
     private fun setUpListeners() {
         mBinding.run {
-            //Next button
-            btnOtpSms.setOnClickListener {
-                replaceFragment(
-                    fragment = OTPVerificationFragment.newInstance(
-                        selectedOption = "sms",
-                        selectedItem = arguments?.getString(mPhoneNO) ?: ""
-                    ),
-                    addToBackStack = true
-                )
-            }
 
-            //Sign In button
-            btnEmailLink.setOnClickListener {
+            rgSelectedMethod.setOnCheckedChangeListener(
+                RadioGroup.OnCheckedChangeListener { group, checkedId ->
+                    val radio: RadioButton? = group?.findViewById(checkedId)
 
-                replaceFragment(
-                    fragment = OTPVerificationFragment.newInstance(
-                        selectedOption = "email",
-                        selectedItem = arguments?.getString(mEmailId) ?: ""
-                    ),
-                    addToBackStack = true
-                )
-            }
+                    if (radio?.text.toString().equals("SMS")) {
+                        selectedOption = "sms"
+                    }
+                    if (radio?.text.toString().equals("Email")) {
+                        selectedOption = "email"
+                    }
 
-            btnSignIn.setOnClickListener {
-                replaceFragment(LoginFragment.newInstance(), false, null)
+                })
+
+
+
+
+            btnSubmit.setOnClickListener {
+
+                if(selectedOption.equals("")){
+
+                    showMessage(resources.getString(R.string.choose_verify_option))
+
+                }else{
+                    replaceFragment(
+                        fragment = OTPVerificationFragment.newInstance(
+                            selectedOption = selectedOption,
+                            selectedItem = arguments?.getString(mEmailId) ?: ""
+                        ),
+                        addToBackStack = true
+                    )
+                }
+
             }
         }
+
     }
 }

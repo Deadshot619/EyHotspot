@@ -24,13 +24,27 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/margin_20" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/margin_20" />
+
+
         <!--    User image  -->
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_user"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:layout_marginTop="@dimen/common_margin_top"
-            android:src="@drawable/ic_baseline_person_24"
+            android:src="@drawable/ic_email_verification"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbarLayout" />
@@ -38,65 +52,106 @@
         <!--        Select verification method-->
         <TextView
             android:id="@+id/tv_select_verification_method_label"
-            style="@style/TextAppearance.MyApp.Headline3_Profile_Normal"
+            style="@style/TextAppearance.MyApp.Headline5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/common_margin_top"
+            android:layout_gravity="center"
             android:gravity="center"
             android:text="@string/verification_method_label"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guideline_right"
+            app:layout_constraintStart_toStartOf="@id/guideline_left"
             app:layout_constraintTop_toBottomOf="@+id/iv_user" />
 
 
-        <!--Email Link-->
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_email_link"
+        <RadioGroup
+            android:id="@+id/rgSelectedMethod"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/margin_10"
+            android:paddingEnd="@dimen/margin_30"
+            android:paddingStart="@dimen/margin_30"
+            android:textDirection="locale"
+
+            app:layout_constraintEnd_toEndOf="@id/guideline_right"
+            app:layout_constraintStart_toStartOf="@id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@+id/tv_select_verification_method_label">
+
+            <RadioButton
+                android:id="@+id/radioButton1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingStart="@dimen/margin_20"
+                android:layout_gravity="center"
+                android:text="@string/sms_label"
+                android:textDirection="locale"
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:id="@+id/radioButton2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingStart="@dimen/margin_20"
+                android:text="@string/email_label"
+                android:textDirection="locale"
+                android:textSize="18sp" />
+
+        </RadioGroup>
+
+        <!--Enter message-->
+        <TextView
+            android:id="@+id/tv_enter_message_shown"
+            style="@style/TextAppearance.MyApp.Headline5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_20"
-            android:background="@drawable/sign_btn_gradient"
-            android:paddingStart="@dimen/margin_20"
-            android:paddingEnd="@dimen/margin_20"
-            android:text="@string/email_link_label"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_select_verification_method_label" />
+            android:textSize="@dimen/text_size_14"
+            android:layout_marginTop="@dimen/common_margin"
+            android:text="@string/captcha_label"
+            android:textDirection="locale"
+            app:layout_constraintEnd_toEndOf="@+id/guideline_right"
+            app:layout_constraintStart_toStartOf="@id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@id/rgSelectedMethod" />
+
+
+        <!--Captcha input-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/captcha_input_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_margin_between_fields_4"
+            android:textDirection="locale"
+            app:layout_constraintEnd_toEndOf="@id/guideline_right"
+            app:layout_constraintStart_toStartOf="@id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@id/tv_enter_message_shown">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_captcha"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/enter_captcha"
+                android:textDirection="locale" />
+        </com.google.android.material.textfield.TextInputLayout>
+
 
 
         <!--otp on sms-->
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_otp_sms"
+            android:id="@+id/btnSubmit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_20"
             android:background="@drawable/sign_btn_gradient"
-            android:paddingStart="@dimen/margin_20"
-            android:paddingEnd="@dimen/margin_20"
-            android:text="@string/otp_sms_label"
-
+            android:gravity="center"
+            android:paddingStart="@dimen/margin_40"
+            android:paddingEnd="@dimen/margin_40"
+            android:text="@string/submit_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btn_email_link" />
-
-
-        <!--Sign In-->
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_sign_in"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/common_margin_top"
-            android:layout_marginBottom="@dimen/common_margin_bottom"
-            android:background="@drawable/sign_btn_gradient"
-            android:paddingStart="@dimen/margin_30"
-            android:paddingEnd="@dimen/margin_30"
-            android:text="@string/sign_in_label"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btn_otp_sms"
-            app:layout_constraintVertical_bias="1" />
+            app:layout_constraintTop_toBottomOf="@id/captcha_input_layout" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

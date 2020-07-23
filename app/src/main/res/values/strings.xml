@@ -45,7 +45,7 @@
     <string name="logout_label">Logout</string>
 
     <!--    Registration Option    -->
-    <string name="verification_method_label">Select verification method</string>
+    <string name="verification_method_label">Please Select Option  To Verify Your Account</string>
     <string name="otp_sms_label">Verfiy OTP using SMS</string>
     <string name="email_link_label">Verify OTP using Email</string>
 
@@ -220,7 +220,7 @@
     <string name="email_id_mobil_no">Email Id /Mobile Number</string>
     <string name="enter_email_mobile">Enter Email Id or Mobile Number</string>
     <string name="send_otp">SEND OTP</string>
-    <string name="verify_otp">VERIFY  OTP</string>
+    <string name="verify_otp">VERIFY </string>
     <string name="btnResendOTP">RESEND OTP</string>
     <string name="verify_account">Verify Account</string>
     <string name="secure_password">Create New Password</string>
@@ -228,6 +228,9 @@
     <string name="enter_email_or_password">Enter  email id or  mobile no</string>
     <string name="sign_in_issue">HAVING  TROUBLE SIGINING  IN?</string>
     <string name="reenter_confirm_password">Re-enter Password</string>
+    <string name="sms_label">SMS</string>
+    <string name="email_label">Email</string>
+    <string name="choose_verify_option">Select Verification Option</string>
 
 
     <!--Demo issue type string-->
@@ -236,5 +239,10 @@
         <item>Issue 2</item>
         <item>Issue 3</item>
         <item>Issue 4</item>
+    </string-array>
+
+
+    <string-array name="CountryCode">
+        <item>Countryone</item>
     </string-array>
 </resources>

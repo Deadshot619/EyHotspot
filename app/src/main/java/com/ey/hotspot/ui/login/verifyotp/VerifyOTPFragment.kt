@@ -89,21 +89,25 @@ class VerifyOTPFragment :
 
         mBinding.btnVerify.setOnClickListener {
 
-            if (!(otp.isEmpty()) && (otp.length == 4)) {
-                val verifyOTPRequest: ForgotPasswordVerifyOTPRequest =
-                    ForgotPasswordVerifyOTPRequest(
-                        otp.toInt(),
-                        HotSpotApp.prefs!!.getForgotPasswordField()
-                    )
-                mViewModel.verifyForgotPasswordOTP(verifyOTPRequest)
-            } else {
-                showMessage(requireActivity().getString(R.string.enter_valid_otp))
+            try {
+                if (!(otp.isEmpty()) && (otp.length == 5)) {
+                    val verifyOTPRequest: ForgotPasswordVerifyOTPRequest =
+                        ForgotPasswordVerifyOTPRequest(
+                            otp.toInt(),
+                            HotSpotApp.prefs!!.getForgotPasswordField()
+                        )
+                    mViewModel.verifyForgotPasswordOTP(verifyOTPRequest)
+                } else {
+                    showMessage(requireActivity().getString(R.string.enter_valid_otp))
+                }
+
+
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
-
-
         }
 
-        mBinding.btResendOTP.setOnClickListener {
+        mBinding.tvResendOTP.setOnClickListener {
 
             val forgotPasswordResendOTPRequest: ForgotPasswordResendOTPRequest =
                 ForgotPasswordResendOTPRequest(
@@ -121,53 +125,60 @@ class VerifyOTPFragment :
 
         mViewModel.forgotPasswordVerifyOTPResponse.observe(viewLifecycleOwner, Observer {
 
-            if (it.status) {
+            it.getContentIfNotHandled()?.let {
+                if (it.status) {
 
-                showMessage(it.message, true)
+                    showMessage(it.message, true)
 
-                replaceFragment(
-                    fragment = ChangePasswordFragment.newInstance(
-                        otp = otp
-                    ),
-                    addToBackStack = true
+                    replaceFragment(
+                        fragment = ChangePasswordFragment.newInstance(
+                            otp = otp
+                        ),
+                        addToBackStack = true
 
-                )
-
-            } else {
-                try {
-                    dialog.setViews(
-                        fetchErrorResponseVerifyOTP(it.data).toString()
-                        , okBtn = {
-                            dialog.dismiss()
-                        }
                     )
-                    dialog.show()
-                } catch (e: Exception) {
-                    e.printStackTrace()
+
+                } else {
+                    try {
+                        dialog.setViews(
+                            fetchErrorResponseVerifyOTP(it.data).toString()
+                            , okBtn = {
+                                dialog.dismiss()
+                            }
+                        )
+                        dialog.show()
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
                 }
+
             }
 
         })
 
         mViewModel.resendOTPResponse.observe(viewLifecycleOwner, Observer {
 
-            if (it.status == true) {
+            it.getContentIfNotHandled()?.let {
 
-                showMessage(it.message, true)
+                if (it.status == true) {
 
-            } else {
-                try {
-                    dialog.setViews(
-                        fetchErrorResponse(it.data).toString()
-                        , okBtn = {
-                            dialog.dismiss()
-                        }
-                    )
-                    dialog.show()
-                } catch (e: Exception) {
-                    e.printStackTrace()
+                    showMessage(it.message, true)
+
+                } else {
+                    try {
+                        dialog.setViews(
+                            fetchErrorResponse(it.data).toString()
+                            , okBtn = {
+                                dialog.dismiss()
+                            }
+                        )
+                        dialog.show()
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
                 }
             }
+
         })
     }
 

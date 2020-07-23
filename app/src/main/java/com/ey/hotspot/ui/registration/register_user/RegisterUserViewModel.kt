@@ -25,8 +25,8 @@ class RegisterUserViewModel(application: Application) : BaseViewModel(applicatio
     var coutrycode = ""
 
 
-    private val _registrationResponse = MutableLiveData<BaseResponse<RegistrationResponse>>()
-    val registrationResponse: LiveData<BaseResponse<RegistrationResponse>>
+    private val _registrationResponse = MutableLiveData<Event<BaseResponse<RegistrationResponse>>>()
+    val registrationResponse: LiveData<Event<BaseResponse<RegistrationResponse>>>
         get() = _registrationResponse
 
     //This variable will handle Profile Errors
@@ -45,7 +45,7 @@ class RegisterUserViewModel(application: Application) : BaseViewModel(applicatio
                 success = {
 
 
-                    _registrationResponse.value = it
+                    _registrationResponse.value = Event(it)
                     if (it.status) {
                         saveRegistrationTokenInSharedPreference(it.data.tmp_token)
                     }

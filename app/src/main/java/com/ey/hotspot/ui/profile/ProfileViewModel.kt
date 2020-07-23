@@ -31,8 +31,8 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
         get() = _profileError
 
     //Country Codes
-    private val _getCoutryCodeList = MutableLiveData<BaseResponse<CoutryCode>>()
-    val getCountryCodeList: LiveData<BaseResponse<CoutryCode>>
+    private val _getCoutryCodeList = MutableLiveData<Event<BaseResponse<CoutryCode>>>()
+    val getCountryCodeList: LiveData<Event<BaseResponse<CoutryCode>>>
         get() = _getCoutryCodeList
 
     init {
@@ -99,7 +99,7 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
 
             DataProvider.getCountryCode(
                 success = {
-                    _getCoutryCodeList.value = it
+                    _getCoutryCodeList.value = Event(it)
                     setDialogVisibility(false)
                 },
                 error = {
