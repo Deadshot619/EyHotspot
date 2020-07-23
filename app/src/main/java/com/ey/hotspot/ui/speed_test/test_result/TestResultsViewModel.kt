@@ -34,6 +34,11 @@ class TestResultsViewModel(application: Application) : BaseViewModel(application
         }
     }
 
+    //Method to set download speed value
+    fun setSpeedValue(value: BigDecimal){
+        _downloadSpeed.value = value
+    }
+
     private suspend fun startDownload() {
         withContext(Dispatchers.IO) {
             SpeedTestUtils.calculateSpeed(

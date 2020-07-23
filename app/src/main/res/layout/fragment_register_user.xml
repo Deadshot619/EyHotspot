@@ -60,7 +60,7 @@
                 style="@style/EditTextHint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/name_label"
+                android:text='@{String.format("%s *", @string/name_label)}'
                 app:layout_constraintBottom_toTopOf="@id/iv_name"
                 app:layout_constraintEnd_toEndOf="@id/iv_name"
                 app:layout_constraintStart_toStartOf="@id/iv_name"
@@ -116,7 +116,7 @@
                     android:id="@+id/edtMobileNo"
                     style="@style/CustomEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:textDirection="locale"
                     android:inputType="phone"
                     android:background="@drawable/mobile_number_bitmap"
@@ -168,7 +168,7 @@
                 style="@style/EditTextHint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/email_id_label"
+                android:text='@{String.format("%s *", @string/email_id_label)}'
                 app:layout_constraintBottom_toTopOf="@id/email_input_layout"
                 app:layout_constraintEnd_toEndOf="@id/email_input_layout"
                 app:layout_constraintStart_toStartOf="@id/email_input_layout"
@@ -189,7 +189,7 @@
                     android:id="@+id/edt_password"
                     style="@style/CustomEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:inputType="textPassword"
                     android:background="@drawable/password_bitmap"
                     android:hint="@string/enter_password"
@@ -204,7 +204,7 @@
                 style="@style/EditTextHint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/password_label"
+                android:text='@{String.format("%s *", @string/password_label)}'
                 app:layout_constraintBottom_toTopOf="@id/password_input_layout"
                 app:layout_constraintEnd_toEndOf="@id/password_input_layout"
                 app:layout_constraintStart_toStartOf="@id/password_input_layout"
@@ -225,8 +225,7 @@
                     android:id="@+id/edt_confirm_password"
                     style="@style/CustomEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textDirection="locale"
+                    android:layout_height="wrap_content"
 
                     android:inputType="textPassword"
                     android:background="@drawable/password_bitmap"
@@ -241,7 +240,7 @@
                 style="@style/EditTextHint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/confirm_password_label"
+                android:text='@{String.format("%s *", @string/confirm_password_label)}'
                 app:layout_constraintBottom_toTopOf="@id/confirm_password_input_layout"
                 app:layout_constraintEnd_toEndOf="@id/confirm_password_input_layout"
                 app:layout_constraintStart_toStartOf="@id/confirm_password_input_layout"

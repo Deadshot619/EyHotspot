@@ -6,7 +6,7 @@ class GetFavouriteItem(
     @SerializedName("user_id") val user_id : Int,
     @SerializedName("id") val id : Int,
     @SerializedName("provider_id") val provider_id : Int,
-    @SerializedName("hotspot_id") val hotspot_id : Int,
+    @SerializedName("hotspot_id") val hotspot_id : String,
     @SerializedName("name") val name : String,
     @SerializedName("name_arabic") val name_arabic : String,
     @SerializedName("lat") val lat : Double,

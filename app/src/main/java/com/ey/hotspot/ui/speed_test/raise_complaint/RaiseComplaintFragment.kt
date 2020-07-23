@@ -76,7 +76,6 @@ class RaiseComplaintFragment :
             //Issues Spinner
             spinnerIssue.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(p0: AdapterView<*>?) {
-                    TODO("Not yet implemented")
                 }
 
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
@@ -90,6 +89,7 @@ class RaiseComplaintFragment :
     }
 
     private fun setUpObservers() {
+        //Issues type
         mViewModel.issuesTypes.observe(viewLifecycleOwner, Observer {
             it?.let {
                 val adapter = ArrayAdapter<String>(
@@ -104,7 +104,7 @@ class RaiseComplaintFragment :
 
         //Simon, Go Back
         mViewModel.goBack.observe(viewLifecycleOwner, Observer {
-            it.getContentIfNotHandled()?.let {status ->
+            it.getContentIfNotHandled()?.let { status ->
                 if (status)
                     activity?.onBackPressed()
             }
@@ -123,7 +123,7 @@ class RaiseComplaintFragment :
                         showMessage("Please select a issue")
                         false
                     }
-                    feedback.trim().isEmpty() -> {
+                    issueType.toLowerCase() == "others" && feedback.trim().isEmpty() -> {
                         edtRemarks.error = resources.getString(R.string.enter_remark_error_label)
                         false
                     }

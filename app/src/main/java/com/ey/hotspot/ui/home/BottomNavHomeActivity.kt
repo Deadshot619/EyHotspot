@@ -4,18 +4,17 @@ import android.content.Intent
 import androidx.core.content.ContextCompat
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseActivity
-import com.ey.hotspot.app_core_lib.CoreApp
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.ActivityBottomNavHomeBinding
 import com.ey.hotspot.service.WifiService
 import com.ey.hotspot.ui.favourite.FavouriteFragment
 import com.ey.hotspot.ui.home.fragment.HomeFragment
-import com.ey.hotspot.ui.login.LoginActivity
 import com.ey.hotspot.ui.review_and_complaint.ReviewAndComplainFragment
 import com.ey.hotspot.ui.settings.fragments.SettingsFragment
 import com.ey.hotspot.ui.speed_test.speed_test_fragmet.SpeedTestFragment
 import com.ey.hotspot.utils.CHANNEL_ID
 import com.ey.hotspot.utils.channel_name
+import com.ey.hotspot.utils.constants.goToLoginScreen
 import com.ey.hotspot.utils.createNotificationChannel
 import com.ey.hotspot.utils.dialogs.YesNoDialog
 import com.ey.hotspot.utils.wifi_notification_key
@@ -25,8 +24,8 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
     private val dialog by lazy { YesNoDialog(this).apply {
         //TODO 17/07/2020 : Extract String resources
         setViews(
-            title = "Login Required",
-            description = "You need to login to access this feature",
+            title = getString(R.string.login_required),
+            description = getString(R.string.need_to_login),
             yes = {
                 goToLoginScreen()
             },
@@ -130,16 +129,6 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
         }
     }
 
-    private fun goToLoginScreen(){
-        //Clear Data
-        HotSpotApp.prefs?.clearSharedPrefData()
-
-        //Redirect user to Login Activity
-        CoreApp.instance.startActivity(Intent(CoreApp.instance, LoginActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
-        })
-    }
 
 
 }

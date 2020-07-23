@@ -87,8 +87,9 @@ class RateWifiFragment : BaseFragment<FragmentRateWifiBinding, RateWifiViewModel
                     showMessage("Please provide a rating")
                     false
                 } else if (feedback.trim().isEmpty()) {
-                    edtRemarks.error = resources.getString(R.string.enter_remark_error_label)
-                    false
+//                    edtRemarks.error = resources.getString(R.string.enter_remark_error_label)
+//                    false
+                    true
                 } else true
             }
         } ?: return false

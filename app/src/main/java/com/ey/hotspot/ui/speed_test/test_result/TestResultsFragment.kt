@@ -5,6 +5,7 @@ import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentTestResultsBinding
 import com.ey.hotspot.utils.constants.setUpToolbar
+import java.math.BigDecimal
 
 class TestResultsFragment : BaseFragment<FragmentTestResultsBinding, TestResultsViewModel>() {
 
@@ -32,6 +33,7 @@ class TestResultsFragment : BaseFragment<FragmentTestResultsBinding, TestResults
     private fun setUpListeners(){
 //        Toolbar retest button
         mBinding.toolbarLayout.tvTextButton.setOnClickListener {
+            mViewModel.setSpeedValue(BigDecimal.valueOf(0))
             mViewModel.onCheckSpeedClick()
         }
     }
