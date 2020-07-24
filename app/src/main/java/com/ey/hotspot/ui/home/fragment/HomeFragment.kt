@@ -186,7 +186,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
     private fun getDeviceLocation() {
         try {
-            if (locationPermissionGranted) {
                 val locationResult = fusedLocationProviderClient.lastLocation
                 locationResult.addOnCompleteListener(requireActivity()) { task ->
                     if (task.isSuccessful) {
@@ -216,13 +215,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                         }
                     } else {
                         map?.moveCamera(
-                            CameraUpdateFactory
-                                .newLatLngZoom(defaultLocation, HomeFragment.DEFAULT_ZOOM.toFloat())
+                            CameraUpdateFactory.newLatLngZoom(
+                                LatLng(
+                                    Constants.LATITUDE,
+                                    Constants.LONGITUDE
+                                ), HomeFragment.DEFAULT_ZOOM.toFloat()
+                            )
                         )
-                        map?.uiSettings?.isMyLocationButtonEnabled = false
+                        getNearByWifiList(checkLocSaveState())
+
                     }
                 }
-            }
+
         } catch (e: SecurityException) {
             Log.e("Exception: %s", e.message, e)
         }
@@ -486,6 +490,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                     grantResults[0] == PackageManager.PERMISSION_GRANTED
                 ) {
                     locationPermissionGranted = true
+                }else{
+
                 }
             }
         }
