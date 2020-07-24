@@ -17,7 +17,6 @@ class RegistrationOptionFragment :
     companion object {
         fun newInstance(emailID: String, phoneNo: String) = RegistrationOptionFragment().apply {
             arguments = Bundle().apply {
-
                 putString(mEmailId, emailID)
                 putString(mPhoneNO, phoneNo)
             }
@@ -26,10 +25,15 @@ class RegistrationOptionFragment :
         const val TYPE_KEY = "type_key"
         const val mEmailId = "emailid"
         const val mPhoneNO = "phone_no"
+
+        const val SMS = "sms"
+        const val EMAIL = "email"
     }
 
     lateinit var TYPE_VALUE: String
-     var selectedOption: String=""
+    var selectedOption: String = ""
+    lateinit var phoneNo: String
+    lateinit var emailID: String
 
     override fun getLayoutId() = R.layout.fragment_registration_option
     override fun getViewModel() = RegistrationOptionViewModel::class.java
@@ -41,12 +45,16 @@ class RegistrationOptionFragment :
             showUpButton = true
         )
         TYPE_VALUE = getDataFromArguments(this, TYPE_KEY)
+        phoneNo = arguments?.getString(mPhoneNO)?.trim() ?: ""
+        emailID = arguments?.getString(mEmailId)?.trim() ?: ""
+
 //        if (TYPE_VALUE == OptionType.TYPE_REGISTRATION.name)
 //            else
 
         setUpListeners()
 
-       if(arguments?.getString(mPhoneNO)?.trim().isNullOrEmpty())
+        //If phone no. id empty, then hide the selection
+       if(phoneNo.isEmpty())
            mBinding.rbSms.visibility = View.GONE
     }
 
@@ -63,10 +71,10 @@ class RegistrationOptionFragment :
                     val radio: RadioButton? = group?.findViewById(checkedId)
 
                     if (radio?.text.toString() == "SMS") {
-                        selectedOption = "sms"
+                        selectedOption = SMS
                     }
                     if (radio?.text.toString() == "Email") {
-                        selectedOption = "email"
+                        selectedOption = EMAIL
                     }
 
                 })
@@ -75,15 +83,13 @@ class RegistrationOptionFragment :
             //Submit
             btnSubmit.setOnClickListener {
 
-                if(selectedOption.equals("")){
-
+                if(selectedOption.trim().isEmpty()){
                     showMessage(resources.getString(R.string.choose_verify_option))
-
                 }else{
                     replaceFragment(
                         fragment = OTPVerificationFragment.newInstance(
                             selectedOption = selectedOption,
-                            selectedItem = arguments?.getString(mEmailId) ?: ""
+                            selectedItem = if(selectedOption == SMS) phoneNo else emailID
                         ),
                         addToBackStack = true
                     )
