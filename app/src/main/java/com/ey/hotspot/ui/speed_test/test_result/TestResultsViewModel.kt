@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.ey.hotspot.app_core_lib.BaseViewModel
 import com.ey.hotspot.utils.Event
 import com.ey.hotspot.utils.SpeedTestUtils
+import com.ey.hotspot.utils.constants.Constants
 import com.ey.hotspot.utils.convertBpsToMbps
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -48,7 +49,7 @@ class TestResultsViewModel(application: Application) : BaseViewModel(application
                     _downloadSpeed.postValue(it?.transferRateBit?.convertBpsToMbps())
                 }, {
                     _toastMessage.postValue(Event(it))
-                }).startDownload("http://ipv4.ikoula.testdebit.info/1M.iso")
+                }).startDownload(Constants.DOWNLOAD_LINK)
         }
     }
 

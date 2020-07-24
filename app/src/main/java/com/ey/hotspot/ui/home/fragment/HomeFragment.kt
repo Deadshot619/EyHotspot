@@ -116,40 +116,26 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         val myMAPF = childFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment?
         myMAPF?.getMapAsync(this)
-
         setUpObservers()
-
-    }
-
-
-    override fun onResume() {
-        super.onResume()
-
-        if (mBinding.customPop.cvMainLayout.visibility == View.VISIBLE) {
-            Log.d("VISIBILITY","VIS")
-        } else {
-            Log.d("VISIBILITY","GONE")
-        }
-
     }
 
 
     private fun setUpObservers() {
-
-
         mViewModel.getHotSpotResponse.observe(viewLifecycleOwner, Observer {
-            if (it.status) {
-                setupClusters()
-                setUpHotSpotDataInCluster(it.data)
-            } else {
-                showMessage(it.message, true)
+            it.getContentIfNotHandled()?.let {
+                if (it.status) {
+                    setupClusters()
+                    setUpHotSpotDataInCluster(it.data)
+                } else {
+                    showMessage(it.message, true)
+                }
             }
         })
-        mViewModel.markFavouriteResponse.observe(viewLifecycleOwner, Observer {
-            if (it.status) {
-                showMessage(it.message, true)
-            } else {
-                showMessage(it.message, true)
+
+        //Change Favourite
+        mViewModel.markFavourite.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let {  item->
+                mClusterManager.updateItem(item.apply { changeFavourite(!mIsFavourite) })
             }
         })
     }
@@ -164,7 +150,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
     private fun getNearByWifiList(gpsStatus: Boolean) {
 
-        if (gpsStatus) {
+        if(gpsStatus){
 
             val getHotSpotRequest: GetHotSpotRequest = GetHotSpotRequest(
                 lastKnownLocation!!.latitude,
@@ -187,6 +173,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
         // Prompt the user for permission.
         getLocationPermission()
+
         setUpClickListener()
         // Turn on the My Location layer and the related control on the map.
         updateLocationUI()
@@ -197,7 +184,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
     private fun setUpClickListener() {
         this.map?.setOnMapClickListener(OnMapClickListener {
             mBinding.customPop.cvMainLayout.visibility = View.GONE
-
         })
 
 //      Searchbar
@@ -328,7 +314,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                 }
                 val markFavouriteRequest: MarkFavouriteRequest =
                     MarkFavouriteRequest(clickedVenueMarker!!.mItemID)
-                mViewModel.markFavouriteItem(markFavouriteRequest, favouriteType)
+                mViewModel.markFavouriteItem(markFavouriteRequest, favouriteType, item)
+
             } else {
                 dialog.show()
             }
@@ -385,14 +372,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         for (location in list) {
             val offsetItems =
                 MyClusterItems(
-                    location.lat.parseToDouble(),
-                    location.lng.parseToDouble(),
-                    location.provider_name,
-                    location.navigate_url,
-                    location.favourite,
-                    location.name,
-                    location.id,
-                    location.location,
+                    lat = location.lat.parseToDouble(),
+                    lng = location.lng.parseToDouble(),
+                    navigateURL = location.provider_name,
+                    title = location.name,
+                    snippet = location.navigate_url,
+                    isfavourite = location.favourite,
+                    itemId = location.id,
+                    address = location.location,
                     location.lat.parseToDouble(),
                     location.lng.parseToDouble()
                 )
@@ -402,10 +389,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
     override fun onClusterItemInfoWindowClick(item: MyClusterItems?) {
 
-        Log.d("ITEMCLICK","ITEM")
     }
 
     companion object {
+        private val TAG = HomeFragment::class.java.simpleName
         private const val DEFAULT_ZOOM = 12
         private const val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
 

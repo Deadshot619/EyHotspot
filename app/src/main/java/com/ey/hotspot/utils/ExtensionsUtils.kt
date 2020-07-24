@@ -125,7 +125,7 @@ fun Activity.isLocationEnabled(): Boolean {
  */
 fun BigDecimal.convertBpsToMbps(): BigDecimal {
     return try {
-        (this / 104857.toBigDecimal()).setScale(
+        ((this / 104857.toBigDecimal())/8.toBigDecimal()).setScale(
             2,
             RoundingMode.CEILING
         )

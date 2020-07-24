@@ -146,7 +146,6 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
             status = false
         }
         return status
-
     }
 
     fun clearFragmentBackstack(){

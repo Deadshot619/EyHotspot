@@ -90,7 +90,4 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
         }
 
     }
-
-
-
 }
