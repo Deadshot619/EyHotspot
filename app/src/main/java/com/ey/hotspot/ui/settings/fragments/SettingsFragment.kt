@@ -18,6 +18,7 @@ import com.ey.hotspot.utils.constants.Constants
 import com.ey.hotspot.utils.constants.goToLoginScreen
 import com.ey.hotspot.utils.dialogs.YesNoDialog
 import com.ey.hotspot.utils.replaceFragment
+import com.ey.hotspot.utils.showMessage
 import kotlinx.android.synthetic.main.custom_confirm_settings_dialog.view.*
 
 class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel>() {
@@ -71,7 +72,8 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel
 
         //Wifi Log List
         mBinding.llWifiLogList.setOnClickListener {
-            replaceFragment(WifiLogListFragment(), true)
+            showMessage(resources.getString(R.string.under_construction_label))
+            //replaceFragment(WifiLogListFragment(), true)
         }
 
         /*Submit click*/
