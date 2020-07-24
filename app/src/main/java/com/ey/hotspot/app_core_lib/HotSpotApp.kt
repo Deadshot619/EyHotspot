@@ -47,6 +47,7 @@ class HotSpotApp : CoreApp() {
             .build()
         Fabric.with(fabric)
 
+        //Set global variable Language of app as its default to 'en'
         prefs?.setLanguage(prefs?.getLanguage() ?: Constants.ENGLISH_LANG)
 
        // FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true);
