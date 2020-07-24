@@ -52,6 +52,18 @@ fun convertStringFromList(vararg lists: List<String>?): String{
  * Method to logout user
  */
 fun goToLoginScreen() {
+    clearDataSaveLang()
+
+    //Redirect user to Login Activity
+    CoreApp.instance.startActivity(Intent(CoreApp.instance, LoginActivity::class.java).apply {
+        flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+    })
+}
+
+/**
+ * This method will clear all the sharedPref data except Language
+ */
+fun clearDataSaveLang(){
     val lang = if (ENGLISH_LANG == HotSpotApp.prefs?.getLanguage()) ENGLISH_LANG else ARABIC_LANG
 
     //Clear Data
@@ -59,9 +71,4 @@ fun goToLoginScreen() {
 
     //Set language
     HotSpotApp.prefs?.setLanguage(lang)
-
-    //Redirect user to Login Activity
-    CoreApp.instance.startActivity(Intent(CoreApp.instance, LoginActivity::class.java).apply {
-        flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-    })
 }
