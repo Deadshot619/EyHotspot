@@ -147,28 +147,28 @@
             android:id="@+id/tvreceviedotp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/common_margin_32"
+            android:layout_marginTop="@dimen/margin_20"
             android:text="@string/receive_otp"
             android:textSize="@dimen/text_size_18"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintTop_toBottomOf="@+id/btnVerify"
+            app:layout_constraintEnd_toEndOf="@id/guideline_right"
             app:layout_constraintStart_toStartOf="@id/guideline_left"
-            app:layout_constraintTop_toBottomOf="@+id/btnVerify" />
+             />
 
         <!--        Resend OTP-->
         <TextView
             android:id="@+id/tvResendOTP"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/common_margin_between_fields_4"
             android:text="@string/resend_otp_label"
             android:textColor="@color/colorPrimarySub"
             android:textSize="@dimen/text_size_18"
-            app:layout_constraintBottom_toBottomOf="@+id/tvreceviedotp"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/margin_10"
+            app:layout_constraintTop_toBottomOf="@+id/tvreceviedotp"
             app:layout_constraintEnd_toEndOf="@id/guideline_right"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/tvreceviedotp"
-            app:layout_constraintTop_toTopOf="@+id/tvreceviedotp" />
+            app:layout_constraintStart_toStartOf="@+id/guideline_left"
+             />
 
 
         <!--Sign In-->

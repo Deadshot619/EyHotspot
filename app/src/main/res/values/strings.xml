@@ -235,6 +235,7 @@
     <string name="email_label">Email</string>
     <string name="choose_verify_option">Select Verification Option</string>
     <string name="captcha_characters">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789</string>
+    <string name="forgotpassword_label">Forgot Password</string>
 
 
     <!--Demo issue type string-->

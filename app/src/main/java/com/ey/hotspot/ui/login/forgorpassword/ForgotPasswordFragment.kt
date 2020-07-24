@@ -49,7 +49,7 @@ class ForgotPasswordFragment :
 
         setUpToolbar(
             toolbarBinding = mBinding.toolbarLayout,
-            title = getString(R.string.forgotpassword),
+            title = getString(R.string.forgotpassword_label),
             showUpButton = true
         )
 

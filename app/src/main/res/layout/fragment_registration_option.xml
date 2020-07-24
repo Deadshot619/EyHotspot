@@ -133,6 +133,11 @@
                 android:id="@+id/et_captcha"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:imeOptions="actionDone"
+                android:maxHeight="@dimen/margin_20"
+                android:maxLines="1"
+                android:nextFocusForward="@+id/btnSubmit"
+                android:singleLine="true"
                 android:hint="@string/enter_captcha"
                 android:textDirection="locale" />
         </com.google.android.material.textfield.TextInputLayout>

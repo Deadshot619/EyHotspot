@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import com.crashlytics.android.Crashlytics
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseActivity
 import com.ey.hotspot.app_core_lib.HotSpotApp
@@ -49,11 +50,12 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(),
 
         setUpGoogleAPIClient()
         checkappLoginStatus()
-/*
-        val crashButton = Button(this)
+
+
+   /*     val crashButton = Button(this)
         crashButton.text = "Crash!"
         crashButton.setOnClickListener {
-            throw RuntimeException("Test Crash") // Force a crash
+            Crashlytics.getInstance().crash();
         }
 
         addContentView(crashButton, ViewGroup.LayoutParams(

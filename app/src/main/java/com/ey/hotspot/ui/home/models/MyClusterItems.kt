@@ -15,6 +15,9 @@ class MyClusterItems : ClusterItem {
     lateinit var mNavigateURL: String
     lateinit var mAddress:String
 
+    var  mLat by Delegates.notNull<Double>()
+    var mLng by Delegates.notNull<Double>()
+
     var mItemID:Int = 0
 
     constructor(lat: Double, lng: Double, mItemID: Int) {
@@ -46,7 +49,9 @@ class MyClusterItems : ClusterItem {
         isfavourite: Boolean,
         navigateURL: String,
         itemId:Int,
-        address:String
+        address:String,
+        nlat:Double,
+        nLng:Double
     ) {
         mPosition = LatLng(lat, lng)
         mTitle = title
@@ -55,6 +60,8 @@ class MyClusterItems : ClusterItem {
         mNavigateURL = navigateURL
         mItemID =itemId
         mAddress=address
+        mLat =nlat
+        mLng =nLng
     }
 
 

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.BackgroundColorSpan
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
@@ -84,7 +85,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
     }
 
     private fun setUpCaptcha() {
-
 
 
 

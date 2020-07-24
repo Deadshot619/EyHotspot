@@ -47,15 +47,13 @@ import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.maps.android.clustering.Cluster
 import com.google.maps.android.clustering.ClusterManager
 import com.google.maps.android.clustering.view.DefaultClusterRenderer
-
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(), OnMapReadyCallback,
-    ClusterManager.OnClusterClickListener<MyClusterItems>,
-    ClusterManager.OnClusterInfoWindowClickListener<MyClusterItems>,
     ClusterManager.OnClusterItemClickListener<MyClusterItems>,
     ClusterManager.OnClusterItemInfoWindowClickListener<MyClusterItems>,
     GoogleApiClient.ConnectionCallbacks,
     GoogleApiClient.OnConnectionFailedListener {
     private var map: GoogleMap? = null
+
     private lateinit var placesClient: PlacesClient
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private val defaultLocation = LatLng(Constants.LATITUDE, Constants.LONGITUDE)
@@ -118,11 +116,27 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         val myMAPF = childFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment?
         myMAPF?.getMapAsync(this)
+
         setUpObservers()
+
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+
+        if (mBinding.customPop.cvMainLayout.visibility == View.VISIBLE) {
+            Log.d("VISIBILITY","VIS")
+        } else {
+            Log.d("VISIBILITY","GONE")
+        }
+
     }
 
 
     private fun setUpObservers() {
+
+
         mViewModel.getHotSpotResponse.observe(viewLifecycleOwner, Observer {
             if (it.status) {
                 setupClusters()
@@ -148,16 +162,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         mGoogleApiClient.connect()
     }
 
-    private fun getNearByWifiList(gpsStatus:Boolean) {
+    private fun getNearByWifiList(gpsStatus: Boolean) {
 
-        if(gpsStatus){
+        if (gpsStatus) {
 
-            val getHotSpotRequest: GetHotSpotRequest = GetHotSpotRequest(lastKnownLocation!!.latitude,
-                lastKnownLocation!!.longitude, "", true)
+            val getHotSpotRequest: GetHotSpotRequest = GetHotSpotRequest(
+                lastKnownLocation!!.latitude,
+                lastKnownLocation!!.longitude, "", true
+            )
             mViewModel.getHotSpotResponse(getHotSpotRequest)
-        }else{
-            val getHotSpotRequest: GetHotSpotRequest = GetHotSpotRequest(Constants.LATITUDE,
-                Constants.LONGITUDE, "", false)
+        } else {
+            val getHotSpotRequest: GetHotSpotRequest = GetHotSpotRequest(
+                Constants.LATITUDE,
+                Constants.LONGITUDE, "", false
+            )
             mViewModel.getHotSpotResponse(getHotSpotRequest)
         }
 
@@ -169,7 +187,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
         // Prompt the user for permission.
         getLocationPermission()
-
         setUpClickListener()
         // Turn on the My Location layer and the related control on the map.
         updateLocationUI()
@@ -180,6 +197,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
     private fun setUpClickListener() {
         this.map?.setOnMapClickListener(OnMapClickListener {
             mBinding.customPop.cvMainLayout.visibility = View.GONE
+
         })
 
 //      Searchbar
@@ -190,46 +208,48 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
     private fun getDeviceLocation() {
         try {
-                val locationResult = fusedLocationProviderClient.lastLocation
-                locationResult.addOnCompleteListener(requireActivity()) { task ->
-                    if (task.isSuccessful) {
-                        // Set the map's camera position to the current location of the device.
-                        lastKnownLocation = task.result
-                        if (lastKnownLocation != null) {
-                            if (checkLocSaveState()) {
-                                map?.moveCamera(
-                                    CameraUpdateFactory.newLatLngZoom(
-                                        LatLng(
-                                            lastKnownLocation!!.latitude,
-                                            lastKnownLocation!!.longitude
-                                        ), HomeFragment.DEFAULT_ZOOM.toFloat()
-                                    )
+            val locationResult = fusedLocationProviderClient.lastLocation
+            locationResult.addOnCompleteListener(requireActivity()) { task ->
+                if (task.isSuccessful) {
+                    // Set the map's camera position to the current location of the device.
+                    lastKnownLocation = task.result
+                    if (lastKnownLocation != null) {
+                        if (checkLocSaveState()) {
+                            map?.moveCamera(
+                                CameraUpdateFactory.newLatLngZoom(
+                                    LatLng(
+                                        lastKnownLocation!!.latitude,
+                                        lastKnownLocation!!.longitude
+                                    ), HomeFragment.DEFAULT_ZOOM.toFloat()
                                 )
-                            } else {
-                                map?.moveCamera(
-                                    CameraUpdateFactory.newLatLngZoom(
-                                        LatLng(
-                                            Constants.LATITUDE,
-                                            Constants.LONGITUDE
-                                        ), HomeFragment.DEFAULT_ZOOM.toFloat()
-                                    )
-                                )
-                            }
-                            getNearByWifiList(checkLocSaveState())
-                        }
-                    } else {
-                        map?.moveCamera(
-                            CameraUpdateFactory.newLatLngZoom(
-                                LatLng(
-                                    Constants.LATITUDE,
-                                    Constants.LONGITUDE
-                                ), HomeFragment.DEFAULT_ZOOM.toFloat()
                             )
-                        )
-                        getNearByWifiList(checkLocSaveState())
+                        } else {
+                            map?.moveCamera(
+                                CameraUpdateFactory.newLatLngZoom(
+                                    LatLng(
+                                        Constants.LATITUDE,
+                                        Constants.LONGITUDE
+                                    ), HomeFragment.DEFAULT_ZOOM.toFloat()
+                                )
+                            )
+                        }
 
+                        getNearByWifiList(checkLocSaveState())
                     }
+                } else {
+                    map?.moveCamera(
+                        CameraUpdateFactory.newLatLngZoom(
+                            LatLng(
+                                Constants.LATITUDE,
+                                Constants.LONGITUDE
+                            ), HomeFragment.DEFAULT_ZOOM.toFloat()
+                        )
+                    )
+
+                    getNearByWifiList(checkLocSaveState())
+
                 }
+            }
 
         } catch (e: SecurityException) {
             Log.e("Exception: %s", e.message, e)
@@ -237,8 +257,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
     }
 
     private fun setupClusters() {
+        if(this::mClusterManager.isInitialized){
+            mClusterManager.markerCollection.clear()
+            mClusterManager.clusterMarkerCollection.clear()
+        }
         mClusterManager = ClusterManager(activity, map)
-        mClusterManager.setOnClusterClickListener(this);
         mClusterManager.setOnClusterItemClickListener(this);
         mClusterManager.setOnClusterItemInfoWindowClickListener(this);
         map?.setOnCameraIdleListener(mClusterManager)
@@ -266,13 +289,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         }
     }
 
-    override fun onClusterClick(cluster: Cluster<MyClusterItems>?): Boolean {
-        return true
-    }
 
-    override fun onClusterInfoWindowClick(cluster: Cluster<MyClusterItems>?) {
-        //TODO
-    }
+
+
 
     /* In this method  1. Showing  Custom Pop up window  along with toggle the mark as favourite option*/
     override fun onClusterItemClick(item: MyClusterItems?): Boolean {
@@ -316,10 +335,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         }
         //Navigate Now
         mBinding.customPop.btnNavigateNow.setOnClickListener {
-            val url = clickedVenueMarker?.snippet
-            val i = Intent(Intent.ACTION_VIEW)
-            i.data = Uri.parse(url)
-            startActivity(i)
+
+            val gmmIntentUri = Uri.parse("google.navigation:q="+clickedVenueMarker?.mLat+","+clickedVenueMarker?.mLng + "&mode=b")
+            val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+            mapIntent.setPackage("com.google.android.apps.maps")
+            startActivity(mapIntent)
         }
 
         //Rate Now
@@ -372,18 +392,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                     location.favourite,
                     location.name,
                     location.id,
-                    location.location
+                    location.location,
+                    location.lat.parseToDouble(),
+                    location.lng.parseToDouble()
                 )
             mClusterManager.addItem(offsetItems)
         }
     }
 
     override fun onClusterItemInfoWindowClick(item: MyClusterItems?) {
-        //TODO
+
+        Log.d("ITEMCLICK","ITEM")
     }
 
     companion object {
-        private val TAG = HomeFragment::class.java.simpleName
         private const val DEFAULT_ZOOM = 12
         private const val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
 
@@ -494,7 +516,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                     grantResults[0] == PackageManager.PERMISSION_GRANTED
                 ) {
                     locationPermissionGranted = true
-                }else{
+                } else {
 
                 }
             }

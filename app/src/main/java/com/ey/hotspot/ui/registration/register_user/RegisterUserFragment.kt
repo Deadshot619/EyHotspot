@@ -170,6 +170,9 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
 
             //Sign In button
             btnGetStarted.setOnClickListener {
+
+
+                val status:Boolean = validate()
                 if (validate()) {
                     val register: RegisterRequest =
                         RegisterRequest(
@@ -320,10 +323,10 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
         if (mViewModel.password.trim().isEmpty()) {
             mBinding.edtPassword.error = resources.getString(R.string.invalid_password)
             password = false
-        } /*else if (!mViewModel.password.isValidPassword()){
+        } else if (!mViewModel.password.isValidPassword()){
             mBinding.edtPassword.error = resources.getString(R.string.password_format)
             password = false
-        }*/ else {
+        } else {
             password = true
         }
 

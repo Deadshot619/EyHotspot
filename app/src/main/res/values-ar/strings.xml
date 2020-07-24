@@ -227,4 +227,5 @@
     <string name="email_label">البريد الإلكتروني</string>
     <string name="choose_verify_option">حدد خيار التحقق</string>
     <string name="captcha_characters">أبجدهـFزحأنايكلاممياصسصسشالخامسثسذضصفرواحدإثنانثلاثةأربعةخمسةستةسبعةثمانيةتسعة</string>
+    <string name="forgotpassword_label">هل نسيت كلمة المرور</string>
 </resources>
