@@ -12,8 +12,8 @@ object LanguageManager {
     @JvmStatic
     fun setLanguage(
         context: Context,
-        languageCode: String?):Context {
-
+        languageCode: String?
+    ):Context {
 
         val locale = Locale(languageCode)
         Locale.setDefault(locale)

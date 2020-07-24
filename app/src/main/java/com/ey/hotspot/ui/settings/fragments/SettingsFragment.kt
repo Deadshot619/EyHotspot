@@ -105,7 +105,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel
 
 
     fun restartApplication(context: Context?, thobeSharedPreference: MyHotSpotSharedPreference) {
-        LanguageManager.setLanguage(requireContext()!!, thobeSharedPreference.getLanguage())
+        LanguageManager.setLanguage(requireContext(), thobeSharedPreference.getLanguage())
         /**
          * restart the application for API > 25 otherwise just recreate
          */
@@ -115,9 +115,9 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel
             /**
              * pop back fragment before activity recreating
              */
-
             activity?.recreate()
         }
+        LanguageManager.setLanguage(requireContext(), thobeSharedPreference.getLanguage())
     }
 
     fun restartApp() {
