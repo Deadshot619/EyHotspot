@@ -23,6 +23,7 @@
     <string name="next_label">Next</string>
     <string name="mbps_label">%s Mbps</string>
     <string name="loading_label">Loading…</string>
+    <string name="under_construction_label">Under Construction…</string>
 
     <!--Toolbar-->
     <string name="search_locations_label">Search Locations</string>

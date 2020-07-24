@@ -59,6 +59,12 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel
         setUpListeners()
 
         hideViewsIfSkippedUser()
+
+        //Change image of language
+        if(HotSpotApp.prefs?.getLanguage() == Constants.ARABIC_LANG)
+            mBinding.ivChangeLanguage.setImageResource(R.drawable.ic_inactive_switch)
+        else
+            mBinding.ivChangeLanguage.setImageResource(R.drawable.ic_active_switch)
     }
 
     private fun setUpListeners() {
@@ -99,30 +105,6 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel
         }
     }
 
-    fun showConfirmDialog(str_msg: String, str_action: String) {
-        val dialogBuilder = AlertDialog.Builder(requireActivity())
-        val inflater = this.getLayoutInflater()
-
-        @SuppressLint("InflateParams")
-        val dialogView = inflater.inflate(R.layout.custom_confirm_settings_dialog, null)
-        dialogBuilder.setView(dialogView)
-
-        val alertDialog = dialogBuilder.create()
-        alertDialog.setCancelable(true)
-
-        val btYes = dialogView.btYes
-        val btNo = dialogView.btNo
-
-        btNo.setOnClickListener {
-            alertDialog.dismiss()
-        }
-
-        btYes.setOnClickListener {
-            alertDialog.dismiss()
-        }
-
-        alertDialog.show()
-    }
 
     fun restartApplication(context: Context?, thobeSharedPreference: MyHotSpotSharedPreference) {
         LanguageManager.setLanguage(requireContext()!!, thobeSharedPreference.getLanguage())

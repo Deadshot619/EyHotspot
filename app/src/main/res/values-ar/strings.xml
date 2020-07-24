@@ -29,6 +29,7 @@
     <string name="next_label">التالى</string>
     <string name="mbps_label">%s ميغابت في الثانية</string>
     <string name="loading_label">جار التحميل…</string>
+    <string name="under_construction_label">تحت التشيد</string>
 
 
     <!--Toolbar-->
