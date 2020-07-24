@@ -125,7 +125,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
                         it.data.country_codes.map { it.value }.toList()
                     )
 
-                    mBinding.spinnerIssue.adapter = adapter
+//                    mBinding.spinnerIssue.adapter = adapter
                 } else {
                     showMessage(it.message, true)
                 }

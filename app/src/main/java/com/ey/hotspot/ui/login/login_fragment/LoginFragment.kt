@@ -18,10 +18,12 @@ import com.ey.hotspot.ui.home.BottomNavHomeActivity
 import com.ey.hotspot.ui.login.forgorpassword.ForgotPasswordFragment
 import com.ey.hotspot.ui.registration.register_user.RegisterUserFragment
 import com.ey.hotspot.utils.constants.convertStringFromList
+import com.ey.hotspot.utils.constants.setSkippedUserData
 import com.ey.hotspot.utils.dialogs.OkDialog
 import com.ey.hotspot.utils.replaceFragment
 import com.ey.hotspot.utils.showMessage
 import com.ey.hotspot.utils.validations.isEmailValid
+import com.ey.hotspot.utils.validations.isValidPassword
 import com.facebook.*
 import com.facebook.login.LoginBehavior
 import com.facebook.login.LoginManager
@@ -155,7 +157,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
         //Skip button
         mBinding.btnSkip.setOnClickListener {
-            mViewModel.setSkippedUserData()
+            setSkippedUserData()
             goToHomePage()
         }
 
@@ -300,6 +302,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
                 }
                 if (password.trim().isEmpty()) {
                     etPassword.error = resources.getString(R.string.enter_password)
+                    isValid = false
+                }  else if (!password.isValidPassword()){
+                    etPassword.error = resources.getString(R.string.password_format)
                     isValid = false
                 }
             }

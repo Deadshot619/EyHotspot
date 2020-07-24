@@ -99,6 +99,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             enableSearchButton = false
         ) {}
         mBinding.toolbarLayout.etSearchBar.isFocusable = false
+
         // Prompt the user for permission.
         activity?.checkLocationPermission(view = mBinding.root, func = {
             locationPermissionGranted = true
@@ -107,6 +108,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             }
             updateLocationUI()
         })
+
+
         Places.initialize(requireActivity(), getString(R.string.maps_api_key))
         placesClient = Places.createClient(requireActivity())
         // Construct a FusedLocationProviderClient.
@@ -178,7 +181,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         this.map?.setOnMapClickListener(OnMapClickListener {
             mBinding.customPop.cvMainLayout.visibility = View.GONE
         })
-//        Searchbar
+
+//      Searchbar
         mBinding.toolbarLayout.etSearchBar.setOnClickListener {
             replaceFragment(SearchListFragment(), true)
         }

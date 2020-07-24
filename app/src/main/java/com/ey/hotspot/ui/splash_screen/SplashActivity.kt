@@ -154,11 +154,10 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(),
     }
 
     override fun onConnectionSuspended(p0: Int) {
-        TODO("Not yet implemented")
+
     }
 
     override fun onConnectionFailed(p0: ConnectionResult) {
-        TODO("Not yet implemented")
     }
 
 

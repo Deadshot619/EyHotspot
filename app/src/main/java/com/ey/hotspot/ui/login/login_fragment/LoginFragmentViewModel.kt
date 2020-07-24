@@ -12,6 +12,7 @@ import com.ey.hotspot.network.request.SocialLoginRequest
 import com.ey.hotspot.network.response.BaseResponse
 import com.ey.hotspot.network.response.LoginResponse
 import com.ey.hotspot.utils.Event
+import com.ey.hotspot.utils.constants.updateSharedPreference
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -91,19 +92,5 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
     }
 
 
-    private fun updateSharedPreference(loginResponse: LoginResponse) {
-        HotSpotApp.prefs?.run {
-            saveAccessToken(loginResponse.accessToken)
-            setAppLoggedInStatus(true)
-            setSkipStatus(false)
-            setUserDataPref(loginResponse)
-        }
-    }
 
-    fun setSkippedUserData(){
-        HotSpotApp.prefs?.run {
-            setAppLoggedInStatus(false)
-            setSkipStatus(true)
-        }
-    }
 }

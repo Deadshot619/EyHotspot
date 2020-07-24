@@ -14,9 +14,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingStart="@dimen/common_padding_start"
-        android:paddingTop="@dimen/common_padding_top"
-        android:paddingEnd="@dimen/common_padding_end"
         tools:context=".ui.registration.email_verification.EmailVerificationFragment">
 
         <androidx.constraintlayout.widget.Guideline
@@ -89,7 +86,7 @@
             style="@style/TextAppearance.MyApp.Headline3_Profile_Bold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_10"
+            android:layout_marginTop="@dimen/common_margin"
             android:gravity="center"
             android:text="@string/otp_title"
             android:textDirection="locale"
@@ -104,6 +101,7 @@
             android:id="@+id/iv_check"
             android:layout_width="@dimen/margin_200"
             android:layout_height="@dimen/margin_200"
+            android:layout_marginTop="@dimen/common_margin"
             android:src="@drawable/ic_mobile_verification"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -118,6 +116,7 @@
             android:textColor="@color/colorPrimary"
             android:textDirection="locale"
             app:itemCount="5"
+            android:layout_marginTop="@dimen/common_margin"
             app:layout_constraintEnd_toEndOf="@+id/guideline_right"
             app:layout_constraintStart_toStartOf="@+id/guideline_left"
             app:layout_constraintTop_toBottomOf="@+id/iv_check"
@@ -151,10 +150,9 @@
             android:layout_marginTop="@dimen/common_margin_32"
             android:text="@string/receive_otp"
             android:textSize="@dimen/text_size_18"
-            app:layout_constraintEnd_toStartOf="@+id/tvTermsCondition"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guideline_left"
             app:layout_constraintTop_toBottomOf="@+id/btnVerify" />
 
         <!--        Resend OTP-->
@@ -167,7 +165,7 @@
             android:textColor="@color/colorPrimarySub"
             android:textSize="@dimen/text_size_18"
             app:layout_constraintBottom_toBottomOf="@+id/tvreceviedotp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guideline_right"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/tvreceviedotp"
             app:layout_constraintTop_toTopOf="@+id/tvreceviedotp" />

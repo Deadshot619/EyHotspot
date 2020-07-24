@@ -4,18 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="data"
             type="com.ey.hotspot.network.response.ComplaintsList" />
     </data>
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="24dp">
-
 
         <!--Wifi Name-->
         <TextView
@@ -25,7 +22,7 @@
             android:layout_height="wrap_content"
             android:text="@{data.location_name}"
             android:layout_marginEnd="@dimen/common_margin"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textDirection="locale"
             app:layout_constraintEnd_toStartOf="@id/tv_date"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -80,6 +77,7 @@
             android:layout_marginTop="@dimen/common_margin_8"
             android:text="@{data.issue_type}"
             tools:text="Ghatiya net bc"
+            android:textDirection="locale"
             app:layout_constraintStart_toStartOf="@id/tv_wifi_provider"
             app:layout_constraintTop_toBottomOf="@id/tv_wifi_provider"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -92,6 +90,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/common_margin_between_fields"
             android:text="@{data.description}"
+            android:textDirection="locale"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_wifi_name"
             app:layout_constraintTop_toBottomOf="@id/tv_wifi_issue"
