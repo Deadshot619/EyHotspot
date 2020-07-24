@@ -124,18 +124,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
     private fun setUpObservers() {
         mViewModel.getHotSpotResponse.observe(viewLifecycleOwner, Observer {
-            if (it.status) {
-                setupClusters()
-                setUpHotSpotDataInCluster(it.data)
-            } else {
-                showMessage(it.message, true)
+            it.getContentIfNotHandled()?.let {
+                if (it.status) {
+                    setupClusters()
+                    setUpHotSpotDataInCluster(it.data)
+                } else {
+                    showMessage(it.message, true)
+                }
             }
         })
-        mViewModel.markFavouriteResponse.observe(viewLifecycleOwner, Observer {
-            if (it.status) {
-                showMessage(it.message, true)
-            } else {
-                showMessage(it.message, true)
+
+        //Change Favourite
+        mViewModel.markFavourite.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let {  item->
+                mClusterManager.updateItem(item.apply { changeFavourite(!mIsFavourite) })
             }
         })
     }
@@ -148,16 +150,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         mGoogleApiClient.connect()
     }
 
-    private fun getNearByWifiList(gpsStatus:Boolean) {
+    private fun getNearByWifiList(gpsStatus: Boolean) {
 
-        if(gpsStatus){
+        if (gpsStatus) {
 
-            val getHotSpotRequest: GetHotSpotRequest = GetHotSpotRequest(lastKnownLocation!!.latitude,
-                lastKnownLocation!!.longitude, "", true)
+            val getHotSpotRequest: GetHotSpotRequest = GetHotSpotRequest(
+                lastKnownLocation!!.latitude,
+                lastKnownLocation!!.longitude, "", true
+            )
             mViewModel.getHotSpotResponse(getHotSpotRequest)
-        }else{
-            val getHotSpotRequest: GetHotSpotRequest = GetHotSpotRequest(Constants.LATITUDE,
-                Constants.LONGITUDE, "", false)
+        } else {
+            val getHotSpotRequest: GetHotSpotRequest = GetHotSpotRequest(
+                Constants.LATITUDE,
+                Constants.LONGITUDE, "", false
+            )
             mViewModel.getHotSpotResponse(getHotSpotRequest)
         }
 
@@ -190,46 +196,46 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
     private fun getDeviceLocation() {
         try {
-                val locationResult = fusedLocationProviderClient.lastLocation
-                locationResult.addOnCompleteListener(requireActivity()) { task ->
-                    if (task.isSuccessful) {
-                        // Set the map's camera position to the current location of the device.
-                        lastKnownLocation = task.result
-                        if (lastKnownLocation != null) {
-                            if (checkLocSaveState()) {
-                                map?.moveCamera(
-                                    CameraUpdateFactory.newLatLngZoom(
-                                        LatLng(
-                                            lastKnownLocation!!.latitude,
-                                            lastKnownLocation!!.longitude
-                                        ), HomeFragment.DEFAULT_ZOOM.toFloat()
-                                    )
+            val locationResult = fusedLocationProviderClient.lastLocation
+            locationResult.addOnCompleteListener(requireActivity()) { task ->
+                if (task.isSuccessful) {
+                    // Set the map's camera position to the current location of the device.
+                    lastKnownLocation = task.result
+                    if (lastKnownLocation != null) {
+                        if (checkLocSaveState()) {
+                            map?.moveCamera(
+                                CameraUpdateFactory.newLatLngZoom(
+                                    LatLng(
+                                        lastKnownLocation!!.latitude,
+                                        lastKnownLocation!!.longitude
+                                    ), HomeFragment.DEFAULT_ZOOM.toFloat()
                                 )
-                            } else {
-                                map?.moveCamera(
-                                    CameraUpdateFactory.newLatLngZoom(
-                                        LatLng(
-                                            Constants.LATITUDE,
-                                            Constants.LONGITUDE
-                                        ), HomeFragment.DEFAULT_ZOOM.toFloat()
-                                    )
-                                )
-                            }
-                            getNearByWifiList(checkLocSaveState())
-                        }
-                    } else {
-                        map?.moveCamera(
-                            CameraUpdateFactory.newLatLngZoom(
-                                LatLng(
-                                    Constants.LATITUDE,
-                                    Constants.LONGITUDE
-                                ), HomeFragment.DEFAULT_ZOOM.toFloat()
                             )
-                        )
+                        } else {
+                            map?.moveCamera(
+                                CameraUpdateFactory.newLatLngZoom(
+                                    LatLng(
+                                        Constants.LATITUDE,
+                                        Constants.LONGITUDE
+                                    ), HomeFragment.DEFAULT_ZOOM.toFloat()
+                                )
+                            )
+                        }
                         getNearByWifiList(checkLocSaveState())
-
                     }
+                } else {
+                    map?.moveCamera(
+                        CameraUpdateFactory.newLatLngZoom(
+                            LatLng(
+                                Constants.LATITUDE,
+                                Constants.LONGITUDE
+                            ), HomeFragment.DEFAULT_ZOOM.toFloat()
+                        )
+                    )
+                    getNearByWifiList(checkLocSaveState())
+
                 }
+            }
 
         } catch (e: SecurityException) {
             Log.e("Exception: %s", e.message, e)
@@ -300,6 +306,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                         ?.getConstantState()
                 val imgID2: Drawable.ConstantState? =
                     mBinding.customPop.ivFavourites.getDrawable().getConstantState()
+
                 if (imgID1 == imgID2) {
                     mBinding.customPop.ivFavourites.setImageResource(R.drawable.ic_favorite_filled_red)
                     favouriteType = true
@@ -307,12 +314,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                     mBinding.customPop.ivFavourites.setImageResource(R.drawable.ic_favorite_filled_gray)
                     favouriteType = false
                 }
+
                 val markFavouriteRequest: MarkFavouriteRequest =
                     MarkFavouriteRequest(clickedVenueMarker!!.mItemID)
-                mViewModel.markFavouriteItem(markFavouriteRequest, favouriteType)
+                mViewModel.markFavouriteItem(markFavouriteRequest, favouriteType, item)
+
             } else {
                 dialog.show()
             }
+
         }
         //Navigate Now
         mBinding.customPop.btnNavigateNow.setOnClickListener {
@@ -365,14 +375,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         for (location in list) {
             val offsetItems =
                 MyClusterItems(
-                    location.lat.parseToDouble(),
-                    location.lng.parseToDouble(),
-                    location.provider_name,
-                    location.navigate_url,
-                    location.favourite,
-                    location.name,
-                    location.id,
-                    location.location
+                    lat = location.lat.parseToDouble(),
+                    lng = location.lng.parseToDouble(),
+                    navigateURL = location.provider_name,
+                    title = location.name,
+                    snippet = location.navigate_url,
+                    isfavourite = location.favourite,
+                    itemId = location.id,
+                    address = location.location
                 )
             mClusterManager.addItem(offsetItems)
         }
@@ -494,7 +504,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                     grantResults[0] == PackageManager.PERMISSION_GRANTED
                 ) {
                     locationPermissionGranted = true
-                }else{
+                } else {
 
                 }
             }
