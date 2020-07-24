@@ -32,6 +32,7 @@ import java.math.BigDecimal
 import java.math.RoundingMode
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
+import kotlin.random.Random
 
 
 var toast: Toast? = null
@@ -90,10 +91,10 @@ fun Activity.showKeyboard() {
     }
 }
 
-fun String?.parseToDouble(): Double{
+fun String?.parseToDouble(): Double {
     return try {
         this!!.toDouble()
-    } catch (e: Exception){
+    } catch (e: Exception) {
         0.0
     }
 }
@@ -108,7 +109,7 @@ fun Activity.isLocationEnabled(): Boolean {
 // This is new method provided in API 28
         val lm =
             this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        lm !=null && lm.isLocationEnabled
+        lm != null && lm.isLocationEnabled
     } else {
 // This is Deprecated in API 28
         val mode: Int = Settings.Secure.getInt(
@@ -204,19 +205,17 @@ fun Activity.turnOnGpsDialog() {
 }
 
 
-
-
 /**
  * This method will a json string as input & return an object of specified type
  */
-inline fun <reified T> Gson.fromJson(json: String) = try{
-    fromJson<T>(json, object: TypeToken<T>() {}.type)
-}catch (e: java.lang.Exception){
+inline fun <reified T> Gson.fromJson(json: String) = try {
+    fromJson<T>(json, object : TypeToken<T>() {}.type)
+} catch (e: java.lang.Exception) {
     null
 }
 
 
-  fun Activity.turnGPSOn() {
+fun Activity.turnGPSOn() {
     val provider = Settings.Secure.getString(
         contentResolver,
         Settings.Secure.LOCATION_PROVIDERS_ALLOWED
@@ -233,23 +232,25 @@ inline fun <reified T> Gson.fromJson(json: String) = try{
     }
 
 
-
-
 }
 
- fun Activity.calculateHashKey(yourPackageName: String) {
-     try {
-         val info: PackageInfo =getPackageManager()
-             .getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES)
-         for (signature in info.signatures) {
-             val md = MessageDigest.getInstance("SHA")
-             md.update(signature.toByteArray())
-             val hashKey = String(Base64.encode(md.digest(), 0))
-             Log.i("HASHKEY", "printHashKey() Hash Key: $hashKey")
-         }
-     } catch (e: NoSuchAlgorithmException) {
-         Log.e("HASHKEY", "printHashKey()", e)
-     } catch (e: java.lang.Exception) {
-         Log.e("HASHKEY", "printHashKey()", e)
-     }
+fun Activity.calculateHashKey(yourPackageName: String) {
+    try {
+        val info: PackageInfo = getPackageManager()
+            .getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES)
+        for (signature in info.signatures) {
+            val md = MessageDigest.getInstance("SHA")
+            md.update(signature.toByteArray())
+            val hashKey = String(Base64.encode(md.digest(), 0))
+            Log.i("HASHKEY", "printHashKey() Hash Key: $hashKey")
+        }
+    } catch (e: NoSuchAlgorithmException) {
+        Log.e("HASHKEY", "printHashKey()", e)
+    } catch (e: java.lang.Exception) {
+        Log.e("HASHKEY", "printHashKey()", e)
+    }
 }
+
+
+
+

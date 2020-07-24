@@ -8,12 +8,18 @@ import com.ey.hotspot.utils.LanguageManager
 import com.ey.hotspot.utils.MyHotSpotSharedPreference
 import com.facebook.FacebookSdk
 import com.facebook.FacebookSdk.setAutoLogAppEventsEnabled
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 
-class HotSpotApp :CoreApp() {
+class HotSpotApp : CoreApp() {
 
     companion object {
         var prefs: MyHotSpotSharedPreference? = null
     }
+
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
+
 
     override fun onCreate() {
 
@@ -23,6 +29,8 @@ class HotSpotApp :CoreApp() {
 
         FacebookSdk.fullyInitialize();
         setAutoLogAppEventsEnabled(true);
+
+        firebaseAnalytics = Firebase.analytics
 
 
     }
@@ -34,15 +42,15 @@ class HotSpotApp :CoreApp() {
 
             if (base != null) {
 
-                CoreApp.sharedPreferences = androidx.preference.PreferenceManager.getDefaultSharedPreferences(base)
+                CoreApp.sharedPreferences =
+                    androidx.preference.PreferenceManager.getDefaultSharedPreferences(base)
                 prefs = MyHotSpotSharedPreference(base)
 
                 super.attachBaseContext(LanguageManager.setLanguage(base, prefs?.getLanguage()))
 
-            }else
+            } else
                 super.attachBaseContext(base)
-        }
-        else {
+        } else {
             super.attachBaseContext(base)
         }
         MultiDex.install(this)

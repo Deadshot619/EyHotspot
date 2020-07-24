@@ -6,6 +6,8 @@ import android.content.IntentSender.SendIntentException
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseActivity
 import com.ey.hotspot.app_core_lib.HotSpotApp
@@ -47,8 +49,16 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(),
 
         setUpGoogleAPIClient()
         checkappLoginStatus()
+/*
+        val crashButton = Button(this)
+        crashButton.text = "Crash!"
+        crashButton.setOnClickListener {
+            throw RuntimeException("Test Crash") // Force a crash
+        }
 
-
+        addContentView(crashButton, ViewGroup.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT))*/
     }
 
     private fun setUpGoogleAPIClient() {

@@ -8,6 +8,11 @@ interface Constants {
         const val ENGLISH_LANG: String = "en"
         const val ARABIC_LANG: String = "ar"
 
+        //Default Location Lat Lng
+
+        const val LATITUDE:Double=19.1403509
+        const val  LONGITUDE:Double=72.8096671
+
         //Intent
         const val AUTHENTICATION_FAILED = "authentication_failed"   //used when user's authticaition is failed while refreshing token
 

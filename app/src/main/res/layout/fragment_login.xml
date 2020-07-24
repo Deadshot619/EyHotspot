@@ -51,9 +51,9 @@
                 android:layout_marginTop="@dimen/common_margin_12"
                 android:text="@string/skip"
                 android:textColor="@color/colorWhite"
-                app:layout_constraintStart_toEndOf="@id/tv_hotspot"
-                app:layout_constraintHorizontal_bias="1"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintStart_toEndOf="@id/tv_hotspot"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <!--        Hotspot-->
@@ -125,9 +125,9 @@
                     style="@style/CustomEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
                     android:background="@drawable/email_id_bitmap"
                     android:hint="@string/email_id_hint"
+                    android:inputType="textEmailAddress"
                     android:text="@={viewModel.emailId}"
                     android:textDirection="locale" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -159,11 +159,11 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_password"
                     style="@style/CustomEditText"
-                    android:inputType="textPassword"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/password_bitmap"
                     android:hint="@string/enter_password"
+                    android:inputType="textPassword"
                     android:text="@={viewModel.password}"
                     android:textDirection="locale" />
 
@@ -199,10 +199,10 @@
                 style="@style/TextAppearance.MyApp.Headline5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_size_14"
                 android:layout_marginTop="@dimen/common_margin"
                 android:text="@string/captcha_label"
                 android:textDirection="locale"
+                android:textSize="@dimen/text_size_14"
                 app:layout_constraintStart_toStartOf="@id/password_input_layout"
                 app:layout_constraintTop_toBottomOf="@id/tv_forgot_password" />
 
@@ -215,7 +215,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/common_margin_between_fields_4"
                 android:textDirection="locale"
-                app:layout_constraintEnd_toEndOf="@id/input_email_id"
+                app:layout_constraintHorizontal_weight="6"
+                app:layout_constraintEnd_toStartOf="@+id/tvCaptach"
                 app:layout_constraintStart_toStartOf="@id/input_email_id"
                 app:layout_constraintTop_toBottomOf="@id/tv_enter_message_shown">
 
@@ -228,17 +229,34 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvCaptach"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="CDCDER"
+                android:layout_marginTop="@dimen/margin_10"
+                app:drawableTintMode="screen"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="@dimen/txt_size_16"
+                android:visibility="gone"
+                app:layout_constraintHorizontal_weight="4"
+                app:layout_constraintTop_toTopOf="@+id/captcha_input_layout"
+                app:layout_constraintEnd_toEndOf="@+id/tv_forgot_password"
+                app:layout_constraintStart_toEndOf="@+id/captcha_input_layout"
+                />
 
-        <ImageView
-            android:id="@+id/ivCaptcha"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:visibility="gone"
-            android:src="@drawable/ic_gray_heart"
-            android:layout_marginStart="@dimen/margin_10"
-            app:layout_constraintEnd_toEndOf="@+id/password_input_layout"
-            app:layout_constraintStart_toEndOf="@+id/captcha_input_layout"
-            app:layout_constraintTop_toBottomOf="@+id/tv_enter_message_shown"/>
+
+            <ImageView
+                android:id="@+id/ivCaptcha"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="@dimen/margin_10"
+                android:src="@drawable/ic_gray_heart"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/password_input_layout"
+                app:layout_constraintStart_toEndOf="@+id/captcha_input_layout"
+                app:layout_constraintTop_toBottomOf="@+id/tv_enter_message_shown" />
 
             <!--        Sign  In-->
             <androidx.appcompat.widget.AppCompatButton
@@ -292,8 +310,7 @@
                 app:layout_constraintEnd_toEndOf="@id/tv_dont_have_account"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="@id/tv_dont_have_account"
-                app:layout_constraintTop_toBottomOf="@+id/tv_dont_have_account"
-                />
+                app:layout_constraintTop_toBottomOf="@+id/tv_dont_have_account" />
 
             <!--Facebook-->
             <com.google.android.material.imageview.ShapeableImageView
@@ -316,8 +333,8 @@
                 android:layout_marginTop="@dimen/common_margin_32"
                 android:layout_marginBottom="@dimen/common_margin_32"
                 android:src="@drawable/ic_google_sign_in"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/ivFacebookSignIn"
                 app:layout_constraintTop_toBottomOf="@id/tv_get_started" />

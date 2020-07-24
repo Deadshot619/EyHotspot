@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "21644787905",
+    "firebase_url": "https://ey-hotspot-android.firebaseio.com",
+    "project_id": "ey-hotspot-android",
+    "storage_bucket": "ey-hotspot-android.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:21644787905:android:691a34266553235cbf1440",
+        "android_client_info": {
+          "package_name": "com.ey.hotspot.ey_hotspot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "21644787905-mdthg3i2klj2oc6tns2jpjrtau9b6mlg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCl3esqHcfoMWcthoiCRcYxjBeMSNOs1rc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "21644787905-mdthg3i2klj2oc6tns2jpjrtau9b6mlg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

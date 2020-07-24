@@ -1,8 +1,13 @@
 package com.ey.hotspot.ui.login.login_fragment
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.BackgroundColorSpan
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
@@ -12,7 +17,6 @@ import com.ey.hotspot.network.request.SocialLoginRequest
 import com.ey.hotspot.ui.home.BottomNavHomeActivity
 import com.ey.hotspot.ui.login.forgorpassword.ForgotPasswordFragment
 import com.ey.hotspot.ui.registration.register_user.RegisterUserFragment
-import com.ey.hotspot.utils.captcha.TextCaptcha
 import com.ey.hotspot.utils.constants.convertStringFromList
 import com.ey.hotspot.utils.dialogs.OkDialog
 import com.ey.hotspot.utils.replaceFragment
@@ -34,9 +38,11 @@ import java.util.*
 
 class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>() {
 
-    val dialog by lazy { OkDialog(requireContext()).apply {
-        setViews { this.dismiss() }
-    } }
+    val dialog by lazy {
+        OkDialog(requireContext()).apply {
+            setViews { this.dismiss() }
+        }
+    }
 
     //Facebook Sign In
     lateinit var callbackManager: CallbackManager
@@ -78,9 +84,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
     private fun setUpCaptcha() {
 
 
-        val textCaptcha =
-            TextCaptcha(100, 50, 4, TextCaptcha.TextOptions.LETTERS_ONLY)
-        mBinding.ivCaptcha.setImageBitmap(textCaptcha.getImage());
+
 
     }
 
@@ -88,8 +92,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
         //Login Response
         mViewModel.loginResponse.observe(viewLifecycleOwner, Observer {
-                showMessage(it.message, true)
-                goToHomePage()
+            showMessage(it.message, true)
+            goToHomePage()
         })
 
         //Social Login Response
@@ -105,7 +109,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
         //Login Error
         mViewModel.loginError.observe(viewLifecycleOwner, Observer {
-            it.getContentIfNotHandled()?.let {response ->
+            it.getContentIfNotHandled()?.let { response ->
                 dialog.setViews(convertStringFromList(response.email, response.password))
                 dialog.show()
             }
@@ -157,7 +161,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
 
         mBinding.tvForgotPassword.setOnClickListener {
-
 
 
             replaceFragment(

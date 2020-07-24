@@ -225,4 +225,5 @@
     <string name="sms_label">رسالة قصيرة</string>
     <string name="email_label">البريد الإلكتروني</string>
     <string name="choose_verify_option">حدد خيار التحقق</string>
+    <string name="captcha_characters">أبجدهـFزحأنايكلاممياصسصسشالخامسثسذضصفرواحدإثنانثلاثةأربعةخمسةستةسبعةثمانيةتسعة</string>
 </resources>
