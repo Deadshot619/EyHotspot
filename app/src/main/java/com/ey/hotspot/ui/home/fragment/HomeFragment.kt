@@ -72,7 +72,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                 title = getString(R.string.login_required),
                 description = getString(R.string.need_to_login),
                 yes = {
-                    logoutUser()
+                    requireActivity().goToLoginScreen()
+                    this.dismiss()
                 },
                 no = {
                     this.dismiss()

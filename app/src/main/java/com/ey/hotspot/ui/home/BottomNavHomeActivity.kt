@@ -25,6 +25,7 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
             description = getString(R.string.need_to_login),
             yes = {
                 goToLoginScreen()
+                this.dismiss()
             },
             no = {
                 this.dismiss()
