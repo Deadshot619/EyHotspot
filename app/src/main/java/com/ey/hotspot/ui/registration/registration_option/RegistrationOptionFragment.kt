@@ -1,13 +1,12 @@
 package com.ey.hotspot.ui.registration.registration_option
 
 import android.os.Bundle
+import android.view.View
 import android.widget.RadioButton
 import android.widget.RadioGroup
-import android.widget.Toast
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentRegistrationOptionBinding
-import com.ey.hotspot.ui.login.login_fragment.LoginFragment
 import com.ey.hotspot.ui.login.otpverification.fragment.OTPVerificationFragment
 import com.ey.hotspot.utils.replaceFragment
 import com.ey.hotspot.utils.showMessage
@@ -46,6 +45,9 @@ class RegistrationOptionFragment :
 //            else
 
         setUpListeners()
+
+       if(arguments?.getString(mPhoneNO)?.trim().isNullOrEmpty())
+           mBinding.rbSms.visibility = View.GONE
     }
 
 
@@ -55,22 +57,22 @@ class RegistrationOptionFragment :
     private fun setUpListeners() {
         mBinding.run {
 
+            //Radio button
             rgSelectedMethod.setOnCheckedChangeListener(
                 RadioGroup.OnCheckedChangeListener { group, checkedId ->
                     val radio: RadioButton? = group?.findViewById(checkedId)
 
-                    if (radio?.text.toString().equals("SMS")) {
+                    if (radio?.text.toString() == "SMS") {
                         selectedOption = "sms"
                     }
-                    if (radio?.text.toString().equals("Email")) {
+                    if (radio?.text.toString() == "Email") {
                         selectedOption = "email"
                     }
 
                 })
 
 
-
-
+            //Submit
             btnSubmit.setOnClickListener {
 
                 if(selectedOption.equals("")){
