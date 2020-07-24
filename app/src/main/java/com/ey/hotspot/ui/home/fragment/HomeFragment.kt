@@ -90,6 +90,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         //Toolbar
         activity?.setUpSearchBar(mBinding.toolbarLayout, showUpButton = false, enableSearchButton = false) {}
         mBinding.toolbarLayout.etSearchBar.isFocusable = false
+
         // Prompt the user for permission.
         activity?.checkLocationPermission(view = mBinding.root, func = {
             locationPermissionGranted = true
@@ -98,6 +99,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             }
             updateLocationUI()
         })
+
+
         Places.initialize(requireActivity(), getString(R.string.maps_api_key))
         placesClient = Places.createClient(requireActivity())
         // Construct a FusedLocationProviderClient.
@@ -157,11 +160,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         this.map?.setOnMapClickListener(OnMapClickListener {
             mBinding.customPop.cvMainLayout.visibility = View.GONE
         })
-//        Searchbar
+
+//      Searchbar
         mBinding.toolbarLayout.etSearchBar.setOnClickListener {
             replaceFragment(SearchListFragment(), true)
         }
     }
+
     private fun getDeviceLocation() {
         try {
             if (locationPermissionGranted) {
@@ -205,6 +210,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             Log.e("Exception: %s", e.message, e)
         }
     }
+
     private fun setupClusters() {
         mClusterManager = ClusterManager(activity, map)
         mClusterManager.setOnClusterClickListener(this);
@@ -215,6 +221,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         val renderer = ClusterItemRenderer(requireActivity(), map, mClusterManager)
         mClusterManager.renderer = renderer
     }
+
     private fun updateLocationUI() {
         if (map == null) {
             return
@@ -232,9 +239,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             Log.e("Exception: %s", e.message, e)
         }
     }
+
     override fun onClusterClick(cluster: Cluster<MyClusterItems>?): Boolean {
         return true
     }
+
     override fun onClusterInfoWindowClick(cluster: Cluster<MyClusterItems>?) {
         //TODO
     }

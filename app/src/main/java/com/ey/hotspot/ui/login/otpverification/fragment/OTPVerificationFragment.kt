@@ -81,18 +81,15 @@ class OTPVerificationFragment :
         var otp: String = ""
         mBinding.otpView.setOtpCompletionListener {
             otp = it
-
         }
 
         mBinding.btnVerify.setOnClickListener {
-
-            if (!(otp.isEmpty()) && (otp.length == 5)) {
+            if (otp.isNotEmpty() && (otp.length == 5)) {
                 val verifyOTPRequest: VerifyOTPRequest = VerifyOTPRequest(otp.toInt())
                 mViewModel.verfiyOTPRequest(verifyOTPRequest)
             } else {
                 showMessage(requireActivity().getString(R.string.enter_valid_otp))
             }
-
 
         }
 

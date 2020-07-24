@@ -37,6 +37,8 @@
     <string name="password_label">Password</string>
     <string name="confirm_password_label">Confirm Password</string>
     <string name="captcha_label">Enter the message shown below</string>
+    <string name="password_format">Password must contain atleast 8 characters including 1 Small letter,
+        1 capital letter, 1 number and 1 special character</string>
 
     <!--My Profile-->
     <string name="my_profile_label">My Profile</string>
