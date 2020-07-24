@@ -36,6 +36,4 @@ data class ReviewsList(
 
     val provider_name: String
         get() = if (LANGUAGE == Constants.ARABIC_LANG) provider_name_arabic else _provider_name
-
-
 }
