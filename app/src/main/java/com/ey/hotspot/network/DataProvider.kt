@@ -171,9 +171,7 @@ object DataProvider : RemoteDataProvider {
         success: (BaseResponse<MarkFavouriteResponse>) -> Unit,
         error: (Exception) -> Unit
     ) {
-
         try {
-
             val result =
                 mServices.markFavourite(request)
                     .await()

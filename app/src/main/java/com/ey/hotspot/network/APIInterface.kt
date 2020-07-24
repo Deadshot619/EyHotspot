@@ -62,7 +62,7 @@ interface APIInterface {
     ): Deferred<BaseResponse<UpdateProfileResponse>>
 
 
-    @POST(Constants.API_GET_USER_HOTSPOT_LIST)
+    @POST(Constants.API_GET_HOTPSOT)
     fun getHotSpots(
         @Body getHotSpotRequest: GetHotSpotRequest
     ): Deferred<BaseResponse<List<GetHotSpotResponse>>>

@@ -12,7 +12,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -73,7 +74,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <!--Number Of users-->
+
+            <TextView
+                android:text="@string/under_construction_label"
+                style="@style/TextAppearance.MaterialComponents.Headline6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/iv_bg_view"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+<!--
+            &lt;!&ndash;Number Of users&ndash;&gt;
             <TextView
                 android:id="@+id/tv_number_of_users"
                 style="@style/TextAppearance.MaterialComponents.Headline2"
@@ -88,7 +101,7 @@
                 app:layout_constraintTop_toBottomOf="@id/iv_bg_view"
                 tools:text="69" />
 
-            <!--Users Connected-->
+            &lt;!&ndash;Users Connected&ndash;&gt;
             <TextView
                 android:id="@+id/tv_users_connected"
                 style="@style/TextAppearance.MaterialComponents.Headline6"
@@ -103,7 +116,7 @@
                 app:layout_constraintStart_toStartOf="@id/tv_number_of_users"
                 app:layout_constraintTop_toBottomOf="@id/tv_number_of_users" />
 
-            <!--        Dotted Line-->
+            &lt;!&ndash;        Dotted Line&ndash;&gt;
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_dotted_line"
                 android:layout_width="0dp"
@@ -117,7 +130,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_users_connected" />
 
-            <!--Wifi SSid-->
+            &lt;!&ndash;Wifi SSid&ndash;&gt;
             <TextView
                 android:id="@+id/tv_wifi_ssid"
                 style="@style/TextAppearance.MaterialComponents.Headline6"
@@ -132,7 +145,7 @@
                 app:layout_constraintStart_toStartOf="@id/tv_number_of_users"
                 app:layout_constraintTop_toBottomOf="@id/iv_dotted_line" />
 
-            <!--UserName-->
+            &lt;!&ndash;UserName&ndash;&gt;
             <TextView
                 android:id="@+id/chip_username"
                 android:layout_width="wrap_content"
@@ -144,7 +157,7 @@
                 app:layout_constraintStart_toStartOf="@id/tv_wifi_ssid"
                 app:layout_constraintTop_toBottomOf="@id/tv_wifi_ssid" />
 
-            <!--        Address-->
+            &lt;!&ndash;        Address&ndash;&gt;
             <TextView
                 android:id="@+id/tv_address"
                 android:layout_width="0dp"
@@ -158,6 +171,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/chip_username"
                 app:layout_constraintBottom_toBottomOf="parent" />
+-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
