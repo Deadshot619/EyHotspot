@@ -138,7 +138,10 @@ class OTPVerificationFragment :
 
 
     fun goToHomeScreen(){
-        activity?.startActivity(Intent(this.requireActivity(), BottomNavHomeActivity::class.java))
+        startActivity(Intent(activity, BottomNavHomeActivity::class.java).apply {
+            flags =
+                Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        })
         activity?.finish()
     }
 

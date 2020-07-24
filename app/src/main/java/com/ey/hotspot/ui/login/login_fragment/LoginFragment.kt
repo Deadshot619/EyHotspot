@@ -1,17 +1,13 @@
 package com.ey.hotspot.ui.login.login_fragment
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
-import android.text.Spannable
-import android.text.SpannableStringBuilder
-import android.text.style.BackgroundColorSpan
-import android.view.inputmethod.EditorInfo
+import android.view.View
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
+import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.FragmentLoginBinding
 import com.ey.hotspot.network.request.LoginRequest
 import com.ey.hotspot.network.request.SocialLoginRequest
@@ -75,6 +71,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
         setUpUIData()
         setUpListeners()
         setUpObservers()
+
+        if (HotSpotApp.prefs!!.getSkipStatus())
+            mBinding.ivBack.visibility = View.VISIBLE
     }
 
     private fun setUpUIData() {
@@ -85,7 +84,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
     }
 
     private fun setUpCaptcha() {
-
 
 
     }
@@ -135,6 +133,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
         }
 
+        //Back Button
+        mBinding.ivBack.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
+
 
         //Register New user
         mBinding.tvGetStarted.setOnClickListener {
@@ -175,7 +178,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
     //Method to redirect user to home page
     private fun goToHomePage() {
-        startActivity(Intent(activity, BottomNavHomeActivity::class.java))
+        startActivity(Intent(activity, BottomNavHomeActivity::class.java).apply {
+            flags =
+                Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        })
+
         activity?.finish()
     }
 
@@ -303,7 +310,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
                 if (password.trim().isEmpty()) {
                     etPassword.error = resources.getString(R.string.enter_password)
                     isValid = false
-                }  else if (!password.isValidPassword()){
+                } else if (!password.isValidPassword()) {
                     etPassword.error = resources.getString(R.string.password_format)
                     isValid = false
                 }

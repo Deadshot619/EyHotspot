@@ -51,7 +51,7 @@ fun convertStringFromList(vararg lists: List<String>?): String{
 /**
  * Method to logout user
  */
-fun goToLoginScreen() {
+fun logoutUser() {
     clearDataSaveLang()
 
     //Redirect user to Login Activity

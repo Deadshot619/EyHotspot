@@ -28,7 +28,7 @@ import com.ey.hotspot.ui.search.searchlist.SearchListFragment
 import com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment
 import com.ey.hotspot.utils.*
 import com.ey.hotspot.utils.constants.Constants
-import com.ey.hotspot.utils.constants.goToLoginScreen
+import com.ey.hotspot.utils.constants.logoutUser
 import com.ey.hotspot.utils.constants.setUpSearchBar
 import com.ey.hotspot.utils.dialogs.YesNoDialog
 import com.google.android.gms.common.ConnectionResult
@@ -44,7 +44,6 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.net.PlacesClient
-import com.google.maps.android.clustering.Cluster
 import com.google.maps.android.clustering.ClusterManager
 import com.google.maps.android.clustering.view.DefaultClusterRenderer
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(), OnMapReadyCallback,
@@ -73,7 +72,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                 title = getString(R.string.login_required),
                 description = getString(R.string.need_to_login),
                 yes = {
-                    goToLoginScreen()
+                    logoutUser()
                 },
                 no = {
                     this.dismiss()

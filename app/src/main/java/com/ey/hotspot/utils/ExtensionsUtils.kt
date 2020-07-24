@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseActivity
+import com.ey.hotspot.ui.login.LoginActivity
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -251,6 +252,7 @@ fun Activity.calculateHashKey(yourPackageName: String) {
     }
 }
 
-
-
+fun Activity.goToLoginScreen(){
+    startActivity(Intent(this, LoginActivity::class.java))
+}
 

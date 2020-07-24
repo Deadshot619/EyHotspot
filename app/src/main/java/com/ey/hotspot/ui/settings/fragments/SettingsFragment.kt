@@ -1,25 +1,21 @@
 package com.ey.hotspot.ui.settings.fragments
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.view.View
-import androidx.appcompat.app.AlertDialog
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.FragmentSettingsBinding
 import com.ey.hotspot.ui.profile.ProfileFragment
-import com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListFragment
 import com.ey.hotspot.utils.LanguageManager
 import com.ey.hotspot.utils.MyHotSpotSharedPreference
 import com.ey.hotspot.utils.constants.Constants
-import com.ey.hotspot.utils.constants.goToLoginScreen
+import com.ey.hotspot.utils.constants.logoutUser
 import com.ey.hotspot.utils.dialogs.YesNoDialog
 import com.ey.hotspot.utils.replaceFragment
 import com.ey.hotspot.utils.showMessage
-import kotlinx.android.synthetic.main.custom_confirm_settings_dialog.view.*
 
 class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel>() {
 
@@ -29,7 +25,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel
             setViews(
                 title = getString(R.string.logout_confirm),
                 description = "",
-                yes = { goToLoginScreen() },
+                yes = { logoutUser() },
                 no = { this.dismiss() }
             )
         }
