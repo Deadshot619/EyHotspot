@@ -23,7 +23,7 @@
     <string name="next_label">Next</string>
     <string name="mbps_label">%s Mbps</string>
     <string name="loading_label">Loading…</string>
-    <string name="under_construction_label">Under Construction…</string>
+    <string name="under_construction_label">Work in progress…</string>
 
     <!--Toolbar-->
     <string name="search_locations_label">Search Locations</string>
@@ -47,6 +47,8 @@
     <string name="retrieving_profile_details_label">Retrieving Profile Info…</string>
     <string name="updating_profile_label">Updating Profile Info…</string>
     <string name="logout_label">Logout</string>
+    <string name="logout_confirm"> Are you sure you want to logout?</string>
+
 
     <!--    Registration Option    -->
     <string name="verification_method_label">Please Select Option  To Verify Your Account</string>

@@ -29,7 +29,7 @@
     <string name="next_label">التالى</string>
     <string name="mbps_label">%s ميغابت في الثانية</string>
     <string name="loading_label">جار التحميل…</string>
-    <string name="under_construction_label">تحت التشيد</string>
+    <string name="under_construction_label">أعمال جارية</string>
 
 
     <!--Toolbar-->
@@ -65,6 +65,8 @@
     <string name="retrieving_profile_details_label">جارٍ استرداد معلومات الملف الشخصي …</string>
     <string name="updating_profile_label">جارٍ تحديث معلومات الملف الشخصي …</string>
     <string name="logout_label">تسجيل خروج</string>
+    <string name="logout_confirm"> هل أنت متأكد أنك تريد تسجيل الخروج؟</string>
+
 
 
     <!--    Registration Option    -->

@@ -26,7 +26,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel
     val dialog by lazy {
         YesNoDialog(requireContext()).apply {
             setViews(
-                title = "Are you sure you want to logout?",
+                title = getString(R.string.logout_confirm),
                 description = "",
                 yes = { goToLoginScreen() },
                 no = { this.dismiss() }
@@ -62,9 +62,9 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel
 
         //Change image of language
         if(HotSpotApp.prefs?.getLanguage() == Constants.ARABIC_LANG)
-            mBinding.ivChangeLanguage.setImageResource(R.drawable.ic_inactive_switch)
-        else
             mBinding.ivChangeLanguage.setImageResource(R.drawable.ic_active_switch)
+        else
+            mBinding.ivChangeLanguage.setImageResource(R.drawable.ic_inactive_switch)
     }
 
     private fun setUpListeners() {

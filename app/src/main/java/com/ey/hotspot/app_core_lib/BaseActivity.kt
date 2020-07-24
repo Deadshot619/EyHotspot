@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo
 import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -32,6 +33,9 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
         LanguageManager.setLanguage(this@BaseActivity, HotSpotApp.prefs!!.getLanguage())
 
         mBinding = DataBindingUtil.setContentView(this@BaseActivity, getLayoutId())
+        getWindow().setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN);
         mViewModel = ViewModelProvider(this@BaseActivity).get(getViewModel())
 
         mManager = supportFragmentManager
