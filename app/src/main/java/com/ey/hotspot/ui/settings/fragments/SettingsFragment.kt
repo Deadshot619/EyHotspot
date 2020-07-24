@@ -8,15 +8,14 @@ import android.view.View
 import androidx.appcompat.app.AlertDialog
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
-import com.ey.hotspot.app_core_lib.CoreApp
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.FragmentSettingsBinding
-import com.ey.hotspot.ui.login.LoginActivity
 import com.ey.hotspot.ui.profile.ProfileFragment
 import com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListFragment
 import com.ey.hotspot.utils.LanguageManager
 import com.ey.hotspot.utils.MyHotSpotSharedPreference
 import com.ey.hotspot.utils.constants.Constants
+import com.ey.hotspot.utils.constants.goToLoginScreen
 import com.ey.hotspot.utils.dialogs.YesNoDialog
 import com.ey.hotspot.utils.replaceFragment
 import kotlinx.android.synthetic.main.custom_confirm_settings_dialog.view.*
@@ -29,7 +28,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel
             setViews(
                 title = "Are you sure you want to logout?",
                 description = "",
-                yes = { returnToLoginScreen() },
+                yes = { goToLoginScreen() },
                 no = { this.dismiss() }
             )
         }
@@ -100,7 +99,6 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel
         }
     }
 
-
     fun showConfirmDialog(str_msg: String, str_action: String) {
         val dialogBuilder = AlertDialog.Builder(requireActivity())
         val inflater = this.getLayoutInflater()
@@ -150,17 +148,6 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel
         startActivity(i)
     }
 
-    //Method to redirect user to login screen
-    private fun returnToLoginScreen() {
-        //Clear Data
-        HotSpotApp.prefs?.clearSharedPrefData()
-
-        //Redirect user to Login Activity
-        CoreApp.instance.startActivity(Intent(CoreApp.instance, LoginActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
-        })
-    }
 
     private fun hideViewsIfSkippedUser(){
         if(HotSpotApp.prefs!!.getSkipStatus())
