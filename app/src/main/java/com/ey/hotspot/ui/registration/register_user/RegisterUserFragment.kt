@@ -18,6 +18,7 @@ import com.ey.hotspot.utils.replaceFragment
 import com.ey.hotspot.utils.showMessage
 import com.ey.hotspot.utils.validations.isEmailValid
 import com.ey.hotspot.utils.validations.isValidMobile
+import com.ey.hotspot.utils.validations.isValidPassword
 import com.facebook.*
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
@@ -319,10 +320,13 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
         if (mViewModel.password.trim().isEmpty()) {
             mBinding.edtPassword.error = resources.getString(R.string.invalid_password)
             password = false
-        } else {
-
+        } /*else if (!mViewModel.password.isValidPassword()){
+            mBinding.edtPassword.error = resources.getString(R.string.password_format)
+            password = false
+        }*/ else {
             password = true
         }
+
         if (mViewModel.confirmPassword.trim().isEmpty()) {
             mBinding.edtConfirmPassword.error =
                 resources.getString(R.string.invalid_confirm_password)

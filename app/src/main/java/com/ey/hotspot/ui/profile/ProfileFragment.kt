@@ -15,6 +15,7 @@ import com.ey.hotspot.utils.replaceFragment
 import com.ey.hotspot.utils.showMessage
 import com.ey.hotspot.utils.validations.isEmailValid
 import com.ey.hotspot.utils.validations.isValidMobile
+import com.ey.hotspot.utils.validations.isValidPassword
 
 class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>() {
 
@@ -161,7 +162,10 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
                     isValid = false
                 }
                 if (password.isNotEmpty() || confirmPassword.isNotEmpty()) {     //Check only if password are written
-                    if (password != confirmPassword) {
+                    if (!password.isValidPassword()){
+                        edtPassword.error = resources.getString(R.string.password_format)
+                        isValid = false
+                    }  else if(password != confirmPassword) {
                         edtPassword.error = resources.getString(R.string.pwd_not_match)
                         edtConfirmPassword.error = resources.getString(R.string.pwd_not_match)
                         isValid = false
