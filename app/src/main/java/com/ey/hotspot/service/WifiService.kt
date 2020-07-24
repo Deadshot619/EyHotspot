@@ -15,6 +15,7 @@ import com.ey.hotspot.database.WifiInfoDatabase
 import com.ey.hotspot.database.WifiInfoDatabaseDao
 import com.ey.hotspot.database.WifiInformationTable
 import com.ey.hotspot.utils.*
+import com.ey.hotspot.utils.constants.Constants
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -198,7 +199,7 @@ class WifiService : Service() {
                                 )
                             )
                         }
-                    }).startDownload("http://ipv4.ikoula.testdebit.info/1M.iso")
+                    }).startDownload(Constants.DOWNLOAD_LINK)
             }
 
         }

@@ -9,12 +9,14 @@ interface Constants {
         const val ARABIC_LANG: String = "ar"
 
         //Default Location Lat Lng
-
         const val LATITUDE:Double=19.1403509
         const val  LONGITUDE:Double=72.8096671
 
         //Intent
         const val AUTHENTICATION_FAILED = "authentication_failed"   //used when user's authticaition is failed while refreshing token
+
+        //Download Link
+        const val DOWNLOAD_LINK = "https://images.apple.com/v/imac-with-retina/a/images/overview/5k_image.jpg"
 
         //SharedPreference
         const val ACCESS_TOKEN: String = "access_token"
