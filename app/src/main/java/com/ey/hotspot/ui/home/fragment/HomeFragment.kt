@@ -243,7 +243,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
     }
 
     private fun setupClusters() {
-        mClusterManager = ClusterManager(activity, map)
         mClusterManager.setOnClusterClickListener(this);
         mClusterManager.setOnClusterItemClickListener(this);
         mClusterManager.setOnClusterItemInfoWindowClickListener(this);
@@ -297,6 +296,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             mBinding.customPop.ivFavourites.setImageResource(R.drawable.ic_favorite_filled_gray)
         }
 
+        showMessage(item?.title.toString())
+
         //Favourite
         mBinding.customPop.ivFavourites.setOnClickListener {
             if (HotSpotApp.prefs?.getAppLoggedInStatus()!!) {
@@ -306,6 +307,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                         ?.getConstantState()
                 val imgID2: Drawable.ConstantState? =
                     mBinding.customPop.ivFavourites.getDrawable().getConstantState()
+
+
 
                 if (imgID1 == imgID2) {
                     mBinding.customPop.ivFavourites.setImageResource(R.drawable.ic_favorite_filled_red)
