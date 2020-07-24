@@ -5,6 +5,8 @@ import com.ey.hotspot.app_core_lib.CoreApp
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.network.response.LoginResponse
 import com.ey.hotspot.ui.login.LoginActivity
+import com.ey.hotspot.utils.constants.Constants.Companion.ARABIC_LANG
+import com.ey.hotspot.utils.constants.Constants.Companion.ENGLISH_LANG
 
 
 /**
@@ -50,8 +52,13 @@ fun convertStringFromList(vararg lists: List<String>?): String{
  * Method to logout user
  */
 fun goToLoginScreen() {
+    val lang = if (ENGLISH_LANG == HotSpotApp.prefs?.getLanguage()) ENGLISH_LANG else ARABIC_LANG
+
     //Clear Data
     HotSpotApp.prefs?.clearSharedPrefData()
+
+    //Set language
+    HotSpotApp.prefs?.setLanguage(lang)
 
     //Redirect user to Login Activity
     CoreApp.instance.startActivity(Intent(CoreApp.instance, LoginActivity::class.java).apply {
