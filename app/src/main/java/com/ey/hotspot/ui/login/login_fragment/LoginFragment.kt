@@ -14,6 +14,7 @@ import com.ey.hotspot.ui.login.forgorpassword.ForgotPasswordFragment
 import com.ey.hotspot.ui.registration.register_user.RegisterUserFragment
 import com.ey.hotspot.utils.captcha.TextCaptcha
 import com.ey.hotspot.utils.constants.convertStringFromList
+import com.ey.hotspot.utils.constants.setSkippedUserData
 import com.ey.hotspot.utils.dialogs.OkDialog
 import com.ey.hotspot.utils.replaceFragment
 import com.ey.hotspot.utils.showMessage
@@ -151,7 +152,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
         //Skip button
         mBinding.btnSkip.setOnClickListener {
-            mViewModel.setSkippedUserData()
+            setSkippedUserData()
             goToHomePage()
         }
 

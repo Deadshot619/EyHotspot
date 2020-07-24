@@ -1,11 +1,13 @@
 package com.ey.hotspot.ui.login.otpverification.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.OTPVerificationFragmentBinding
+import com.ey.hotspot.ui.home.BottomNavHomeActivity
 import com.ey.hotspot.ui.login.otpverification.fragment.model.SendOTPRequest
 import com.ey.hotspot.ui.login.otpverification.fragment.model.VerifyOTPRequest
 import com.ey.hotspot.ui.speed_test.rate_wifi.RateWifiFragment
@@ -127,15 +129,9 @@ class OTPVerificationFragment :
 
         mViewModel.verifyResponse.observe(viewLifecycleOwner, Observer {
 
-            if (it.status == true) {
-
+            if (it.status) {
                 showMessage(it.message)
-
-                replaceFragment(
-                    fragment = com.ey.hotspot.ui.login.login_fragment.LoginFragment(),
-                    addToBackStack = false,
-                    bundle = null
-                )
+                goToHomeScreen()
             } else {
                 showMessage(it.message)
             }
@@ -143,5 +139,10 @@ class OTPVerificationFragment :
 
     }
 
+
+    fun goToHomeScreen(){
+        activity?.startActivity(Intent(this.requireActivity(), BottomNavHomeActivity::class.java))
+        activity?.finish()
+    }
 
 }

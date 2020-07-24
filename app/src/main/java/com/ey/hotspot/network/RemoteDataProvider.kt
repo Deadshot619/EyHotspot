@@ -134,7 +134,7 @@ interface RemoteDataProvider {
 
     suspend fun verifyOTP(
         request: VerifyOTPRequest,
-        success: (BaseResponse<Any>) -> Unit,
+        success: (BaseResponse<LoginResponse>) -> Unit,
         error: (Exception) -> Unit
     )
 

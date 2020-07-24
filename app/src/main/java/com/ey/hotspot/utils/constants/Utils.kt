@@ -3,6 +3,7 @@ package com.ey.hotspot.utils.constants
 import android.content.Intent
 import com.ey.hotspot.app_core_lib.CoreApp
 import com.ey.hotspot.app_core_lib.HotSpotApp
+import com.ey.hotspot.network.response.LoginResponse
 import com.ey.hotspot.ui.login.LoginActivity
 
 /**
@@ -33,4 +34,20 @@ fun goToLoginScreen() {
     CoreApp.instance.startActivity(Intent(CoreApp.instance, LoginActivity::class.java).apply {
         flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
     })
+}
+
+fun updateSharedPreference(loginResponse: LoginResponse) {
+    HotSpotApp.prefs?.run {
+        saveAccessToken(loginResponse.accessToken)
+        setAppLoggedInStatus(true)
+        setSkipStatus(false)
+        setUserDataPref(loginResponse)
+    }
+}
+
+fun setSkippedUserData(){
+    HotSpotApp.prefs?.run {
+        setAppLoggedInStatus(false)
+        setSkipStatus(true)
+    }
 }

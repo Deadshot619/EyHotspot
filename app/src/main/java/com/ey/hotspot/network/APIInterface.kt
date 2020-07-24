@@ -113,7 +113,7 @@ interface APIInterface {
     @POST(Constants.API_VERIFY_OTP + "/" + "{id}?")
     fun verifyOTP(
         @Path("id") id: String?, @Body verifyOTPRequest: VerifyOTPRequest
-    ): Deferred<BaseResponse<Any>>
+    ): Deferred<BaseResponse<LoginResponse>>
 
 
     @POST(Constants.API_FORGOT_PASSWORD)
