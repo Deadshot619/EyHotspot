@@ -379,23 +379,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                     snippet = location.navigate_url,
                     isfavourite = location.favourite,
                     itemId = location.id,
-                    address = location.location,
-                    location.lat.parseToDouble(),
-                    location.lng.parseToDouble()
+                    address = location.location
                 )
             mClusterManager.addItem(offsetItems)
         }
     }
 
     override fun onClusterItemInfoWindowClick(item: MyClusterItems?) {
-
     }
 
     companion object {
         private val TAG = HomeFragment::class.java.simpleName
         private const val DEFAULT_ZOOM = 12
         private const val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
-
     }
 
     class ClusterItemRenderer(

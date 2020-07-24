@@ -24,6 +24,8 @@ class MyClusterItems : ClusterItem {
         mTitle = "";
         mSnippet = "";
         this.mItemID = mItemID
+        mLat = lat
+        mLng = lng
     }
 
     constructor(
