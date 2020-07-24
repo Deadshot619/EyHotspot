@@ -10,9 +10,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingStart="@dimen/common_padding_start"
-        android:paddingTop="@dimen/common_padding_top"
-        android:paddingEnd="@dimen/common_padding_end"
         tools:context=".ui.registration.registration_option.RegistrationOptionFragment">
 
         <!--Toolbar-->
@@ -29,14 +26,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="@dimen/margin_20" />
+            app:layout_constraintGuide_begin="@dimen/common_margin_32" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_end="@dimen/margin_20" />
+            app:layout_constraintGuide_end="@dimen/common_margin_32" />
 
 
         <!--    User image  -->
@@ -44,6 +41,7 @@
             android:id="@+id/iv_user"
             android:layout_width="150dp"
             android:layout_height="150dp"
+            android:layout_marginTop="@dimen/common_margin"
             android:src="@drawable/ic_email_verification"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -55,6 +53,7 @@
             style="@style/TextAppearance.MyApp.Headline5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_margin"
             android:layout_gravity="center"
             android:gravity="center"
             android:text="@string/verification_method_label"
@@ -73,7 +72,7 @@
             android:paddingEnd="@dimen/margin_30"
             android:paddingStart="@dimen/margin_30"
             android:textDirection="locale"
-
+            android:weightSum="2"
             app:layout_constraintEnd_toEndOf="@id/guideline_right"
             app:layout_constraintStart_toStartOf="@id/guideline_left"
             app:layout_constraintTop_toBottomOf="@+id/tv_select_verification_method_label">
@@ -84,6 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:paddingStart="@dimen/margin_20"
+                android:paddingEnd="@dimen/margin_20"
                 android:layout_gravity="center"
                 android:text="@string/sms_label"
                 android:textDirection="locale"
@@ -95,6 +95,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:paddingStart="@dimen/margin_20"
+                android:paddingEnd="@dimen/margin_20"
                 android:text="@string/email_label"
                 android:textDirection="locale"
                 android:textSize="18sp" />
@@ -108,7 +109,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size_14"
-            android:layout_marginTop="@dimen/common_margin"
+            android:layout_marginTop="@dimen/common_margin_24"
             android:text="@string/captcha_label"
             android:textDirection="locale"
             app:layout_constraintEnd_toEndOf="@+id/guideline_right"
@@ -139,12 +140,12 @@
 
 
         <!--otp on sms-->
-        <androidx.appcompat.widget.AppCompatButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSubmit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_20"
-            android:background="@drawable/sign_btn_gradient"
+            style="@style/GradientButton"
             android:gravity="center"
             android:paddingStart="@dimen/margin_40"
             android:paddingEnd="@dimen/margin_40"
