@@ -170,7 +170,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <!--EmailId Hint-->
-            <TextView
+           <!-- <TextView
                 android:id="@+id/tv_email_id_hint"
                 style="@style/EditTextHint"
                 android:layout_width="wrap_content"
@@ -181,6 +181,27 @@
                 app:layout_constraintStart_toStartOf="@id/email_input_layout"
                 app:layout_constraintTop_toTopOf="@id/email_input_layout" />
 
+-->
+            <!--Email Hint-->
+            <TextView
+                android:id="@+id/tv_email_id_hint"
+                style="@style/EditTextHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/email_id_label"
+                app:layout_constraintBottom_toTopOf="@id/email_input_layout"
+                app:layout_constraintEnd_toEndOf="@id/email_input_layout"
+                app:layout_constraintStart_toStartOf="@id/email_input_layout"
+                app:layout_constraintTop_toTopOf="@id/email_input_layout" />
+
+            <!--            Asterik-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/AsterikEditText"
+                app:layout_constraintTop_toTopOf="@id/tv_email_id_hint"
+                app:layout_constraintStart_toEndOf="@id/tv_email_id_hint"
+                />
             <!--Password input-->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/password_input_layout"
@@ -205,7 +226,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
-            <!--Password Hint-->
+          <!--  &lt;!&ndash;Password Hint&ndash;&gt;
             <TextView
                 android:id="@+id/tv_password_hint"
                 style="@style/EditTextHint"
@@ -216,6 +237,29 @@
                 app:layout_constraintEnd_toEndOf="@id/password_input_layout"
                 app:layout_constraintStart_toStartOf="@id/password_input_layout"
                 app:layout_constraintTop_toTopOf="@id/password_input_layout" />
+-->
+
+            <!--Password Hint-->
+            <TextView
+                android:id="@+id/tv_password_hint"
+                style="@style/EditTextHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/password_label"
+                app:layout_constraintBottom_toTopOf="@id/password_input_layout"
+                app:layout_constraintEnd_toEndOf="@id/password_input_layout"
+                app:layout_constraintStart_toStartOf="@id/password_input_layout"
+                app:layout_constraintTop_toTopOf="@id/password_input_layout" />
+
+            <!--            Asterik-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/AsterikEditText"
+                app:layout_constraintTop_toTopOf="@id/tv_password_hint"
+                app:layout_constraintStart_toEndOf="@id/tv_password_hint"
+                />
+
 
             <!-- Confirm Password input-->
             <com.google.android.material.textfield.TextInputLayout
@@ -241,7 +285,7 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!--Confirm Password Hint-->
+          <!--  &lt;!&ndash;Confirm Password Hint&ndash;&gt;
             <TextView
                 android:id="@+id/tv_confirm_password_hint"
                 style="@style/EditTextHint"
@@ -252,6 +296,28 @@
                 app:layout_constraintEnd_toEndOf="@id/confirm_password_input_layout"
                 app:layout_constraintStart_toStartOf="@id/confirm_password_input_layout"
                 app:layout_constraintTop_toTopOf="@id/confirm_password_input_layout" />
+-->
+
+            <!-- Confirm Password Hint-->
+            <TextView
+                android:id="@+id/tv_confirm_password_hint"
+                style="@style/EditTextHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/confirm_password_label"
+                app:layout_constraintBottom_toTopOf="@id/confirm_password_input_layout"
+                app:layout_constraintEnd_toEndOf="@id/confirm_password_input_layout"
+                app:layout_constraintStart_toStartOf="@id/confirm_password_input_layout"
+                app:layout_constraintTop_toTopOf="@id/confirm_password_input_layout" />
+
+            <!--            Asterik-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/AsterikEditText"
+                app:layout_constraintTop_toTopOf="@id/tv_confirm_password_hint"
+                app:layout_constraintStart_toEndOf="@id/tv_confirm_password_hint"
+                />
 
 
             <TextView
