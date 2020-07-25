@@ -81,8 +81,7 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
     }
 
     private fun setUpObservers() {
-
-
+        //Registration Response
         mViewModel.registrationResponse.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             it.getContentIfNotHandled()?.let {
                 if (it.status) {
@@ -98,7 +97,6 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
 
                     )
                 } else {
-
                     try {
                         dialog.setViews(
                             convertStringFromList(
@@ -140,9 +138,8 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
         })
     }
 
-
+    //Method to setup UI data
     private fun setUpUIData() {
-
         setUpToolbar(
             toolbarBinding = mBinding.toolbarLayout,
             title = getString(R.string.register_with_us),
@@ -155,14 +152,12 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
     }
 
     private fun setuPGoogelSignIn() {
-
         val gso =
             GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(resources.getString(R.string.google_client_id))
                 .requestEmail()
                 .build()
         mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
-
     }
 
     private fun setUpFacebookLogin() {
