@@ -112,28 +112,21 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
             }
         })
 
+        //Country Code
         mViewModel.getCountryCodeList.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let {
-
-                if (it.status == true) {
-                  /*  for (i in 0 until it.data.country_codes.size) {
-                        val countryName: String = it.data.country_codes.get(i).value
-                    }*/
-
+                if (it.status) {
                     val adapter = ArrayAdapter<String>(
                         requireContext(),
                         R.layout.support_simple_spinner_dropdown_item,
                         it.data.country_codes.map { it.value }.toList()
                     )
 
-//                    mBinding.spinnerIssue.adapter = adapter
+                    mBinding.spinnerIssue.adapter = adapter
                 } else {
                     showMessage(it.message, true)
                 }
-
-              
             }
-
         })
     }
 

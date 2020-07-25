@@ -88,8 +88,7 @@
 
 
 
-<!--
-            &lt;!&ndash;Spinner&ndash;&gt;
+            <!--Spinner-->
             <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/spinner_issue"
                 android:layout_width="0dp"
@@ -105,7 +104,7 @@
                 app:layout_constraintStart_toStartOf="@id/iv_countryCode"
                 app:layout_constraintTop_toTopOf="@id/iv_countryCode" />
 
-            &lt;!&ndash;Issue bg View&ndash;&gt;
+            <!--Issue bg View-->
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_countryCode"
                 android:layout_width="0dp"
@@ -117,7 +116,7 @@
                 app:layout_constraintStart_toStartOf="@id/iv_name"
                 app:layout_constraintTop_toBottomOf="@id/edt_last_name" />
 
-            &lt;!&ndash;Country Code&ndash;&gt;
+            <!--Country Code-->
             <TextView
                 android:id="@+id/tv_country_code_hint"
                 style="@style/EditTextHint"
@@ -128,7 +127,6 @@
                 app:layout_constraintEnd_toEndOf="@id/iv_countryCode"
                 app:layout_constraintStart_toStartOf="@id/iv_countryCode"
                 app:layout_constraintTop_toTopOf="@id/iv_countryCode" />
--->
 
 
             <!--Mobile No-->
@@ -143,7 +141,7 @@
                 app:hintEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_name">
+                app:layout_constraintTop_toBottomOf="@id/iv_countryCode">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_mobile_no"

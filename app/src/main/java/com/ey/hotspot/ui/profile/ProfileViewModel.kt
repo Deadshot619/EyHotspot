@@ -37,7 +37,8 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
 
     init {
         if (HotSpotApp.prefs?.getAppLoggedInStatus()!!)
-            getProfileDetails()
+            getCountryCodeList()
+//            getProfileDetails()
     }
 
 
@@ -93,14 +94,18 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
     }
 
 
-    fun getCountryCodeList() {
+    private fun getCountryCodeList() {
         setDialogVisibility(true)
         coroutineScope.launch {
 
             DataProvider.getCountryCode(
                 success = {
                     _getCoutryCodeList.value = Event(it)
-                    setDialogVisibility(false)
+                    if (it.status)
+                        getProfileDetails()
+                    else
+                        setDialogVisibility(false)
+
                 },
                 error = {
                     checkError(it)
