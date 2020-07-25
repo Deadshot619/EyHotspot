@@ -13,6 +13,8 @@ import com.ey.hotspot.utils.showMessage
 class RaiseComplaintFragment :
     BaseFragment<FragmentRaiseComplaintBinding, RaiseComplaintViewModel>() {
 
+
+
     companion object {
         fun newInstance(locationId: Int, wifiSsid: String, wifiProvider: String, location: String) =
             RaiseComplaintFragment().apply {

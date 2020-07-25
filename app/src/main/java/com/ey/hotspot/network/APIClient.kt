@@ -1,12 +1,10 @@
 package com.ey.hotspot.network
 
 import com.ey.hotspot.BuildConfig
-import com.ey.hotspot.app_core_lib.CoreApp
 import com.ey.hotspot.network.interceptor.AuthInterceptor
 import com.ey.hotspot.network.interceptor.HeaderInterceptor
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.readystatesoftware.chuck.ChuckInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import retrofit2.Retrofit
@@ -74,7 +72,7 @@ class APIClient {
 //                builder.addNetworkInterceptor(StethoInterceptor())
                 builder.addInterceptor(HeaderInterceptor())
 
-                builder.addNetworkInterceptor(ChuckInterceptor(CoreApp.instance))
+//                builder.addNetworkInterceptor(ChuckInterceptor(CoreApp.instance))
                 builder.connectTimeout(1, TimeUnit.MINUTES)
                 builder.readTimeout(30, TimeUnit.SECONDS)
                 builder.writeTimeout(15, TimeUnit.SECONDS)
@@ -83,7 +81,6 @@ class APIClient {
             } catch (e: Exception) {
                 throw RuntimeException(e)
             }
-
         }
 
 
