@@ -209,10 +209,9 @@
             <!--Password input-->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/password_input_layout"
-                style="@style/CustomTextField"
+                style="@style/CustomPasswordTextField"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-
                 android:layout_marginTop="@dimen/common_margin_32"
                 app:layout_constraintEnd_toEndOf="@id/input_email_id"
                 app:layout_constraintStart_toStartOf="@id/input_email_id"
@@ -246,7 +245,7 @@
             <!-- Confirm Password input-->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/confirm_password_input_layout"
-                style="@style/CustomTextField"
+                style="@style/CustomPasswordTextField"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/common_margin_32"
