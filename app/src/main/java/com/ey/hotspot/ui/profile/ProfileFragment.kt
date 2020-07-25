@@ -146,11 +146,11 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
 
         mViewModel.profileData.value?.run {
             mBinding.run {
-                if (firstName.isValidName()) {
+                if (!firstName.isValidName()) {
                     edtFirstName.error = resources.getString(R.string.invalid_firstName)
                     isValid = false
                 }
-                if (lastName.isValidName()) {
+                if (!lastName.isValidName()) {
                     edtLastName.error = resources.getString(R.string.invalid_last_name_label)
                     isValid = false
                 }
