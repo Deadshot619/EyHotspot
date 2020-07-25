@@ -166,7 +166,7 @@
             <!--Password input-->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/password_input_layout"
-                style="@style/CustomTextField"
+                style="@style/CustomPasswordTextField"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/common_margin_32"

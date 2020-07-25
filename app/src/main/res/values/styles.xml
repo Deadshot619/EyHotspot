@@ -44,6 +44,12 @@
         <item name="hintEnabled">false</item>
     </style>
 
+    <!--    Custom TextField for password  -->
+    <style name="CustomPasswordTextField" parent="CustomTextField">
+        <item name="passwordToggleEnabled">true</item>
+        <item name="passwordToggleTint">@color/colorPrimary</item>
+    </style>
+
     <!--    Custom Edittext-->
     <style name="CustomEditText" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:paddingStart">@dimen/custom_edt_dimen</item>
