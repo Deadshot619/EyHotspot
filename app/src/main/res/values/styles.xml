@@ -73,6 +73,14 @@
 
     </style>
 
+    <!--  Asterik style for edit text hint  -->
+    <style name="AsterikEditText" parent="EditTextHint">
+        <item name="android:textColor">@color/colorRed</item>
+        <item name="layout_constraintHorizontal_bias">0</item>
+        <item name="android:paddingStart">0dp</item>
+        <item name="android:text">*</item>
+    </style>
+
     <!--    Custom EditText for name field              //First Name-->
     <style name="CustomEditTextFirstName" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:layout_marginStart">@dimen/common_margin_32</item>
