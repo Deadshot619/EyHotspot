@@ -15,6 +15,7 @@ import com.ey.hotspot.utils.replaceFragment
 import com.ey.hotspot.utils.showMessage
 import com.ey.hotspot.utils.validations.isEmailValid
 import com.ey.hotspot.utils.validations.isValidMobile
+import com.ey.hotspot.utils.validations.isValidName
 import com.ey.hotspot.utils.validations.isValidPassword
 
 class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>() {
@@ -145,11 +146,11 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
 
         mViewModel.profileData.value?.run {
             mBinding.run {
-                if (firstName.trim().isEmpty()) {
+                if (firstName.isValidName()) {
                     edtFirstName.error = resources.getString(R.string.invalid_firstName)
                     isValid = false
                 }
-                if (lastName.trim().isEmpty()) {
+                if (lastName.isValidName()) {
                     edtLastName.error = resources.getString(R.string.invalid_last_name_label)
                     isValid = false
                 }

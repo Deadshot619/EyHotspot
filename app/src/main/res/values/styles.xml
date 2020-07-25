@@ -53,7 +53,7 @@
     <!--    Custom Edittext-->
     <style name="CustomEditText" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:paddingStart">@dimen/custom_edt_dimen</item>
-        <item name="android:paddingEnd">@dimen/common_padding_24</item>
+        <item name="android:paddingEnd">36dp</item>
         <item name="android:textColor">@color/colorEditText</item>
         <item name="android:singleLine">true</item>
         <item name="android:textAlignment">viewStart</item>

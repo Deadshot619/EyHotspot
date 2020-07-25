@@ -13,11 +13,11 @@ fun String.isEmailValid(): Boolean{
  * Method to Check if password is valid
  */
 fun String.isValidPassword(): Boolean {
-    return if(this.length >= 8){
+    return if(length in 8..32){
         //Contains small letter, Capital letter, a number
         val textPattern = Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$")
         //Contains special character
-        val special = Pattern.compile ("[!@#$%&*()_+=|<>?{}\\[\\]~-]")
+        val special = Pattern.compile ("[#$%\\[\\]~-]")    //!@&*()_+=|<>?{}
         textPattern.matcher(this).matches() && special.matcher(this).find()
     } else {
         false
@@ -29,4 +29,11 @@ fun String.isValidPassword(): Boolean {
  */
 fun String.isValidMobile(): Boolean{
     return Pattern.matches("[0-9]+", this) && this.length in 10..10
+}
+
+/**
+ * Method to validate
+ */
+fun String.isValidName(): Boolean{
+    return Pattern.matches("[a-zA-Z]+", this) && length > 0 && trim().isNotEmpty()
 }

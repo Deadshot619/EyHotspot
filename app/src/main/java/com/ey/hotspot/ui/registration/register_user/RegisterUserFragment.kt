@@ -10,7 +10,6 @@ import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentRegisterUserBinding
 import com.ey.hotspot.network.request.RegisterRequest
 import com.ey.hotspot.ui.login.permission.PermissionFragment
-import com.ey.hotspot.ui.registration.register_user.model.RegistrationResponse
 import com.ey.hotspot.ui.registration.registration_option.RegistrationOptionFragment
 import com.ey.hotspot.utils.constants.convertStringFromList
 import com.ey.hotspot.utils.dialogs.OkDialog
@@ -18,6 +17,7 @@ import com.ey.hotspot.utils.replaceFragment
 import com.ey.hotspot.utils.showMessage
 import com.ey.hotspot.utils.validations.isEmailValid
 import com.ey.hotspot.utils.validations.isValidMobile
+import com.ey.hotspot.utils.validations.isValidName
 import com.ey.hotspot.utils.validations.isValidPassword
 import com.facebook.*
 import com.facebook.login.LoginManager
@@ -28,8 +28,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
-import com.google.gson.Gson
-import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_register_user.*
 import java.util.*
 
@@ -118,7 +116,7 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
                     }
                 }
             }
-            })
+        })
 
 
     }
@@ -172,8 +170,8 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
             btnGetStarted.setOnClickListener {
 
 
-                val status:Boolean = validate()
-                if (validate()) {
+//                val status: Boolean = validate()
+                if (validate2()) {
                     val register: RegisterRequest =
                         RegisterRequest(
                             mViewModel.firstName,
@@ -323,7 +321,7 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
         if (mViewModel.password.trim().isEmpty()) {
             mBinding.edtPassword.error = resources.getString(R.string.invalid_password)
             password = false
-        } else if (!mViewModel.password.isValidPassword()){
+        } else if (!mViewModel.password.isValidPassword()) {
             mBinding.edtPassword.error = resources.getString(R.string.password_format)
             password = false
         } else {
@@ -368,6 +366,44 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
 
     }
 
+    /**
+     * Method to validate input fields
+     */
+    private fun validate2(): Boolean {
+        var isValid = true
+
+        mViewModel.run {
+            mBinding.run {
+                if (!firstName.isValidName()) {
+                    edtFirstName.error = resources.getString(R.string.invalid_firstName)
+                    isValid = false
+                }
+                if (!lastName.isValidName()) {
+                    edtLastName.error = resources.getString(R.string.invalid_last_name_label)
+                    isValid = false
+                }
+                if (!emailId.isEmailValid()) {
+                    edtEmail.error = resources.getString(R.string.invalid_email_label)
+                    isValid = false
+                }
+                if (mobileNumber.trim().isNotEmpty() && !mobileNumber.isValidMobile()) {
+                    edtMobileNo.error = resources.getString(R.string.invalid_mobile)
+                    isValid = false
+                }
+                if (!password.trim().isValidPassword()) {
+                    edtPassword.error = resources.getString(R.string.password_format)
+                    edtConfirmPassword.error = resources.getString(R.string.password_format)
+                    isValid = false
+                } else if (password != confirmPassword) {
+                    edtPassword.error = resources.getString(R.string.pwd_not_match)
+                    edtConfirmPassword.error = resources.getString(R.string.pwd_not_match)
+                    isValid = false
+                }
+            }
+        } ?: return false
+
+        return isValid
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         callbackManager.onActivityResult(requestCode, resultCode, data)
