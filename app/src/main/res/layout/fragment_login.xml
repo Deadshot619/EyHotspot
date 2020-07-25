@@ -176,9 +176,9 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_password"
-                    style="@style/CustomEditText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    style="@style/CustomEditText"
                     android:background="@drawable/password_bitmap"
                     android:hint="@string/enter_password"
                     android:inputType="textPassword"

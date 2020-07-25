@@ -57,7 +57,7 @@
     <string name="password_label">كلمه السر</string>
     <string name="confirm_password_label">تأكيد كلمة المرور</string>
     <string name="captcha_label">أدخل الرسالة الموضحة أدناه</string>
-    <string name="password_format">يجب أن تحتوي كلمة المرور على 8 أحرف على الأقل بما في ذلك حرف صغير واحد وحرف كبير ورقم واحد وحرف خاص واحد</string>
+    <string name="password_format">يجب أن تحتوي كلمة المرور على 8–32 حرفًا حرف واحد كبير ، حرف صغير واحد ، أرقام عشرية (0–9) ، حرف خاص (# ، $ ،٪)</string>
 
     <!--My Profile-->
     <string name="my_profile_label">ملفي</string>

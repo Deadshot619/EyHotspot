@@ -37,7 +37,8 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
 
     init {
         if (HotSpotApp.prefs?.getAppLoggedInStatus()!!)
-            getProfileDetails()
+            getCountryCodeList()
+//            getProfileDetails()
     }
 
 
@@ -56,8 +57,8 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
                         firstName = it.data.firstname ?: "",
                         lastName = it.data.lastname ?: "",
                         mobileNo = it.data.mobile_no ?: "",
-                        emailId = it.data.email ?: ""
-
+                        emailId = it.data.email ?: "",
+                        countryCode = it.data.country_code
                     )
 
                 //Hide dialog
@@ -92,22 +93,25 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
         }
     }
 
-
-    fun getCountryCodeList() {
+    //Method to get Country code list
+    private fun getCountryCodeList() {
         setDialogVisibility(true)
         coroutineScope.launch {
 
             DataProvider.getCountryCode(
                 success = {
                     _getCoutryCodeList.value = Event(it)
-                    setDialogVisibility(false)
+                    if (it.status)
+                        getProfileDetails()
+                    else
+                        setDialogVisibility(false)
+
                 },
                 error = {
                     checkError(it)
                 }
             )
         }
-
     }
 
 

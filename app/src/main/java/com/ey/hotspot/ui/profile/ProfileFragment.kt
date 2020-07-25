@@ -1,6 +1,7 @@
 package com.ey.hotspot.ui.profile
 
 import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.lifecycle.Observer
 import com.ey.hotspot.R
@@ -15,6 +16,7 @@ import com.ey.hotspot.utils.replaceFragment
 import com.ey.hotspot.utils.showMessage
 import com.ey.hotspot.utils.validations.isEmailValid
 import com.ey.hotspot.utils.validations.isValidMobile
+import com.ey.hotspot.utils.validations.isValidName
 import com.ey.hotspot.utils.validations.isValidPassword
 
 class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>() {
@@ -75,21 +77,38 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
                         firstName = mViewModel.profileData.value!!.firstName,
                         lastName = mViewModel.profileData.value!!.lastName,
                         mobileNo = mViewModel.profileData.value?.mobileNo,
-                        countryCode = "91",
+                        countryCode = mViewModel.profileData.value?.countryCode.toString(),
                         email = mViewModel.profileData.value!!.emailId
                     )
                 )
             }
-
         }
 
+        //Country Code
+        mBinding.spinnerIssue.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+            }
 
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                //set country code in profile
+                mViewModel.profileData.value?.countryCode =
+                    mViewModel.getCountryCodeList.value?.peekContent()?.data?.country_codes?.find {
+                        it.value == mBinding.spinnerIssue.selectedItem.toString()
+                    }?.key ?: -1
+            }
+
+        }
     }
 
     private fun setUpObserver() {
+        //Profile Response
         mViewModel.profileResponse.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let { content ->
                 //showMessage(content.message, false)
+                mBinding.spinnerIssue.setSelection(
+                    mViewModel.getCountryCodeList.value?.peekContent()?.data?.country_codes?.indexOfFirst { it.key == content.data.country_code }
+                        ?: -1
+                )
             }
         })
 
@@ -112,28 +131,21 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
             }
         })
 
+        //Country Code
         mViewModel.getCountryCodeList.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let {
-
-                if (it.status == true) {
-                  /*  for (i in 0 until it.data.country_codes.size) {
-                        val countryName: String = it.data.country_codes.get(i).value
-                    }*/
-
+                if (it.status) {
                     val adapter = ArrayAdapter<String>(
                         requireContext(),
-                        R.layout.support_simple_spinner_dropdown_item,
+                        R.layout.item_country_code,
                         it.data.country_codes.map { it.value }.toList()
                     )
 
-//                    mBinding.spinnerIssue.adapter = adapter
+                    mBinding.spinnerIssue.adapter = adapter
                 } else {
                     showMessage(it.message, true)
                 }
-
-              
             }
-
         })
     }
 
@@ -145,11 +157,11 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
 
         mViewModel.profileData.value?.run {
             mBinding.run {
-                if (firstName.trim().isEmpty()) {
+                if (!firstName.isValidName()) {
                     edtFirstName.error = resources.getString(R.string.invalid_firstName)
                     isValid = false
                 }
-                if (lastName.trim().isEmpty()) {
+                if (!lastName.isValidName()) {
                     edtLastName.error = resources.getString(R.string.invalid_last_name_label)
                     isValid = false
                 }
@@ -162,10 +174,10 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
                     isValid = false
                 }
                 if (password.isNotEmpty() || confirmPassword.isNotEmpty()) {     //Check only if password are written
-                    if (!password.isValidPassword()){
+                    if (!password.isValidPassword()) {
                         edtPassword.error = resources.getString(R.string.password_format)
                         isValid = false
-                    }  else if(password != confirmPassword) {
+                    } else if (password != confirmPassword) {
                         edtPassword.error = resources.getString(R.string.pwd_not_match)
                         edtConfirmPassword.error = resources.getString(R.string.pwd_not_match)
                         isValid = false

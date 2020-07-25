@@ -63,9 +63,9 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/first_name_label"
                 android:singleLine="true"
-                android:text="@={viewModel.profileData.firstName}"
-
                 android:textDirection="locale"
+
+                android:text="@={viewModel.profileData.firstName}"
                 app:layout_constraintBottom_toBottomOf="@id/iv_name"
                 app:layout_constraintEnd_toStartOf="@+id/edt_last_name"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -73,7 +73,7 @@
                 app:layout_constraintStart_toStartOf="@id/iv_name"
                 app:layout_constraintTop_toTopOf="@id/iv_name" />
 
-            <!--Name Hint-->
+           <!-- &lt;!&ndash;Name Hint&ndash;&gt;
             <TextView
                 android:id="@+id/tv_name_hint"
                 style="@style/EditTextHint"
@@ -84,7 +84,28 @@
                 app:layout_constraintEnd_toEndOf="@id/iv_name"
                 app:layout_constraintStart_toStartOf="@id/iv_name"
                 app:layout_constraintTop_toTopOf="@id/iv_name" />
+-->
 
+            <!--Name Hint-->
+            <TextView
+                android:id="@+id/tv_name_hint"
+                style="@style/EditTextHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/name_label"
+                app:layout_constraintBottom_toTopOf="@id/iv_name"
+                app:layout_constraintEnd_toEndOf="@id/iv_name"
+                app:layout_constraintStart_toStartOf="@id/iv_name"
+                app:layout_constraintTop_toTopOf="@id/iv_name" />
+
+            <!--            Asterik-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/AsterikEditText"
+                app:layout_constraintTop_toTopOf="@id/tv_name_hint"
+                app:layout_constraintStart_toEndOf="@id/tv_name_hint"
+                />
 
             <!--Last Name-->
             <com.google.android.material.textfield.TextInputEditText
@@ -93,8 +114,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/last_name_label"
-                android:text="@={viewModel.profileData.lastName}"
                 android:textDirection="locale"
+                android:text="@={viewModel.profileData.lastName}"
                 app:layout_constraintBottom_toBottomOf="@id/iv_name"
                 app:layout_constraintEnd_toEndOf="@id/iv_name"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -102,47 +123,46 @@
                 app:layout_constraintTop_toTopOf="@id/iv_name" />
 
 
-            <!--
-                        &lt;!&ndash;Spinner&ndash;&gt;
-                        <androidx.appcompat.widget.AppCompatSpinner
-                            android:id="@+id/spinner_issue"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/common_padding"
-                            android:layout_marginEnd="@dimen/common_padding"
-                            tools:entries="@array/CountryCode"
-                            android:dropDownSelector="@color/colorPrimary"
-                            android:paddingStart="@dimen/common_padding_24"
-                            android:paddingEnd="@dimen/common_padding_24"
-                            app:layout_constraintBottom_toBottomOf="@id/iv_countryCode"
-                            app:layout_constraintEnd_toEndOf="@id/iv_countryCode"
-                            app:layout_constraintStart_toStartOf="@id/iv_countryCode"
-                            app:layout_constraintTop_toTopOf="@id/iv_countryCode" />
 
-                        &lt;!&ndash;Issue bg View&ndash;&gt;
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/iv_countryCode"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/common_margin_32"
-                            android:scaleType="fitXY"
-                            android:src="@drawable/mobile_number_bitmap"
-                            app:layout_constraintEnd_toEndOf="@id/iv_name"
-                            app:layout_constraintStart_toStartOf="@id/iv_name"
-                            app:layout_constraintTop_toBottomOf="@id/edt_last_name" />
+            <!--Spinner-->
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinner_issue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/common_padding"
+                android:layout_marginEnd="@dimen/common_padding"
+                tools:entries="@array/CountryCode"
+                android:dropDownSelector="@color/colorPrimary"
+                android:paddingStart="@dimen/common_padding_24"
+                android:paddingEnd="@dimen/common_padding_24"
+                app:layout_constraintBottom_toBottomOf="@id/iv_countryCode"
+                app:layout_constraintEnd_toEndOf="@id/iv_countryCode"
+                app:layout_constraintStart_toStartOf="@id/iv_countryCode"
+                app:layout_constraintTop_toTopOf="@id/iv_countryCode" />
 
-                        &lt;!&ndash;Country Code&ndash;&gt;
-                        <TextView
-                            android:id="@+id/tv_country_code_hint"
-                            style="@style/EditTextHint"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/country_code_label"
-                            app:layout_constraintBottom_toTopOf="@id/iv_countryCode"
-                            app:layout_constraintEnd_toEndOf="@id/iv_countryCode"
-                            app:layout_constraintStart_toStartOf="@id/iv_countryCode"
-                            app:layout_constraintTop_toTopOf="@id/iv_countryCode" />
-            -->
+            <!--Issue bg View-->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_countryCode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_margin_32"
+                android:scaleType="fitXY"
+                android:src="@drawable/mobile_number_bitmap"
+                app:layout_constraintEnd_toEndOf="@id/iv_name"
+                app:layout_constraintStart_toStartOf="@id/iv_name"
+                app:layout_constraintTop_toBottomOf="@id/edt_last_name" />
+
+            <!--Country Code-->
+            <TextView
+                android:id="@+id/tv_country_code_hint"
+                style="@style/EditTextHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/country_code_label"
+                app:layout_constraintBottom_toTopOf="@id/iv_countryCode"
+                app:layout_constraintEnd_toEndOf="@id/iv_countryCode"
+                app:layout_constraintStart_toStartOf="@id/iv_countryCode"
+                app:layout_constraintTop_toTopOf="@id/iv_countryCode" />
 
 
             <!--Mobile No-->
@@ -157,18 +177,18 @@
                 app:hintEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_name">
+                app:layout_constraintTop_toBottomOf="@id/iv_countryCode">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_mobile_no"
                     style="@style/CustomEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textDirection="locale"
+                    android:inputType="phone"
                     android:background="@drawable/mobile_number_bitmap"
                     android:hint="@string/mobile_number_label"
-                    android:inputType="phone"
-                    android:text="@={viewModel.profileData.mobileNo}"
-                    android:textDirection="locale" />
+                    android:text="@={viewModel.profileData.mobileNo}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!--Mobile Hint-->
@@ -201,14 +221,14 @@
                     style="@style/CustomEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textDirection="locale"
+                    android:inputType="textEmailAddress"
                     android:background="@drawable/email_id_bitmap"
                     android:hint='@{String.format("%s *",@string/email_id_label)}'
-                    android:inputType="textEmailAddress"
-                    android:text="@={viewModel.profileData.emailId}"
-                    android:textDirection="locale" />
+                    android:text="@={viewModel.profileData.emailId}" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!--EmailId Hint-->
+            <!--&lt;!&ndash;EmailId Hint&ndash;&gt;
             <TextView
                 android:id="@+id/tv_email_id_hint"
                 style="@style/EditTextHint"
@@ -219,14 +239,35 @@
                 app:layout_constraintEnd_toEndOf="@id/input_email_id"
                 app:layout_constraintStart_toStartOf="@id/input_email_id"
                 app:layout_constraintTop_toTopOf="@id/input_email_id" />
+-->
+
+            <!--Email Hint-->
+            <TextView
+                android:id="@+id/tv_email_id_hint"
+                style="@style/EditTextHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/email_id_label"
+                app:layout_constraintBottom_toTopOf="@id/input_email_id"
+                app:layout_constraintEnd_toEndOf="@id/input_email_id"
+                app:layout_constraintStart_toStartOf="@id/input_email_id"
+                app:layout_constraintTop_toTopOf="@id/input_email_id" />
+
+            <!--            Asterik-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/AsterikEditText"
+                app:layout_constraintTop_toTopOf="@id/tv_email_id_hint"
+                app:layout_constraintStart_toEndOf="@id/tv_email_id_hint"
+                />
 
             <!--Password input-->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/password_input_layout"
-                style="@style/CustomTextField"
+                style="@style/CustomPasswordTextField"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-
                 android:layout_marginTop="@dimen/common_margin_32"
                 app:layout_constraintEnd_toEndOf="@id/input_email_id"
                 app:layout_constraintStart_toStartOf="@id/input_email_id"
@@ -237,15 +278,15 @@
                     style="@style/CustomEditText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:inputType="textPassword"
+                    android:textDirection="locale"
                     android:background="@drawable/password_bitmap"
                     android:hint="@string/enter_password"
-                    android:inputType="textPassword"
-                    android:text="@={viewModel.profileData.password}"
-                    android:textDirection="locale" />
+                    android:text="@={viewModel.profileData.password}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!--Password Hint-->
+          <!--  &lt;!&ndash;Password Hint&ndash;&gt;
             <TextView
                 android:id="@+id/tv_password_hint"
                 style="@style/EditTextHint"
@@ -256,11 +297,25 @@
                 app:layout_constraintEnd_toEndOf="@id/password_input_layout"
                 app:layout_constraintStart_toStartOf="@id/password_input_layout"
                 app:layout_constraintTop_toTopOf="@id/password_input_layout" />
+-->
+
+            <!--Password Hint-->
+            <TextView
+                android:id="@+id/tv_password_hint"
+                style="@style/EditTextHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/password_label"
+                app:layout_constraintBottom_toTopOf="@id/password_input_layout"
+                app:layout_constraintEnd_toEndOf="@id/password_input_layout"
+                app:layout_constraintStart_toStartOf="@id/password_input_layout"
+                app:layout_constraintTop_toTopOf="@id/password_input_layout" />
+
 
             <!-- Confirm Password input-->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/confirm_password_input_layout"
-                style="@style/CustomTextField"
+                style="@style/CustomPasswordTextField"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/common_margin_32"
@@ -271,22 +326,34 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_confirm_password"
                     style="@style/CustomEditText"
+                    android:inputType="textPassword"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/password_bitmap"
                     android:hint="@string/enter_confirm_password"
-                    android:inputType="textPassword"
                     android:text="@={viewModel.profileData.confirmPassword}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!--Confirm Password Hint-->
+          <!--  &lt;!&ndash;Confirm Password Hint&ndash;&gt;
             <TextView
                 android:id="@+id/tv_confirm_password_hint"
                 style="@style/EditTextHint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text='@{String.format("%s ",@string/confirm_password_label)}'
+                app:layout_constraintBottom_toTopOf="@id/confirm_password_input_layout"
+                app:layout_constraintEnd_toEndOf="@id/confirm_password_input_layout"
+                app:layout_constraintStart_toStartOf="@id/confirm_password_input_layout"
+                app:layout_constraintTop_toTopOf="@id/confirm_password_input_layout" />
+-->
+            <!-- Confirm Password Hint-->
+            <TextView
+                android:id="@+id/tv_confirm_password_hint"
+                style="@style/EditTextHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/confirm_password_label"
                 app:layout_constraintBottom_toTopOf="@id/confirm_password_input_layout"
                 app:layout_constraintEnd_toEndOf="@id/confirm_password_input_layout"
                 app:layout_constraintStart_toStartOf="@id/confirm_password_input_layout"
@@ -306,6 +373,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/confirm_password_input_layout" />
+
+
 
 
 

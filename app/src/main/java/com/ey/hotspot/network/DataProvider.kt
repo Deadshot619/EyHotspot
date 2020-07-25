@@ -420,7 +420,7 @@ object DataProvider : RemoteDataProvider {
         error: (Exception) -> Unit
     ) {
         try {
-            val result = mServices.getCountryList().await()
+            val result = mServices.getCountryListAsync().await()
             success(result)
         } catch (e: Exception) {
             error(e)

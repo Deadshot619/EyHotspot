@@ -4,20 +4,24 @@ import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentRegisterUserBinding
 import com.ey.hotspot.network.request.RegisterRequest
 import com.ey.hotspot.ui.login.permission.PermissionFragment
-import com.ey.hotspot.ui.registration.register_user.model.RegistrationResponse
 import com.ey.hotspot.ui.registration.registration_option.RegistrationOptionFragment
+import com.ey.hotspot.utils.constants.Constants
 import com.ey.hotspot.utils.constants.convertStringFromList
 import com.ey.hotspot.utils.dialogs.OkDialog
 import com.ey.hotspot.utils.replaceFragment
 import com.ey.hotspot.utils.showMessage
 import com.ey.hotspot.utils.validations.isEmailValid
 import com.ey.hotspot.utils.validations.isValidMobile
+import com.ey.hotspot.utils.validations.isValidName
 import com.ey.hotspot.utils.validations.isValidPassword
 import com.facebook.*
 import com.facebook.login.LoginManager
@@ -28,8 +32,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
-import com.google.gson.Gson
-import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_register_user.*
 import java.util.*
 
@@ -83,9 +85,7 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
 
 
         mViewModel.registrationResponse.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-
             it.getContentIfNotHandled()?.let {
-
                 if (it.status) {
 
                     showMessage(it.message, true)
@@ -118,9 +118,27 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
                     }
                 }
             }
-            })
+        })
 
 
+        //Country Code
+        mViewModel.getCountryCodeList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            it.getContentIfNotHandled()?.let {
+                val adapter = ArrayAdapter<String>(
+                    requireContext(),
+                    R.layout.item_country_code,
+                    it.country_codes.map { it.value }.toList()
+                )
+
+                mBinding.spinnerCountryCode.adapter = adapter
+
+                mBinding.spinnerCountryCode.setSelection(
+                    mViewModel.getCountryCodeList.value?.peekContent()?.country_codes?.indexOfFirst { it.key == Constants.SAUDI_ARABIA_COUNTRY_CODE }
+                        ?: -1
+                )
+            }
+
+        })
     }
 
 
@@ -167,18 +185,15 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
      */
     private fun setUpListeners() {
         mBinding.run {
-
             //Sign In button
             btnGetStarted.setOnClickListener {
-
-
-                val status:Boolean = validate()
-                if (validate()) {
+//                val status: Boolean = validate()
+                if (validate2()) {
                     val register: RegisterRequest =
                         RegisterRequest(
                             mViewModel.firstName,
                             mViewModel.lastName,
-                            "91",
+                            mViewModel.coutrycode,
                             mViewModel.mobileNumber,
                             mViewModel.emailId,
                             mViewModel.password,
@@ -187,11 +202,10 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
 
 
                     mViewModel.registerUser(register)
-
-
                 }
             }
 
+            //T&C
             tvTermsCondition.setOnClickListener {
                 replaceFragment(
                     fragment = PermissionFragment.newInstance(),
@@ -212,6 +226,21 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
             }
 
 
+            //Country Code
+            mBinding.spinnerCountryCode.onItemSelectedListener =
+                object : AdapterView.OnItemSelectedListener {
+                    override fun onNothingSelected(p0: AdapterView<*>?) {
+                    }
+
+                    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                        //set country code in profile
+                        mViewModel.coutrycode =
+                            mViewModel.getCountryCodeList.value?.peekContent()?.country_codes?.find {
+                                it.value == mBinding.spinnerCountryCode.selectedItem.toString()
+                            }?.key.toString() ?: ""
+                    }
+
+                }
         }
     }
 
@@ -323,7 +352,7 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
         if (mViewModel.password.trim().isEmpty()) {
             mBinding.edtPassword.error = resources.getString(R.string.invalid_password)
             password = false
-        } else if (!mViewModel.password.isValidPassword()){
+        } else if (!mViewModel.password.isValidPassword()) {
             mBinding.edtPassword.error = resources.getString(R.string.password_format)
             password = false
         } else {
@@ -368,6 +397,44 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
 
     }
 
+    /**
+     * Method to validate input fields
+     */
+    private fun validate2(): Boolean {
+        var isValid = true
+
+        mViewModel.run {
+            mBinding.run {
+                if (!firstName.isValidName()) {
+                    edtFirstName.error = resources.getString(R.string.invalid_firstName)
+                    isValid = false
+                }
+                if (!lastName.isValidName()) {
+                    edtLastName.error = resources.getString(R.string.invalid_last_name_label)
+                    isValid = false
+                }
+                if (!emailId.isEmailValid()) {
+                    edtEmail.error = resources.getString(R.string.invalid_email_label)
+                    isValid = false
+                }
+                if (mobileNumber.trim().isNotEmpty() && !mobileNumber.isValidMobile()) {
+                    edtMobileNo.error = resources.getString(R.string.invalid_mobile)
+                    isValid = false
+                }
+                if (!password.trim().isValidPassword()) {
+                    edtPassword.error = resources.getString(R.string.password_format)
+                    edtConfirmPassword.error = resources.getString(R.string.password_format)
+                    isValid = false
+                } else if (password != confirmPassword) {
+                    edtPassword.error = resources.getString(R.string.pwd_not_match)
+                    edtConfirmPassword.error = resources.getString(R.string.pwd_not_match)
+                    isValid = false
+                }
+            }
+        } ?: return false
+
+        return isValid
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         callbackManager.onActivityResult(requestCode, resultCode, data)

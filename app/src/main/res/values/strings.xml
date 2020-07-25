@@ -5,11 +5,7 @@
     <string name="registration_button">Register</string>
 
 
-
-
     <string name="google_client_id">701065953910-ua0p0sl83t7r04n0fh317p17pnpfouem.apps.googleusercontent.com</string>
-
-
 
 
     <string name="facebook_app_id">2495789184045739</string>
@@ -38,8 +34,10 @@
     <string name="password_label">Password</string>
     <string name="confirm_password_label">Confirm Password</string>
     <string name="captcha_label">Enter the message shown below</string>
-    <string name="password_format">Password must contain atleast 8 characters including 1 Small letter,
-        1 capital letter, 1 number and 1 special character</string>
+    <string name="password_format">Password Must Contain 8-32 characters One upper case letter,
+        One lower case letter,
+        Decimal digits(0-9),
+        Special character (#, $, %)</string>
 
     <!--My Profile-->
     <string name="my_profile_label">My Profile</string>
@@ -127,7 +125,7 @@
     <!--Raise Complaint-->
     <string name="explain_problem_label">Explain your problem in detail here</string>
     <string name="raise_complaint_label">Raise Complaint</string>
-<!--    <string name="comment_and_evaluate_label">Comment and Evaluate</string>-->
+    <!--    <string name="comment_and_evaluate_label">Comment and Evaluate</string>-->
 
 
     <!--WiFi Service-->

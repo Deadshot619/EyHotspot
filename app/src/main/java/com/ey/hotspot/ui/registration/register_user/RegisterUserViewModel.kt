@@ -9,9 +9,11 @@ import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.network.DataProvider
 import com.ey.hotspot.network.request.RegisterRequest
 import com.ey.hotspot.network.response.BaseResponse
+import com.ey.hotspot.network.response.CoutryCode
 import com.ey.hotspot.network.response.UpdateProfileResponse
 import com.ey.hotspot.ui.registration.register_user.model.RegistrationResponse
 import com.ey.hotspot.utils.Event
+import com.ey.hotspot.utils.constants.Constants
 import kotlinx.coroutines.launch
 
 class RegisterUserViewModel(application: Application) : BaseViewModel(application) {
@@ -22,7 +24,7 @@ class RegisterUserViewModel(application: Application) : BaseViewModel(applicatio
     var password = ""
     var confirmPassword = ""
     var mobileNumber = ""
-    var coutrycode = ""
+    var coutrycode = Constants.SAUDI_ARABIA_COUNTRY_CODE.toString()
 
 
     private val _registrationResponse = MutableLiveData<Event<BaseResponse<RegistrationResponse>>>()
@@ -34,17 +36,24 @@ class RegisterUserViewModel(application: Application) : BaseViewModel(applicatio
     val registrationError: LiveData<Event<UpdateProfileResponse?>>
         get() = _registrationError
 
+    //Country Codes
+    private val _getCoutryCodeList = MutableLiveData<Event<CoutryCode>>()
+    val getCountryCodeList: LiveData<Event<CoutryCode>>
+        get() = _getCoutryCodeList
+
+
+    init {
+        getCountryCodeList()
+    }
+
 
     fun registerUser(register: RegisterRequest) {
-
         setDialogVisibility(true, appInstance.getString(R.string.registering_new_user))
         coroutineScope.launch {
 
             DataProvider.registerUser(
                 request = register,
                 success = {
-
-
                     _registrationResponse.value = Event(it)
                     if (it.status) {
                         saveRegistrationTokenInSharedPreference(it.data.tmp_token)
@@ -58,10 +67,29 @@ class RegisterUserViewModel(application: Application) : BaseViewModel(applicatio
                 }
             )
         }
-
-
     }
 
+
+    //Method to get Country code list
+    private fun getCountryCodeList() {
+        setDialogVisibility(true)
+        coroutineScope.launch {
+
+            DataProvider.getCountryCode(
+                success = {
+                    if (it.status)
+                        _getCoutryCodeList.value = Event(it.data)
+                    else
+                        showToastFromViewModel(it.message)
+
+                    setDialogVisibility(false)
+                },
+                error = {
+                    checkError(it)
+                }
+            )
+        }
+    }
 
     private fun saveRegistrationTokenInSharedPreference(tempToken: String) {
 

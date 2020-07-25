@@ -143,5 +143,5 @@ interface APIInterface {
     ): Deferred<BaseResponse<ResendForgotPasswordOTP>>
 
     @GET(Constants.API_GET_COUNTRY_CODE_NAME)
-    fun getCountryList():Deferred<BaseResponse<CoutryCode>>
+    fun getCountryListAsync():Deferred<BaseResponse<CoutryCode>>
 }
