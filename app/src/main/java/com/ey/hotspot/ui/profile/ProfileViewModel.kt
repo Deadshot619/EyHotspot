@@ -93,7 +93,7 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
         }
     }
 
-
+    //Method to get Country code list
     private fun getCountryCodeList() {
         setDialogVisibility(true)
         coroutineScope.launch {

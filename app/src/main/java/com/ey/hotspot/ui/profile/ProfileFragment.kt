@@ -118,7 +118,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
                 if (it.status) {
                     val adapter = ArrayAdapter<String>(
                         requireContext(),
-                        R.layout.support_simple_spinner_dropdown_item,
+                        R.layout.item_country_code,
                         it.data.country_codes.map { it.value }.toList()
                     )
 
