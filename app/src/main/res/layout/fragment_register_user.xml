@@ -349,7 +349,7 @@
             <TextView
                 android:id="@+id/tvPasswordMsg"
                 android:layout_width="0dp"
-                android:textSize="@dimen/txt_size_16"
+                android:textSize="12sp"
                 android:textStyle="italic"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_20"

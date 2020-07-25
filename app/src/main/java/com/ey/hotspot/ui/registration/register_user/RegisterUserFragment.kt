@@ -12,7 +12,6 @@ import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentRegisterUserBinding
 import com.ey.hotspot.network.request.RegisterRequest
-import com.ey.hotspot.ui.login.permission.PermissionFragment
 import com.ey.hotspot.ui.registration.registration_option.RegistrationOptionFragment
 import com.ey.hotspot.utils.constants.Constants
 import com.ey.hotspot.utils.constants.convertStringFromList
@@ -207,11 +206,11 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
 
             //T&C
             tvTermsCondition.setOnClickListener {
-                replaceFragment(
+                /*replaceFragment(
                     fragment = PermissionFragment.newInstance(),
                     addToBackStack = true,
                     bundle = null
-                )
+                )*/
             }
 
 
