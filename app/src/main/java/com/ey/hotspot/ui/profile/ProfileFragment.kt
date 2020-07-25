@@ -81,7 +81,6 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
                     )
                 )
             }
-
         }
 
 
