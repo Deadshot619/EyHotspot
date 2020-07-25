@@ -88,10 +88,10 @@ class RegistrationOptionFragment :
                 RadioGroup.OnCheckedChangeListener { group, checkedId ->
                     val radio: RadioButton? = group?.findViewById(checkedId)
 
-                    if (radio?.text.toString() == "SMS") {
+                    if (radio?.text.toString() == getString(R.string.sms_label)) {
                         selectedOption = SMS
                     }
-                    if (radio?.text.toString() == "Email") {
+                    if (radio?.text.toString() == getString(R.string.email_label)) {
                         selectedOption = EMAIL
                     }
 

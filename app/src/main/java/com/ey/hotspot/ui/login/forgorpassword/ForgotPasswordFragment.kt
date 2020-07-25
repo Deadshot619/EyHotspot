@@ -76,7 +76,6 @@ class ForgotPasswordFragment :
                             otp = it.message
                         ),
                         addToBackStack = true
-
                     )
                 } else {
                     try {
@@ -118,7 +117,6 @@ class ForgotPasswordFragment :
             btnSendOtp.setOnClickListener {
 
                 if (validate()) {
-
                     val forgotPasswordRequest: ForgotPasswordRequest =
                         ForgotPasswordRequest(mViewModel.mEmailIdOrPassword)
                     mViewModel.callForgotPasswordAPI(forgotPasswordRequest)

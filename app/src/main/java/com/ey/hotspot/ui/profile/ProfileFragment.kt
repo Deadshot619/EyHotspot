@@ -70,7 +70,6 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
 
 //        Update Profile
         mBinding.btnUpdateProfile.setOnClickListener {
-
             if (validate()) {
                 mViewModel.updateProfile(
                     UpdateProfileRequest(
@@ -78,7 +77,9 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
                         lastName = mViewModel.profileData.value!!.lastName,
                         mobileNo = mViewModel.profileData.value?.mobileNo,
                         countryCode = mViewModel.profileData.value?.countryCode.toString(),
-                        email = mViewModel.profileData.value!!.emailId
+                        email = mViewModel.profileData.value!!.emailId,
+                        password = mViewModel.profileData.value?.password,
+                        confirmPassword = mViewModel.profileData.value?.confirmPassword
                     )
                 )
             }

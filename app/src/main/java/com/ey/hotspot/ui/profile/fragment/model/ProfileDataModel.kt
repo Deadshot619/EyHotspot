@@ -6,7 +6,7 @@ data class ProfileDataModel (
     var countryCode: Int = -1,
     var mobileNo: String = "",
     var emailId: String = "",
-    var password:String ="",
-    var confirmPassword:String=""
+    var password: String ="",
+    var confirmPassword: String=""
 
 )
