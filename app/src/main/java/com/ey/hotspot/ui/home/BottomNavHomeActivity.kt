@@ -19,7 +19,6 @@ import com.ey.hotspot.utils.dialogs.YesNoDialog
 class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomNavHomeViewModel>() {
 
     private val dialog by lazy { YesNoDialog(this).apply {
-        //TODO 17/07/2020 : Extract String resources
         setViews(
             title = getString(R.string.login_required),
             description = getString(R.string.need_to_login),

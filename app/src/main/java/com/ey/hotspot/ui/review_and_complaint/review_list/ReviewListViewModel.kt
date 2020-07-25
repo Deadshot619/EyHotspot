@@ -5,13 +5,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ey.hotspot.app_core_lib.BaseViewModel
 import com.ey.hotspot.network.DataProvider
+import com.ey.hotspot.network.response.BaseResponse
 import com.ey.hotspot.network.response.ReviewsList
 import kotlinx.coroutines.launch
 
 class ReviewListViewModel(application: Application) : BaseViewModel(application) {
 
-    private val _reviewList = MutableLiveData<List<ReviewsList>>()
-    val reviewList: LiveData<List<ReviewsList>>
+    private val _reviewList = MutableLiveData<BaseResponse<List<ReviewsList>>>()
+    val reviewList: LiveData<BaseResponse<List<ReviewsList>>>
         get() = _reviewList
 
     init {
@@ -22,8 +23,7 @@ class ReviewListViewModel(application: Application) : BaseViewModel(application)
         coroutineScope.launch {
             DataProvider.getReviews(
                 success = {
-                    if (it.status)
-                        _reviewList.value = it.data
+                        _reviewList.value = it
                 },
                 error = {
                     checkError(it)

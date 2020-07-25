@@ -5,13 +5,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ey.hotspot.app_core_lib.BaseViewModel
 import com.ey.hotspot.network.DataProvider
+import com.ey.hotspot.network.response.BaseResponse
 import com.ey.hotspot.network.response.ComplaintsList
 import kotlinx.coroutines.launch
 
 class ComplaintListViewModel(application: Application) : BaseViewModel(application) {
 
-    private val _complaintList = MutableLiveData<List<ComplaintsList>>()
-    val complaintList: LiveData<List<ComplaintsList>>
+    private val _complaintList = MutableLiveData<BaseResponse<List<ComplaintsList>>>()
+    val complaintList: LiveData<BaseResponse<List<ComplaintsList>>>
         get() = _complaintList
 
     init {
@@ -22,8 +23,7 @@ class ComplaintListViewModel(application: Application) : BaseViewModel(applicati
         coroutineScope.launch {
             DataProvider.getCompaints(
                 success = {
-                    if (it.status)
-                        _complaintList.value = it.data
+                        _complaintList.value = it
                 },
                 error = {
                     checkError(it)
