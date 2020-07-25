@@ -112,7 +112,6 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
                 }
             )
         }
-
     }
 
 

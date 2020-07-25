@@ -108,6 +108,50 @@
                 app:layout_constraintStart_toEndOf="@+id/edt_first_name"
                 app:layout_constraintTop_toTopOf="@id/iv_name" />
 
+
+            <!--Spinner-->
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinner_country_code"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/common_padding"
+                android:layout_marginEnd="@dimen/common_padding"
+                tools:entries="@array/CountryCode"
+                android:dropDownSelector="@color/colorPrimary"
+                android:paddingStart="@dimen/common_padding_24"
+                android:paddingEnd="@dimen/common_padding_24"
+                app:layout_constraintBottom_toBottomOf="@id/iv_countryCode"
+                app:layout_constraintEnd_toEndOf="@id/iv_countryCode"
+                app:layout_constraintStart_toStartOf="@id/iv_countryCode"
+                app:layout_constraintTop_toTopOf="@id/iv_countryCode" />
+
+            <!--Issue bg View-->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_countryCode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_margin_32"
+                android:scaleType="fitXY"
+                android:src="@drawable/mobile_number_bitmap"
+                app:layout_constraintEnd_toEndOf="@id/iv_name"
+                app:layout_constraintStart_toStartOf="@id/iv_name"
+                app:layout_constraintTop_toBottomOf="@id/edt_last_name" />
+
+            <!--Country Code-->
+            <TextView
+                android:id="@+id/tv_country_code_hint"
+                style="@style/EditTextHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/country_code_label"
+                app:layout_constraintBottom_toTopOf="@id/iv_countryCode"
+                app:layout_constraintEnd_toEndOf="@id/iv_countryCode"
+                app:layout_constraintStart_toStartOf="@id/iv_countryCode"
+                app:layout_constraintTop_toTopOf="@id/iv_countryCode" />
+
+
+
+
             <!--Mobile Number input-->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/input_mobile_number"
@@ -117,7 +161,7 @@
                 android:layout_marginTop="@dimen/common_margin_32"
                 app:layout_constraintEnd_toEndOf="@id/guideline_right"
                 app:layout_constraintStart_toStartOf="@id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@id/iv_name">
+                app:layout_constraintTop_toBottomOf="@id/iv_countryCode">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtMobileNo"

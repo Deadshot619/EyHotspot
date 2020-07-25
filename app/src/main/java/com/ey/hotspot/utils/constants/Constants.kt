@@ -18,6 +18,10 @@ interface Constants {
         //Download Link
         const val DOWNLOAD_LINK = "https://images.apple.com/v/imac-with-retina/a/images/overview/5k_image.jpg"
 
+        //Country Code
+        const val SAUDI_ARABIA_COUNTRY_CODE = 966
+
+
         //SharedPreference
         const val ACCESS_TOKEN: String = "access_token"
         const val APP_LOGGED_IN: String = "app_logged_in"

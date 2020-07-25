@@ -4,6 +4,9 @@ import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
@@ -11,6 +14,7 @@ import com.ey.hotspot.databinding.FragmentRegisterUserBinding
 import com.ey.hotspot.network.request.RegisterRequest
 import com.ey.hotspot.ui.login.permission.PermissionFragment
 import com.ey.hotspot.ui.registration.registration_option.RegistrationOptionFragment
+import com.ey.hotspot.utils.constants.Constants
 import com.ey.hotspot.utils.constants.convertStringFromList
 import com.ey.hotspot.utils.dialogs.OkDialog
 import com.ey.hotspot.utils.replaceFragment
@@ -81,9 +85,7 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
 
 
         mViewModel.registrationResponse.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-
             it.getContentIfNotHandled()?.let {
-
                 if (it.status) {
 
                     showMessage(it.message, true)
@@ -119,6 +121,24 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
         })
 
 
+        //Country Code
+        mViewModel.getCountryCodeList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            it.getContentIfNotHandled()?.let {
+                val adapter = ArrayAdapter<String>(
+                    requireContext(),
+                    R.layout.item_country_code,
+                    it.country_codes.map { it.value }.toList()
+                )
+
+                mBinding.spinnerCountryCode.adapter = adapter
+
+                mBinding.spinnerCountryCode.setSelection(
+                    mViewModel.getCountryCodeList.value?.peekContent()?.country_codes?.indexOfFirst { it.key == Constants.SAUDI_ARABIA_COUNTRY_CODE }
+                        ?: -1
+                )
+            }
+
+        })
     }
 
 
@@ -165,18 +185,15 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
      */
     private fun setUpListeners() {
         mBinding.run {
-
             //Sign In button
             btnGetStarted.setOnClickListener {
-
-
 //                val status: Boolean = validate()
                 if (validate2()) {
                     val register: RegisterRequest =
                         RegisterRequest(
                             mViewModel.firstName,
                             mViewModel.lastName,
-                            "91",
+                            mViewModel.coutrycode,
                             mViewModel.mobileNumber,
                             mViewModel.emailId,
                             mViewModel.password,
@@ -185,11 +202,10 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
 
 
                     mViewModel.registerUser(register)
-
-
                 }
             }
 
+            //T&C
             tvTermsCondition.setOnClickListener {
                 replaceFragment(
                     fragment = PermissionFragment.newInstance(),
@@ -210,6 +226,21 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
             }
 
 
+            //Country Code
+            mBinding.spinnerCountryCode.onItemSelectedListener =
+                object : AdapterView.OnItemSelectedListener {
+                    override fun onNothingSelected(p0: AdapterView<*>?) {
+                    }
+
+                    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                        //set country code in profile
+                        mViewModel.coutrycode =
+                            mViewModel.getCountryCodeList.value?.peekContent()?.country_codes?.find {
+                                it.value == mBinding.spinnerCountryCode.selectedItem.toString()
+                            }?.key.toString() ?: ""
+                    }
+
+                }
         }
     }
 
