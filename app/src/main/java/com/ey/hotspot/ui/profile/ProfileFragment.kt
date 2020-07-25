@@ -96,8 +96,9 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
                         it.value == mBinding.spinnerIssue.selectedItem.toString()
                     }?.key ?: -1
             }
-
         }
+
+
     }
 
     private fun setUpObserver() {
