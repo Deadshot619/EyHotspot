@@ -296,14 +296,6 @@
                 app:layout_constraintStart_toStartOf="@id/password_input_layout"
                 app:layout_constraintTop_toTopOf="@id/password_input_layout" />
 
-            <!--            Asterik-->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/AsterikEditText"
-                app:layout_constraintTop_toTopOf="@id/tv_password_hint"
-                app:layout_constraintStart_toEndOf="@id/tv_password_hint"
-                />
 
             <!-- Confirm Password input-->
             <com.google.android.material.textfield.TextInputLayout
@@ -352,14 +344,6 @@
                 app:layout_constraintStart_toStartOf="@id/confirm_password_input_layout"
                 app:layout_constraintTop_toTopOf="@id/confirm_password_input_layout" />
 
-            <!--            Asterik-->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/AsterikEditText"
-                app:layout_constraintTop_toTopOf="@id/tv_confirm_password_hint"
-                app:layout_constraintStart_toEndOf="@id/tv_confirm_password_hint"
-                />
 
 
             <!--Update Profile-->

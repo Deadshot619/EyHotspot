@@ -57,8 +57,8 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
                         firstName = it.data.firstname ?: "",
                         lastName = it.data.lastname ?: "",
                         mobileNo = it.data.mobile_no ?: "",
-                        emailId = it.data.email ?: ""
-
+                        emailId = it.data.email ?: "",
+                        countryCode = it.data.country_code
                     )
 
                 //Hide dialog

@@ -1,6 +1,7 @@
 package com.ey.hotspot.ui.profile
 
 import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.lifecycle.Observer
 import com.ey.hotspot.R
@@ -76,20 +77,38 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
                         firstName = mViewModel.profileData.value!!.firstName,
                         lastName = mViewModel.profileData.value!!.lastName,
                         mobileNo = mViewModel.profileData.value?.mobileNo,
-                        countryCode = "91",
+                        countryCode = mViewModel.profileData.value?.countryCode.toString(),
                         email = mViewModel.profileData.value!!.emailId
                     )
                 )
             }
         }
 
+        //Country Code
+        mBinding.spinnerIssue.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+            }
 
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                //set country code in profile
+                mViewModel.profileData.value?.countryCode =
+                    mViewModel.getCountryCodeList.value?.peekContent()?.data?.country_codes?.find {
+                        it.value == mBinding.spinnerIssue.selectedItem.toString()
+                    }?.key ?: -1
+            }
+
+        }
     }
 
     private fun setUpObserver() {
+        //Profile Response
         mViewModel.profileResponse.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let { content ->
                 //showMessage(content.message, false)
+                mBinding.spinnerIssue.setSelection(
+                    mViewModel.getCountryCodeList.value?.peekContent()?.data?.country_codes?.indexOfFirst { it.key == content.data.country_code }
+                        ?: -1
+                )
             }
         })
 
@@ -155,10 +174,10 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
                     isValid = false
                 }
                 if (password.isNotEmpty() || confirmPassword.isNotEmpty()) {     //Check only if password are written
-                    if (!password.isValidPassword()){
+                    if (!password.isValidPassword()) {
                         edtPassword.error = resources.getString(R.string.password_format)
                         isValid = false
-                    }  else if(password != confirmPassword) {
+                    } else if (password != confirmPassword) {
                         edtPassword.error = resources.getString(R.string.pwd_not_match)
                         edtConfirmPassword.error = resources.getString(R.string.pwd_not_match)
                         isValid = false
