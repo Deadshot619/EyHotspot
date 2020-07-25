@@ -122,7 +122,7 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
 
         //Country Code
         mViewModel.getCountryCodeList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            it.getContentIfNotHandled()?.let {
+            it.peekContent()?.let {
                 val adapter = ArrayAdapter<String>(
                     requireContext(),
                     R.layout.item_country_code,
