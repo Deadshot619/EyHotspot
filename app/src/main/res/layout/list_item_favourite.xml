@@ -127,7 +127,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="0.8"
                     android:textDirection="locale"
-
+                    android:visibility="gone"
                     android:src="@drawable/baseline_share_24" />
 
 
