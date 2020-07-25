@@ -17,7 +17,8 @@ import kotlinx.coroutines.launch
 class HomeFragmentViewModel(application: Application) : BaseViewModel(application) {
 
     //Variable to store response of HotSpot
-    private val _getHotSpotResponse = MutableLiveData<Event<BaseResponse<List<GetHotSpotResponse>>>>()
+    private val _getHotSpotResponse =
+        MutableLiveData<Event<BaseResponse<List<GetHotSpotResponse>>>>()
     val getHotSpotResponse: LiveData<Event<BaseResponse<List<GetHotSpotResponse>>>>
         get() = _getHotSpotResponse
 
@@ -34,16 +35,13 @@ class HomeFragmentViewModel(application: Application) : BaseViewModel(applicatio
 
     //Get HotSpots
     fun getHotSpotResponse(getHotSpotRequest: GetHotSpotRequest) {
-
         coroutineScope.launch {
             DataProvider.getHotspot(
                 request = getHotSpotRequest,
                 success = {
 
                     _getHotSpotResponse.value = Event(it)
-
                 }, error = {
-
                     checkError(it)
 
                 }
@@ -52,10 +50,14 @@ class HomeFragmentViewModel(application: Application) : BaseViewModel(applicatio
     }
 
     //Mark a hotspot as favourite
-    fun markFavouriteItem(markFavouriteRequest: MarkFavouriteRequest,favouriteType:Boolean, myClusterItems: MyClusterItems?) {
-        if(favouriteType) {
-            setDialogVisibility(true,null)
-        }else{
+    fun markFavouriteItem(
+        markFavouriteRequest: MarkFavouriteRequest,
+        favouriteType: Boolean,
+        myClusterItems: MyClusterItems?
+    ) {
+        if (favouriteType) {
+            setDialogVisibility(true, null)
+        } else {
             setDialogVisibility(true, null)
 
         }

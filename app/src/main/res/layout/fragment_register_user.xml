@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.ey.hotspot.ui.registration.register_user.RegisterUserViewModel" />
@@ -41,17 +42,33 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/tvMandatoryFieldMsg"
+                android:layout_width="0dp"
+                android:textSize="@dimen/txt_size_16"
+                android:textStyle="italic"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_20"
+                android:text="@string/msg_mandatory_fields"
+                app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@+id/toolbarLayout" />
+
+
+
+
+
             <!--Name View-->
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_margin_32"
+                android:layout_marginTop="@dimen/margin_30"
                 android:scaleType="fitXY"
                 android:src="@drawable/user_bitmap"
                 app:layout_constraintEnd_toEndOf="@id/input_mobile_number"
                 app:layout_constraintStart_toStartOf="@id/input_mobile_number"
-                app:layout_constraintTop_toBottomOf="@+id/toolbarLayout" />
+                app:layout_constraintTop_toBottomOf="@+id/tvMandatoryFieldMsg" />
 
             <!--Name Hint-->
             <TextView
@@ -82,9 +99,9 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/first_name_label"
                 android:singleLine="true"
-                android:textDirection="locale"
-
                 android:text="@={viewModel.firstName}"
+
+                android:textDirection="locale"
                 app:layout_constraintBottom_toBottomOf="@id/iv_name"
                 app:layout_constraintEnd_toStartOf="@+id/edt_last_name"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -99,9 +116,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/last_name_label"
-                android:textDirection="locale"
-
                 android:text="@={viewModel.lastName}"
+
+                android:textDirection="locale"
                 app:layout_constraintBottom_toBottomOf="@id/iv_name"
                 app:layout_constraintEnd_toEndOf="@id/iv_name"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -124,11 +141,11 @@
                     style="@style/CustomEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textDirection="locale"
-                    android:inputType="phone"
                     android:background="@drawable/mobile_number_bitmap"
                     android:hint="@string/enter_register_mobile"
-                    android:text="@={viewModel.mobileNumber}" />
+                    android:inputType="phone"
+                    android:text="@={viewModel.mobileNumber}"
+                    android:textDirection="locale" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -143,7 +160,6 @@
                 app:layout_constraintEnd_toEndOf="@id/input_mobile_number"
                 app:layout_constraintStart_toStartOf="@id/input_mobile_number"
                 app:layout_constraintTop_toTopOf="@id/input_mobile_number" />
-
 
 
             <!--Email Id input-->
@@ -162,9 +178,9 @@
                     style="@style/CustomEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
                     android:background="@drawable/email_id_bitmap"
                     android:hint="@string/email_id_hint"
+                    android:inputType="textEmailAddress"
                     android:text="@={viewModel.emailId}" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -197,9 +213,9 @@
                     style="@style/CustomEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword"
                     android:background="@drawable/password_bitmap"
                     android:hint="@string/enter_password"
+                    android:inputType="textPassword"
                     android:text="@={viewModel.password}" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -234,12 +250,28 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
-                    android:inputType="textPassword"
                     android:background="@drawable/password_bitmap"
                     android:hint="@string/enter_confirm_password"
+                    android:inputType="textPassword"
                     android:text="@={viewModel.confirmPassword}" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
+
+            <TextView
+                android:id="@+id/tvPasswordMsg"
+                android:layout_width="0dp"
+                android:textSize="@dimen/txt_size_16"
+                android:textStyle="italic"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_20"
+                android:text="@string/password_format"
+                app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@+id/confirm_password_input_layout" />
+
+
+
 
             <!--Confirm Password Hint-->
             <TextView
@@ -261,12 +293,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_30"
                 android:gravity="center"
-                android:textDirection="locale"
-
                 android:text="@string/sign_agree_msg"
+                android:textDirection="locale"
                 app:layout_constraintEnd_toEndOf="@id/guideline_right"
                 app:layout_constraintStart_toStartOf="@id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@id/confirm_password_input_layout" />
+                app:layout_constraintTop_toBottomOf="@id/tvPasswordMsg" />
 
 
             <TextView
@@ -294,9 +325,9 @@
                 android:paddingEnd="@dimen/margin_60"
                 android:paddingBottom="@dimen/margin_10"
                 android:text="@string/get_started"
-                android:textDirection="locale"
-
                 android:textColor="@color/colorWhite"
+
+                android:textDirection="locale"
                 android:textSize="@dimen/text_size_15"
                 app:layout_constraintEnd_toEndOf="@+id/guideline_right"
                 app:layout_constraintStart_toStartOf="@+id/guideline_left"
@@ -304,12 +335,12 @@
 
 
             <LinearLayout
-                android:visibility="gone"
                 android:id="@+id/llOR"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_30"
                 android:orientation="horizontal"
+                android:visibility="gone"
                 android:weightSum="3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -329,10 +360,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="0.6"
-                    android:textDirection="locale"
-
                     android:gravity="center"
-                    android:text="@string/or" />
+
+                    android:text="@string/or"
+                    android:textDirection="locale" />
 
                 <View
                     android:layout_width="0dp"
@@ -366,17 +397,16 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="@dimen/common_margin_24"
-                android:textDirection="locale"
-                android:visibility="gone"
-
                 android:src="@drawable/ic_google_sign_in"
+                android:textDirection="locale"
+
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/ivFacebookSignIn"
                 app:layout_constraintTop_toBottomOf="@id/llOR" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
     </ScrollView>

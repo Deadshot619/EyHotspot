@@ -1,7 +1,11 @@
 package com.ey.hotspot.ui.login.login_fragment
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.BackgroundColorSpan
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -17,6 +21,7 @@ import com.ey.hotspot.ui.registration.register_user.RegisterUserFragment
 import com.ey.hotspot.utils.constants.convertStringFromList
 import com.ey.hotspot.utils.constants.setSkippedUserData
 import com.ey.hotspot.utils.dialogs.OkDialog
+import com.ey.hotspot.utils.generateCaptchaCode
 import com.ey.hotspot.utils.replaceFragment
 import com.ey.hotspot.utils.showMessage
 import com.ey.hotspot.utils.validations.isEmailValid
@@ -60,6 +65,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
     override fun getLayoutId() = R.layout.fragment_login
     override fun getViewModel() = LoginFragmentViewModel::class.java
 
+    var mCaptcha: String? = null
     override fun onBinding() {
 
 
@@ -84,8 +90,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
     }
 
     private fun setUpCaptcha() {
-
-
+        mCaptcha = activity?.generateCaptchaCode(4)
+        mBinding.etCaptchaText.setText(mCaptcha)
     }
 
     private fun setUpObservers() {
@@ -300,7 +306,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
      */
     private fun validate(): Boolean {
         var isValid = true
-
+        val tmp = mBinding.etCaptcha.text
         mViewModel.run {
             mBinding.run {
                 if (!emailId.isEmailValid()) {
@@ -310,10 +316,20 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
                 if (password.trim().isEmpty()) {
                     etPassword.error = resources.getString(R.string.enter_password)
                     isValid = false
-                } else if (!password.isValidPassword()) {
+                }
+                if (!password.isValidPassword()) {
                     etPassword.error = resources.getString(R.string.password_format)
                     isValid = false
                 }
+               /* if (tmp?.isEmpty()!!) {
+                    etCaptcha.error = resources.getString(R.string.enter_captcha)
+                    isValid = false
+                }
+
+                if (!tmp?.equals(mCaptcha)!!) {
+                    etCaptcha.error = resources.getString(R.string.invalid_captcha)
+                    isValid = false
+                }*/
             }
         }
         return isValid

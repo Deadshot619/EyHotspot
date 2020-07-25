@@ -34,13 +34,15 @@ class VerifyOTPFragment :
     lateinit var otp: String
 
     companion object {
-        fun newInstance(inputData: String) = VerifyOTPFragment().apply {
+        fun newInstance(inputData: String, otp: String) = VerifyOTPFragment().apply {
             arguments = Bundle().apply {
                 putString(mInputData, inputData)
+                putString(mOTP, otp)
             }
         }
 
         public const val mInputData = "inputData"
+        public const val mOTP = "OTP"
 
 
     }
@@ -73,6 +75,12 @@ class VerifyOTPFragment :
         mBinding.tvCheckEmailLabel.setText(
             resources.getString(R.string.otp_title) + " " + arguments?.getString(
                 mInputData
+            ) ?: ""
+        )
+
+        mBinding.tvDisplayOTP.setText(
+            arguments?.getString(
+                mOTP
             ) ?: ""
         )
 
@@ -129,7 +137,6 @@ class VerifyOTPFragment :
                 if (it.status) {
 
                     showMessage(it.message, true)
-
                     replaceFragment(
                         fragment = ChangePasswordFragment.newInstance(
                             otp = otp
@@ -160,6 +167,7 @@ class VerifyOTPFragment :
                 if (it.status == true) {
 
                     showMessage(it.message, true)
+                    mBinding.tvDisplayOTP.setText( resources.getString(R.string.otp_sent_msg)+ it.data.otp)
 
                 } else {
                     try {

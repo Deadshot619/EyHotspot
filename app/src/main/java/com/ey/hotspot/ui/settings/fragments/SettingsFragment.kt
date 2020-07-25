@@ -58,7 +58,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel
         hideViewsIfSkippedUser()
 
         //Change image of language
-        if(HotSpotApp.prefs?.getLanguage() == Constants.ARABIC_LANG)
+        if (HotSpotApp.prefs?.getLanguage() == Constants.ARABIC_LANG)
             mBinding.ivChangeLanguage.setImageResource(R.drawable.ic_active_switch)
         else
             mBinding.ivChangeLanguage.setImageResource(R.drawable.ic_inactive_switch)
@@ -129,11 +129,13 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel
     }
 
 
-    private fun hideViewsIfSkippedUser(){
-        if(HotSpotApp.prefs!!.getSkipStatus())
+    private fun hideViewsIfSkippedUser() {
+        if (HotSpotApp.prefs!!.getSkipStatus())
             mBinding.run {
                 llProfileList.visibility = View.GONE
                 llLogout.visibility = View.GONE
+                llLogin.visibility = View.VISIBLE
+
             }
     }
 }

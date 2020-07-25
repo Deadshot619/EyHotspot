@@ -224,11 +224,15 @@
     <string name="secure_password">إنشاء كلمة مرور جديدة</string>
     <string name="password_reset_label">إعادة تعيين كلمة المرور</string>
     <string name="enter_email_or_password">أدخل معرف البريد الإلكتروني أو رقم الجوال</string>
-    <string name="sign_in_issue">هل تواجه مشاكل في التوقيع؟</string>
+    <string name="sign_in_issue">أدخل عنوان البريد الإلكتروني أو رقم الجوال. المرتبطة بحسابك</string>
     <string name="reenter_confirm_password">اعادة ادخال كلمة السر</string>
     <string name="sms_label">رسالة قصيرة</string>
     <string name="email_label">البريد الإلكتروني</string>
     <string name="choose_verify_option">حدد خيار التحقق</string>
     <string name="captcha_characters">أبجدهـFزحأنايكلاممياصسصسشالخامسثسذضصفرواحدإثنانثلاثةأربعةخمسةستةسبعةثمانيةتسعة</string>
     <string name="forgotpassword_label">هل نسيت كلمة المرور</string>
+    <string name="invalid_captcha">كلمة التحقق غير صالحة</string>
+    <string name="msg_mandatory_fields">* تعني الحقول الإلزامية</string>
+
+    <string-array name="otp_sent_msg">تم إرسال OTP إلى رقم هاتفك المحمول المسجل</string-array>
 </resources>

@@ -408,9 +408,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         }
 
         override fun onClusterItemUpdated(item: MyClusterItems, marker: Marker) {
-            val icon: BitmapDescriptor =
+
+           /* val icon: BitmapDescriptor =
                 BitmapDescriptorFactory.fromResource(R.drawable.ic_wifi_signal)
-            marker.setIcon(icon)
+            marker.setIcon(icon)*/
+
         }
     }
 

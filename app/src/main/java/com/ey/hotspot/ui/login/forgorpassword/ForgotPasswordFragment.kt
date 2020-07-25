@@ -72,7 +72,8 @@ class ForgotPasswordFragment :
                     showMessage(it.message, true)
                     replaceFragment(
                         fragment = VerifyOTPFragment.newInstance(
-                            inputData = mViewModel.mEmailIdOrPassword
+                            inputData = mViewModel.mEmailIdOrPassword,
+                            otp = it.message
                         ),
                         addToBackStack = true
 

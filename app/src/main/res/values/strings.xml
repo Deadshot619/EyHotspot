@@ -232,13 +232,16 @@
     <string name="secure_password">Create New Password</string>
     <string name="password_reset_label">Reset Password</string>
     <string name="enter_email_or_password">Enter  email id or  mobile no</string>
-    <string name="sign_in_issue">HAVING  TROUBLE SIGINING  IN?</string>
+    <string name="sign_in_issue">Enter the email address or mobile no. associated with your account</string>
     <string name="reenter_confirm_password">Re-enter Password</string>
     <string name="sms_label">SMS</string>
     <string name="email_label">Email</string>
     <string name="choose_verify_option">Select Verification Option</string>
     <string name="captcha_characters">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789</string>
     <string name="forgotpassword_label">Forgot Password</string>
+    <string name="invalid_captcha">Invalid Captcha</string>
+    <string name="msg_mandatory_fields">* means mandatory fields</string>
+    <string name="otp_sent_msg">An OTP has been sent to your registered Mobile number</string>
 
 
     <!--Demo issue type string-->

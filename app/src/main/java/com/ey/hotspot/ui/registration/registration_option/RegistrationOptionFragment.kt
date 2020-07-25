@@ -8,6 +8,7 @@ import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentRegistrationOptionBinding
 import com.ey.hotspot.ui.login.otpverification.fragment.OTPVerificationFragment
+import com.ey.hotspot.utils.generateCaptchaCode
 import com.ey.hotspot.utils.replaceFragment
 import com.ey.hotspot.utils.showMessage
 
@@ -35,6 +36,9 @@ class RegistrationOptionFragment :
     lateinit var phoneNo: String
     lateinit var emailID: String
 
+    var mCaptcha: String? = null
+
+
     override fun getLayoutId() = R.layout.fragment_registration_option
     override fun getViewModel() = RegistrationOptionViewModel::class.java
     override fun onBinding() {
@@ -51,11 +55,25 @@ class RegistrationOptionFragment :
 //        if (TYPE_VALUE == OptionType.TYPE_REGISTRATION.name)
 //            else
 
+        setUpDataViews()
+
         setUpListeners()
 
+
         //If phone no. id empty, then hide the selection
-       if(phoneNo.isEmpty())
-           mBinding.rbSms.visibility = View.GONE
+        if (phoneNo.isEmpty())
+            mBinding.rbSms.visibility = View.GONE
+    }
+
+    private fun setUpDataViews() {
+
+        setUpCaptcha()
+
+    }
+
+    private fun setUpCaptcha() {
+        mCaptcha = activity?.generateCaptchaCode(4)
+        mBinding.etCaptchaText.setText(mCaptcha)
     }
 
 
@@ -83,13 +101,12 @@ class RegistrationOptionFragment :
             //Submit
             btnSubmit.setOnClickListener {
 
-                if(selectedOption.trim().isEmpty()){
-                    showMessage(resources.getString(R.string.choose_verify_option))
-                }else{
+
+                if (validate()) {
                     replaceFragment(
                         fragment = OTPVerificationFragment.newInstance(
                             selectedOption = selectedOption,
-                            selectedItem = if(selectedOption == SMS) phoneNo else emailID
+                            selectedItem = if (selectedOption == SMS) phoneNo else emailID
                         ),
                         addToBackStack = true
                     )
@@ -97,6 +114,27 @@ class RegistrationOptionFragment :
 
             }
         }
+
+    }
+
+    private fun validate(): Boolean {
+        var isValid = true
+        if (selectedOption.trim().isEmpty()) {
+            showMessage(resources.getString(R.string.choose_verify_option))
+            isValid = false
+        }
+
+      /*  if (mBinding.etCaptcha.text?.isEmpty()!!) {
+            mBinding.etCaptcha.error = resources.getString(R.string.enter_captcha)
+            isValid = false
+        }
+
+        if (!mBinding.etCaptcha.text?.equals(mCaptcha)!!) {
+            mBinding.etCaptcha.error = resources.getString(R.string.invalid_captcha)
+            isValid = false
+        }*/
+
+        return isValid
 
     }
 }

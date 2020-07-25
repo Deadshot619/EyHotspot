@@ -165,6 +165,20 @@
             />
 
 
+
+        <TextView
+            android:id="@+id/tvDisplayOTP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textDirection="locale"
+            android:textSize="@dimen/text_size_15"
+            android:layout_marginTop="@dimen/margin_20"
+            app:layout_constraintTop_toBottomOf="@id/tvResendOTP"
+            app:layout_constraintEnd_toEndOf="@id/guideline_right"
+            app:layout_constraintStart_toStartOf="@id/guideline_left"
+            />
+
+
         <!--Sign In-->
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_sign_in"
@@ -182,7 +196,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvResendOTP"
+            app:layout_constraintTop_toBottomOf="@id/tvDisplayOTP"
             app:layout_constraintVertical_bias="1" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -256,3 +256,15 @@ fun Activity.goToLoginScreen(){
     startActivity(Intent(this, LoginActivity::class.java))
 }
 
+
+
+fun Activity.generateCaptchaCode(limit: Int): String? {
+    val chars = resources.getString(R.string.captcha_characters)
+    val buf = StringBuffer()
+    buf.append(chars[Random.nextInt(10)])
+    for (i in 0 until limit) {
+        buf.append(chars[Random.nextInt(chars.length)])
+    }
+    return buf.toString()
+}
+

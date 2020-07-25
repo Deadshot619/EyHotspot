@@ -53,8 +53,8 @@
             style="@style/TextAppearance.MyApp.Headline5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/common_margin"
             android:layout_gravity="center"
+            android:layout_marginTop="@dimen/common_margin"
             android:gravity="center"
             android:text="@string/verification_method_label"
             app:layout_constraintEnd_toEndOf="@id/guideline_right"
@@ -67,10 +67,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="horizontal"
             android:layout_marginTop="@dimen/margin_10"
-            android:paddingEnd="@dimen/margin_30"
+            android:orientation="horizontal"
             android:paddingStart="@dimen/margin_30"
+            android:paddingEnd="@dimen/margin_30"
             android:textDirection="locale"
             android:weightSum="2"
             app:layout_constraintEnd_toEndOf="@id/guideline_right"
@@ -81,10 +81,10 @@
                 android:id="@+id/rb_sms"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:paddingStart="@dimen/margin_20"
                 android:paddingEnd="@dimen/margin_20"
-                android:layout_gravity="center"
                 android:text="@string/sms_label"
                 android:textDirection="locale"
                 android:textSize="18sp" />
@@ -108,56 +108,93 @@
             style="@style/TextAppearance.MyApp.Headline5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_14"
             android:layout_marginTop="@dimen/common_margin_24"
             android:text="@string/captcha_label"
             android:textDirection="locale"
+            android:textSize="@dimen/text_size_14"
             app:layout_constraintEnd_toEndOf="@+id/guideline_right"
             app:layout_constraintStart_toStartOf="@id/guideline_left"
             app:layout_constraintTop_toBottomOf="@id/rgSelectedMethod" />
 
 
-        <!--Captcha input-->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/captcha_input_layout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        <LinearLayout
+            android:id="@+id/llcaptcha"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/common_margin_between_fields_4"
-            android:textDirection="locale"
+            android:layout_marginTop="@dimen/margin_10"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="2"
             app:layout_constraintEnd_toEndOf="@id/guideline_right"
             app:layout_constraintStart_toStartOf="@id/guideline_left"
             app:layout_constraintTop_toBottomOf="@id/tv_enter_message_shown">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_captcha"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/captcha_input_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:imeOptions="actionDone"
-                android:maxHeight="@dimen/margin_20"
-                android:maxLines="1"
-                android:nextFocusForward="@+id/btnSubmit"
-                android:singleLine="true"
-                android:hint="@string/enter_captcha"
-                android:textDirection="locale" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_height="wrap_content"
+                android:layout_weight="0.6"
+                android:textDirection="locale">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_captcha"
+                    android:imeOptions="actionDone"
+                    android:maxHeight="@dimen/margin_20"
+                    android:maxLines="1"
+                    android:nextFocusForward="@+id/btn_sign_in"
+                    android:singleLine="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/enter_captcha"
+                    android:textDirection="locale" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/captcha_input_layout_text"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.4"
+                android:textDirection="locale">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_captcha_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorLightestGray"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:textDirection="locale" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        </LinearLayout>
+
 
 
 
         <!--otp on sms-->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSubmit"
+            style="@style/GradientButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_20"
-            style="@style/GradientButton"
             android:gravity="center"
             android:paddingStart="@dimen/margin_40"
             android:paddingEnd="@dimen/margin_40"
             android:text="@string/submit_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/captcha_input_layout" />
+            app:layout_constraintTop_toBottomOf="@id/llcaptcha" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

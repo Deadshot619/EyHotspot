@@ -21,6 +21,7 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
 
     var emailId = ""
     var password = ""
+    var captcha =""
 
     private val _loginResponse = MutableLiveData<BaseResponse<LoginResponse?>>()
     val loginResponse: LiveData<BaseResponse<LoginResponse?>>

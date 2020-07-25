@@ -118,6 +118,10 @@ class OTPVerificationFragment :
             if (it.status == true) {
 
                 showMessage(it.message)
+
+                mBinding.tvDisplayOTP.setText( it.message)
+
+
             } else {
                 showMessage(it.message)
             }
