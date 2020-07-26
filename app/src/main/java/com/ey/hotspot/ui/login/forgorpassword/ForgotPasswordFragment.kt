@@ -8,8 +8,8 @@ import com.ey.hotspot.ui.login.verifyotp.VerifyOTPFragment
 import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordRequest
 import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordResponse
 import com.ey.hotspot.utils.dialogs.OkDialog
-import com.ey.hotspot.utils.replaceFragment
-import com.ey.hotspot.utils.showMessage
+import com.ey.hotspot.utils.extention_functions.replaceFragment
+import com.ey.hotspot.utils.extention_functions.showMessage
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 

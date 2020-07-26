@@ -7,7 +7,7 @@ import com.ey.hotspot.app_core_lib.BaseViewModel
 import com.ey.hotspot.utils.Event
 import com.ey.hotspot.utils.SpeedTestUtils
 import com.ey.hotspot.utils.constants.Constants
-import com.ey.hotspot.utils.convertBpsToMbps
+import com.ey.hotspot.utils.extention_functions.convertBpsToMbps
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

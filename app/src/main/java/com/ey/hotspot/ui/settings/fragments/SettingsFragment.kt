@@ -9,10 +9,14 @@ import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.FragmentSettingsBinding
 import com.ey.hotspot.ui.profile.ProfileFragment
-import com.ey.hotspot.utils.*
+import com.ey.hotspot.utils.LanguageManager
+import com.ey.hotspot.utils.MyHotSpotSharedPreference
 import com.ey.hotspot.utils.constants.Constants
 import com.ey.hotspot.utils.constants.logoutUser
 import com.ey.hotspot.utils.dialogs.YesNoDialog
+import com.ey.hotspot.utils.extention_functions.goToLoginScreen
+import com.ey.hotspot.utils.extention_functions.replaceFragment
+import com.ey.hotspot.utils.extention_functions.showMessage
 
 class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel>() {
 

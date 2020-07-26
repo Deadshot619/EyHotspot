@@ -5,13 +5,9 @@ import android.content.Intent
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentLoginSelectionBinding
-import com.ey.hotspot.ui.login.LoginActivity
-import com.ey.hotspot.ui.login.login_fragment.LoginFragment
-import com.ey.hotspot.ui.login.otpverification.fragment.OTPVerificationFragment
 import com.ey.hotspot.ui.registration.RegistrationActivity
-import com.ey.hotspot.ui.registration.email_verification.EmailVerificationFragment
 import com.ey.hotspot.ui.registration.register_user.RegisterUserFragment
-import com.ey.hotspot.utils.replaceFragment
+import com.ey.hotspot.utils.extention_functions.replaceFragment
 
 class LoginSelectionFragment :
     BaseFragment<FragmentLoginSelectionBinding, LoginSelectionFragmentViewModel>() {

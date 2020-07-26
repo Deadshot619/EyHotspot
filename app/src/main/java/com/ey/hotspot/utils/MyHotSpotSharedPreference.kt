@@ -13,6 +13,7 @@ import com.ey.hotspot.utils.constants.Constants.Companion.LANGUAGE_SELECTED
 import com.ey.hotspot.utils.constants.Constants.Companion.REGISTRATION_TMP_TOKEN
 import com.ey.hotspot.utils.constants.Constants.Companion.SKIP_STATUS
 import com.ey.hotspot.utils.constants.Constants.Companion.USER_DATA
+import com.ey.hotspot.utils.extention_functions.fromJson
 import com.google.gson.Gson
 
 class MyHotSpotSharedPreference(context: Context) {

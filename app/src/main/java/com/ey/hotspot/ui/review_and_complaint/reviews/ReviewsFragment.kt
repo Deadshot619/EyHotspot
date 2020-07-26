@@ -8,7 +8,7 @@ import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentReviewsBinding
 import com.ey.hotspot.ui.speed_test.rate_wifi.RateWifiFragment
-import com.ey.hotspot.utils.replaceFragment
+import com.ey.hotspot.utils.extention_functions.replaceFragment
 
 class ReviewsFragment : BaseFragment<FragmentReviewsBinding, ReviewsViewModel>() {
 

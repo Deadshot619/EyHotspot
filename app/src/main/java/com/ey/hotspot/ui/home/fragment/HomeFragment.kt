@@ -26,11 +26,10 @@ import com.ey.hotspot.ui.home.models.MyClusterItems
 import com.ey.hotspot.ui.review_and_complaint.reviews.ReviewsFragment
 import com.ey.hotspot.ui.search.searchlist.SearchListFragment
 import com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment
-import com.ey.hotspot.utils.*
 import com.ey.hotspot.utils.constants.Constants
-import com.ey.hotspot.utils.constants.logoutUser
 import com.ey.hotspot.utils.constants.setUpSearchBar
 import com.ey.hotspot.utils.dialogs.YesNoDialog
+import com.ey.hotspot.utils.extention_functions.*
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.common.api.PendingResult
@@ -200,7 +199,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                     // Set the map's camera position to the current location of the device.
                     lastKnownLocation = task.result
                     if (lastKnownLocation != null) {
-                        if (checkLocSaveState()) {
+                        if (requireActivity().checkLocSaveState()) {
                             map?.moveCamera(
                                 CameraUpdateFactory.newLatLngZoom(
                                     LatLng(
@@ -220,7 +219,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                             )
                         }
 
-                        getNearByWifiList(checkLocSaveState())
+                        getNearByWifiList(requireActivity().checkLocSaveState())
                     }
                 } else {
                     map?.moveCamera(
@@ -232,7 +231,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                         )
                     )
 
-                    getNearByWifiList(checkLocSaveState())
+                    getNearByWifiList(requireActivity().checkLocSaveState())
 
                 }
             }
