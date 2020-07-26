@@ -268,29 +268,28 @@ fun Activity.generateCaptchaCode(limit: Int): String? {
 }
 
 
-fun Context.getUserLocation(): Array<Double>? {
+fun Context.getUserLocation(func: (lat: Double?, lon: Double?) -> Unit){
     val client = FusedLocationProviderClient(this)
 
-      try {
-          if (checkLocSaveState())
-              return if (ActivityCompat.checkSelfPermission(
-                      this,
-                      Manifest.permission.ACCESS_FINE_LOCATION
-                  ) == PackageManager.PERMISSION_GRANTED &&
-                  ActivityCompat.checkSelfPermission(
-                      this,
-                      Manifest.permission.ACCESS_COARSE_LOCATION
-                  ) == PackageManager.PERMISSION_GRANTED
-              ) {
-                  val latitude = client.lastLocation.result!!.latitude
-                  val longitude = client.lastLocation.result!!.longitude
-                  arrayOf(latitude, longitude)
-              }   else    {
-                  null
-              }
-          else
-              return null
-      }  catch (e: Exception){
-          return null
-      }
+    try {
+        if (checkLocSaveState())
+            if (ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) == PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
+                val location = client.lastLocation
+                location.addOnCompleteListener {
+                    func(it.result?.latitude, it.result?.longitude)
+                }
+                location.addOnFailureListener {
+                    func(null, null)
+                }
+            }
+    } catch (e: Exception) {
+    }
 }
