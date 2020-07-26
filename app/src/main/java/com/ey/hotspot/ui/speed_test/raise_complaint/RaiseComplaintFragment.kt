@@ -8,10 +8,13 @@ import androidx.lifecycle.Observer
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentRaiseComplaintBinding
+import com.ey.hotspot.utils.constants.logoutUser
+import com.ey.hotspot.utils.dialogs.YesNoDialog
 import com.ey.hotspot.utils.showMessage
 
 class RaiseComplaintFragment :
     BaseFragment<FragmentRaiseComplaintBinding, RaiseComplaintViewModel>() {
+
 
 
 
@@ -61,6 +64,18 @@ class RaiseComplaintFragment :
             wifiLocation = arguments?.getString(RaiseComplaintFragment.LOCATION) ?: ""
         }
     }
+    //Create 'OK' Dialog
+    val dialog by lazy {
+        YesNoDialog(requireContext()).apply {
+            setViews(
+                title = getString(R.string.confirm_rating),
+                description = "",
+                yes = { mViewModel.addComplaint()
+                this.dismiss()},
+                no = { this.dismiss() }
+            )
+        }
+    }
 
     private fun setUpListeners() {
         mBinding.run {
@@ -72,7 +87,7 @@ class RaiseComplaintFragment :
 //            Submit Feedback
             btnSubmitComplaint.setOnClickListener {
                 if (validate())
-                    mViewModel.addComplaint()
+               dialog.show()
             }
 
             //Issues Spinner
