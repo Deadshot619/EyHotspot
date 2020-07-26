@@ -5,7 +5,9 @@ import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentSpeedTestBinding
 import com.ey.hotspot.ui.speed_test.test_result.TestResultsFragment
 import com.ey.hotspot.utils.constants.setUpToolbar
+import com.ey.hotspot.utils.extention_functions.getUserLocation
 import com.ey.hotspot.utils.extention_functions.replaceFragment
+import com.ey.hotspot.utils.extention_functions.showMessage
 
 class SpeedTestFragment : BaseFragment<FragmentSpeedTestBinding, SpeedTestFragmentViewModel>() {
 
@@ -27,6 +29,12 @@ class SpeedTestFragment : BaseFragment<FragmentSpeedTestBinding, SpeedTestFragme
         )
 
         setUpListeners()
+
+        val location = activity?.getUserLocation()
+        location?.let {
+            showMessage("${it[0]} ${it[1]}")
+        }
+
     }
 
     fun setUpListeners() {
@@ -35,5 +43,7 @@ class SpeedTestFragment : BaseFragment<FragmentSpeedTestBinding, SpeedTestFragme
             replaceFragment(TestResultsFragment(), true)
         }
     }
+
+
 
 }

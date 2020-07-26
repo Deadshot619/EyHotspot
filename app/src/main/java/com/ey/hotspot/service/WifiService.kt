@@ -9,7 +9,6 @@ import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import android.net.wifi.WifiManager
 import android.os.IBinder
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.ey.hotspot.R
 import com.ey.hotspot.database.WifiInfoDatabase
@@ -20,7 +19,6 @@ import com.ey.hotspot.utils.SpeedTestUtils
 import com.ey.hotspot.utils.constants.Constants
 import com.ey.hotspot.utils.extention_functions.convertBpsToMbps
 import com.ey.hotspot.utils.extention_functions.extractWifiName
-import com.ey.hotspot.utils.extention_functions.getUserLocation
 import com.ey.hotspot.utils.getNotification
 import com.ey.hotspot.utils.wifi_notification_key
 import kotlinx.coroutines.CoroutineScope
@@ -135,15 +133,6 @@ class WifiService : Service() {
         }
 
         override fun onAvailable(network: Network?) {
-
-            val location = getUserLocation()
-            location?.let {
-                Toast.makeText(
-                    applicationContext,
-                    "${it[0]} ${it[1]}",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
 
             //This will initially show the notification as wifi connected
             ContextCompat.startForegroundService(
