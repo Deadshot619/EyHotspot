@@ -17,7 +17,7 @@ fun String.isValidPassword(): Boolean {
         //Contains small letter, Capital letter, a number
         val textPattern = Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$")
         //Contains special character
-        val special = Pattern.compile ("[@#$%\\[\\]~-]")    //!@&*()_+=|<>?{}
+        val special = Pattern.compile ("[!@#$%&*()_+=|<>?{}\\[\\]~-]")
         textPattern.matcher(this).matches() && special.matcher(this).find()
     } else {
         false
