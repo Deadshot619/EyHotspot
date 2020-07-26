@@ -177,6 +177,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
                 bundle = null
             )
         }
+
+        mBinding.ivRefreshCaptchaCode.setOnClickListener {
+
+            mCaptcha = activity?.generateCaptchaCode(5)
+            mBinding.etCaptchaText.setText(mCaptcha)
+
+        }
     }
 
     //Method to redirect user to home page

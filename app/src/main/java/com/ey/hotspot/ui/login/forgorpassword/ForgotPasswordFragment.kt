@@ -131,6 +131,13 @@ class ForgotPasswordFragment :
                 }
             }
         }
+
+        mBinding.ivRefreshCaptchaCode.setOnClickListener {
+
+            mCaptcha = activity?.generateCaptchaCode(5)
+            mBinding.etCaptchaText.setText(mCaptcha)
+
+        }
     }
 
 

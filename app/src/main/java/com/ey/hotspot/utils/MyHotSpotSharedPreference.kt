@@ -12,6 +12,7 @@ import com.ey.hotspot.utils.constants.Constants.Companion.FORGOT_PASSWORD_FIELD
 import com.ey.hotspot.utils.constants.Constants.Companion.LANGUAGE_SELECTED
 import com.ey.hotspot.utils.constants.Constants.Companion.REGISTRATION_TMP_TOKEN
 import com.ey.hotspot.utils.constants.Constants.Companion.SKIP_STATUS
+import com.ey.hotspot.utils.constants.Constants.Companion.TERMS_AND_CONDITION
 import com.ey.hotspot.utils.constants.Constants.Companion.USER_DATA
 import com.ey.hotspot.utils.extention_functions.fromJson
 import com.google.gson.Gson
@@ -113,7 +114,6 @@ class MyHotSpotSharedPreference(context: Context) {
     }
 
 
-
     fun setForgotPasswordField(field: String) {
         CoreApp.sharedPreferences.edit().putString(FORGOT_PASSWORD_FIELD, field).apply()
     }
@@ -128,4 +128,15 @@ class MyHotSpotSharedPreference(context: Context) {
     fun clearSharedPrefData() {
         CoreApp.sharedPreferences.edit().clear().apply()
     }
+
+    fun setTermsConditionStatus(value: Boolean) {
+        CoreApp.sharedPreferences.edit().putBoolean(TERMS_AND_CONDITION, value).apply()
+
+    }
+
+    fun getTermsAndConditionStatus(): Boolean? {
+        return CoreApp.sharedPreferences.getBoolean(TERMS_AND_CONDITION, false)
+
+    }
+
 }

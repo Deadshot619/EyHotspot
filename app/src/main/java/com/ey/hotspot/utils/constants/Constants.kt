@@ -31,6 +31,7 @@ interface Constants {
         const val SKIP_STATUS = "skip_status"
         const val VERIFY_FORGOT_PASSWORD="verify_forgot_password"
         const val FORGOT_PASSWORD_FIELD="forgot_password_field"
+        const val  TERMS_AND_CONDITION="termscondition"
 
         //APIS
 

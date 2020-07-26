@@ -361,6 +361,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                 )
             } else dialog.show()
         }
+
+        mBinding.customPop.ivShare.setOnClickListener {
+
+
+        }
         return false
     }
 
@@ -407,20 +412,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             markerOptions.icon(icon)
         }
 
-        override fun onClusterItemUpdated(item: MyClusterItems, marker: Marker) {
 
-            /* val icon: BitmapDescriptor =
-                 BitmapDescriptorFactory.fromResource(R.drawable.ic_wifi_signal)
-             marker.setIcon(icon)*/
-
-        }
-
-        override fun onClusterItemRendered(clusterItem: MyClusterItems, marker: Marker) {
-
-           /*  val icon: BitmapDescriptor =
-                BitmapDescriptorFactory.fromResource(R.drawable.ic_wifi_signal)
-            marker.setIcon(icon)*/
-        }
 
     }
 

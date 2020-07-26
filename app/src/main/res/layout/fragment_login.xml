@@ -247,6 +247,7 @@
                     android:imeOptions="actionDone"
                     android:maxLines="1"
                     android:maxEms="10"
+                    android:textSize="@dimen/text_size_15"
                     android:nextFocusForward="@+id/btn_sign_in"
                     android:singleLine="true"
                     android:textDirection="locale" />
@@ -256,7 +257,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_captcha_text"
                 android:layout_width="wrap_content"
-                android:minWidth="150dp"
+                android:minWidth="@dimen/margin_120"
                 android:layout_height="0dp"
                 android:layout_gravity="center"
                 android:maxEms="10"
@@ -269,10 +270,24 @@
                 android:editable="false"
                 android:focusable="false"
                 android:gravity="center"
+                android:paddingEnd="@dimen/margin_30"
                 app:layout_constraintTop_toTopOf="@id/captcha_input_layout"
                 app:layout_constraintEnd_toEndOf="@id/captcha_input_layout"
                 app:layout_constraintBottom_toBottomOf="@id/captcha_input_layout"
                 android:textDirection="locale" />
+
+            <ImageView
+                android:id="@+id/ivRefreshCaptchaCode"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/refreashicon"
+                android:paddingEnd="@dimen/margin_5"
+                android:paddingStart="@dimen/margin_5"
+                app:layout_constraintTop_toTopOf="@id/captcha_input_layout"
+                app:layout_constraintEnd_toEndOf="@id/captcha_input_layout"
+                app:layout_constraintBottom_toBottomOf="@id/captcha_input_layout"/>
+
+
 
 
             <!--        Sign  In-->

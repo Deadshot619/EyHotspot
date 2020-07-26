@@ -2,6 +2,7 @@ package com.ey.hotspot.ui.login.permission
 
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
+import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.FragmentPermissionBinding
 import com.ey.hotspot.utils.extention_functions.removeFragment
 
@@ -32,7 +33,11 @@ class PermissionFragment : BaseFragment<FragmentPermissionBinding, PermissionVie
 
 
 
+
         mBinding.btnSubmit.setOnClickListener {
+
+
+            HotSpotApp.prefs?.setTermsConditionStatus(true)
 
             removeFragment(this)
         }

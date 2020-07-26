@@ -111,6 +111,11 @@ class SearchListFragment : BaseFragment<SearchListFragmentBinding, SearchListVie
                 i.data = Uri.parse(url)
                 startActivity(i)
             }
+
+            override fun onClickShare(data: GetHotSpotResponse) {
+
+
+            }
         })
 
         recyclerView.run {

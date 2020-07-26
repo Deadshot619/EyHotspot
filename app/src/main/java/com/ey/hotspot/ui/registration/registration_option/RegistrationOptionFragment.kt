@@ -115,6 +115,13 @@ class RegistrationOptionFragment :
             }
         }
 
+        mBinding.ivRefreshCaptchaCode.setOnClickListener {
+
+            mCaptcha = activity?.generateCaptchaCode(5)
+            mBinding.etCaptchaText.setText(mCaptcha)
+
+        }
+
     }
 
     private fun validate(): Boolean {
