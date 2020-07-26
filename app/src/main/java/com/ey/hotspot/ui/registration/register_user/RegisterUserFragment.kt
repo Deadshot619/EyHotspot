@@ -181,7 +181,6 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
         mBinding.run {
             //Sign In button
             btnGetStarted.setOnClickListener {
-//                val status: Boolean = validate()
                 if (validate2()) {
                     val register: RegisterRequest =
                         RegisterRequest(
@@ -193,8 +192,6 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
                             mViewModel.password,
                             mViewModel.confirmPassword
                         )
-
-
                     mViewModel.registerUser(register)
                 }
             }
@@ -328,6 +325,9 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
             lastName = true
         }
 
+
+
+
         if (mViewModel.mobileNumber.trim().isNotEmpty())
             if (!mViewModel.mobileNumber.isValidMobile()) {
                 edtMobileNo.error = resources.getString(R.string.invalid_mobile)
@@ -399,14 +399,26 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
 
         mViewModel.run {
             mBinding.run {
-                if (!firstName.isValidName()) {
-                    edtFirstName.error = resources.getString(R.string.invalid_firstName)
+
+
+                if( firstName.isEmpty()){
+                    edtFirstName.error = resources.getString(R.string.empty_firstName)
+                    isValid = false
+
+                } else if(!firstName.isValidName()){
+                    edtFirstName.error = resources.getString(R.string.invalid_Name)
                     isValid = false
                 }
-                if (!lastName.isValidName()) {
-                    edtLastName.error = resources.getString(R.string.invalid_last_name_label)
+
+
+                if(lastName.isEmpty()){
+                    edtLastName.error = resources.getString(R.string.empty_lastName)
+                    isValid = false
+                }else if(!lastName.isValidName()){
+                    edtLastName.error = resources.getString(R.string.invalid_Name)
                     isValid = false
                 }
+
                 if (!emailId.isEmailValid()) {
                     edtEmail.error = resources.getString(R.string.invalid_email_label)
                     isValid = false

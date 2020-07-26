@@ -20,13 +20,16 @@ class ComplaintListViewModel(application: Application) : BaseViewModel(applicati
     }
 
     private fun getComplaintsList() {
+        setDialogVisibility(true)
         coroutineScope.launch {
             DataProvider.getCompaints(
                 success = {
                         _complaintList.value = it
+                    setDialogVisibility(false)
                 },
                 error = {
                     checkError(it)
+                    setDialogVisibility(false)
                 }
             )
         }

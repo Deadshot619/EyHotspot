@@ -35,15 +35,17 @@ class HomeFragmentViewModel(application: Application) : BaseViewModel(applicatio
 
     //Get HotSpots
     fun getHotSpotResponse(getHotSpotRequest: GetHotSpotRequest) {
+        setDialogVisibility(true)
         coroutineScope.launch {
             DataProvider.getHotspot(
                 request = getHotSpotRequest,
                 success = {
 
                     _getHotSpotResponse.value = Event(it)
+                    setDialogVisibility(false)
                 }, error = {
                     checkError(it)
-
+                    setDialogVisibility(false)
                 }
             )
         }
@@ -75,6 +77,7 @@ class HomeFragmentViewModel(application: Application) : BaseViewModel(applicatio
                     setDialogVisibility(false)
                 }, error = {
                     checkError(it)
+                    setDialogVisibility(false)
                 }
 
             )

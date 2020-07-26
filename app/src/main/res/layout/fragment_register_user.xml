@@ -99,7 +99,6 @@
                 android:hint="@string/first_name_label"
                 android:singleLine="true"
                 android:text="@={viewModel.firstName}"
-
                 android:textDirection="locale"
                 app:layout_constraintBottom_toBottomOf="@id/iv_name"
                 app:layout_constraintEnd_toStartOf="@+id/edt_last_name"
@@ -116,7 +115,6 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/last_name_label"
                 android:text="@={viewModel.lastName}"
-
                 android:textDirection="locale"
                 app:layout_constraintBottom_toBottomOf="@id/iv_name"
                 app:layout_constraintEnd_toEndOf="@id/iv_name"

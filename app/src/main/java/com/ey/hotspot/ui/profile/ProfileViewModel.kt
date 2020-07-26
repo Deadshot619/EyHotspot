@@ -45,7 +45,7 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
     //Method to retrieve Profile Details
     private fun getProfileDetails() {
         //Show dialog
-        setDialogVisibility(true, appInstance.getString(R.string.retrieving_profile_details_label))
+        setDialogVisibility(true)
 
         coroutineScope.launch {
             DataProvider.getProfile(success = {
@@ -72,7 +72,7 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
 
     //Method to update User Profile Details
     fun updateProfile(updateProfileRequest: UpdateProfileRequest) {
-        setDialogVisibility(true, appInstance.getString(R.string.updating_profile_label))
+        setDialogVisibility(true)
 
         coroutineScope.launch {
 

@@ -62,6 +62,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
     override fun getViewModel() = LoginFragmentViewModel::class.java
 
     var mCaptcha: String? = null
+    var mEnteredCaptch: String? = null
     override fun onBinding() {
 
 
@@ -86,7 +87,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
     }
 
     private fun setUpCaptcha() {
-        mCaptcha = activity?.generateCaptchaCode(4)
+        mCaptcha = activity?.generateCaptchaCode(5)
         mBinding.etCaptchaText.setText(mCaptcha)
     }
 
@@ -302,7 +303,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
      */
     private fun validate(): Boolean {
         var isValid = true
-        val tmp = mBinding.etCaptcha.text
+        mEnteredCaptch = mBinding.etCaptcha.text?.toString()
         mViewModel.run {
             mBinding.run {
                 if (!emailId.isEmailValid()) {
@@ -317,15 +318,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
                     etPassword.error = resources.getString(R.string.password_format)
                     isValid = false
                 }
-               /* if (tmp?.isEmpty()!!) {
-                    etCaptcha.error = resources.getString(R.string.enter_captcha)
+                if (mEnteredCaptch?.isEmpty()!!) {
+                    etCaptcha.error = resources.getString(R.string.empty_captcha)
                     isValid = false
-                }
-
-                if (!tmp?.equals(mCaptcha)!!) {
+                } else if (!(mEnteredCaptch == mCaptcha)) {
                     etCaptcha.error = resources.getString(R.string.invalid_captcha)
                     isValid = false
-                }*/
+                }
             }
         }
         return isValid

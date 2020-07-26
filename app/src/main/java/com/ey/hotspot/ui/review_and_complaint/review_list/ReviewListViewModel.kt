@@ -20,13 +20,16 @@ class ReviewListViewModel(application: Application) : BaseViewModel(application)
     }
 
     private fun getReviewsList() {
+        setDialogVisibility(true)
         coroutineScope.launch {
             DataProvider.getReviews(
                 success = {
                         _reviewList.value = it
+                    setDialogVisibility(false)
                 },
                 error = {
                     checkError(it)
+                    setDialogVisibility(false)
                 }
             )
         }

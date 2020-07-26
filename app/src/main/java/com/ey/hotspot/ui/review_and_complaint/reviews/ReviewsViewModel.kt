@@ -37,6 +37,7 @@ class ReviewsViewModel(application: Application) : BaseViewModel(application) {
                 },
                 error = {
                     checkError(it)
+                    setDialogVisibility(false)
                 }
             )
         }

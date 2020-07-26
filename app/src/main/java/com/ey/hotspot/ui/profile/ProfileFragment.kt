@@ -159,7 +159,28 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
 
         mViewModel.profileData.value?.run {
             mBinding.run {
-                if (!firstName.isValidName()) {
+
+
+                if( firstName.isEmpty()){
+                    edtFirstName.error = resources.getString(R.string.empty_firstName)
+                    isValid = false
+
+                } else if(!firstName.isValidName()){
+                    edtFirstName.error = resources.getString(R.string.invalid_Name)
+                    isValid = false
+                }
+
+
+                if(lastName.isEmpty()){
+                    edtLastName.error = resources.getString(R.string.empty_lastName)
+                    isValid = false
+                }else if(!lastName.isValidName()){
+                    edtLastName.error = resources.getString(R.string.invalid_Name)
+                    isValid = false
+                }
+
+
+            /*    if (!firstName.isValidName()) {
                     edtFirstName.error = resources.getString(R.string.invalid_firstName)
                     isValid = false
                 }
@@ -167,6 +188,9 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
                     edtLastName.error = resources.getString(R.string.invalid_last_name_label)
                     isValid = false
                 }
+                */
+
+
                 if (!emailId.isEmailValid()) {
                     edtEmail.error = resources.getString(R.string.invalid_email_label)
                     isValid = false
