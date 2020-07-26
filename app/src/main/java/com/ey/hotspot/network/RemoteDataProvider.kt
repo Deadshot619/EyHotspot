@@ -168,4 +168,23 @@ interface RemoteDataProvider {
         success: (BaseResponse<CoutryCode>) -> Unit,
         error: (Exception) -> Unit
     )
+
+    //Wifi
+    suspend fun validateWifi(
+        request: ValidateWifiRequest,
+        success: (BaseResponse<ValidateWifiResponse>) -> Unit,
+        error: (Exception) -> Unit
+    )
+
+    suspend fun wifiLogin(
+        request: WifiLoginRequest,
+        success: (BaseResponse<WifiLoginResponse>) -> Unit,
+        error: (Exception) -> Unit
+    )
+
+    suspend fun wifiLogout(
+        request: WifiLoginRequest,
+        success: (BaseResponse<WifiLogoutResponse>) -> Unit,
+        error: (Exception) -> Unit
+    )
 }

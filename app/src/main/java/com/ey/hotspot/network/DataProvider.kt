@@ -399,14 +399,14 @@ object DataProvider : RemoteDataProvider {
     }
 
     override suspend fun resendForgotPasswordOTP(
-        request:ForgotPasswordResendOTPRequest,
+        request: ForgotPasswordResendOTPRequest,
         success: (BaseResponse<ResendForgotPasswordOTP>) -> Unit,
         error: (Exception) -> Unit
     ) {
 
         try {
             val result = mServices.resendForgotPasswordOTP(
-                HotSpotApp.prefs!!.getRegistrationTempToken(),request
+                HotSpotApp.prefs!!.getRegistrationTempToken(), request
             ).await()
 
             success(result)
@@ -428,5 +428,47 @@ object DataProvider : RemoteDataProvider {
 
     }
 
+    //Wifi
+    override suspend fun validateWifi(
+        request: ValidateWifiRequest,
+        success: (BaseResponse<ValidateWifiResponse>) -> Unit,
+        error: (Exception) -> Unit
+    ) {
+        try {
+            val result = mServices.validateWifiAsync().await()
+            success(result)
+        } catch (e: Exception) {
+            error(e)
+        }
+
+    }
+
+    override suspend fun wifiLogin(
+        request: WifiLoginRequest,
+        success: (BaseResponse<WifiLoginResponse>) -> Unit,
+        error: (Exception) -> Unit
+    ) {
+        try {
+            val result = mServices.wifiLoginAsync().await()
+            success(result)
+        } catch (e: Exception) {
+            error(e)
+        }
+
+    }
+
+    override suspend fun wifiLogout(
+        request: WifiLoginRequest,
+        success: (BaseResponse<WifiLogoutResponse>) -> Unit,
+        error: (Exception) -> Unit
+    ) {
+        try {
+            val result = mServices.wifiLogoutAsync().await()
+            success(result)
+        } catch (e: Exception) {
+            error(e)
+        }
+
+    }
 
 }

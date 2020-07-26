@@ -39,7 +39,7 @@ interface Constants {
         const val HEADER_X_LOCALIZATION = "X-localization"
         const val HEADER_REFRESH_TOKEN = "Refresh-Token"
 
-        //POST
+        /*    POST    */
         const val API_LOGIN = "login"
         const val API_SOCIAL_LOGIN = "socialLogin"
 
@@ -61,14 +61,22 @@ interface Constants {
         const val API_RESET_PASSWORD="resetPassword"
         const val  API_RESEND_FORGOT_PASSWORD_OTP="forgotPassword/resendOtp"
         const val API_LOCATION_REVIEWS = "getLocationReviews"
+        //Wifi
+        const val API_WIFI_LOGIN = "wifi/login"
+        const val API_WIFI_LOGOUT = "wifi/logout"
+        const val API_VALIDATE_WIFI = "wifi/validateWifi"
+        const val API_MATCH_WIFI = "wifi/matchWifi"
 
-        //GET
+
+        /*    GET    */
         const val UNAUTHORIZED = "unauthorized"
         const val API_GET_USER_LIST = "userList"
         const val API_GET_REVIEWS = "getReviews"
         const val API_GET_COMPLAINTS = "getComplaints"
         const val API_GET_COMPLAINTS_ISSUE_TYPES = "getComplaintIssueTypes"
         const val API_GET_COUNTRY_CODE_NAME="getCountryCodeList"
+
+
 
     }
 }

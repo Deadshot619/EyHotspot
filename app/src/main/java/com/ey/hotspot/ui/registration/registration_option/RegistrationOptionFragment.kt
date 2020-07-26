@@ -38,7 +38,6 @@ class RegistrationOptionFragment :
 
     var mCaptcha: String? = null
 
-
     override fun getLayoutId() = R.layout.fragment_registration_option
     override fun getViewModel() = RegistrationOptionViewModel::class.java
     override fun onBinding() {
