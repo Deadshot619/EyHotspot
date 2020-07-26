@@ -44,8 +44,10 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.net.PlacesClient
+import com.google.maps.android.clustering.Cluster
 import com.google.maps.android.clustering.ClusterManager
 import com.google.maps.android.clustering.view.DefaultClusterRenderer
+
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(), OnMapReadyCallback,
     ClusterManager.OnClusterItemClickListener<MyClusterItems>,
     ClusterManager.OnClusterItemInfoWindowClickListener<MyClusterItems>,
@@ -134,7 +136,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
         //Change Favourite
         mViewModel.markFavourite.observe(viewLifecycleOwner, Observer {
-            it.getContentIfNotHandled()?.let {  item->
+            it.getContentIfNotHandled()?.let { item ->
                 mClusterManager.updateItem(item.apply { changeFavourite(!mIsFavourite) })
             }
         })
@@ -150,7 +152,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
     private fun getNearByWifiList(gpsStatus: Boolean) {
 
-        if(gpsStatus){
+        if (gpsStatus) {
 
             val getHotSpotRequest: GetHotSpotRequest = GetHotSpotRequest(
                 lastKnownLocation!!.latitude,
@@ -243,7 +245,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
     }
 
     private fun setupClusters() {
-        if(this::mClusterManager.isInitialized){
+        if (this::mClusterManager.isInitialized) {
             mClusterManager.markerCollection.clear()
             mClusterManager.clusterMarkerCollection.clear()
         }
@@ -274,9 +276,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             Log.e("Exception: %s", e.message, e)
         }
     }
-
-
-
 
 
     /* In this method  1. Showing  Custom Pop up window  along with toggle the mark as favourite option*/
@@ -323,7 +322,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         //Navigate Now
         mBinding.customPop.btnNavigateNow.setOnClickListener {
 
-            val gmmIntentUri = Uri.parse("google.navigation:q="+clickedVenueMarker?.mLat+","+clickedVenueMarker?.mLng + "&mode=b")
+            val gmmIntentUri =
+                Uri.parse("google.navigation:q=" + clickedVenueMarker?.mLat + "," + clickedVenueMarker?.mLng + "&mode=b")
             val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
             mapIntent.setPackage("com.google.android.apps.maps")
             startActivity(mapIntent)
@@ -382,6 +382,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                     address = location.location
                 )
             mClusterManager.addItem(offsetItems)
+            mClusterManager.cluster()
         }
     }
 
@@ -409,11 +410,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
         override fun onClusterItemUpdated(item: MyClusterItems, marker: Marker) {
 
-           /* val icon: BitmapDescriptor =
-                BitmapDescriptorFactory.fromResource(R.drawable.ic_wifi_signal)
-            marker.setIcon(icon)*/
+            /* val icon: BitmapDescriptor =
+                 BitmapDescriptorFactory.fromResource(R.drawable.ic_wifi_signal)
+             marker.setIcon(icon)*/
 
         }
+
+        override fun onClusterItemRendered(clusterItem: MyClusterItems, marker: Marker) {
+
+           /*  val icon: BitmapDescriptor =
+                BitmapDescriptorFactory.fromResource(R.drawable.ic_wifi_signal)
+            marker.setIcon(icon)*/
+        }
+
     }
 
     override fun onConnected(p0: Bundle?) {

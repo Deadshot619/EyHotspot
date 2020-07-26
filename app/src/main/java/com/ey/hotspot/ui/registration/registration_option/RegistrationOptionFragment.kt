@@ -37,7 +37,7 @@ class RegistrationOptionFragment :
     lateinit var emailID: String
 
     var mCaptcha: String? = null
-
+    var mEnteredCaptch: String? = null
 
     override fun getLayoutId() = R.layout.fragment_registration_option
     override fun getViewModel() = RegistrationOptionViewModel::class.java
@@ -72,7 +72,7 @@ class RegistrationOptionFragment :
     }
 
     private fun setUpCaptcha() {
-        mCaptcha = activity?.generateCaptchaCode(4)
+        mCaptcha = activity?.generateCaptchaCode(5)
         mBinding.etCaptchaText.setText(mCaptcha)
     }
 
@@ -119,20 +119,24 @@ class RegistrationOptionFragment :
 
     private fun validate(): Boolean {
         var isValid = true
+
+        mEnteredCaptch = mBinding.etCaptcha.text?.toString()
+
         if (selectedOption.trim().isEmpty()) {
             showMessage(resources.getString(R.string.choose_verify_option))
             isValid = false
         }
 
-      /*  if (mBinding.etCaptcha.text?.isEmpty()!!) {
-            mBinding.etCaptcha.error = resources.getString(R.string.enter_captcha)
+
+
+        if (mBinding.etCaptcha.text?.isEmpty()!!) {
+            mBinding.etCaptcha.error = resources.getString(R.string.empty_captcha)
+            isValid = false
+        } else if (!(mEnteredCaptch == mCaptcha)) {
+            mBinding.etCaptcha.error = resources.getString(R.string.invalid_captcha)
             isValid = false
         }
 
-        if (!mBinding.etCaptcha.text?.equals(mCaptcha)!!) {
-            mBinding.etCaptcha.error = resources.getString(R.string.invalid_captcha)
-            isValid = false
-        }*/
 
         return isValid
 

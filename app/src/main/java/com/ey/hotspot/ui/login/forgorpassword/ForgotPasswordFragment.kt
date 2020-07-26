@@ -8,6 +8,7 @@ import com.ey.hotspot.ui.login.verifyotp.VerifyOTPFragment
 import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordRequest
 import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordResponse
 import com.ey.hotspot.utils.dialogs.OkDialog
+import com.ey.hotspot.utils.generateCaptchaCode
 import com.ey.hotspot.utils.replaceFragment
 import com.ey.hotspot.utils.showMessage
 import com.google.gson.Gson
@@ -30,6 +31,8 @@ class ForgotPasswordFragment :
     companion object {
         fun newInstance() = ForgotPasswordFragment()
     }
+    var mCaptcha: String? = null
+    var mEnteredCaptch: String? = null
 
 
     override fun getLayoutId(): Int {
@@ -61,9 +64,12 @@ class ForgotPasswordFragment :
 
     private fun setUpViewData() {
 
-
+            setUpCaptcha()
     }
-
+    private fun setUpCaptcha() {
+        mCaptcha = activity?.generateCaptchaCode(5)
+        mBinding.etCaptchaText.setText(mCaptcha)
+    }
     private fun setUpObserver() {
 
         mViewModel.forgotPasswordResponse.observe(viewLifecycleOwner, Observer {
@@ -132,12 +138,21 @@ class ForgotPasswordFragment :
      */
     private fun validate(): Boolean {
         var isValid = true
+        mEnteredCaptch = mBinding.etCaptcha.text?.toString()
 
         mViewModel.run {
             mBinding.run {
 
                 if (mEmailIdOrPassword.trim().isEmpty()) {
                     edtMobileNo.error = resources.getString(R.string.enter_email_or_password)
+                    isValid = false
+                }
+
+                if (mEnteredCaptch?.isEmpty()!!) {
+                    etCaptcha.error = resources.getString(R.string.empty_captcha)
+                    isValid = false
+                }else if (!(mEnteredCaptch == mCaptcha)) {
+                    etCaptcha.error = resources.getString(R.string.invalid_captcha)
                     isValid = false
                 }
             }

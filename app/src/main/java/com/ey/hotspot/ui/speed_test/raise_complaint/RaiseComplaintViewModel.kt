@@ -30,6 +30,7 @@ class RaiseComplaintViewModel(application: Application) : BaseViewModel(applicat
 
     //Method to get Issues type spinner data
     private fun getIssuesTypes() {
+        setDialogVisibility(true)
         coroutineScope.launch {
             DataProvider.getComplaintsIssuesTypes(
                 {
@@ -37,9 +38,11 @@ class RaiseComplaintViewModel(application: Application) : BaseViewModel(applicat
                         _issueTypes.value = it.data
                     else
                         showToastFromViewModel(it.message)
+                    setDialogVisibility(false)
                 },
                 {
                     checkError(it)
+                    setDialogVisibility(false)
                 }
             )
         }
