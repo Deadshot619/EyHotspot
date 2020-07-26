@@ -89,7 +89,8 @@
     <string name="reviews_label">Reviews</string>
     <string name="complaint_label">Complaints</string>
     <string name="all_label">All</string>
-    <string name="confirm_rating">Do you want to submit your rating?</string>
+    <string name="confirm_complaint">Do you want to submit your complaint?</string>
+    <string name="confirm_review">Do you want to submit your rating?</string>
 
     <!--Favourite Wifi-->
     <string name="favoutite_wifi_label">Favourite Wifi</string>

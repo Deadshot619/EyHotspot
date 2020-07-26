@@ -68,7 +68,7 @@ class RaiseComplaintFragment :
     val dialog by lazy {
         YesNoDialog(requireContext()).apply {
             setViews(
-                title = getString(R.string.confirm_rating),
+                title = getString(R.string.confirm_complaint),
                 description = "",
                 yes = { mViewModel.addComplaint()
                 this.dismiss()},

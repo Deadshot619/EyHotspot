@@ -96,7 +96,8 @@
     <string name="reviews_label">المراجعات</string>
     <string name="complaint_label">شكاوي</string>
     <string name="all_label">الكل</string>
-    <string name="confirm_rating">هل تريد تقديم تصويتك؟</string>
+    <string name="confirm_complaint">هل تريد تقديم شكواك؟</string>
+    <string name="confirm_review">هل تريد تقديم تصويتك؟</string>
 
 
     <!--Favourite Wifi-->

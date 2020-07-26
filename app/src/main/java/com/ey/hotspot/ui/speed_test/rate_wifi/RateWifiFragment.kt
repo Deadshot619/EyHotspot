@@ -47,7 +47,7 @@ class RateWifiFragment : BaseFragment<FragmentRateWifiBinding, RateWifiViewModel
     val dialog by lazy {
         YesNoDialog(requireContext()).apply {
             setViews(
-                title = getString(R.string.confirm_rating),
+                title = getString(R.string.confirm_review),
                 description = "",
                 yes = { mViewModel.addReview()
                     this.dismiss() },
