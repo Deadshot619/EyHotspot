@@ -55,7 +55,10 @@
     <string name="password_label">كلمه السر</string>
     <string name="confirm_password_label">تأكيد كلمة المرور</string>
     <string name="captcha_label">أدخل الرسالة الموضحة أدناه</string>
-    <string name="password_format">يجب أن تحتوي كلمة المرور على 8–32 حرفًا حرف واحد كبير ، حرف صغير واحد ، أرقام عشرية (0–9) ، حرف خاص (# ، $ ،٪)</string>
+    <string name="password_format">يجب أن تحتوي كلمة المرور على 8-32 حرفًا وحرف كبير واحد ،
+        حرف واحد صغير ،
+        الأرقام العشرية (0-9) ،
+        حرف خاص (# ، $ ،٪) إلخ</string>
 
     <!--My Profile-->
     <string name="my_profile_label">ملفي</string>
@@ -93,6 +96,9 @@
     <string name="reviews_label">المراجعات</string>
     <string name="complaint_label">شكاوي</string>
     <string name="all_label">الكل</string>
+    <string name="confirm_complaint">هل تريد تقديم شكواك؟</string>
+    <string name="confirm_review">هل تريد تقديم تصويتك؟</string>
+
 
     <!--Favourite Wifi-->
     <string name="favoutite_wifi_label">واي فاي المفضلة</string>

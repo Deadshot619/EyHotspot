@@ -37,7 +37,7 @@
     <string name="password_format">Password Must Contain 8-32 characters One upper case letter,
         One lower case letter,
         Decimal digits(0-9),
-        Special character (#, $, %)</string>
+        Special character (#, $, %) etc</string>
 
     <!--My Profile-->
     <string name="my_profile_label">My Profile</string>
@@ -89,6 +89,8 @@
     <string name="reviews_label">Reviews</string>
     <string name="complaint_label">Complaints</string>
     <string name="all_label">All</string>
+    <string name="confirm_complaint">Do you want to submit your complaint?</string>
+    <string name="confirm_review">Do you want to submit your rating?</string>
 
     <!--Favourite Wifi-->
     <string name="favoutite_wifi_label">Favourite Wifi</string>

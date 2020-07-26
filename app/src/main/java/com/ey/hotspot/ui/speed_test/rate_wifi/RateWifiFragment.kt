@@ -5,9 +5,12 @@ import androidx.lifecycle.Observer
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentRateWifiBinding
+import com.ey.hotspot.utils.dialogs.YesNoDialog
 import com.ey.hotspot.utils.showMessage
 
 class RateWifiFragment : BaseFragment<FragmentRateWifiBinding, RateWifiViewModel>() {
+
+
 
     companion object {
         fun newInstance(locationId: Int, wifiSsid: String, wifiProvider: String, location: String) =
@@ -40,6 +43,18 @@ class RateWifiFragment : BaseFragment<FragmentRateWifiBinding, RateWifiViewModel
 
         setUpObservers()
     }
+    //Create 'OK' Dialog
+    val dialog by lazy {
+        YesNoDialog(requireContext()).apply {
+            setViews(
+                title = getString(R.string.confirm_review),
+                description = "",
+                yes = { mViewModel.addReview()
+                    this.dismiss() },
+                no = { this.dismiss() }
+            )
+        }
+    }
 
     //Method to set data in view
     private fun setDataInView(){
@@ -62,7 +77,7 @@ class RateWifiFragment : BaseFragment<FragmentRateWifiBinding, RateWifiViewModel
 //            Submit Feedback
             btnSubmitFeedback.setOnClickListener {
                 if (validate())
-                    mViewModel.addReview()
+               dialog.show()
             }
         }
     }
