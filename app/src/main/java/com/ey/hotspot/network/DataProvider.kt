@@ -471,4 +471,15 @@ object DataProvider : RemoteDataProvider {
 
     }
 
+    override suspend fun wifiSearchKeyWords(
+        success: (BaseResponse<List<String>>) -> Unit,
+        error: (Exception) -> Unit
+    ) {
+        try {
+            val result = mServices.getWifiSearchKeyWordsAsync().await()
+            success(result)
+        } catch (e: Exception){
+            error(e)
+        }
+    }
 }

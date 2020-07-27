@@ -158,5 +158,6 @@ interface APIInterface {
     @POST(Constants.API_WIFI_LOGOUT)
     fun wifiLogoutAsync(@Body request: WifiLogoutRequest): Deferred<BaseResponse<WifiLogoutResponse>>
 
-
+    @GET(Constants.API_GET_WIFI_SEARCH_KEY_WORDS)
+    fun getWifiSearchKeyWordsAsync(): Deferred<BaseResponse<List<String>>>
 }
