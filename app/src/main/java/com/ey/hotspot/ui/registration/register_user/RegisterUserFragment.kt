@@ -5,6 +5,8 @@ import android.graphics.Paint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -79,6 +81,17 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
         setUpListeners()
 
         setUpObservers()
+    }
+
+    private fun openWebview(webView:WebView,url:String)
+    {
+        webView.webViewClient = object : WebViewClient() {
+            override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
+                view?.loadUrl(url)
+                return true
+            }
+        }
+        webView.loadUrl(url)
     }
 
     private fun setUpObservers() {
