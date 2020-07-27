@@ -21,6 +21,7 @@ interface Constants {
         //Country Code
         const val SAUDI_ARABIA_COUNTRY_CODE = 966
 
+        const val UNKNOWN_SSID = "unknown ssid"
 
         //SharedPreference
         const val ACCESS_TOKEN: String = "access_token"

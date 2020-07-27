@@ -55,7 +55,7 @@ class WifiService : Service() {
 
         //Get Wifi Manager
         wifiManager = applicationContext?.getSystemService(Context.WIFI_SERVICE) as WifiManager
-        val networkRequestWiFi = NetworkRequest.Builder()
+        val networkRequestWiFi: NetworkRequest = NetworkRequest.Builder()
             .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
             .build()
 

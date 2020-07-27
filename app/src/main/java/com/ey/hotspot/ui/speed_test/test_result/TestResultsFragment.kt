@@ -11,6 +11,7 @@ class TestResultsFragment : BaseFragment<FragmentTestResultsBinding, TestResults
 
     companion object {
         fun newInstance() = TestResultsFragment()
+
     }
 
     override fun getLayoutId() = R.layout.fragment_test_results
