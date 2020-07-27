@@ -11,15 +11,21 @@ import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.FragmentLoginBinding
 import com.ey.hotspot.network.request.LoginRequest
 import com.ey.hotspot.network.request.SocialLoginRequest
+import com.ey.hotspot.network.response.LoginResponse
+import com.ey.hotspot.network.response.VerificationPending
 import com.ey.hotspot.ui.home.BottomNavHomeActivity
 import com.ey.hotspot.ui.login.forgorpassword.ForgotPasswordFragment
+import com.ey.hotspot.ui.login.otpverification.fragment.OTPVerificationFragment
 import com.ey.hotspot.ui.registration.register_user.RegisterUserFragment
+import com.ey.hotspot.ui.registration.registration_option.RegistrationOptionFragment
+import com.ey.hotspot.utils.constants.Constants
 import com.ey.hotspot.utils.constants.convertStringFromList
 import com.ey.hotspot.utils.constants.setSkippedUserData
 import com.ey.hotspot.utils.dialogs.OkDialog
 import com.ey.hotspot.utils.extention_functions.generateCaptchaCode
 import com.ey.hotspot.utils.extention_functions.replaceFragment
 import com.ey.hotspot.utils.extention_functions.showMessage
+import com.ey.hotspot.utils.extention_functions.toVerificationPending
 import com.ey.hotspot.utils.validations.isEmailValid
 import com.ey.hotspot.utils.validations.isValidPassword
 import com.facebook.*
@@ -95,8 +101,30 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
         //Login Response
         mViewModel.loginResponse.observe(viewLifecycleOwner, Observer {
-            showMessage(it.message, true)
-            goToHomePage()
+
+            if (it.status) {
+
+                showMessage(it.message, true)
+                goToHomePage()
+
+            } else {
+
+
+                if (!(it.data!!.verification)!!) {
+
+                    if ((it.data!!.mobile_no!!.isEmpty()) || (it.data!!.mobile_no!!.isBlank())) {
+                        callVerificationFragment(it.data)
+                    } else {
+                        callVerificationOptionSelectionFragment(it.data.toVerificationPending())
+                    }
+
+                } else {
+                    showMessage(it.message, true)
+
+                }
+
+            }
+
         })
 
         //Social Login Response
@@ -106,7 +134,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
                 showMessage(it.message, true)
                 goToHomePage()
             } else {
-                showMessage(it.message, true)
+
+
             }
         })
 
@@ -118,6 +147,39 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
             }
         })
     }
+
+
+    private fun callVerificationFragment(response: LoginResponse) {
+
+        HotSpotApp.prefs!!.setRegistrationTempToken(response.tmpToken!!)
+        HotSpotApp.prefs!!.setRegistrationEmailID(response.email_id!!)
+
+        replaceFragment(
+            fragment = OTPVerificationFragment.newInstance(
+                selectedOption = "email",
+                selectedItem = response.email_id
+            ), addToBackStack = true
+        )
+
+
+    }
+
+    private fun callVerificationOptionSelectionFragment(response: VerificationPending) {
+
+        HotSpotApp.prefs!!.setRegistrationTempToken(response.tmpToken!!)
+        HotSpotApp.prefs!!.setRegistrationEmailID(response.email_id!!)
+
+
+        replaceFragment(
+            fragment = RegistrationOptionFragment.newInstance(
+                emailID = response.email_id,
+                phoneNo = response.mobile_no!!
+            ),
+            addToBackStack = true
+        )
+
+    }
+
 
     private fun setUpListeners() {
         //Submit

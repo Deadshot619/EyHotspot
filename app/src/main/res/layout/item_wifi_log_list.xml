@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="data"
-            type="com.ey.hotspot.database.WifiInformationTable" />
+            type="com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListResponse" />
 
         <variable
             name="clickListener"
@@ -16,25 +17,26 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="3"
         android:onClick="@{() -> clickListener.onClick(data)}"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="horizontal"
         android:paddingTop="@dimen/common_padding_top"
-        android:paddingBottom="@dimen/common_padding_bottom">
+        android:paddingBottom="@dimen/common_padding_bottom"
+        android:weightSum="3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
 
-    <!--Date-->
+        <!--Date-->
         <TextView
             android:id="@+id/tv_date_label"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:bindFormatDateTime="@{data.connectedOn}"
+            android:text="@{data.created_at}"
+
             android:textSize="@dimen/text_size_18"
-            tools:text="69-69-0420"/>
+            tools:text="69-69-0420" />
 
         <!--    Name/WiFi ssid    -->
         <TextView
@@ -42,19 +44,19 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.5"
-            android:text="@{data.wifiSsid}"
+            android:text="@{data.location.wifi_name}"
             android:textSize="@dimen/text_size_18"
-            tools:text="Hong Kong"/>
+            tools:text="Hong Kong" />
 
         <!--    Arrow   -->
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_arrow"
-            android:src="@drawable/ic_baseline_arrow_forward_ios_24"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_weight="0.5"
             android:backgroundTint="?colorOnSecondary"
-            android:layout_gravity="center_vertical"
-            android:layout_height="wrap_content"/>
+            android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
 
 
     </LinearLayout>

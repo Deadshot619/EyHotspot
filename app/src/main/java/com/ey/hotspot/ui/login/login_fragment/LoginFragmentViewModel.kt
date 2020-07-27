@@ -21,7 +21,7 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
 
     var emailId = ""
     var password = ""
-    var captcha =""
+    var captcha = ""
 
     private val _loginResponse = MutableLiveData<BaseResponse<LoginResponse?>>()
     val loginResponse: LiveData<BaseResponse<LoginResponse?>>
@@ -49,21 +49,17 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
 
 
                     if (it.status) {
-                        _loginResponse.value = it
-
                         Timber.tag("Bearer_Token").d(it.data?.accessToken)
                         updateSharedPreference(it.data!!)
-
-                    } else {
-                        setDialogVisibility(false)
-//                        _loginError.value = Event(it.data)
-                        showToastFromViewModel(it.message)
                     }
 
+                    _loginResponse.value = it
+                    setDialogVisibility(false)
 
                 },
                 error = {
-                        checkError(it)
+                    checkError(it)
+                    setDialogVisibility(false)
                 }
             )
         }
@@ -81,7 +77,7 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
                     _socialLoginRespinse.value = it
                     updateSharedPreference(it.data!!)
 
-                    Log.d("TOKEN",it.data.accessToken)
+                    Log.d("TOKEN", it.data.accessToken)
 
                 }, error = {
                     checkError(it)

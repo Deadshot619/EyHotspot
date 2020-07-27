@@ -16,6 +16,8 @@ import com.ey.hotspot.ui.login.verifyotp.model.*
 import com.ey.hotspot.ui.profile.fragment.model.ProfileResponse
 import com.ey.hotspot.ui.profile.fragment.model.UpdateProfileRequest
 import com.ey.hotspot.ui.registration.register_user.model.RegistrationResponse
+import com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListRequest
+import com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListResponse
 import com.google.gson.JsonArray
 
 interface RemoteDataProvider {
@@ -159,7 +161,7 @@ interface RemoteDataProvider {
     )
 
     suspend fun resendForgotPasswordOTP(
-        request:ForgotPasswordResendOTPRequest,
+        request: ForgotPasswordResendOTPRequest,
         success: (BaseResponse<ResendForgotPasswordOTP>) -> Unit,
         error: (Exception) -> Unit
     )
@@ -185,6 +187,12 @@ interface RemoteDataProvider {
     suspend fun wifiLogout(
         request: WifiLoginRequest,
         success: (BaseResponse<WifiLogoutResponse>) -> Unit,
+        error: (Exception) -> Unit
+    )
+
+    suspend fun wifiLogList(
+        request:WifiLogListRequest,
+        success: (BaseResponse<List<WifiLogListResponse>>) -> Unit,
         error: (Exception) -> Unit
     )
 }

@@ -10,24 +10,24 @@ import com.ey.hotspot.databinding.ItemWifiLogListBinding
 
 
 class WifiLogListAdapter(val listener: OnClickListener) :
-    ListAdapter<WifiInformationTable, WifiLogListAdapter.WifiLogListViewHolder>(
+    ListAdapter<WifiLogListResponse, WifiLogListAdapter.WifiLogListViewHolder>(
         DiffCallback
     ) {
     /**
      * Allows the RecyclerView to determine which items have changed when the [List] of [WifiInformationTable]
      * has been updated.
      */
-    companion object DiffCallback : DiffUtil.ItemCallback<WifiInformationTable>() {
+    companion object DiffCallback : DiffUtil.ItemCallback<WifiLogListResponse>() {
         override fun areItemsTheSame(
-            oldItem: WifiInformationTable,
-            newItem: WifiInformationTable
+            oldItem: WifiLogListResponse,
+            newItem: WifiLogListResponse
         ): Boolean {
             return oldItem === newItem
         }
 
         override fun areContentsTheSame(
-            oldItem: WifiInformationTable,
-            newItem: WifiInformationTable
+            oldItem: WifiLogListResponse,
+            newItem: WifiLogListResponse
         ): Boolean {
             return oldItem.id == newItem.id
         }
@@ -54,7 +54,7 @@ class WifiLogListAdapter(val listener: OnClickListener) :
     class WifiLogListViewHolder(private var binding: ItemWifiLogListBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(
-            item: WifiInformationTable?,
+            item: WifiLogListResponse,
             listener: OnClickListener
         ) {
             binding.run {
@@ -71,8 +71,8 @@ class WifiLogListAdapter(val listener: OnClickListener) :
     /**
      * Interface to call in the [OnClickListener] & passed on to fragment to implement
      */
-    class OnClickListener(val clickListener: (data: WifiInformationTable) -> Unit) {
-        fun onClick(data: WifiInformationTable) =
+    class OnClickListener(val clickListener: (data: WifiLogListResponse) -> Unit) {
+        fun onClick(data: WifiLogListResponse) =
             clickListener(data)
     }
 

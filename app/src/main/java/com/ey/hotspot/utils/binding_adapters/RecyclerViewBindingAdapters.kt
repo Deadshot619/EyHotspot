@@ -13,6 +13,7 @@ import com.ey.hotspot.ui.review_and_complaint.review_list.ReviewListAdapter
 import com.ey.hotspot.ui.review_and_complaint.reviews.ReviewsAdapter
 import com.ey.hotspot.ui.search.searchlist.adapter.SearchListAdapter
 import com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListAdapter
+import com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListResponse
 
 /**
  * When there is no data (data is null), hide the [RecyclerView],
@@ -42,7 +43,7 @@ fun bindLocationReviewList(recyclerView: RecyclerView, data: List<ReviewsList>?)
 
 //Wifi Log List
 @BindingAdapter("listWifiLogList")
-fun bindWifiLogList(recyclerView: RecyclerView, data: List<WifiInformationTable>?){
+fun bindWifiLogList(recyclerView: RecyclerView, data: List<WifiLogListResponse>?){
     val adapter = recyclerView.adapter as WifiLogListAdapter
     adapter.submitList(data)
 }

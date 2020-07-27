@@ -17,6 +17,8 @@ import com.ey.hotspot.ui.login.verifyotp.model.*
 import com.ey.hotspot.ui.profile.fragment.model.ProfileResponse
 import com.ey.hotspot.ui.profile.fragment.model.UpdateProfileRequest
 import com.ey.hotspot.ui.registration.register_user.model.RegistrationResponse
+import com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListRequest
+import com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListResponse
 import com.google.gson.JsonArray
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -465,6 +467,22 @@ object DataProvider : RemoteDataProvider {
         try {
             val result = mServices.wifiLogoutAsync().await()
             success(result)
+        } catch (e: Exception) {
+            error(e)
+        }
+
+    }
+
+    override suspend fun wifiLogList(
+        request:WifiLogListRequest,
+        success: (BaseResponse<List<WifiLogListResponse>>) -> Unit,
+        error: (Exception) -> Unit
+    ) {
+
+        try {
+            val result = mServices.wifiLogsList(request).await()
+            success(result)
+
         } catch (e: Exception) {
             error(e)
         }

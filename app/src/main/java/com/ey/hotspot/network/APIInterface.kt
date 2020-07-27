@@ -17,6 +17,8 @@ import com.ey.hotspot.ui.login.verifyotp.model.*
 import com.ey.hotspot.ui.profile.fragment.model.ProfileResponse
 import com.ey.hotspot.ui.profile.fragment.model.UpdateProfileRequest
 import com.ey.hotspot.ui.registration.register_user.model.RegistrationResponse
+import com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListRequest
+import com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListResponse
 import com.ey.hotspot.utils.constants.Constants
 import com.google.gson.JsonArray
 import kotlinx.coroutines.Deferred
@@ -157,6 +159,11 @@ interface APIInterface {
 
     @POST(Constants.API_WIFI_LOGOUT)
     fun wifiLogoutAsync(): Deferred<BaseResponse<WifiLogoutResponse>>
+
+    @POST(Constants.API_WIFI_LOGS)
+    fun wifiLogsList(
+        @Body wifiLogListRequest: WifiLogListRequest
+    ): Deferred<BaseResponse<List<WifiLogListResponse>>>
 
 
 }

@@ -32,6 +32,7 @@ interface Constants {
         const val VERIFY_FORGOT_PASSWORD="verify_forgot_password"
         const val FORGOT_PASSWORD_FIELD="forgot_password_field"
         const val  TERMS_AND_CONDITION="termscondition"
+        const val  REGISTRATION_EMAIL_ID="REGISTRATION_EMAIL_ID"
 
         //APIS
 
@@ -67,6 +68,7 @@ interface Constants {
         const val API_WIFI_LOGOUT = "wifi/logout"
         const val API_VALIDATE_WIFI = "wifi/validateWifi"
         const val API_MATCH_WIFI = "wifi/matchWifi"
+        const val API_WIFI_LOGS= "wifi/userLogs"
 
 
         /*    GET    */

@@ -10,6 +10,7 @@ import com.ey.hotspot.utils.constants.Constants.Companion.DELEGATE_ENGLISH_LANG
 import com.ey.hotspot.utils.constants.Constants.Companion.ENABLED_GPS_LOCATION
 import com.ey.hotspot.utils.constants.Constants.Companion.FORGOT_PASSWORD_FIELD
 import com.ey.hotspot.utils.constants.Constants.Companion.LANGUAGE_SELECTED
+import com.ey.hotspot.utils.constants.Constants.Companion.REGISTRATION_EMAIL_ID
 import com.ey.hotspot.utils.constants.Constants.Companion.REGISTRATION_TMP_TOKEN
 import com.ey.hotspot.utils.constants.Constants.Companion.SKIP_STATUS
 import com.ey.hotspot.utils.constants.Constants.Companion.TERMS_AND_CONDITION
@@ -138,5 +139,12 @@ class MyHotSpotSharedPreference(context: Context) {
         return CoreApp.sharedPreferences.getBoolean(TERMS_AND_CONDITION, false)
 
     }
+
+    fun setRegistrationEmailID(emailID: String) {
+        CoreApp.sharedPreferences.edit().putString(REGISTRATION_EMAIL_ID, emailID).apply()
+
+    }
+
+
 
 }

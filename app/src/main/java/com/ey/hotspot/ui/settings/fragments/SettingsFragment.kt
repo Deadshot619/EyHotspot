@@ -9,6 +9,7 @@ import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.FragmentSettingsBinding
 import com.ey.hotspot.ui.profile.ProfileFragment
+import com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListFragment
 import com.ey.hotspot.utils.LanguageManager
 import com.ey.hotspot.utils.MyHotSpotSharedPreference
 import com.ey.hotspot.utils.constants.Constants
@@ -68,8 +69,8 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel
     private fun setUpListeners() {
         //Wifi Log List
         mBinding.llWifiLogList.setOnClickListener {
-            showMessage(resources.getString(R.string.under_construction_label))
-            //replaceFragment(WifiLogListFragment(), true)
+           // showMessage(resources.getString(R.string.under_construction_label))
+            replaceFragment(WifiLogListFragment(), true)
         }
 
         /*Submit click*/
