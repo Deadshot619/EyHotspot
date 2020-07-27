@@ -152,13 +152,13 @@ interface APIInterface {
     fun matchWifiNameAsync(): Deferred<BaseResponse<Any>>
 
     @POST(Constants.API_VALIDATE_WIFI)
-    fun validateWifiAsync(): Deferred<BaseResponse<ValidateWifiResponse>>
+    fun validateWifiAsync(@Body request: ValidateWifiRequest): Deferred<BaseResponse<ValidateWifiResponse>>
 
     @POST(Constants.API_WIFI_LOGIN)
-    fun wifiLoginAsync(): Deferred<BaseResponse<WifiLoginResponse>>
+    fun wifiLoginAsync(@Body request: WifiLoginRequest): Deferred<BaseResponse<WifiLoginResponse>>
 
     @POST(Constants.API_WIFI_LOGOUT)
-    fun wifiLogoutAsync(): Deferred<BaseResponse<WifiLogoutResponse>>
+    fun wifiLogoutAsync(@Body request: WifiLogoutRequest): Deferred<BaseResponse<WifiLogoutResponse>>
 
     @POST(Constants.API_WIFI_LOGS)
     fun wifiLogsList(

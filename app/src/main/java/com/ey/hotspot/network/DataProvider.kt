@@ -437,7 +437,7 @@ object DataProvider : RemoteDataProvider {
         error: (Exception) -> Unit
     ) {
         try {
-            val result = mServices.validateWifiAsync().await()
+            val result = mServices.validateWifiAsync(request).await()
             success(result)
         } catch (e: Exception) {
             error(e)
@@ -451,7 +451,7 @@ object DataProvider : RemoteDataProvider {
         error: (Exception) -> Unit
     ) {
         try {
-            val result = mServices.wifiLoginAsync().await()
+            val result = mServices.wifiLoginAsync(request).await()
             success(result)
         } catch (e: Exception) {
             error(e)
@@ -460,12 +460,12 @@ object DataProvider : RemoteDataProvider {
     }
 
     override suspend fun wifiLogout(
-        request: WifiLoginRequest,
+        request: WifiLogoutRequest,
         success: (BaseResponse<WifiLogoutResponse>) -> Unit,
         error: (Exception) -> Unit
     ) {
         try {
-            val result = mServices.wifiLogoutAsync().await()
+            val result = mServices.wifiLogoutAsync(request).await()
             success(result)
         } catch (e: Exception) {
             error(e)

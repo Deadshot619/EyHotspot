@@ -185,7 +185,7 @@ interface RemoteDataProvider {
     )
 
     suspend fun wifiLogout(
-        request: WifiLoginRequest,
+        request: WifiLogoutRequest,
         success: (BaseResponse<WifiLogoutResponse>) -> Unit,
         error: (Exception) -> Unit
     )
