@@ -4,9 +4,9 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ey.hotspot.app_core_lib.BaseViewModel
-import com.ey.hotspot.database.WifiInfoDatabase
-import com.ey.hotspot.database.WifiInfoDatabaseDao
-import com.ey.hotspot.database.WifiInformationTable
+import com.ey.hotspot.database.wifi_info.WifiInfoDatabase
+import com.ey.hotspot.database.wifi_info.WifiInfoDatabaseDao
+import com.ey.hotspot.database.wifi_info.WifiInformationTable
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

@@ -1,4 +1,4 @@
-package com.ey.hotspot.database
+package com.ey.hotspot.database.wifi_info
 
 import androidx.room.Dao
 import androidx.room.Insert
@@ -16,4 +16,8 @@ interface WifiInfoDatabaseDao {
 
     @Query("SELECT * FROM wifi_information_table")
     fun getAllWifiInfoData(): List<WifiInformationTable>
+
+    @Query("DELETE FROM wifi_information_table")
+    fun deleteAllDataFromDb()
+
 }

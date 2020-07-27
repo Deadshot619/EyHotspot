@@ -11,14 +11,18 @@ import android.net.wifi.WifiManager
 import android.os.IBinder
 import androidx.core.content.ContextCompat
 import com.ey.hotspot.R
-import com.ey.hotspot.database.WifiInfoDatabase
-import com.ey.hotspot.database.WifiInfoDatabaseDao
-import com.ey.hotspot.database.WifiInformationTable
+import com.ey.hotspot.database.wifi_info.WifiInfoDatabase
+import com.ey.hotspot.database.wifi_info.WifiInfoDatabaseDao
+import com.ey.hotspot.database.wifi_info.WifiInformationTable
+import com.ey.hotspot.network.DataProvider
+import com.ey.hotspot.network.request.ValidateWifiRequest
+import com.ey.hotspot.network.request.WifiLoginRequest
 import com.ey.hotspot.utils.CHANNEL_ID
 import com.ey.hotspot.utils.SpeedTestUtils
 import com.ey.hotspot.utils.constants.Constants
 import com.ey.hotspot.utils.extention_functions.convertBpsToMbps
 import com.ey.hotspot.utils.extention_functions.extractWifiName
+import com.ey.hotspot.utils.extention_functions.getUserLocation
 import com.ey.hotspot.utils.getNotification
 import com.ey.hotspot.utils.wifi_notification_key
 import kotlinx.coroutines.CoroutineScope
@@ -43,6 +47,12 @@ class WifiService : Service() {
 
     //Holds value of currently inserted DB data
     private var _currentlyInsertedDataId = -1L
+    private var _currentWifiId = 0
+
+    //Variable to store whether the connected wifi is Our open wifi
+    private var isItOurWifi = false
+    private var validateWifiSuccessful =
+        false  //True, if wifi is validated successfully, else false
 
     override fun onCreate() {
         super.onCreate()
@@ -133,46 +143,128 @@ class WifiService : Service() {
         }
 
         override fun onAvailable(network: Network?) {
-
-            //This will initially show the notification as wifi connected
-            ContextCompat.startForegroundService(
-                applicationContext,
-                Intent(applicationContext, WifiService::class.java).apply {
-                    putExtra(
-                        wifi_notification_key,
-                        String.format(
-                            getString(R.string.calculating_wifi_speed_label),
-                            wifiManager.connectionInfo.ssid
-                        )
+            //Wifi Ssid
+            val wifiSsid = wifiManager.connectionInfo.ssid.extractWifiName()
+            if (!wifiSsid.contains(Constants.UNKNOWN_SSID)) {    //If the wifi is "unknown ssid", then skip it
+                //Get Search Keywords
+                CoroutineScope(Dispatchers.Main).launch {
+                    DataProvider.wifiSearchKeyWords(
+                        success = {
+                            if (it.status) {
+                                it.data.forEach {
+                                    //Check if the keywords are present in wifi name
+                                    isItOurWifi = /*wifiSsid.contains(it)*/ true
+                                    if (isItOurWifi) return@forEach
+                                }
+                            } else {
+                                isItOurWifi = false
+                            }
+                        },
+                        error = {
+                            isItOurWifi = false
+                        }
                     )
-                })
+                }
+            } else {
+                isItOurWifi = false
+            }
+
+            //If the wifi contains some special keywords then validate current wifi
+            if (isItOurWifi) {
+                applicationContext.getUserLocation { lat, lng ->
+                    if (lat != null && lng != null) {
+                        val request = ValidateWifiRequest(wifiSsid, lat = lat, lng = lng)
+                        CoroutineScope(Dispatchers.Main).launch {
+                            DataProvider.validateWifi(
+                                request = request,
+                                success = {
+                                    if (it.status) {
+                                        validateWifiSuccessful = true
+                                        calculateSpeed(wifiId = 69, deviceId = "Hella")
+                                    } else
+                                        validateWifiSuccessful = false
+                                },
+                                error = {
+                                    validateWifiSuccessful = false
+                                }
+                            )
+                        }
 
 
-            //TODO("Check for internet connection first")
-            CoroutineScope(Dispatchers.IO).launch {
-                SpeedTestUtils.calculateSpeed(
-                    onCompletedReport = {//When speed test is completed successfully
-                        //get download speed
-                        val downloadSpeed = it?.transferRateBit?.convertBpsToMbps()
+                    } /*else
+//                        mViewModel.verifyHotspot(wifiSSid, Constants.LATITUDE, Constants.LONGITUDE)
+                }*/
+                }
+
+                //This will initially show the notification as wifi connected
+                ContextCompat.startForegroundService(
+                    applicationContext,
+                    Intent(applicationContext, WifiService::class.java).apply {
+                        putExtra(
+                            wifi_notification_key,
+                            String.format(
+                                getString(R.string.calculating_wifi_speed_label),
+                                wifiManager.connectionInfo.ssid
+                            )
+                        )
+                    })
 
 
-                        //Start Service
-                        ContextCompat.startForegroundService(
-                            applicationContext,
-                            Intent(applicationContext, WifiService::class.java).apply {
-                                putExtra(
-                                    wifi_notification_key,
-//                                    "WiFi connected : ${wifiManager?.connectionInfo.ssid}, Speed : $downloadSpeed Mbps"
-                                    String.format(
-                                        getString(R.string.calculated_wifi_speed_label),
-                                        wifiManager.connectionInfo.ssid.extractWifiName(),
-                                        downloadSpeed
-                                    )
+            }
+        }
+    }
+
+    private fun callWifiLogin(wifiId: Int, averageSpeed: Double) {
+        val request = WifiLoginRequest(
+            wifi_id = wifiId,
+            average_speed = averageSpeed.toInt(),
+            user_id = 0,
+            device_id = "bleh"
+        )
+        CoroutineScope(Dispatchers.Main).launch {
+            DataProvider.wifiLogin(
+                request = request,
+                success = {
+
+                },
+                error = {
+
+                }
+
+            )
+        }
+    }
+
+    //Method to calculate speed
+    fun calculateSpeed(wifiId: Int, deviceId: String){
+        //TODO("Check for internet connection first")
+        CoroutineScope(Dispatchers.IO).launch {
+            SpeedTestUtils.calculateSpeed(
+                onCompletedReport = {       //When speed test is completed successfully
+                    //get download speed
+                    val downloadSpeed = it?.transferRateBit?.convertBpsToMbps()
+
+                    //Start Service
+                    ContextCompat.startForegroundService(
+                        applicationContext,
+                        Intent(applicationContext, WifiService::class.java).apply {
+                            putExtra(
+                                wifi_notification_key,
+                                String.format(
+                                    getString(R.string.calculated_wifi_speed_label),
+                                    wifiManager.connectionInfo.ssid.extractWifiName(),
+                                    downloadSpeed
                                 )
-                            })
+                            )
+                        })
 
-                        //Insert data into table
-                        CoroutineScope(Dispatchers.IO).launch {
+                    //Delete & Insert data into table
+                    CoroutineScope(Dispatchers.IO).launch {
+                        synchronized(this){
+                            //First delete data
+                            database.deleteAllDataFromDb()
+
+                            //Then insert new data
                             _currentlyInsertedDataId = database.insert(
                                 WifiInformationTable(
                                     wifiSsid = wifiManager.connectionInfo.ssid.extractWifiName(),
@@ -181,35 +273,40 @@ class WifiService : Service() {
                                 )
                             )
                         }
-                    },
-                    onProgressReport = {
+                    }
 
-                    },
-                    onErrorReport = {
-                        //Start Service
-                        ContextCompat.startForegroundService(
-                            applicationContext,
-                            Intent(applicationContext, WifiService::class.java).apply {
-                                putExtra(
-                                    wifi_notification_key,
+                    //Login wifi
+                    CoroutineScope(Dispatchers.Main).launch {
+                        callWifiLogin(wifiId = wifiId, averageSpeed = downloadSpeed!!.toDouble())
+                    }
+                },
+                onProgressReport = {
+
+                },
+                onErrorReport = {
+                    //Start Service
+                    ContextCompat.startForegroundService(
+                        applicationContext,
+                        Intent(applicationContext, WifiService::class.java).apply {
+                            putExtra(
+                                wifi_notification_key,
 //                                    "No Internet Connection"
-                                    getString(R.string.no_internet_connection_label)
-                                )
-                            })
-
-                        //Insert data into table
-                        CoroutineScope(Dispatchers.IO).launch {
-                            _currentlyInsertedDataId = database.insert(
-                                WifiInformationTable(
-                                    wifiSsid = wifiManager.connectionInfo.ssid,
-                                    connectedOn = Calendar.getInstance(),
-                                    downloadSpeed = "0"
-                                )
+                                getString(R.string.no_internet_connection_label)
                             )
-                        }
-                    }).startDownload(Constants.DOWNLOAD_LINK)
-            }
+                        })
 
+                    //Insert data into table
+                    CoroutineScope(Dispatchers.IO).launch {
+                        _currentlyInsertedDataId = database.insert(
+                            WifiInformationTable(
+                                wifiSsid = wifiManager.connectionInfo.ssid,
+                                connectedOn = Calendar.getInstance(),
+                                downloadSpeed = "0"
+                            )
+                        )
+                    }
+                }).startDownload(Constants.DOWNLOAD_LINK)
         }
+
     }
 }

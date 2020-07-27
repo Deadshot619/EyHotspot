@@ -1,4 +1,4 @@
-package com.ey.hotspot.database
+package com.ey.hotspot.database.wifi_info
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

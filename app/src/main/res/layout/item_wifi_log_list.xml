@@ -6,7 +6,7 @@
     <data>
         <variable
             name="data"
-            type="com.ey.hotspot.database.WifiInformationTable" />
+            type="com.ey.hotspot.database.wifi_info.WifiInformationTable" />
 
         <variable
             name="clickListener"
