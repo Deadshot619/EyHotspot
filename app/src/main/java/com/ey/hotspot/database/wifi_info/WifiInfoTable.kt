@@ -21,8 +21,14 @@ data class WifiInformationTable(
     val disconnectedOn: Calendar? = null,
 
     @ColumnInfo(name = "download_speed")
-    val downloadSpeed: String
+    val downloadSpeed: String,
 
+    @ColumnInfo(name = "wifi_id")
+    val wifiId: Int,
+
+    @ColumnInfo(name = "synced")
+    val synced: Boolean = false
+    
 /*    @ColumnInfo(name = "upload_speed")
     val uploadSpeed: String*/
 )

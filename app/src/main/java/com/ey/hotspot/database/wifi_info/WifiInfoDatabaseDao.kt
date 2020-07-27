@@ -11,6 +11,9 @@ interface WifiInfoDatabaseDao {
     @Insert
     fun insert(wifiInformationTable: WifiInformationTable): Long
 
+    @Query("SELECT * FROM wifi_information_table ORDER BY id DESC")
+    fun getLastInsertedData(): List<WifiInformationTable>
+
     @Query("UPDATE wifi_information_table SET disconnected_on = :disconnectedOn WHERE id = :id")
     fun updateWifiInfoData(id: Long, disconnectedOn: Calendar): Int
 

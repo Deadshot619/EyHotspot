@@ -17,6 +17,7 @@ import com.ey.hotspot.database.wifi_info.WifiInformationTable
 import com.ey.hotspot.network.DataProvider
 import com.ey.hotspot.network.request.ValidateWifiRequest
 import com.ey.hotspot.network.request.WifiLoginRequest
+import com.ey.hotspot.network.request.WifiLogoutRequest
 import com.ey.hotspot.utils.CHANNEL_ID
 import com.ey.hotspot.utils.SpeedTestUtils
 import com.ey.hotspot.utils.constants.Constants
@@ -48,6 +49,8 @@ class WifiService : Service() {
     //Holds value of currently inserted DB data
     private var _currentlyInsertedDataId = -1L
     private var _currentWifiId = 0
+    private var TEMP_DEVICE_ID = "bleh"
+
 
     //Variable to store whether the connected wifi is Our open wifi
     private var isItOurWifi = false
@@ -143,28 +146,21 @@ class WifiService : Service() {
         }
 
         override fun onAvailable(network: Network?) {
+            synchronized(this){
+                    CoroutineScope(Dispatchers.IO).launch {
+                        val data = database.getLastInsertedData()
+                        if (data.isNotEmpty() && !data[0].synced)
+                            callWifiLogout(wifiId = data[0].wifiId, deviceId = TEMP_DEVICE_ID)
+                    }
+            }
+
             //Wifi Ssid
             val wifiSsid = wifiManager.connectionInfo.ssid.extractWifiName()
             if (!wifiSsid.contains(Constants.UNKNOWN_SSID)) {    //If the wifi is "unknown ssid", then skip it
-                //Get Search Keywords
-                CoroutineScope(Dispatchers.Main).launch {
-                    DataProvider.wifiSearchKeyWords(
-                        success = {
-                            if (it.status) {
-                                it.data.forEach {
-                                    //Check if the keywords are present in wifi name
-                                    isItOurWifi = /*wifiSsid.contains(it)*/ true
-                                    if (isItOurWifi) return@forEach
-                                }
-                            } else {
-                                isItOurWifi = false
-                            }
-                        },
-                        error = {
-                            isItOurWifi = false
-                        }
-                    )
-                }
+                /*
+                 *  Check if the wifi name is present in wifi keywords
+                 */
+                isItOurWifi = /*WIFI_KEYWORDS?.contains(wifiSsid) ?: false*/ true   //TODO 27/07/2020: Remove True, when live
             } else {
                 isItOurWifi = false
             }
@@ -172,7 +168,7 @@ class WifiService : Service() {
             //If the wifi contains some special keywords then validate current wifi
             if (isItOurWifi) {
                 applicationContext.getUserLocation { lat, lng ->
-                    if (lat != null && lng != null) {
+                    if (lat != null && lng != null) {   //If Location is available
                         val request = ValidateWifiRequest(wifiSsid, lat = lat, lng = lng)
                         CoroutineScope(Dispatchers.Main).launch {
                             DataProvider.validateWifi(
@@ -180,7 +176,8 @@ class WifiService : Service() {
                                 success = {
                                     if (it.status) {
                                         validateWifiSuccessful = true
-                                        calculateSpeed(wifiId = 69, deviceId = "Hella")
+                                        _currentWifiId = it.data.id
+                                        calculateSpeed(wifiId = it.data.id, deviceId = TEMP_DEVICE_ID)
                                     } else
                                         validateWifiSuccessful = false
                                 },
@@ -189,8 +186,6 @@ class WifiService : Service() {
                                 }
                             )
                         }
-
-
                     } /*else
 //                        mViewModel.verifyHotspot(wifiSSid, Constants.LATITUDE, Constants.LONGITUDE)
                 }*/
@@ -208,29 +203,61 @@ class WifiService : Service() {
                             )
                         )
                     })
-
-
             }
         }
     }
 
-    private fun callWifiLogin(wifiId: Int, averageSpeed: Double) {
+    //Method to call WifiLogin Api
+    private fun callWifiLogin(wifiId: Int, averageSpeed: Double, deviceId: String) {
         val request = WifiLoginRequest(
             wifi_id = wifiId,
             average_speed = averageSpeed.toInt(),
-            user_id = 0,
-            device_id = "bleh"
+            device_id = deviceId
         )
+
         CoroutineScope(Dispatchers.Main).launch {
             DataProvider.wifiLogin(
                 request = request,
                 success = {
+                    if (it.status)
+                    //Delete & Insert data into table
+                        CoroutineScope(Dispatchers.IO).launch {
+                            synchronized(this){
+                                //First delete data
+                                database.deleteAllDataFromDb()
 
+                                //Then insert new data
+                                _currentlyInsertedDataId = database.insert(
+                                    WifiInformationTable(
+                                        wifiSsid = wifiManager.connectionInfo.ssid.extractWifiName(),
+                                        connectedOn = Calendar.getInstance(),
+                                        downloadSpeed = averageSpeed.toString(),
+                                        wifiId = wifiId
+                                    )
+                                )
+                            }
+                        }
                 },
                 error = {
-
                 }
+            )
+        }
+    }
 
+    //Method to call WifiLogout Api
+    private fun callWifiLogout(wifiId: Int, deviceId: String){
+        val request = WifiLogoutRequest(
+            wifi_id = wifiId,
+            device_id = deviceId
+        )
+
+        CoroutineScope(Dispatchers.Main).launch {
+            DataProvider.wifiLogout(
+                request = request,
+                success = {
+                },
+                error = {
+                }
             )
         }
     }
@@ -258,26 +285,10 @@ class WifiService : Service() {
                             )
                         })
 
-                    //Delete & Insert data into table
-                    CoroutineScope(Dispatchers.IO).launch {
-                        synchronized(this){
-                            //First delete data
-                            database.deleteAllDataFromDb()
-
-                            //Then insert new data
-                            _currentlyInsertedDataId = database.insert(
-                                WifiInformationTable(
-                                    wifiSsid = wifiManager.connectionInfo.ssid.extractWifiName(),
-                                    connectedOn = Calendar.getInstance(),
-                                    downloadSpeed = downloadSpeed.toString()
-                                )
-                            )
-                        }
-                    }
 
                     //Login wifi
                     CoroutineScope(Dispatchers.Main).launch {
-                        callWifiLogin(wifiId = wifiId, averageSpeed = downloadSpeed!!.toDouble())
+                        callWifiLogin(wifiId = wifiId, averageSpeed = downloadSpeed!!.toDouble(), deviceId = TEMP_DEVICE_ID)
                     }
                 },
                 onProgressReport = {
@@ -296,15 +307,16 @@ class WifiService : Service() {
                         })
 
                     //Insert data into table
-                    CoroutineScope(Dispatchers.IO).launch {
+/*                    CoroutineScope(Dispatchers.IO).launch {
                         _currentlyInsertedDataId = database.insert(
                             WifiInformationTable(
                                 wifiSsid = wifiManager.connectionInfo.ssid,
                                 connectedOn = Calendar.getInstance(),
-                                downloadSpeed = "0"
+                                downloadSpeed = "0",
+                                wifiId = wifiId
                             )
                         )
-                    }
+                    }*/
                 }).startDownload(Constants.DOWNLOAD_LINK)
         }
 
