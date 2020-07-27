@@ -1,11 +1,7 @@
 package com.ey.hotspot.ui.login.login_fragment
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
-import android.text.Spannable
-import android.text.SpannableStringBuilder
-import android.text.style.BackgroundColorSpan
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -21,9 +17,9 @@ import com.ey.hotspot.ui.registration.register_user.RegisterUserFragment
 import com.ey.hotspot.utils.constants.convertStringFromList
 import com.ey.hotspot.utils.constants.setSkippedUserData
 import com.ey.hotspot.utils.dialogs.OkDialog
-import com.ey.hotspot.utils.generateCaptchaCode
-import com.ey.hotspot.utils.replaceFragment
-import com.ey.hotspot.utils.showMessage
+import com.ey.hotspot.utils.extention_functions.generateCaptchaCode
+import com.ey.hotspot.utils.extention_functions.replaceFragment
+import com.ey.hotspot.utils.extention_functions.showMessage
 import com.ey.hotspot.utils.validations.isEmailValid
 import com.ey.hotspot.utils.validations.isValidPassword
 import com.facebook.*
@@ -66,6 +62,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
     override fun getViewModel() = LoginFragmentViewModel::class.java
 
     var mCaptcha: String? = null
+    var mEnteredCaptch: String? = null
     override fun onBinding() {
 
 
@@ -90,7 +87,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
     }
 
     private fun setUpCaptcha() {
-        mCaptcha = activity?.generateCaptchaCode(4)
+        mCaptcha = activity?.generateCaptchaCode(5)
         mBinding.etCaptchaText.setText(mCaptcha)
     }
 
@@ -179,6 +176,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
                 addToBackStack = true,
                 bundle = null
             )
+        }
+
+        mBinding.ivRefreshCaptchaCode.setOnClickListener {
+
+            mCaptcha = activity?.generateCaptchaCode(5)
+            mBinding.etCaptchaText.setText(mCaptcha)
+
         }
     }
 
@@ -306,7 +310,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
      */
     private fun validate(): Boolean {
         var isValid = true
-        val tmp = mBinding.etCaptcha.text
+        mEnteredCaptch = mBinding.etCaptcha.text?.toString()
         mViewModel.run {
             mBinding.run {
                 if (!emailId.isEmailValid()) {
@@ -321,15 +325,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
                     etPassword.error = resources.getString(R.string.password_format)
                     isValid = false
                 }
-               /* if (tmp?.isEmpty()!!) {
-                    etCaptcha.error = resources.getString(R.string.enter_captcha)
+                if (mEnteredCaptch?.isEmpty()!!) {
+                    etCaptcha.error = resources.getString(R.string.empty_captcha)
                     isValid = false
-                }
-
-                if (!tmp?.equals(mCaptcha)!!) {
+                } else if (!(mEnteredCaptch == mCaptcha)) {
                     etCaptcha.error = resources.getString(R.string.invalid_captcha)
                     isValid = false
-                }*/
+                }
             }
         }
         return isValid

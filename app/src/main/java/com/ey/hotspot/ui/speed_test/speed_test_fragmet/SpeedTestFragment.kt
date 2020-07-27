@@ -4,8 +4,10 @@ import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentSpeedTestBinding
 import com.ey.hotspot.ui.speed_test.test_result.TestResultsFragment
+import com.ey.hotspot.utils.constants.Constants
 import com.ey.hotspot.utils.constants.setUpToolbar
-import com.ey.hotspot.utils.replaceFragment
+import com.ey.hotspot.utils.extention_functions.getUserLocation
+import com.ey.hotspot.utils.extention_functions.replaceFragment
 
 class SpeedTestFragment : BaseFragment<FragmentSpeedTestBinding, SpeedTestFragmentViewModel>() {
 
@@ -27,6 +29,13 @@ class SpeedTestFragment : BaseFragment<FragmentSpeedTestBinding, SpeedTestFragme
         )
 
         setUpListeners()
+
+        activity?.getUserLocation { lat, lng ->
+           if (lat != null && lng != null)
+               mViewModel.verifyHotspot(lat, lng)
+            else
+               mViewModel.verifyHotspot(Constants.LATITUDE, Constants.LONGITUDE)
+        }
     }
 
     fun setUpListeners() {
@@ -35,5 +44,7 @@ class SpeedTestFragment : BaseFragment<FragmentSpeedTestBinding, SpeedTestFragme
             replaceFragment(TestResultsFragment(), true)
         }
     }
+
+
 
 }

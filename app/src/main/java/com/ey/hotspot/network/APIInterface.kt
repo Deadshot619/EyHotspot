@@ -103,7 +103,6 @@ interface APIInterface {
     fun apiAddComplaint(@Body request: AddComplaintRequest): Deferred<BaseResponse<Any>>
 
 
-
     //OTP
     @POST(Constants.API_SEND_OTP + "/" + "{id}?")
     fun sendOTP(
@@ -139,9 +138,25 @@ interface APIInterface {
 
     @POST(Constants.API_RESEND_FORGOT_PASSWORD_OTP + "/" + "{id}")
     fun resendForgotPasswordOTP(
-        @Path("id") id: String?,@Body forgotPasswordResendOTPRequest: ForgotPasswordResendOTPRequest
+        @Path("id") id: String?,
+        @Body forgotPasswordResendOTPRequest: ForgotPasswordResendOTPRequest
     ): Deferred<BaseResponse<ResendForgotPasswordOTP>>
 
     @GET(Constants.API_GET_COUNTRY_CODE_NAME)
-    fun getCountryListAsync():Deferred<BaseResponse<CoutryCode>>
+    fun getCountryListAsync(): Deferred<BaseResponse<CoutryCode>>
+
+    //Wifi APis
+    @POST(Constants.API_MATCH_WIFI)
+    fun matchWifiNameAsync(): Deferred<BaseResponse<Any>>
+
+    @POST(Constants.API_VALIDATE_WIFI)
+    fun validateWifiAsync(@Body request: ValidateWifiRequest): Deferred<BaseResponse<ValidateWifiResponse>>
+
+    @POST(Constants.API_WIFI_LOGIN)
+    fun wifiLoginAsync(@Body request: WifiLoginRequest): Deferred<BaseResponse<WifiLoginResponse>>
+
+    @POST(Constants.API_WIFI_LOGOUT)
+    fun wifiLogoutAsync(@Body request: WifiLogoutRequest): Deferred<BaseResponse<WifiLogoutResponse>>
+
+
 }

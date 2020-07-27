@@ -1,7 +1,9 @@
-package com.ey.hotspot.utils
+package com.ey.hotspot.utils.extention_functions
 
+import android.Manifest
 import android.app.Activity
 import android.content.Context
+import android.content.Context.LOCATION_SERVICE
 import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
@@ -17,20 +19,18 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseActivity
 import com.ey.hotspot.ui.login.LoginActivity
+import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.material.snackbar.Snackbar
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
-import java.math.BigDecimal
-import java.math.RoundingMode
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import kotlin.random.Random
@@ -92,24 +92,17 @@ fun Activity.showKeyboard() {
     }
 }
 
-fun String?.parseToDouble(): Double {
-    return try {
-        this!!.toDouble()
-    } catch (e: Exception) {
-        0.0
-    }
-}
 
 /**
  * Method to check if GPS is Enabled/Disabled
  *
  * @return returns true if location is enabled, else false
  */
-fun Activity.isLocationEnabled(): Boolean {
+fun Context.isLocationEnabled(): Boolean {
     return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
 // This is new method provided in API 28
         val lm =
-            this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+            this.getSystemService(LOCATION_SERVICE) as LocationManager
         lm != null && lm.isLocationEnabled
     } else {
 // This is Deprecated in API 28
@@ -121,18 +114,36 @@ fun Activity.isLocationEnabled(): Boolean {
     }
 }
 
-/**
- * This method will convert a value of Bits per second to Megabytes per second
- */
-fun BigDecimal.convertBpsToMbps(): BigDecimal {
-    return try {
-        ((this / 104857.toBigDecimal())/8.toBigDecimal()).setScale(
-            2,
-            RoundingMode.CEILING
-        )
-    } catch (e: Exception) {
-        BigDecimal.valueOf(0)
+//Check location status in Xioami phones
+fun Context.checkLocSaveState(): Boolean {
+    var status: Boolean = false
+    val lm = getSystemService(LOCATION_SERVICE) as LocationManager
+    var gps_enabled = false
+    var network_enabled = false
+
+    try {
+        gps_enabled = lm != null && lm.isProviderEnabled(LocationManager.GPS_PROVIDER)
+    } catch (ex: Exception) {
+        ex.printStackTrace()
     }
+
+    try {
+        network_enabled = lm != null && lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+    } catch (ex: Exception) {
+        ex.printStackTrace()
+    }
+
+    if (gps_enabled && network_enabled) {
+        status = true
+    } else if (gps_enabled && network_enabled) {
+        status = false
+    } else if (gps_enabled && network_enabled) {
+        status = false
+    } else if (gps_enabled && network_enabled) {
+        status = false
+    }
+
+    return status
 }
 
 /**
@@ -141,7 +152,7 @@ fun BigDecimal.convertBpsToMbps(): BigDecimal {
  * @param view The view from which it is called. Used to show SnackBar on
  * @param func The function to be executed when permission is granted
  */
-fun Activity.checkLocationPermission(view: View, func: (Unit) -> Unit) {
+fun Context.checkLocationPermission(view: View, func: (Unit) -> Unit) {
     Dexter.withContext(this)
         .withPermissions(
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -205,17 +216,6 @@ fun Activity.turnOnGpsDialog() {
         .show()
 }
 
-
-/**
- * This method will a json string as input & return an object of specified type
- */
-inline fun <reified T> Gson.fromJson(json: String) = try {
-    fromJson<T>(json, object : TypeToken<T>() {}.type)
-} catch (e: java.lang.Exception) {
-    null
-}
-
-
 fun Activity.turnGPSOn() {
     val provider = Settings.Secure.getString(
         contentResolver,
@@ -252,10 +252,9 @@ fun Activity.calculateHashKey(yourPackageName: String) {
     }
 }
 
-fun Activity.goToLoginScreen(){
+fun Activity.goToLoginScreen() {
     startActivity(Intent(this, LoginActivity::class.java))
 }
-
 
 
 fun Activity.generateCaptchaCode(limit: Int): String? {
@@ -268,3 +267,29 @@ fun Activity.generateCaptchaCode(limit: Int): String? {
     return buf.toString()
 }
 
+
+fun Context.getUserLocation(func: (lat: Double?, lon: Double?) -> Unit){
+    val client = FusedLocationProviderClient(this)
+
+    try {
+        if (checkLocSaveState())
+            if (ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) == PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
+                val location = client.lastLocation
+                location.addOnCompleteListener {
+                    func(it.result?.latitude, it.result?.longitude)
+                }
+                location.addOnFailureListener {
+                    func(null, null)
+                }
+            }
+    } catch (e: Exception) {
+    }
+}

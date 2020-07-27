@@ -6,7 +6,7 @@ import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentRateWifiBinding
 import com.ey.hotspot.utils.dialogs.YesNoDialog
-import com.ey.hotspot.utils.showMessage
+import com.ey.hotspot.utils.extention_functions.showMessage
 
 class RateWifiFragment : BaseFragment<FragmentRateWifiBinding, RateWifiViewModel>() {
 

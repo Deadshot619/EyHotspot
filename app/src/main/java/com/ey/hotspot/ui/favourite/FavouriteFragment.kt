@@ -11,7 +11,8 @@ import com.ey.hotspot.ui.favourite.model.GetFavouriteItem
 import com.ey.hotspot.ui.review_and_complaint.reviews.ReviewsFragment
 import com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment
 import com.ey.hotspot.utils.constants.setUpSearchBar
-import com.ey.hotspot.utils.replaceFragment
+import com.ey.hotspot.utils.extention_functions.replaceFragment
+import com.ey.hotspot.utils.extention_functions.showMessage
 
 class FavouriteFragment : BaseFragment<FavouriteFragmentBinding, FavouriteViewModel>() {
 
@@ -41,7 +42,7 @@ class FavouriteFragment : BaseFragment<FavouriteFragmentBinding, FavouriteViewMo
             toolbarBinding = mBinding.toolbarLayout2,
             showUpButton = false,
             showShadow = false
-        ){
+        ) {
             mViewModel.getFavouriteList(value = it)
         }
 
@@ -88,6 +89,12 @@ class FavouriteFragment : BaseFragment<FavouriteFragmentBinding, FavouriteViewMo
                 val i = Intent(Intent.ACTION_VIEW)
                 i.data = Uri.parse(url)
                 startActivity(i)
+            }
+
+            override fun onClickShare(data: GetFavouriteItem) {
+
+
+                showMessage("HOME", true)
             }
         })
 

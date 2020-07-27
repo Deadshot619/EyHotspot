@@ -80,20 +80,20 @@
                 style="@style/TextAppearance.MaterialComponents.Headline6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@id/iv_bg_view"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
-<!--
-            &lt;!&ndash;Number Of users&ndash;&gt;
+            <!--Number Of users-->
             <TextView
                 android:id="@+id/tv_number_of_users"
                 style="@style/TextAppearance.MaterialComponents.Headline2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/common_margin_64"
-                android:text="69"
+                android:text="@{viewModel.wifiData.number_of_users_connected + ``}"
                 android:textColor="@color/colorPrimaryDark"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -101,7 +101,7 @@
                 app:layout_constraintTop_toBottomOf="@id/iv_bg_view"
                 tools:text="69" />
 
-            &lt;!&ndash;Users Connected&ndash;&gt;
+            <!--Users Connected-->
             <TextView
                 android:id="@+id/tv_users_connected"
                 style="@style/TextAppearance.MaterialComponents.Headline6"
@@ -116,7 +116,7 @@
                 app:layout_constraintStart_toStartOf="@id/tv_number_of_users"
                 app:layout_constraintTop_toBottomOf="@id/tv_number_of_users" />
 
-            &lt;!&ndash;        Dotted Line&ndash;&gt;
+            <!--        Dotted Line-->
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_dotted_line"
                 android:layout_width="0dp"
@@ -130,14 +130,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_users_connected" />
 
-            &lt;!&ndash;Wifi SSid&ndash;&gt;
+            <!--Wifi SSid-->
             <TextView
                 android:id="@+id/tv_wifi_ssid"
                 style="@style/TextAppearance.MaterialComponents.Headline6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/common_padding_24"
-                android:text="D-Zone Wifi"
+                android:text="@{viewModel.wifiData.wifi_name}"
+                tools:text="D-Link"
                 android:textAllCaps="true"
                 android:textColor="@color/textColorHeadline"
                 android:textStyle="bold"
@@ -145,33 +146,33 @@
                 app:layout_constraintStart_toStartOf="@id/tv_number_of_users"
                 app:layout_constraintTop_toBottomOf="@id/iv_dotted_line" />
 
-            &lt;!&ndash;UserName&ndash;&gt;
+            <!--UserName-->
             <TextView
                 android:id="@+id/chip_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Riyadh"
+                tools:text="Vodafone"
+                android:text="Vodafone"
                 style="@style/ChipStyleTextView"
                 android:layout_marginTop="@dimen/common_margin_between_fields"
                 app:layout_constraintEnd_toEndOf="@id/tv_wifi_ssid"
                 app:layout_constraintStart_toStartOf="@id/tv_wifi_ssid"
                 app:layout_constraintTop_toBottomOf="@id/tv_wifi_ssid" />
 
-            &lt;!&ndash;        Address&ndash;&gt;
+            <!--        Address-->
             <TextView
                 android:id="@+id/tv_address"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/common_margin"
                 android:gravity="center"
-                android:text="Hola Hola Hola Hola Hola Hola "
+                android:text="@{viewModel.wifiData.average_speed + ``}"
                 android:textColor="@color/colorLightGray"
                 android:textSize="@dimen/text_size_16"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/chip_username"
                 app:layout_constraintBottom_toBottomOf="parent" />
--->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

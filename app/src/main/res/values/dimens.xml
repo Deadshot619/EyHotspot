@@ -74,5 +74,6 @@
     <dimen name="custom_edt_dimen">48dp</dimen>
     <dimen name="margin_100">100dp</dimen>
     <dimen name="margin_200">200dp</dimen>
+    <dimen name="margin_120">120dp</dimen>
 
 </resources>

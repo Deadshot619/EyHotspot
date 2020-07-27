@@ -8,7 +8,7 @@ import com.ey.hotspot.ui.registration.email_verification.EmailVerificationFragme
 import com.ey.hotspot.ui.registration.registration_option.RegistrationOptionFragment
 import com.ey.hotspot.ui.registration.sms_verification.SmsVerificationFragment
 import com.ey.hotspot.utils.constants.OptionType
-import com.ey.hotspot.utils.replaceFragment
+import com.ey.hotspot.utils.extention_functions.replaceFragment
 
 class IncompleteRegistrationFragment : BaseFragment<FragmentIncompleteRegistrationBinding, IncompleteRegistrationViewModel>() {
 

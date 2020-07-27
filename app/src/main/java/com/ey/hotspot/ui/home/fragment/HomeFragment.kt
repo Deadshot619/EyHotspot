@@ -26,11 +26,10 @@ import com.ey.hotspot.ui.home.models.MyClusterItems
 import com.ey.hotspot.ui.review_and_complaint.reviews.ReviewsFragment
 import com.ey.hotspot.ui.search.searchlist.SearchListFragment
 import com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment
-import com.ey.hotspot.utils.*
 import com.ey.hotspot.utils.constants.Constants
-import com.ey.hotspot.utils.constants.logoutUser
 import com.ey.hotspot.utils.constants.setUpSearchBar
 import com.ey.hotspot.utils.dialogs.YesNoDialog
+import com.ey.hotspot.utils.extention_functions.*
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.common.api.PendingResult
@@ -44,8 +43,10 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.net.PlacesClient
+import com.google.maps.android.clustering.Cluster
 import com.google.maps.android.clustering.ClusterManager
 import com.google.maps.android.clustering.view.DefaultClusterRenderer
+
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(), OnMapReadyCallback,
     ClusterManager.OnClusterItemClickListener<MyClusterItems>,
     ClusterManager.OnClusterItemInfoWindowClickListener<MyClusterItems>,
@@ -134,7 +135,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
         //Change Favourite
         mViewModel.markFavourite.observe(viewLifecycleOwner, Observer {
-            it.getContentIfNotHandled()?.let {  item->
+            it.getContentIfNotHandled()?.let { item ->
                 mClusterManager.updateItem(item.apply { changeFavourite(!mIsFavourite) })
             }
         })
@@ -150,7 +151,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
     private fun getNearByWifiList(gpsStatus: Boolean) {
 
-        if(gpsStatus){
+        if (gpsStatus) {
 
             val getHotSpotRequest: GetHotSpotRequest = GetHotSpotRequest(
                 lastKnownLocation!!.latitude,
@@ -200,7 +201,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                     // Set the map's camera position to the current location of the device.
                     lastKnownLocation = task.result
                     if (lastKnownLocation != null) {
-                        if (checkLocSaveState()) {
+                        if (requireActivity().checkLocSaveState()) {
                             map?.moveCamera(
                                 CameraUpdateFactory.newLatLngZoom(
                                     LatLng(
@@ -220,7 +221,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                             )
                         }
 
-                        getNearByWifiList(checkLocSaveState())
+                        getNearByWifiList(requireActivity().checkLocSaveState())
                     }
                 } else {
                     map?.moveCamera(
@@ -232,7 +233,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                         )
                     )
 
-                    getNearByWifiList(checkLocSaveState())
+                    getNearByWifiList(requireActivity().checkLocSaveState())
 
                 }
             }
@@ -243,7 +244,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
     }
 
     private fun setupClusters() {
-        if(this::mClusterManager.isInitialized){
+        if (this::mClusterManager.isInitialized) {
             mClusterManager.markerCollection.clear()
             mClusterManager.clusterMarkerCollection.clear()
         }
@@ -274,9 +275,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             Log.e("Exception: %s", e.message, e)
         }
     }
-
-
-
 
 
     /* In this method  1. Showing  Custom Pop up window  along with toggle the mark as favourite option*/
@@ -323,7 +321,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         //Navigate Now
         mBinding.customPop.btnNavigateNow.setOnClickListener {
 
-            val gmmIntentUri = Uri.parse("google.navigation:q="+clickedVenueMarker?.mLat+","+clickedVenueMarker?.mLng + "&mode=b")
+            val gmmIntentUri =
+                Uri.parse("google.navigation:q=" + clickedVenueMarker?.mLat + "," + clickedVenueMarker?.mLng + "&mode=b")
             val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
             mapIntent.setPackage("com.google.android.apps.maps")
             startActivity(mapIntent)
@@ -362,6 +361,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                 )
             } else dialog.show()
         }
+
+        mBinding.customPop.ivShare.setOnClickListener {
+
+
+        }
         return false
     }
 
@@ -382,6 +386,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                     address = location.location
                 )
             mClusterManager.addItem(offsetItems)
+            mClusterManager.cluster()
         }
     }
 
@@ -407,13 +412,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             markerOptions.icon(icon)
         }
 
-        override fun onClusterItemUpdated(item: MyClusterItems, marker: Marker) {
 
-           /* val icon: BitmapDescriptor =
-                BitmapDescriptorFactory.fromResource(R.drawable.ic_wifi_signal)
-            marker.setIcon(icon)*/
 
-        }
     }
 
     override fun onConnected(p0: Bundle?) {

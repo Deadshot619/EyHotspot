@@ -10,8 +10,8 @@ import com.ey.hotspot.ui.login.changepassword.model.ResetPasswordRequest
 import com.ey.hotspot.ui.login.changepassword.model.ResetPasswordResponse
 import com.ey.hotspot.ui.login.login_fragment.LoginFragment
 import com.ey.hotspot.utils.dialogs.OkDialog
-import com.ey.hotspot.utils.replaceFragment
-import com.ey.hotspot.utils.showMessage
+import com.ey.hotspot.utils.extention_functions.replaceFragment
+import com.ey.hotspot.utils.extention_functions.showMessage
 import com.ey.hotspot.utils.validations.isEmailValid
 import com.ey.hotspot.utils.validations.isValidPassword
 import com.google.gson.Gson

@@ -4,7 +4,7 @@ import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentSmsVerificationBinding
 import com.ey.hotspot.ui.login.changepassword.ChangePasswordFragment
-import com.ey.hotspot.utils.replaceFragment
+import com.ey.hotspot.utils.extention_functions.replaceFragment
 
 class SmsVerificationFragment : BaseFragment<FragmentSmsVerificationBinding, SmsVerificationViewModel>() {
 

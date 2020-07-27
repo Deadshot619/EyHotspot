@@ -6,7 +6,7 @@ import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentWifiLogBinding
 import com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment
 import com.ey.hotspot.ui.speed_test.rate_wifi.RateWifiFragment
-import com.ey.hotspot.utils.replaceFragment
+import com.ey.hotspot.utils.extention_functions.replaceFragment
 
 class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>() {
 

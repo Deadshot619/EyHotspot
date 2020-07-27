@@ -12,8 +12,8 @@ import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordVerifyOTPRequest
 import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordVerifyOTPResponse
 import com.ey.hotspot.ui.login.verifyotp.model.ResendForgotPasswordOTP
 import com.ey.hotspot.utils.dialogs.OkDialog
-import com.ey.hotspot.utils.replaceFragment
-import com.ey.hotspot.utils.showMessage
+import com.ey.hotspot.utils.extention_functions.replaceFragment
+import com.ey.hotspot.utils.extention_functions.showMessage
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 

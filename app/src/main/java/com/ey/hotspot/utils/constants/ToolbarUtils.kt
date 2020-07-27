@@ -6,8 +6,8 @@ import android.view.inputmethod.EditorInfo
 import com.ey.hotspot.R
 import com.ey.hotspot.databinding.LayoutCustomToolbarDarkBinding
 import com.ey.hotspot.databinding.LayoutCustomToolbarSearchbarBinding
-import com.ey.hotspot.utils.showKeyboard
-import com.ey.hotspot.utils.showMessage
+import com.ey.hotspot.utils.extention_functions.showKeyboard
+import com.ey.hotspot.utils.extention_functions.showMessage
 
 fun Activity.setUpToolbar(
     toolbarBinding: LayoutCustomToolbarDarkBinding,

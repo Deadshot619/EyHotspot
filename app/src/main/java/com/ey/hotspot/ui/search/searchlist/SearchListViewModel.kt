@@ -11,7 +11,7 @@ import com.ey.hotspot.ui.home.models.GetHotSpotRequest
 import com.ey.hotspot.ui.home.models.GetHotSpotResponse
 import kotlinx.coroutines.launch
 
-class SearchListViewModel(application: Application): BaseViewModel(application){
+class SearchListViewModel(application: Application) : BaseViewModel(application) {
 
     //Skipped user
     private val _getHotSpotResponse = MutableLiveData<BaseResponse<List<GetHotSpotResponse>>>()
@@ -31,21 +31,23 @@ class SearchListViewModel(application: Application): BaseViewModel(application){
         )
 
         searchString = value
-
+        setDialogVisibility(true)
         coroutineScope.launch {
             DataProvider.getHotspot(
                 request = request,
                 success = {
 
-                    if (it.status){
+                    if (it.status) {
                         _getHotSpotResponse.value = it
                     } else {
                         showToastFromViewModel(it.message)
                     }
+                    setDialogVisibility(false)
+
 
                 }, error = {
-
                     checkError(it)
+                    setDialogVisibility(false)
                 }
             )
         }
@@ -53,7 +55,7 @@ class SearchListViewModel(application: Application): BaseViewModel(application){
 
 
     fun markFavouriteItem(locationId: Int) {
-        setDialogVisibility(true,null)
+        setDialogVisibility(true, null)
         coroutineScope.launch {
             DataProvider.markFavourite(
                 request = MarkFavouriteRequest(locationId = locationId),

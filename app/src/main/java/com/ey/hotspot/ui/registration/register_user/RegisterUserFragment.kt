@@ -12,12 +12,13 @@ import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentRegisterUserBinding
 import com.ey.hotspot.network.request.RegisterRequest
+import com.ey.hotspot.ui.login.permission.PermissionFragment
 import com.ey.hotspot.ui.registration.registration_option.RegistrationOptionFragment
 import com.ey.hotspot.utils.constants.Constants
 import com.ey.hotspot.utils.constants.convertStringFromList
 import com.ey.hotspot.utils.dialogs.OkDialog
-import com.ey.hotspot.utils.replaceFragment
-import com.ey.hotspot.utils.showMessage
+import com.ey.hotspot.utils.extention_functions.replaceFragment
+import com.ey.hotspot.utils.extention_functions.showMessage
 import com.ey.hotspot.utils.validations.isEmailValid
 import com.ey.hotspot.utils.validations.isValidMobile
 import com.ey.hotspot.utils.validations.isValidName
@@ -181,7 +182,6 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
         mBinding.run {
             //Sign In button
             btnGetStarted.setOnClickListener {
-//                val status: Boolean = validate()
                 if (validate2()) {
                     val register: RegisterRequest =
                         RegisterRequest(
@@ -193,19 +193,17 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
                             mViewModel.password,
                             mViewModel.confirmPassword
                         )
-
-
                     mViewModel.registerUser(register)
                 }
             }
 
             //T&C
             tvTermsCondition.setOnClickListener {
-                /*replaceFragment(
+                replaceFragment(
                     fragment = PermissionFragment.newInstance(),
                     addToBackStack = true,
                     bundle = null
-                )*/
+                )
             }
 
 
@@ -328,6 +326,9 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
             lastName = true
         }
 
+
+
+
         if (mViewModel.mobileNumber.trim().isNotEmpty())
             if (!mViewModel.mobileNumber.isValidMobile()) {
                 edtMobileNo.error = resources.getString(R.string.invalid_mobile)
@@ -399,14 +400,26 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
 
         mViewModel.run {
             mBinding.run {
-                if (!firstName.isValidName()) {
-                    edtFirstName.error = resources.getString(R.string.invalid_firstName)
+
+
+                if( firstName.isEmpty()){
+                    edtFirstName.error = resources.getString(R.string.empty_firstName)
+                    isValid = false
+
+                } else if(!firstName.isValidName()){
+                    edtFirstName.error = resources.getString(R.string.invalid_Name)
                     isValid = false
                 }
-                if (!lastName.isValidName()) {
-                    edtLastName.error = resources.getString(R.string.invalid_last_name_label)
+
+
+                if(lastName.isEmpty()){
+                    edtLastName.error = resources.getString(R.string.empty_lastName)
+                    isValid = false
+                }else if(!lastName.isValidName()){
+                    edtLastName.error = resources.getString(R.string.invalid_Name)
                     isValid = false
                 }
+
                 if (!emailId.isEmailValid()) {
                     edtEmail.error = resources.getString(R.string.invalid_email_label)
                     isValid = false

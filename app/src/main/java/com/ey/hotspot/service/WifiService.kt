@@ -14,15 +14,20 @@ import com.ey.hotspot.R
 import com.ey.hotspot.database.WifiInfoDatabase
 import com.ey.hotspot.database.WifiInfoDatabaseDao
 import com.ey.hotspot.database.WifiInformationTable
-import com.ey.hotspot.utils.*
+import com.ey.hotspot.utils.CHANNEL_ID
+import com.ey.hotspot.utils.SpeedTestUtils
 import com.ey.hotspot.utils.constants.Constants
+import com.ey.hotspot.utils.extention_functions.convertBpsToMbps
+import com.ey.hotspot.utils.extention_functions.extractWifiName
+import com.ey.hotspot.utils.getNotification
+import com.ey.hotspot.utils.wifi_notification_key
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
 
 class WifiService : Service() {
-    companion object{
+    companion object {
         //Variable to indicate whether the service is running
         private var _isRunning = false
         val isRunning: Boolean
@@ -33,9 +38,11 @@ class WifiService : Service() {
     private lateinit var wifiManager: WifiManager
     private lateinit var database: WifiInfoDatabaseDao
 
+    //Current WiFi service id
     private val WIFI_SERVICE_ID = 1
 
-    private var _currentlyInsertedDataId = -1L     //Holds value of currently inserted DB data
+    //Holds value of currently inserted DB data
+    private var _currentlyInsertedDataId = -1L
 
     override fun onCreate() {
         super.onCreate()
@@ -64,7 +71,7 @@ class WifiService : Service() {
         val input = intent?.getStringExtra(wifi_notification_key) ?: ""
 
         if (input != "")
-            //Start foreground service with notification
+        //Start foreground service with notification
             startForeground(
                 WIFI_SERVICE_ID,
                 getNotification(
@@ -88,6 +95,8 @@ class WifiService : Service() {
         _isRunning = false
     }
 
+
+    //Network callback for WIFI
     private var networkCallbackWiFi = object : ConnectivityManager.NetworkCallback() {
         override fun onLost(network: Network?) {
             //TODO 11/7/2020 : Remove this, once live
@@ -131,7 +140,6 @@ class WifiService : Service() {
                 Intent(applicationContext, WifiService::class.java).apply {
                     putExtra(
                         wifi_notification_key,
-//                        "WiFi connected : ${wifiManager.connectionInfo.ssid}, Speed : Calculating..."
                         String.format(
                             getString(R.string.calculating_wifi_speed_label),
                             wifiManager.connectionInfo.ssid
@@ -157,7 +165,7 @@ class WifiService : Service() {
 //                                    "WiFi connected : ${wifiManager?.connectionInfo.ssid}, Speed : $downloadSpeed Mbps"
                                     String.format(
                                         getString(R.string.calculated_wifi_speed_label),
-                                        wifiManager.connectionInfo.ssid,
+                                        wifiManager.connectionInfo.ssid.extractWifiName(),
                                         downloadSpeed
                                     )
                                 )
@@ -167,7 +175,7 @@ class WifiService : Service() {
                         CoroutineScope(Dispatchers.IO).launch {
                             _currentlyInsertedDataId = database.insert(
                                 WifiInformationTable(
-                                    wifiSsid = wifiManager.connectionInfo.ssid,
+                                    wifiSsid = wifiManager.connectionInfo.ssid.extractWifiName(),
                                     connectedOn = Calendar.getInstance(),
                                     downloadSpeed = downloadSpeed.toString()
                                 )

@@ -12,8 +12,12 @@ import com.ey.hotspot.ui.home.fragment.HomeFragment
 import com.ey.hotspot.ui.review_and_complaint.ReviewAndComplainFragment
 import com.ey.hotspot.ui.settings.fragments.SettingsFragment
 import com.ey.hotspot.ui.speed_test.speed_test_fragmet.SpeedTestFragment
-import com.ey.hotspot.utils.*
+import com.ey.hotspot.utils.CHANNEL_ID
+import com.ey.hotspot.utils.channel_name
+import com.ey.hotspot.utils.createNotificationChannel
 import com.ey.hotspot.utils.dialogs.YesNoDialog
+import com.ey.hotspot.utils.extention_functions.goToLoginScreen
+import com.ey.hotspot.utils.wifi_notification_key
 
 class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomNavHomeViewModel>() {
 
@@ -39,7 +43,7 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
         //Start service only if it isn't running already
         if (!WifiService.isRunning)
             //TODO 25/07/2020 : Uncomment this later
-//            startWifiCheckService()
+            startWifiCheckService()
 
         //Set Home as initial fragment
         mBinding.bottomNavigation.menu.run {

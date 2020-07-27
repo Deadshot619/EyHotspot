@@ -48,7 +48,6 @@ fun NotificationManager.sendNotification(
         applicationContext,
         channelId
     )
-//        .setSmallIcon(R.drawable.mpcb_logo)
 
         .setContentTitle(messageTitle)
         .setContentText(messageBody)
@@ -101,7 +100,7 @@ fun createNotificationChannel(context: Context, channelId: String, channelName: 
 
         notificationChannel.enableLights(true)
         notificationChannel.lightColor = Color.RED
-        notificationChannel.enableVibration(true)
+//        notificationChannel.enableVibration(true)
 //            notificationChannel.description = "Time for breakfast"
 
 

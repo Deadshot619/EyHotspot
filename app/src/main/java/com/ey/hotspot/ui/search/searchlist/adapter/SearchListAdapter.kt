@@ -77,6 +77,8 @@ class SearchListAdapter(val listener: OnClickListener) :
         fun onClickReport(data: GetHotSpotResponse)
         fun onClickAddFavourite(data: GetHotSpotResponse)
         fun onClickNavigate(data: GetHotSpotResponse)
+
+        fun onClickShare(data:GetHotSpotResponse)
     }
 
 
