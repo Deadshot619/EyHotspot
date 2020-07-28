@@ -132,7 +132,8 @@
                             app:layout_constraintHorizontal_bias="0"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            tools:text="@string/connection_logs_label" />
+                            tools:text="@string/connection_logs_label"
+                            android:text="@string/connection_logs_label"/>
 
                         <!--Start Time-->
                         <TextView
@@ -187,7 +188,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             android:layout_marginTop="@dimen/common_margin"/>
 
-                        <!--                RecyclerView Connecting logs-->
+                       <!-- &lt;!&ndash;                RecyclerView Connecting logs&ndash;&gt;
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rv_connecting_logs"
                             android:layout_width="0dp"
@@ -196,8 +197,46 @@
                             app:layout_constraintTop_toBottomOf="@id/view_horizontal"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            android:layout_marginTop="@dimen/common_margin"/>
+                            android:layout_marginTop="@dimen/common_margin"/>-->
 
+                        <LinearLayout
+                            app:layout_constraintTop_toBottomOf="@+id/view_horizontal"
+                            android:orientation="horizontal"
+                            android:weightSum="2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            tools:ignore="MissingConstraints">
+                            <TextView
+                                android:layout_weight="1"
+                                android:id="@+id/tv_start_time_value"
+                                style="@style/Headline7"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/common_margin_between_fields"
+                                android:textColor="@color/colorGrayLight"
+                                app:layout_constraintEnd_toStartOf="@+id/tv_end_time"
+                                app:layout_constraintHorizontal_bias="0.5"
+                                android:text="@string/start_time_label"
+                                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                                app:layout_constraintStart_toStartOf="parent"
+                                tools:text="@string/start_time_label" />
+
+                            <TextView
+                                android:gravity="end"
+                                android:layout_weight="1"
+                                android:id="@+id/tv_end_time_value"
+                                style="@style/Headline7"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/common_margin_between_fields"
+                                android:textColor="@color/colorGrayLight"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.5"
+                                android:text="@string/end_time_label"
+                                android:layout_marginEnd="@dimen/common_margin_end"
+                                app:layout_constraintStart_toEndOf="@+id/tv_start_time"
+                                tools:text="@string/end_time_label" />
+                        </LinearLayout>
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
 
@@ -231,7 +270,8 @@
                             app:layout_constraintHorizontal_bias="0"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            tools:text="@string/speed_test_logs_label" />
+                            tools:text="@string/speed_test_logs_label"
+                            android:text="@string/speed_test_logs_label"/>
 
                         <!--Start Time-->
                         <TextView
@@ -286,7 +326,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             android:layout_marginTop="@dimen/common_margin"/>
 
-                        <!--                RecyclerView Connecting logs-->
+                       <!-- &lt;!&ndash;                RecyclerView Connecting logs&ndash;&gt;
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rv_speed_test_logs"
                             android:layout_width="0dp"
@@ -295,7 +335,46 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             tools:itemCount="2"
                             app:layout_constraintStart_toStartOf="parent"
-                            android:layout_marginTop="@dimen/common_margin"/>
+                            android:layout_marginTop="@dimen/common_margin"/>-->
+
+                        <LinearLayout
+                            app:layout_constraintTop_toBottomOf="@+id/view_horizontal_speed"
+                            android:orientation="horizontal"
+                            android:weightSum="2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            tools:ignore="MissingConstraints">
+                            <TextView
+                                android:layout_weight="1"
+                                android:id="@+id/tv_start_speed_value"
+                                style="@style/Headline7"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/common_margin_between_fields"
+                                android:textColor="@color/colorGrayLight"
+                                app:layout_constraintEnd_toStartOf="@+id/tv_end_time"
+                                app:layout_constraintHorizontal_bias="0.5"
+                                android:text="@string/start_time_label"
+                                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                                app:layout_constraintStart_toStartOf="parent"
+                                tools:text="@string/start_time_label" />
+
+                            <TextView
+                                android:gravity="end"
+                                android:layout_weight="1"
+                                android:id="@+id/tv_end_speed_value"
+                                style="@style/Headline7"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/common_margin_between_fields"
+                                android:textColor="@color/colorGrayLight"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.5"
+                                android:text="@string/end_time_label"
+                                android:layout_marginEnd="@dimen/common_margin_end"
+                                app:layout_constraintStart_toEndOf="@+id/tv_start_time"
+                                tools:text="@string/end_time_label" />
+                        </LinearLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
