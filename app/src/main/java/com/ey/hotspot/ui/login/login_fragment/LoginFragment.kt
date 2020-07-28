@@ -235,10 +235,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
         }
 
         mBinding.ivRefreshCaptchaCode.setOnClickListener {
-
             mCaptcha = activity?.generateCaptchaCode(5)
             mBinding.etCaptchaText.setText(mCaptcha)
-
         }
     }
 
@@ -384,7 +382,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
                 if (mEnteredCaptch?.isEmpty()!!) {
                     etCaptcha.error = resources.getString(R.string.empty_captcha)
                     isValid = false
-                } else if (!(mEnteredCaptch == mCaptcha)) {
+                } else if (mEnteredCaptch != mCaptcha) {
                     etCaptcha.error = resources.getString(R.string.invalid_captcha)
                     isValid = false
                 }

@@ -26,9 +26,7 @@ import com.ey.hotspot.utils.extention_functions.extractWifiName
 import com.ey.hotspot.utils.extention_functions.getUserLocation
 import com.ey.hotspot.utils.getNotification
 import com.ey.hotspot.utils.wifi_notification_key
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import java.util.*
 
 class WifiService : Service() {
@@ -56,6 +54,10 @@ class WifiService : Service() {
     private var isItOurWifi = false
     private var validateWifiSuccessful =
         false  //True, if wifi is validated successfully, else false
+
+    //Create a Coroutine Scope & job
+    private val serviceJjob = Job()
+    private val coroutineScope = CoroutineScope(serviceJjob + Dispatchers.Main)
 
     override fun onCreate() {
         super.onCreate()
@@ -106,6 +108,7 @@ class WifiService : Service() {
         super.onDestroy()
         //indicate EService is not running
         _isRunning = false
+        coroutineScope.cancel()
     }
 
 
@@ -123,27 +126,17 @@ class WifiService : Service() {
                 }
             )
 
-            //Update data in table
-            CoroutineScope(Dispatchers.IO).launch {
-                if (_currentlyInsertedDataId >= 0L) {   //Update data only if key is >= 0
-                    val success = database.updateWifiInfoData(
-                        id = _currentlyInsertedDataId,
-                        disconnectedOn = Calendar.getInstance()
-                    )
-
-                    if (success == 1)       //If row updated successfully, then change current id
-                        _currentlyInsertedDataId = -1
-                }
+            //When wifi is lost/disconnected, add wifi logout time
+            coroutineScope.launch {
+                //Add Logout Time
+                updateLogoutTimeInDb()
             }
         }
 
         override fun onAvailable(network: Network?) {
-            synchronized(this){
-                    CoroutineScope(Dispatchers.IO).launch {
-                        val data = database.getLastInsertedData()
-                        if (data.isNotEmpty() && !data[0].synced)
-                            callWifiLogout(wifiId = data[0].wifiId, deviceId = TEMP_DEVICE_ID)
-                    }
+            coroutineScope.launch {
+                //Get last inserted data & do things accordingly
+                getLastInsertedData()
             }
 
             //Wifi Ssid
@@ -152,7 +145,8 @@ class WifiService : Service() {
                 /*
                  *  Check if the wifi name is present in wifi keywords
                  */
-                isItOurWifi = /*WIFI_KEYWORDS?.contains(wifiSsid) ?: false*/ true   //TODO 27/07/2020: Remove True, when live
+                isItOurWifi = /*WIFI_KEYWORDS?.contains(wifiSsid) ?: false*/
+                    true   //TODO 27/07/2020: Remove True, when live
             } else {
                 isItOurWifi = false
             }
@@ -161,24 +155,12 @@ class WifiService : Service() {
             if (isItOurWifi) {
                 applicationContext.getUserLocation { lat, lng ->
                     if (lat != null && lng != null) {   //If Location is available
-                        val request = ValidateWifiRequest(wifiSsid, lat = lat, lng = lng)
-                        CoroutineScope(Dispatchers.Main).launch {
-                            DataProvider.validateWifi(
-                                request = request,
-                                success = {
-                                    if (it.status) {
-                                        validateWifiSuccessful = true
-                                        _currentWifiId = it.data.id
-                                        calculateSpeed(wifiId = it.data.id, deviceId = TEMP_DEVICE_ID)
-                                    } else
-                                        validateWifiSuccessful = false
-                                },
-                                error = {
-                                    validateWifiSuccessful = false
-                                }
-                            )
+                        coroutineScope.launch {
+                            //Validate WiFi
+                            validateWifi(wifiSsid = wifiSsid, lat = lat, lng = lng)
                         }
-                    } /*else
+                    }   //TODO 28/07/2020: What if User Location is not available?
+                    /*else
 //                        mViewModel.verifyHotspot(wifiSSid, Constants.LATITUDE, Constants.LONGITUDE)
                 }*/
                 }
@@ -199,65 +181,150 @@ class WifiService : Service() {
         }
     }
 
+    /*
+     * Method to validate if the wifi is company's WiFi. If yes, then Calculate wifi download speed
+     */
+    private suspend fun validateWifi(wifiSsid: String, lat: Double, lng: Double) {
+        val request = ValidateWifiRequest(wifiSsid, lat = lat, lng = lng)
+
+        DataProvider.validateWifi(
+            request = request,
+            success = {
+                if (it.status) {
+                    validateWifiSuccessful = true
+                    _currentWifiId = it.data.id
+                    coroutineScope.launch {
+                        calculateSpeed(
+                            wifiId = it.data.id,
+                            deviceId = TEMP_DEVICE_ID
+                        )
+                    }
+                } else
+                    validateWifiSuccessful = false
+            },
+            error = {
+                validateWifiSuccessful = false
+            }
+        )
+    }
+
     //Method to call WifiLogin Api
-    private fun callWifiLogin(wifiId: Int, averageSpeed: Double, deviceId: String) {
+    private suspend fun callWifiLogin(wifiId: Int, averageSpeed: Double, deviceId: String) {
         val request = WifiLoginRequest(
             wifi_id = wifiId,
             average_speed = averageSpeed.toInt(),
             device_id = deviceId
         )
 
-        CoroutineScope(Dispatchers.Main).launch {
-            DataProvider.wifiLogin(
-                request = request,
-                success = {
-                    if (it.status)
-                    //Delete & Insert data into table
-                        CoroutineScope(Dispatchers.IO).launch {
-                            synchronized(this){
-                                //First delete data from DB
-                                database.deleteAllDataFromDb()
-
-                                //Then insert new data  from DB
-                                _currentlyInsertedDataId = database.insert(
-                                    WifiInformationTable(
-                                        wifiSsid = wifiManager.connectionInfo.ssid.extractWifiName(),
-                                        connectedOn = Calendar.getInstance(),
-                                        downloadSpeed = averageSpeed.toString(),
-                                        wifiId = wifiId
-                                    )
-                                )
-                            }
-                        }
-                },
-                error = {
-                }
-            )
-        }
+        DataProvider.wifiLogin(
+            request = request,
+            success = {
+                if (it.status)
+                    //When login is successful, Delete & Insert data into table
+                    coroutineScope.launch {
+                        deleteAndInsertData(wifiId = wifiId, averageSpeed = averageSpeed)
+                    }
+            },
+            error = {
+            }
+        )
     }
 
-    //Method to call WifiLogout Api
-    private fun callWifiLogout(wifiId: Int, deviceId: String){
+    /*
+     *  Method to call WifiLogout Api.
+     *  This api will be called when a wifi connection will be available
+     */
+    private suspend fun callWifiLogout(dbId: Long, wifiId: Int, deviceId: String) {
         val request = WifiLogoutRequest(
             wifi_id = wifiId,
             device_id = deviceId
         )
 
-        CoroutineScope(Dispatchers.Main).launch {
-            DataProvider.wifiLogout(
-                request = request,
-                success = {
-                },
-                error = {
+        DataProvider.wifiLogout(
+            request = request,
+            success = {
+                if(it.status){
+                    //If logout is successful, then update sync status of the data in DB
+                    coroutineScope.launch {
+                        updateSyncStatusOfDataInDb(dbId = dbId, syncStatus = it.status)
+                    }
                 }
-            )
+            },
+            error = {
+            }
+        )
+    }
+
+    /*
+     *  This method will delete all data from DB then insert a new row.
+     *  This will be called when user's wifi data has been successfully logged in on Server.
+     */
+    private suspend fun deleteAndInsertData(wifiId: Int, averageSpeed: Double){
+        withContext(Dispatchers.IO){
+            synchronized(this) {
+                //First delete data from DB
+                database.deleteAllDataFromDb()
+
+                //Then insert new data  from DB
+                _currentlyInsertedDataId = database.insert(
+                    WifiInformationTable(
+                        wifiSsid = wifiManager.connectionInfo.ssid.extractWifiName(),
+                        connectedOn = Calendar.getInstance(),
+                        downloadSpeed = averageSpeed.toString(),
+                        wifiId = wifiId
+                    )
+                )
+            }
         }
     }
 
-    //Method to calculate speed
-    fun calculateSpeed(wifiId: Int, deviceId: String){
+    /*
+     *  This method will retrieve last inserted data from DB based on their ID as it increments linearly.
+     *  Then If the data is present, not synced & has disconnected time, we will call logout Wifi api
+     */
+    private suspend fun getLastInsertedData() {
+        withContext(Dispatchers.IO) {
+            val data = database.getLastInsertedData()
+            if (data.isNotEmpty() && !data[0].synced && data[0].disconnectedOn != null)
+                callWifiLogout(dbId = data[0].id, wifiId = data[0].wifiId, deviceId = TEMP_DEVICE_ID)
+        }
+    }
+
+    /*
+     *  Method to Update Logout Time in DB.
+     *  Will be called when wifi is disconnected/lost
+     */
+    private suspend fun updateLogoutTimeInDb() {
+        //Update data in table
+        withContext(Dispatchers.IO) {
+            if (_currentlyInsertedDataId >= 0L) {   //Update data only if key is >= 0
+                val success = database.updateWifiInfoData(
+                    id = _currentlyInsertedDataId,
+                    disconnectedOn = Calendar.getInstance()
+                )
+
+                if (success == 1)       //If row updated successfully, then change current id
+                    _currentlyInsertedDataId = -1
+            }
+        }
+    }
+
+    /*
+     *  This method will update current sync status of Data in DB.
+     *  Will be called when WiFi logout api has been called & wifi has successfully logged out
+     */
+    private suspend fun updateSyncStatusOfDataInDb(dbId: Long, syncStatus: Boolean){
+        withContext(Dispatchers.IO){
+            database.updateSyncStatus(id = dbId, sync = syncStatus)
+        }
+    }
+
+    /*
+     *  Method to calculate speed
+     */
+    private suspend fun calculateSpeed(wifiId: Int, deviceId: String) {
         //TODO("Check for internet connection first")
-        CoroutineScope(Dispatchers.IO).launch {
+        withContext(Dispatchers.IO) {
             SpeedTestUtils.calculateSpeed(
                 onCompletedReport = {       //When speed test is completed successfully
                     //get download speed
@@ -278,9 +345,13 @@ class WifiService : Service() {
                         })
 
 
-                    //Login wifi
-                    CoroutineScope(Dispatchers.Main).launch {
-                        callWifiLogin(wifiId = wifiId, averageSpeed = downloadSpeed!!.toDouble(), deviceId = TEMP_DEVICE_ID)
+                    //When download is succcesful, call Login wifi
+                    coroutineScope.launch {
+                        callWifiLogin(
+                            wifiId = wifiId,
+                            averageSpeed = downloadSpeed!!.toDouble(),
+                            deviceId = TEMP_DEVICE_ID
+                        )
                     }
                 },
                 onProgressReport = {

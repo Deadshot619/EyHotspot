@@ -244,6 +244,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/enter_captcha"
                     android:paddingEnd="160dp"
+                    android:paddingStart="@dimen/common_padding"
                     android:imeOptions="actionDone"
                     android:maxLines="1"
                     android:maxEms="10"
@@ -278,11 +279,11 @@
 
             <ImageView
                 android:id="@+id/ivRefreshCaptchaCode"
-                android:layout_width="40dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/refreashicon"
-                android:paddingEnd="@dimen/margin_5"
-                android:paddingStart="@dimen/margin_5"
+                android:layout_marginEnd="@dimen/margin_5"
+                android:layout_marginStart="@dimen/margin_5"
                 app:layout_constraintTop_toTopOf="@id/captcha_input_layout"
                 app:layout_constraintEnd_toEndOf="@id/captcha_input_layout"
                 app:layout_constraintBottom_toBottomOf="@id/captcha_input_layout"/>

@@ -21,18 +21,20 @@ import com.ey.hotspot.utils.wifi_notification_key
 
 class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomNavHomeViewModel>() {
 
-    private val dialog by lazy { YesNoDialog(this).apply {
-        setViews(
-            title = getString(R.string.login_required),
-            description = getString(R.string.need_to_login),
-            yes = {
-                goToLoginScreen()
-                this.dismiss()
-            },
-            no = {
-                this.dismiss()
-            })
-    } }
+    private val dialog by lazy {
+        YesNoDialog(this).apply {
+            setViews(
+                title = getString(R.string.login_required),
+                description = getString(R.string.need_to_login),
+                yes = {
+                    goToLoginScreen()
+                    this.dismiss()
+                },
+                no = {
+                    this.dismiss()
+                })
+        }
+    }
 
     override fun getLayoutId() = R.layout.activity_bottom_nav_home
     override fun getViewModel() = BottomNavHomeViewModel::class.java
@@ -42,7 +44,7 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
 
         //Start service only if it isn't running already
         if (!WifiService.isRunning)
-            //TODO 25/07/2020 : Uncomment this later
+        //TODO 25/07/2020 : Uncomment this later
             startWifiCheckService()
 
         //Set Home as initial fragment
@@ -67,6 +69,7 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
         ContextCompat.startForegroundService(this, Intent(this, WifiService::class.java).apply {
             putExtra(wifi_notification_key, getString(R.string.checking_wifi_connection_label))
         })
+
     }
 
     private fun setBottomNavListener() {
@@ -74,11 +77,11 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
             when (item.itemId) {
                 //Favourites
                 R.id.favourite -> {
-                    if (HotSpotApp.prefs?.getAppLoggedInStatus()!!){
+                    if (HotSpotApp.prefs?.getAppLoggedInStatus()!!) {
                         clearFragmentBackstack()
                         replaceFragment(FavouriteFragment(), false)
                         return@setOnNavigationItemSelectedListener true
-                    }else{
+                    } else {
 //                        showMessage("Login to continue")
                         dialog.show()
                         return@setOnNavigationItemSelectedListener false
@@ -87,11 +90,11 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
 
                 //Reviews & complaints
                 R.id.logs -> {
-                    if (HotSpotApp.prefs?.getAppLoggedInStatus()!!){
+                    if (HotSpotApp.prefs?.getAppLoggedInStatus()!!) {
                         clearFragmentBackstack()
                         replaceFragment(ReviewAndComplainFragment(), false)
                         return@setOnNavigationItemSelectedListener true
-                    }else{
+                    } else {
 //                        showMessage("Login to continue")
                         dialog.show()
                         return@setOnNavigationItemSelectedListener false
@@ -129,7 +132,6 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
             false
         }
     }
-
 
 
 }

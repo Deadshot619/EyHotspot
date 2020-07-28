@@ -15,7 +15,7 @@ inline fun <reified T> Gson.fromJson(json: String) = try {
 }
 
 
-fun String.extractWifiName(): String{
+fun String.extractWifiName(): String {
     return this.removeSurrounding("\"")
 }
 
@@ -24,7 +24,7 @@ fun String.extractWifiName(): String{
  */
 fun BigDecimal.convertBpsToMbps(): BigDecimal {
     return try {
-        ((this / 104857.toBigDecimal())/8.toBigDecimal()).setScale(
+        ((this / 104857.toBigDecimal()) / 8.toBigDecimal()).setScale(
             2,
             RoundingMode.CEILING
         )

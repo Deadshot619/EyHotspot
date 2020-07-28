@@ -17,10 +17,12 @@ interface WifiInfoDatabaseDao {
     @Query("UPDATE wifi_information_table SET disconnected_on = :disconnectedOn WHERE id = :id")
     fun updateWifiInfoData(id: Long, disconnectedOn: Calendar): Int
 
+    @Query("UPDATE wifi_information_table SET synced = :sync WHERE id = :id")
+    fun updateSyncStatus(id: Long, sync: Boolean)
+
     @Query("SELECT * FROM wifi_information_table")
     fun getAllWifiInfoData(): List<WifiInformationTable>
 
     @Query("DELETE FROM wifi_information_table")
     fun deleteAllDataFromDb()
-
 }
