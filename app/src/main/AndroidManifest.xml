@@ -40,11 +40,12 @@
         <activity android:name=".ui.search.SearchActivity"/>
 
         <activity android:name=".ui.login.LoginActivity" android:launchMode="singleTask">
-
         </activity>
+
         <activity android:name=".app_core_lib.BaseActivity" />
         <activity android:name=".ui.registration.RegistrationActivity" />
         <activity android:name=".ui.login_selection.LoginSelectionActivity" /> <!-- Meta-data  Google Map -->
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />

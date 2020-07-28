@@ -18,7 +18,6 @@ import com.ey.hotspot.ui.login.forgorpassword.ForgotPasswordFragment
 import com.ey.hotspot.ui.login.otpverification.fragment.OTPVerificationFragment
 import com.ey.hotspot.ui.registration.register_user.RegisterUserFragment
 import com.ey.hotspot.ui.registration.registration_option.RegistrationOptionFragment
-import com.ey.hotspot.utils.constants.Constants
 import com.ey.hotspot.utils.constants.convertStringFromList
 import com.ey.hotspot.utils.constants.setSkippedUserData
 import com.ey.hotspot.utils.dialogs.OkDialog
@@ -108,23 +107,18 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
                 goToHomePage()
 
             } else {
+                showMessage(it.message, true)
 
 
-                if (!(it.data!!.verification)!!) {
-
-                    if ((it.data!!.mobile_no!!.isEmpty()) || (it.data!!.mobile_no!!.isBlank())) {
+                if (!(it.data?.verification)!!) {
+                    if ((it.data.mobile_no!!.isEmpty()) || (it.data.mobile_no.isBlank())) {
                         callVerificationFragment(it.data)
                     } else {
                         callVerificationOptionSelectionFragment(it.data.toVerificationPending())
                     }
-
-                } else {
-                    showMessage(it.message, true)
-
                 }
 
             }
-
         })
 
         //Social Login Response
