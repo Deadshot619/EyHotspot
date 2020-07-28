@@ -1,8 +1,10 @@
 package com.ey.hotspot.ui.login
 
+import android.content.Intent
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseActivity
 import com.ey.hotspot.databinding.ActivityLoginBinding
+import com.ey.hotspot.service.WifiService
 import com.ey.hotspot.ui.login.login_fragment.LoginFragment
 
 class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
@@ -20,6 +22,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
 
         supportActionBar?.title = getString(R.string.login_button)
 //        calculateHashKey("com.ey.hotspot.ey_hotspot")
+
+        //If service is running, stop the service
+        if(WifiService.isRunning)
+            stopService(Intent(this, WifiService::class.java))
+
 
         replaceFragment(fragment = LoginFragment(), addToBackstack = false, bundle = null)
 

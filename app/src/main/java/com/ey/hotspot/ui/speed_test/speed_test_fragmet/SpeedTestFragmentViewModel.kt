@@ -15,6 +15,10 @@ class SpeedTestFragmentViewModel(application: Application) : BaseViewModel(appli
     val wifiData: LiveData<ValidateWifiResponse>
         get() = _wifiData
 
+    private val _hideDataView = MutableLiveData<Boolean>(false)
+    val hideDataView: LiveData<Boolean>
+        get() = _hideDataView
+
     //Method to verify Wifi Hotspot
     fun verifyHotspot(wifiSsid: String, lat: Double, lng: Double) {
         val request = ValidateWifiRequest(
@@ -31,6 +35,8 @@ class SpeedTestFragmentViewModel(application: Application) : BaseViewModel(appli
                     showToastFromViewModel(it.message)
                     if (it.status)
                         _wifiData.value = it.data
+
+                    _hideDataView.value = !it.status
 
                     setDialogVisibility(false)
                 },

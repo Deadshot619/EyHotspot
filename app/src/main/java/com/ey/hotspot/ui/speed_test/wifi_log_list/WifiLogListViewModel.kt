@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.ey.hotspot.app_core_lib.BaseViewModel
 import com.ey.hotspot.network.DataProvider
 import com.ey.hotspot.network.response.BaseResponse
+import com.ey.hotspot.utils.constants.getDeviceId
 import kotlinx.coroutines.launch
 
 class WifiLogListViewModel(application: Application) : BaseViewModel(application) {
@@ -14,7 +15,7 @@ class WifiLogListViewModel(application: Application) : BaseViewModel(application
     val wifiLogListResponse: LiveData<BaseResponse<List<WifiLogListResponse>>>
         get() = _wifiLogListResponse
 
-    val deviceId = "bleh"
+    val deviceId = getDeviceId()
 
     init {
         callWifiLogListResponse(deviceId)
