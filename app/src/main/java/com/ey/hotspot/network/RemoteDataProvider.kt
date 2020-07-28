@@ -195,4 +195,10 @@ interface RemoteDataProvider {
         success: (BaseResponse<List<WifiLogListResponse>>) -> Unit,
         error: (Exception) -> Unit
     )
+
+    suspend fun wifiSearchKeyWords(
+        success: (BaseResponse<List<String>>) -> Unit,
+        error: (Exception) -> Unit
+    )
 }
+

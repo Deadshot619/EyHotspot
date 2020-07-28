@@ -1,4 +1,4 @@
-package com.ey.hotspot.database
+package com.ey.hotspot.database.wifi_info
 
 import android.content.Context
 import androidx.room.Database
@@ -43,7 +43,8 @@ abstract class WifiInfoDatabase : RoomDatabase() {
              * which makes sure DB instance is initialized only once.
              */
             synchronized(this){
-                var instance = INSTANCE
+                var instance =
+                    INSTANCE
 
                 //Check if DB already exists
                 if (instance == null){

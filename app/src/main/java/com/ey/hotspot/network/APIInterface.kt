@@ -166,4 +166,6 @@ interface APIInterface {
     ): Deferred<BaseResponse<List<WifiLogListResponse>>>
 
 
+    @GET(Constants.API_GET_WIFI_SEARCH_KEY_WORDS)
+    fun getWifiSearchKeyWordsAsync(): Deferred<BaseResponse<List<String>>>
 }

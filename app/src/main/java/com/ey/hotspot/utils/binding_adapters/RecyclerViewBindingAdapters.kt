@@ -2,7 +2,7 @@ package com.ey.hotspot.utils.binding_adapters
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.ey.hotspot.database.WifiInformationTable
+import com.ey.hotspot.database.wifi_info.WifiInformationTable
 import com.ey.hotspot.network.response.ComplaintsList
 import com.ey.hotspot.network.response.ReviewsList
 import com.ey.hotspot.ui.favourite.FavouriteListAdapter

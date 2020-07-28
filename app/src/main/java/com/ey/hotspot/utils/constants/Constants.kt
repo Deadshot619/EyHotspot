@@ -9,18 +9,21 @@ interface Constants {
         const val ARABIC_LANG: String = "ar"
 
         //Default Location Lat Lng
-        const val LATITUDE:Double=19.1403509
-        const val  LONGITUDE:Double=72.8096671
+        const val LATITUDE: Double = 19.1403509
+        const val LONGITUDE: Double = 72.8096671
 
         //Intent
-        const val AUTHENTICATION_FAILED = "authentication_failed"   //used when user's authticaition is failed while refreshing token
+        const val AUTHENTICATION_FAILED =
+            "authentication_failed"   //used when user's authticaition is failed while refreshing token
 
         //Download Link
-        const val DOWNLOAD_LINK = "https://images.apple.com/v/imac-with-retina/a/images/overview/5k_image.jpg"
+        const val DOWNLOAD_LINK =
+            "https://images.apple.com/v/imac-with-retina/a/images/overview/5k_image.jpg"
 
         //Country Code
         const val SAUDI_ARABIA_COUNTRY_CODE = 966
 
+        const val UNKNOWN_SSID = "unknown ssid"
 
         //SharedPreference
         const val ACCESS_TOKEN: String = "access_token"
@@ -56,13 +59,14 @@ interface Constants {
         const val API_FAVOURITE_LIST = "getFavourites"
         const val API_ADD_REVIEW = "addReview"
         const val API_ADD_COMPLAINT = "addComplaint"
-        const val API_SEND_OTP="sendOTP"
-        const val API_VERIFY_OTP="verifyOTP"
-        const val  API_FORGOT_PASSWORD="forgotPassword"
-        const val  API_FORGOT_PASSWORD_VERIFY_OTP="forgotPassword/verifyOtp"
-        const val API_RESET_PASSWORD="resetPassword"
-        const val  API_RESEND_FORGOT_PASSWORD_OTP="forgotPassword/resendOtp"
+        const val API_SEND_OTP = "sendOTP"
+        const val API_VERIFY_OTP = "verifyOTP"
+        const val API_FORGOT_PASSWORD = "forgotPassword"
+        const val API_FORGOT_PASSWORD_VERIFY_OTP = "forgotPassword/verifyOtp"
+        const val API_RESET_PASSWORD = "resetPassword"
+        const val API_RESEND_FORGOT_PASSWORD_OTP = "forgotPassword/resendOtp"
         const val API_LOCATION_REVIEWS = "getLocationReviews"
+
         //Wifi
         const val API_WIFI_LOGIN = "wifi/login"
         const val API_WIFI_LOGOUT = "wifi/logout"
@@ -77,8 +81,8 @@ interface Constants {
         const val API_GET_REVIEWS = "getReviews"
         const val API_GET_COMPLAINTS = "getComplaints"
         const val API_GET_COMPLAINTS_ISSUE_TYPES = "getComplaintIssueTypes"
-        const val API_GET_COUNTRY_CODE_NAME="getCountryCodeList"
-
+        const val API_GET_COUNTRY_CODE_NAME = "getCountryCodeList"
+        const val API_GET_WIFI_SEARCH_KEY_WORDS = "wifi/wifiSearchKeywords"
 
 
     }

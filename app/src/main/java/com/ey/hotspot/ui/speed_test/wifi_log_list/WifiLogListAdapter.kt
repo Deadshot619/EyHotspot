@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.ey.hotspot.database.WifiInformationTable
+import com.ey.hotspot.database.wifi_info.WifiInformationTable
 import com.ey.hotspot.databinding.ItemWifiLogListBinding
 
 
