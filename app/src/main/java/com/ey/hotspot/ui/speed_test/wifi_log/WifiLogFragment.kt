@@ -6,8 +6,10 @@ import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentWifiLogBinding
 import com.ey.hotspot.ui.review_and_complaint.reviews.ReviewsFragment
 import com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment
-import com.ey.hotspot.ui.speed_test.rate_wifi.RateWifiFragment
-import com.ey.hotspot.utils.extention_functions.*
+import com.ey.hotspot.utils.extention_functions.extractDateFromDateTime
+import com.ey.hotspot.utils.extention_functions.extractTimeFromDateTime
+import com.ey.hotspot.utils.extention_functions.extractspeed
+import com.ey.hotspot.utils.extention_functions.replaceFragment
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -22,19 +24,20 @@ class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>()
         ) = WifiLogFragment().apply {
             arguments = Bundle().apply {
                 putString(WIFI_SSID, wifiSsid)
-                putString(LOGINAT,loginAt)
-                putString(LOGOUTAT,logoutAt)
-                putString(CREATEDAT,createdAt)
-                putString(UPDATEAT,updateAt)
-                putDouble(AVERAGE_SPPED,averageSpeed)
+                putString(LOGINAT, loginAt)
+                putString(LOGOUTAT, logoutAt)
+                putString(CREATEDAT, createdAt)
+                putString(UPDATEAT, updateAt)
+                putDouble(AVERAGE_SPPED, averageSpeed)
             }
         }
+
         private const val WIFI_SSID = "wifi_ssid"
-        private const val LOGINAT="login_at"
-        private const val LOGOUTAT="logout_at"
-        private const val CREATEDAT="created_at"
-        private const val UPDATEAT="update_at"
-        private const val AVERAGE_SPPED="average_speed"
+        private const val LOGINAT = "login_at"
+        private const val LOGOUTAT = "logout_at"
+        private const val CREATEDAT = "created_at"
+        private const val UPDATEAT = "update_at"
+        private const val AVERAGE_SPPED = "average_speed"
     }
 
     override fun getLayoutId() = R.layout.fragment_wifi_log
@@ -52,28 +55,36 @@ class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>()
 
     private fun setDataInView() {
         mBinding.tvWifiSsid.text = arguments?.getString(WIFI_SSID)
-        mBinding.tvDate.text="Date:${getDate(arguments?.getString(LOGINAT)?.extractDateFromDateTime())}"
-        mBinding.tvStartTimeValue.text=getTime(arguments?.getString(LOGINAT)?.extractTimeFromDateTime())
-        mBinding.tvEndTimeValue.text=getTime(arguments?.getString(LOGOUTAT)?.extractTimeFromDateTime())
-        mBinding.tvStartSpeedValue.text=getTime(arguments?.getString(LOGINAT)?.extractTimeFromDateTime())
-        mBinding.tvEndSpeedValue.text="${arguments?.getDouble(AVERAGE_SPPED).toString().extractspeed()} mbps"
+        mBinding.tvDate.text =
+            "Date:${getDate(arguments?.getString(LOGINAT)?.extractDateFromDateTime())}"
+        mBinding.tvStartTimeValue.text =
+            getTime(arguments?.getString(LOGINAT)?.extractTimeFromDateTime())
+        mBinding.tvEndTimeValue.text =
+            getTime(arguments?.getString(LOGOUTAT)?.extractTimeFromDateTime())
+        mBinding.tvStartSpeedValue.text =
+            getTime(arguments?.getString(LOGINAT)?.extractTimeFromDateTime())
+        mBinding.tvEndSpeedValue.text =
+            "${arguments?.getDouble(AVERAGE_SPPED).toString().extractspeed()} mbps"
     }
 
-    private fun getDate(datestring: String?):String
-    {
+    private fun getDate(datestring: String?): String {
         val inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
         val outputFormat: DateFormat = SimpleDateFormat("dd-MM-yyyy")
         val date: Date = inputFormat.parse(datestring)
         val outputDateStr: String = outputFormat.format(date)
         return outputDateStr;
     }
-    private fun getTime(datestring: String?):String
-    {
-        val inputFormat: DateFormat = SimpleDateFormat("hh:mm:ss")
-        val outputFormat: DateFormat = SimpleDateFormat("hh:mm a")
-        val date: Date = inputFormat.parse(datestring)
-        val outputDateStr: String = outputFormat.format(date)
-        return outputDateStr;
+
+    private fun getTime(datestring: String?): String {
+        return try{
+            val inputFormat: DateFormat = SimpleDateFormat("hh:mm:ss")
+            val outputFormat: DateFormat = SimpleDateFormat("hh:mm a")
+            val date: Date = inputFormat.parse(datestring)
+            val outputDateStr: String = outputFormat.format(date)
+            outputDateStr
+        }catch(e: Exception){
+            "-"
+        }
     }
 
     private fun setUpListeners() {

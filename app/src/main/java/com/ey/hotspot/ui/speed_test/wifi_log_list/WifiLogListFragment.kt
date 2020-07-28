@@ -36,19 +36,18 @@ class WifiLogListFragment : BaseFragment<FragmentWifiLogListBinding, WifiLogList
         //Setup Adapter
         mAdapter = WifiLogListAdapter(WifiLogListAdapter.OnClickListener {
 
-            replaceFragment(fragment = WifiLogFragment.newInstance(
-                wifiSsid = it.location.wifi_name,
-                loginAt =it.login_at,
-                logoutAt =it.logout_at,
-                createdAt =it.created_at,
-                updateAt =it.updated_at,
-                averageSpeed =it.average_speed
+            replaceFragment(
+                fragment = WifiLogFragment.newInstance(
+                    wifiSsid = it.location.wifi_name,
+                    loginAt = it.login_at,
+                    logoutAt = it.logout_at,
+                    createdAt = it.created_at,
+                    updateAt = it.updated_at,
+                    averageSpeed = it.average_speed
 
-            ),
-                addToBackStack = true)
-
-
-
+                ),
+                addToBackStack = true
+            )
         })
 
         recyclerView.run {
