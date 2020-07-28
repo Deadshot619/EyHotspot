@@ -112,20 +112,12 @@ class WifiService : Service() {
     //Network callback for WIFI
     private var networkCallbackWiFi = object : ConnectivityManager.NetworkCallback() {
         override fun onLost(network: Network?) {
-            //TODO 11/7/2020 : Remove this, once live
-            /*Toast.makeText(
-                applicationContext,
-                getString(R.string.wifi_disconnected_label),
-                Toast.LENGTH_SHORT
-            ).show()*/
-
             //Start Service
             ContextCompat.startForegroundService(
                 applicationContext,
                 Intent(applicationContext, WifiService::class.java).apply {
                     putExtra(
                         wifi_notification_key,
-//                                    "No Internet Connection"
                         getString(R.string.wifi_disconnected_label)
                     )
                 }
@@ -223,10 +215,10 @@ class WifiService : Service() {
                     //Delete & Insert data into table
                         CoroutineScope(Dispatchers.IO).launch {
                             synchronized(this){
-                                //First delete data
+                                //First delete data from DB
                                 database.deleteAllDataFromDb()
 
-                                //Then insert new data
+                                //Then insert new data  from DB
                                 _currentlyInsertedDataId = database.insert(
                                     WifiInformationTable(
                                         wifiSsid = wifiManager.connectionInfo.ssid.extractWifiName(),
