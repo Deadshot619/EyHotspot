@@ -26,15 +26,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
         <!--Date-->
         <TextView
             android:id="@+id/tv_date_label"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@{data.created_at}"
-
+            app:bindExtractDateFromDateTime="@{data.created_at}"
             android:textSize="@dimen/text_size_18"
             tools:text="69-69-0420" />
 
@@ -57,7 +55,5 @@
             android:layout_weight="0.5"
             android:backgroundTint="?colorOnSecondary"
             android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
-
-
     </LinearLayout>
 </layout>

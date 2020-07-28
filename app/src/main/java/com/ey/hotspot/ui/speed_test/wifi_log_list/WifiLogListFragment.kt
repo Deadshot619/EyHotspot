@@ -1,6 +1,5 @@
 package com.ey.hotspot.ui.speed_test.wifi_log_list
 
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ey.hotspot.R
@@ -8,7 +7,6 @@ import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentWifiLogListBinding
 import com.ey.hotspot.ui.speed_test.wifi_log.WifiLogFragment
 import com.ey.hotspot.utils.extention_functions.replaceFragment
-import com.ey.hotspot.utils.extention_functions.showMessage
 
 class WifiLogListFragment : BaseFragment<FragmentWifiLogListBinding, WifiLogListViewModel>() {
 
@@ -31,29 +29,7 @@ class WifiLogListFragment : BaseFragment<FragmentWifiLogListBinding, WifiLogList
             showUpButton = true
         )
 
-        setUpObserver()
-        callAPI()
         setUpRecyclerView(mBinding.rvWifiLogList)
-    }
-
-    private fun callAPI() {
-
-        val wifiLogListRequest: WifiLogListRequest = WifiLogListRequest("deviceid")
-        mViewModel.callWifiLogListResponse(wifiLogListRequest)
-    }
-
-    private fun setUpObserver() {
-
-
-        mViewModel.wifiLogListResponse.observe(viewLifecycleOwner, Observer {
-
-            if (it.status) {
-
-                showMessage(it.message, true)
-            } else {
-                showMessage(it.message, true)
-            }
-        })
     }
 
     private fun setUpRecyclerView(recyclerView: RecyclerView) {
