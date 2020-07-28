@@ -41,3 +41,32 @@ fun String?.parseToDouble(): Double {
     }
 }
 
+
+fun String.extractDateFromDateTime(): String {
+    return if (this.contains("T"))
+        this.substringBefore("T")
+    else
+        this.substringBefore(" ")
+}
+fun String.extractTimeFromDateTime():String
+{
+    return if (this.contains("T"))
+        this.substringAfter("T")
+    else
+    {
+        this.substringAfter(" ")
+    }
+}
+
+fun String.extractspeed():String
+{
+    return if (this.contains("."))
+        this.substringBefore(".")
+    else
+    {
+        this.substringBefore(" ")
+    }
+}
+
+
+
