@@ -20,6 +20,7 @@ import com.ey.hotspot.ui.registration.register_user.RegisterUserFragment
 import com.ey.hotspot.ui.registration.registration_option.RegistrationOptionFragment
 import com.ey.hotspot.utils.constants.convertStringFromList
 import com.ey.hotspot.utils.constants.setSkippedUserData
+import com.ey.hotspot.utils.constants.updateSharedPreference
 import com.ey.hotspot.utils.dialogs.OkDialog
 import com.ey.hotspot.utils.extention_functions.generateCaptchaCode
 import com.ey.hotspot.utils.extention_functions.replaceFragment
@@ -100,15 +101,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
         //Login Response
         mViewModel.loginResponse.observe(viewLifecycleOwner, Observer {
-
             if (it.status) {
-
-                showMessage(it.message, true)
+                showMessage(it.message, false)
+                updateSharedPreference(it.data!!)
                 goToHomePage()
-
             } else {
                 showMessage(it.message, true)
-
 
                 if (!(it.data?.verification)!!) {
                     if ((it.data.mobile_no!!.isEmpty()) || (it.data.mobile_no.isBlank())) {

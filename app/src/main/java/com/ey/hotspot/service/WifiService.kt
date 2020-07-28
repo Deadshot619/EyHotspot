@@ -21,6 +21,7 @@ import com.ey.hotspot.network.request.WifiLogoutRequest
 import com.ey.hotspot.utils.CHANNEL_ID
 import com.ey.hotspot.utils.SpeedTestUtils
 import com.ey.hotspot.utils.constants.Constants
+import com.ey.hotspot.utils.constants.getDeviceId
 import com.ey.hotspot.utils.extention_functions.convertBpsToMbps
 import com.ey.hotspot.utils.extention_functions.extractWifiName
 import com.ey.hotspot.utils.extention_functions.getUserLocation
@@ -47,7 +48,7 @@ class WifiService : Service() {
     //Holds value of currently inserted DB data
     private var _currentlyInsertedDataId = -1L
     private var _currentWifiId = 0
-    private var TEMP_DEVICE_ID = "bleh"
+    private val DEVICE_ID = getDeviceId()
 
 
     //Variable to store whether the connected wifi is Our open wifi
@@ -196,7 +197,7 @@ class WifiService : Service() {
                     coroutineScope.launch {
                         calculateSpeed(
                             wifiId = it.data.id,
-                            deviceId = TEMP_DEVICE_ID
+                            deviceId = DEVICE_ID
                         )
                     }
                 } else
@@ -286,7 +287,7 @@ class WifiService : Service() {
         withContext(Dispatchers.IO) {
             val data = database.getLastInsertedData()
             if (data.isNotEmpty() && !data[0].synced && data[0].disconnectedOn != null)
-                callWifiLogout(dbId = data[0].id, wifiId = data[0].wifiId, deviceId = TEMP_DEVICE_ID)
+                callWifiLogout(dbId = data[0].id, wifiId = data[0].wifiId, deviceId = DEVICE_ID)
         }
     }
 
@@ -350,7 +351,7 @@ class WifiService : Service() {
                         callWifiLogin(
                             wifiId = wifiId,
                             averageSpeed = downloadSpeed!!.toDouble(),
-                            deviceId = TEMP_DEVICE_ID
+                            deviceId = DEVICE_ID
                         )
                     }
                 },

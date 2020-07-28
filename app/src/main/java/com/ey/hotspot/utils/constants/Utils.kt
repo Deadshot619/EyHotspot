@@ -1,12 +1,19 @@
 package com.ey.hotspot.utils.constants
 
 import android.content.Intent
+import android.provider.Settings
 import com.ey.hotspot.app_core_lib.CoreApp
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.network.response.LoginResponse
 import com.ey.hotspot.ui.login.LoginActivity
 import com.ey.hotspot.utils.constants.Constants.Companion.ARABIC_LANG
 import com.ey.hotspot.utils.constants.Constants.Companion.ENGLISH_LANG
+
+
+/**
+ * Method to get Device Id
+ */
+fun getDeviceId() = Settings.Secure.getString(CoreApp.instance.contentResolver, Settings.Secure.ANDROID_ID).toString()
 
 
 /**
@@ -53,6 +60,9 @@ fun convertStringFromList(vararg lists: List<String>?): String{
  */
 fun logoutUser() {
     clearDataSaveLang()
+
+    //Stop Service
+//    CoreApp.instance.stopService(Intent(CoreApp.instance, WifiService::class.java))
 
     //Redirect user to Login Activity
     CoreApp.instance.startActivity(Intent(CoreApp.instance, LoginActivity::class.java).apply {
