@@ -6,6 +6,8 @@ import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import android.net.wifi.WifiManager
+import android.view.View
+import androidx.lifecycle.Observer
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentSpeedTestBinding
@@ -41,6 +43,7 @@ class SpeedTestFragment : BaseFragment<FragmentSpeedTestBinding, SpeedTestFragme
         )
 
         setUpListeners()
+        setUpObservers()
 
         //Get connectivity Manager
         connec = requireActivity().applicationContext?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -61,8 +64,17 @@ class SpeedTestFragment : BaseFragment<FragmentSpeedTestBinding, SpeedTestFragme
     fun setUpListeners() {
         //Go
         mBinding.tvGo.setOnClickListener {
-            replaceFragment(TestResultsFragment(), true)
+            replaceFragment(TestResultsFragment.newInstance(mViewModel.wifiData.value, mViewModel.hideDataView.value!!), true)
         }
+    }
+
+    fun setUpObservers(){
+        mViewModel.hideDataView.observe(viewLifecycleOwner, Observer {
+            if (it)
+                mBinding.clDataLayout.visibility = View.INVISIBLE
+            else
+                mBinding.clDataLayout.visibility = View.VISIBLE
+        })
     }
 
     override fun onStop() {

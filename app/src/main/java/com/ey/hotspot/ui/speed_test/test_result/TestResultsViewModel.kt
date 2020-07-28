@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ey.hotspot.app_core_lib.BaseViewModel
+import com.ey.hotspot.network.response.ValidateWifiResponse
 import com.ey.hotspot.utils.Event
 import com.ey.hotspot.utils.SpeedTestUtils
 import com.ey.hotspot.utils.constants.Constants
@@ -19,10 +20,13 @@ class TestResultsViewModel(application: Application) : BaseViewModel(application
     val downloadSpeed: LiveData<BigDecimal>
         get() = _downloadSpeed
 
-    private val _uploadSpeed = MutableLiveData<BigDecimal>()
-    val uploadSpeed: LiveData<BigDecimal>
-        get() = _uploadSpeed
+    private val _wifiData = MutableLiveData<ValidateWifiResponse>()
+    val wifiData: LiveData<ValidateWifiResponse>
+        get() = _wifiData
 
+    private val _hideDataView = MutableLiveData<Boolean>()
+    val hideDataView: LiveData<Boolean>
+        get() = _hideDataView
 
     init {
         onCheckSpeedClick()
@@ -31,7 +35,6 @@ class TestResultsViewModel(application: Application) : BaseViewModel(application
     fun onCheckSpeedClick() {
         coroutineScope.launch {
             startDownload()
-//            startUpload()
         }
     }
 
@@ -53,16 +56,9 @@ class TestResultsViewModel(application: Application) : BaseViewModel(application
         }
     }
 
-    private suspend fun startUpload() {
-        withContext(Dispatchers.IO) {
-            SpeedTestUtils.calculateSpeed(
-                {
-                    _uploadSpeed.postValue(it?.transferRateBit?.convertBpsToMbps())
-                }, {
-                    _uploadSpeed.postValue(it?.transferRateBit?.convertBpsToMbps())
-                }, {
-                    _toastMessage.postValue(Event(it))
-                }).startUpload("http://ipv4.ikoula.testdebit.info/", 1000000);
-        }
+
+    fun setWifiData(wifiData: ValidateWifiResponse?, hideDataView: Boolean?){
+        _wifiData.value = wifiData
+        _hideDataView.value = hideDataView
     }
 }

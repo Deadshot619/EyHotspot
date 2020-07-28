@@ -1,17 +1,28 @@
 package com.ey.hotspot.ui.speed_test.test_result
 
+import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.Observer
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentTestResultsBinding
+import com.ey.hotspot.network.response.ValidateWifiResponse
 import com.ey.hotspot.utils.constants.setUpToolbar
 import java.math.BigDecimal
 
 class TestResultsFragment : BaseFragment<FragmentTestResultsBinding, TestResultsViewModel>() {
 
     companion object {
-        fun newInstance() = TestResultsFragment()
+        fun newInstance(wifiData: ValidateWifiResponse?, hideDataView: Boolean = false) =
+            TestResultsFragment().apply {
+                arguments = Bundle().apply {
+                    putParcelable(WIFI_DATA, wifiData)
+                    putBoolean(HIDE_DATA_VIEW, hideDataView)
+                }
+            }
 
+        private const val WIFI_DATA = "wifi_data"
+        private const val HIDE_DATA_VIEW = "hide_data_view"
     }
 
     override fun getLayoutId() = R.layout.fragment_test_results
@@ -27,11 +38,17 @@ class TestResultsFragment : BaseFragment<FragmentTestResultsBinding, TestResults
             showTextButton = true
         )
 
+        mViewModel.setWifiData(
+            arguments?.getParcelable<ValidateWifiResponse>(WIFI_DATA), arguments?.getBoolean(
+                HIDE_DATA_VIEW
+            )
+        )
+
         setUpListeners()
         setUpObservers()
     }
 
-    private fun setUpListeners(){
+    private fun setUpListeners() {
 //        Toolbar retest button
         mBinding.toolbarLayout.tvTextButton.setOnClickListener {
             mViewModel.setSpeedValue(BigDecimal.valueOf(0))
@@ -39,10 +56,19 @@ class TestResultsFragment : BaseFragment<FragmentTestResultsBinding, TestResults
         }
     }
 
+
     private fun setUpObservers() {
         //Download Speed
         mViewModel.downloadSpeed.observe(viewLifecycleOwner, Observer {
             mBinding.imageSpeedometer.speedTo(it.toFloat(), 500)
+        })
+
+        //Hide View
+        mViewModel.hideDataView.observe(viewLifecycleOwner, Observer {
+            if (it)
+                mBinding.clDataLayout.visibility = View.INVISIBLE
+            else
+                mBinding.clDataLayout.visibility = View.VISIBLE
         })
     }
 }

@@ -86,93 +86,108 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
-            <!--Number Of users-->
-            <TextView
-                android:id="@+id/tv_number_of_users"
-                style="@style/TextAppearance.MaterialComponents.Headline2"
-                android:layout_width="wrap_content"
+<!--            Data Layout-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_data_layout"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_margin_64"
-                android:text="@{viewModel.wifiData.number_of_users_connected + ``}"
-                android:textColor="@color/colorPrimaryDark"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintVertical_bias="0"
+                android:paddingBottom="@dimen/common_padding_32"
                 app:layout_constraintTop_toBottomOf="@id/iv_bg_view"
-                tools:text="69" />
-
-            <!--Users Connected-->
-            <TextView
-                android:id="@+id/tv_users_connected"
-                style="@style/TextAppearance.MaterialComponents.Headline6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_margin_between_fields"
-                android:text="@string/users_connected_label"
-                android:textAllCaps="true"
-                android:textColor="@color/textColorHeadline"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@id/tv_number_of_users"
-                app:layout_constraintStart_toStartOf="@id/tv_number_of_users"
-                app:layout_constraintTop_toBottomOf="@id/tv_number_of_users" />
-
-            <!--        Dotted Line-->
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/iv_dotted_line"
-                android:layout_width="0dp"
-                android:layout_height="2dp"
-                android:layout_marginStart="@dimen/common_margin_32"
-                android:layout_marginTop="@dimen/common_margin_24"
-                android:layout_marginEnd="@dimen/common_margin_32"
-                android:layout_marginBottom="@dimen/common_margin_24"
-                android:src="@drawable/dotted_line"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_users_connected" />
-
-            <!--Wifi SSid-->
-            <TextView
-                android:id="@+id/tv_wifi_ssid"
-                style="@style/TextAppearance.MaterialComponents.Headline6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_padding_24"
-                android:text="@{viewModel.wifiData.wifi_name}"
-                tools:text="D-Link"
-                android:textAllCaps="true"
-                android:textColor="@color/textColorHeadline"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@id/tv_number_of_users"
-                app:layout_constraintStart_toStartOf="@id/tv_number_of_users"
-                app:layout_constraintTop_toBottomOf="@id/iv_dotted_line" />
-
-            <!--UserName-->
-            <TextView
-                android:id="@+id/chip_username"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="Vodafone"
-                android:text="Vodafone"
-                style="@style/ChipStyleTextView"
-                android:layout_marginTop="@dimen/common_margin_between_fields"
-                app:layout_constraintEnd_toEndOf="@id/tv_wifi_ssid"
-                app:layout_constraintStart_toStartOf="@id/tv_wifi_ssid"
-                app:layout_constraintTop_toBottomOf="@id/tv_wifi_ssid" />
-
-            <!--        Address-->
-            <TextView
-                android:id="@+id/tv_address"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_margin"
-                android:gravity="center"
-                android:text="@{viewModel.wifiData.average_speed + ``}"
-                android:textColor="@color/colorLightGray"
-                android:textSize="@dimen/text_size_16"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/chip_username"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                >
+
+                <!--Number Of users-->
+                <TextView
+                    android:id="@+id/tv_number_of_users"
+                    style="@style/TextAppearance.MaterialComponents.Headline2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/common_margin_64"
+                    android:text="@{viewModel.wifiData.number_of_users_connected + ``}"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="69" />
+
+                <!--Users Connected-->
+                <TextView
+                    android:id="@+id/tv_users_connected"
+                    style="@style/TextAppearance.MaterialComponents.Headline6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/common_margin_between_fields"
+                    android:text="@string/users_connected_label"
+                    android:textAllCaps="true"
+                    android:textColor="@color/textColorHeadline"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@id/tv_number_of_users"
+                    app:layout_constraintStart_toStartOf="@id/tv_number_of_users"
+                    app:layout_constraintTop_toBottomOf="@id/tv_number_of_users" />
+
+                <!--        Dotted Line-->
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_dotted_line"
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:layout_marginStart="@dimen/common_margin_32"
+                    android:layout_marginTop="@dimen/common_margin_24"
+                    android:layout_marginEnd="@dimen/common_margin_32"
+                    android:layout_marginBottom="@dimen/common_margin_24"
+                    android:src="@drawable/dotted_line"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_users_connected" />
+
+                <!--Wifi SSid-->
+                <TextView
+                    android:id="@+id/tv_wifi_ssid"
+                    style="@style/TextAppearance.MaterialComponents.Headline6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/common_padding_24"
+                    android:text="@{viewModel.wifiData.wifi_name}"
+                    tools:text="D-Link"
+                    android:textAllCaps="true"
+                    android:textColor="@color/textColorHeadline"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@id/tv_number_of_users"
+                    app:layout_constraintStart_toStartOf="@id/tv_number_of_users"
+                    app:layout_constraintTop_toBottomOf="@id/iv_dotted_line" />
+
+                <!--UserName-->
+                <TextView
+                    android:id="@+id/chip_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Vodafone"
+                    android:text="Vodafone"
+                    style="@style/ChipStyleTextView"
+                    android:layout_marginTop="@dimen/common_margin_between_fields"
+                    app:layout_constraintEnd_toEndOf="@id/tv_wifi_ssid"
+                    app:layout_constraintStart_toStartOf="@id/tv_wifi_ssid"
+                    app:layout_constraintTop_toBottomOf="@id/tv_wifi_ssid" />
+
+                <!--        Address-->
+                <TextView
+                    android:id="@+id/tv_address"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/common_margin"
+                    android:gravity="center"
+                    android:text="@{viewModel.wifiData.average_speed + ``}"
+                    android:textColor="@color/colorLightGray"
+                    android:textSize="@dimen/text_size_16"
+                    tools:text=""
+                    app:layout_constraintEnd_toEndOf="@id/iv_dotted_line"
+                    app:layout_constraintStart_toStartOf="@id/iv_dotted_line"
+                    app:layout_constraintTop_toBottomOf="@id/chip_username"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
