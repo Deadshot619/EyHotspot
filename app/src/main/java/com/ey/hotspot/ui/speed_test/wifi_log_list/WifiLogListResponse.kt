@@ -7,8 +7,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class WifiLogListResponse(
-
-    @SerializedName("id") @Expose val id: Int,
+    @SerializedName("id") @Expose  val id : Int,
     @SerializedName("user_id") @Expose val user_id: Int,
     @SerializedName("wifi_id") @Expose val wifi_id: Int,
     @SerializedName("device_id") @Expose val device_id: String,

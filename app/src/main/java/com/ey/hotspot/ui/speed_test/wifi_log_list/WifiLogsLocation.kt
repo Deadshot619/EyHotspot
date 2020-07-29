@@ -18,7 +18,7 @@ data class WifiLogsLocation(
     @SerializedName("location_arabic") @Expose val location_arabic: String,
 //    @SerializedName("type")val type:String,
     //  @SerializedName("type_arabic") val type_arabic:String,
-    @SerializedName("average_rating") @Expose val average_rating: DecimalFormat,
+    @SerializedName("average_rating") @Expose val average_rating: Double,
     @SerializedName("provider_name") @Expose val provider_name: String,
     @SerializedName("provider_name_arabic") @Expose val provider_name_arabic: String
 
