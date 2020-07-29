@@ -24,11 +24,11 @@ class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>()
         ) = WifiLogFragment().apply {
             arguments = Bundle().apply {
                 putString(WIFI_SSID, wifiSsid)
-                putString(LOGINAT, loginAt)
+                putString(LOGINAT,loginAt)
                 putString(LOGOUTAT, logoutAt)
-                putString(CREATEDAT, createdAt)
-                putString(UPDATEAT, updateAt)
-                putDouble(AVERAGE_SPPED, averageSpeed)
+                putString(CREATEDAT,createdAt)
+                putString(UPDATEAT,updateAt)
+                putDouble(AVERAGE_SPPED,averageSpeed)
             }
         }
 
@@ -55,16 +55,13 @@ class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>()
 
     private fun setDataInView() {
         mBinding.tvWifiSsid.text = arguments?.getString(WIFI_SSID)
-        mBinding.tvDate.text =
-            "Date:${getDate(arguments?.getString(LOGINAT)?.extractDateFromDateTime())}"
-        mBinding.tvStartTimeValue.text =
-            getTime(arguments?.getString(LOGINAT)?.extractTimeFromDateTime())
+        mBinding.tvDate.text="Date:${getDate(arguments?.getString(LOGINAT)!!.extractDateFromDateTime())}"
+        mBinding.tvStartTimeValue.text=getTime(arguments?.getString(LOGINAT)?.extractTimeFromDateTime())
+
         mBinding.tvEndTimeValue.text =
-            getTime(arguments?.getString(LOGOUTAT)?.extractTimeFromDateTime())
-        mBinding.tvStartSpeedValue.text =
-            getTime(arguments?.getString(LOGINAT)?.extractTimeFromDateTime())
-        mBinding.tvEndSpeedValue.text =
-            "${arguments?.getDouble(AVERAGE_SPPED).toString().extractspeed()} mbps"
+                getTime(arguments?.getString(LOGOUTAT)?.extractTimeFromDateTime())
+        mBinding.tvStartSpeedValue.text=getTime(arguments?.getString(LOGINAT)?.extractTimeFromDateTime())
+        mBinding.tvEndSpeedValue.text="${arguments?.getDouble(AVERAGE_SPPED).toString().extractspeed()} mbps"
     }
 
     private fun getDate(datestring: String?): String {
@@ -74,17 +71,20 @@ class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>()
         val outputDateStr: String = outputFormat.format(date)
         return outputDateStr;
     }
-
-    private fun getTime(datestring: String?): String {
-        return try{
+    private fun getTime(datestring: String?):String
+    {
+        var outputDateStr: String=""
+        if (!datestring.equals("null")) {
             val inputFormat: DateFormat = SimpleDateFormat("hh:mm:ss")
             val outputFormat: DateFormat = SimpleDateFormat("hh:mm a")
             val date: Date = inputFormat.parse(datestring)
-            val outputDateStr: String = outputFormat.format(date)
-            outputDateStr
-        }catch(e: Exception){
-            "-"
+             outputDateStr = outputFormat.format(date)
         }
+        else
+        {
+            outputDateStr="-"
+        }
+        return outputDateStr;
     }
 
     private fun setUpListeners() {
