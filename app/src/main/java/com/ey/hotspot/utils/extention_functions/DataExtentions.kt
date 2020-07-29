@@ -4,6 +4,8 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.math.BigDecimal
 import java.math.RoundingMode
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * This method will a json string as input & return an object of specified type
@@ -66,6 +68,15 @@ fun String.extractspeed(): String {
     else {
         this.substringBefore(" ")
     }
+}
+
+/**
+ * This method will return a string in  the format [2020/07/03 22:44:22] to send to server
+ */
+fun Date?.toServerFormat(): String{
+    return this?.let {
+        SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.ENGLISH).format(it)
+    } ?: ""
 }
 
 

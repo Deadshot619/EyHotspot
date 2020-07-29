@@ -25,6 +25,7 @@ import com.ey.hotspot.utils.constants.getDeviceId
 import com.ey.hotspot.utils.extention_functions.convertBpsToMbps
 import com.ey.hotspot.utils.extention_functions.extractWifiName
 import com.ey.hotspot.utils.extention_functions.getUserLocation
+import com.ey.hotspot.utils.extention_functions.toServerFormat
 import com.ey.hotspot.utils.getNotification
 import com.ey.hotspot.utils.wifi_notification_key
 import kotlinx.coroutines.*
@@ -235,10 +236,11 @@ class WifiService : Service() {
      *  Method to call WifiLogout Api.
      *  This api will be called when a wifi connection will be available
      */
-    private suspend fun callWifiLogout(dbId: Long, wifiId: Int, deviceId: String) {
+    private suspend fun callWifiLogout(dbId: Long, wifiId: Int, deviceId: String, logoutAt: Date) {
         val request = WifiLogoutRequest(
             wifi_id = wifiId,
-            device_id = deviceId
+            device_id = deviceId,
+            logout_at = logoutAt.toServerFormat()
         )
 
         DataProvider.wifiLogout(
@@ -287,10 +289,9 @@ class WifiService : Service() {
         withContext(Dispatchers.IO) {
             val data = database.getLastInsertedData()
             if (data.isNotEmpty() && !data[0].synced && data[0].disconnectedOn != null)
-                callWifiLogout(dbId = data[0].id, wifiId = data[0].wifiId, deviceId = DEVICE_ID)
+                callWifiLogout(dbId = data[0].id, wifiId = data[0].wifiId, deviceId = DEVICE_ID, logoutAt = data[0].disconnectedOn!!.time)
         }
     }
-
     /*
      *  Method to Update Logout Time in DB.
      *  Will be called when wifi is disconnected/lost
