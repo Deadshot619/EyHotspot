@@ -94,7 +94,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
     private fun setUpCaptcha() {
         mCaptcha = activity?.generateCaptchaCode(5)
-        mBinding.etCaptchaText.setText(mCaptcha)
+        mBinding.layoutCaptcha.etCaptchaText.setText(mCaptcha)
     }
 
     private fun setUpObservers() {
@@ -232,9 +232,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
             )
         }
 
-        mBinding.ivRefreshCaptchaCode.setOnClickListener {
+        mBinding.layoutCaptcha.ivRefreshCaptchaCode.setOnClickListener {
             mCaptcha = activity?.generateCaptchaCode(5)
-            mBinding.etCaptchaText.setText(mCaptcha)
+            mBinding.layoutCaptcha.etCaptchaText.setText(mCaptcha)
         }
     }
 
@@ -362,7 +362,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
      */
     private fun validate(): Boolean {
         var isValid = true
-        mEnteredCaptch = mBinding.etCaptcha.text?.toString()
+        mEnteredCaptch = mBinding.layoutCaptcha.etCaptcha.text?.toString()
         mViewModel.run {
             mBinding.run {
                 if (!emailId.isEmailValid()) {
@@ -378,10 +378,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
                     isValid = false
                 }
                 if (mEnteredCaptch?.isEmpty()!!) {
-                    etCaptcha.error = resources.getString(R.string.empty_captcha)
+                    layoutCaptcha.etCaptcha.error = resources.getString(R.string.empty_captcha)
                     isValid = false
                 } else if (mEnteredCaptch != mCaptcha) {
-                    etCaptcha.error = resources.getString(R.string.invalid_captcha)
+                    layoutCaptcha.etCaptcha.error = resources.getString(R.string.invalid_captcha)
                     isValid = false
                 }
             }
@@ -458,10 +458,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
             )
 
             mViewModel.callSocialLogin(socialLoginRequest)
-
-
         } catch (e: ApiException) {
-
             e.printStackTrace()
             showMessage(resources.getString(R.string.google_sign_failed), true)
         }

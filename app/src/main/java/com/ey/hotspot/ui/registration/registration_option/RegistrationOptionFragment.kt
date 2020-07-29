@@ -73,7 +73,7 @@ class RegistrationOptionFragment :
 
     private fun setUpCaptcha() {
         mCaptcha = activity?.generateCaptchaCode(5)
-        mBinding.etCaptchaText.setText(mCaptcha)
+        mBinding.layoutCaptcha.etCaptchaText.setText(mCaptcha)
     }
 
 
@@ -115,10 +115,10 @@ class RegistrationOptionFragment :
             }
         }
 
-        mBinding.ivRefreshCaptchaCode.setOnClickListener {
+        mBinding.layoutCaptcha.ivRefreshCaptchaCode.setOnClickListener {
 
             mCaptcha = activity?.generateCaptchaCode(5)
-            mBinding.etCaptchaText.setText(mCaptcha)
+            mBinding.layoutCaptcha.etCaptchaText.setText(mCaptcha)
 
         }
 
@@ -127,7 +127,7 @@ class RegistrationOptionFragment :
     private fun validate(): Boolean {
         var isValid = true
 
-        mEnteredCaptch = mBinding.etCaptcha.text?.toString()
+        mEnteredCaptch = mBinding.layoutCaptcha.etCaptcha.text?.toString()
 
         if (selectedOption.trim().isEmpty()) {
             showMessage(resources.getString(R.string.choose_verify_option))
@@ -136,11 +136,11 @@ class RegistrationOptionFragment :
 
 
 
-        if (mBinding.etCaptcha.text?.isEmpty()!!) {
-            mBinding.etCaptcha.error = resources.getString(R.string.empty_captcha)
+        if (mBinding.layoutCaptcha.etCaptcha.text?.isEmpty()!!) {
+            mBinding.layoutCaptcha.etCaptcha.error = resources.getString(R.string.empty_captcha)
             isValid = false
         } else if (!(mEnteredCaptch == mCaptcha)) {
-            mBinding.etCaptcha.error = resources.getString(R.string.invalid_captcha)
+            mBinding.layoutCaptcha.etCaptcha.error = resources.getString(R.string.invalid_captcha)
             isValid = false
         }
 

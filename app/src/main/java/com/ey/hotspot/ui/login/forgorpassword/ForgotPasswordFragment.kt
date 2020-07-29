@@ -69,7 +69,7 @@ class ForgotPasswordFragment :
     }
     private fun setUpCaptcha() {
         mCaptcha = activity?.generateCaptchaCode(5)
-        mBinding.etCaptchaText.setText(mCaptcha)
+        mBinding.layoutCaptcha.etCaptchaText.setText(mCaptcha)
     }
     private fun setUpObserver() {
 
@@ -132,10 +132,10 @@ class ForgotPasswordFragment :
             }
         }
 
-        mBinding.ivRefreshCaptchaCode.setOnClickListener {
+        mBinding.layoutCaptcha.ivRefreshCaptchaCode.setOnClickListener {
 
             mCaptcha = activity?.generateCaptchaCode(5)
-            mBinding.etCaptchaText.setText(mCaptcha)
+            mBinding.layoutCaptcha.etCaptchaText.setText(mCaptcha)
 
         }
     }
@@ -146,7 +146,7 @@ class ForgotPasswordFragment :
      */
     private fun validate(): Boolean {
         var isValid = true
-        mEnteredCaptch = mBinding.etCaptcha.text?.toString()
+        mEnteredCaptch = mBinding.layoutCaptcha.etCaptcha.text?.toString()
 
         mViewModel.run {
             mBinding.run {
@@ -157,10 +157,10 @@ class ForgotPasswordFragment :
                 }
 
                 if (mEnteredCaptch?.isEmpty()!!) {
-                    etCaptcha.error = resources.getString(R.string.empty_captcha)
+                    layoutCaptcha.etCaptcha.error = resources.getString(R.string.empty_captcha)
                     isValid = false
                 }else if (!(mEnteredCaptch == mCaptcha)) {
-                    etCaptcha.error = resources.getString(R.string.invalid_captcha)
+                    layoutCaptcha.etCaptcha.error = resources.getString(R.string.invalid_captcha)
                     isValid = false
                 }
             }
