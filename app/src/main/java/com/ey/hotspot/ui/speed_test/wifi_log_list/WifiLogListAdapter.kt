@@ -72,6 +72,7 @@ class WifiLogListAdapter(val listener: OnClickListener) :
      * Interface to call in the [OnClickListener] & passed on to fragment to implement
      */
     class OnClickListener(val clickListener: (data: WifiLogListResponse) -> Unit) {
+
         fun onClick(data: WifiLogListResponse) =
             clickListener(data)
     }
