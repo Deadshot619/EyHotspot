@@ -36,6 +36,7 @@ interface Constants {
         const val FORGOT_PASSWORD_FIELD="forgot_password_field"
         const val  TERMS_AND_CONDITION="termscondition"
         const val  REGISTRATION_EMAIL_ID="REGISTRATION_EMAIL_ID"
+        const val WIFI_KEYWORDS = "wifi_keywords"
 
         //APIS
 

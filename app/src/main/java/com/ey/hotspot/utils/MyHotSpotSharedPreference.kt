@@ -15,6 +15,7 @@ import com.ey.hotspot.utils.constants.Constants.Companion.REGISTRATION_TMP_TOKEN
 import com.ey.hotspot.utils.constants.Constants.Companion.SKIP_STATUS
 import com.ey.hotspot.utils.constants.Constants.Companion.TERMS_AND_CONDITION
 import com.ey.hotspot.utils.constants.Constants.Companion.USER_DATA
+import com.ey.hotspot.utils.constants.Constants.Companion.WIFI_KEYWORDS
 import com.ey.hotspot.utils.extention_functions.fromJson
 import com.google.gson.Gson
 
@@ -145,6 +146,19 @@ class MyHotSpotSharedPreference(context: Context) {
 
     }
 
+    /*
+     *  Method to save & retrieve Wifi Keywords from SharedPref that we get in Splash Activity
+     */
+    fun saveWifiKeywordsPref(list: List<String>) {
+        CoreApp.sharedPreferences.edit().putString(WIFI_KEYWORDS, Gson().toJson(list)).apply()
+    }
 
-
+    fun getWifiKeywordsPref(): List<String>? {
+        return Gson().fromJson<List<String>>(
+            CoreApp.sharedPreferences.getString(
+                WIFI_KEYWORDS,
+                null
+            ) ?: ""
+        )
+    }
 }

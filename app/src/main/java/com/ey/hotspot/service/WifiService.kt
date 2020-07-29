@@ -147,7 +147,7 @@ class WifiService : Service() {
                 /*
                  *  Check if the wifi name is present in wifi keywords
                  */
-                isItOurWifi = /*WIFI_KEYWORDS?.contains(wifiSsid) ?: false*/
+                isItOurWifi = /*HotSpotApp.prefs?.getWifiKeywordsPref()?.contains(wifiSsid) ?: false*/
                     true   //TODO 27/07/2020: Remove True, when live
             } else {
                 isItOurWifi = false
@@ -382,6 +382,15 @@ class WifiService : Service() {
                             )
                         )
                     }*/
+
+                    //When download is unsucccesful, try calling Login wifi
+                    coroutineScope.launch {
+                        callWifiLogin(
+                            wifiId = wifiId,
+                            averageSpeed = 0.0,
+                            deviceId = DEVICE_ID
+                        )
+                    }
                 }).startDownload(Constants.DOWNLOAD_LINK)
         }
 
