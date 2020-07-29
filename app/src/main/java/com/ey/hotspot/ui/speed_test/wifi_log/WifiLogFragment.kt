@@ -78,6 +78,10 @@ class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>()
             val date: Date = inputFormat.parse(datestring)
              outputDateStr = outputFormat.format(date)
         }
+        else
+        {
+            outputDateStr="-"
+        }
         return outputDateStr;
     }
 
