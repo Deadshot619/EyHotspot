@@ -42,7 +42,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.5"
-            android:text="@{data.location.wifi_name}"
+            android:text="@{data.location.name}"
             android:textSize="@dimen/text_size_18"
             tools:text="Hong Kong" />
 

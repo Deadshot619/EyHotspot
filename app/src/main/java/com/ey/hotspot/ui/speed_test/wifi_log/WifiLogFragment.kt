@@ -4,8 +4,11 @@ import android.os.Bundle
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentWifiLogBinding
+import com.ey.hotspot.network.response.ValidateWifiResponse
 import com.ey.hotspot.ui.review_and_complaint.reviews.ReviewsFragment
 import com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment
+import com.ey.hotspot.ui.speed_test.test_result.TestResultsFragment
+import com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListResponse
 import com.ey.hotspot.utils.extention_functions.extractDateFromDateTime
 import com.ey.hotspot.utils.extention_functions.extractTimeFromDateTime
 import com.ey.hotspot.utils.extention_functions.extractspeed
@@ -18,26 +21,16 @@ class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>()
 
     companion object {
         fun newInstance(
-            wifiSsid: String,
-            loginAt: String, logoutAt: String, createdAt: String, updateAt: String,
-            averageSpeed: Double
+           wifilog:WifiLogListResponse
         ) = WifiLogFragment().apply {
             arguments = Bundle().apply {
-                putString(WIFI_SSID, wifiSsid)
-                putString(LOGINAT,loginAt)
-                putString(LOGOUTAT, logoutAt)
-                putString(CREATEDAT,createdAt)
-                putString(UPDATEAT,updateAt)
-                putDouble(AVERAGE_SPPED,averageSpeed)
+                putParcelable(WIFI_LOG, wifilog)
+
             }
         }
 
-        private const val WIFI_SSID = "wifi_ssid"
-        private const val LOGINAT = "login_at"
-        private const val LOGOUTAT = "logout_at"
-        private const val CREATEDAT = "created_at"
-        private const val UPDATEAT = "update_at"
-        private const val AVERAGE_SPPED = "average_speed"
+        private const val WIFI_LOG = "wifi_LOG"
+
     }
 
     override fun getLayoutId() = R.layout.fragment_wifi_log
@@ -54,14 +47,17 @@ class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>()
     }
 
     private fun setDataInView() {
-        mBinding.tvWifiSsid.text = arguments?.getString(WIFI_SSID)
-        mBinding.tvDate.text="Date:${getDate(arguments?.getString(LOGINAT)!!.extractDateFromDateTime())}"
-        mBinding.tvStartTimeValue.text=getTime(arguments?.getString(LOGINAT)?.extractTimeFromDateTime())
+
+        if (!arguments?.getParcelable<WifiLogListResponse>(WIFI_LOG)?.location?.name.isNullOrEmpty()) {
+            mBinding.tvWifiSsid.text = arguments?.getParcelable<WifiLogListResponse>(WIFI_LOG)?.location?.name
+        }
+        mBinding.tvDate.text="Date:${getDate(arguments?.getParcelable<WifiLogListResponse>(WIFI_LOG)?.login_at!!.extractDateFromDateTime())}"
+        mBinding.tvStartTimeValue.text=getTime(arguments?.getParcelable<WifiLogListResponse>(WIFI_LOG)?.login_at?.extractTimeFromDateTime())
 
         mBinding.tvEndTimeValue.text =
-                getTime(arguments?.getString(LOGOUTAT)?.extractTimeFromDateTime())
-        mBinding.tvStartSpeedValue.text=getTime(arguments?.getString(LOGINAT)?.extractTimeFromDateTime())
-        mBinding.tvEndSpeedValue.text="${arguments?.getDouble(AVERAGE_SPPED).toString().extractspeed()} mbps"
+                getTime(arguments?.getParcelable<WifiLogListResponse>(WIFI_LOG)?.logout_at?.extractTimeFromDateTime())
+        mBinding.tvStartSpeedValue.text=getTime(arguments?.getParcelable<WifiLogListResponse>(WIFI_LOG)?.login_at?.extractTimeFromDateTime())
+        mBinding.tvEndSpeedValue.text="${arguments?.getParcelable<WifiLogListResponse>(WIFI_LOG)?.location?.average_rating.toString().extractspeed()} mbps"
     }
 
     private fun getDate(datestring: String?): String {
@@ -92,10 +88,10 @@ class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>()
         mBinding.btnRateNow.setOnClickListener {
             replaceFragment(
                 ReviewsFragment.newInstance(
-                    locationId = -1,
-                    wifiSsid = arguments?.getString(WIFI_SSID)!!,
-                    wifiProvider = "Bleh",
-                    location = arguments?.getString(WIFI_SSID)!!
+                    locationId = arguments?.getParcelable<WifiLogListResponse>(WIFI_LOG)?.location?.id!!.toInt(),
+                    wifiSsid = arguments?.getParcelable<WifiLogListResponse>(WIFI_LOG)?.location?.name!!,
+                    wifiProvider =  arguments?.getParcelable<WifiLogListResponse>(WIFI_LOG)?.location?.provider_name!!,
+                    location =  arguments?.getParcelable<WifiLogListResponse>(WIFI_LOG)?.location?.name!!
                 ), true
             )
         }
@@ -104,10 +100,10 @@ class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>()
         mBinding.ivFlag.setOnClickListener {
             replaceFragment(
                 RaiseComplaintFragment.newInstance(
-                    locationId = -1,
-                    wifiSsid = arguments?.getString(WIFI_SSID)!!,
-                    wifiProvider = "Bleh",
-                    location = "bleh"
+                    locationId = arguments?.getParcelable<WifiLogListResponse>(WIFI_LOG)?.location?.id!!.toInt(),
+                    wifiSsid = arguments?.getParcelable<WifiLogListResponse>(WIFI_LOG)?.location?.name!!,
+                    wifiProvider =  arguments?.getParcelable<WifiLogListResponse>(WIFI_LOG)?.location?.provider_name!!,
+                    location =  arguments?.getParcelable<WifiLogListResponse>(WIFI_LOG)?.location?.name!!
                 ),
                 true
             )

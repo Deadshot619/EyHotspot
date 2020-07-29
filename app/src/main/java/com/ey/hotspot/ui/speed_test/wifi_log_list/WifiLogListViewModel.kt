@@ -35,6 +35,7 @@ class WifiLogListViewModel(application: Application) : BaseViewModel(application
                     setDialogVisibility(false)
                 },
                 error = {
+                    showToastFromViewModel(it.message)
                     setDialogVisibility(false)
                 }
             )
