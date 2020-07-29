@@ -31,11 +31,11 @@ class WifiLogListViewModel(application: Application) : BaseViewModel(application
             DataProvider.wifiLogList(
                 request,
                 success = {
-
                     _wifiLogListResponse.value = it
                     setDialogVisibility(false)
                 },
                 error = {
+                    showToastFromViewModel(it.message)
                     setDialogVisibility(false)
                 }
             )

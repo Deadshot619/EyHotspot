@@ -1,45 +1,40 @@
 package com.ey.hotspot.ui.speed_test.wifi_log
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
+import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.FragmentWifiLogBinding
+import com.ey.hotspot.network.response.ValidateWifiResponse
+import com.ey.hotspot.ui.favourite.model.MarkFavouriteRequest
 import com.ey.hotspot.ui.review_and_complaint.reviews.ReviewsFragment
 import com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment
-import com.ey.hotspot.utils.extention_functions.extractDateFromDateTime
-import com.ey.hotspot.utils.extention_functions.extractTimeFromDateTime
-import com.ey.hotspot.utils.extention_functions.extractspeed
-import com.ey.hotspot.utils.extention_functions.replaceFragment
+import com.ey.hotspot.ui.speed_test.test_result.TestResultsFragment
+import com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListResponse
+import com.ey.hotspot.utils.extention_functions.*
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
 class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>() {
+    private var favouriteType: Boolean = false
 
     companion object {
         fun newInstance(
-            wifiSsid: String,
-            loginAt: String, logoutAt: String, createdAt: String, updateAt: String,
-            averageSpeed: Double
+           wifilog:WifiLogListResponse
         ) = WifiLogFragment().apply {
             arguments = Bundle().apply {
-                putString(WIFI_SSID, wifiSsid)
-                putString(LOGINAT, loginAt)
-                putString(LOGOUTAT, logoutAt)
-                putString(CREATEDAT, createdAt)
-                putString(UPDATEAT, updateAt)
-                putDouble(AVERAGE_SPPED, averageSpeed)
+                putParcelable(WIFI_LOG, wifilog)
+
             }
         }
 
-        private const val WIFI_SSID = "wifi_ssid"
-        private const val LOGINAT = "login_at"
-        private const val LOGOUTAT = "logout_at"
-        private const val CREATEDAT = "created_at"
-        private const val UPDATEAT = "update_at"
-        private const val AVERAGE_SPPED = "average_speed"
+        private const val WIFI_LOG = "wifi_LOG"
+
     }
 
+   lateinit var wifiloglist:WifiLogListResponse
     override fun getLayoutId() = R.layout.fragment_wifi_log
     override fun getViewModel() = WifiLogViewModel::class.java
     override fun onBinding() {
@@ -50,22 +45,48 @@ class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>()
 
         setDataInView()
 
+
         setUpListeners()
+
+        mBinding.ivFavourites.setOnClickListener{
+            if (HotSpotApp.prefs?.getAppLoggedInStatus()!!) {
+                if (wifiloglist.location!=null) {
+                val imgID1: Drawable.ConstantState? =
+                    requireContext().getDrawable(R.drawable.ic_favorite_filled_gray)
+                        ?.getConstantState()
+                val imgID2: Drawable.ConstantState? =
+                    mBinding.ivFavourites.getDrawable().getConstantState()
+                if (imgID1 == imgID2) {
+                    mBinding.ivFavourites.setImageResource(R.drawable.ic_favorite_filled_red)
+                    favouriteType = true
+                } else {
+                    mBinding.ivFavourites.setImageResource(R.drawable.ic_favorite_filled_gray)
+                    favouriteType = false
+                }
+
+                    mViewModel.markFavouriteItem(wifiloglist.location?.id!!)
+                }
+                else
+                {
+                    showMessage("No data Available")
+                }
+
+            }
+        }
     }
 
     private fun setDataInView() {
-        mBinding.tvWifiSsid.text = arguments?.getString(WIFI_SSID)
-        mBinding.tvDate.text =
-            "Date:${getDate(arguments?.getString(LOGINAT)!!.extractDateFromDateTime())}"
-        mBinding.tvStartTimeValue.text =
-            getTime(arguments?.getString(LOGINAT)?.extractTimeFromDateTime())
+        wifiloglist=arguments?.getParcelable<WifiLogListResponse>(WIFI_LOG)!!
+        if (!wifiloglist?.location?.name.isNullOrEmpty()) {
+            mBinding.tvWifiSsid.text =wifiloglist?.location?.name
+        }
+        mBinding.tvDate.text="Date:${getDate(wifiloglist?.login_at!!.extractDateFromDateTime())}"
+        mBinding.tvStartTimeValue.text=getTime(wifiloglist?.login_at?.extractTimeFromDateTime())
 
         mBinding.tvEndTimeValue.text =
-            getTime(arguments?.getString(LOGOUTAT)?.extractTimeFromDateTime())
-        mBinding.tvStartSpeedValue.text =
-            getTime(arguments?.getString(LOGINAT)?.extractTimeFromDateTime())
-        mBinding.tvEndSpeedValue.text =
-            "${arguments?.getDouble(AVERAGE_SPPED).toString().extractspeed()} mbps"
+                getTime(wifiloglist?.logout_at?.extractTimeFromDateTime().toString())
+        mBinding.tvStartSpeedValue.text=getTime(wifiloglist?.login_at?.extractTimeFromDateTime())
+        mBinding.tvEndSpeedValue.text="${wifiloglist?.location?.average_rating.toString().extractspeed()} mbps"
     }
 
     private fun getDate(datestring: String?): String {
@@ -75,16 +96,18 @@ class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>()
         val outputDateStr: String = outputFormat.format(date)
         return outputDateStr;
     }
-
-    private fun getTime(datestring: String?): String {
-        var outputDateStr: String = ""
-        outputDateStr = if (!datestring.equals("null")) {
+    private fun getTime(datestring: String?):String
+    {
+        var outputDateStr: String=""
+        if (!datestring.equals("null")) {
             val inputFormat: DateFormat = SimpleDateFormat("hh:mm:ss")
             val outputFormat: DateFormat = SimpleDateFormat("hh:mm a")
             val date: Date = inputFormat.parse(datestring)
-            outputFormat.format(date)
-        } else {
-            "-"
+             outputDateStr = outputFormat.format(date)
+        }
+        else
+        {
+            outputDateStr="-"
         }
         return outputDateStr;
     }
@@ -92,27 +115,39 @@ class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>()
     private fun setUpListeners() {
         //Rate Now
         mBinding.btnRateNow.setOnClickListener {
-            replaceFragment(
-                ReviewsFragment.newInstance(
-                    locationId = -1,
-                    wifiSsid = arguments?.getString(WIFI_SSID)!!,
-                    wifiProvider = "Bleh",
-                    location = arguments?.getString(WIFI_SSID)!!
-                ), true
-            )
+           if (wifiloglist.location!=null) {
+               replaceFragment(
+                   ReviewsFragment.newInstance(
+                       locationId = (wifiloglist.location?.id!!.toString()).toInt(),
+                       wifiSsid =wifiloglist.location?.name!!.toString(),
+                       wifiProvider =wifiloglist.location?.provider_name!!.toString(),
+                       location = wifiloglist.location?.name!!.toString()
+                   ), true
+               )
+           }
+            else
+           {
+               showMessage("No data Available")
+           }
         }
 
         //Report
         mBinding.ivFlag.setOnClickListener {
-            replaceFragment(
-                RaiseComplaintFragment.newInstance(
-                    locationId = -1,
-                    wifiSsid = arguments?.getString(WIFI_SSID)!!,
-                    wifiProvider = "Bleh",
-                    location = "bleh"
-                ),
-                true
-            )
+            if (wifiloglist.location!=null) {
+                replaceFragment(
+                    RaiseComplaintFragment.newInstance(
+                        locationId = (wifiloglist.location?.id!!.toString()).toInt(),
+                        wifiSsid =wifiloglist.location?.name!!.toString(),
+                        wifiProvider =wifiloglist.location?.provider_name!!.toString(),
+                        location = wifiloglist.location?.name!!.toString()
+                    ), true
+                )
+            }
+            else
+            {
+                showMessage("No data Available")
+            }
         }
     }
 }
+

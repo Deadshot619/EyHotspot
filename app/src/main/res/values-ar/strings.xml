@@ -138,11 +138,11 @@
 
     <!--WiFi Service-->
     <string name="wifi_service_label">خدمة واي فاي</string>
-    <string name="wifi_connected_label">تم توصيل WiFi</string>
-    <string name="wifi_disconnected_label">تم قطع اتصال WiFi</string>
-    <string name="checking_wifi_connection_label">التحقق من اتصال WiFi</string>
-    <string name="calculating_wifi_speed_label">اتصال WiFi : %s ، السرعة: حساب …</string>
-    <string name="calculated_wifi_speed_label">اتصال WiFi:٪ s ، السرعة:٪ s ميغابت في الثانية</string>
+    <string name="wifi_connected_label">تم توصيل واي فاي</string>
+    <string name="wifi_disconnected_label">تم قطع اتصال واي فاي</string>
+    <string name="checking_wifi_connection_label">التحقق من اتصال واي فاي</string>
+    <string name="calculating_wifi_speed_label">اتصال واي فاي : %s ، السرعة: حساب …</string>
+    <string name="calculated_wifi_speed_label">اتصال واي فاي:٪ s ، السرعة:٪ s ميغابت في الثانية</string>
     <string name="no_internet_connection_label">لا يوجد اتصال بالإنترنت</string>
 
     <!--    Yes/No Dialogs-->
@@ -191,7 +191,7 @@
     <string name="dummytext">Lorem lpsum هو ببساطة نص وهمي</string>
     <string name="language_label">لغة</string>
     <string name="gps_status_label">كشف GPS</string>
-    <string name="get_wifi_label">احصل على سجل WIFI</string>
+    <string name="get_wifi_label">احصل على سجل واي فاي</string>
     <string name="notifications_label">إشعارات</string>
     <string name="setting_label">اعداداتي</string>
     <string name="setting_title_label">أنت متأكد من أنك تريد حفظ الإعدادات.</string>
@@ -228,7 +228,7 @@
     <string name="secure_password">إنشاء كلمة مرور جديدة</string>
     <string name="password_reset_label">إعادة تعيين كلمة المرور</string>
     <string name="enter_email_or_password">أدخل معرف البريد الإلكتروني أو رقم الجوال</string>
-    <string name="sign_in_issue">أدخل عنوان البريد الإلكتروني أو رقم الجوال. المرتبطة بحسابك</string>
+    <string name="sign_in_issue">أدخل عنوان البريد الإلكتروني أو رقم الهاتف المحمول المرتبط بحسابك</string>
     <string name="reenter_confirm_password">اعادة ادخال كلمة السر</string>
     <string name="sms_label">رسالة قصيرة</string>
     <string name="email_label">البريد الإلكتروني</string>
@@ -236,7 +236,7 @@
     <string name="captcha_characters">أبجدهـFزحأنايكلاممياصسصسشالخامسثسذضصفرواحدإثنانثلاثةأربعةخمسةستةسبعةثمانيةتسعة</string>
     <string name="forgotpassword_label">هل نسيت كلمة المرور</string>
     <string name="invalid_captcha">كلمة التحقق غير صالحة</string>
-    <string name="msg_mandatory_fields">* تعني الحقول الإلزامية</string>
+    <string name="msg_mandatory_fields">* الحقول الإلزامية</string>
     <string name="empty_firstName">حقل الاسم الأول مطلوب</string>
     <string name="invalid_Name">القيم العددية غير مقبولة في هذا المجال</string>
     <string name="empty_lastName">حقل اسم العائلة مطلوب</string>
