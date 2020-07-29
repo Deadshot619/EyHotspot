@@ -10,7 +10,7 @@ data class WifiLogListResponse(
     @SerializedName("device_id") val device_id: String,
     @SerializedName("average_speed") val average_speed: Double,
     @SerializedName("login_at") val login_at: String,
-    @SerializedName("logout_at") val logout_at: String,
+    @SerializedName("logout_at") val logout_at: String?,
     @SerializedName("created_at") val created_at: String,
     @SerializedName("updated_at") val updated_at: String,
     @SerializedName("location") val location: WifiLogsLocation

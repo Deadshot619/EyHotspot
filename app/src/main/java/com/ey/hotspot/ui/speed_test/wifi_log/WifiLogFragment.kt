@@ -23,7 +23,7 @@ class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>()
             arguments = Bundle().apply {
                 putString(WIFI_SSID, wifiSsid)
                 putString(LOGINAT,loginAt)
-                putString(LOGOUTAT,logoutAt)
+                putString(LOGOUTAT, logoutAt)
                 putString(CREATEDAT,createdAt)
                 putString(UPDATEAT,updateAt)
                 putDouble(AVERAGE_SPPED,averageSpeed)
@@ -52,9 +52,11 @@ class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>()
 
     private fun setDataInView() {
         mBinding.tvWifiSsid.text = arguments?.getString(WIFI_SSID)
-        mBinding.tvDate.text="Date:${getDate(arguments?.getString(LOGINAT)?.extractDateFromDateTime())}"
+        mBinding.tvDate.text="Date:${getDate(arguments?.getString(LOGINAT)!!.extractDateFromDateTime())}"
         mBinding.tvStartTimeValue.text=getTime(arguments?.getString(LOGINAT)?.extractTimeFromDateTime())
-        mBinding.tvEndTimeValue.text=getTime(arguments?.getString(LOGOUTAT)?.extractTimeFromDateTime())
+
+        mBinding.tvEndTimeValue.text =
+                getTime(arguments?.getString(LOGOUTAT)?.extractTimeFromDateTime())
         mBinding.tvStartSpeedValue.text=getTime(arguments?.getString(LOGINAT)?.extractTimeFromDateTime())
         mBinding.tvEndSpeedValue.text="${arguments?.getDouble(AVERAGE_SPPED).toString().extractspeed()} mbps"
     }
@@ -69,10 +71,13 @@ class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>()
     }
     private fun getTime(datestring: String?):String
     {
-        val inputFormat: DateFormat = SimpleDateFormat("hh:mm:ss")
-        val outputFormat: DateFormat = SimpleDateFormat("hh:mm a")
-        val date: Date = inputFormat.parse(datestring)
-        val outputDateStr: String = outputFormat.format(date)
+        var outputDateStr: String=""
+        if (!datestring.equals("null")) {
+            val inputFormat: DateFormat = SimpleDateFormat("hh:mm:ss")
+            val outputFormat: DateFormat = SimpleDateFormat("hh:mm a")
+            val date: Date = inputFormat.parse(datestring)
+             outputDateStr = outputFormat.format(date)
+        }
         return outputDateStr;
     }
 
