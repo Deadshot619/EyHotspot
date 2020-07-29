@@ -8,6 +8,7 @@ import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import android.net.wifi.WifiManager
+import android.os.Build
 import android.os.IBinder
 import androidx.core.content.ContextCompat
 import com.ey.hotspot.R
@@ -29,7 +30,9 @@ import com.ey.hotspot.utils.extention_functions.toServerFormat
 import com.ey.hotspot.utils.getNotification
 import com.ey.hotspot.utils.wifi_notification_key
 import kotlinx.coroutines.*
+import timber.log.Timber
 import java.util.*
+
 
 class WifiService : Service() {
     companion object {
@@ -39,7 +42,9 @@ class WifiService : Service() {
             get() = _isRunning
     }
 
-    private lateinit var connec: ConnectivityManager
+    private lateinit var connecManagerWifi: ConnectivityManager        //For Wifi
+    private lateinit var connecManagerAny: ConnectivityManager
+
     private lateinit var wifiManager: WifiManager
     private lateinit var database: WifiInfoDatabaseDao
 
@@ -68,7 +73,8 @@ class WifiService : Service() {
         _isRunning = true
 
         //Get connectivity Manager
-        connec = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        connecManagerWifi = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        connecManagerAny = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
         //Get Wifi Manager
         wifiManager = applicationContext?.getSystemService(Context.WIFI_SERVICE) as WifiManager
@@ -76,11 +82,20 @@ class WifiService : Service() {
             .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
             .build()
 
+
         //get instance of database
         database = WifiInfoDatabase.getInstance(application).wifiInfoDatabaseDao
 
+        //Wifi
+        connecManagerWifi.registerNetworkCallback(networkRequestWiFi, wifiNetworkCallback)
 
-        connec.registerNetworkCallback(networkRequestWiFi, networkCallbackWiFi)
+        //For any network with internet
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            connecManagerAny.registerDefaultNetworkCallback(anyNetworkCallback)
+        } else {
+            val request = NetworkRequest.Builder().addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET).build()
+            connecManagerAny.registerNetworkCallback(request, anyNetworkCallback)
+        }
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -115,7 +130,7 @@ class WifiService : Service() {
 
 
     //Network callback for WIFI
-    private var networkCallbackWiFi = object : ConnectivityManager.NetworkCallback() {
+    private var wifiNetworkCallback = object : ConnectivityManager.NetworkCallback() {
         override fun onLost(network: Network?) {
             //Start Service
             ContextCompat.startForegroundService(
@@ -136,10 +151,11 @@ class WifiService : Service() {
         }
 
         override fun onAvailable(network: Network?) {
-            coroutineScope.launch {
+           /* coroutineScope.launch {
                 //Get last inserted data & do things accordingly
                 getLastInsertedData()
-            }
+            }*/
+
 
             //Wifi Ssid
             val wifiSsid = wifiManager.connectionInfo.ssid.extractWifiName()
@@ -180,6 +196,20 @@ class WifiService : Service() {
                         )
                     })
             }
+        }
+    }
+
+    private var anyNetworkCallback = object : ConnectivityManager.NetworkCallback() {
+        override fun onAvailable(network: Network) {
+            coroutineScope.launch {
+                Timber.tag("NETWORK CALLBACK : ").d(network.toString())
+                //Get last inserted data & do things accordingly
+                getLastInsertedData()
+            }
+        }
+
+        override fun onLost(network: Network) {
+
         }
     }
 

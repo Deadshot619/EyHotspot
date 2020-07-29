@@ -3,7 +3,6 @@ package com.ey.hotspot.ui.speed_test.wifi_log_list
 import com.google.gson.annotations.SerializedName
 
 data class WifiLogListResponse(
-
     @SerializedName("id") val id: Int,
     @SerializedName("user_id") val user_id: Int,
     @SerializedName("wifi_id") val wifi_id: Int,
