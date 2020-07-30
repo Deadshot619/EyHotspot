@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
 import android.content.pm.PackageManager
-import android.graphics.drawable.Drawable
 import android.location.Location
 import android.net.Uri
 import android.os.Bundle
@@ -21,9 +20,7 @@ import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.FragmentHomeBinding
 import com.ey.hotspot.ui.deep_link.model.DeepLinkHotspotDataModel
 import com.ey.hotspot.ui.favourite.model.MarkFavouriteRequest
-import com.ey.hotspot.ui.home.models.GetHotSpotRequest
-import com.ey.hotspot.ui.home.models.GetHotSpotResponse
-import com.ey.hotspot.ui.home.models.MyClusterItems
+import com.ey.hotspot.ui.home.models.*
 import com.ey.hotspot.ui.review_and_complaint.reviews.ReviewsFragment
 import com.ey.hotspot.ui.search.searchlist.SearchListFragment
 import com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment
@@ -67,6 +64,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
         private val TAG = HomeFragment::class.java.simpleName
         private const val DEFAULT_ZOOM = 12
+        private const val DL_HOTSPOT_ZOOM = 18
         private const val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
     }
 
@@ -86,6 +84,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
     var result: PendingResult<LocationSettingsResult>? = null
     val REQUEST_LOCATION = 199
 
+
+    private var currentCluster: MyClusterItems? = null
     private var dlData: DeepLinkHotspotDataModel? = null
 
     private val dialog by lazy {
@@ -145,8 +145,81 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
 
         setUpObservers()
+
+        setUpInterfaceForWifiInfoDialog()
     }
 
+    /**
+     * Click Listeners for wifi/cluster data view
+     */
+    private fun setUpInterfaceForWifiInfoDialog(){
+        mBinding.customPop.clickListener = object : WifiInfoDialogClickListener{
+            override fun onClickRateNow(data: WifiInfoModel) {
+                if (HotSpotApp.prefs?.getAppLoggedInStatus()!!) {
+                    replaceFragment(
+                        fragment = ReviewsFragment.newInstance(
+                            locationId = clickedVenueMarker!!.mItemID ,
+                            wifiSsid = clickedVenueMarker?.title!!,
+                            wifiProvider = clickedVenueMarker?.snippet!!,
+                            location = clickedVenueMarker!!.mAddress
+                        ),
+                        addToBackStack = true
+                    )
+                } else
+                    dialog.show()
+            }
+
+            override fun onClickReport(data: WifiInfoModel) {
+                if (HotSpotApp.prefs?.getAppLoggedInStatus()!!) {
+                    replaceFragment(
+                        RaiseComplaintFragment.newInstance(
+                            locationId = clickedVenueMarker!!.mItemID ,
+                            wifiSsid = clickedVenueMarker?.title!!,
+                            wifiProvider = clickedVenueMarker?.snippet!!,
+                            location = clickedVenueMarker!!.mAddress
+                        ), true
+                    )
+                } else dialog.show()
+            }
+
+            override fun onClickAddFavourite(data: WifiInfoModel) {
+                if (HotSpotApp.prefs?.getAppLoggedInStatus()!!) {
+                    val markFavouriteRequest: MarkFavouriteRequest =
+                        MarkFavouriteRequest(clickedVenueMarker!!.mItemID)
+                    mViewModel.markFavouriteItem(markFavouriteRequest, data)
+
+                } else {
+                    dialog.show()
+                }
+            }
+
+            override fun onClickNavigate(data: WifiInfoModel) {
+                val gmmIntentUri =
+                    Uri.parse("google.navigation:q=" + clickedVenueMarker?.mLat + "," + clickedVenueMarker?.mLng + "&mode=d")
+                val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+                mapIntent.setPackage("com.google.android.apps.maps")
+                startActivity(mapIntent)
+            }
+
+            override fun onClickShare(data: WifiInfoModel) {
+                TODO("Not yet implemented")
+            }
+
+        }
+    }
+
+    /**
+     * This method will set data on Wifi/Cluster info view
+     */
+    private fun setDataOnCusterDialog(data: WifiInfoModel){
+        mBinding.customPop.run {
+            this.data = data
+            executePendingBindings()
+
+            //Main cardview Layout
+            cvMainLayout.visibility = View.VISIBLE
+        }
+    }
 
     private fun setUpObservers() {
         mViewModel.getHotSpotResponse.observe(viewLifecycleOwner, Observer {
@@ -163,7 +236,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         //Change Favourite
         mViewModel.markFavourite.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let { item ->
-                mClusterManager.updateItem(item.apply { changeFavourite(!mIsFavourite) })
+                mClusterManager.updateItem(currentCluster?.apply { changeFavourite(!mIsFavourite) }).toString()
+                setDataOnCusterDialog(currentCluster!!.toWifiInfoModel())
             }
         })
     }
@@ -310,91 +384,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
     override fun onClusterItemClick(item: MyClusterItems?): Boolean {
         clickedVenueMarker = item;
 
-        //Main cardview Layout
-        mBinding.customPop.cvMainLayout.visibility = View.VISIBLE
-
-        //Wifi Ssid
-        mBinding.customPop.tvWifiSsid.text = clickedVenueMarker?.title
-        mBinding.customPop.tvServiceProvider.text = clickedVenueMarker?.mNavigateURL
-        mBinding.customPop.tvLocation.text = clickedVenueMarker?.mAddress
-        if (clickedVenueMarker?.mIsFavourite == true) {
-            mBinding.customPop.ivFavourites.setImageResource(R.drawable.ic_favorite_filled_red)
-        } else {
-            mBinding.customPop.ivFavourites.setImageResource(R.drawable.ic_favorite_filled_gray)
+        item?.let {
+            currentCluster = it
+            setDataOnCusterDialog(it.toWifiInfoModel())
         }
 
-        //Favourite
-        mBinding.customPop.ivFavourites.setOnClickListener {
-            if (HotSpotApp.prefs?.getAppLoggedInStatus()!!) {
-
-                val imgID1: Drawable.ConstantState? =
-                    requireContext().getDrawable(R.drawable.ic_favorite_filled_gray)
-                        ?.getConstantState()
-                val imgID2: Drawable.ConstantState? =
-                    mBinding.customPop.ivFavourites.getDrawable().getConstantState()
-                if (imgID1 == imgID2) {
-                    mBinding.customPop.ivFavourites.setImageResource(R.drawable.ic_favorite_filled_red)
-                    favouriteType = true
-                } else {
-                    mBinding.customPop.ivFavourites.setImageResource(R.drawable.ic_favorite_filled_gray)
-                    favouriteType = false
-                }
-                val markFavouriteRequest: MarkFavouriteRequest =
-                    MarkFavouriteRequest(clickedVenueMarker!!.mItemID)
-                mViewModel.markFavouriteItem(markFavouriteRequest, favouriteType, item)
-
-            } else {
-                dialog.show()
-            }
-        }
-        //Navigate Now
-        mBinding.customPop.btnNavigateNow.setOnClickListener {
-
-            val gmmIntentUri =
-                Uri.parse("google.navigation:q=" + clickedVenueMarker?.mLat + "," + clickedVenueMarker?.mLng + "&mode=d")
-            val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
-            mapIntent.setPackage("com.google.android.apps.maps")
-            startActivity(mapIntent)
-        }
-
-        //Rate Now
-        mBinding.customPop.btnRateNow.setOnClickListener {
-            if (HotSpotApp.prefs?.getAppLoggedInStatus()!!) {
-
-                val wifiProvideer: String = clickedVenueMarker?.title!!
-                replaceFragment(
-                    fragment = ReviewsFragment.newInstance(
-                        locationId = clickedVenueMarker!!.mItemID,
-                        wifiSsid = clickedVenueMarker!!.mNavigateURL,
-                        wifiProvider = wifiProvideer,
-                        location = clickedVenueMarker!!.mAddress
-                    ),
-                    addToBackStack = true
-                )
-            } else
-                dialog.show()
-        }
-
-        //Report
-        mBinding.customPop.ivFlag.setOnClickListener {
-            if (HotSpotApp.prefs?.getAppLoggedInStatus()!!) {
-
-                val wifiProvideer: String = clickedVenueMarker?.title!!
-                replaceFragment(
-                    RaiseComplaintFragment.newInstance(
-                        locationId = clickedVenueMarker!!.mItemID,
-                        wifiSsid = clickedVenueMarker!!.mNavigateURL,
-                        wifiProvider = wifiProvideer,
-                        location = clickedVenueMarker!!.mAddress
-                    ), true
-                )
-            } else dialog.show()
-        }
-
-        mBinding.customPop.ivShare.setOnClickListener {
-
-
-        }
         return false
     }
 
@@ -407,9 +401,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                 MyClusterItems(
                     lat = location.lat.parseToDouble(),
                     lng = location.lng.parseToDouble(),
-                    navigateURL = location.provider_name,
+                    navigateURL = location.navigate_url,
                     title = location.name,
-                    snippet = location.navigate_url,
+                    snippet = location.provider_name,
                     isfavourite = location.favourite,
                     itemId = location.id,
                     address = location.location
@@ -417,6 +411,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             mClusterManager.addItem(offsetItems)
             mClusterManager.cluster()
         }
+
+        dlData?.let {
+            map?.moveCamera(
+                CameraUpdateFactory.newLatLngZoom(
+                    LatLng(
+                        it.lat,
+                        it.lon
+                    ), DL_HOTSPOT_ZOOM.toFloat()
+                )
+            )
+        }
+
     }
 
     override fun onClusterItemInfoWindowClick(item: MyClusterItems?) {

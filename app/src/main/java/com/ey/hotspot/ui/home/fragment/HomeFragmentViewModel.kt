@@ -8,9 +8,7 @@ import com.ey.hotspot.network.DataProvider
 import com.ey.hotspot.network.response.BaseResponse
 import com.ey.hotspot.ui.favourite.model.MarkFavouriteRequest
 import com.ey.hotspot.ui.favourite.model.MarkFavouriteResponse
-import com.ey.hotspot.ui.home.models.GetHotSpotRequest
-import com.ey.hotspot.ui.home.models.GetHotSpotResponse
-import com.ey.hotspot.ui.home.models.MyClusterItems
+import com.ey.hotspot.ui.home.models.*
 import com.ey.hotspot.utils.Event
 import kotlinx.coroutines.launch
 
@@ -54,30 +52,22 @@ class HomeFragmentViewModel(application: Application) : BaseViewModel(applicatio
     //Mark a hotspot as favourite
     fun markFavouriteItem(
         markFavouriteRequest: MarkFavouriteRequest,
-        favouriteType: Boolean,
-        myClusterItems: MyClusterItems?
+        data: WifiInfoModel
     ) {
-        if (favouriteType) {
-            setDialogVisibility(true, null)
-        } else {
-            setDialogVisibility(true, null)
-
-        }
+        setDialogVisibility(true, null)
 
         coroutineScope.launch {
             DataProvider.markFavourite(
                 request = markFavouriteRequest,
                 success = {
-//                    _markFavouriteResponse.value = it
                     if (it.status)
-                        _markFavourite.value = Event(myClusterItems)
+                        _markFavourite.value = Event(data.toMyClusterItems())
 
                     showToastFromViewModel(it.message)
 
                     setDialogVisibility(false)
                 }, error = {
                     checkError(it)
-                    setDialogVisibility(false)
                 }
 
             )
