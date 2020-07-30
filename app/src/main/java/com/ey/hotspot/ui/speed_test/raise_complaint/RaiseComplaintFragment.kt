@@ -135,8 +135,8 @@ class RaiseComplaintFragment :
         mViewModel.raiseComplaintData.value?.run {
             mBinding.run {
                 return when {
-                    issueType.trim().isEmpty() -> {
-                        showMessage("Please select a issue")
+                    issueType.isEmpty() || issueType == "0" -> {
+                        showMessage(getString(R.string.please_select_issue_type_label))
                         false
                     }
                     issueType.toLowerCase() == "others" && feedback.trim().isEmpty() -> {

@@ -6,11 +6,8 @@ import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.FragmentWifiLogBinding
-import com.ey.hotspot.network.response.ValidateWifiResponse
-import com.ey.hotspot.ui.favourite.model.MarkFavouriteRequest
 import com.ey.hotspot.ui.review_and_complaint.reviews.ReviewsFragment
 import com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment
-import com.ey.hotspot.ui.speed_test.test_result.TestResultsFragment
 import com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListResponse
 import com.ey.hotspot.utils.extention_functions.*
 import java.text.DateFormat
@@ -31,7 +28,6 @@ class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>()
         }
 
         private const val WIFI_LOG = "wifi_LOG"
-
     }
 
    lateinit var wifiloglist:WifiLogListResponse
