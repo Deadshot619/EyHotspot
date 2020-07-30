@@ -72,12 +72,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         private const val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
     }
 
+    //Variable to save data retrieved for Deep Linking
     private var dlData: DeepLinkHotspotDataModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         //Get deep link data
         dlData = arguments?.getParcelable(Constants.DL_DATA)
+
         showMessage(dlData?.id.toString())
     }
 
@@ -287,9 +290,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
     }
 
     private fun getNearByWifiList(gpsStatus: Boolean) {
-
         if (gpsStatus) {
-
             val getHotSpotRequest: GetHotSpotRequest = GetHotSpotRequest(
                 lastKnownLocation!!.latitude,
                 lastKnownLocation!!.longitude, "", true
