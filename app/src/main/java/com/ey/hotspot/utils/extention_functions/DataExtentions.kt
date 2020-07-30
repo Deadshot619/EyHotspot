@@ -52,8 +52,6 @@ fun String?.parseToInt(): Int {
 }
 
 
-
-
 fun String.extractDateFromDateTime(): String {
     return if (this.contains("T"))
             this.substringBefore("T")

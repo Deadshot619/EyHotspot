@@ -27,6 +27,7 @@ import com.ey.hotspot.ui.home.models.toWifiInfoModel
 import com.ey.hotspot.ui.review_and_complaint.reviews.ReviewsFragment
 import com.ey.hotspot.ui.search.searchlist.SearchListFragment
 import com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment
+import com.ey.hotspot.utils.Event
 import com.ey.hotspot.utils.constants.Constants
 import com.ey.hotspot.utils.constants.setUpSearchBar
 import com.ey.hotspot.utils.dialogs.YesNoDialog
@@ -71,6 +72,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         private const val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
     }
 
+    private var dlData: DeepLinkHotspotDataModel? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        //Get deep link data
+        dlData = arguments?.getParcelable(Constants.DL_DATA)
+        showMessage(dlData?.id.toString())
+    }
 
     private var map: GoogleMap? = null
 
@@ -89,7 +98,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
 
     private var currentCluster: MyClusterItems? = null
-    private var dlData: DeepLinkHotspotDataModel? = null
 
     private val dialog by lazy {
         YesNoDialog(requireActivity()).apply {
@@ -123,9 +131,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         ) {}
         mBinding.toolbarLayout.etSearchBar.isFocusable = false
 
-        //Get deep link data
-        dlData = arguments?.getParcelable(Constants.DL_DATA)
-        showMessage(dlData?.id.toString())
+        //Set deep linked wifi id in viewmodel
+        mViewModel.deepLinkedWifiId = dlData?.id ?: -1
 
         // Prompt the user for permission.
         activity?.checkLocationPermission(view = mBinding.root, func = {
@@ -155,13 +162,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
     /**
      * Click Listeners for wifi/cluster data view
      */
-    private fun setUpInterfaceForWifiInfoDialog(){
-        mBinding.customPop.clickListener = object : WifiInfoDialogClickListener{
+    private fun setUpInterfaceForWifiInfoDialog() {
+        mBinding.customPop.clickListener = object : WifiInfoDialogClickListener {
             override fun onClickRateNow(data: WifiInfoModel) {
                 if (HotSpotApp.prefs?.getAppLoggedInStatus()!!) {
                     replaceFragment(
                         fragment = ReviewsFragment.newInstance(
-                            locationId = clickedVenueMarker!!.mItemID ,
+                            locationId = clickedVenueMarker!!.mItemID,
                             wifiSsid = clickedVenueMarker?.title!!,
                             wifiProvider = clickedVenueMarker?.snippet!!,
                             location = clickedVenueMarker!!.mAddress
@@ -176,7 +183,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                 if (HotSpotApp.prefs?.getAppLoggedInStatus()!!) {
                     replaceFragment(
                         RaiseComplaintFragment.newInstance(
-                            locationId = clickedVenueMarker!!.mItemID ,
+                            locationId = clickedVenueMarker!!.mItemID,
                             wifiSsid = clickedVenueMarker?.title!!,
                             wifiProvider = clickedVenueMarker?.snippet!!,
                             location = clickedVenueMarker!!.mAddress
@@ -205,7 +212,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             }
 
             override fun onClickShare(data: WifiInfoModel) {
-                TODO("Not yet implemented")
+                activity?.shareWifiHotspotData(id = data.id, lat = data.lat, lon = data.lon)
             }
 
         }
@@ -214,14 +221,39 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
     /**
      * This method will set data on Wifi/Cluster info view
      */
-    private fun setDataOnCusterDialog(data: WifiInfoModel){
-        mBinding.customPop.run {
-            this.data = data
-            executePendingBindings()
+    private fun setDataOnCusterDialog(data: WifiInfoModel?) {
+        if (data != null)
+            mBinding.customPop.run {
+                this.data = data
+                executePendingBindings()
 
-            //Main cardview Layout
-            cvMainLayout.visibility = View.VISIBLE
+                //Main cardview Layout
+                cvMainLayout.visibility = View.VISIBLE
+            }
+    }
+
+    private fun moveCameraToSelectedClustorWhenDeepLink() {
+        mViewModel.goToDeepLinkedLocation.value?.getContentIfNotHandled()?.let {
+            if (it) {
+                //Show deep link data
+                dlData?.let {
+                    map?.moveCamera(
+                        CameraUpdateFactory.newLatLngZoom(
+                            LatLng(
+                                it.lat,
+                                it.lon
+                            ), DL_HOTSPOT_ZOOM.toFloat()
+                        )
+                    )
+                }
+
+                setDataOnCusterDialog(mViewModel.saveLinkedLocationIfExists.value?.toWifiInfoModel())
+
+                mViewModel.goToDeepLinkedLocation.value = Event(false)
+            }
+
         }
+
     }
 
     private fun setUpObservers() {
@@ -239,7 +271,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         //Change Favourite
         mViewModel.markFavourite.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let { item ->
-                mClusterManager.updateItem(currentCluster?.apply { changeFavourite(!mIsFavourite) }).toString()
+                mClusterManager.updateItem(currentCluster?.apply { changeFavourite(!mIsFavourite) })
+                    .toString()
                 setDataOnCusterDialog(currentCluster!!.toWifiInfoModel())
             }
         })
@@ -402,18 +435,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         mClusterManager.addItems(mViewModel.listClusterItem)
         mClusterManager.cluster()
 
-        //Show deep link data
-        dlData?.let {
-            map?.moveCamera(
-                CameraUpdateFactory.newLatLngZoom(
-                    LatLng(
-                        it.lat,
-                        it.lon
-                    ), DL_HOTSPOT_ZOOM.toFloat()
-                )
-            )
-        }
-
+        moveCameraToSelectedClustorWhenDeepLink()
     }
 
     override fun onClusterItemInfoWindowClick(item: MyClusterItems?) {
@@ -432,7 +454,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                 BitmapDescriptorFactory.fromResource(R.drawable.ic_wifi_signal)
             markerOptions.icon(icon)
         }
-
 
 
     }

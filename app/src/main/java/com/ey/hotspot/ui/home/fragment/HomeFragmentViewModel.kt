@@ -15,6 +15,8 @@ import kotlinx.coroutines.launch
 
 class HomeFragmentViewModel(application: Application) : BaseViewModel(application) {
 
+
+
     //Variable to store response of HotSpot
     private val _getHotSpotResponse =
         MutableLiveData<Event<BaseResponse<List<GetHotSpotResponse>>>>()
@@ -35,6 +37,11 @@ class HomeFragmentViewModel(application: Application) : BaseViewModel(applicatio
     var listClusterItem = mutableListOf<MyClusterItems>()
         private set
 
+    var deepLinkedWifiId: Int = -1  //this variable will store id of wifi obtained from deeplink
+    val goToDeepLinkedLocation = MutableLiveData<Event<Boolean>>(Event(true))
+    val saveLinkedLocationIfExists = MutableLiveData<MyClusterItems>()
+
+
     //Get HotSpots
     fun getHotSpotResponse(getHotSpotRequest: GetHotSpotRequest) {
 //        setDialogVisibility(true)
@@ -45,7 +52,19 @@ class HomeFragmentViewModel(application: Application) : BaseViewModel(applicatio
 
                     if (it.status){
                         listClusterItem.clear()
-                        for (i in it.data)
+                        for (i in it.data){
+                            if (i.id == deepLinkedWifiId){
+                                saveLinkedLocationIfExists.value = MyClusterItems(
+                                    lat = i.lat.parseToDouble(),
+                                    lng = i.lng.parseToDouble(),
+                                    navigateURL = i.navigate_url,
+                                    title = i.name,
+                                    snippet = i.provider_name,
+                                    isfavourite = i.favourite,
+                                    itemId = i.id,
+                                    address = i.location
+                                )
+                            }
                             listClusterItem.add(
                                 MyClusterItems(
                                     lat = i.lat.parseToDouble(),
@@ -58,6 +77,7 @@ class HomeFragmentViewModel(application: Application) : BaseViewModel(applicatio
                                     address = i.location
                                 )
                             )
+                        }
                     }
 
                     _getHotSpotResponse.value = Event(it)
