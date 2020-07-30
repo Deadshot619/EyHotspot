@@ -5,15 +5,28 @@ import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseActivity
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.ActivityDeepLinkBinding
+import com.ey.hotspot.ui.deep_link.model.DeepLinkHotspotDataModel
 import com.ey.hotspot.ui.home.BottomNavHomeActivity
 import com.ey.hotspot.ui.login.LoginActivity
-import com.ey.hotspot.utils.extention_functions.showMessage
+import com.ey.hotspot.utils.constants.Constants.Companion.DL_DATA
+import com.ey.hotspot.utils.constants.Constants.Companion.DL_ID
+import com.ey.hotspot.utils.constants.Constants.Companion.DL_LAT
+import com.ey.hotspot.utils.constants.Constants.Companion.DL_LON
+import com.ey.hotspot.utils.extention_functions.parseToDouble
+import com.ey.hotspot.utils.extention_functions.parseToInt
 
 class DeepLinkActivity : BaseActivity<ActivityDeepLinkBinding, DeepLinkViewModel>() {
+    lateinit var deepLinkData: DeepLinkHotspotDataModel
+
     override fun getLayoutId(): Int = R.layout.activity_deep_link
     override fun getViewModel() = DeepLinkViewModel::class.java
     override fun onBinding() {
-        showMessage(intent.data?.getQueryParameter("id").toString())
+
+        deepLinkData = DeepLinkHotspotDataModel(
+            id = intent.data?.getQueryParameter(DL_ID).parseToInt(),
+            lat = intent.data?.getQueryParameter(DL_LAT).parseToDouble(),
+            lon = intent.data?.getQueryParameter(DL_LON).parseToDouble()
+        )
 
         checkAppLoginStatus()
     }
@@ -22,11 +35,9 @@ class DeepLinkActivity : BaseActivity<ActivityDeepLinkBinding, DeepLinkViewModel
         when {
             HotSpotApp.prefs?.getAppLoggedInStatus()!! -> { //If user is already logged in
                 goToHomePage()
-
             }
             HotSpotApp.prefs?.getSkipStatus()!! -> {    //If user has skipped login
                 goToHomePage()
-
             }
             else -> {   //Stay on splash screen & show select lang dialogue
                 goToLoginPage()
@@ -36,7 +47,9 @@ class DeepLinkActivity : BaseActivity<ActivityDeepLinkBinding, DeepLinkViewModel
 
     //Method to redirect user to homepage
     private fun goToHomePage() {
-        startActivity(Intent(this, BottomNavHomeActivity::class.java))
+        startActivity(Intent(this, BottomNavHomeActivity::class.java).apply {
+            putExtra(DL_DATA, deepLinkData)
+        })
         finish()
     }
 

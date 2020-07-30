@@ -43,6 +43,16 @@ fun String?.parseToDouble(): Double {
     }
 }
 
+fun String?.parseToInt(): Int {
+    return try {
+        this!!.toInt()
+    } catch (e: Exception) {
+        0
+    }
+}
+
+
+
 
 fun String.extractDateFromDateTime(): String {
     return if (this.contains("T"))

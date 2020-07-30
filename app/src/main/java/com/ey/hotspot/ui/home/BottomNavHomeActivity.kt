@@ -7,6 +7,7 @@ import com.ey.hotspot.app_core_lib.BaseActivity
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.ActivityBottomNavHomeBinding
 import com.ey.hotspot.service.WifiService
+import com.ey.hotspot.ui.deep_link.model.DeepLinkHotspotDataModel
 import com.ey.hotspot.ui.favourite.FavouriteFragment
 import com.ey.hotspot.ui.home.fragment.HomeFragment
 import com.ey.hotspot.ui.review_and_complaint.ReviewAndComplainFragment
@@ -14,6 +15,7 @@ import com.ey.hotspot.ui.settings.fragments.SettingsFragment
 import com.ey.hotspot.ui.speed_test.speed_test_fragmet.SpeedTestFragment
 import com.ey.hotspot.utils.CHANNEL_ID
 import com.ey.hotspot.utils.channel_name
+import com.ey.hotspot.utils.constants.Constants
 import com.ey.hotspot.utils.createNotificationChannel
 import com.ey.hotspot.utils.dialogs.YesNoDialog
 import com.ey.hotspot.utils.extention_functions.goToLoginScreen
@@ -36,9 +38,15 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
         }
     }
 
+    //Variable to hold deep link data
+    var dlData: DeepLinkHotspotDataModel? = null
+
     override fun getLayoutId() = R.layout.activity_bottom_nav_home
     override fun getViewModel() = BottomNavHomeViewModel::class.java
     override fun onBinding() {
+        //Get deep link data
+        dlData = intent.extras?.getParcelable(Constants.DL_DATA)
+
 
         setBottomNavListener()
 
@@ -104,7 +112,7 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
                 //home
                 R.id.home -> {
                     clearFragmentBackstack()
-                    replaceFragment(HomeFragment(), false)
+                    replaceFragment(HomeFragment.getInstance(data = dlData), false)
                     return@setOnNavigationItemSelectedListener true
                 }
 

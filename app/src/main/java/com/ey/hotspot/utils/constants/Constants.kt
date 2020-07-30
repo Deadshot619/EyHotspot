@@ -17,6 +17,7 @@ interface Constants {
         const val DL_ID = "id"
         const val DL_LAT = "lat"
         const val DL_LON = "lon"
+        const val DL_DATA = "deep_link_hotspot_data"
 
 
         //Intent

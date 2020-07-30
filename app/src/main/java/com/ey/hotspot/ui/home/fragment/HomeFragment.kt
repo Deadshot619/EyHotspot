@@ -19,6 +19,7 @@ import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.FragmentHomeBinding
+import com.ey.hotspot.ui.deep_link.model.DeepLinkHotspotDataModel
 import com.ey.hotspot.ui.favourite.model.MarkFavouriteRequest
 import com.ey.hotspot.ui.home.models.GetHotSpotRequest
 import com.ey.hotspot.ui.home.models.GetHotSpotResponse
@@ -40,10 +41,12 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.GoogleMap.OnMapClickListener
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.*
+import com.google.android.gms.maps.model.BitmapDescriptor
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.net.PlacesClient
-import com.google.maps.android.clustering.Cluster
 import com.google.maps.android.clustering.ClusterManager
 import com.google.maps.android.clustering.view.DefaultClusterRenderer
 
@@ -52,6 +55,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
     ClusterManager.OnClusterItemInfoWindowClickListener<MyClusterItems>,
     GoogleApiClient.ConnectionCallbacks,
     GoogleApiClient.OnConnectionFailedListener {
+
+    companion object {
+        fun getInstance(data: DeepLinkHotspotDataModel?) = HomeFragment().apply {
+            arguments = Bundle().apply {
+                if (data != null)
+                    putParcelable(Constants.DL_DATA, data)
+            }
+        }
+
+
+        private val TAG = HomeFragment::class.java.simpleName
+        private const val DEFAULT_ZOOM = 12
+        private const val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
+    }
+
+
     private var map: GoogleMap? = null
 
     private lateinit var placesClient: PlacesClient
@@ -66,6 +85,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
     lateinit var mGoogleApiClient: GoogleApiClient
     var result: PendingResult<LocationSettingsResult>? = null
     val REQUEST_LOCATION = 199
+
+    private var dlData: DeepLinkHotspotDataModel? = null
 
     private val dialog by lazy {
         YesNoDialog(requireActivity()).apply {
@@ -98,6 +119,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             enableSearchButton = false
         ) {}
         mBinding.toolbarLayout.etSearchBar.isFocusable = false
+
+        //Get deep link data
+        dlData = arguments?.getParcelable(Constants.DL_DATA)
+        showMessage(dlData?.id.toString())
 
         // Prompt the user for permission.
         activity?.checkLocationPermission(view = mBinding.root, func = {
@@ -397,11 +422,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
     override fun onClusterItemInfoWindowClick(item: MyClusterItems?) {
     }
 
-    companion object {
-        private val TAG = HomeFragment::class.java.simpleName
-        private const val DEFAULT_ZOOM = 12
-        private const val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
-    }
 
     class ClusterItemRenderer(
         context: Context, map: GoogleMap?,
