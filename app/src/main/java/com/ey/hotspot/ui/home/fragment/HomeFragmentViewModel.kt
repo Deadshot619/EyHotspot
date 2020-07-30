@@ -10,6 +10,7 @@ import com.ey.hotspot.ui.favourite.model.MarkFavouriteRequest
 import com.ey.hotspot.ui.favourite.model.MarkFavouriteResponse
 import com.ey.hotspot.ui.home.models.*
 import com.ey.hotspot.utils.Event
+import com.ey.hotspot.utils.extention_functions.parseToDouble
 import kotlinx.coroutines.launch
 
 class HomeFragmentViewModel(application: Application) : BaseViewModel(application) {
@@ -30,6 +31,9 @@ class HomeFragmentViewModel(application: Application) : BaseViewModel(applicatio
     val markFavourite: LiveData<Event<MyClusterItems?>>
         get() = _markFavourite
 
+    //Variable to hold cluster items
+    var listClusterItem = mutableListOf<MyClusterItems>()
+        private set
 
     //Get HotSpots
     fun getHotSpotResponse(getHotSpotRequest: GetHotSpotRequest) {
@@ -39,7 +43,26 @@ class HomeFragmentViewModel(application: Application) : BaseViewModel(applicatio
                 request = getHotSpotRequest,
                 success = {
 
+                    if (it.status){
+                        listClusterItem.clear()
+                        for (i in it.data)
+                            listClusterItem.add(
+                                MyClusterItems(
+                                    lat = i.lat.parseToDouble(),
+                                    lng = i.lng.parseToDouble(),
+                                    navigateURL = i.navigate_url,
+                                    title = i.name,
+                                    snippet = i.provider_name,
+                                    isfavourite = i.favourite,
+                                    itemId = i.id,
+                                    address = i.location
+                                )
+                            )
+                    }
+
                     _getHotSpotResponse.value = Event(it)
+
+
                     setDialogVisibility(false)
                 }, error = {
                     checkError(it)

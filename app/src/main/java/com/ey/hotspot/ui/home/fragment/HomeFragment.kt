@@ -20,7 +20,10 @@ import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.FragmentHomeBinding
 import com.ey.hotspot.ui.deep_link.model.DeepLinkHotspotDataModel
 import com.ey.hotspot.ui.favourite.model.MarkFavouriteRequest
-import com.ey.hotspot.ui.home.models.*
+import com.ey.hotspot.ui.home.models.GetHotSpotRequest
+import com.ey.hotspot.ui.home.models.MyClusterItems
+import com.ey.hotspot.ui.home.models.WifiInfoModel
+import com.ey.hotspot.ui.home.models.toWifiInfoModel
 import com.ey.hotspot.ui.review_and_complaint.reviews.ReviewsFragment
 import com.ey.hotspot.ui.search.searchlist.SearchListFragment
 import com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment
@@ -226,7 +229,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             it.getContentIfNotHandled()?.let {
                 if (it.status) {
                     setupClusters()
-                    setUpHotSpotDataInCluster(it.data)
+                    setUpHotSpotDataInCluster()
                 } else {
                     showMessage(it.message, true)
                 }
@@ -395,23 +398,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
     /**
      * Method to add items in clusters
      */
-    private fun setUpHotSpotDataInCluster(list: List<GetHotSpotResponse>) {
-        for (location in list) {
-            val offsetItems =
-                MyClusterItems(
-                    lat = location.lat.parseToDouble(),
-                    lng = location.lng.parseToDouble(),
-                    navigateURL = location.navigate_url,
-                    title = location.name,
-                    snippet = location.provider_name,
-                    isfavourite = location.favourite,
-                    itemId = location.id,
-                    address = location.location
-                )
-            mClusterManager.addItem(offsetItems)
-            mClusterManager.cluster()
-        }
+    private fun setUpHotSpotDataInCluster() {
+        mClusterManager.addItems(mViewModel.listClusterItem)
+        mClusterManager.cluster()
 
+        //Show deep link data
         dlData?.let {
             map?.moveCamera(
                 CameraUpdateFactory.newLatLngZoom(
