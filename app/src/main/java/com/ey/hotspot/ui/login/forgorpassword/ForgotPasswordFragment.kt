@@ -4,9 +4,9 @@ import androidx.lifecycle.Observer
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentForgotPasswordMobileBinding
+import com.ey.hotspot.network.request.ForgotPasswordRequest
+import com.ey.hotspot.network.response.ForgotPasswordResponse
 import com.ey.hotspot.ui.login.verifyotp.VerifyOTPFragment
-import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordRequest
-import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordResponse
 import com.ey.hotspot.utils.dialogs.OkDialog
 import com.ey.hotspot.utils.extention_functions.generateCaptchaCode
 import com.ey.hotspot.utils.extention_functions.replaceFragment

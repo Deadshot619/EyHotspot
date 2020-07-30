@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ey.hotspot.database.wifi_info.WifiInformationTable
 import com.ey.hotspot.databinding.ItemWifiLogListBinding
+import com.ey.hotspot.network.response.WifiLogListResponse
 
 
 class WifiLogListAdapter(val listener: OnClickListener) :

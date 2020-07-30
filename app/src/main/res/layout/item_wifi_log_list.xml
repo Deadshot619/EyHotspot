@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListResponse" />
+            type="com.ey.hotspot.network.response.WifiLogListResponse" />
 
         <variable
             name="clickListener"

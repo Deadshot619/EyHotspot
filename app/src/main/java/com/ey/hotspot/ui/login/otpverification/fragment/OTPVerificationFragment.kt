@@ -6,9 +6,9 @@ import androidx.lifecycle.Observer
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.OTPVerificationFragmentBinding
+import com.ey.hotspot.network.request.SendOTPRequest
+import com.ey.hotspot.network.request.VerifyOTPRequest
 import com.ey.hotspot.ui.home.BottomNavHomeActivity
-import com.ey.hotspot.ui.login.otpverification.fragment.model.SendOTPRequest
-import com.ey.hotspot.ui.login.otpverification.fragment.model.VerifyOTPRequest
 import com.ey.hotspot.utils.extention_functions.replaceFragment
 import com.ey.hotspot.utils.extention_functions.showMessage
 import com.facebook.login.LoginFragment

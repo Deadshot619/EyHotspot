@@ -6,8 +6,8 @@ import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.ChangePasswordFragmentBinding
-import com.ey.hotspot.ui.login.changepassword.model.ResetPasswordRequest
-import com.ey.hotspot.ui.login.changepassword.model.ResetPasswordResponse
+import com.ey.hotspot.network.request.ResetPasswordRequest
+import com.ey.hotspot.network.response.ResetPasswordResponse
 import com.ey.hotspot.ui.login.login_fragment.LoginFragment
 import com.ey.hotspot.utils.dialogs.OkDialog
 import com.ey.hotspot.utils.extention_functions.replaceFragment

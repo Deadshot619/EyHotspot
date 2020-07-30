@@ -10,8 +10,8 @@ import com.ey.hotspot.network.DataProvider
 import com.ey.hotspot.network.request.RegisterRequest
 import com.ey.hotspot.network.response.BaseResponse
 import com.ey.hotspot.network.response.CoutryCode
+import com.ey.hotspot.network.response.RegistrationResponse
 import com.ey.hotspot.network.response.UpdateProfileResponse
-import com.ey.hotspot.ui.registration.register_user.model.RegistrationResponse
 import com.ey.hotspot.utils.Event
 import com.ey.hotspot.utils.constants.Constants
 import kotlinx.coroutines.launch

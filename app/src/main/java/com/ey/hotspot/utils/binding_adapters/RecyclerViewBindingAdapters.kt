@@ -2,9 +2,9 @@ package com.ey.hotspot.utils.binding_adapters
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.ey.hotspot.database.wifi_info.WifiInformationTable
 import com.ey.hotspot.network.response.ComplaintsList
 import com.ey.hotspot.network.response.ReviewsList
+import com.ey.hotspot.network.response.WifiLogListResponse
 import com.ey.hotspot.ui.favourite.FavouriteListAdapter
 import com.ey.hotspot.ui.favourite.model.GetFavouriteItem
 import com.ey.hotspot.ui.home.models.GetHotSpotResponse
@@ -13,7 +13,6 @@ import com.ey.hotspot.ui.review_and_complaint.review_list.ReviewListAdapter
 import com.ey.hotspot.ui.review_and_complaint.reviews.ReviewsAdapter
 import com.ey.hotspot.ui.search.searchlist.adapter.SearchListAdapter
 import com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListAdapter
-import com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListResponse
 
 /**
  * When there is no data (data is null), hide the [RecyclerView],

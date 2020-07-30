@@ -1,4 +1,4 @@
-package com.ey.hotspot.ui.speed_test.wifi_log_list
+package com.ey.hotspot.network.response
 
 import android.os.Parcelable
 import com.google.gson.annotations.Expose

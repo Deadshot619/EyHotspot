@@ -7,10 +7,8 @@ import com.ey.hotspot.app_core_lib.BaseViewModel
 import com.ey.hotspot.network.DataProvider
 import com.ey.hotspot.network.request.GetFavoriteRequest
 import com.ey.hotspot.network.response.BaseResponse
-import com.ey.hotspot.network.response.ValidateWifiResponse
 import com.ey.hotspot.ui.favourite.model.GetFavouriteItem
 import com.ey.hotspot.ui.favourite.model.MarkFavouriteRequest
-import com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListResponse
 import kotlinx.coroutines.launch
 
 class WifiLogViewModel(application: Application) : BaseViewModel(application) {

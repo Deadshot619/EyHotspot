@@ -5,7 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ey.hotspot.app_core_lib.BaseViewModel
 import com.ey.hotspot.network.DataProvider
+import com.ey.hotspot.network.request.WifiLogListRequest
 import com.ey.hotspot.network.response.BaseResponse
+import com.ey.hotspot.network.response.WifiLogListResponse
 import com.ey.hotspot.utils.constants.getDeviceId
 import kotlinx.coroutines.launch
 

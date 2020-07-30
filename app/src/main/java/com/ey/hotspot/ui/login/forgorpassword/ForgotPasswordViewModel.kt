@@ -7,9 +7,9 @@ import androidx.lifecycle.MutableLiveData
 import com.ey.hotspot.app_core_lib.BaseViewModel
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.network.DataProvider
+import com.ey.hotspot.network.request.ForgotPasswordRequest
 import com.ey.hotspot.network.response.BaseResponse
-import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordRequest
-import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordResponse
+import com.ey.hotspot.network.response.ForgotPasswordResponse
 import com.ey.hotspot.utils.Event
 import kotlinx.coroutines.launch
 

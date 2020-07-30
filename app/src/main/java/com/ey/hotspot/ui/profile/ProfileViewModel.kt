@@ -3,16 +3,15 @@ package com.ey.hotspot.ui.profile
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseViewModel
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.network.DataProvider
+import com.ey.hotspot.network.request.UpdateProfileRequest
 import com.ey.hotspot.network.response.BaseResponse
 import com.ey.hotspot.network.response.CoutryCode
+import com.ey.hotspot.network.response.ProfileResponse
 import com.ey.hotspot.network.response.UpdateProfileResponse
 import com.ey.hotspot.ui.profile.fragment.model.ProfileDataModel
-import com.ey.hotspot.ui.profile.fragment.model.ProfileResponse
-import com.ey.hotspot.ui.profile.fragment.model.UpdateProfileRequest
 import com.ey.hotspot.utils.Event
 import kotlinx.coroutines.launch
 

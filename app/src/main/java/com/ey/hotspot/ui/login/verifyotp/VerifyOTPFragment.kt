@@ -6,10 +6,10 @@ import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.VerifyOtpFragmentBinding
+import com.ey.hotspot.network.request.ForgotPasswordResendOTPRequest
+import com.ey.hotspot.network.request.ForgotPasswordVerifyOTPRequest
+import com.ey.hotspot.network.response.ForgotPasswordVerifyOTPResponse
 import com.ey.hotspot.ui.login.changepassword.ChangePasswordFragment
-import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordResendOTPRequest
-import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordVerifyOTPRequest
-import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordVerifyOTPResponse
 import com.ey.hotspot.ui.login.verifyotp.model.ResendForgotPasswordOTP
 import com.ey.hotspot.utils.dialogs.OkDialog
 import com.ey.hotspot.utils.extention_functions.replaceFragment

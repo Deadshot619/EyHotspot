@@ -1,4 +1,4 @@
-package com.ey.hotspot.ui.registration.register_user.model
+package com.ey.hotspot.network.response
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName

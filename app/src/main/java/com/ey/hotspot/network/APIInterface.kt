@@ -8,17 +8,8 @@ import com.ey.hotspot.ui.favourite.model.MarkFavouriteRequest
 import com.ey.hotspot.ui.favourite.model.MarkFavouriteResponse
 import com.ey.hotspot.ui.home.models.GetHotSpotRequest
 import com.ey.hotspot.ui.home.models.GetHotSpotResponse
-import com.ey.hotspot.ui.login.changepassword.model.ResetPasswordRequest
-import com.ey.hotspot.ui.login.changepassword.model.ResetPasswordResponse
 import com.ey.hotspot.ui.login.logout.LogoutResponse
-import com.ey.hotspot.ui.login.otpverification.fragment.model.SendOTPRequest
-import com.ey.hotspot.ui.login.otpverification.fragment.model.VerifyOTPRequest
 import com.ey.hotspot.ui.login.verifyotp.model.*
-import com.ey.hotspot.ui.profile.fragment.model.ProfileResponse
-import com.ey.hotspot.ui.profile.fragment.model.UpdateProfileRequest
-import com.ey.hotspot.ui.registration.register_user.model.RegistrationResponse
-import com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListRequest
-import com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListResponse
 import com.ey.hotspot.utils.constants.Constants
 import com.google.gson.JsonArray
 import kotlinx.coroutines.Deferred

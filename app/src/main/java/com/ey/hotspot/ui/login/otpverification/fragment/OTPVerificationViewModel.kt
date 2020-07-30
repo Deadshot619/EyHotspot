@@ -7,10 +7,10 @@ import androidx.lifecycle.MutableLiveData
 import com.ey.hotspot.app_core_lib.BaseViewModel
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.network.DataProvider
+import com.ey.hotspot.network.request.SendOTPRequest
+import com.ey.hotspot.network.request.VerifyOTPRequest
 import com.ey.hotspot.network.response.BaseResponse
 import com.ey.hotspot.network.response.LoginResponse
-import com.ey.hotspot.ui.login.otpverification.fragment.model.SendOTPRequest
-import com.ey.hotspot.ui.login.otpverification.fragment.model.VerifyOTPRequest
 import com.ey.hotspot.utils.constants.updateSharedPreference
 import kotlinx.coroutines.launch
 
