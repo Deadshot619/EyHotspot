@@ -7,6 +7,10 @@ import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.network.response.LoginResponse
 import com.ey.hotspot.ui.login.LoginActivity
 import com.ey.hotspot.utils.constants.Constants.Companion.ARABIC_LANG
+import com.ey.hotspot.utils.constants.Constants.Companion.DL_ID
+import com.ey.hotspot.utils.constants.Constants.Companion.DL_LAT
+import com.ey.hotspot.utils.constants.Constants.Companion.DL_LINK
+import com.ey.hotspot.utils.constants.Constants.Companion.DL_LON
 import com.ey.hotspot.utils.constants.Constants.Companion.ENGLISH_LANG
 
 
@@ -14,6 +18,11 @@ import com.ey.hotspot.utils.constants.Constants.Companion.ENGLISH_LANG
  * Method to get Device Id
  */
 fun getDeviceId() = Settings.Secure.getString(CoreApp.instance.contentResolver, Settings.Secure.ANDROID_ID).toString()
+
+/**
+ * returns a deep link url in the form "http://eyhotspot.com?id=69&lat=69.69&lon=69.69"
+ */
+fun getDeepLinkUrl(id: Int, lat: Double, lon: Double) = "$DL_LINK?$DL_ID=$id&$DL_LAT=$lat&$DL_LON=$lon"
 
 
 /**

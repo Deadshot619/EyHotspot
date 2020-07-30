@@ -61,7 +61,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(),
     }
 
     private fun setUpGoogleAPIClient() {
-
         mGoogleApiClient = GoogleApiClient.Builder(this)
             .addApi(LocationServices.API)
             .addConnectionCallbacks(this)

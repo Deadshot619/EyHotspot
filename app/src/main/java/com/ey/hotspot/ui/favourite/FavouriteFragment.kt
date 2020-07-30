@@ -10,9 +10,9 @@ import com.ey.hotspot.databinding.FavouriteFragmentBinding
 import com.ey.hotspot.ui.favourite.model.GetFavouriteItem
 import com.ey.hotspot.ui.review_and_complaint.reviews.ReviewsFragment
 import com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment
+import com.ey.hotspot.utils.constants.getDeepLinkUrl
 import com.ey.hotspot.utils.constants.setUpSearchBar
 import com.ey.hotspot.utils.extention_functions.replaceFragment
-import com.ey.hotspot.utils.extention_functions.showMessage
 
 class FavouriteFragment : BaseFragment<FavouriteFragmentBinding, FavouriteViewModel>() {
 
@@ -91,10 +91,17 @@ class FavouriteFragment : BaseFragment<FavouriteFragmentBinding, FavouriteViewMo
                 startActivity(i)
             }
 
+            //Share
             override fun onClickShare(data: GetFavouriteItem) {
 
+                val sendIntent: Intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, getDeepLinkUrl(id = data.id, lat = data.lat, lon = data.lng))
+                    type = "text/plain"
+                }
 
-                showMessage("HOME", true)
+                val shareIntent = Intent.createChooser(sendIntent, null)
+                startActivity(shareIntent)
             }
         })
 

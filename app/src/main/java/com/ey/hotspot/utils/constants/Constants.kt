@@ -12,9 +12,16 @@ interface Constants {
         const val LATITUDE: Double = 19.1403509
         const val LONGITUDE: Double = 72.8096671
 
+        //Deep Link
+        const val DL_LINK = "http://eyhotspot.com"
+        const val DL_ID = "id"
+        const val DL_LAT = "lat"
+        const val DL_LON = "lon"
+
+
         //Intent
         const val AUTHENTICATION_FAILED =
-            "authentication_failed"   //used when user's authticaition is failed while refreshing token
+            "authentication_failed"   //used when user's authentication is failed while refreshing token
 
         //Download Link
         const val DOWNLOAD_LINK =

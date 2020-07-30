@@ -105,7 +105,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/baseline_share_24"
                 android:textDirection="locale"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:layout_constraintStart_toStartOf="@id/tv_location"
                 app:layout_constraintTop_toTopOf="@id/btn_rate_now"
                 app:layout_constraintBottom_toBottomOf="@id/btn_rate_now"/>
