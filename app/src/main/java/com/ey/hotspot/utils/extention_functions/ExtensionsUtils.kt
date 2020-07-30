@@ -24,6 +24,7 @@ import androidx.fragment.app.Fragment
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseActivity
 import com.ey.hotspot.ui.login.LoginActivity
+import com.ey.hotspot.utils.constants.getDeepLinkUrl
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.material.snackbar.Snackbar
 import com.karumi.dexter.Dexter
@@ -292,4 +293,18 @@ fun Context.getUserLocation(func: (lat: Double?, lon: Double?) -> Unit){
             }
     } catch (e: Exception) {
     }
+}
+
+/**
+ * This method will be used to share Wifi Hotspot data to other apps as text message
+ */
+fun Context.shareWifiHotspotData(id: Int, lat: Double, lon: Double){
+    val sendIntent: Intent = Intent().apply {
+        action = Intent.ACTION_SEND
+        putExtra(Intent.EXTRA_TEXT, getDeepLinkUrl(id = id, lat = lat, lon = lon))
+        type = "text/plain"
+    }
+
+    val shareIntent = Intent.createChooser(sendIntent, null)
+    startActivity(shareIntent)
 }

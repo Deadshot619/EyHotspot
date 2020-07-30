@@ -83,3 +83,4 @@ class MyClusterItems : ClusterItem {
         this.mIsFavourite = isFavourite
     }
 }
+

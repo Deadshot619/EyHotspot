@@ -3,10 +3,12 @@ package com.ey.hotspot.ui.speed_test.raise_complaint
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseViewModel
 import com.ey.hotspot.network.DataProvider
 import com.ey.hotspot.network.request.AddComplaintRequest
 import com.ey.hotspot.network.response.ComplaintIssuesTypes
+import com.ey.hotspot.network.response.Type
 import com.ey.hotspot.utils.Event
 import kotlinx.coroutines.launch
 
@@ -35,7 +37,11 @@ class RaiseComplaintViewModel(application: Application) : BaseViewModel(applicat
             DataProvider.getComplaintsIssuesTypes(
                 {
                     if (it.status)
-                        _issueTypes.value = it.data
+                        _issueTypes.value = ComplaintIssuesTypes(
+                            mutableListOf(Type("0", appInstance.getString(R.string.select_issue_type_label))).apply {
+                                addAll(it.data.types)
+                            }
+                        )
                     else
                         showToastFromViewModel(it.message)
                     setDialogVisibility(false)

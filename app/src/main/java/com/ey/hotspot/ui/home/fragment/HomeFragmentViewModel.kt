@@ -8,13 +8,14 @@ import com.ey.hotspot.network.DataProvider
 import com.ey.hotspot.network.response.BaseResponse
 import com.ey.hotspot.ui.favourite.model.MarkFavouriteRequest
 import com.ey.hotspot.ui.favourite.model.MarkFavouriteResponse
-import com.ey.hotspot.ui.home.models.GetHotSpotRequest
-import com.ey.hotspot.ui.home.models.GetHotSpotResponse
-import com.ey.hotspot.ui.home.models.MyClusterItems
+import com.ey.hotspot.ui.home.models.*
 import com.ey.hotspot.utils.Event
+import com.ey.hotspot.utils.extention_functions.parseToDouble
 import kotlinx.coroutines.launch
 
 class HomeFragmentViewModel(application: Application) : BaseViewModel(application) {
+
+
 
     //Variable to store response of HotSpot
     private val _getHotSpotResponse =
@@ -32,16 +33,56 @@ class HomeFragmentViewModel(application: Application) : BaseViewModel(applicatio
     val markFavourite: LiveData<Event<MyClusterItems?>>
         get() = _markFavourite
 
+    //Variable to hold cluster items
+    var listClusterItem = mutableListOf<MyClusterItems>()
+        private set
+
+    var deepLinkedWifiId: Int = -1  //this variable will store id of wifi obtained from deeplink
+    val goToDeepLinkedLocation = MutableLiveData<Event<Boolean>>(Event(true))
+    val saveLinkedLocationIfExists = MutableLiveData<MyClusterItems>()
+
 
     //Get HotSpots
     fun getHotSpotResponse(getHotSpotRequest: GetHotSpotRequest) {
-        setDialogVisibility(true)
+//        setDialogVisibility(true)
         coroutineScope.launch {
             DataProvider.getHotspot(
                 request = getHotSpotRequest,
                 success = {
 
+                    if (it.status){
+                        listClusterItem.clear()
+                        for (i in it.data){
+                            if (i.id == deepLinkedWifiId){
+                                saveLinkedLocationIfExists.value = MyClusterItems(
+                                    lat = i.lat.parseToDouble(),
+                                    lng = i.lng.parseToDouble(),
+                                    navigateURL = i.navigate_url,
+                                    title = i.name,
+                                    snippet = i.provider_name,
+                                    isfavourite = i.favourite,
+                                    itemId = i.id,
+                                    address = i.location
+                                )
+                            }
+                            listClusterItem.add(
+                                MyClusterItems(
+                                    lat = i.lat.parseToDouble(),
+                                    lng = i.lng.parseToDouble(),
+                                    navigateURL = i.navigate_url,
+                                    title = i.name,
+                                    snippet = i.provider_name,
+                                    isfavourite = i.favourite,
+                                    itemId = i.id,
+                                    address = i.location
+                                )
+                            )
+                        }
+                    }
+
                     _getHotSpotResponse.value = Event(it)
+
+
                     setDialogVisibility(false)
                 }, error = {
                     checkError(it)
@@ -54,30 +95,22 @@ class HomeFragmentViewModel(application: Application) : BaseViewModel(applicatio
     //Mark a hotspot as favourite
     fun markFavouriteItem(
         markFavouriteRequest: MarkFavouriteRequest,
-        favouriteType: Boolean,
-        myClusterItems: MyClusterItems?
+        data: WifiInfoModel
     ) {
-        if (favouriteType) {
-            setDialogVisibility(true, null)
-        } else {
-            setDialogVisibility(true, null)
-
-        }
+        setDialogVisibility(true, null)
 
         coroutineScope.launch {
             DataProvider.markFavourite(
                 request = markFavouriteRequest,
                 success = {
-//                    _markFavouriteResponse.value = it
                     if (it.status)
-                        _markFavourite.value = Event(myClusterItems)
+                        _markFavourite.value = Event(data.toMyClusterItems())
 
                     showToastFromViewModel(it.message)
 
                     setDialogVisibility(false)
                 }, error = {
                     checkError(it)
-                    setDialogVisibility(false)
                 }
 
             )

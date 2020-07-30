@@ -16,7 +16,9 @@ import com.ey.hotspot.ui.search.searchlist.adapter.SearchListAdapter
 import com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment
 import com.ey.hotspot.utils.constants.setUpSearchBar
 import com.ey.hotspot.utils.dialogs.YesNoDialog
+import com.ey.hotspot.utils.extention_functions.parseToDouble
 import com.ey.hotspot.utils.extention_functions.replaceFragment
+import com.ey.hotspot.utils.extention_functions.shareWifiHotspotData
 
 class SearchListFragment : BaseFragment<SearchListFragmentBinding, SearchListViewModel>() {
 
@@ -113,8 +115,7 @@ class SearchListFragment : BaseFragment<SearchListFragmentBinding, SearchListVie
             }
 
             override fun onClickShare(data: GetHotSpotResponse) {
-
-
+                activity?.shareWifiHotspotData(id = data.id, lat = data.lat.parseToDouble(), lon = data.lng.parseToDouble())
             }
         })
 
