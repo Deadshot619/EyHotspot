@@ -80,8 +80,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
         //Get deep link data
         dlData = arguments?.getParcelable(Constants.DL_DATA)
-
-        showMessage(dlData?.id.toString())
     }
 
     private var map: GoogleMap? = null

@@ -86,7 +86,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
     }
 
     private fun setUpUIData() {
-
         setUpFacebookLogin()
         setuPGoogelSignIn()
         setUpCaptcha()
@@ -101,6 +100,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
         //Login Response
         mViewModel.loginResponse.observe(viewLifecycleOwner, Observer {
+
+            setUpCaptcha()
+
             if (it.status) {
                 showMessage(it.message, false)
                 updateSharedPreference(it.data!!)
@@ -117,6 +119,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
                 }
 
             }
+
+
         })
 
         //Social Login Response
@@ -223,8 +227,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
 
         mBinding.tvForgotPassword.setOnClickListener {
-
-
             replaceFragment(
                 fragment = ForgotPasswordFragment.newInstance(),
                 addToBackStack = true,
@@ -233,8 +235,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
         }
 
         mBinding.layoutCaptcha.ivRefreshCaptchaCode.setOnClickListener {
-            mCaptcha = activity?.generateCaptchaCode(5)
-            mBinding.layoutCaptcha.etCaptchaText.setText(mCaptcha)
+            setUpCaptcha()
         }
     }
 
