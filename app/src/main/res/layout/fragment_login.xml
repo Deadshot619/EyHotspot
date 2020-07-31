@@ -33,7 +33,7 @@
                 android:id="@+id/tv_hotspot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_margin_32"
+                android:layout_marginTop="@dimen/common_margin_48"
                 android:src="@drawable/ic_hotspot_logo"
                 android:textColor="@color/colorWhite"
                 android:textDirection="locale"
@@ -103,7 +103,7 @@
                 app:layout_constraintEnd_toEndOf="@id/tv_hotspot"
                 app:layout_constraintStart_toStartOf="@id/tv_hotspot"
                 app:layout_constraintTop_toBottomOf="@id/tv_hotspot"
-                app:layout_constraintVertical_bias="0.70" />
+                app:layout_constraintVertical_bias="0.65" />
 
             <!--        Login to Portal     -->
             <TextView
