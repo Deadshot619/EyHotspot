@@ -1,7 +1,5 @@
 package com.ey.hotspot.ui.favourite
 
-import android.content.Intent
-import android.net.Uri
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ey.hotspot.R
@@ -11,6 +9,7 @@ import com.ey.hotspot.ui.favourite.model.GetFavouriteItem
 import com.ey.hotspot.ui.review_and_complaint.reviews.ReviewsFragment
 import com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment
 import com.ey.hotspot.utils.constants.setUpSearchBar
+import com.ey.hotspot.utils.extention_functions.openNavigateUrl
 import com.ey.hotspot.utils.extention_functions.replaceFragment
 import com.ey.hotspot.utils.extention_functions.shareWifiHotspotData
 
@@ -84,11 +83,7 @@ class FavouriteFragment : BaseFragment<FavouriteFragmentBinding, FavouriteViewMo
 
             //Navigate Now
             override fun onClickNavigate(data: GetFavouriteItem) {
-                val url = data.navigate_url
-
-                val i = Intent(Intent.ACTION_VIEW)
-                i.data = Uri.parse(url)
-                startActivity(i)
+                activity?.openNavigateUrl(data.navigate_url)
             }
 
             //Share

@@ -1,7 +1,6 @@
 package com.ey.hotspot.ui.search.searchlist
 
 import android.content.Intent
-import android.net.Uri
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ey.hotspot.R
@@ -16,6 +15,7 @@ import com.ey.hotspot.ui.search.searchlist.adapter.SearchListAdapter
 import com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment
 import com.ey.hotspot.utils.constants.setUpSearchBar
 import com.ey.hotspot.utils.dialogs.YesNoDialog
+import com.ey.hotspot.utils.extention_functions.openNavigateUrl
 import com.ey.hotspot.utils.extention_functions.parseToDouble
 import com.ey.hotspot.utils.extention_functions.replaceFragment
 import com.ey.hotspot.utils.extention_functions.shareWifiHotspotData
@@ -107,11 +107,7 @@ class SearchListFragment : BaseFragment<SearchListFragmentBinding, SearchListVie
 
             //Navigate Now
             override fun onClickNavigate(data: GetHotSpotResponse) {
-                val url = data.navigate_url
-
-                val i = Intent(Intent.ACTION_VIEW)
-                i.data = Uri.parse(url)
-                startActivity(i)
+                activity?.openNavigateUrl(data.navigate_url)
             }
 
             override fun onClickShare(data: GetHotSpotResponse) {

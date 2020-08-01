@@ -7,7 +7,6 @@ import android.content.Intent
 import android.content.IntentSender
 import android.content.pm.PackageManager
 import android.location.Location
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -205,11 +204,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             }
 
             override fun onClickNavigate(data: WifiInfoModel) {
-                val gmmIntentUri =
-                    Uri.parse("google.navigation:q=" + clickedVenueMarker?.mLat + "," + clickedVenueMarker?.mLng + "&mode=d")
-                val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
-                mapIntent.setPackage("com.google.android.apps.maps")
-                startActivity(mapIntent)
+                activity?.openNavigateUrl(data.navigate_url)
             }
 
             override fun onClickShare(data: WifiInfoModel) {

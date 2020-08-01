@@ -269,7 +269,7 @@ fun Activity.generateCaptchaCode(limit: Int): String? {
 }
 
 
-fun Context.getUserLocation(func: (lat: Double?, lon: Double?) -> Unit){
+fun Context.getUserLocation(func: (lat: Double?, lon: Double?) -> Unit) {
     val client = FusedLocationProviderClient(this)
 
     try {
@@ -298,7 +298,7 @@ fun Context.getUserLocation(func: (lat: Double?, lon: Double?) -> Unit){
 /**
  * This method will be used to share Wifi Hotspot data to other apps as text message
  */
-fun Context.shareWifiHotspotData(id: Int, lat: Double, lon: Double){
+fun Context.shareWifiHotspotData(id: Int, lat: Double, lon: Double) {
     val sendIntent: Intent = Intent().apply {
         action = Intent.ACTION_SEND
         putExtra(Intent.EXTRA_TEXT, getDeepLinkUrl(id = id, lat = lat, lon = lon))
@@ -307,4 +307,19 @@ fun Context.shareWifiHotspotData(id: Int, lat: Double, lon: Double){
 
     val shareIntent = Intent.createChooser(sendIntent, null)
     startActivity(shareIntent)
+}
+
+/**
+ * This method will show possible apps that can open the link
+ */
+fun Activity.openNavigateUrl(url: String) {
+    val gmmIntentUri =
+//                    Uri.parse("google.navigation:q=" + clickedVenueMarker?.mLat + "," + clickedVenueMarker?.mLng + "&mode=d")
+        Uri.parse(url)
+    val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+//                mapIntent.setPackage("com.google.android.apps.maps")
+    if (mapIntent.resolveActivity(packageManager) != null)
+        startActivity(mapIntent)
+    else
+        showMessage("There are no apps to open this link")
 }

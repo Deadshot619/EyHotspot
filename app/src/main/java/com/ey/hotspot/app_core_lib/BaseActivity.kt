@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.ey.hotspot.R
 import com.ey.hotspot.utils.LanguageManager
 import com.ey.hotspot.utils.MyHotSpotSharedPreference
+import com.ey.hotspot.utils.extention_functions.showMessage
 
 abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatActivity(),
     UICallbacks<V> {
