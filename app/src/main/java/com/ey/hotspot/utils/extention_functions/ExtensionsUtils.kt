@@ -304,7 +304,6 @@ fun Context.shareWifiHotspotData(id: Int, lat: Double, lon: Double){
         putExtra(Intent.EXTRA_TEXT, getDeepLinkUrl(id = id, lat = lat, lon = lon))
         type = "text/plain"
     }
-
     val shareIntent = Intent.createChooser(sendIntent, null)
     startActivity(shareIntent)
 }

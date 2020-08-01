@@ -152,7 +152,7 @@ class ForgotPasswordFragment :
             mBinding.run {
 
                 if (mEmailIdOrPassword.trim().isEmpty()) {
-                    edtMobileNo.error = resources.getString(R.string.enter_email_or_password)
+                    edtMobileNo.error = resources.getString(R.string.email_id_hint)
                     isValid = false
                 }
 

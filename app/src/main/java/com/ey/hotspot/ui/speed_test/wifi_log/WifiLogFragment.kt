@@ -96,7 +96,7 @@ class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>()
     private fun getTime(datestring: String?):String
     {
         var outputDateStr: String=""
-        if (!datestring.equals("null")) {
+        if (datestring!=null) {
             val inputFormat: DateFormat = SimpleDateFormat("hh:mm:ss")
             val outputFormat: DateFormat = SimpleDateFormat("hh:mm a")
             val date: Date = inputFormat.parse(datestring)
