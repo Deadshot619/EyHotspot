@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo
 import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -19,6 +20,8 @@ import com.ey.hotspot.utils.MyHotSpotSharedPreference
 
 abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatActivity(),
     UICallbacks<V> {
+
+    private var doubleBackToExitPressedOnce = false
 
     protected lateinit var mBinding: T
     protected lateinit var mViewModel: V
@@ -112,9 +115,17 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
-        if (supportFragmentManager.fragments.isEmpty())
-            finish()
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed()
+            return
+        }
+
+        this.doubleBackToExitPressedOnce = true
+//        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show()
+        showMessage(getString(R.string.press_back_again_label))
+
+        Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
+
     }
 
 

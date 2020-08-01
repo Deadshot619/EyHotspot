@@ -30,6 +30,7 @@
     <string name="mbps_label">%s ميغابت في الثانية</string>
     <string name="loading_label">جار التحميل…</string>
     <string name="under_construction_label">أعمال جارية</string>
+    <string name="press_back_again_label">اضغط مرة أخرى للخروج</string>
 
 
     <!--Toolbar-->

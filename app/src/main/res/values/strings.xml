@@ -20,6 +20,7 @@
     <string name="mbps_label">%s Mbps</string>
     <string name="loading_label">Loading…</string>
     <string name="under_construction_label">Work in progress…</string>
+    <string name="press_back_again_label">Press back again to exit</string>
 
     <!--Toolbar-->
     <string name="search_locations_label">Search Locations</string>
