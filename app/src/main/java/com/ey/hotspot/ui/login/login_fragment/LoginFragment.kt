@@ -2,7 +2,6 @@ package com.ey.hotspot.ui.login.login_fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.ey.hotspot.R
@@ -81,8 +80,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
         setUpListeners()
         setUpObservers()
 
-        if (HotSpotApp.prefs!!.getSkipStatus())
-            mBinding.ivBack.visibility = View.VISIBLE
+/*        if (HotSpotApp.prefs!!.getSkipStatus())
+            mBinding.ivBack.visibility = View.VISIBLE*/
     }
 
     private fun setUpUIData() {
