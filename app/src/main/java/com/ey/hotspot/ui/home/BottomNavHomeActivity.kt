@@ -1,6 +1,7 @@
 package com.ey.hotspot.ui.home
 
 import android.content.Intent
+import android.os.Handler
 import androidx.core.content.ContextCompat
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseActivity
@@ -19,6 +20,7 @@ import com.ey.hotspot.utils.constants.Constants
 import com.ey.hotspot.utils.createNotificationChannel
 import com.ey.hotspot.utils.dialogs.YesNoDialog
 import com.ey.hotspot.utils.extention_functions.goToLoginScreen
+import com.ey.hotspot.utils.extention_functions.showMessage
 import com.ey.hotspot.utils.wifi_notification_key
 
 class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomNavHomeViewModel>() {
@@ -41,6 +43,7 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
     //Variable to hold deep link data
     var dlData: DeepLinkHotspotDataModel? = null
 
+    private var doubleBackToExitPressedOnce = false
 
     override fun getLayoutId() = R.layout.activity_bottom_nav_home
     override fun getViewModel() = BottomNavHomeViewModel::class.java
@@ -140,6 +143,26 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
             }
             false
         }
+    }
+
+
+    override fun onBackPressed() {
+        if (mManager.backStackEntryCount == 0) {
+
+            if (doubleBackToExitPressedOnce) {
+                super.onBackPressed()
+                return
+            }
+
+            this.doubleBackToExitPressedOnce = true
+//        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show()
+            showMessage(getString(R.string.press_back_again_label))
+
+            Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
+        }
+        else
+            super.onBackPressed()
+
     }
 
 }
