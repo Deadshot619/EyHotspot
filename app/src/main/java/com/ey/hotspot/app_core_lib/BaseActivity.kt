@@ -116,7 +116,8 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
     }
 
     override fun onBackPressed() {
-        if (doubleBackToExitPressedOnce) {
+        super.onBackPressed()
+       /* if (doubleBackToExitPressedOnce) {
             super.onBackPressed()
             return
         }
@@ -125,7 +126,7 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
 //        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show()
         showMessage(getString(R.string.press_back_again_label))
 
-        Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
+        Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)*/
 
     }
 

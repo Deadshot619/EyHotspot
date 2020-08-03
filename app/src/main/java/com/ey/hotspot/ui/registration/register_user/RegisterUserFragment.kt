@@ -16,6 +16,7 @@ import com.ey.hotspot.databinding.FragmentRegisterUserBinding
 import com.ey.hotspot.network.request.RegisterRequest
 import com.ey.hotspot.ui.login.permission.PermissionFragment
 import com.ey.hotspot.ui.registration.registration_option.RegistrationOptionFragment
+import com.ey.hotspot.ui.registration.webview.WebViewFragment
 import com.ey.hotspot.utils.constants.Constants
 import com.ey.hotspot.utils.constants.convertStringFromList
 import com.ey.hotspot.utils.dialogs.OkDialog
@@ -83,16 +84,7 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
         setUpObservers()
     }
 
-    private fun openWebview(webView:WebView,url:String)
-    {
-        webView.webViewClient = object : WebViewClient() {
-            override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
-                view?.loadUrl(url)
-                return true
-            }
-        }
-        webView.loadUrl(url)
-    }
+
 
     private fun setUpObservers() {
         //Registration Response
@@ -213,7 +205,7 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
             //T&C
             tvTermsCondition.setOnClickListener {
                 replaceFragment(
-                    fragment = PermissionFragment.newInstance(),
+                    fragment =WebViewFragment(),
                     addToBackStack = true,
                     bundle = null
                 )
@@ -425,13 +417,20 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
                 }
 
 
-                if(lastName.isEmpty()){
+                /*if(lastName.isEmpty()){
                     edtLastName.error = resources.getString(R.string.empty_lastName)
                     isValid = false
                 }else if(!lastName.isValidName()){
                     edtLastName.error = resources.getString(R.string.invalid_Name)
                     isValid = false
+                }*/
+                if(!lastName.isEmpty()){
+                    if(!lastName.isValidName()){
+                        edtLastName.error = resources.getString(R.string.invalid_Name)
+                        isValid = false
+                    }
                 }
+
 
                 if (!emailId.isEmailValid()) {
                     edtEmail.error = resources.getString(R.string.invalid_email_label)
