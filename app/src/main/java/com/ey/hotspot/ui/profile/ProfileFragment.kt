@@ -171,24 +171,31 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
                 }
 
 
-                if(lastName.isEmpty()){
+                /*if(lastName.isEmpty()){
                     edtLastName.error = resources.getString(R.string.empty_lastName)
                     isValid = false
                 }else if(!lastName.isValidName()){
                     edtLastName.error = resources.getString(R.string.invalid_Name)
                     isValid = false
+                }*/
+
+                if(!lastName.isEmpty()){
+                    if(!lastName.isValidName()){
+                        edtLastName.error = resources.getString(R.string.invalid_Name)
+                        isValid = false
+                    }
                 }
 
 
-            /*    if (!firstName.isValidName()) {
-                    edtFirstName.error = resources.getString(R.string.invalid_firstName)
-                    isValid = false
-                }
-                if (!lastName.isValidName()) {
-                    edtLastName.error = resources.getString(R.string.invalid_last_name_label)
-                    isValid = false
-                }
-                */
+                /*    if (!firstName.isValidName()) {
+                        edtFirstName.error = resources.getString(R.string.invalid_firstName)
+                        isValid = false
+                    }
+                    if (!lastName.isValidName()) {
+                        edtLastName.error = resources.getString(R.string.invalid_last_name_label)
+                        isValid = false
+                    }
+                    */
 
 
                 if (!emailId.isEmailValid()) {

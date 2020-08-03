@@ -3,6 +3,7 @@ package com.ey.hotspot.ui.home
 import android.content.Intent
 import android.os.Handler
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseActivity
 import com.ey.hotspot.app_core_lib.HotSpotApp
@@ -13,6 +14,8 @@ import com.ey.hotspot.ui.favourite.FavouriteFragment
 import com.ey.hotspot.ui.home.fragment.HomeFragment
 import com.ey.hotspot.ui.review_and_complaint.ReviewAndComplainFragment
 import com.ey.hotspot.ui.settings.fragments.SettingsFragment
+import com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment
+import com.ey.hotspot.ui.speed_test.rate_wifi.RateWifiFragment
 import com.ey.hotspot.ui.speed_test.speed_test_fragmet.SpeedTestFragment
 import com.ey.hotspot.utils.CHANNEL_ID
 import com.ey.hotspot.utils.channel_name
@@ -22,6 +25,7 @@ import com.ey.hotspot.utils.dialogs.YesNoDialog
 import com.ey.hotspot.utils.extention_functions.goToLoginScreen
 import com.ey.hotspot.utils.extention_functions.showMessage
 import com.ey.hotspot.utils.wifi_notification_key
+
 
 class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomNavHomeViewModel>() {
 
@@ -39,6 +43,35 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
                 })
         }
     }
+
+    //dialog for review
+    private val dialogReview by lazy {
+        YesNoDialog(this).apply {
+            setViews(
+                title = getString(R.string.discard_review),
+                description = "",
+                yes = {
+                    super.onBackPressed()
+                    this.dismiss() },
+                no = { this.dismiss() }
+            )
+        }
+    }
+    //dialog for complaint
+    private val dialogComplaint by lazy {
+        YesNoDialog(this).apply {
+            setViews(
+                title = getString(R.string.discard_complaint),
+                description = "",
+                yes = {
+                    super.onBackPressed()
+                    this.dismiss() },
+                no = { this.dismiss() }
+            )
+        }
+    }
+
+
 
     //Variable to hold deep link data
     var dlData: DeepLinkHotspotDataModel? = null
@@ -145,6 +178,22 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
         }
     }
 
+    override fun onBackPressed() {
+        val instanceFragment: Fragment? = supportFragmentManager.findFragmentById(R.id.container)
+        if (instanceFragment is RateWifiFragment)
+        {
+            dialogReview.show()
+
+        }else if (instanceFragment is RaiseComplaintFragment)
+        {
+           dialogComplaint.show()
+        }
+        else
+        {
+            super.onBackPressed()
+        }
+
+    }
 
     override fun onBackPressed() {
         if (mManager.backStackEntryCount == 0) {

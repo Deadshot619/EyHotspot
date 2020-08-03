@@ -92,6 +92,8 @@
     <string name="all_label">All</string>
     <string name="confirm_complaint">Do you want to submit your complaint?</string>
     <string name="confirm_review">Do you want to submit your rating?</string>
+    <string name="discard_review">Do you want to discard your review? </string>
+    <string name="discard_complaint">Do you want to discard your complaint? </string>
 
     <!--Favourite Wifi-->
     <string name="favoutite_wifi_label">Favourite Wifi</string>
@@ -175,7 +177,7 @@
     <string name="first_last_name_label">Firstname           Lastname</string>
     <string name="enter_confirm_password">Enter the password again!</string>
     <string name="sign_agree_msg">By signing up  you agree to the  </string>
-    <string name="terms_condition"><u>terms &amp; conditions</u></string>
+    <string name="terms_condition"><u>Terms &amp; Conditions</u></string>
     <string name="get_started">" GET STARTED NOW"</string>
     <string name="or">OR</string>
     <string name="otp_title">Please enter OTP sent to</string>
@@ -235,7 +237,7 @@
     <string name="secure_password">Create New Password</string>
     <string name="password_reset_label">Reset Password</string>
     <string name="enter_email_or_password">Enter  email id or  mobile no</string>
-    <string name="sign_in_issue">Enter the email address or mobile number associated with your account</string>
+    <string name="sign_in_issue">Enter the email address associated with your account</string>
     <string name="reenter_confirm_password">Re-enter Password</string>
     <string name="sms_label">SMS</string>
     <string name="email_label">Email</string>

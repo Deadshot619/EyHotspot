@@ -37,14 +37,14 @@ class RateWifiFragment : BaseFragment<FragmentRateWifiBinding, RateWifiViewModel
 
         setUpToolbar(toolbarBinding = mBinding.toolbarLayout, title = getString(R.string.rate_wifi_label), showUpButton = true)
 
+
         setDataInView()
 
         setUpListeners()
 
         setUpObservers()
     }
-
-    //Create 'OK' Dialog
+    //Create 'Yes/No' Dialog
     val dialog by lazy {
         YesNoDialog(requireContext()).apply {
             setViews(
@@ -82,6 +82,8 @@ class RateWifiFragment : BaseFragment<FragmentRateWifiBinding, RateWifiViewModel
             }
         }
     }
+
+
 
     private fun setUpObservers() {
         //Simon, Go Back

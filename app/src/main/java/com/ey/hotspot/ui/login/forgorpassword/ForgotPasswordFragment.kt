@@ -11,6 +11,7 @@ import com.ey.hotspot.utils.dialogs.OkDialog
 import com.ey.hotspot.utils.extention_functions.generateCaptchaCode
 import com.ey.hotspot.utils.extention_functions.replaceFragment
 import com.ey.hotspot.utils.extention_functions.showMessage
+import com.ey.hotspot.utils.validations.isEmailValid
 
 import com.google.gson.Gson
 import com.google.gson.JsonObject
@@ -153,6 +154,10 @@ class ForgotPasswordFragment :
 
                 if (mEmailIdOrPassword.trim().isEmpty()) {
                     edtMobileNo.error = resources.getString(R.string.email_id_hint)
+                    isValid = false
+                }
+                if (!mEmailIdOrPassword.isEmailValid()) {
+                    edtMobileNo.error = resources.getString(R.string.invalid_email)
                     isValid = false
                 }
 
