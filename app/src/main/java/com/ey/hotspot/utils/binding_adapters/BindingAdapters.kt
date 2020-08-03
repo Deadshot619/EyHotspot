@@ -46,6 +46,18 @@ fun bindShowTextViewListEmpty(textView: TextView, list: List<Any>?, value: Strin
     }
 }
 
+/**
+ * This adapter will hide the views associated with its particular recyclerview if the list is empty
+ */
+@BindingAdapter("bindHideViewListEmpty")
+fun bindHideViewListEmpty(view: View, list: List<Any>?) {
+    if (list.isNullOrEmpty()) {
+        view.visibility = View.GONE
+    } else {
+        view.visibility = View.VISIBLE
+    }
+}
+
 @BindingAdapter("bindExtractDateFromDateTime")
 fun bindExtractDateFromDateTime(textView: TextView, value: String?){
     value?.let {

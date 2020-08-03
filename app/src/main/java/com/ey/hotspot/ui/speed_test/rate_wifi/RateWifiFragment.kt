@@ -43,6 +43,7 @@ class RateWifiFragment : BaseFragment<FragmentRateWifiBinding, RateWifiViewModel
 
         setUpObservers()
     }
+
     //Create 'OK' Dialog
     val dialog by lazy {
         YesNoDialog(requireContext()).apply {

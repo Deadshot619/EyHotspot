@@ -367,7 +367,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                     )
 
                     getNearByWifiList(requireActivity().checkLocSaveState())
-
                 }
             }
 

@@ -96,7 +96,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
     }
 
     private fun setUpObservers() {
-
         //Login Response
         mViewModel.loginResponse.observe(viewLifecycleOwner, Observer {
 
@@ -116,10 +115,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
                         callVerificationOptionSelectionFragment(it.data.toVerificationPending())
                     }
                 }
-
             }
-
-
         })
 
         //Social Login Response

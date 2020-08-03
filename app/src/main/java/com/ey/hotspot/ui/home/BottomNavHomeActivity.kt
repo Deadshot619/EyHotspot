@@ -41,6 +41,7 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
     //Variable to hold deep link data
     var dlData: DeepLinkHotspotDataModel? = null
 
+
     override fun getLayoutId() = R.layout.activity_bottom_nav_home
     override fun getViewModel() = BottomNavHomeViewModel::class.java
     override fun onBinding() {
@@ -140,6 +141,5 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
             false
         }
     }
-
 
 }
