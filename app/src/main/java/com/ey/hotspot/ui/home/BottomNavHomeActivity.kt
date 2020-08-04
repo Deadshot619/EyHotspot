@@ -52,11 +52,13 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
                 description = "",
                 yes = {
                     super.onBackPressed()
-                    this.dismiss() },
+                    this.dismiss()
+                },
                 no = { this.dismiss() }
             )
         }
     }
+
     //dialog for complaint
     private val dialogComplaint by lazy {
         YesNoDialog(this).apply {
@@ -65,12 +67,12 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
                 description = "",
                 yes = {
                     super.onBackPressed()
-                    this.dismiss() },
+                    this.dismiss()
+                },
                 no = { this.dismiss() }
             )
         }
     }
-
 
 
     //Variable to hold deep link data
@@ -180,23 +182,12 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
 
     override fun onBackPressed() {
         val instanceFragment: Fragment? = supportFragmentManager.findFragmentById(R.id.container)
-        if (instanceFragment is RateWifiFragment)
-        {
+        if (instanceFragment is RateWifiFragment) {
             dialogReview.show()
 
-        }else if (instanceFragment is RaiseComplaintFragment)
-        {
-           dialogComplaint.show()
-        }
-        else
-        {
-            super.onBackPressed()
-        }
-
-    }
-
-    override fun onBackPressed() {
-        if (mManager.backStackEntryCount == 0) {
+        } else if (instanceFragment is RaiseComplaintFragment) {
+            dialogComplaint.show()
+        } else if (mManager.backStackEntryCount == 0) {
 
             if (doubleBackToExitPressedOnce) {
                 super.onBackPressed()
@@ -208,10 +199,11 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
             showMessage(getString(R.string.press_back_again_label))
 
             Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
-        }
-        else
+        } else
             super.onBackPressed()
 
+
     }
+
 
 }
