@@ -32,6 +32,7 @@ class ForgotPasswordFragment :
     companion object {
         fun newInstance() = ForgotPasswordFragment()
     }
+
     var mCaptcha: String? = null
     var mEnteredCaptch: String? = null
 
@@ -65,12 +66,14 @@ class ForgotPasswordFragment :
 
     private fun setUpViewData() {
 
-            setUpCaptcha()
+        setUpCaptcha()
     }
+
     private fun setUpCaptcha() {
         mCaptcha = activity?.generateCaptchaCode(5)
         mBinding.layoutCaptcha.etCaptchaText.setText(mCaptcha)
     }
+
     private fun setUpObserver() {
 
         mViewModel.forgotPasswordResponse.observe(viewLifecycleOwner, Observer {
@@ -154,16 +157,15 @@ class ForgotPasswordFragment :
                 if (mEmailIdOrPassword.trim().isEmpty()) {
                     edtMobileNo.error = resources.getString(R.string.email_id_hint)
                     isValid = false
-                }
-                if (!mEmailIdOrPassword.isEmailValid()) {
-                    edtMobileNo.error = resources.getString(R.string.invalid_email)
+                } else if (!mEmailIdOrPassword.isEmailValid()) {
+                    edtMobileNo.error = resources.getString(R.string.invalid_email_label)
                     isValid = false
                 }
 
                 if (mEnteredCaptch?.isEmpty()!!) {
                     layoutCaptcha.etCaptcha.error = resources.getString(R.string.empty_captcha)
                     isValid = false
-                }else if (!(mEnteredCaptch == mCaptcha)) {
+                } else if (mEnteredCaptch != mCaptcha) {
                     layoutCaptcha.etCaptcha.error = resources.getString(R.string.invalid_captcha)
                     isValid = false
                 }
