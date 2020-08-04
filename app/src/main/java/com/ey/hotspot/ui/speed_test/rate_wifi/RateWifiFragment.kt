@@ -5,7 +5,10 @@ import androidx.lifecycle.Observer
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentRateWifiBinding
+import com.ey.hotspot.ui.review_and_complaint.reviews.ReviewsFragment
 import com.ey.hotspot.utils.dialogs.YesNoDialog
+import com.ey.hotspot.utils.extention_functions.removeFragment
+import com.ey.hotspot.utils.extention_functions.replaceFragment
 import com.ey.hotspot.utils.extention_functions.showMessage
 
 class RateWifiFragment : BaseFragment<FragmentRateWifiBinding, RateWifiViewModel>() {
@@ -73,6 +76,7 @@ class RateWifiFragment : BaseFragment<FragmentRateWifiBinding, RateWifiViewModel
             //Cancel Button
             btnCancelButton.setOnClickListener {
                 edtRemarks.setText("")
+                activity?.onBackPressed()
             }
 
 //            Submit Feedback
@@ -90,7 +94,10 @@ class RateWifiFragment : BaseFragment<FragmentRateWifiBinding, RateWifiViewModel
         mViewModel.goBack.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let {status ->
                 if (status)
-                    activity?.onBackPressed()
+
+                    //activity?.onBackPressed()
+                    removeFragment(this)
+
             }
         })
     }
