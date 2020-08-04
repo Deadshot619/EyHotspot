@@ -46,7 +46,7 @@
 
     <!--    Custom TextField for password  -->
     <style name="CustomPasswordTextField" parent="CustomTextField">
-        <item name="passwordToggleEnabled">false</item>
+        <item name="passwordToggleEnabled">true</item>
         <item name="passwordToggleTint">@color/colorPrimary</item>
     </style>
 
