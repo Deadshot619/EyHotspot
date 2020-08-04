@@ -1,24 +1,18 @@
 package com.ey.hotspot.ui.search.searchlist
 
-import android.content.Intent
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
-import com.ey.hotspot.app_core_lib.CoreApp
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.SearchListFragmentBinding
 import com.ey.hotspot.ui.home.models.GetHotSpotResponse
-import com.ey.hotspot.ui.login.LoginActivity
 import com.ey.hotspot.ui.review_and_complaint.reviews.ReviewsFragment
 import com.ey.hotspot.ui.search.searchlist.adapter.SearchListAdapter
 import com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment
 import com.ey.hotspot.utils.constants.setUpSearchBar
 import com.ey.hotspot.utils.dialogs.YesNoDialog
-import com.ey.hotspot.utils.extention_functions.openNavigateUrl
-import com.ey.hotspot.utils.extention_functions.parseToDouble
-import com.ey.hotspot.utils.extention_functions.replaceFragment
-import com.ey.hotspot.utils.extention_functions.shareWifiHotspotData
+import com.ey.hotspot.utils.extention_functions.*
 
 class SearchListFragment : BaseFragment<SearchListFragmentBinding, SearchListViewModel>() {
 
@@ -28,7 +22,7 @@ class SearchListFragment : BaseFragment<SearchListFragmentBinding, SearchListVie
                 title = getString(R.string.login_required),
                 description = getString(R.string.need_to_login),
                 yes = {
-                    goToLoginScreen()
+                    activity?.goToLoginScreen()
                 },
                 no = {
                     this.dismiss()
@@ -121,16 +115,4 @@ class SearchListFragment : BaseFragment<SearchListFragmentBinding, SearchListVie
             this.adapter = mAdapter
         }
     }
-
-    private fun goToLoginScreen() {
-        //Clear Data
-        HotSpotApp.prefs?.clearSharedPrefData()
-
-        //Redirect user to Login Activity
-        CoreApp.instance.startActivity(Intent(CoreApp.instance, LoginActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
-        })
-    }
-
 }

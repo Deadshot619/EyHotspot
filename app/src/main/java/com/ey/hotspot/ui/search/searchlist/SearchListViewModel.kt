@@ -63,9 +63,10 @@ class SearchListViewModel(application: Application) : BaseViewModel(application)
 
                     if (it.status)
                         getHotSpotResponse(searchString)
+                    else
+                        setDialogVisibility(false)
 
                     showToastFromViewModel(it.message)
-                    setDialogVisibility(false)
                 }, error = {
                     checkError(it)
                 }

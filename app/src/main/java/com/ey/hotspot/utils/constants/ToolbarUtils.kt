@@ -69,7 +69,7 @@ fun Activity.setUpSearchBar(
         if (enableSearchButton){
             //Search button
             ivSearch.setOnClickListener {
-                if (etSearchBar.text.isNullOrEmpty()) {
+                if (etSearchBar.text.isNullOrEmpty() && false) {
                     showMessage(resources.getString(R.string.empty_query_alert_label))
                     etSearchBar.requestFocus()
                     this@setUpSearchBar?.showKeyboard()
@@ -80,7 +80,7 @@ fun Activity.setUpSearchBar(
 
             etSearchBar.setOnEditorActionListener{_, actionId, _ ->
                 if (actionId == EditorInfo.IME_ACTION_GO){
-                    if (etSearchBar.text.isNullOrEmpty()) {
+                    if (etSearchBar.text.isNullOrEmpty() && false) {
                         showMessage(resources.getString(R.string.empty_query_alert_label))
                         etSearchBar.requestFocus()
                         this@setUpSearchBar?.showKeyboard()

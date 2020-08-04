@@ -32,9 +32,10 @@ class FavouriteViewModel(application: Application) : BaseViewModel(application) 
 
                     if (it.status)
                         getFavouriteList()
+                    else
+                        setDialogVisibility(false)
 
                     showToastFromViewModel(it.message)
-                    setDialogVisibility(false)
                 }, error = {
                     checkError(it)
                 }
