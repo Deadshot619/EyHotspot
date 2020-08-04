@@ -243,7 +243,7 @@
     <string name="captcha_characters">أبجدهـFزحأنايكلاممياصسصسشالخامسثسذضصفرواحدإثنانثلاثةأربعةخمسةستةسبعةثمانيةتسعة</string>
     <string name="forgotpassword_label">هل نسيت كلمة المرور</string>
     <string name="invalid_captcha">كلمة التحقق غير صالحة</string>
-    <string name="msg_mandatory_fields">* الحقول الإلزامية</string>
+    <string name="msg_mandatory_fields"> الحقول الإلزامية</string>
     <string name="empty_firstName">حقل الاسم الأول مطلوب</string>
     <string name="invalid_Name">القيم العددية غير مقبولة في هذا المجال</string>
     <string name="empty_lastName">حقل اسم العائلة مطلوب</string>

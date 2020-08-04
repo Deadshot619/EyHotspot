@@ -8,7 +8,10 @@ import androidx.lifecycle.Observer
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentRaiseComplaintBinding
+import com.ey.hotspot.ui.favourite.FavouriteFragment
 import com.ey.hotspot.utils.dialogs.YesNoDialog
+import com.ey.hotspot.utils.extention_functions.removeFragment
+import com.ey.hotspot.utils.extention_functions.replaceFragment
 import com.ey.hotspot.utils.extention_functions.showMessage
 
 class RaiseComplaintFragment :
@@ -81,6 +84,7 @@ class RaiseComplaintFragment :
             //Cancel Button
             btnCancelButton.setOnClickListener {
                 edtRemarks.setText("")
+                activity?.onBackPressed()
             }
 
 //            Submit Feedback
@@ -122,7 +126,10 @@ class RaiseComplaintFragment :
         mViewModel.goBack.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let { status ->
                 if (status)
-                    activity?.onBackPressed()
+                   // activity?.onBackPressed()
+                    removeFragment(this)
+
+
             }
         })
     }
