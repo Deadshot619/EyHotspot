@@ -38,7 +38,7 @@
     <string name="password_format">Password Must Contain 8-32 characters One upper case letter,
         One lower case letter,
         Decimal digits(0-9),
-        Special character (#, $, %) etc</string>
+        Special character (#, $, % etc) </string>
 
     <!--My Profile-->
     <string name="my_profile_label">My Profile</string>
