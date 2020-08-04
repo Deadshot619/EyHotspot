@@ -13,13 +13,14 @@ class RateWifiFragment : BaseFragment<FragmentRateWifiBinding, RateWifiViewModel
 
 
     companion object {
-        fun newInstance(locationId: Int, wifiSsid: String, wifiProvider: String, location: String) =
+        fun newInstance(locationId: Int, wifiSsid: String, wifiProvider: String, location: String, reviewType: ReviewTypeEnum) =
             RateWifiFragment().apply {
                 arguments = Bundle().apply {
                     putInt(WIFI_ID, locationId)
                     putString(WIFI_SSID, wifiSsid)
                     putString(WIFI_PROVIDER, wifiProvider)
                     putString(LOCATION, location)
+                    putString(REVIEW_TYPE, reviewType.name)
                 }
             }
 
@@ -27,6 +28,8 @@ class RateWifiFragment : BaseFragment<FragmentRateWifiBinding, RateWifiViewModel
         private const val WIFI_SSID = "wifi_ssid"
         private const val WIFI_PROVIDER = "wifi_provider"
         private const val LOCATION = "location"
+        private const val REVIEW_TYPE = "review_type"
+        enum class ReviewTypeEnum(value: String) { ADD_REVIEW("add_review"), EDIT_REVIEW("edit_review") }
     }
 
     override fun getLayoutId() = R.layout.fragment_rate_wifi

@@ -31,6 +31,7 @@
             tools:context="com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListFragment"
             android:orientation="horizontal"
             android:weightSum="3"
+            app:bindHideViewListEmpty="@{viewModel.wifiLogListResponse.data}"
             android:visibility="visible"
             android:layout_marginStart="@dimen/common_margin_24"
             android:layout_marginEnd="@dimen/common_margin_24"
@@ -72,6 +73,18 @@
             app:layout_constraintEnd_toEndOf="@id/ll_header"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
+        <!--        Empty List Error Text-->
+        <TextView
+            android:id="@+id/tv_empty_list_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:bindShowTextViewListEmpty="@{viewModel.wifiLogListResponse.data}"
+            app:bindShowEmptyListMessage="@{@string/empty_log_list_label}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <TextView
             android:text="@string/under_construction_label"

@@ -77,7 +77,8 @@ class ReviewsFragment : BaseFragment<FragmentReviewsBinding, ReviewsViewModel>()
                         locationId = it.id,
                         wifiSsid = it.wifiSsid,
                         wifiProvider = it.wifiProvider,
-                        location = it.wifiLocation
+                        location = it.wifiLocation,
+                        reviewType = RateWifiFragment.Companion.ReviewTypeEnum.ADD_REVIEW
                     ),
                     addToBackStack = true
                 )
