@@ -65,7 +65,6 @@ class ForgotPasswordFragment :
     }
 
     private fun setUpViewData() {
-
         setUpCaptcha()
     }
 
@@ -78,6 +77,8 @@ class ForgotPasswordFragment :
 
         mViewModel.forgotPasswordResponse.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let {
+                setUpCaptcha()
+
                 if (it.status) {
                     showMessage(it.message, true)
                     replaceFragment(
