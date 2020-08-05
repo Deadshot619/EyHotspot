@@ -38,7 +38,7 @@ class RaiseComplaintViewModel(application: Application) : BaseViewModel(applicat
                 {
                     if (it.status)
                         _issueTypes.value = ComplaintIssuesTypes(
-                            mutableListOf(Type("0", appInstance.getString(R.string.select_issue_type_label))).apply {
+                            mutableListOf(Type("0", appInstance.applicationContext.resources.getString(R.string.select_issue_type_label))).apply {
                                 addAll(it.data.types)
                             }
                         )
