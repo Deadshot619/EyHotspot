@@ -202,7 +202,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
                     edtEmail.error = resources.getString(R.string.invalid_email_label)
                     isValid = false
                 }
-                if (!mobileNo.isValidMobile()) {
+                if (mobileNo.trim().isNotEmpty() && !mobileNo.isValidMobile()) {
                     edtMobileNo.error = resources.getString(R.string.invalid_mobile)
                     isValid = false
                 }
