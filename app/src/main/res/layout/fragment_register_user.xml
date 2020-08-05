@@ -42,6 +42,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:textDirection="locale"
                 android:id="@+id/asterik"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -52,11 +53,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/toolbarLayout"
                 />
             <TextView
+                android:textDirection="locale"
                 android:id="@+id/tvMandatoryFieldMsg"
                 android:layout_width="0dp"
                 android:textSize="@dimen/txt_size_16"
                 android:textStyle="italic"
-                android:layout_marginLeft="@dimen/margin_5"
+                android:layout_marginRight="@dimen/common_margin_12"
+                android:layout_marginLeft="@dimen/common_margin_12"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_20"
                 app:layout_constraintRight_toLeftOf="@+id/asterik"
