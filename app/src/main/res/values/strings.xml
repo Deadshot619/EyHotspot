@@ -35,6 +35,7 @@
     <string name="password_label">Password</string>
     <string name="confirm_password_label">Confirm Password</string>
     <string name="captcha_label">Enter the message shown below</string>
+    <string name="accept_terms_and_condition_label">You need to accept Terms and Conditions to continue</string>
     <string name="password_format">Password Must Contain 8-32 characters One upper case letter,
         One lower case letter,
         Decimal digits(0-9),
