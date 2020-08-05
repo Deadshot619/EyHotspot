@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:paddingTop="@dimen/common_padding_8"
     android:paddingBottom="@dimen/common_padding_8"
+    android:textDirection="locale"
     style="?attr/spinnerDropDownItemStyle"
     android:textColor="@color/colorAccent"
     android:ellipsize="marquee"
