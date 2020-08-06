@@ -55,7 +55,7 @@
     <string name="mobile_number_label">رقم الهاتف المحمول</string>
     <string name="password_label">كلمه السر</string>
     <string name="confirm_password_label">اعادة ادخال كلمة السر</string>
-    <string name="captcha_label">أدخل الرسالة الموضحة أدناه</string>
+    <string name="captcha_label">أدخل كلمة التحقق المبينة أدناه</string>
     <string name="accept_terms_and_condition_label">تحتاج إلى قبول الشروط والأحكام للمتابعة</string>
     <string name="password_format">يجب أن تحتوي كلمة المرور على 8-32 حرفًا وحرف كبير واحد ،
         حرف واحد صغير ،
@@ -92,6 +92,10 @@
     <string name="verification_label">التحقق</string>
     <string name="already_registered_label">لقد سجلت بالفعل مع %s و %s</string>
     <string name="complete_registration_label">أكمل تسجيلك بتحديد الخيار أدناه</string>
+
+    <!--    OTP-->
+    <string name="invalid_otp_label">OTP غير صحيح</string>
+
 
     <!--Review & Complaint-->
     <string name="reviews_and_complaint">التعليقات والشكاوى</string>

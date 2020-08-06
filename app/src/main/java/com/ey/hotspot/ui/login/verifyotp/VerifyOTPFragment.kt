@@ -72,33 +72,17 @@ class VerifyOTPFragment :
 
     private fun setUpDataView() {
 
-        mBinding.tvCheckEmailLabel.setText(
-            resources.getString(R.string.otp_title) + " " + arguments?.getString(
-                mInputData
-            ) ?: ""
-        )
-
-        mBinding.tvDisplayOTP.setText(
-            arguments?.getString(
-                mOTP
-            ) ?: ""
-        )
-
+        mBinding.tvCheckEmailLabel.text = resources.getString(R.string.otp_title) + " " + arguments?.getString(
+            mInputData
+        ) ?: ""
 
     }
 
     private fun setUpListener() {
-
-
-        mBinding.otpView.setOtpCompletionListener {
-            otp = it
-
-        }
-
         mBinding.btnVerify.setOnClickListener {
-
+            otp = mBinding.otpView.text.toString()
             try {
-                if (!(otp.isEmpty()) && (otp.length == 5)) {
+                if (otp.isNotEmpty() && otp.length == 5) {
                     val verifyOTPRequest: ForgotPasswordVerifyOTPRequest =
                         ForgotPasswordVerifyOTPRequest(
                             otp.toInt(),
@@ -106,10 +90,8 @@ class VerifyOTPFragment :
                         )
                     mViewModel.verifyForgotPasswordOTP(verifyOTPRequest)
                 } else {
-                    showMessage(requireActivity().getString(R.string.enter_valid_otp))
+                    showMessage(requireActivity().getString(R.string.invalid_otp_label))
                 }
-
-
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -165,10 +147,7 @@ class VerifyOTPFragment :
             it.getContentIfNotHandled()?.let {
 
                 if (it.status == true) {
-
                     showMessage(it.message, true)
-                    mBinding.tvDisplayOTP.setText( resources.getString(R.string.otp_sent_msg)+ it.data.otp)
-
                 } else {
                     try {
                         dialog.setViews(
