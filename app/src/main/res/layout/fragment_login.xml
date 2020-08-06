@@ -33,14 +33,15 @@
                 android:id="@+id/tv_hotspot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_margin_48"
                 android:src="@drawable/ic_hotspot_logo"
                 android:textColor="@color/colorWhite"
                 android:textDirection="locale"
+                app:layout_constraintVertical_bias="0.4"
                 android:textSize="@dimen/txt_size_45"
                 app:layout_constraintEnd_toEndOf="@id/iv_bg_header"
                 app:layout_constraintStart_toStartOf="@id/iv_bg_header"
-                app:layout_constraintTop_toTopOf="@id/iv_bg_header" />
+                app:layout_constraintTop_toTopOf="@id/iv_bg_header"
+                app:layout_constraintBottom_toBottomOf="@id/iv_bg_header"/>
 
             <!--            Skip button-->
             <Button
@@ -103,7 +104,7 @@
                 app:layout_constraintEnd_toEndOf="@id/tv_hotspot"
                 app:layout_constraintStart_toStartOf="@id/tv_hotspot"
                 app:layout_constraintTop_toBottomOf="@id/tv_hotspot"
-                app:layout_constraintVertical_bias="0.65" />
+                app:layout_constraintVertical_bias="0.55" />
 
             <!--        Login to Portal     -->
             <TextView
@@ -298,6 +299,7 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="@drawable/ic_facebook_"
+                android:tint="@color/com_facebook_blue"
                 app:layout_constraintBottom_toBottomOf="@+id/ivGoogleSignIn"
                 app:layout_constraintEnd_toStartOf="@+id/ivGoogleSignIn"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -311,6 +313,7 @@
                 android:layout_height="30dp"
                 android:layout_marginTop="@dimen/common_margin_32"
                 android:layout_marginBottom="@dimen/common_margin_32"
+                android:tint="@color/colorRed"
                 android:src="@drawable/ic_google_sign_in"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -81,7 +81,7 @@
     <string name="forgotpassword">Forgot Password?</string>
     <string name="email_id_hint">Enter Email Id</string>
     <string name="enter_password">Enter  Password</string>
-    <string name="enter_captcha">Enter the captcha</string>
+    <string name="enter_captcha">Enter captcha</string>
     <string name="login_credentials_msg">Login to the portal with your credentials</string>
     <string name="connecting_kingdom_label">Connecting the \n Kingdom of Saudi Arabia…!</string>
 
@@ -170,7 +170,7 @@
     <string name="btTextRateWifi">Rate Wifi</string>
     <string name="wifi_name">Wifi Name</string>
     <string name="issue_type">Issue type</string>
-    <string name="login_hotspot_msg">Don\'t have an account with Hotspot?</string>
+    <string name="login_hotspot_msg">Don\'t have an account with KSA Free Wifi?</string>
     <string name="get_started_msg">GET STARTED NOW!</string>
     <string name="invalid_email">Invalid User Name</string>
     <string name="verify_link_msg">"A verification link has been sent to "</string>
@@ -185,7 +185,7 @@
     <string name="otp_title">Please enter OTP sent to</string>
     <string name="resend_otp_label">RESEND OTP</string>
     <string name="btn_verify">VERIFY</string>
-    <string name="receive_otp">Didn\'t received OTP?</string>
+    <string name="receive_otp">Didn\'t receive OTP?</string>
     <string name="loginHeaderName">Hotspot</string>
     <string name="loginHeaderNameSub">Connecting world...!</string>
     <string name="navigate_label">NAVIGATING</string>
