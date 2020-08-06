@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HotSpot</string>
+    <string name="app_name" translatable="false">KSA Free Wifi</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="login_button">Login</string>
     <string name="registration_button">Register</string>
@@ -195,8 +195,9 @@
     <string name="otp_label">OTP</string>
     <string name="recently_search_label">Recent  Search</string>
     <string name="rate_now_label">RATE NOW</string>
-    <string name="arabic">Arabic</string>
-    <string name="english">English</string>
+<!--    <string name="arabic">Arabic</string>-->
+ <string name="arabic">عربى</string>
+ <string name="english">English</string>
     <string name="save_settings_label">SAVE SETTINGS</string>
     <string name="notification_label">NOTIFICATION</string>
     <string name="dummytext">Lorem lpsum is simply dummy text</string>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">هوت سبوت</string>
+<!--    <string name="app_name">هوت سبوت</string>-->
     <string name="hello_blank_fragment">مرحبًا بجزء فارغ</string>
 
     <string name="login_button">تسجيل الدخول</string>
@@ -192,8 +192,8 @@
     <string name="otp_label">OTP</string>
     <string name="recently_search_label">البحث الأخير</string>
     <string name="rate_now_label">قيم الآن</string>
-    <string name="arabic">عربى</string>
-    <string name="english">الإنجليزية</string>
+<!--    <string name="arabic">عربى</string>-->
+<!--    <string name="english">الإنجليزية</string>-->
     <string name="save_settings_label">احفظ التغييرات</string>
     <string name="notification_label">تنبيه</string>
     <string name="dummytext">Lorem lpsum هو ببساطة نص وهمي</string>
