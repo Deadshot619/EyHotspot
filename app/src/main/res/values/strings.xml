@@ -203,7 +203,7 @@
     <string name="dummytext">Lorem lpsum is simply dummy text</string>
     <string name="language_label">LANGUAGE</string>
     <string name="gps_status_label">GPS DETECTION</string>
-    <string name="get_wifi_label">GET WIFI LOG</string>
+    <string name="get_wifi_label">GET WIFI LOGS</string>
     <string name="notifications_label">NOTIFICATIONS</string>
     <string name="setting_label">My Settings</string>
     <string name="setting_title_label">You are sure you want to save the settings.</string>
