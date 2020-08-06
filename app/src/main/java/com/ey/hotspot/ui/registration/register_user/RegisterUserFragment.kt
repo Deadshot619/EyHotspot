@@ -186,8 +186,8 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
                 if (validate2()) {
                     val register: RegisterRequest =
                         RegisterRequest(
-                            mViewModel.firstName,
-                            mViewModel.lastName,
+                            mViewModel.firstName.trim(),
+                            mViewModel.lastName.trim(),
                             mViewModel.coutrycode,
                             mViewModel.mobileNumber,
                             mViewModel.emailId,
@@ -403,11 +403,10 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
             mBinding.run {
 
 
-                if (firstName.isEmpty()) {
+                if (firstName.trim().isEmpty()) {
                     edtFirstName.error = resources.getString(R.string.empty_firstName)
                     isValid = false
-
-                } else if (!firstName.isValidName()) {
+                } else if (!firstName.trim().isValidName()) {
                     edtFirstName.error = resources.getString(R.string.invalid_Name)
                     isValid = false
                 }
@@ -420,8 +419,8 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
                     edtLastName.error = resources.getString(R.string.invalid_Name)
                     isValid = false
                 }*/
-                if (lastName.isNotEmpty()) {
-                    if (!lastName.isValidName()) {
+                if (lastName.trim().isNotEmpty()) {
+                    if (!lastName.trim().isValidName()) {
                         edtLastName.error = resources.getString(R.string.invalid_Name)
                         isValid = false
                     }

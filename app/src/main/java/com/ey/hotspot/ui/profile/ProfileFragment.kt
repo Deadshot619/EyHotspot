@@ -161,11 +161,11 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
             mBinding.run {
 
 
-                if( firstName.isEmpty()){
+                if(firstName.trim().isEmpty()){
                     edtFirstName.error = resources.getString(R.string.empty_firstName)
                     isValid = false
 
-                } else if(!firstName.isValidName()){
+                } else if(!firstName.trim().isValidName()){
                     edtFirstName.error = resources.getString(R.string.invalid_Name)
                     isValid = false
                 }
@@ -179,11 +179,9 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
                     isValid = false
                 }*/
 
-                if(!lastName.isEmpty()){
-                    if(!lastName.isValidName()){
-                        edtLastName.error = resources.getString(R.string.invalid_Name)
-                        isValid = false
-                    }
+                if(lastName.trim().isNotEmpty() && !lastName.trim().isValidName()) {
+                    edtLastName.error = resources.getString(R.string.invalid_Name)
+                    isValid = false
                 }
 
 

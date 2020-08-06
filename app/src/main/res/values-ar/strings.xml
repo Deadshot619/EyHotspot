@@ -54,7 +54,7 @@
     <string name="country_code_label">الرقم الدولي</string>
     <string name="mobile_number_label">رقم الهاتف المحمول</string>
     <string name="password_label">كلمه السر</string>
-    <string name="confirm_password_label">تأكيد كلمة المرور</string>
+    <string name="confirm_password_label">اعادة ادخال كلمة السر</string>
     <string name="captcha_label">أدخل الرسالة الموضحة أدناه</string>
     <string name="accept_terms_and_condition_label">تحتاج إلى قبول الشروط والأحكام للمتابعة</string>
     <string name="password_format">يجب أن تحتوي كلمة المرور على 8-32 حرفًا وحرف كبير واحد ،
@@ -212,7 +212,7 @@
     <string name="invalid_email_label">البريد الإلكتروني غير صالح</string>
     <string name="invalid_mobile">رقم الجوال غير صالح</string>
     <string name="invalid_password">رمز مرور خاطئ</string>
-    <string name="pwd_not_match">كلمة المرور غير مطابقة</string>
+    <string name="pwd_not_match">تأكيد كلمة المرور غير متطابق</string>
     <string name="registering_new_user">تسجيل المستخدم الجديد</string>
     <string name="gettting_hotspots_list">الحصول على قائمة النقاط الساخنة</string>
     <string name="getting_favourite_hotspot_list">الحصول على قائمة النقاط الساخنة المفضلة</string>
@@ -245,8 +245,8 @@
     <string name="forgotpassword_label">هل نسيت كلمة المرور</string>
     <string name="invalid_captcha">كلمة التحقق غير صالحة</string>
     <string name="msg_mandatory_fields"> الحقول الإلزامية</string>
-    <string name="empty_firstName">حقل الاسم الأول مطلوب</string>
-    <string name="invalid_Name">القيم العددية غير مقبولة في هذا المجال</string>
+    <string name="empty_firstName">حقل الاسم الأول إلزامي</string>
+    <string name="invalid_Name">القيم الرقمية غير مقبولة في هذا المجال</string>
     <string name="empty_lastName">حقل اسم العائلة مطلوب</string>
     <string name="empty_captcha">رمز الكابتشا مطلوب</string>
 
