@@ -21,8 +21,8 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
     var password = ""
     var captcha = ""
 
-    private val _loginResponse = MutableLiveData<BaseResponse<LoginResponse?>>()
-    val loginResponse: LiveData<BaseResponse<LoginResponse?>>
+    private val _loginResponse = MutableLiveData<Event<BaseResponse<LoginResponse?>>>()
+    val loginResponse: LiveData<Event<BaseResponse<LoginResponse?>>>
         get() = _loginResponse
 
     //This variable will handle Login Errors
@@ -45,7 +45,7 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
                 request = loginRequest,
                 success = {
 
-                    _loginResponse.value = it
+                    _loginResponse.value = Event(it)
                     setDialogVisibility(false)
 
                 },
@@ -56,7 +56,6 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
             )
         }
     }
-
 
     fun callSocialLogin(socialLoginRequest: SocialLoginRequest) {
         setDialogVisibility(true)

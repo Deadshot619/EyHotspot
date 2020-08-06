@@ -9,7 +9,7 @@ import com.ey.hotspot.ui.favourite.model.MarkFavouriteResponse
 import com.ey.hotspot.ui.home.models.GetHotSpotRequest
 import com.ey.hotspot.ui.home.models.GetHotSpotResponse
 import com.ey.hotspot.ui.login.logout.LogoutResponse
-import com.ey.hotspot.ui.login.verifyotp.model.*
+import com.ey.hotspot.ui.login.verifyotp.model.ResendForgotPasswordOTP
 import com.ey.hotspot.utils.constants.Constants
 import com.google.gson.JsonArray
 import kotlinx.coroutines.Deferred
@@ -23,7 +23,7 @@ interface APIInterface {
     fun register(@Body registerRequest: RegisterRequest): Deferred<BaseResponse<RegistrationResponse>>
 
     @POST(Constants.API_LOGIN)
-    fun login(@Body loginRequest: LoginRequest): Deferred<BaseResponse<LoginResponse?>>
+    fun loginAsync(@Body loginRequest: LoginRequest): Deferred<BaseResponse<LoginResponse?>>
 
     @POST(Constants.API_SOCIAL_LOGIN)
     fun socialLogin(@Body socialLoginRequest: SocialLoginRequest): Deferred<BaseResponse<LoginResponse?>>

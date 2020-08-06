@@ -65,8 +65,6 @@ class OTPVerificationFragment :
     }
 
     private fun setUpViewData() {
-
-
         mBinding.tvCheckEmailLabel.setText(
             requireActivity().getString(R.string.otp_title) + " " + arguments?.getString(
                 mSelectedItem
@@ -76,17 +74,16 @@ class OTPVerificationFragment :
 
     private fun setUpClickListener() {
 
-        var otp: String = ""
-        mBinding.otpView.setOtpCompletionListener {
-            otp = it
-        }
+
 
         mBinding.btnVerify.setOnClickListener {
+            val otp = mBinding.otpView.text.toString()
+
             if (otp.isNotEmpty() && (otp.length == 5)) {
                 val verifyOTPRequest: VerifyOTPRequest = VerifyOTPRequest(otp.toInt())
                 mViewModel.verfiyOTPRequest(verifyOTPRequest)
             } else {
-                showMessage(requireActivity().getString(R.string.enter_valid_otp))
+                showMessage(requireActivity().getString(R.string.invalid_otp_label))
             }
 
         }
@@ -116,9 +113,6 @@ class OTPVerificationFragment :
             if (it.status == true) {
 
                 showMessage(it.message)
-
-                mBinding.tvDisplayOTP.setText( it.message)
-
 
             } else {
                 showMessage(it.message)

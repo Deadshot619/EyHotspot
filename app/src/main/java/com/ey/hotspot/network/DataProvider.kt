@@ -9,7 +9,7 @@ import com.ey.hotspot.ui.favourite.model.MarkFavouriteResponse
 import com.ey.hotspot.ui.home.models.GetHotSpotRequest
 import com.ey.hotspot.ui.home.models.GetHotSpotResponse
 import com.ey.hotspot.ui.login.logout.LogoutResponse
-import com.ey.hotspot.ui.login.verifyotp.model.*
+import com.ey.hotspot.ui.login.verifyotp.model.ResendForgotPasswordOTP
 import com.google.gson.JsonArray
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -45,7 +45,7 @@ object DataProvider : RemoteDataProvider {
 
         withContext(Dispatchers.Main) {
             try {
-                val result = mServices.login(request).await()
+                val result = mServices.loginAsync(request).await()
                 success(result)
             } catch (e: Exception) {
                 error(e)

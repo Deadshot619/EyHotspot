@@ -163,9 +163,6 @@
             app:layout_constraintStart_toStartOf="@id/guideline_left"
             />
 
-
-
-
         <!--Sign In-->
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_sign_in"
@@ -183,7 +180,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvDisplayOTP"
             app:layout_constraintVertical_bias="1" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
