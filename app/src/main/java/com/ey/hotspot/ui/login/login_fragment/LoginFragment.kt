@@ -19,7 +19,6 @@ import com.ey.hotspot.ui.registration.register_user.RegisterUserFragment
 import com.ey.hotspot.ui.registration.registration_option.RegistrationOptionFragment
 import com.ey.hotspot.utils.constants.convertStringFromList
 import com.ey.hotspot.utils.constants.setSkippedUserData
-import com.ey.hotspot.utils.constants.updateSharedPreference
 import com.ey.hotspot.utils.dialogs.OkDialog
 import com.ey.hotspot.utils.extention_functions.generateCaptchaCode
 import com.ey.hotspot.utils.extention_functions.replaceFragment
@@ -98,23 +97,27 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
     private fun setUpObservers() {
         //Login Response
         mViewModel.loginResponse.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let { response ->
 
-            setUpCaptcha()
+                setUpCaptcha()
 
-            if (it.status) {
+/*            if (it.status) {
                 showMessage(it.message, false)
                 updateSharedPreference(it.data!!)
                 goToHomePage()
-            } else {
-                showMessage(it.message, true)
+            } else {*/
+                showMessage(response.message, true)
 
-                if (!(it.data?.verification)!!) {
-                    if ((it.data.mobile_no!!.isEmpty()) || (it.data.mobile_no.isBlank())) {
-                        callVerificationFragment(it.data)
+//                if (!(it.data?.verification)!!) {
+                response.data?.let { data2 ->
+                    if (data2.mobile_no.isNullOrEmpty() && !data2.email_id.isNullOrEmpty()) {
+                        callVerificationFragment(data2)
                     } else {
-                        callVerificationOptionSelectionFragment(it.data.toVerificationPending())
+                        callVerificationOptionSelectionFragment(data2.toVerificationPending())
                     }
                 }
+//                }
+//            }
             }
         })
 
@@ -133,7 +136,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
         //Login Error
         mViewModel.loginError.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let { response ->
-                dialog.setViews(convertStringFromList(response.email, response.password))
+                dialog.setViews(convertStringFromList(response.email_error, response.password))
                 dialog.show()
             }
         })
@@ -159,7 +162,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
         HotSpotApp.prefs!!.setRegistrationTempToken(response.tmpToken!!)
         HotSpotApp.prefs!!.setRegistrationEmailID(response.email_id!!)
-
 
         replaceFragment(
             fragment = RegistrationOptionFragment.newInstance(

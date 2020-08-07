@@ -65,7 +65,6 @@ class ForgotPasswordFragment :
     }
 
     private fun setUpViewData() {
-
         setUpCaptcha()
     }
 
@@ -78,6 +77,8 @@ class ForgotPasswordFragment :
 
         mViewModel.forgotPasswordResponse.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let {
+                setUpCaptcha()
+
                 if (it.status) {
                     showMessage(it.message, true)
                     replaceFragment(
@@ -149,7 +150,8 @@ class ForgotPasswordFragment :
      */
     private fun validate(): Boolean {
         var isValid = true
-        mEnteredCaptch = mBinding.layoutCaptcha.etCaptcha.text?.toString()
+
+
 
         mViewModel.run {
             mBinding.run {
@@ -162,10 +164,10 @@ class ForgotPasswordFragment :
                     isValid = false
                 }
 
-                if (mEnteredCaptch?.isEmpty()!!) {
+                if (layoutCaptcha.etCaptcha.text.isNullOrEmpty()) {
                     layoutCaptcha.etCaptcha.error = resources.getString(R.string.empty_captcha)
                     isValid = false
-                } else if (mEnteredCaptch != mCaptcha) {
+                } else if (layoutCaptcha.etCaptcha.text.toString() != layoutCaptcha.etCaptchaText.text.toString()) {
                     layoutCaptcha.etCaptcha.error = resources.getString(R.string.invalid_captcha)
                     isValid = false
                 }

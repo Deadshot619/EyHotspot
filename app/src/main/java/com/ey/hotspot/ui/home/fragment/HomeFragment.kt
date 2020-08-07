@@ -228,6 +228,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             }
     }
 
+    /**
+     * This method is when we get the data from Deep Link to move the map to desired location
+     */
     private fun moveCameraToSelectedClustorWhenDeepLink() {
         mViewModel.goToDeepLinkedLocation.value?.getContentIfNotHandled()?.let {
             if (it) {
@@ -288,15 +291,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                 lastKnownLocation!!.latitude,
                 lastKnownLocation!!.longitude, "", true
             )
-            mViewModel.getHotSpotResponse(getHotSpotRequest)
+//            mViewModel.getHotSpotResponse(getHotSpotRequest)
         } else {
             val getHotSpotRequest: GetHotSpotRequest = GetHotSpotRequest(
                 Constants.LATITUDE,
                 Constants.LONGITUDE, "", false
             )
-            mViewModel.getHotSpotResponse(getHotSpotRequest)
+//            mViewModel.getHotSpotResponse(getHotSpotRequest)
         }
-
     }
 
     override fun onMapReady(map: GoogleMap) {
@@ -307,8 +309,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         getLocationPermission()
 
         setUpClickListener()
+
         // Turn on the My Location layer and the related control on the map.
         updateLocationUI()
+
         // Get the current location of the device and set the position of the map.
         getDeviceLocation()
     }

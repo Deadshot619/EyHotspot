@@ -7,3 +7,5 @@ enum class LoadingStatus {
     ERROR,
     LOADING
 }
+
+enum class VerificationType(value: String){ EMAIL("email"), SMS("sms") }

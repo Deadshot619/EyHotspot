@@ -53,8 +53,8 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
 
                 if (it.status)
                     profileData.value = ProfileDataModel(
-                        firstName = it.data.firstname ?: "",
-                        lastName = it.data.lastname ?: "",
+                        firstName = it.data.firstname?.trim() ?: "",
+                        lastName = it.data.lastname?.trim() ?: "",
                         mobileNo = it.data.mobile_no ?: "",
                         emailId = it.data.email ?: "",
                         countryCode = it.data.country_code

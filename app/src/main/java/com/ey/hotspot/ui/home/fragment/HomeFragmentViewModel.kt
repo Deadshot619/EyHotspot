@@ -42,12 +42,18 @@ class HomeFragmentViewModel(application: Application) : BaseViewModel(applicatio
     val saveLinkedLocationIfExists = MutableLiveData<MyClusterItems>()
 
 
+    init {
+        getHotSpotResponse()
+    }
+
     //Get HotSpots
-    fun getHotSpotResponse(getHotSpotRequest: GetHotSpotRequest) {
+    fun getHotSpotResponse() {
+        val request = GetHotSpotRequest(name = "")
+
         setDialogVisibility(true)
         coroutineScope.launch {
             DataProvider.getHotspot(
-                request = getHotSpotRequest,
+                request = request,
                 success = {
 
                     if (it.status){

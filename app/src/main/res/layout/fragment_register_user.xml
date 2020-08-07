@@ -41,31 +41,29 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+<!--            Asterik-->
             <TextView
-                android:textDirection="locale"
                 android:id="@+id/asterik"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/AsterikEditText"
                 android:layout_marginTop="@dimen/margin_20"
-                app:layout_constraintEnd_toEndOf="@id/guideline_right"
                 app:layout_constraintStart_toStartOf="@id/guideline_left"
                 app:layout_constraintTop_toBottomOf="@+id/toolbarLayout"
                 />
+
+<!--            Mandatory field-->
             <TextView
-                android:textDirection="locale"
                 android:id="@+id/tvMandatoryFieldMsg"
                 android:layout_width="0dp"
                 android:textSize="@dimen/txt_size_16"
                 android:textStyle="italic"
-                android:layout_marginRight="@dimen/common_margin_12"
-                android:layout_marginLeft="@dimen/common_margin_12"
+                android:layout_marginStart="@dimen/margin_5"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_20"
-                app:layout_constraintRight_toLeftOf="@+id/asterik"
+                app:layout_constraintStart_toEndOf="@+id/asterik"
                 android:text="@string/msg_mandatory_fields"
                 app:layout_constraintEnd_toEndOf="@id/guideline_right"
-                app:layout_constraintStart_toStartOf="@id/guideline_left"
                 app:layout_constraintTop_toBottomOf="@+id/toolbarLayout" />
 
             <!--Name View-->
@@ -406,10 +404,20 @@
                 />
 
 
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cb_terms_conditions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/tvSignAgree"
+                app:layout_constraintBottom_toBottomOf="@id/tvTermsCondition"
+                app:layout_constraintEnd_toStartOf="@id/tvSignAgree"/>
+
+<!--            By signing up-->
             <TextView
                 android:id="@+id/tvSignAgree"
                 style="@style/TextAppearance.MyApp.Headline3_Profile_Normal_Dark"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_30"
                 android:gravity="center"
@@ -419,20 +427,20 @@
                 app:layout_constraintStart_toStartOf="@id/guideline_left"
                 app:layout_constraintTop_toBottomOf="@id/tvPasswordMsg" />
 
-
+            <!--T&C-->
             <TextView
                 android:id="@+id/tvTermsCondition"
                 style="@style/TextAppearance.MyApp.Headline3_Profile_Bold"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/terms_condition"
                 android:textDirection="locale"
-
-                app:layout_constraintEnd_toEndOf="@id/guideline_right"
-                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintEnd_toEndOf="@+id/tvSignAgree"
+                app:layout_constraintStart_toStartOf="@id/tvSignAgree"
                 app:layout_constraintTop_toBottomOf="@id/tvSignAgree" />
 
+<!--            Get Started now-->
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnGetStarted"
                 android:layout_width="wrap_content"

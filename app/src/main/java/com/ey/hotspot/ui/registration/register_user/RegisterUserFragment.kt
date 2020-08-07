@@ -5,8 +5,6 @@ import android.graphics.Paint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.webkit.WebView
-import android.webkit.WebViewClient
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -14,7 +12,6 @@ import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentRegisterUserBinding
 import com.ey.hotspot.network.request.RegisterRequest
-import com.ey.hotspot.ui.login.permission.PermissionFragment
 import com.ey.hotspot.ui.registration.registration_option.RegistrationOptionFragment
 import com.ey.hotspot.ui.registration.webview.WebViewFragment
 import com.ey.hotspot.utils.constants.Constants
@@ -83,7 +80,6 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
 
         setUpObservers()
     }
-
 
 
     private fun setUpObservers() {
@@ -190,8 +186,8 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
                 if (validate2()) {
                     val register: RegisterRequest =
                         RegisterRequest(
-                            mViewModel.firstName,
-                            mViewModel.lastName,
+                            mViewModel.firstName.trim(),
+                            mViewModel.lastName.trim(),
                             mViewModel.coutrycode,
                             mViewModel.mobileNumber,
                             mViewModel.emailId,
@@ -205,7 +201,7 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
             //T&C
             tvTermsCondition.setOnClickListener {
                 replaceFragment(
-                    fragment =WebViewFragment(),
+                    fragment = WebViewFragment(),
                     addToBackStack = true,
                     bundle = null
                 )
@@ -407,11 +403,10 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
             mBinding.run {
 
 
-                if( firstName.isEmpty()){
+                if (firstName.trim().isEmpty()) {
                     edtFirstName.error = resources.getString(R.string.empty_firstName)
                     isValid = false
-
-                } else if(!firstName.isValidName()){
+                } else if (!firstName.trim().isValidName()) {
                     edtFirstName.error = resources.getString(R.string.invalid_Name)
                     isValid = false
                 }
@@ -424,8 +419,8 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
                     edtLastName.error = resources.getString(R.string.invalid_Name)
                     isValid = false
                 }*/
-                if(!lastName.isEmpty()){
-                    if(!lastName.isValidName()){
+                if (lastName.trim().isNotEmpty()) {
+                    if (!lastName.trim().isValidName()) {
                         edtLastName.error = resources.getString(R.string.invalid_Name)
                         isValid = false
                     }
@@ -449,6 +444,13 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
                     edtConfirmPassword.error = resources.getString(R.string.pwd_not_match)
                     isValid = false
                 }
+
+                if (isValid)
+                    //Terms & Conditions
+                    if (!cbTermsConditions.isChecked) {
+                        showMessage(getString(R.string.accept_terms_and_condition_label))
+                        isValid = false
+                    }
             }
         } ?: return false
 
@@ -471,7 +473,6 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
         val isLoggedIn = accessToken != null && !accessToken.isExpired
         return isLoggedIn
     }
-
 
     fun logOutUser() {
         LoginManager.getInstance().logOut()

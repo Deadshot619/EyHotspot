@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">هوت سبوت</string>
+<!--    <string name="app_name">هوت سبوت</string>-->
     <string name="hello_blank_fragment">مرحبًا بجزء فارغ</string>
 
     <string name="login_button">تسجيل الدخول</string>
@@ -43,7 +43,7 @@
     <string name="enter_password">أدخل كلمة المرور</string>
     <string name="enter_captcha">أدخل كلمة التحققق</string>
     <string name="login_credentials_msg">تسجيل الدخول إلى البوابة باستخدام بيانات اعتمادك</string>
-    <string name="login_hotspot_msg">أليس لديك حساب على نقطة اتصال؟</string>
+    <string name="login_hotspot_msg">ليس لديك حساب مع KSA Free Wifi؟</string>
     <string name="get_started_msg">نبدأ الآن!</string>
     <string name="connecting_kingdom_label">ربط \n المملكة العربية السعودية …!</string>
 
@@ -54,8 +54,9 @@
     <string name="country_code_label">الرقم الدولي</string>
     <string name="mobile_number_label">رقم الهاتف المحمول</string>
     <string name="password_label">كلمه السر</string>
-    <string name="confirm_password_label">تأكيد كلمة المرور</string>
-    <string name="captcha_label">أدخل الرسالة الموضحة أدناه</string>
+    <string name="confirm_password_label">اعادة ادخال كلمة السر</string>
+    <string name="captcha_label">أدخل كلمة التحقق المبينة أدناه</string>
+    <string name="accept_terms_and_condition_label">تحتاج إلى قبول الشروط والأحكام للمتابعة</string>
     <string name="password_format">يجب أن تحتوي كلمة المرور على 8-32 حرفًا وحرف كبير واحد ،
         حرف واحد صغير ،
         الأرقام العشرية (0-9) ،
@@ -91,6 +92,10 @@
     <string name="verification_label">التحقق</string>
     <string name="already_registered_label">لقد سجلت بالفعل مع %s و %s</string>
     <string name="complete_registration_label">أكمل تسجيلك بتحديد الخيار أدناه</string>
+
+    <!--    OTP-->
+    <string name="invalid_otp_label">OTP غير صحيح</string>
+
 
     <!--Review & Complaint-->
     <string name="reviews_and_complaint">التعليقات والشكاوى</string>
@@ -135,6 +140,8 @@
     <string name="add_remarks_label">أضف ملاحظاتك / ملاحظاتك هنا</string>
     <string name="cancel_label">إلغاء</string>
     <string name="submit_feedback_label">إرسال ملاحظات</string>
+    <string name="enter_remark_error_label">يرجى تقديم ملاحظات</string>
+
 
     <!--Raise Complaint-->
     <string name="explain_problem_label">اشرح مشكلتك بالتفصيل هنا</string>
@@ -190,15 +197,15 @@
     <string name="skip">تخطى</string>
     <string name="otp_label">OTP</string>
     <string name="recently_search_label">البحث الأخير</string>
-    <string name="rate_now_label">قيم الآن</string>
-    <string name="arabic">عربى</string>
-    <string name="english">الإنجليزية</string>
+    <string name="rate_now_label">قيم واي فاي</string>
+<!--    <string name="arabic">عربى</string>-->
+<!--    <string name="english">الإنجليزية</string>-->
     <string name="save_settings_label">احفظ التغييرات</string>
     <string name="notification_label">تنبيه</string>
     <string name="dummytext">Lorem lpsum هو ببساطة نص وهمي</string>
     <string name="language_label">لغة</string>
     <string name="gps_status_label">كشف GPS</string>
-    <string name="get_wifi_label">احصل على سجل واي فاي</string>
+    <string name="get_wifi_label">احصل على السجلات واي فاي</string>
     <string name="notifications_label">إشعارات</string>
     <string name="setting_label">اعداداتي</string>
     <string name="setting_title_label">أنت متأكد من أنك تريد حفظ الإعدادات.</string>
@@ -211,7 +218,7 @@
     <string name="invalid_email_label">البريد الإلكتروني غير صالح</string>
     <string name="invalid_mobile">رقم الجوال غير صالح</string>
     <string name="invalid_password">رمز مرور خاطئ</string>
-    <string name="pwd_not_match">كلمة المرور غير مطابقة</string>
+    <string name="pwd_not_match">تأكيد كلمة المرور غير متطابق</string>
     <string name="registering_new_user">تسجيل المستخدم الجديد</string>
     <string name="gettting_hotspots_list">الحصول على قائمة النقاط الساخنة</string>
     <string name="getting_favourite_hotspot_list">الحصول على قائمة النقاط الساخنة المفضلة</string>
@@ -244,8 +251,8 @@
     <string name="forgotpassword_label">هل نسيت كلمة المرور</string>
     <string name="invalid_captcha">كلمة التحقق غير صالحة</string>
     <string name="msg_mandatory_fields"> الحقول الإلزامية</string>
-    <string name="empty_firstName">حقل الاسم الأول مطلوب</string>
-    <string name="invalid_Name">القيم العددية غير مقبولة في هذا المجال</string>
+    <string name="empty_firstName">حقل الاسم الأول إلزامي</string>
+    <string name="invalid_Name">القيم الرقمية غير مقبولة في هذا المجال</string>
     <string name="empty_lastName">حقل اسم العائلة مطلوب</string>
     <string name="empty_captcha">رمز الكابتشا مطلوب</string>
 
