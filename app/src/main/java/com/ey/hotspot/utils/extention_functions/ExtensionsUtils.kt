@@ -2,6 +2,7 @@ package com.ey.hotspot.utils.extention_functions
 
 import android.Manifest
 import android.app.Activity
+import android.app.Application
 import android.content.Context
 import android.content.Context.LOCATION_SERVICE
 import android.content.Intent
@@ -25,6 +26,8 @@ import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseActivity
 import com.ey.hotspot.ui.home.BottomNavHomeActivity
 import com.ey.hotspot.ui.login.LoginActivity
+import com.ey.hotspot.utils.constants.Constants
+import com.ey.hotspot.utils.constants.clearDataSaveLang
 import com.ey.hotspot.utils.constants.getDeepLinkUrl
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.material.snackbar.Snackbar
@@ -329,4 +332,20 @@ fun Activity.openNavigateUrl(url: String) {
         startActivity(mapIntent)
     else
         showMessage("There are no apps to open this link")
+}
+
+/**
+ * Method to logout user & go to Login Page
+ */
+fun Application.logoutUser(bundle: Bundle? = null) {
+    clearDataSaveLang()
+
+    //Stop Service
+//    CoreApp.instance.stopService(Intent(CoreApp.instance, WifiService::class.java))
+
+    //Redirect user to Login Activity
+    this.startActivity(Intent(this, LoginActivity::class.java).apply {
+        flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        putExtra(Constants.LOGIN_BUNDLE, bundle)
+    })
 }

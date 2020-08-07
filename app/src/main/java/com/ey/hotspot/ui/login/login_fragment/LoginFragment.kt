@@ -10,7 +10,6 @@ import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.FragmentLoginBinding
 import com.ey.hotspot.network.request.LoginRequest
 import com.ey.hotspot.network.request.SocialLoginRequest
-import com.ey.hotspot.network.response.LoginResponse
 import com.ey.hotspot.network.response.VerificationPending
 import com.ey.hotspot.ui.home.BottomNavHomeActivity
 import com.ey.hotspot.ui.login.forgorpassword.ForgotPasswordFragment
@@ -60,7 +59,21 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
 
     companion object {
-        fun newInstance() = LoginFragment()
+        fun newInstance(
+            goToVerificationFragment: Boolean,
+            email: String? = null,
+            tempToken: String? = null
+        ) = LoginFragment().apply {
+            arguments = Bundle().apply {
+                putBoolean(GO_TO_VERIFICATION_FRAGMENT, goToVerificationFragment)
+                putString(EMAIL_ID, email)
+                putString(TEMP_TOKEN, tempToken)
+            }
+        }
+
+        private const val GO_TO_VERIFICATION_FRAGMENT = "go_to_verification_fragment"
+        private const val EMAIL_ID = "email_id"
+        private const val TEMP_TOKEN = "temp_token"
     }
 
     override fun getLayoutId() = R.layout.fragment_login
@@ -68,6 +81,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
     var mCaptcha: String? = null
     var mEnteredCaptch: String? = null
+    var countGoToVerification = 0
+
     override fun onBinding() {
 
 
@@ -79,6 +94,15 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
         setUpUIData()
         setUpListeners()
         setUpObservers()
+
+        //If true, go to verification fragment
+        if (arguments?.getBoolean(GO_TO_VERIFICATION_FRAGMENT)!!) {
+            if (countGoToVerification++ < 1)
+                callVerificationFragment(
+                    token = arguments?.getString(TEMP_TOKEN)!!,
+                    email = arguments?.getString(EMAIL_ID)!!
+                )
+        }
 
 /*        if (HotSpotApp.prefs!!.getSkipStatus())
             mBinding.ivBack.visibility = View.VISIBLE*/
@@ -112,7 +136,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 //                if (!(it.data?.verification)!!) {
                 response.data?.let { data2 ->
                     if (data2.mobile_no.isNullOrEmpty() && !data2.email_id.isNullOrEmpty()) {
-                        callVerificationFragment(data2)
+                        callVerificationFragment(token = data2.tmpToken!!, email = data2.email_id)
                     } else {
                         callVerificationOptionSelectionFragment(data2.toVerificationPending())
                     }
@@ -144,19 +168,16 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
     }
 
 
-    private fun callVerificationFragment(response: LoginResponse) {
-
-        HotSpotApp.prefs!!.setRegistrationTempToken(response.tmpToken!!)
-        HotSpotApp.prefs!!.setRegistrationEmailID(response.email_id!!)
+    private fun callVerificationFragment(token: String, email: String) {
+        HotSpotApp.prefs!!.setRegistrationTempToken(token)
+        HotSpotApp.prefs!!.setRegistrationEmailID(email)
 
         replaceFragment(
             fragment = OTPVerificationFragment.newInstance(
                 selectedOption = VerificationType.EMAIL,
-                selectedItem = response.email_id
+                selectedItem = email
             ), addToBackStack = true
         )
-
-
     }
 
     private fun callVerificationOptionSelectionFragment(response: VerificationPending) {

@@ -1,6 +1,5 @@
 package com.ey.hotspot.ui.settings.fragments
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -15,11 +14,10 @@ import com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListFragment
 import com.ey.hotspot.utils.LanguageManager
 import com.ey.hotspot.utils.MyHotSpotSharedPreference
 import com.ey.hotspot.utils.constants.Constants
-import com.ey.hotspot.utils.constants.logoutUser
 import com.ey.hotspot.utils.dialogs.YesNoDialog
 import com.ey.hotspot.utils.extention_functions.goToLoginScreen
+import com.ey.hotspot.utils.extention_functions.logoutUser
 import com.ey.hotspot.utils.extention_functions.replaceFragment
-import com.ey.hotspot.utils.extention_functions.showMessage
 
 class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel>() {
 
@@ -30,7 +28,8 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel
                 title = getString(R.string.logout_confirm),
                 description = "",
                 yes = {
-                    logoutUser() },
+                    activity?.application?.logoutUser()
+                },
                 no = { this.dismiss() }
             )
         }

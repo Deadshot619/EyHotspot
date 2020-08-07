@@ -83,7 +83,7 @@ class ChangePasswordFragment :
 
             if (it.status == true) {
                 replaceFragment(
-                    fragment = LoginFragment.newInstance(),
+                    fragment = LoginFragment.newInstance(goToVerificationFragment = false),
                     addToBackStack = true,
                     bundle = null
                 )

@@ -6,6 +6,7 @@ import com.ey.hotspot.app_core_lib.BaseActivity
 import com.ey.hotspot.databinding.ActivityLoginBinding
 import com.ey.hotspot.service.WifiService
 import com.ey.hotspot.ui.login.login_fragment.LoginFragment
+import com.ey.hotspot.utils.constants.Constants
 
 class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
     override fun getLayoutId(): Int {
@@ -24,11 +25,19 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
 //        calculateHashKey("com.ey.hotspot.ey_hotspot")
 
         //If service is running, stop the service
-        if(WifiService.isRunning)
+        if (WifiService.isRunning)
             stopService(Intent(this, WifiService::class.java))
 
 
-        replaceFragment(fragment = LoginFragment(), addToBackstack = false, bundle = null)
-
+        replaceFragment(
+            fragment = LoginFragment.newInstance(
+                goToVerificationFragment = intent?.getBundleExtra(Constants.LOGIN_BUNDLE)
+                    ?.getBoolean(Constants.GO_TO_VERIFICATION_FRAGMENT) ?: false,
+                email = intent?.getBundleExtra(Constants.LOGIN_BUNDLE)
+                    ?.getString(Constants.EMAIL_ID),
+                tempToken = intent?.getBundleExtra(Constants.LOGIN_BUNDLE)
+                    ?.getString(Constants.TEMP_TOKEN)
+            ), addToBackstack = false, bundle = null
+        )
     }
 }

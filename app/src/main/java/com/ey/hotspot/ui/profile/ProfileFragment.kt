@@ -1,5 +1,6 @@
 package com.ey.hotspot.ui.profile
 
+import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -9,9 +10,13 @@ import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.ProfileFragmentBinding
 import com.ey.hotspot.network.request.UpdateProfileRequest
+import com.ey.hotspot.ui.login.otpverification.fragment.OTPVerificationFragment
 import com.ey.hotspot.ui.settings.fragments.SettingsFragment
+import com.ey.hotspot.utils.constants.Constants
+import com.ey.hotspot.utils.constants.VerificationType
 import com.ey.hotspot.utils.constants.convertStringFromList
 import com.ey.hotspot.utils.dialogs.OkDialog
+import com.ey.hotspot.utils.extention_functions.logoutUser
 import com.ey.hotspot.utils.extention_functions.replaceFragment
 import com.ey.hotspot.utils.extention_functions.showMessage
 import com.ey.hotspot.utils.validations.isEmailValid
@@ -149,6 +154,19 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
                 }
             }
         })
+
+        //Email is changed
+        mViewModel.emailChange.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let {
+//                callVerificationFragment(it.tmp_token, mViewModel.profileData.value?.emailId!!)
+                activity?.application?.logoutUser(Bundle().apply {
+                    putBoolean(Constants.GO_TO_VERIFICATION_FRAGMENT, true)
+                    putString(Constants.EMAIL_ID, mViewModel.profileData.value?.emailId)
+                    putString(Constants.TEMP_TOKEN, it.tmp_token)
+                })
+            }
+        })
+
     }
 
     /**
@@ -161,11 +179,11 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
             mBinding.run {
 
 
-                if(firstName.trim().isEmpty()){
+                if (firstName.trim().isEmpty()) {
                     edtFirstName.error = resources.getString(R.string.empty_firstName)
                     isValid = false
 
-                } else if(!firstName.trim().isValidName()){
+                } else if (!firstName.trim().isValidName()) {
                     edtFirstName.error = resources.getString(R.string.invalid_Name)
                     isValid = false
                 }
@@ -179,7 +197,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
                     isValid = false
                 }*/
 
-                if(lastName.trim().isNotEmpty() && !lastName.trim().isValidName()) {
+                if (lastName.trim().isNotEmpty() && !lastName.trim().isValidName()) {
                     edtLastName.error = resources.getString(R.string.invalid_Name)
                     isValid = false
                 }
@@ -218,6 +236,18 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
         } ?: return false
 
         return isValid
+    }
+
+    private fun callVerificationFragment(token: String, email: String) {
+        HotSpotApp.prefs!!.setRegistrationTempToken(token)
+        HotSpotApp.prefs!!.setRegistrationEmailID(email)
+
+        replaceFragment(
+            fragment = OTPVerificationFragment.newInstance(
+                selectedOption = VerificationType.EMAIL,
+                selectedItem = email
+            ), addToBackStack = true
+        )
     }
 
 

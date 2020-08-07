@@ -34,6 +34,10 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
     val getCountryCodeList: LiveData<Event<BaseResponse<CoutryCode>>>
         get() = _getCoutryCodeList
 
+    private val _emailChange = MutableLiveData<Event<UpdateProfileResponse>>()
+    val emailChange: LiveData<Event<UpdateProfileResponse>>
+        get() = _emailChange
+
     init {
         if (HotSpotApp.prefs?.getAppLoggedInStatus()!!)
             getCountryCodeList()
@@ -83,6 +87,10 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
 
                     if (!it.status)
                         _profileError.value = Event(it.data)
+
+                    //If email is changed successfully
+                    if (it.status && it.data.email_change)
+                        _emailChange.value = Event(it.data)
 
                     setDialogVisibility(false)
                 }, error = {

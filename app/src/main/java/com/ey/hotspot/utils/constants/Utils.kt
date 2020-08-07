@@ -65,7 +65,7 @@ fun convertStringFromList(vararg lists: List<String>?): String{
 }
 
 /**
- * Method to logout user
+ * Method to logout user & go to Login Page
  */
 fun logoutUser() {
     clearDataSaveLang()

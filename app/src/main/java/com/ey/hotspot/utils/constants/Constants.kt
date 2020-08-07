@@ -21,8 +21,12 @@ interface Constants {
 
 
         //Intent
-        const val AUTHENTICATION_FAILED =
-            "authentication_failed"   //used when user's authentication is failed while refreshing token
+        const val AUTHENTICATION_FAILED = "authentication_failed"   //used when user's authentication is failed while refreshing token
+        const val LOGIN_BUNDLE = "login_bundle"
+        const val GO_TO_VERIFICATION_FRAGMENT = "go_to_verification_fragment"
+        const val EMAIL_ID = "email_id"
+        const val TEMP_TOKEN = "temp_token"
+
 
         //Download Link
         const val DOWNLOAD_LINK =
