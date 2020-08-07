@@ -198,7 +198,7 @@ object DataProvider : RemoteDataProvider {
 
     //Reviews
     override suspend fun getReviews(
-        success: (BaseResponse<List<ReviewsList>>) -> Unit,
+        success: (BaseResponse<List<LocationReviews>>) -> Unit,
         error: (Exception) -> Unit
     ) {
         withContext(Dispatchers.Main) {
@@ -229,7 +229,7 @@ object DataProvider : RemoteDataProvider {
     //Reviews
     override suspend fun getLocationReviews(
         request: GetLocationReviewsRequest,
-        success: (BaseResponse<List<ReviewsList>>) -> Unit,
+        success: (BaseResponse<ReviewsList>) -> Unit,
         error: (Exception) -> Unit
     ) {
         withContext(Dispatchers.Main) {

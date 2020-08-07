@@ -15,8 +15,8 @@ class ReviewsViewModel(application: Application) : BaseViewModel(application) {
 
     val rateWifiData = MutableLiveData(RateWifiModel())
 
-    private val _reviewListResponse = MutableLiveData<BaseResponse<List<ReviewsList>>>()
-    val reviewListResponse: LiveData<BaseResponse<List<ReviewsList>>>
+    private val _reviewListResponse = MutableLiveData<BaseResponse<ReviewsList>>()
+    val reviewListResponse: LiveData<BaseResponse<ReviewsList>>
         get() = _reviewListResponse
 
     fun getReviewsList() {

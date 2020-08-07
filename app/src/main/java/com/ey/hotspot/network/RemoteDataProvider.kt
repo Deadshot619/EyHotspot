@@ -8,7 +8,7 @@ import com.ey.hotspot.ui.favourite.model.MarkFavouriteResponse
 import com.ey.hotspot.ui.home.models.GetHotSpotRequest
 import com.ey.hotspot.ui.home.models.GetHotSpotResponse
 import com.ey.hotspot.ui.login.logout.LogoutResponse
-import com.ey.hotspot.ui.login.verifyotp.model.*
+import com.ey.hotspot.ui.login.verifyotp.model.ResendForgotPasswordOTP
 import com.google.gson.JsonArray
 
 interface RemoteDataProvider {
@@ -80,7 +80,7 @@ interface RemoteDataProvider {
 
     //Reviews & Complaints
     suspend fun getReviews(     //Reviews
-        success: (BaseResponse<List<ReviewsList>>) -> Unit,
+        success: (BaseResponse<List<LocationReviews>>) -> Unit,
         error: (Exception) -> Unit
     )
 
@@ -91,7 +91,7 @@ interface RemoteDataProvider {
 
     suspend fun getLocationReviews(     //Reviews
         request: GetLocationReviewsRequest,
-        success: (BaseResponse<List<ReviewsList>>) -> Unit,
+        success: (BaseResponse<ReviewsList>) -> Unit,
         error: (Exception) -> Unit
     )
 

@@ -26,7 +26,7 @@
         <!--    Add button  -->
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_add"
-            android:src="@drawable/ic_round_add_24"
+            tools:src="@drawable/ic_round_add_24"
             android:elevation="10dp"
             android:layout_marginEnd="@dimen/common_margin"
             android:tint="?android:attr/colorPrimary"
@@ -87,7 +87,7 @@
             android:layout_height="0dp"
             tools:listitem="@layout/item_reviews"
             tools:itemCount="3"
-            app:listLocationReviewList="@{viewModel.reviewListResponse.data}"
+            app:listLocationReviewList="@{viewModel.reviewListResponse.data.location_reviews}"
             android:layout_marginTop="@dimen/common_margin"
             app:layout_constraintTop_toBottomOf="@id/tv_wifi_provider"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -99,7 +99,7 @@
             android:id="@+id/tv_empty_list_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:showDashWhenTextEmpty="@{viewModel.reviewListResponse.data}"
+            app:showDashWhenTextEmpty="@{viewModel.reviewListResponse.data.location_reviews}"
             app:showEmptymessege="@{viewModel.reviewListResponse.message}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

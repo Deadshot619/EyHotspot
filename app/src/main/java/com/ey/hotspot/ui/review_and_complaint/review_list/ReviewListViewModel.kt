@@ -6,13 +6,13 @@ import androidx.lifecycle.MutableLiveData
 import com.ey.hotspot.app_core_lib.BaseViewModel
 import com.ey.hotspot.network.DataProvider
 import com.ey.hotspot.network.response.BaseResponse
-import com.ey.hotspot.network.response.ReviewsList
+import com.ey.hotspot.network.response.LocationReviews
 import kotlinx.coroutines.launch
 
 class ReviewListViewModel(application: Application) : BaseViewModel(application) {
 
-    private val _reviewList = MutableLiveData<BaseResponse<List<ReviewsList>>>()
-    val reviewList: LiveData<BaseResponse<List<ReviewsList>>>
+    private val _reviewList = MutableLiveData<BaseResponse<List<LocationReviews>>>()
+    val reviewList: LiveData<BaseResponse<List<LocationReviews>>>
         get() = _reviewList
 
     init {

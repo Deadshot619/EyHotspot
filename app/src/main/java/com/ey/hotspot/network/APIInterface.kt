@@ -77,13 +77,13 @@ interface APIInterface {
 
     //    Reviews & Complaints
     @GET(Constants.API_GET_REVIEWS)    //Reviews List
-    fun getReviewsAsync(): Deferred<BaseResponse<List<ReviewsList>>>
+    fun getReviewsAsync(): Deferred<BaseResponse<List<LocationReviews>>>
 
     @GET(Constants.API_GET_COMPLAINTS)    //Complaints
     fun getComplaintsAsync(): Deferred<BaseResponse<List<ComplaintsList>>>
 
     @POST(Constants.API_LOCATION_REVIEWS)    //Location Reviews List
-    fun getLocationReviewsAsync(@Body request: GetLocationReviewsRequest): Deferred<BaseResponse<List<ReviewsList>>>
+    fun getLocationReviewsAsync(@Body request: GetLocationReviewsRequest): Deferred<BaseResponse<ReviewsList>>
 
 
     @GET(Constants.API_GET_COMPLAINTS_ISSUE_TYPES)

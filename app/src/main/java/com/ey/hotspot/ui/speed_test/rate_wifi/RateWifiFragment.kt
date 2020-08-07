@@ -5,10 +5,10 @@ import androidx.lifecycle.Observer
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentRateWifiBinding
-import com.ey.hotspot.ui.review_and_complaint.reviews.ReviewsFragment
+import com.ey.hotspot.network.response.LocationReviews
+import com.ey.hotspot.utils.constants.ReviewTypeEnum
 import com.ey.hotspot.utils.dialogs.YesNoDialog
 import com.ey.hotspot.utils.extention_functions.removeFragment
-import com.ey.hotspot.utils.extention_functions.replaceFragment
 import com.ey.hotspot.utils.extention_functions.showMessage
 
 class RateWifiFragment : BaseFragment<FragmentRateWifiBinding, RateWifiViewModel>() {
@@ -16,14 +16,15 @@ class RateWifiFragment : BaseFragment<FragmentRateWifiBinding, RateWifiViewModel
 
 
     companion object {
-        fun newInstance(locationId: Int, wifiSsid: String, wifiProvider: String, location: String, reviewType: ReviewTypeEnum) =
+        fun newInstance(locationId: Int, wifiSsid: String, wifiProvider: String, location: String, reviewType: ReviewTypeEnum, userReview: LocationReviews?) =
             RateWifiFragment().apply {
                 arguments = Bundle().apply {
                     putInt(WIFI_ID, locationId)
                     putString(WIFI_SSID, wifiSsid)
                     putString(WIFI_PROVIDER, wifiProvider)
                     putString(LOCATION, location)
-                    putString(REVIEW_TYPE, reviewType.name)
+                    putString(REVIEW_TYPE, reviewType.value)
+                    putParcelable(USER_REVIEW, userReview)
                 }
             }
 
@@ -32,7 +33,7 @@ class RateWifiFragment : BaseFragment<FragmentRateWifiBinding, RateWifiViewModel
         private const val WIFI_PROVIDER = "wifi_provider"
         private const val LOCATION = "location"
         private const val REVIEW_TYPE = "review_type"
-        enum class ReviewTypeEnum(value: String) { ADD_REVIEW("add_review"), EDIT_REVIEW("edit_review") }
+        private const val USER_REVIEW = "user_review"
     }
 
     override fun getLayoutId() = R.layout.fragment_rate_wifi
@@ -70,6 +71,9 @@ class RateWifiFragment : BaseFragment<FragmentRateWifiBinding, RateWifiViewModel
             wifiSsid = arguments?.getString(WIFI_SSID) ?: ""
             wifiProvider = arguments?.getString(WIFI_PROVIDER) ?: ""
             wifiLocation = arguments?.getString(LOCATION) ?: ""
+
+            rating = arguments?.getParcelable<LocationReviews>(USER_REVIEW)?.rating ?: 0.0f
+            feedback = arguments?.getParcelable<LocationReviews>(USER_REVIEW)?.description ?: ""
         }
     }
 
