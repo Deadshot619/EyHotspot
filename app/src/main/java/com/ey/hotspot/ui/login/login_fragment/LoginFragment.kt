@@ -17,6 +17,7 @@ import com.ey.hotspot.ui.login.forgorpassword.ForgotPasswordFragment
 import com.ey.hotspot.ui.login.otpverification.fragment.OTPVerificationFragment
 import com.ey.hotspot.ui.registration.register_user.RegisterUserFragment
 import com.ey.hotspot.ui.registration.registration_option.RegistrationOptionFragment
+import com.ey.hotspot.utils.constants.VerificationType
 import com.ey.hotspot.utils.constants.convertStringFromList
 import com.ey.hotspot.utils.constants.setSkippedUserData
 import com.ey.hotspot.utils.dialogs.OkDialog
@@ -150,7 +151,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
         replaceFragment(
             fragment = OTPVerificationFragment.newInstance(
-                selectedOption = "email",
+                selectedOption = VerificationType.EMAIL,
                 selectedItem = response.email_id
             ), addToBackStack = true
         )

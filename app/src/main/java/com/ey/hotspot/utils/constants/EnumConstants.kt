@@ -8,4 +8,4 @@ enum class LoadingStatus {
     LOADING
 }
 
-enum class VerificationType(value: String){ EMAIL("email"), SMS("sms") }
+enum class VerificationType(val value: String){ EMAIL("email"), SMS("sms") }

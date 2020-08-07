@@ -8,6 +8,7 @@ import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentRegistrationOptionBinding
 import com.ey.hotspot.ui.login.otpverification.fragment.OTPVerificationFragment
+import com.ey.hotspot.utils.constants.VerificationType
 import com.ey.hotspot.utils.extention_functions.generateCaptchaCode
 import com.ey.hotspot.utils.extention_functions.replaceFragment
 import com.ey.hotspot.utils.extention_functions.showMessage
@@ -32,7 +33,7 @@ class RegistrationOptionFragment :
     }
 
     lateinit var TYPE_VALUE: String
-    var selectedOption: String = ""
+    var selectedOption: VerificationType? = null
     lateinit var phoneNo: String
     lateinit var emailID: String
 
@@ -89,10 +90,10 @@ class RegistrationOptionFragment :
                     val radio: RadioButton? = group?.findViewById(checkedId)
 
                     if (radio?.text.toString() == getString(R.string.sms_label)) {
-                        selectedOption = SMS
+                        selectedOption = VerificationType.SMS
                     }
                     if (radio?.text.toString() == getString(R.string.email_label)) {
-                        selectedOption = EMAIL
+                        selectedOption = VerificationType.EMAIL
                     }
 
                 })
@@ -105,8 +106,8 @@ class RegistrationOptionFragment :
                 if (validate()) {
                     replaceFragment(
                         fragment = OTPVerificationFragment.newInstance(
-                            selectedOption = selectedOption,
-                            selectedItem = if (selectedOption == SMS) phoneNo else emailID
+                            selectedOption = selectedOption!!,
+                            selectedItem = if (selectedOption == VerificationType.SMS) phoneNo else emailID
                         ),
                         addToBackStack = true
                     )
@@ -129,7 +130,7 @@ class RegistrationOptionFragment :
 
         mEnteredCaptch = mBinding.layoutCaptcha.etCaptcha.text?.toString()
 
-        if (selectedOption.trim().isEmpty()) {
+        if (selectedOption == null) {
             showMessage(resources.getString(R.string.choose_verify_option))
             isValid = false
         }

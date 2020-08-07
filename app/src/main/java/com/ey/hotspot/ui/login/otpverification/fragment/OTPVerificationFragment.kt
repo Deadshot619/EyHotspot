@@ -1,6 +1,5 @@
 package com.ey.hotspot.ui.login.otpverification.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.ey.hotspot.R
@@ -8,7 +7,8 @@ import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.OTPVerificationFragmentBinding
 import com.ey.hotspot.network.request.SendOTPRequest
 import com.ey.hotspot.network.request.VerifyOTPRequest
-import com.ey.hotspot.ui.home.BottomNavHomeActivity
+import com.ey.hotspot.utils.constants.VerificationType
+import com.ey.hotspot.utils.extention_functions.goToHomeScreen
 import com.ey.hotspot.utils.extention_functions.replaceFragment
 import com.ey.hotspot.utils.extention_functions.showMessage
 import com.facebook.login.LoginFragment
@@ -18,18 +18,17 @@ class OTPVerificationFragment :
 
 
     companion object {
-        fun newInstance(selectedOption: String, selectedItem: String) =
+        fun newInstance(selectedOption: VerificationType, selectedItem: String) =
             OTPVerificationFragment().apply {
 
                 arguments = Bundle().apply {
-
-                    putString(selectedType, selectedOption)
+                    putString(selectedType, selectedOption.value)
                     putString(mSelectedItem, selectedItem)
                 }
             }
 
-        private const val selectedType = "selectedoption"
-        private const val mSelectedItem = "selecteditem"
+        private const val selectedType = "selected_type"
+        private const val mSelectedItem = "selected_item"
     }
 
     override fun getLayoutId(): Int {
@@ -65,17 +64,12 @@ class OTPVerificationFragment :
     }
 
     private fun setUpViewData() {
-        mBinding.tvCheckEmailLabel.setText(
-            requireActivity().getString(R.string.otp_title) + " " + arguments?.getString(
-                mSelectedItem
-            ) ?: ""
-        )
+        mBinding.tvCheckEmailLabel.text = requireActivity().getString(R.string.otp_title) + " " + arguments?.getString(
+            mSelectedItem
+        ) ?: ""
     }
 
     private fun setUpClickListener() {
-
-
-
         mBinding.btnVerify.setOnClickListener {
             val otp = mBinding.otpView.text.toString()
 
@@ -101,44 +95,24 @@ class OTPVerificationFragment :
                 arguments?.getString(selectedType) ?: ""
             )
             mViewModel.callSendOTPRequest(sendOTPRequest)
-
         }
-
     }
 
     private fun setUpObserver() {
 
         mViewModel.sendOTPResponse.observe(viewLifecycleOwner, Observer {
-
-            if (it.status == true) {
-
-                showMessage(it.message)
-
-            } else {
-                showMessage(it.message)
-            }
-
+            showMessage(it.message)
         })
 
         mViewModel.verifyResponse.observe(viewLifecycleOwner, Observer {
 
             if (it.status) {
                 showMessage(it.message)
-                goToHomeScreen()
+                requireActivity().goToHomeScreen()
             } else {
                 showMessage(it.message)
             }
         })
 
     }
-
-
-    fun goToHomeScreen(){
-        startActivity(Intent(activity, BottomNavHomeActivity::class.java).apply {
-            flags =
-                Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-        })
-        activity?.finish()
-    }
-
 }

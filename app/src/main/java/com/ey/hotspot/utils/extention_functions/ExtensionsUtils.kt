@@ -23,6 +23,7 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseActivity
+import com.ey.hotspot.ui.home.BottomNavHomeActivity
 import com.ey.hotspot.ui.login.LoginActivity
 import com.ey.hotspot.utils.constants.getDeepLinkUrl
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -257,6 +258,13 @@ fun Activity.goToLoginScreen() {
     startActivity(Intent(this, LoginActivity::class.java))
 }
 
+fun Activity.goToHomeScreen(){
+    startActivity(Intent(this, BottomNavHomeActivity::class.java).apply {
+        flags =
+            Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+    })
+    this.finish()
+}
 
 fun Activity.generateCaptchaCode(limit: Int): String? {
     val chars = resources.getString(R.string.captcha_characters)
