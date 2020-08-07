@@ -24,5 +24,9 @@ data class RegisterRequest(
     val password: String,
 
     @SerializedName("confirm_password") @Expose
-    val confirmPassword: String
+    val confirmPassword: String,
+
+    @SerializedName("is_tc_accepted") @Expose
+    val isTcAccepted: Boolean
+
 )

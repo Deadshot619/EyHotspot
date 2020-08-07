@@ -192,7 +192,8 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
                             mViewModel.mobileNumber,
                             mViewModel.emailId,
                             mViewModel.password,
-                            mViewModel.confirmPassword
+                            mViewModel.confirmPassword,
+                            mBinding.cbTermsConditions.isChecked
                         )
                     mViewModel.registerUser(register)
                 }
