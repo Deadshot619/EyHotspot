@@ -66,10 +66,6 @@
                 app:layout_constraintEnd_toEndOf="@id/guideline_right"
                 app:layout_constraintTop_toBottomOf="@+id/toolbarLayout" />
 
-
-
-
-
             <!--Name View-->
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_name"

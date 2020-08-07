@@ -6,6 +6,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
 import com.ey.hotspot.R
 import java.math.BigDecimal
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -63,4 +64,35 @@ fun bindExtractDateFromDateTime(textView: TextView, value: String?){
     value?.let {
         textView.text = it.substringBefore("T")
     }
+}
+
+@BindingAdapter("bindExtractDateFromDateTime_DDMMYYYY")
+fun bindExtractDateFromDateTime_DDMMYYYY(textView: TextView, value: String?){
+    value?.let {
+        val inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
+        val outputFormat: DateFormat = SimpleDateFormat("dd/MM/yyyy")
+        val date: Date = inputFormat.parse(it.substringBefore("T"))
+        val outputDateStr: String = outputFormat.format(date)
+        textView.text = outputDateStr
+    }
+}
+
+@BindingAdapter("showDashWhenTextEmpty","showEmptymessege")
+fun showDashWhenTextEmpty(textView: TextView, list: List<Any>?,value: String?)
+{
+    if (list.isNullOrEmpty()) {
+        textView.visibility = View.VISIBLE
+        if (value.isNullOrEmpty())
+        {
+            textView.text = "-"
+        }
+        else
+        {
+            textView.text = value
+        }
+
+    } else {
+        textView.visibility = View.GONE
+    }
+
 }
