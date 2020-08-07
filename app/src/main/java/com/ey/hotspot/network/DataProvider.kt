@@ -215,12 +215,13 @@ object DataProvider : RemoteDataProvider {
 
     //Complaints
     override suspend fun getCompaints(
+        request: ReviewSortType,
         success: (BaseResponse<List<ComplaintsList>>) -> Unit,
         error: (Exception) -> Unit
     ) {
         withContext(Dispatchers.Main) {
             try {
-                val result = mServices.getComplaintsAsync().await()
+                val result = mServices.getComplaintsAsync(complaintOrder = request.value).await()
                 success(result)
             } catch (e: Exception) {
                 error(e)

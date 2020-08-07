@@ -7,6 +7,7 @@ import com.ey.hotspot.app_core_lib.BaseViewModel
 import com.ey.hotspot.network.DataProvider
 import com.ey.hotspot.network.response.BaseResponse
 import com.ey.hotspot.network.response.ComplaintsList
+import com.ey.hotspot.utils.constants.ReviewSortType
 import kotlinx.coroutines.launch
 
 class ComplaintListViewModel(application: Application) : BaseViewModel(application) {
@@ -16,13 +17,14 @@ class ComplaintListViewModel(application: Application) : BaseViewModel(applicati
         get() = _complaintList
 
     init {
-        getComplaintsList()
+        getComplaintsList(ReviewSortType.LATEST)
     }
 
-    private fun getComplaintsList() {
+    fun getComplaintsList(value: ReviewSortType) {
         setDialogVisibility(true)
         coroutineScope.launch {
             DataProvider.getCompaints(
+                request = value,
                 success = {
                         _complaintList.value = it
                     setDialogVisibility(false)

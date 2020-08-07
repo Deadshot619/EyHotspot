@@ -87,6 +87,7 @@ interface RemoteDataProvider {
     )
 
     suspend fun getCompaints(   //Compaints
+        request: ReviewSortType,
         success: (BaseResponse<List<ComplaintsList>>) -> Unit,
         error: (Exception) -> Unit
     )

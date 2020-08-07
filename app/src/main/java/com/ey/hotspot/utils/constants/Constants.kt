@@ -95,6 +95,7 @@ interface Constants {
 
         /*  Query   */
         const val REVIEW_ORDER = "review_order"
+        const val COMPLAINT_ORDER = "complaint_order"
 
 
     }
