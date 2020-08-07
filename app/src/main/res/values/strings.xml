@@ -5,7 +5,7 @@
     <string name="registration_button">Register</string>
 
 
-   <string name="google_client_id">701065953910-ua0p0sl83t7r04n0fh317p17pnpfouem.apps.googleusercontent.com</string>
+    <string name="google_client_id">701065953910-ua0p0sl83t7r04n0fh317p17pnpfouem.apps.googleusercontent.com</string>
 
 
     <string name="facebook_app_id">2495789184045739</string>
@@ -51,6 +51,7 @@
 
 
     <!--    Registration Option    -->
+    <string name="verify_account_label">Verify Account</string>
     <string name="verification_method_label">Please Select Option  To Verify Your Account</string>
     <string name="otp_sms_label">Verfiy OTP using SMS</string>
     <string name="email_link_label">Verify OTP using Email</string>
@@ -71,7 +72,7 @@
     <string name="already_registered_label">You have already registered with</string>
     <string name="complete_registration_label">Complete your registration by selecting below option</string>
 
-<!--    OTP-->
+    <!--    OTP-->
     <string name="invalid_otp_label">Invalid OTP</string>
 
     <!--Login-->
@@ -197,9 +198,9 @@
     <string name="otp_label">OTP</string>
     <string name="recently_search_label">Recent  Search</string>
     <string name="rate_now_label">RATE WIFI</string>
-<!--    <string name="arabic">Arabic</string>-->
- <string name="arabic">عربى</string>
- <string name="english">English</string>
+    <!--    <string name="arabic">Arabic</string>-->
+    <string name="arabic">عربى</string>
+    <string name="english">English</string>
     <string name="save_settings_label">SAVE SETTINGS</string>
     <string name="notification_label">NOTIFICATION</string>
     <string name="dummytext">Lorem lpsum is simply dummy text</string>

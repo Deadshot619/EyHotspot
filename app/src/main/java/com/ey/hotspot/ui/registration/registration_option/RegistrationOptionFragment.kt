@@ -45,7 +45,7 @@ class RegistrationOptionFragment :
 
         setUpToolbar(
             toolbarBinding = mBinding.toolbarLayout,
-            title = getString(R.string.registration_label),
+            title = getString(R.string.verify_account_label),
             showUpButton = true
         )
         TYPE_VALUE = getDataFromArguments(this, TYPE_KEY)

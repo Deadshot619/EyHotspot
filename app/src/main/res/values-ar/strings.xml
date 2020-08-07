@@ -73,6 +73,7 @@
 
 
     <!--    Registration Option    -->
+    <string name="verify_account_label">التحقق من الحساب</string>
     <string name="verification_method_label">حدد طريقة التحقق</string>
     <string name="otp_sms_label">Verfiy OTP باستخدام الرسائل القصيرة</string>
     <string name="email_link_label">تحقق باستخدام البريد الإلكتروني</string>
