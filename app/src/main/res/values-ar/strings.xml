@@ -57,10 +57,14 @@
     <string name="confirm_password_label">اعادة ادخال كلمة السر</string>
     <string name="captcha_label">أدخل كلمة التحقق المبينة أدناه</string>
     <string name="accept_terms_and_condition_label">تحتاج إلى قبول الشروط والأحكام للمتابعة</string>
-    <string name="password_format">يجب أن تحتوي كلمة المرور على 8-32 حرفًا وحرف كبير واحد ،
+   <!-- <string name="password_format">يجب أن تحتوي كلمة المرور على 8-32 حرفًا وحرف كبير واحد ،
         حرف واحد صغير ،
         الأرقام العشرية (0-9) ،
-        حرف خاص (# ، $ ،٪) إلخ</string>
+        حرف خاص (# ، $ ،٪) إلخ</string>-->
+    <string name="password_format">الرجاء إدخال كلمة السر الصحيحة</string>
+
+
+
 
     <!--My Profile-->
     <string name="my_profile_label">ملفي</string>
@@ -219,7 +223,7 @@
     <string name="invalid_email_label">البريد الإلكتروني غير صالح</string>
     <string name="invalid_mobile">رقم الجوال غير صالح</string>
     <string name="invalid_password">رمز مرور خاطئ</string>
-    <string name="pwd_not_match">تأكيد كلمة المرور غير متطابق</string>
+    <string name="pwd_not_match">تأكيد كلمة المرور لا يتطابق</string>
     <string name="registering_new_user">تسجيل المستخدم الجديد</string>
     <string name="gettting_hotspots_list">الحصول على قائمة النقاط الساخنة</string>
     <string name="getting_favourite_hotspot_list">الحصول على قائمة النقاط الساخنة المفضلة</string>

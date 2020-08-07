@@ -1,5 +1,6 @@
 package com.ey.hotspot.ui.settings.fragments
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -8,6 +9,7 @@ import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.FragmentSettingsBinding
+import com.ey.hotspot.ui.login.LoginActivity
 import com.ey.hotspot.ui.profile.ProfileFragment
 import com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListFragment
 import com.ey.hotspot.utils.LanguageManager
@@ -27,11 +29,32 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel
             setViews(
                 title = getString(R.string.logout_confirm),
                 description = "",
-                yes = { logoutUser() },
+                yes = {
+                    logoutUser() },
                 no = { this.dismiss() }
             )
         }
     }
+
+    private val dialogForGuest by lazy {
+        YesNoDialog(requireContext()).apply {
+            setViews(
+                title = getString(R.string.login_required),
+                description = getString(R.string.need_to_login),
+                yes = {
+                    goToLoginScreen()
+                    this.dismiss()
+                },
+                no = {
+                    this.dismiss()
+                }
+            )
+        }
+    }
+    fun goToLoginScreen() {
+        startActivity(Intent(requireContext(), LoginActivity::class.java))
+    }
+
 
     companion object {
         fun newInstance() = SettingsFragment()
@@ -70,7 +93,13 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel
         //Wifi Log List
         mBinding.llWifiLogList.setOnClickListener {
            // showMessage(resources.getString(R.string.under_construction_label))
-            replaceFragment(WifiLogListFragment(), true)
+            if (HotSpotApp.prefs?.getAppLoggedInStatus()!!) {
+                replaceFragment(WifiLogListFragment(), true)
+            }
+            else
+            {
+                dialogForGuest.show()
+            }
         }
 
         /*Submit click*/
