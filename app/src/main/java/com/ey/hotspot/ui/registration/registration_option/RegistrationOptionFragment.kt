@@ -135,8 +135,6 @@ class RegistrationOptionFragment :
             isValid = false
         }
 
-
-
         if (mBinding.layoutCaptcha.etCaptcha.text?.isEmpty()!!) {
             mBinding.layoutCaptcha.etCaptcha.error = resources.getString(R.string.empty_captcha)
             isValid = false

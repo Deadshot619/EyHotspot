@@ -13,7 +13,7 @@ data class LoginResponse(
     @SerializedName("refresh_token") @Expose
     val refreshToken: String? = null,
 
-    @SerializedName("email") @Expose
+//    @SerializedName("email") @Expose
     val email_error: List<String>? = null,
     @SerializedName("password") @Expose
     val password: List<String>? = null,
@@ -22,7 +22,7 @@ data class LoginResponse(
     val verification: Boolean? = null,
     @SerializedName("mobile_no") @Expose
     val mobile_no: String? = null,
-    @SerializedName("email_id") @Expose
+    @SerializedName("email") @Expose
     val email_id: String? = null,
     @SerializedName("tmp_token") @Expose
     val tmpToken: String? = null
@@ -38,7 +38,7 @@ data class VerificationPending(
     @SerializedName("mobile_no") @Expose
     val mobile_no: String? = null,
 
-    @SerializedName("email_id") @Expose
+    @SerializedName("email") @Expose
     val email_id: String? = null,
 
     @SerializedName("tmp_token") @Expose
