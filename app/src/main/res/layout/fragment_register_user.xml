@@ -68,10 +68,6 @@
                 app:layout_constraintStart_toStartOf="@id/guideline_left"
                 app:layout_constraintTop_toBottomOf="@+id/toolbarLayout" />
 
-
-
-
-
             <!--Name View-->
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_name"
