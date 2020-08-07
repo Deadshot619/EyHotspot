@@ -100,13 +100,22 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/common_margin_between_fields"
-            android:text="@{data.description}"
+            app:bindShowDashWhenTextEmpty="@{data.description}"
             android:textDirection="locale"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_wifi_name"
             app:layout_constraintTop_toBottomOf="@id/tv_wifi_provider"
             tools:text="Osama Bin Laden" />
 
+<!--        Days Ago-->
+        <TextView
+            android:id="@+id/tv_days_ago"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="69 days ago"
+            android:text="@{data.diff_for_human}"
+            app:layout_constraintTop_toBottomOf="@id/tv_review"
+            app:layout_constraintStart_toStartOf="@id/tv_review"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

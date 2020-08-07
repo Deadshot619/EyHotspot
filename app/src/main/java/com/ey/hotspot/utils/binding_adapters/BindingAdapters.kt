@@ -67,7 +67,7 @@ fun bindExtractDateFromDateTime(textView: TextView, value: String?){
 }
 
 @BindingAdapter("bindExtractDateFromDateTime_DDMMYYYY")
-fun bindExtractDateFromDateTime_DDMMYYYY(textView: TextView, value: String?){
+fun bindExtractDateFromDateTimeDDMMYYYY(textView: TextView, value: String?){
     value?.let {
         val inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
         val outputFormat: DateFormat = SimpleDateFormat("dd/MM/yyyy")
@@ -77,22 +77,10 @@ fun bindExtractDateFromDateTime_DDMMYYYY(textView: TextView, value: String?){
     }
 }
 
-@BindingAdapter("showDashWhenTextEmpty","showEmptymessege")
-fun showDashWhenTextEmpty(textView: TextView, list: List<Any>?,value: String?)
-{
-    if (list.isNullOrEmpty()) {
-        textView.visibility = View.VISIBLE
-        if (value.isNullOrEmpty())
-        {
-            textView.text = "-"
-        }
-        else
-        {
-            textView.text = value
-        }
 
-    } else {
-        textView.visibility = View.GONE
-    }
-
+@BindingAdapter("bindShowDashWhenTextEmpty")
+fun showDashWhenTextEmpty2(textView: TextView, value: String?){
+    textView.text = value?.let {
+        if (it.trim().isEmpty()) "-" else  value
+    } ?:  "-"
 }
