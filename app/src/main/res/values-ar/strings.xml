@@ -137,7 +137,7 @@
     <string name="end_time_label">وقت النهاية</string>
 
     <!--Rate Wifi-->
-    <string name="add_remarks_label">أضف ملاحظاتك / ملاحظاتك هنا</string>
+    <string name="add_remarks_label">أضف تعليقاتك هناا</string>
     <string name="cancel_label">إلغاء</string>
     <string name="submit_feedback_label">إرسال ملاحظات</string>
     <string name="enter_remark_error_label">يرجى تقديم ملاحظات</string>
