@@ -8,10 +8,8 @@ import androidx.lifecycle.Observer
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentRaiseComplaintBinding
-import com.ey.hotspot.ui.favourite.FavouriteFragment
 import com.ey.hotspot.utils.dialogs.YesNoDialog
 import com.ey.hotspot.utils.extention_functions.removeFragment
-import com.ey.hotspot.utils.extention_functions.replaceFragment
 import com.ey.hotspot.utils.extention_functions.showMessage
 
 class RaiseComplaintFragment :
@@ -36,6 +34,7 @@ class RaiseComplaintFragment :
         private const val WIFI_PROVIDER = "wifi_provider"
         private const val LOCATION = "location"
     }
+
 
     override fun getLayoutId() = R.layout.fragment_raise_complaint
     override fun getViewModel() = RaiseComplaintViewModel::class.java

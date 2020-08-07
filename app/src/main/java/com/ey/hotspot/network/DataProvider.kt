@@ -10,6 +10,7 @@ import com.ey.hotspot.ui.home.models.GetHotSpotRequest
 import com.ey.hotspot.ui.home.models.GetHotSpotResponse
 import com.ey.hotspot.ui.login.logout.LogoutResponse
 import com.ey.hotspot.ui.login.verifyotp.model.ResendForgotPasswordOTP
+import com.ey.hotspot.utils.constants.ReviewSortType
 import com.google.gson.JsonArray
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -198,12 +199,13 @@ object DataProvider : RemoteDataProvider {
 
     //Reviews
     override suspend fun getReviews(
+        request: ReviewSortType,
         success: (BaseResponse<List<LocationReviews>>) -> Unit,
         error: (Exception) -> Unit
     ) {
         withContext(Dispatchers.Main) {
             try {
-                val result = mServices.getReviewsAsync().await()
+                val result = mServices.getReviewsAsync(reviewOrder = request.value).await()
                 success(result)
             } catch (e: Exception) {
                 error(e)

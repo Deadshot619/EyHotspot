@@ -77,7 +77,7 @@ interface APIInterface {
 
     //    Reviews & Complaints
     @GET(Constants.API_GET_REVIEWS)    //Reviews List
-    fun getReviewsAsync(): Deferred<BaseResponse<List<LocationReviews>>>
+    fun getReviewsAsync(@Query(Constants.REVIEW_ORDER) reviewOrder: String): Deferred<BaseResponse<List<LocationReviews>>>
 
     @GET(Constants.API_GET_COMPLAINTS)    //Complaints
     fun getComplaintsAsync(): Deferred<BaseResponse<List<ComplaintsList>>>

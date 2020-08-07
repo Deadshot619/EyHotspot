@@ -11,3 +11,5 @@ enum class LoadingStatus {
 enum class ReviewTypeEnum(val value: String) { ADD_REVIEW("add_review"), EDIT_REVIEW("edit_review") }
 
 enum class VerificationType(val value: String){ EMAIL("email"), SMS("sms") }
+
+enum class ReviewSortType(val value: String){ LATEST("latest"), OLDEST("oldest") }

@@ -262,4 +262,11 @@
     <string name="empty_captcha">رمز الكابتشا مطلوب</string>
 
     <string-array name="otp_sent_msg">تم إرسال OTP إلى رقم هاتفك المحمول المسجل</string-array>
+
+    <!--    Reviews & Complaints Sort Type string  -->
+    <string-array name="review_complaint_sort_type">
+        <item>Latest</item>
+        <item>Oldest</item>
+    </string-array>
+
 </resources>

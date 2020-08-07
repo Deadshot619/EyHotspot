@@ -93,6 +93,9 @@ interface Constants {
         const val API_GET_COUNTRY_CODE_NAME = "getCountryCodeList"
         const val API_GET_WIFI_SEARCH_KEY_WORDS = "wifi/wifiSearchKeywords"
 
+        /*  Query   */
+        const val REVIEW_ORDER = "review_order"
+
 
     }
 }
