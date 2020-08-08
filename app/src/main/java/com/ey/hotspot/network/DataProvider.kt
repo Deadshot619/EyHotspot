@@ -138,12 +138,13 @@ object DataProvider : RemoteDataProvider {
         success: (BaseResponse<List<GetHotSpotResponse>>) -> Unit,
         error: (Exception) -> Unit
     ) {
-        try {
-            val result = mServices.getHotSpots(request).await()
-            success(result)
-        } catch (e: Exception) {
-            error(e)
-        }
+        withContext(Dispatchers.Main){
+            try {
+                val result = mServices.getHotSpots(request).await()
+                success(result)
+            } catch (e: Exception) {
+                error(e)
+            }}
     }
 
     override suspend fun getUserHotSpot(

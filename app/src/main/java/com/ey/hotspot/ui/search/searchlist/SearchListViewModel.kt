@@ -42,7 +42,7 @@ class SearchListViewModel(application: Application) : BaseViewModel(application)
                 success = {
 
                     if (it.status) {
-                        _getHotSpotResponse.value = it
+                        _getHotSpotResponse.postValue(it)
                     } else {
                         showToastFromViewModel(it.message)
                     }
@@ -51,7 +51,6 @@ class SearchListViewModel(application: Application) : BaseViewModel(application)
 
                 }, error = {
                     checkError(it)
-                    setDialogVisibility(false)
                 }
             )
         }

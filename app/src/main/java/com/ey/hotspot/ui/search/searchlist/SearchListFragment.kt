@@ -1,5 +1,7 @@
 package com.ey.hotspot.ui.search.searchlist
 
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ey.hotspot.R
@@ -13,6 +15,7 @@ import com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment
 import com.ey.hotspot.utils.constants.setUpSearchBar
 import com.ey.hotspot.utils.dialogs.YesNoDialog
 import com.ey.hotspot.utils.extention_functions.*
+import java.util.*
 
 class SearchListFragment : BaseFragment<SearchListFragmentBinding, SearchListViewModel>() {
 
@@ -52,6 +55,8 @@ class SearchListFragment : BaseFragment<SearchListFragmentBinding, SearchListVie
         }
 
         setUpRecyclerView(mBinding.rvSearchList)
+
+        setUpListeners()
     }
 
     private fun setUpRecyclerView(recyclerView: RecyclerView) {
@@ -114,5 +119,27 @@ class SearchListFragment : BaseFragment<SearchListFragmentBinding, SearchListVie
 //            addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
             this.adapter = mAdapter
         }
+    }
+
+    private fun setUpListeners(){
+        mBinding.toolbarLayout.etSearchBar.addTextChangedListener(object : TextWatcher{
+            private var timer = Timer()
+            private val DELAY: Long = 1000L
+
+            override fun afterTextChanged(p0: Editable?) {
+                timer.cancel()
+                timer = Timer()
+                timer.schedule(object : TimerTask() {
+                    override fun run() {
+                        mViewModel.getHotSpotResponse(mBinding.toolbarLayout.etSearchBar.text.toString())
+                    }
+                }, DELAY)
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+        })
     }
 }
