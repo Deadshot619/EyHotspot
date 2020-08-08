@@ -66,7 +66,7 @@ class RegistrationOptionFragment :
             mBinding.rbSms.visibility = View.GONE
 
         //Set Email selected
-        mBinding.rbEmail.isSelected = true
+        mBinding.rbEmail.isChecked = true
     }
 
     private fun setUpDataViews() {
