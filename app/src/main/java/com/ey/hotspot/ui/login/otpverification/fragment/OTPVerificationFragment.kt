@@ -18,17 +18,19 @@ class OTPVerificationFragment :
 
 
     companion object {
-        fun newInstance(selectedOption: VerificationType, selectedItem: String) =
+        fun newInstance(selectedOption: VerificationType, selectedItem: String, callOtpApi: Boolean = true) =
             OTPVerificationFragment().apply {
 
                 arguments = Bundle().apply {
                     putString(selectedType, selectedOption.value)
                     putString(mSelectedItem, selectedItem)
+                    putBoolean(CALL_OTP_API, callOtpApi)
                 }
             }
 
         private const val selectedType = "selected_type"
         private const val mSelectedItem = "selected_item"
+        private const val CALL_OTP_API = "call_otp_api"
     }
 
     override fun getLayoutId(): Int {
@@ -56,7 +58,11 @@ class OTPVerificationFragment :
         val sendOTPRequest: SendOTPRequest = SendOTPRequest(
             arguments?.getString(selectedType) ?: ""
         )
-        mViewModel.callSendOTPRequest(sendOTPRequest)
+
+        //Call the APi, only if its true
+        if (arguments?.getBoolean(CALL_OTP_API)!!)
+            mViewModel.callSendOTPRequest(sendOTPRequest)
+
         setUpViewData()
         setUpObserver()
         setUpClickListener()

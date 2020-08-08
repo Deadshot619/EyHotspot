@@ -84,8 +84,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
     var countGoToVerification = 0
 
     override fun onBinding() {
-
-
         mBinding.run {
             lifecycleOwner = viewLifecycleOwner
             viewModel = mViewModel
@@ -100,7 +98,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
             if (countGoToVerification++ < 1)
                 callVerificationFragment(
                     token = arguments?.getString(TEMP_TOKEN)!!,
-                    email = arguments?.getString(EMAIL_ID)!!
+                    email = arguments?.getString(EMAIL_ID)!!,
+                    callOtpApi = false
                 )
         }
 
@@ -136,7 +135,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 //                if (!(it.data?.verification)!!) {
                 response.data?.let { data2 ->
                     if (data2.mobile_no.isNullOrEmpty() && !data2.email_id.isNullOrEmpty()) {
-                        callVerificationFragment(token = data2.tmpToken!!, email = data2.email_id)
+                        callVerificationFragment(token = data2.tmpToken!!, email = data2.email_id, callOtpApi = true)
                     } else {
                         callVerificationOptionSelectionFragment(data2.toVerificationPending())
                     }
@@ -168,14 +167,15 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
     }
 
 
-    private fun callVerificationFragment(token: String, email: String) {
+    private fun callVerificationFragment(token: String, email: String, callOtpApi: Boolean) {
         HotSpotApp.prefs!!.setRegistrationTempToken(token)
         HotSpotApp.prefs!!.setRegistrationEmailID(email)
 
         replaceFragment(
             fragment = OTPVerificationFragment.newInstance(
                 selectedOption = VerificationType.EMAIL,
-                selectedItem = email
+                selectedItem = email,
+                callOtpApi = callOtpApi
             ), addToBackStack = true
         )
     }

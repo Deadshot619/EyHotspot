@@ -66,6 +66,7 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
                 success = {
                     setDialogVisibility(false)
                     _socialLoginRespinse.value = it
+
                     updateSharedPreference(it.data!!)
 
                     Log.d("TOKEN", it.data.accessToken)
