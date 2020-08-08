@@ -11,21 +11,17 @@ import com.ey.hotspot.databinding.FragmentLoginBinding
 import com.ey.hotspot.network.request.LoginRequest
 import com.ey.hotspot.network.request.SocialLoginRequest
 import com.ey.hotspot.network.response.VerificationPending
-import com.ey.hotspot.ui.home.BottomNavHomeActivity
 import com.ey.hotspot.ui.login.forgorpassword.ForgotPasswordFragment
 import com.ey.hotspot.ui.login.otpverification.fragment.OTPVerificationFragment
 import com.ey.hotspot.ui.registration.register_user.RegisterUserFragment
 import com.ey.hotspot.ui.registration.registration_option.RegistrationOptionFragment
 import com.ey.hotspot.ui.registration.webview.WebViewFragment
 import com.ey.hotspot.utils.constants.VerificationType
+import com.ey.hotspot.utils.constants.clearDataSaveLang
 import com.ey.hotspot.utils.constants.convertStringFromList
 import com.ey.hotspot.utils.constants.setSkippedUserData
-import com.ey.hotspot.utils.constants.updateSharedPreference
 import com.ey.hotspot.utils.dialogs.OkDialog
-import com.ey.hotspot.utils.extention_functions.generateCaptchaCode
-import com.ey.hotspot.utils.extention_functions.replaceFragment
-import com.ey.hotspot.utils.extention_functions.showMessage
-import com.ey.hotspot.utils.extention_functions.toVerificationPending
+import com.ey.hotspot.utils.extention_functions.*
 import com.ey.hotspot.utils.validations.isEmailValid
 import com.ey.hotspot.utils.validations.isValidPassword
 import com.facebook.*
@@ -150,20 +146,21 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
         //Social Login Response
         mViewModel.socialLoginResponse.observe(viewLifecycleOwner, Observer {
 
+            showMessage(it.message, true)
+
             if (it.status) {
-                showMessage(it.message, true)
                 if (it.data?.istcaccepted!!)
                 {
-                    goToHomePage()
+                    activity?.goToHomeScreen()
                 }
                 else {
-                    updateSharedPreference(it.data)
+                    clearDataSaveLang()
+                    HotSpotApp.prefs?.setUserDataPref(it.data)
                     replaceFragment(
                         fragment = WebViewFragment.newInstance("login"),
                         addToBackStack = false,
                         bundle = null
                     )
-
                 }
             }
         })
@@ -251,8 +248,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
         //Skip button
         mBinding.btnSkip.setOnClickListener {
+            clearDataSaveLang()
             setSkippedUserData()
-            goToHomePage()
+            activity?.goToHomeScreen()
         }
 
 
@@ -268,17 +266,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
             setUpCaptcha()
         }
     }
-
-    //Method to redirect user to home page
-    private fun goToHomePage() {
-        startActivity(Intent(activity, BottomNavHomeActivity::class.java).apply {
-            flags =
-                Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-        })
-
-        activity?.finish()
-    }
-
 
     /*   FACEBOOK   */
     private fun facebookSign() {

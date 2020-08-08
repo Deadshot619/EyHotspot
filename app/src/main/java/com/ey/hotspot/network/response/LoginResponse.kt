@@ -1,8 +1,11 @@
 package com.ey.hotspot.network.response
 
+import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class LoginResponse(
     @SerializedName("token_type") @Expose
     val tokenType: String? = null,
@@ -29,8 +32,7 @@ data class LoginResponse(
     @SerializedName("is_tc_accepted")@Expose
     val istcaccepted:Boolean?=null
 
-) {
-}
+): Parcelable
 
 
 data class VerificationPending(

@@ -1,22 +1,19 @@
 package com.ey.hotspot.ui.registration.webview
 
-import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentWebViewBinding
 import com.ey.hotspot.network.request.TermsRequest
-import com.ey.hotspot.ui.home.BottomNavHomeActivity
+import com.ey.hotspot.network.response.LoginResponse
 import com.ey.hotspot.ui.login.permission.PermissionViewModel
-import com.ey.hotspot.ui.registration.register_user.RegisterUserFragment
-import com.ey.hotspot.ui.review_and_complaint.reviews.ReviewsFragment
-import com.ey.hotspot.utils.extention_functions.removeFragment
-import com.ey.hotspot.utils.extention_functions.showMessage
+import com.ey.hotspot.utils.constants.updateSharedPreference
+import com.ey.hotspot.utils.extention_functions.goToHomeScreen
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -32,14 +29,16 @@ class WebViewFragment() :
     BaseFragment<FragmentWebViewBinding, PermissionViewModel>() {
 
     companion object {
-        fun newInstance(fragname: String) =
+        fun newInstance(fragname: String, loginData: LoginResponse? = null) =
             WebViewFragment().apply {
                 arguments = Bundle().apply {
                     putString(FRAG_NAME, fragname)
+                    putParcelable(LOGIN_DATA, loginData)
                 }
             }
 
         private const val FRAG_NAME = ""
+        private const val LOGIN_DATA = "login_data"
     }
 
     override fun getLayoutId(): Int {
@@ -47,7 +46,6 @@ class WebViewFragment() :
     }
 
     override fun getViewModel(): Class<PermissionViewModel> {
-
         return PermissionViewModel::class.java
     }
 
@@ -79,7 +77,10 @@ class WebViewFragment() :
 
             if (it.status) {
                 //showMessage(it.message, true)
-                goToHomePage()
+                arguments?.getParcelable<LoginResponse>(LOGIN_DATA)?.let { data ->
+                    updateSharedPreference(data)
+                }
+                activity?.goToHomeScreen()
 
             }
         })
@@ -92,12 +93,7 @@ class WebViewFragment() :
             mBinding.btnAgree.visibility=View.VISIBLE
         }
     }
-    //Method to redirect user to homepage
-    private fun goToHomePage() {
-        startActivity(Intent(activity, BottomNavHomeActivity::class.java).apply {
-        })
-        activity?.finish()
-    }
+
     private fun openWebview(webView: WebView, url:String)
     {
         webView.webViewClient = object : WebViewClient() {
