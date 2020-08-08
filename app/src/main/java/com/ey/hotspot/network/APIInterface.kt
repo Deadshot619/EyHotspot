@@ -156,7 +156,9 @@ interface APIInterface {
         @Body wifiLogListRequest: WifiLogListRequest
     ): Deferred<BaseResponse<List<WifiLogListResponse>>>
 
-
     @GET(Constants.API_GET_WIFI_SEARCH_KEY_WORDS)
     fun getWifiSearchKeyWordsAsync(): Deferred<BaseResponse<List<String>>>
+
+    @POST(Constants.API_TERMNCONDITION)
+    fun getTermsncondition(@Body request:TermsRequest):Deferred<BaseResponse<TermsResponse>>
 }

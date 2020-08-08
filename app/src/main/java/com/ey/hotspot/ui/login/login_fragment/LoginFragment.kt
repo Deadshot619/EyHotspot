@@ -16,9 +16,11 @@ import com.ey.hotspot.ui.login.forgorpassword.ForgotPasswordFragment
 import com.ey.hotspot.ui.login.otpverification.fragment.OTPVerificationFragment
 import com.ey.hotspot.ui.registration.register_user.RegisterUserFragment
 import com.ey.hotspot.ui.registration.registration_option.RegistrationOptionFragment
+import com.ey.hotspot.ui.registration.webview.WebViewFragment
 import com.ey.hotspot.utils.constants.VerificationType
 import com.ey.hotspot.utils.constants.convertStringFromList
 import com.ey.hotspot.utils.constants.setSkippedUserData
+import com.ey.hotspot.utils.constants.updateSharedPreference
 import com.ey.hotspot.utils.dialogs.OkDialog
 import com.ey.hotspot.utils.extention_functions.generateCaptchaCode
 import com.ey.hotspot.utils.extention_functions.replaceFragment
@@ -151,10 +153,18 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
             if (it.status) {
                 showMessage(it.message, true)
-                goToHomePage()
-            } else {
+                if (it.data?.istcaccepted!!)
+                {
+                    goToHomePage()
+                }
+                else {
+                    replaceFragment(
+                        fragment = WebViewFragment.newInstance("login"),
+                        addToBackStack = false,
+                        bundle = null
+                    )
 
-
+                }
             }
         })
 
@@ -358,8 +368,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
     }
 
     private fun setUpFacebookLogin() {
-
-
         callbackManager = CallbackManager.Factory.create()
         FacebookSdk.setApplicationId(resources.getString(R.string.facebook_app_id))
         FacebookSdk.setIsDebugEnabled(true)

@@ -25,7 +25,9 @@ data class LoginResponse(
     @SerializedName("email") @Expose
     val email_id: String? = null,
     @SerializedName("tmp_token") @Expose
-    val tmpToken: String? = null
+    val tmpToken: String? = null,
+    @SerializedName("is_tc_accepted")@Expose
+    val istcaccepted:Boolean?=null
 
 ) {
 }
