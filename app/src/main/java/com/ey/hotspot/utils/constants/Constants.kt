@@ -80,6 +80,8 @@ interface Constants {
         const val API_RESEND_FORGOT_PASSWORD_OTP = "forgotPassword/resendOtp"
         const val API_LOCATION_REVIEWS = "getLocationReviews"
         const val API_TERMNCONDITION="acceptTermsConditions"
+        const val TANDC_UR_ENGLISH="https://nearbyhs.php-dev.in/EyHotspots/public/acceptTermsConditions"
+        const val TANDC_UR_ARABIC="https://nearbyhs.php-dev.in/EyHotspots/public/acceptTermsConditions/ar"
 
         //Wifi
         const val API_WIFI_LOGIN = "wifi/login"
