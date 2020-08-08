@@ -68,17 +68,17 @@ class WebViewFragment() :
                 true
             )
             mViewModel.callTAndC(termsResponse)
-            removeFragment(this)
+            //removeFragment(this)
         }
 
     }
     private fun setUpObservers() {
 
-        //Social Login Response
+        //terms and condition Response
         mViewModel.termsResponse.observe(viewLifecycleOwner, Observer {
 
             if (it.status) {
-                showMessage(it.message, true)
+                //showMessage(it.message, true)
                 goToHomePage()
 
             }

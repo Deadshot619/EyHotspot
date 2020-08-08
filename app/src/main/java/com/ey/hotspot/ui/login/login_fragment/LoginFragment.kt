@@ -158,6 +158,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
                     goToHomePage()
                 }
                 else {
+                    updateSharedPreference(it.data)
                     replaceFragment(
                         fragment = WebViewFragment.newInstance("login"),
                         addToBackStack = false,
