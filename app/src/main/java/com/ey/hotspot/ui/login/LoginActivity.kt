@@ -9,6 +9,7 @@ import com.ey.hotspot.service.WifiService
 import com.ey.hotspot.ui.login.login_fragment.LoginFragment
 import com.ey.hotspot.ui.registration.webview.WebViewFragment
 import com.ey.hotspot.ui.speed_test.rate_wifi.RateWifiFragment
+import com.ey.hotspot.utils.IOnBackPressed
 import com.ey.hotspot.utils.constants.Constants
 
 class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
@@ -45,12 +46,19 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
     }
 
     override fun onBackPressed() {
+
         val instanceFragment: Fragment? = supportFragmentManager.findFragmentById(R.id.container)
         if (instanceFragment is WebViewFragment) {
+            (instanceFragment as? IOnBackPressed)?.onBackPressed()?.not()?.let {
+                super.onBackPressed()
+            }
         }
         else
         {
             super.onBackPressed()
         }
+
+
+
     }
 }

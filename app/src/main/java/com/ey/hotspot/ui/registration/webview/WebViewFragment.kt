@@ -8,10 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
+import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.FragmentWebViewBinding
 import com.ey.hotspot.network.request.TermsRequest
 import com.ey.hotspot.network.response.LoginResponse
 import com.ey.hotspot.ui.login.permission.PermissionViewModel
+import com.ey.hotspot.utils.IOnBackPressed
+import com.ey.hotspot.utils.constants.Constants
 import com.ey.hotspot.utils.constants.updateSharedPreference
 import com.ey.hotspot.utils.extention_functions.goToHomeScreen
 
@@ -26,7 +29,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class WebViewFragment() :
-    BaseFragment<FragmentWebViewBinding, PermissionViewModel>() {
+    BaseFragment<FragmentWebViewBinding, PermissionViewModel>(), IOnBackPressed {
 
     companion object {
         fun newInstance(fragname: String, loginData: LoginResponse? = null) =
@@ -58,7 +61,12 @@ class WebViewFragment() :
         )
         setUpObservers()
 
-        openWebview(mBinding.webview,"https://nearbyhs.php-dev.in/EyHotspots/public/acceptTermsConditions")
+        val langType = HotSpotApp.prefs!!.getLanguage()
+        if (langType == Constants.ENGLISH_LANG) {
+            openWebview(mBinding.webview,Constants.TANDC_UR_ENGLISH)
+        } else if (langType == Constants.ARABIC_LANG) {
+            openWebview(mBinding.webview,Constants.TANDC_UR_ARABIC)
+        }
         mBinding.btnAgree.setOnClickListener {
 
            // HotSpotApp.prefs?.setTermsConditionStatus(true)
@@ -94,6 +102,8 @@ class WebViewFragment() :
         }
     }
 
+
+
     private fun openWebview(webView: WebView, url:String)
     {
         webView.webViewClient = object : WebViewClient() {
@@ -103,6 +113,17 @@ class WebViewFragment() :
             }
         }
         webView.loadUrl(url)
+    }
+
+    override fun onBackPressed(): Boolean {
+        return if (arguments?.getString(FRAG_NAME).equals("register"))
+        {
+            true
+        }
+        else
+        {
+            false
+        }
     }
 
 }
