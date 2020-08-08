@@ -202,7 +202,7 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
             //T&C
             tvTermsCondition.setOnClickListener {
                 replaceFragment(
-                    fragment = WebViewFragment(),
+                    fragment = WebViewFragment.newInstance("register"),
                     addToBackStack = true,
                     bundle = null
                 )

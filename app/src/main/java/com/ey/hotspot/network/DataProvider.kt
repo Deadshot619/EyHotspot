@@ -55,6 +55,8 @@ object DataProvider : RemoteDataProvider {
     }
 
 
+
+
     override suspend fun getUserList(
         success: (JsonArray) -> Unit,
         error: (Exception) -> Unit
@@ -494,5 +496,20 @@ object DataProvider : RemoteDataProvider {
         } catch (e: Exception){
             error(e)
         }
+    }
+
+
+    suspend fun termsncondition(
+        request: TermsRequest,
+        success: (BaseResponse<Any>) -> Unit,
+        error: (Exception) -> Unit)
+    {
+        try {
+            val result= mServices.getTermsncondition(request).await()
+            success(result)
+        }catch (e: Exception){
+            error(e)
+        }
+
     }
 }

@@ -79,6 +79,7 @@ interface Constants {
         const val API_RESET_PASSWORD = "resetPassword"
         const val API_RESEND_FORGOT_PASSWORD_OTP = "forgotPassword/resendOtp"
         const val API_LOCATION_REVIEWS = "getLocationReviews"
+        const val API_TERMNCONDITION="acceptTermsConditions"
 
         //Wifi
         const val API_WIFI_LOGIN = "wifi/login"
