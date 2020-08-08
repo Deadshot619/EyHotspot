@@ -43,7 +43,7 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
      * @param e Takes an Exception as argument
      */
     protected fun checkError(e: Exception) {
-        _dialogVisibility.postValue(false)
+        _dialogVisibility.value = false
         e.message?.let {
             if (it.contains("500") || it.contains("Socket"))
                 showToastFromViewModel("No Internet Connection $it", true)
@@ -59,8 +59,8 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
      * @param message The message to be shown in dialog
      */
     protected fun setDialogVisibility(show: Boolean, message: String? = null){
-        _dialogVisibility.postValue(show)
-        _dialogMessage.postValue(message)
+        _dialogVisibility.value = show
+        _dialogMessage.value = message
     }
 
     /**
@@ -70,7 +70,7 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
      * @param message The message to be shown in Toast
      */
     protected fun showToastFromViewModel(message: String?, durationLong: Boolean = false){
-        _toastMessage.postValue(Event(message))
+        _toastMessage.value = Event(message)
         toastMessageDuration = durationLong
     }
 

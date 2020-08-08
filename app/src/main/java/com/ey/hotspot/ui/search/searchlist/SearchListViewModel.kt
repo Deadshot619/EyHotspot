@@ -42,7 +42,7 @@ class SearchListViewModel(application: Application) : BaseViewModel(application)
                 success = {
 
                     if (it.status) {
-                        _getHotSpotResponse.postValue(it)
+                        _getHotSpotResponse.value = it
                     } else {
                         showToastFromViewModel(it.message)
                     }

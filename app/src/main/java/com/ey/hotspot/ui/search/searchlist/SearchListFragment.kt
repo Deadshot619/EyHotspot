@@ -15,7 +15,11 @@ import com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment
 import com.ey.hotspot.utils.constants.setUpSearchBar
 import com.ey.hotspot.utils.dialogs.YesNoDialog
 import com.ey.hotspot.utils.extention_functions.*
-import java.util.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ObsoleteCoroutinesApi
+import kotlinx.coroutines.channels.ticker
+import kotlinx.coroutines.launch
 
 class SearchListFragment : BaseFragment<SearchListFragmentBinding, SearchListViewModel>() {
 
@@ -121,19 +125,22 @@ class SearchListFragment : BaseFragment<SearchListFragmentBinding, SearchListVie
         }
     }
 
+    @ObsoleteCoroutinesApi
     private fun setUpListeners(){
         mBinding.toolbarLayout.etSearchBar.addTextChangedListener(object : TextWatcher{
-            private var timer = Timer()
+
             private val DELAY: Long = 1000L
+            var ticker = ticker(DELAY)
 
             override fun afterTextChanged(p0: Editable?) {
-                timer.cancel()
-                timer = Timer()
-                timer.schedule(object : TimerTask() {
-                    override fun run() {
-                        mViewModel.getHotSpotResponse(mBinding.toolbarLayout.etSearchBar.text.toString())
-                    }
-                }, DELAY)
+                ticker.cancel()
+                ticker = ticker(DELAY)
+
+                CoroutineScope(Dispatchers.Main).launch{
+                    ticker.receive()
+                    //Call this api after 1 sec delay
+                    mViewModel.getHotSpotResponse(mBinding.toolbarLayout.etSearchBar.text.toString())
+                }
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
