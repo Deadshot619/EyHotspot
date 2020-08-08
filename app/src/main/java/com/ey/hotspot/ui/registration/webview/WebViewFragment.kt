@@ -39,7 +39,7 @@ class WebViewFragment() :
                 }
             }
 
-        private const val FRAG_NAME = "fragname"
+        private const val FRAG_NAME = ""
     }
 
     override fun getLayoutId(): Int {
@@ -84,7 +84,7 @@ class WebViewFragment() :
             }
         })
 
-        if (FRAG_NAME.equals("register")) {
+        if (arguments?.getString(FRAG_NAME).equals("register")) {
             mBinding.btnAgree.visibility=View.GONE
         }
         else

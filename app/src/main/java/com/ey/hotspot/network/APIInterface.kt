@@ -160,5 +160,5 @@ interface APIInterface {
     fun getWifiSearchKeyWordsAsync(): Deferred<BaseResponse<List<String>>>
 
     @POST(Constants.API_TERMNCONDITION)
-    fun getTermsncondition(@Body request:TermsRequest):Deferred<BaseResponse<TermsResponse>>
+    fun getTermsncondition(@Body request:TermsRequest):Deferred<BaseResponse<Any>>
 }
