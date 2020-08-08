@@ -64,6 +64,9 @@ class RegistrationOptionFragment :
         //If phone no. id empty, then hide the selection
         if (phoneNo.isEmpty())
             mBinding.rbSms.visibility = View.GONE
+
+        //Set Email selected
+        mBinding.rbEmail.isSelected = true
     }
 
     private fun setUpDataViews() {
@@ -101,7 +104,6 @@ class RegistrationOptionFragment :
 
             //Submit
             btnSubmit.setOnClickListener {
-
 
                 if (validate()) {
                     replaceFragment(

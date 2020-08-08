@@ -70,12 +70,21 @@ class OTPVerificationFragment :
     }
 
     private fun setUpViewData() {
-        mBinding.tvCheckEmailLabel.text = requireActivity().getString(R.string.otp_title) + " " + arguments?.getString(
-            mSelectedItem
-        ) ?: ""
+        mBinding.tvCheckEmailLabel.text =
+            requireActivity().getString(R.string.otp_title) + " " + arguments?.getString(
+                mSelectedItem
+            ) ?: ""
+
+        //Change image according to Selected Type
+        if ( arguments?.getString(selectedType) == VerificationType.SMS.value)
+            mBinding.ivCheck.setImageResource(R.drawable.ic_mobile_verification)
+        else
+            mBinding.ivCheck.setImageResource(R.drawable.ic_email_verification)
+
     }
 
     private fun setUpClickListener() {
+        //Verify
         mBinding.btnVerify.setOnClickListener {
             val otp = mBinding.otpView.text.toString()
 
@@ -96,6 +105,7 @@ class OTPVerificationFragment :
             )
         }
 
+        //Resend Otp
         mBinding.tvResendOTP.setOnClickListener {
             val sendOTPRequest: SendOTPRequest = SendOTPRequest(
                 arguments?.getString(selectedType) ?: ""
