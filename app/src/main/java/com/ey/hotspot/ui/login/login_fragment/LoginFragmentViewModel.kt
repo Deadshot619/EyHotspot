@@ -1,7 +1,6 @@
 package com.ey.hotspot.ui.login.login_fragment
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ey.hotspot.app_core_lib.BaseViewModel
@@ -11,7 +10,6 @@ import com.ey.hotspot.network.request.SocialLoginRequest
 import com.ey.hotspot.network.response.BaseResponse
 import com.ey.hotspot.network.response.LoginResponse
 import com.ey.hotspot.utils.Event
-import com.ey.hotspot.utils.constants.updateSharedPreference
 import kotlinx.coroutines.launch
 
 class LoginFragmentViewModel(application: Application) : BaseViewModel(application) {
@@ -67,9 +65,7 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
                     setDialogVisibility(false)
                     _socialLoginRespinse.value = it
 
-                    updateSharedPreference(it.data!!)
-
-                    Log.d("TOKEN", it.data.accessToken)
+//                    updateSharedPreference(it.data!!)
 
                 }, error = {
                     checkError(it)

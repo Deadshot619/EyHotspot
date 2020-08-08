@@ -4,11 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
             type="com.ey.hotspot.ui.login.otpverification.fragment.OTPVerificationViewModel" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
