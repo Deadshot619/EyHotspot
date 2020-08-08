@@ -21,13 +21,17 @@ class SearchListViewModel(application: Application) : BaseViewModel(application)
     //Variable to store search string
     private var searchString = ""
 
+    init {
+        getHotSpotResponse("")
+    }
+
     //Method to get hotspots list for non-logged in user
     fun getHotSpotResponse(value: String) {
         val request = GetHotSpotRequest(
             name = value,
-            latitude = 19.1403509,
-            longitude = 72.8096671,
-            locationEnabled = true
+            latitude = 0.0,
+            longitude = 0.0,
+            locationEnabled = false
         )
 
         searchString = value
