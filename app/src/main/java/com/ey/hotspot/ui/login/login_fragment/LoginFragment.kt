@@ -376,7 +376,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
      */
     private fun validate(): Boolean {
         var isValid = true
-        mEnteredCaptch = mBinding.layoutCaptcha.etCaptcha.text?.toString()
+
+        mEnteredCaptch = mBinding.layoutCaptcha.etCaptcha.text.toString()
+        mCaptcha = mBinding.layoutCaptcha.etCaptchaText.text.toString()
+
         mViewModel.run {
             mBinding.run {
                 if (!emailId.isEmailValid()) {

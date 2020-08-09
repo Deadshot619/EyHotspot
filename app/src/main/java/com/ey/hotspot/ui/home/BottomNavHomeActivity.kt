@@ -1,6 +1,7 @@
 package com.ey.hotspot.ui.home
 
 import android.content.Intent
+import android.os.Bundle
 import android.os.Handler
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -177,6 +178,18 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
                 }
             }
             false
+        }
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+
+        savedInstanceState?.run {
+            //Set Home as initial fragment
+            mBinding.bottomNavigation.menu.run {
+//                performIdentifierAction(R.id.home, 2)
+                getItem(2).isChecked = true
+            }
         }
     }
 
