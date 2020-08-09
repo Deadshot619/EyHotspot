@@ -86,6 +86,7 @@
                 android:paddingStart="@dimen/margin_20"
                 android:paddingEnd="@dimen/margin_20"
                 android:text="@string/sms_label"
+                tools:checked="true"
                 android:textDirection="locale"
                 android:textSize="18sp" />
 

@@ -43,13 +43,12 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
                 request = loginRequest,
                 success = {
 
-                    _loginResponse.value = Event(it)
+                    _loginResponse.postValue(Event(it))
                     setDialogVisibility(false)
 
                 },
                 error = {
                     checkError(it)
-                    setDialogVisibility(false)
                 }
             )
         }
