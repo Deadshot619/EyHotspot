@@ -49,8 +49,14 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
 
         val instanceFragment: Fragment? = supportFragmentManager.findFragmentById(R.id.container)
         if (instanceFragment is WebViewFragment) {
-            (instanceFragment as? IOnBackPressed)?.onBackPressed()?.not()?.let {
-                super.onBackPressed()
+            (instanceFragment as? IOnBackPressed)?.onBackPressed().let {
+                if(it==true) {
+                    super.onBackPressed()
+                }
+                else
+                {
+
+                }
             }
         }
         else

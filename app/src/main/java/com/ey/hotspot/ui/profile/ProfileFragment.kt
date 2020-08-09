@@ -117,6 +117,23 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
                         ?: -1
                 )
             }
+
+            //  login from facebook/google disable emailid
+            if(mViewModel.profileData.value?.provider.equals("google")|| mViewModel.profileData.value?.provider.equals("facebook"))
+            {
+                mBinding.inputEmailId.isFocusable=false
+                mBinding.inputEmailId.isEnabled=false
+                mBinding.edtEmail.isFocusable=false
+                mBinding.edtEmail.isEnabled=false
+            }
+            else
+            {
+                mBinding.inputEmailId.isFocusable=true
+                mBinding.inputEmailId.isEnabled=true
+                mBinding.edtEmail.isFocusable=true
+                mBinding.edtEmail.isEnabled=true
+
+            }
         })
 
 
@@ -154,6 +171,8 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
                 }
             }
         })
+
+
 
         //Email is changed
         mViewModel.emailChange.observe(viewLifecycleOwner, Observer {

@@ -42,6 +42,7 @@ class WebViewFragment() :
 
         private const val FRAG_NAME = ""
         private const val LOGIN_DATA = "login_data"
+        var back:Boolean=false
     }
 
     override fun getLayoutId(): Int {
@@ -63,13 +64,13 @@ class WebViewFragment() :
 
         val langType = HotSpotApp.prefs!!.getLanguage()
         if (langType == Constants.ENGLISH_LANG) {
-            openWebview(mBinding.webview, Constants.TANDC_UR_ENGLISH)
+            openWebview(mBinding.webview,Constants.TANDC_UR_ENGLISH)
         } else if (langType == Constants.ARABIC_LANG) {
-            openWebview(mBinding.webview, Constants.TANDC_UR_ARABIC)
+            openWebview(mBinding.webview,Constants.TANDC_UR_ARABIC)
         }
         mBinding.btnAgree.setOnClickListener {
 
-            // HotSpotApp.prefs?.setTermsConditionStatus(true)
+           // HotSpotApp.prefs?.setTermsConditionStatus(true)
             val termsResponse: TermsRequest = TermsRequest(
                 true
             )
@@ -78,7 +79,6 @@ class WebViewFragment() :
         }
 
     }
-
     private fun setUpObservers() {
 
         //terms and condition Response
@@ -90,18 +90,25 @@ class WebViewFragment() :
                     updateSharedPreference(data)
                 }
                 activity?.goToHomeScreen()
+
             }
         })
 
         if (arguments?.getString(FRAG_NAME).equals("register")) {
-            mBinding.btnAgree.visibility = View.GONE
-        } else {
-            mBinding.btnAgree.visibility = View.VISIBLE
+            mBinding.btnAgree.visibility=View.GONE
+            back=true
+        }
+        else
+        {
+            mBinding.btnAgree.visibility=View.VISIBLE
+            back=false
         }
     }
 
 
-    private fun openWebview(webView: WebView, url: String) {
+
+    private fun openWebview(webView: WebView, url:String)
+    {
         webView.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
                 view?.loadUrl(url)
@@ -112,11 +119,7 @@ class WebViewFragment() :
     }
 
     override fun onBackPressed(): Boolean {
-        return if (arguments?.getString(FRAG_NAME).equals("register")) {
-            true
-        } else {
-            false
-        }
+        return back
     }
 
 }
