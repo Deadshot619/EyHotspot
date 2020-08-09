@@ -2,6 +2,8 @@ package com.ey.hotspot.ui.login.login_fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.ey.hotspot.R
@@ -78,6 +80,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
     var mEnteredCaptch: String? = null
     var countGoToVerification = 0
 
+
+
     override fun onBinding() {
         mBinding.run {
             lifecycleOwner = viewLifecycleOwner
@@ -116,11 +120,31 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
     private fun setUpObservers() {
         //Login Response
         mViewModel.loginResponse.observe(viewLifecycleOwner, Observer {
+
+            //new code
+          /*  setUpCaptcha()
+            showMessage(it.message, true)
+
+            if (it.status) {
+                if (it.data?.mobile_no.isNullOrEmpty() && !it.data?.email_id.isNullOrEmpty()) {
+                    callVerificationFragment(
+                        token = it.data?.tmpToken!!,
+                        email = it.data.email_id.toString(),
+                        callOtpApi = true
+                    )
+                } else {
+                    callVerificationOptionSelectionFragment(it.data!!.toVerificationPending())
+                }
+            }*/
+//new code
+
+
+
             it.getContentIfNotHandled()?.let { response ->
 
                 setUpCaptcha()
 
-/*            if (it.status) {
+          /*  if (it.status) {
                 showMessage(it.message, false)
                 updateSharedPreference(it.data!!)
                 goToHomePage()
@@ -128,16 +152,25 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
                 showMessage(response.message, true)
 
 //                if (!(it.data?.verification)!!) {
-                response.data?.let { data2 ->
-                    if (data2.mobile_no.isNullOrEmpty() && !data2.email_id.isNullOrEmpty()) {
-                        callVerificationFragment(token = data2.tmpToken!!, email = data2.email_id, callOtpApi = true)
-                    } else {
-                        callVerificationOptionSelectionFragment(data2.toVerificationPending())
+
+                if(response.status) {
+
+                    response.data?.let { data2 ->
+                        if (data2.mobile_no.isNullOrEmpty() && !data2.email_id.isNullOrEmpty()) {
+                            callVerificationFragment(
+                                token = data2.tmpToken!!,
+                                email = data2.email_id,
+                                callOtpApi = true
+                            )
+                        } else {
+                            callVerificationOptionSelectionFragment(data2.toVerificationPending())
+                        }
                     }
                 }
 //                }
 //            }
             }
+
         })
 
         //Social Login Response
@@ -207,7 +240,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
         mBinding.btnSignIn.setOnClickListener {
 
             if (validate()) {
-
+                setUpCaptcha()
                 val loginRequest: LoginRequest =
                     LoginRequest(
                         mViewModel.emailId,
@@ -480,6 +513,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
             showMessage(resources.getString(R.string.google_sign_failed), true)
         }
     }
+
 
 
 }

@@ -128,6 +128,7 @@ class ForgotPasswordFragment :
             btnSendOtp.setOnClickListener {
 
                 if (validate()) {
+                    setUpCaptcha()
                     val forgotPasswordRequest: ForgotPasswordRequest =
                         ForgotPasswordRequest(mViewModel.mEmailIdOrPassword)
                     mViewModel.callForgotPasswordAPI(forgotPasswordRequest)
@@ -151,7 +152,8 @@ class ForgotPasswordFragment :
     private fun validate(): Boolean {
         var isValid = true
 
-
+        mEnteredCaptch = mBinding.layoutCaptcha.etCaptcha.text.toString()
+        mCaptcha = mBinding.layoutCaptcha.etCaptchaText.text.toString()
 
         mViewModel.run {
             mBinding.run {

@@ -106,6 +106,7 @@ class RegistrationOptionFragment :
             btnSubmit.setOnClickListener {
 
                 if (validate()) {
+                    setUpCaptcha()
                     replaceFragment(
                         fragment = OTPVerificationFragment.newInstance(
                             selectedOption = selectedOption!!,
@@ -129,8 +130,8 @@ class RegistrationOptionFragment :
 
     private fun validate(): Boolean {
         var isValid = true
-
-        mEnteredCaptch = mBinding.layoutCaptcha.etCaptcha.text?.toString()
+        mEnteredCaptch = mBinding.layoutCaptcha.etCaptcha.text.toString()
+        mCaptcha = mBinding.layoutCaptcha.etCaptchaText.text.toString()
 
         if (selectedOption == null) {
             showMessage(resources.getString(R.string.choose_verify_option))
