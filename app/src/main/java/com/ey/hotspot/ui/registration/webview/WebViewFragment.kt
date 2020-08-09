@@ -42,6 +42,7 @@ class WebViewFragment() :
 
         private const val FRAG_NAME = ""
         private const val LOGIN_DATA = "login_data"
+        var back:Boolean=false
     }
 
     override fun getLayoutId(): Int {
@@ -95,10 +96,12 @@ class WebViewFragment() :
 
         if (arguments?.getString(FRAG_NAME).equals("register")) {
             mBinding.btnAgree.visibility=View.GONE
+            back=true
         }
         else
         {
             mBinding.btnAgree.visibility=View.VISIBLE
+            back=false
         }
     }
 
@@ -116,14 +119,7 @@ class WebViewFragment() :
     }
 
     override fun onBackPressed(): Boolean {
-        return if (arguments?.getString(FRAG_NAME).equals("register"))
-        {
-            true
-        }
-        else
-        {
-            false
-        }
+        return back
     }
 
 }
