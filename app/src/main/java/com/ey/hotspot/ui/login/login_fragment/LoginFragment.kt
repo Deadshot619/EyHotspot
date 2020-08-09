@@ -16,10 +16,7 @@ import com.ey.hotspot.ui.login.otpverification.fragment.OTPVerificationFragment
 import com.ey.hotspot.ui.registration.register_user.RegisterUserFragment
 import com.ey.hotspot.ui.registration.registration_option.RegistrationOptionFragment
 import com.ey.hotspot.ui.registration.webview.WebViewFragment
-import com.ey.hotspot.utils.constants.VerificationType
-import com.ey.hotspot.utils.constants.clearDataSaveLang
-import com.ey.hotspot.utils.constants.convertStringFromList
-import com.ey.hotspot.utils.constants.setSkippedUserData
+import com.ey.hotspot.utils.constants.*
 import com.ey.hotspot.utils.dialogs.OkDialog
 import com.ey.hotspot.utils.extention_functions.*
 import com.ey.hotspot.utils.validations.isEmailValid
@@ -151,6 +148,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
             if (it.status) {
                 if (it.data?.istcaccepted!!)
                 {
+                    updateSharedPreference(it.data)
                     activity?.goToHomeScreen()
                 }
                 else {
