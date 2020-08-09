@@ -207,14 +207,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
         mBinding.btnSignIn.setOnClickListener {
 
             if (validate()) {
-
                 val loginRequest: LoginRequest =
                     LoginRequest(
                         mViewModel.emailId,
                         mViewModel.password
                     )
                 mViewModel.callLogin(loginRequest)
-
             }
 
         }

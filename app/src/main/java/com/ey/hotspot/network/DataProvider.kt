@@ -37,7 +37,6 @@ object DataProvider : RemoteDataProvider {
         }
     }
 
-
     override suspend fun login(
         request: LoginRequest,
         success: (BaseResponse<LoginResponse?>) -> Unit,
@@ -50,7 +49,6 @@ object DataProvider : RemoteDataProvider {
             error(e)
         }
     }
-
 
     override suspend fun getUserList(
         success: (JsonArray) -> Unit,

@@ -14,7 +14,6 @@ import kotlinx.coroutines.launch
 
 class LoginFragmentViewModel(application: Application) : BaseViewModel(application) {
 
-
     var emailId = ""
     var password = ""
     var captcha = ""
@@ -43,7 +42,7 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
                 request = loginRequest,
                 success = {
 
-                    _loginResponse.postValue(Event(it))
+                    _loginResponse.value = Event(it)
                     setDialogVisibility(false)
 
                 },
