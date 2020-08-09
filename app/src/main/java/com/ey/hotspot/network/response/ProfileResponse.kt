@@ -21,7 +21,7 @@ data class ProfileResponse(
     @SerializedName("mobile_verified_at") val mobile_verified_at: String,
     @SerializedName("lat") val lat: String,
     @SerializedName("lng") val lng: String,
-    @SerializedName("provider") val provider: String,
+    @SerializedName("provider") val provider: String? = null,
     @SerializedName("provider_id") val provider_id: String,
     @SerializedName("s_avatar") val s_avatar: String,
     @SerializedName("s_avatar_original") val s_avatar_original: String,

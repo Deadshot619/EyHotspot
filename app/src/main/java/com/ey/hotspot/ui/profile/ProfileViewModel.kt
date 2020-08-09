@@ -63,7 +63,6 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
                         emailId = it.data.email ?: "",
                         countryCode = it.data.country_code,
                         provider = it.data.provider
-
                     )
 
                 //Hide dialog

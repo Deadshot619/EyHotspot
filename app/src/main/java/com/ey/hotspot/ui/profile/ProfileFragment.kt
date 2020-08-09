@@ -10,10 +10,8 @@ import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.ProfileFragmentBinding
 import com.ey.hotspot.network.request.UpdateProfileRequest
-import com.ey.hotspot.ui.login.otpverification.fragment.OTPVerificationFragment
 import com.ey.hotspot.ui.settings.fragments.SettingsFragment
 import com.ey.hotspot.utils.constants.Constants
-import com.ey.hotspot.utils.constants.VerificationType
 import com.ey.hotspot.utils.constants.convertStringFromList
 import com.ey.hotspot.utils.dialogs.OkDialog
 import com.ey.hotspot.utils.extention_functions.logoutUser
@@ -116,24 +114,11 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
                     mViewModel.getCountryCodeList.value?.peekContent()?.data?.country_codes?.indexOfFirst { it.key == content.data.country_code }
                         ?: -1
                 )
+
+                disableViewsWhenSocialLogin(content.data.provider)
             }
 
-            //  login from facebook/google disable emailid
-            if(mViewModel.profileData.value?.provider.equals("google")|| mViewModel.profileData.value?.provider.equals("facebook"))
-            {
-                mBinding.inputEmailId.isFocusable=false
-                mBinding.inputEmailId.isEnabled=false
-                mBinding.edtEmail.isFocusable=false
-                mBinding.edtEmail.isEnabled=false
-            }
-            else
-            {
-                mBinding.inputEmailId.isFocusable=true
-                mBinding.inputEmailId.isEnabled=true
-                mBinding.edtEmail.isFocusable=true
-                mBinding.edtEmail.isEnabled=true
 
-            }
         })
 
 
@@ -171,7 +156,6 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
                 }
             }
         })
-
 
 
         //Email is changed
@@ -257,16 +241,30 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
         return isValid
     }
 
-    private fun callVerificationFragment(token: String, email: String) {
-        HotSpotApp.prefs!!.setRegistrationTempToken(token)
-        HotSpotApp.prefs!!.setRegistrationEmailID(email)
+    /**
+     * This method will disable/hide certain views when user has logged in via social media
+     */
+    private fun disableViewsWhenSocialLogin(provider: String?) {
+        //  login from facebook/google disable emailid
+//        if (mViewModel.profileData.value?.provider.equals("google") || mViewModel.profileData.value?.provider.equals("facebook")) {
+        if (!provider.isNullOrEmpty()) {
+            mBinding.run {
+                //email
+                edtEmail.isFocusable = false
+                edtEmail.isEnabled = false
 
-        replaceFragment(
-            fragment = OTPVerificationFragment.newInstance(
-                selectedOption = VerificationType.EMAIL,
-                selectedItem = email
-            ), addToBackStack = true
-        )
+                //Password
+                passwordInputLayout.visibility = View.GONE
+                tvPasswordHint.visibility = View.GONE
+
+                //Confirm Password
+                confirmPasswordInputLayout.visibility = View.GONE
+                tvConfirmPasswordHint.visibility = View.GONE
+
+                //Password Info
+                tvPasswordMsg.visibility = View.GONE
+            }
+        }
     }
 
 

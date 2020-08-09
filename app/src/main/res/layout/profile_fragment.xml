@@ -377,9 +377,7 @@
                 app:layout_constraintStart_toStartOf="@id/confirm_password_input_layout"
                 app:layout_constraintTop_toTopOf="@id/confirm_password_input_layout" />
 
-
-
-
+<!--            Password info-->
             <TextView
                 android:id="@+id/tvPasswordMsg"
                 android:layout_width="0dp"
