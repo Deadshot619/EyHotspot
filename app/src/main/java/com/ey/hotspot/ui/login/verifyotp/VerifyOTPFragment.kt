@@ -11,6 +11,7 @@ import com.ey.hotspot.network.request.ForgotPasswordVerifyOTPRequest
 import com.ey.hotspot.network.response.ForgotPasswordVerifyOTPResponse
 import com.ey.hotspot.ui.login.changepassword.ChangePasswordFragment
 import com.ey.hotspot.ui.login.verifyotp.model.ResendForgotPasswordOTP
+import com.ey.hotspot.utils.constants.setUpToolbar
 import com.ey.hotspot.utils.dialogs.OkDialog
 import com.ey.hotspot.utils.extention_functions.replaceFragment
 import com.ey.hotspot.utils.extention_functions.showMessage
@@ -57,10 +58,17 @@ class VerifyOTPFragment :
             viewModel = mViewModel
         }
 
-        setUpToolbar(
+        /*setUpToolbar(
             toolbarBinding = mBinding.toolbarLayout,
             title = getString(R.string.verify_account),
             showUpButton = true
+        )*/
+
+        activity?.setUpToolbar(
+            mBinding.toolbarLayout,
+            resources.getString(R.string.verify_account),
+            true,
+            showTextButton = false
         )
 
         setUpDataView()
