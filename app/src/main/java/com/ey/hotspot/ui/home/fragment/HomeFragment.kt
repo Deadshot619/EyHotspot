@@ -66,7 +66,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
 
         private val TAG = HomeFragment::class.java.simpleName
-        private const val DEFAULT_ZOOM = 8
+        private const val DEFAULT_ZOOM = 12
+        private const val DEFAULT_ZOOM_COUNTRY = 8
         private const val DL_HOTSPOT_ZOOM = 18
         private const val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
     }
@@ -365,7 +366,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                                 LatLng(
                                     Constants.LATITUDE,
                                     Constants.LONGITUDE
-                                ), HomeFragment.DEFAULT_ZOOM.toFloat()
+                                ), HomeFragment.DEFAULT_ZOOM_COUNTRY.toFloat()
                             )
                         )
 

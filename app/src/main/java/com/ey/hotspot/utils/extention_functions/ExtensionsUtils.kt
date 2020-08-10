@@ -209,7 +209,7 @@ fun Context.checkLocationPermission(view: View, func: (Unit) -> Unit) {
  */
 fun Activity.turnOnGpsDialog() {
     AlertDialog.Builder(this)
-        .setMessage("Your GPS seems to be disabled, do you want to enable it?")
+        .setMessage(getString(R.string.gps_enable_conformation))
         .setCancelable(false)
         .setPositiveButton(R.string.yes_label) { dialog, id ->
             startActivity(Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS))

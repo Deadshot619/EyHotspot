@@ -21,6 +21,8 @@
     <string name="loading_label">Loading…</string>
     <string name="under_construction_label">Work in progress…</string>
     <string name="press_back_again_label">Press back again to exit</string>
+    <string name="gps_enable_conformation">Your GPS seems to be disabled, do you want to enable it?</string>
+
 
     <!--Toolbar-->
     <string name="search_locations_label">Search Locations</string>
@@ -109,6 +111,8 @@
     <string name="go_label">Go</string>
     <string name="download_speed_label">Download Speed</string>
     <string name="retest_label">Retest</string>
+    <string name="wifi_disabled_label">Wifi Disabled</string>
+    <string name="wifi_enable_conformation">Your wifi seems to be disabled, do you want to enable it?</string>
 
     <string name="speed_test_result_label">Speed Test Result</string>
     <string name="download_label">Download</string>
