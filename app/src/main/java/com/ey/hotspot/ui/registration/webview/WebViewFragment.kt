@@ -15,6 +15,7 @@ import com.ey.hotspot.network.response.LoginResponse
 import com.ey.hotspot.ui.login.permission.PermissionViewModel
 import com.ey.hotspot.utils.IOnBackPressed
 import com.ey.hotspot.utils.constants.Constants
+import com.ey.hotspot.utils.constants.setUpToolbar
 import com.ey.hotspot.utils.constants.updateSharedPreference
 import com.ey.hotspot.utils.extention_functions.goToHomeScreen
 
@@ -55,10 +56,16 @@ class WebViewFragment() :
 
     override fun onBinding() {
 
-        setUpToolbar(
+       /* setUpToolbar(
             toolbarBinding = mBinding.toolbarLayout,
             title = getString(R.string.terms_condition),
             showUpButton = false
+        )*/
+        activity?.setUpToolbar(
+            mBinding.toolbarLayout,
+            resources.getString(R.string.terms_condition),
+            false,
+            showTextButton = false
         )
         setUpObservers()
 

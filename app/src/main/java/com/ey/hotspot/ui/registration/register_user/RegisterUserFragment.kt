@@ -16,6 +16,7 @@ import com.ey.hotspot.ui.registration.registration_option.RegistrationOptionFrag
 import com.ey.hotspot.ui.registration.webview.WebViewFragment
 import com.ey.hotspot.utils.constants.Constants
 import com.ey.hotspot.utils.constants.convertStringFromList
+import com.ey.hotspot.utils.constants.setUpToolbar
 import com.ey.hotspot.utils.dialogs.OkDialog
 import com.ey.hotspot.utils.extention_functions.replaceFragment
 import com.ey.hotspot.utils.extention_functions.showMessage
@@ -142,10 +143,16 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
 
     //Method to setup UI data
     private fun setUpUIData() {
-        setUpToolbar(
+       /* setUpToolbar(
             toolbarBinding = mBinding.toolbarLayout,
             title = getString(R.string.register_with_us),
             showUpButton = true
+        )*/
+        activity?.setUpToolbar(
+            mBinding.toolbarLayout,
+            resources.getString(R.string.register_with_us),
+            true,
+            showTextButton = false
         )
         tvTermsCondition.paintFlags = tvTermsCondition.paintFlags or Paint.UNDERLINE_TEXT_FLAG
 

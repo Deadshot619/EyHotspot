@@ -8,6 +8,7 @@ import com.ey.hotspot.databinding.OTPVerificationFragmentBinding
 import com.ey.hotspot.network.request.SendOTPRequest
 import com.ey.hotspot.network.request.VerifyOTPRequest
 import com.ey.hotspot.utils.constants.VerificationType
+import com.ey.hotspot.utils.constants.setUpToolbar
 import com.ey.hotspot.utils.extention_functions.goToHomeScreen
 import com.ey.hotspot.utils.extention_functions.replaceFragment
 import com.ey.hotspot.utils.extention_functions.showMessage
@@ -43,10 +44,17 @@ class OTPVerificationFragment :
     }
 
     override fun onBinding() {
-        setUpToolbar(
+        /*setUpToolbar(
             toolbarBinding = mBinding.toolbarLayout,
             title = getString(R.string.otp_label),
             showUpButton = true
+        )*/
+
+        activity?.setUpToolbar(
+            mBinding.toolbarLayout,
+            resources.getString(R.string.otp_label),
+            true,
+            showTextButton = false
         )
 
         mBinding.run {

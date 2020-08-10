@@ -7,6 +7,7 @@ import com.ey.hotspot.databinding.FragmentForgotPasswordMobileBinding
 import com.ey.hotspot.network.request.ForgotPasswordRequest
 import com.ey.hotspot.network.response.ForgotPasswordResponse
 import com.ey.hotspot.ui.login.verifyotp.VerifyOTPFragment
+import com.ey.hotspot.utils.constants.setUpToolbar
 import com.ey.hotspot.utils.dialogs.OkDialog
 import com.ey.hotspot.utils.extention_functions.generateCaptchaCode
 import com.ey.hotspot.utils.extention_functions.replaceFragment
@@ -52,10 +53,17 @@ class ForgotPasswordFragment :
             viewModel = mViewModel
         }
 
-        setUpToolbar(
+        /*setUpToolbar(
             toolbarBinding = mBinding.toolbarLayout,
             title = getString(R.string.forgotpassword_label),
             showUpButton = true
+
+        )*/
+        activity?.setUpToolbar(
+            mBinding.toolbarLayout,
+            resources.getString(R.string.forgotpassword_label),
+            true,
+            showTextButton = false
         )
 
         setUpViewData()

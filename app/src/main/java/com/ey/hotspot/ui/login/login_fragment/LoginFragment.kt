@@ -121,25 +121,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
         //Login Response
         mViewModel.loginResponse.observe(viewLifecycleOwner, Observer {
 
-            //new code
-          /*  setUpCaptcha()
-            showMessage(it.message, true)
-
-            if (it.status) {
-                if (it.data?.mobile_no.isNullOrEmpty() && !it.data?.email_id.isNullOrEmpty()) {
-                    callVerificationFragment(
-                        token = it.data?.tmpToken!!,
-                        email = it.data.email_id.toString(),
-                        callOtpApi = true
-                    )
-                } else {
-                    callVerificationOptionSelectionFragment(it.data!!.toVerificationPending())
-                }
-            }*/
-//new code
-
-
-
             it.getContentIfNotHandled()?.let { response ->
 
                 setUpCaptcha()
@@ -226,7 +207,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
         replaceFragment(
             fragment = RegistrationOptionFragment.newInstance(
-                emailID = response.email_id,
+                emailID = response.email_id!!,
                 phoneNo = response.mobile_no!!
             ),
             addToBackStack = true

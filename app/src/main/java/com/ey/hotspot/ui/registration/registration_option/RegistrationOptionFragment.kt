@@ -9,6 +9,7 @@ import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentRegistrationOptionBinding
 import com.ey.hotspot.ui.login.otpverification.fragment.OTPVerificationFragment
 import com.ey.hotspot.utils.constants.VerificationType
+import com.ey.hotspot.utils.constants.setUpToolbar
 import com.ey.hotspot.utils.extention_functions.generateCaptchaCode
 import com.ey.hotspot.utils.extention_functions.replaceFragment
 import com.ey.hotspot.utils.extention_functions.showMessage
@@ -44,10 +45,16 @@ class RegistrationOptionFragment :
     override fun getViewModel() = RegistrationOptionViewModel::class.java
     override fun onBinding() {
 
-        setUpToolbar(
+        /*setUpToolbar(
             toolbarBinding = mBinding.toolbarLayout,
             title = getString(R.string.verify_account_label),
             showUpButton = true
+        )*/
+        activity?.setUpToolbar(
+            mBinding.toolbarLayout,
+            resources.getString(R.string.verify_account_label),
+            true,
+            showTextButton = false
         )
         TYPE_VALUE = getDataFromArguments(this, TYPE_KEY)
         phoneNo = arguments?.getString(mPhoneNO)?.trim() ?: ""

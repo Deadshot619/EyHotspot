@@ -15,7 +15,7 @@
         <!--Toolbar-->
         <include
             android:id="@+id/toolbarLayout"
-            layout="@layout/layout_custom_toolbar"
+            layout="@layout/layout_custom_toolbar_dark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
