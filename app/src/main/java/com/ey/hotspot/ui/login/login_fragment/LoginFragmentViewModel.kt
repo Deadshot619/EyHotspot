@@ -1,8 +1,6 @@
 package com.ey.hotspot.ui.login.login_fragment
 
 import android.app.Application
-import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ey.hotspot.app_core_lib.BaseViewModel
@@ -12,10 +10,7 @@ import com.ey.hotspot.network.request.SocialLoginRequest
 import com.ey.hotspot.network.response.BaseResponse
 import com.ey.hotspot.network.response.LoginResponse
 import com.ey.hotspot.utils.Event
-import com.ey.hotspot.utils.extention_functions.showMessage
-import com.google.gson.Gson
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
 class LoginFragmentViewModel(application: Application) : BaseViewModel(application) {
 
@@ -23,9 +18,14 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
     var password = ""
     var captcha = ""
 
-    private val _loginResponse = MutableLiveData<Event<BaseResponse<LoginResponse?>>>()
-    val loginResponse: LiveData<Event<BaseResponse<LoginResponse?>>>
-        get() = _loginResponse
+    private val _loginResponseSuccess = MutableLiveData<Event<LoginResponse?>>()
+    val loginResponseSuccess: LiveData<Event<LoginResponse?>>
+        get() = _loginResponseSuccess
+
+    private val _loginResponseFailure = MutableLiveData<Event<LoginResponse?>>()
+    val loginResponseFailure: LiveData<Event<LoginResponse?>>
+        get() = _loginResponseFailure
+
 
     //This variable will handle Login Errors
     private val _loginError = MutableLiveData<Event<LoginResponse?>>()
@@ -48,7 +48,14 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
                 request = loginRequest,
                 success = {
                     setDialogVisibility(false)
-                    _loginResponse.value = Event(it)
+
+                    showToastFromViewModel(it.message)
+
+                    if (it.status)
+                        _loginResponseSuccess.value = Event(it.data)
+                    else
+                        _loginResponseFailure.value = Event(it.data)
+
                 },
                 error = {
                     checkError(it)

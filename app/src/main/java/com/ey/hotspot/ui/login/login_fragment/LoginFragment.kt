@@ -80,7 +80,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
     var countGoToVerification = 0
 
 
-
     override fun onBinding() {
         mBinding.run {
             lifecycleOwner = viewLifecycleOwner
@@ -118,53 +117,25 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
     private fun setUpObservers() {
         //Login Response
-        mViewModel.loginResponse.observe(viewLifecycleOwner, Observer {
-
-            //new code
-          /*  setUpCaptcha()
-            showMessage(it.message, true)
-
-            if (it.status) {
-                if (it.data?.mobile_no.isNullOrEmpty() && !it.data?.email_id.isNullOrEmpty()) {
-                    callVerificationFragment(
-                        token = it.data?.tmpToken!!,
-                        email = it.data.email_id.toString(),
-                        callOtpApi = true
-                    )
-                } else {
-                    callVerificationOptionSelectionFragment(it.data!!.toVerificationPending())
-                }
-            }*/
-//new code
-
-
-
+        mViewModel.loginResponseSuccess.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let { response ->
 
                 setUpCaptcha()
+//                showMessage(response.message, true)
 
-          /*  if (it.status) {
-                showMessage(it.message, false)
-                updateSharedPreference(it.data!!)
-                goToHomePage()
-            } else {*/
-                showMessage(response.message, true)
-
-//                if (!(it.data?.verification)!!) {
-
-                if(response.status) {
-                    response.data?.let { data2 ->
-                        verifyAccount(data2)
-                    }
-                } else {
-                    response.data?.let { data2 ->
-                        verifyAccount(data2)
-                    }
-                }
-//                }
-//            }
+                verifyAccount(response)
             }
+        })
 
+        mViewModel.loginResponseFailure.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let { response ->
+
+                setUpCaptcha()
+//                showMessage(response.message, true)
+
+                verifyAccount(response)
+
+            }
         })
 
         //Social Login Response
@@ -173,12 +144,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
             showMessage(it.message, true)
 
             if (it.status) {
-                if (it.data?.istcaccepted!!)
-                {
+                if (it.data?.istcaccepted!!) {
                     updateSharedPreference(it.data)
                     activity?.goToHomeScreen()
-                }
-                else {
+                } else {
                     clearDataSaveLang()
                     HotSpotApp.prefs?.setUserDataPref(it.data)
                     replaceFragment(
@@ -199,16 +168,16 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
         })
     }
 
-    private fun verifyAccount(data: LoginResponse){
-            if (data.mobile_no.isNullOrEmpty() && !data.email_id.isNullOrEmpty()) {
-                callVerificationFragment(
-                    token = data.tmpToken!!,
-                    email = data.email_id,
-                    callOtpApi = true
-                )
-            } else {
-                callVerificationOptionSelectionFragment(data.toVerificationPending())
-            }
+    private fun verifyAccount(data: LoginResponse) {
+        if (data.mobile_no.isNullOrEmpty() && !data.email_id.isNullOrEmpty()) {
+            callVerificationFragment(
+                token = data.tmpToken!!,
+                email = data.email_id,
+                callOtpApi = true
+            )
+        } else {
+            callVerificationOptionSelectionFragment(data.toVerificationPending())
+        }
     }
 
     private fun callVerificationFragment(token: String, email: String, callOtpApi: Boolean) {
@@ -519,7 +488,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
             showMessage(resources.getString(R.string.google_sign_failed), true)
         }
     }
-
 
 
 }
