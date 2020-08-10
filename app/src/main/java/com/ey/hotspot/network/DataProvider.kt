@@ -37,25 +37,18 @@ object DataProvider : RemoteDataProvider {
         }
     }
 
-
     override suspend fun login(
         request: LoginRequest,
         success: (BaseResponse<LoginResponse?>) -> Unit,
         error: (Exception) -> Unit
     ) {
-
-        withContext(Dispatchers.Main) {
-            try {
-                val result = mServices.loginAsync(request).await()
-                success(result)
-            } catch (e: Exception) {
-                error(e)
-            }
+        try {
+            val result = mServices.loginAsync(request).await()
+            success(result)
+        } catch (e: Exception) {
+            error(e)
         }
     }
-
-
-
 
     override suspend fun getUserList(
         success: (JsonArray) -> Unit,
@@ -140,13 +133,14 @@ object DataProvider : RemoteDataProvider {
         success: (BaseResponse<List<GetHotSpotResponse>>) -> Unit,
         error: (Exception) -> Unit
     ) {
-        withContext(Dispatchers.Main){
+        withContext(Dispatchers.Main) {
             try {
                 val result = mServices.getHotSpots(request).await()
                 success(result)
             } catch (e: Exception) {
                 error(e)
-            }}
+            }
+        }
     }
 
     override suspend fun getUserHotSpot(
@@ -471,7 +465,7 @@ object DataProvider : RemoteDataProvider {
     }
 
     override suspend fun wifiLogList(
-        request:WifiLogListRequest,
+        request: WifiLogListRequest,
         success: (BaseResponse<List<WifiLogListResponse>>) -> Unit,
         error: (Exception) -> Unit
     ) {
@@ -493,7 +487,7 @@ object DataProvider : RemoteDataProvider {
         try {
             val result = mServices.getWifiSearchKeyWordsAsync().await()
             success(result)
-        } catch (e: Exception){
+        } catch (e: Exception) {
             error(e)
         }
     }
@@ -502,12 +496,12 @@ object DataProvider : RemoteDataProvider {
     suspend fun termsncondition(
         request: TermsRequest,
         success: (BaseResponse<Any>) -> Unit,
-        error: (Exception) -> Unit)
-    {
+        error: (Exception) -> Unit
+    ) {
         try {
-            val result= mServices.getTermsncondition(request).await()
+            val result = mServices.getTermsncondition(request).await()
             success(result)
-        }catch (e: Exception){
+        } catch (e: Exception) {
             error(e)
         }
 

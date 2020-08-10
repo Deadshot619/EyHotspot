@@ -14,15 +14,31 @@ import com.ey.hotspot.databinding.FragmentSpeedTestBinding
 import com.ey.hotspot.ui.speed_test.test_result.TestResultsFragment
 import com.ey.hotspot.utils.constants.Constants
 import com.ey.hotspot.utils.constants.setUpToolbar
-import com.ey.hotspot.utils.extention_functions.extractWifiName
-import com.ey.hotspot.utils.extention_functions.getUserLocation
-import com.ey.hotspot.utils.extention_functions.replaceFragment
+import com.ey.hotspot.utils.dialogs.YesNoDialog
+import com.ey.hotspot.utils.extention_functions.*
 
 class SpeedTestFragment : BaseFragment<FragmentSpeedTestBinding, SpeedTestFragmentViewModel>() {
 
     private lateinit var connec: ConnectivityManager
     private lateinit var wifiManager: WifiManager
     private lateinit var networkRequestWiFi: NetworkRequest
+
+
+    val dialog by lazy {
+        YesNoDialog(this.requireActivity()).apply {
+            setViews(
+                title = "WiFi Disabled",
+                description = "Your wifi seems to be disabled, do you want to enable it?",
+                yes = {
+                    wifiManager.isWifiEnabled = true
+                    this.dismiss()
+                },
+                no = {
+                    this.dismiss()
+                }
+            )
+        }
+    }
 
 
     companion object {
@@ -46,7 +62,8 @@ class SpeedTestFragment : BaseFragment<FragmentSpeedTestBinding, SpeedTestFragme
         setUpObservers()
 
         //Get connectivity Manager
-        connec = requireActivity().applicationContext?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        connec =
+            requireActivity().applicationContext?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
         //Get Wifi Manager
         wifiManager =
@@ -54,21 +71,41 @@ class SpeedTestFragment : BaseFragment<FragmentSpeedTestBinding, SpeedTestFragme
         networkRequestWiFi = NetworkRequest.Builder()
             .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
             .build()
+
+
+        // Prompt the user for permission.
+
+        activity?.checkLocationPermission(view = mBinding.root, func = {
+                checkWifiEnabled()
+                if (!requireActivity().isLocationEnabled()) {
+                    activity?.turnOnGpsDialog()
+                }
+            })
     }
 
     override fun onStart() {
         super.onStart()
+
+        //Receiver for wifi
         connec.registerNetworkCallback(networkRequestWiFi, networkCallbackWiFi)
+
+        //Receiver for GPS
+//        activity?.registerReceiver(gpsReceiver, IntentFilter(LocationManager.MODE_CHANGED_ACTION))
     }
 
     fun setUpListeners() {
         //Go
         mBinding.tvGo.setOnClickListener {
-            replaceFragment(TestResultsFragment.newInstance(mViewModel.wifiData.value, mViewModel.hideDataView.value!!), true)
+            replaceFragment(
+                TestResultsFragment.newInstance(
+                    mViewModel.wifiData.value,
+                    mViewModel.hideDataView.value!!
+                ), true
+            )
         }
     }
 
-    fun setUpObservers(){
+    fun setUpObservers() {
         mViewModel.hideDataView.observe(viewLifecycleOwner, Observer {
             if (it)
                 mBinding.clDataLayout.visibility = View.INVISIBLE
@@ -79,7 +116,15 @@ class SpeedTestFragment : BaseFragment<FragmentSpeedTestBinding, SpeedTestFragme
 
     override fun onStop() {
         super.onStop()
+
         connec.unregisterNetworkCallback(networkCallbackWiFi)
+//        activity?.unregisterReceiver(gpsReceiver)
+    }
+
+    //Method to check if wifi is enabled
+    private fun checkWifiEnabled() {
+        if (!wifiManager.isWifiEnabled)
+            dialog.show()
     }
 
     //Network callback for WIFI
@@ -88,16 +133,23 @@ class SpeedTestFragment : BaseFragment<FragmentSpeedTestBinding, SpeedTestFragme
             //get wifi ssid
             val wifiSSid = wifiManager.connectionInfo.ssid.extractWifiName()
             if (wifiSSid.contains(Constants.UNKNOWN_SSID)) {
-
-            } else {
-                requireActivity().applicationContext.getUserLocation { lat, lng ->
-                    if (lat != null && lng != null)
-                        mViewModel.verifyHotspot(wifiSSid, lat, lng)
-                    else
-                        mViewModel.verifyHotspot(wifiSSid, Constants.LATITUDE, Constants.LONGITUDE)
+                if (!requireActivity().isLocationEnabled()) {
+                    activity?.turnOnGpsDialog()
+                    getUserLocationAndValidateWifi(wifiSSid)
                 }
+            } else {
+                getUserLocationAndValidateWifi(wifiSSid)
             }
+        }
+    }
 
+    //Method to get User Location & validate Wifi
+    private fun getUserLocationAndValidateWifi(wifiSSid: String) {
+        requireActivity().applicationContext.getUserLocation { lat, lng ->
+            if (lat != null && lng != null)
+                mViewModel.verifyHotspot(wifiSSid, lat, lng)
+            else
+                mViewModel.verifyHotspot(wifiSSid, Constants.LATITUDE, Constants.LONGITUDE)
         }
     }
 }

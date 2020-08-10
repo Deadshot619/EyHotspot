@@ -8,9 +8,9 @@ interface Constants {
         const val ENGLISH_LANG: String = "en"
         const val ARABIC_LANG: String = "ar"
 
-        //Default Location Lat Lng
-        const val LATITUDE: Double = 19.1403509
-        const val LONGITUDE: Double = 72.8096671
+        //Default Location Lat Lng of Saudi Arabia
+        const val LATITUDE: Double = 23.8859
+        const val LONGITUDE: Double = 45.0792
 
         //Deep Link
         const val DL_LINK = "http://eyhotspot.com"

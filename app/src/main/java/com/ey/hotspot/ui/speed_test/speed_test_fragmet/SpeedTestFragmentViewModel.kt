@@ -15,7 +15,7 @@ class SpeedTestFragmentViewModel(application: Application) : BaseViewModel(appli
     val wifiData: LiveData<ValidateWifiResponse>
         get() = _wifiData
 
-    private val _hideDataView = MutableLiveData<Boolean>(false)
+    private val _hideDataView = MutableLiveData<Boolean>(true)
     val hideDataView: LiveData<Boolean>
         get() = _hideDataView
 

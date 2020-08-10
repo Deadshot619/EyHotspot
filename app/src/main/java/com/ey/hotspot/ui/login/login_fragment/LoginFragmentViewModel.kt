@@ -19,7 +19,6 @@ import java.lang.Exception
 
 class LoginFragmentViewModel(application: Application) : BaseViewModel(application) {
 
-
     var emailId = ""
     var password = ""
     var captcha = ""
@@ -53,7 +52,6 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
                 },
                 error = {
                     checkError(it)
-                    setDialogVisibility(false)
                 }
             )
         }

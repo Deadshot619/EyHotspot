@@ -87,6 +87,7 @@
                 android:paddingEnd="@dimen/margin_20"
                 android:text="@string/sms_label"
                 android:buttonTint="@color/colorPrimary"
+                tools:checked="true"
                 android:textDirection="locale"
                 android:textSize="18sp" />
 
