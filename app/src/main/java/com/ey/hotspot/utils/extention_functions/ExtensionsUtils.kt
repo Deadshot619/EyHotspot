@@ -322,14 +322,14 @@ fun Activity.shareWifiHotspotData(id: Int, lat: Double, lon: Double) {
 /**
  * This method will show possible apps that can open the link
  */
-fun Activity.openNavigateUrl(url: String) {
+fun Activity.openNavigateUrl(url: String, lat: String, lon: String) {
     val gmmIntentUri =
-//                    Uri.parse("google.navigation:q=" + clickedVenueMarker?.mLat + "," + clickedVenueMarker?.mLng + "&mode=d")
-        Uri.parse(url)
+                    Uri.parse("https://www.google.com/maps/dir/?api=1&destination=$lat,$lon&mode=d")
+//        Uri.parse(url)
     val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
 //                mapIntent.setPackage("com.google.android.apps.maps")
     if (mapIntent.resolveActivity(packageManager) != null)
-        startActivity(mapIntent)
+        startActivity(Intent.createChooser(mapIntent, null))
     else
         showMessage("There are no apps to open this link")
 }

@@ -204,7 +204,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             }
 
             override fun onClickNavigate(data: WifiInfoModel) {
-                activity?.openNavigateUrl(data.navigate_url)
+                activity?.openNavigateUrl(data.navigate_url, data.lat.toString(), data.lon.toString())
             }
 
             override fun onClickShare(data: WifiInfoModel) {

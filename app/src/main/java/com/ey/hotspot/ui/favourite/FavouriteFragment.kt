@@ -83,7 +83,7 @@ class FavouriteFragment : BaseFragment<FavouriteFragmentBinding, FavouriteViewMo
 
             //Navigate Now
             override fun onClickNavigate(data: GetFavouriteItem) {
-                activity?.openNavigateUrl(data.navigate_url)
+                activity?.openNavigateUrl(data.navigate_url, data.lat.toString(), data.lng.toString())
             }
 
             //Share
