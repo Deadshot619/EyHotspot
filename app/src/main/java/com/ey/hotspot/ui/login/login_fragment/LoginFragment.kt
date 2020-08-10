@@ -2,8 +2,6 @@ package com.ey.hotspot.ui.login.login_fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.ey.hotspot.R
@@ -12,6 +10,7 @@ import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.FragmentLoginBinding
 import com.ey.hotspot.network.request.LoginRequest
 import com.ey.hotspot.network.request.SocialLoginRequest
+import com.ey.hotspot.network.response.LoginResponse
 import com.ey.hotspot.network.response.VerificationPending
 import com.ey.hotspot.ui.login.forgorpassword.ForgotPasswordFragment
 import com.ey.hotspot.ui.login.otpverification.fragment.OTPVerificationFragment
@@ -154,17 +153,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 //                if (!(it.data?.verification)!!) {
 
                 if(response.status) {
-
                     response.data?.let { data2 ->
-                        if (data2.mobile_no.isNullOrEmpty() && !data2.email_id.isNullOrEmpty()) {
-                            callVerificationFragment(
-                                token = data2.tmpToken!!,
-                                email = data2.email_id,
-                                callOtpApi = true
-                            )
-                        } else {
-                            callVerificationOptionSelectionFragment(data2.toVerificationPending())
-                        }
+                        verifyAccount(data2)
+                    }
+                } else {
+                    response.data?.let { data2 ->
+                        verifyAccount(data2)
                     }
                 }
 //                }
@@ -205,6 +199,17 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
         })
     }
 
+    private fun verifyAccount(data: LoginResponse){
+            if (data.mobile_no.isNullOrEmpty() && !data.email_id.isNullOrEmpty()) {
+                callVerificationFragment(
+                    token = data.tmpToken!!,
+                    email = data.email_id,
+                    callOtpApi = true
+                )
+            } else {
+                callVerificationOptionSelectionFragment(data.toVerificationPending())
+            }
+    }
 
     private fun callVerificationFragment(token: String, email: String, callOtpApi: Boolean) {
         HotSpotApp.prefs!!.setRegistrationTempToken(token)
