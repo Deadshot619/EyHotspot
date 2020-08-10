@@ -49,13 +49,14 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
                 success = {
                     setDialogVisibility(false)
 
-                    showToastFromViewModel(it.message)
+//                    showToastFromViewModel(it.message)
 
                     if (it.status)
                         _loginResponseSuccess.value = Event(it.data)
-                    else
+                    else{
+                        showToastFromViewModel(it.message)
                         _loginResponseFailure.value = Event(it.data)
-
+                    }
                 },
                 error = {
                     checkError(it)
