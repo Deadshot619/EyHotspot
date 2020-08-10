@@ -28,7 +28,6 @@ import com.ey.hotspot.ui.home.BottomNavHomeActivity
 import com.ey.hotspot.ui.login.LoginActivity
 import com.ey.hotspot.utils.constants.Constants
 import com.ey.hotspot.utils.constants.clearDataSaveLang
-import com.ey.hotspot.utils.constants.getDeepLinkUrl
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.material.snackbar.Snackbar
 import com.karumi.dexter.Dexter
@@ -210,7 +209,7 @@ fun Context.checkLocationPermission(view: View, func: (Unit) -> Unit) {
  */
 fun Activity.turnOnGpsDialog() {
     AlertDialog.Builder(this)
-        .setMessage("Your GPS seems to be disabled, do you want to enable it?")
+        .setMessage(getString(R.string.gps_enable_conformation))
         .setCancelable(false)
         .setPositiveButton(R.string.yes_label) { dialog, id ->
             startActivity(Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS))
@@ -309,27 +308,28 @@ fun Context.getUserLocation(func: (lat: Double?, lon: Double?) -> Unit) {
 /**
  * This method will be used to share Wifi Hotspot data to other apps as text message
  */
-fun Context.shareWifiHotspotData(id: Int, lat: Double, lon: Double) {
-    val sendIntent: Intent = Intent().apply {
+fun Activity.shareWifiHotspotData(id: Int, lat: Double, lon: Double) {
+    /*val sendIntent: Intent = Intent().apply {
         action = Intent.ACTION_SEND
         putExtra(Intent.EXTRA_TEXT, getDeepLinkUrl(id = id, lat = lat, lon = lon))
         type = "text/plain"
     }
     val shareIntent = Intent.createChooser(sendIntent, null)
-    startActivity(shareIntent)
+    startActivity(shareIntent)*/
+    showMessage(getString(R.string.under_construction_label))
 }
 
 /**
  * This method will show possible apps that can open the link
  */
-fun Activity.openNavigateUrl(url: String) {
+fun Activity.openNavigateUrl(url: String, lat: String, lon: String) {
     val gmmIntentUri =
-//                    Uri.parse("google.navigation:q=" + clickedVenueMarker?.mLat + "," + clickedVenueMarker?.mLng + "&mode=d")
-        Uri.parse(url)
+                    Uri.parse("https://www.google.com/maps/dir/?api=1&destination=$lat,$lon&mode=d")
+//        Uri.parse(url)
     val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
 //                mapIntent.setPackage("com.google.android.apps.maps")
     if (mapIntent.resolveActivity(packageManager) != null)
-        startActivity(mapIntent)
+        startActivity(Intent.createChooser(mapIntent, null))
     else
         showMessage("There are no apps to open this link")
 }

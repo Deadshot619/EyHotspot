@@ -110,7 +110,7 @@ class SearchListFragment : BaseFragment<SearchListFragmentBinding, SearchListVie
 
             //Navigate Now
             override fun onClickNavigate(data: GetHotSpotResponse) {
-                activity?.openNavigateUrl(data.navigate_url)
+                activity?.openNavigateUrl(data.navigate_url, data.lat, data.lng)
             }
 
             override fun onClickShare(data: GetHotSpotResponse) {

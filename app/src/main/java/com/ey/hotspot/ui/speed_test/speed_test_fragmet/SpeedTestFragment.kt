@@ -27,8 +27,8 @@ class SpeedTestFragment : BaseFragment<FragmentSpeedTestBinding, SpeedTestFragme
     val dialog by lazy {
         YesNoDialog(this.requireActivity()).apply {
             setViews(
-                title = "WiFi Disabled",
-                description = "Your wifi seems to be disabled, do you want to enable it?",
+                title = getString(R.string.wifi_disabled_label),
+                description = getString(R.string.wifi_enable_conformation),
                 yes = {
                     wifiManager.isWifiEnabled = true
                     this.dismiss()

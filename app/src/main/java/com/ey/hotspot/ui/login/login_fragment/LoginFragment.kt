@@ -2,8 +2,6 @@ package com.ey.hotspot.ui.login.login_fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.ey.hotspot.R
@@ -12,6 +10,7 @@ import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.FragmentLoginBinding
 import com.ey.hotspot.network.request.LoginRequest
 import com.ey.hotspot.network.request.SocialLoginRequest
+import com.ey.hotspot.network.response.LoginResponse
 import com.ey.hotspot.network.response.VerificationPending
 import com.ey.hotspot.ui.login.forgorpassword.ForgotPasswordFragment
 import com.ey.hotspot.ui.login.otpverification.fragment.OTPVerificationFragment
@@ -81,7 +80,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
     var countGoToVerification = 0
 
 
-
     override fun onBinding() {
         mBinding.run {
             lifecycleOwner = viewLifecycleOwner
@@ -119,39 +117,27 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
     private fun setUpObservers() {
         //Login Response
-        mViewModel.loginResponse.observe(viewLifecycleOwner, Observer {
+
+        mViewModel.loginResponseSuccess.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let { response ->
+
+                setUpCaptcha()
+//                showMessage(response.message, true)
+
+                verifyAccount(response)
+            }
+        })
+
+        mViewModel.loginResponseFailure.observe(viewLifecycleOwner, Observer {
 
             it.getContentIfNotHandled()?.let { response ->
 
                 setUpCaptcha()
+//                showMessage(response.message, true)
 
-          /*  if (it.status) {
-                showMessage(it.message, false)
-                updateSharedPreference(it.data!!)
-                goToHomePage()
-            } else {*/
-                showMessage(response.message, true)
+                verifyAccount(response)
 
-//                if (!(it.data?.verification)!!) {
-
-                if(response.status) {
-
-                    response.data?.let { data2 ->
-                        if (data2.mobile_no.isNullOrEmpty() && !data2.email_id.isNullOrEmpty()) {
-                            callVerificationFragment(
-                                token = data2.tmpToken!!,
-                                email = data2.email_id,
-                                callOtpApi = true
-                            )
-                        } else {
-                            callVerificationOptionSelectionFragment(data2.toVerificationPending())
-                        }
-                    }
-                }
-//                }
-//            }
             }
-
         })
 
         //Social Login Response
@@ -160,12 +146,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
             showMessage(it.message, true)
 
             if (it.status) {
-                if (it.data?.istcaccepted!!)
-                {
+                if (it.data?.istcaccepted!!) {
                     updateSharedPreference(it.data)
                     activity?.goToHomeScreen()
-                }
-                else {
+                } else {
                     clearDataSaveLang()
                     HotSpotApp.prefs?.setUserDataPref(it.data)
                     replaceFragment(
@@ -186,6 +170,17 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
         })
     }
 
+    private fun verifyAccount(data: LoginResponse) {
+        if (data.mobile_no.isNullOrEmpty() && !data.email_id.isNullOrEmpty()) {
+            callVerificationFragment(
+                token = data.tmpToken!!,
+                email = data.email_id,
+                callOtpApi = true
+            )
+        } else {
+            callVerificationOptionSelectionFragment(data.toVerificationPending())
+        }
+    }
 
     private fun callVerificationFragment(token: String, email: String, callOtpApi: Boolean) {
         HotSpotApp.prefs!!.setRegistrationTempToken(token)
@@ -495,7 +490,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
             showMessage(resources.getString(R.string.google_sign_failed), true)
         }
     }
-
 
 
 }
