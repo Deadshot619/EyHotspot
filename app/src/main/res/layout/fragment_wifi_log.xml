@@ -98,7 +98,7 @@
                     android:id="@+id/iv_flag"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
-                    android:src="@drawable/ic_group"
+                    android:src="@drawable/flag_icon_bitmap"
                     android:layout_marginEnd="@dimen/common_margin_32"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/btn_rate_now"

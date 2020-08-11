@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:textDirection="locale"
 
-                android:src="@drawable/ic_group"
+                android:src="@drawable/flag_icon_bitmap"
                 android:onClick="@{() -> clickListener.onClickReport(data)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
