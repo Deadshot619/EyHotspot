@@ -93,7 +93,7 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
                         _profileError.value = Event(it.data)
 
                     //If email is changed successfully
-                    if (it.status && it.data.email_change)
+                    if (it.status && (it.data.email_change || it.data.password_change))
                         _emailChange.value = Event(it.data)
 
                     setDialogVisibility(false)

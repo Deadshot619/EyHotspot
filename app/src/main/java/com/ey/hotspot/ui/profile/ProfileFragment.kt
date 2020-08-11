@@ -1,6 +1,5 @@
 package com.ey.hotspot.ui.profile
 
-import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -11,10 +10,9 @@ import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.ProfileFragmentBinding
 import com.ey.hotspot.network.request.UpdateProfileRequest
 import com.ey.hotspot.ui.settings.fragments.SettingsFragment
-import com.ey.hotspot.utils.constants.Constants
 import com.ey.hotspot.utils.constants.convertStringFromList
+import com.ey.hotspot.utils.constants.logoutUser
 import com.ey.hotspot.utils.dialogs.OkDialog
-import com.ey.hotspot.utils.extention_functions.logoutUser
 import com.ey.hotspot.utils.extention_functions.parseToInt
 import com.ey.hotspot.utils.extention_functions.replaceFragment
 import com.ey.hotspot.utils.extention_functions.showMessage
@@ -163,11 +161,13 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
         mViewModel.emailChange.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let {
 //                callVerificationFragment(it.tmp_token, mViewModel.profileData.value?.emailId!!)
-                activity?.application?.logoutUser(Bundle().apply {
+/*                activity?.application?.logoutUser(Bundle().apply {
                     putBoolean(Constants.GO_TO_VERIFICATION_FRAGMENT, true)
                     putString(Constants.EMAIL_ID, mViewModel.profileData.value?.emailId)
                     putString(Constants.TEMP_TOKEN, it.tmp_token)
-                })
+                })*/
+
+                logoutUser()
             }
         })
 

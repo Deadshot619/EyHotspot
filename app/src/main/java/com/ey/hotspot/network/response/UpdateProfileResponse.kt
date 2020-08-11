@@ -14,6 +14,8 @@ data class UpdateProfileResponse(
 
     //Used when user changes their email
     @SerializedName("tmp_token") @Expose val tmp_token: String,
-    @SerializedName("email_change") @Expose val email_change: Boolean = false
+    @SerializedName("email_change") @Expose val email_change: Boolean = false,
+    @SerializedName("password_change") @Expose val password_change: Boolean = false
+
 
 )
