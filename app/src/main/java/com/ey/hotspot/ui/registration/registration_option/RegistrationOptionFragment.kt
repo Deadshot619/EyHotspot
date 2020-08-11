@@ -147,10 +147,10 @@ class RegistrationOptionFragment :
 
         if (mBinding.layoutCaptcha.etCaptcha.text?.isEmpty()!!) {
             mBinding.layoutCaptcha.etCaptcha.error = resources.getString(R.string.empty_captcha)
-            isValid = false
+            isValid = true
         } else if (!(mEnteredCaptch == mCaptcha)) {
             mBinding.layoutCaptcha.etCaptcha.error = resources.getString(R.string.invalid_captcha)
-            isValid = false
+            isValid = true
         }
 
 

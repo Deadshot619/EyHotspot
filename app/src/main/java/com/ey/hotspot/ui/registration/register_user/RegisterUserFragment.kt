@@ -18,6 +18,7 @@ import com.ey.hotspot.utils.constants.Constants
 import com.ey.hotspot.utils.constants.convertStringFromList
 import com.ey.hotspot.utils.constants.setUpToolbar
 import com.ey.hotspot.utils.dialogs.OkDialog
+import com.ey.hotspot.utils.extention_functions.generateCaptchaCode
 import com.ey.hotspot.utils.extention_functions.replaceFragment
 import com.ey.hotspot.utils.extention_functions.showMessage
 import com.ey.hotspot.utils.validations.isEmailValid
@@ -34,6 +35,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import kotlinx.android.synthetic.main.fragment_register_user.*
+import kotlinx.android.synthetic.main.item_layout_captcha.view.*
 import java.util.*
 
 
@@ -56,7 +58,8 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
     lateinit var callbackManager: CallbackManager
     var name = ""
     var accessToken = ""
-
+    var mCaptcha: String? = null
+    var mEnteredCaptch: String? = null
     //Google Sign In
     lateinit var mGoogleSignInClient: GoogleSignInClient
     private val RC_SIGN_IN = 9001
@@ -80,6 +83,7 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
         setUpListeners()
 
         setUpObservers()
+        setUpCaptcha()
     }
 
 
@@ -154,7 +158,11 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
         setUpFacebookLogin()
         setuPGoogelSignIn()
     }
+    private fun setUpCaptcha() {
+        mCaptcha = activity?.generateCaptchaCode(5)
+        mBinding.run {  layout_captcha.et_captcha_text.setText(mCaptcha) }
 
+    }
     private fun setuPGoogelSignIn() {
         val gso =
             GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -186,6 +194,7 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
             //Sign In button
             btnGetStarted.setOnClickListener {
                 if (validate2()) {
+                    setUpCaptcha()
                     val register: RegisterRequest =
                         RegisterRequest(
                             mViewModel.firstName.trim(),
@@ -201,6 +210,12 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
                 }
             }
 
+           layout_captcha.ivRefreshCaptchaCode.setOnClickListener {
+
+                mCaptcha = activity?.generateCaptchaCode(5)
+               layout_captcha.et_captcha_text.setText(mCaptcha)
+
+            }
             //T&C
             tvTermsCondition.setOnClickListener {
                 replaceFragment(
@@ -405,7 +420,8 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
         mViewModel.run {
             mBinding.run {
 
-
+                mEnteredCaptch = layout_captcha.et_captcha.text.toString()
+                mCaptcha = layout_captcha.et_captcha_text.text.toString()
                 if (firstName.trim().isEmpty()) {
                     edtFirstName.error = resources.getString(R.string.empty_firstName)
                     isValid = false
@@ -454,6 +470,14 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
                         showMessage(getString(R.string.accept_terms_and_condition_label))
                         isValid = false
                     }
+
+                if (layout_captcha.et_captcha.text?.isEmpty()!!) {
+                    layout_captcha.et_captcha.error = resources.getString(R.string.empty_captcha)
+                    isValid = false
+                } else if (!(mEnteredCaptch == mCaptcha)) {
+                    layout_captcha.et_captcha.error = resources.getString(R.string.invalid_captcha)
+                    isValid = false
+                }
             }
         } ?: return false
 

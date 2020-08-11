@@ -84,6 +84,17 @@ class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>()
                 getTime(wifiloglist?.logout_at?.extractTimeFromDateTime().toString())
         mBinding.tvStartSpeedValue.text=getTime(wifiloglist?.login_at?.extractTimeFromDateTime())
         mBinding.tvEndSpeedValue.text="${wifiloglist?.location?.average_rating.toString().extractspeed()} mbps"
+
+        if (wifiloglist.location!!.favourite)
+        {
+            mBinding.ivFavourites.setImageResource(R.drawable.ic_favorite_filled_red)
+        }
+        else
+        {
+            mBinding.ivFavourites.setImageResource(R.drawable.ic_favorite_filled_gray)
+        }
+
+
     }
 
     private fun getDate(datestring: String?): String {
@@ -96,7 +107,7 @@ class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>()
     private fun getTime(datestring: String?):String
     {
         var outputDateStr: String=""
-        if (datestring!=null) {
+        if (!datestring.equals("null")) {
             val inputFormat: DateFormat = SimpleDateFormat("hh:mm:ss")
             val outputFormat: DateFormat = SimpleDateFormat("hh:mm a")
             val date: Date = inputFormat.parse(datestring)
