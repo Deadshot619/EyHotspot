@@ -440,7 +440,37 @@
                 app:layout_constraintStart_toStartOf="@id/tvSignAgree"
                 app:layout_constraintTop_toBottomOf="@id/tvSignAgree" />
 
-<!--            Get Started now-->
+
+            <!--Enter message-->
+            <TextView
+                android:id="@+id/tv_enter_message_shown"
+                style="@style/TextAppearance.MyApp.Headline5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_margin_24"
+                android:text="@string/captcha_label"
+                android:textDirection="locale"
+                android:textSize="@dimen/text_size_14"
+                app:layout_constraintEnd_toEndOf="@+id/guideline_right"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@id/tvTermsCondition" />
+
+
+            <!--            Captcha Layout-->
+            <include
+                android:id="@+id/layout_captcha"
+                layout="@layout/item_layout_captcha"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_margin_8"
+                app:layout_constraintEnd_toEndOf="@+id/guideline_right"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@id/tv_enter_message_shown"/>
+
+
+
+
+            <!--            Get Started now-->
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnGetStarted"
                 android:layout_width="wrap_content"
@@ -459,7 +489,7 @@
                 android:textSize="@dimen/text_size_15"
                 app:layout_constraintEnd_toEndOf="@+id/guideline_right"
                 app:layout_constraintStart_toStartOf="@+id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@+id/tvTermsCondition" />
+                app:layout_constraintTop_toBottomOf="@+id/layout_captcha" />
 
 
             <LinearLayout

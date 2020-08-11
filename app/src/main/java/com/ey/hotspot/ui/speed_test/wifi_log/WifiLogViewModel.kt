@@ -25,9 +25,7 @@ class WifiLogViewModel(application: Application) : BaseViewModel(application) {
                 success = {
 
                     if (it.status)
-                        getFavouriteList()
-
-                    showToastFromViewModel(it.message)
+                        showToastFromViewModel(it.message)
                     setDialogVisibility(false)
                 }, error = {
                     checkError(it)
@@ -36,29 +34,4 @@ class WifiLogViewModel(application: Application) : BaseViewModel(application) {
         }
     }
 
-
-    /**
-     * Method to get favourites list
-     */
-    fun getFavouriteList(value: String = "") {
-        val request = GetFavoriteRequest(name = value)
-
-        setDialogVisibility(true,null)
-
-        coroutineScope.launch {
-            DataProvider.getFavourite(
-                request = request,
-                success = {
-
-                    _getFavouriteResponse.value = it
-
-                    setDialogVisibility(false)
-
-                }, error = {
-
-                    checkError(it)
-                }
-            )
-        }
-    }
 }

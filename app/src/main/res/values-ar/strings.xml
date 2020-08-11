@@ -55,7 +55,7 @@
     <string name="country_code_label">الرقم الدولي</string>
     <string name="mobile_number_label">رقم الهاتف المحمول</string>
     <string name="password_label">كلمه السر</string>
-    <string name="confirm_password_label">اعادة ادخال كلمة السر</string>
+    <string name="confirm_password_label">اتأكيد كلمة المرور</string>
     <string name="captcha_label">أدخل كلمة التحقق المبينة أدناه</string>
     <string name="accept_terms_and_condition_label">تحتاج إلى قبول الشروط والأحكام للمتابعة</string>
     <string name="password_format_str">يجب أن تحتوي كلمة المرور على 8-32 حرفًا وحرف كبير واحد ،
@@ -187,7 +187,7 @@
     <string name="completeRegistration">أكمل تسجيلك بإعادة إرسال الرابط</string>
     <string name="first_last_name_label">الاسم الاول الاسم الاخير</string>
 
-    <string name="enter_confirm_password">أدخل كلمة المرور مرة أخرى!</string>
+    <string name="enter_confirm_password">اعادة ادخال كلمة السر</string>
     <string name="sign_agree_msg">بالتسجيل أنت توافق على</string>
     <string name="terms_condition">البنود و الظروف</string>
     <string name="get_started">نبدأ الآن</string>
@@ -254,7 +254,9 @@
     <string name="sms_label">رسالة قصيرة</string>
     <string name="email_label">البريد الإلكتروني</string>
     <string name="choose_verify_option">حدد خيار التحقق</string>
-    <string name="captcha_characters">أبجدهـFزحأنايكلاممياصسصسشالخامسثسذضصفرواحدإثنانثلاثةأربعةخمسةستةسبعةثمانيةتسعة</string>
+<!--
+   <string name="captcha_characters">أبجدهـFزحأنايكلاممياصسصسشالخامسثسذضصفرواحدإثنانثلاثةأربعةخمسةستةسبعةثمانيةتسعة</string>
+-->
     <string name="forgotpassword_label">هل نسيت كلمة المرور</string>
     <string name="invalid_captcha">كلمة التحقق غير صالحة</string>
     <string name="msg_mandatory_fields"> الحقول الإلزامية</string>

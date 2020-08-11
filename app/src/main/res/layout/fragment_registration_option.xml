@@ -112,6 +112,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/common_margin_24"
+            android:visibility="gone"
             android:text="@string/captcha_label"
             android:textDirection="locale"
             android:textSize="@dimen/text_size_14"
@@ -122,6 +123,7 @@
 
         <!--            Captcha Layout-->
         <include
+            android:visibility="gone"
             android:id="@+id/layout_captcha"
             layout="@layout/item_layout_captcha"
             android:layout_width="0dp"

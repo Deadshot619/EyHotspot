@@ -288,10 +288,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
     private fun getNearByWifiList(gpsStatus: Boolean) {
         if (gpsStatus) {
-            val getHotSpotRequest: GetHotSpotRequest = GetHotSpotRequest(
-                lastKnownLocation!!.latitude,
-                lastKnownLocation!!.longitude, "", true
-            )
+            if(lastKnownLocation !=null) {
+                val getHotSpotRequest: GetHotSpotRequest = GetHotSpotRequest(
+                    lastKnownLocation!!.latitude,
+                    lastKnownLocation!!.longitude, "", true
+                )
+            }
 //            mViewModel.getHotSpotResponse(getHotSpotRequest)
         } else {
             val getHotSpotRequest: GetHotSpotRequest = GetHotSpotRequest(
@@ -359,7 +361,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                             )
                         }
 
-                        getNearByWifiList(requireActivity().checkLocSaveState())
+                       // getNearByWifiList(requireActivity().checkLocSaveState())
                     }else{
                         map?.moveCamera(
                             CameraUpdateFactory.newLatLngZoom(
@@ -370,7 +372,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                             )
                         )
 
-                        getNearByWifiList(requireActivity().checkLocSaveState())
+                       // getNearByWifiList(requireActivity().checkLocSaveState())
 
                     }
                 } else {
@@ -383,7 +385,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                         )
                     )
 
-                    getNearByWifiList(requireActivity().checkLocSaveState())
+                    //getNearByWifiList(requireActivity().checkLocSaveState())
                 }
             }
 

@@ -4,6 +4,7 @@ import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
+import java.text.DecimalFormat
 
 @Parcelize
 data class WifiLogsLocation(
@@ -15,9 +16,10 @@ data class WifiLogsLocation(
     @SerializedName("lng") @Expose val lng: String,
     @SerializedName("location") @Expose val location: String,
     @SerializedName("location_arabic") @Expose val location_arabic: String,
-    //    @SerializedName("type")val type:String,
-    //  @SerializedName("type_arabic") val type_arabic:String,
     @SerializedName("average_rating") @Expose val average_rating: Double,
     @SerializedName("provider_name") @Expose val provider_name: String,
-    @SerializedName("provider_name_arabic") @Expose val provider_name_arabic: String
+    @SerializedName("provider_name_arabic") @Expose val provider_name_arabic: String,
+    @SerializedName("favourite")@Expose val favourite:Boolean
+
+
 ) : Parcelable
