@@ -66,21 +66,24 @@ class TestResultsFragment : BaseFragment<FragmentTestResultsBinding, TestResults
         //Download Completed
         mViewModel.downloadCompleted.observe(viewLifecycleOwner, Observer {
             //When true, show DownloadComplete Layout & hide Speedometer Layout else vice versa
-            if (it){
+            if (it) {
                 mBinding.clSpeedometerLayout.visibility = View.INVISIBLE
                 mBinding.clDownloadCompletedLayout.visibility = View.VISIBLE
             } else {
                 mBinding.clSpeedometerLayout.visibility = View.VISIBLE
-                    mBinding.clDownloadCompletedLayout.visibility = View.INVISIBLE
+                mBinding.clDownloadCompletedLayout.visibility = View.INVISIBLE
             }
         })
 
         //Hide View
         mViewModel.hideDataView.observe(viewLifecycleOwner, Observer {
-            if (it)
+            if (it) {
                 mBinding.clDataLayout.visibility = View.INVISIBLE
-            else
+                mBinding.tvWifiNotValidated.visibility = View.VISIBLE
+            } else {
                 mBinding.clDataLayout.visibility = View.VISIBLE
+                mBinding.tvWifiNotValidated.visibility = View.INVISIBLE
+            }
         })
     }
 }

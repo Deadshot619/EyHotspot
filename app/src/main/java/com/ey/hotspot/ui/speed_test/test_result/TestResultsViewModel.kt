@@ -20,7 +20,7 @@ class TestResultsViewModel(application: Application) : BaseViewModel(application
     val downloadSpeed: LiveData<BigDecimal>
         get() = _downloadSpeed
 
-    private val _downloadCompleted = MutableLiveData<Boolean>()
+    private val _downloadCompleted = MutableLiveData<Boolean>(false)
     val downloadCompleted: LiveData<Boolean>
         get() = _downloadCompleted
 
