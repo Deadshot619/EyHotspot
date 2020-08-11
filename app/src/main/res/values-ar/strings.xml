@@ -63,6 +63,7 @@
         الأرقام العشرية (0-9) ،
         حرف خاص (# ، $ ،٪) إلخ</string>
     <string name="password_format">الرجاء إدخال كلمة السر الصحيحة</string>
+    <string name="select_country_code_error_msg">الرجاء تحديد رمز الدولة!</string>
 
 
     <!--My Profile-->

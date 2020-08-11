@@ -16,8 +16,8 @@ import com.ey.hotspot.ui.registration.registration_option.RegistrationOptionFrag
 import com.ey.hotspot.ui.registration.webview.WebViewFragment
 import com.ey.hotspot.utils.constants.Constants
 import com.ey.hotspot.utils.constants.convertStringFromList
-import com.ey.hotspot.utils.constants.setUpToolbar
 import com.ey.hotspot.utils.dialogs.OkDialog
+import com.ey.hotspot.utils.extention_functions.parseToInt
 import com.ey.hotspot.utils.extention_functions.replaceFragment
 import com.ey.hotspot.utils.extention_functions.showMessage
 import com.ey.hotspot.utils.validations.isEmailValid
@@ -233,7 +233,7 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
                         mViewModel.coutrycode =
                             mViewModel.getCountryCodeList.value?.peekContent()?.country_codes?.find {
                                 it.value == mBinding.spinnerCountryCode.selectedItem.toString()
-                            }?.key.toString() ?: ""
+                            }?.key.toString() ?: "-1"
                     }
 
                 }
@@ -434,9 +434,18 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
                     edtEmail.error = resources.getString(R.string.invalid_email_label)
                     isValid = false
                 }
-                if (mobileNumber.trim().isNotEmpty() && !mobileNumber.isValidMobile()) {
-                    edtMobileNo.error = resources.getString(R.string.invalid_mobile)
-                    isValid = false
+                //Mobile No.
+                if (mobileNumber.trim().isNotEmpty()) {
+                    if (!mobileNumber.isValidMobile()) {
+                        edtMobileNo.error = resources.getString(R.string.invalid_mobile)
+                        isValid = false
+                    }
+
+                    //Country Code
+                    if (coutrycode.parseToInt() < 0){
+                        showMessage(getString(R.string.select_country_code_error_msg))
+                        isValid = false
+                    }
                 }
                 if (!password.trim().isValidPassword()) {
                     edtPassword.error = resources.getString(R.string.password_format)

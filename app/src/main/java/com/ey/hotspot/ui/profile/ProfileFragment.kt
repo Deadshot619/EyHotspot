@@ -15,6 +15,7 @@ import com.ey.hotspot.utils.constants.Constants
 import com.ey.hotspot.utils.constants.convertStringFromList
 import com.ey.hotspot.utils.dialogs.OkDialog
 import com.ey.hotspot.utils.extention_functions.logoutUser
+import com.ey.hotspot.utils.extention_functions.parseToInt
 import com.ey.hotspot.utils.extention_functions.replaceFragment
 import com.ey.hotspot.utils.extention_functions.showMessage
 import com.ey.hotspot.utils.validations.isEmailValid
@@ -111,7 +112,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
             it.getContentIfNotHandled()?.let { content ->
                 //showMessage(content.message, false)
                 mBinding.spinnerIssue.setSelection(
-                    mViewModel.getCountryCodeList.value?.peekContent()?.data?.country_codes?.indexOfFirst { it.key == content.data.country_code }
+                    mViewModel.getCountryCodeList.value?.peekContent()?.data?.country_codes?.indexOfFirst { it.key == content.data.country_code.parseToInt() }
                         ?: -1
                 )
 
@@ -216,15 +217,27 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
                     }
                     */
 
-
+                //Email
                 if (!emailId.isEmailValid()) {
                     edtEmail.error = resources.getString(R.string.invalid_email_label)
                     isValid = false
                 }
-                if (mobileNo.trim().isNotEmpty() && !mobileNo.isValidMobile()) {
-                    edtMobileNo.error = resources.getString(R.string.invalid_mobile)
-                    isValid = false
+
+                //Mobile No.
+                if (mobileNo.trim().isNotEmpty()) {
+                    if (!mobileNo.isValidMobile()) {
+                        edtMobileNo.error = resources.getString(R.string.invalid_mobile)
+                        isValid = false
+                    }
+
+                    //Country Code
+                    if (countryCode < 0){
+                        showMessage(getString(R.string.select_country_code_error_msg))
+                        isValid = false
+                    }
                 }
+
+                //Password & Confirm Passsword
                 if (password.isNotEmpty() || confirmPassword.isNotEmpty()) {     //Check only if password are written
                     if (!password.isValidPassword()) {
                         edtPassword.error = resources.getString(R.string.password_format)

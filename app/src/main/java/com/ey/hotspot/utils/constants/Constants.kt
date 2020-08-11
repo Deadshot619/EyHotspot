@@ -33,7 +33,7 @@ interface Constants {
             "https://images.apple.com/v/imac-with-retina/a/images/overview/5k_image.jpg"
 
         //Country Code
-        const val SAUDI_ARABIA_COUNTRY_CODE = 966
+        const val SAUDI_ARABIA_COUNTRY_CODE = /*966*/ 187
 
         const val UNKNOWN_SSID = "unknown ssid"
 

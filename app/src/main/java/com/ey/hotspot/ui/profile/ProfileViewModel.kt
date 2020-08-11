@@ -13,6 +13,7 @@ import com.ey.hotspot.network.response.ProfileResponse
 import com.ey.hotspot.network.response.UpdateProfileResponse
 import com.ey.hotspot.ui.profile.fragment.model.ProfileDataModel
 import com.ey.hotspot.utils.Event
+import com.ey.hotspot.utils.extention_functions.parseToInt
 import kotlinx.coroutines.launch
 
 class ProfileViewModel(application: Application) : BaseViewModel(application) {
@@ -53,7 +54,6 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
         coroutineScope.launch {
             DataProvider.getProfile(success = {
 
-                _profileResponse.value = Event(it)
 
                 if (it.status)
                     profileData.value = ProfileDataModel(
@@ -61,9 +61,12 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
                         lastName = it.data.lastname?.trim() ?: "",
                         mobileNo = it.data.mobile_no ?: "",
                         emailId = it.data.email ?: "",
-                        countryCode = it.data.country_code,
+                        countryCode = it.data.country_code.parseToInt(),
                         provider = it.data.provider
                     )
+
+                _profileResponse.value = Event(it)
+
 
                 //Hide dialog
                 setDialogVisibility(false)
