@@ -61,12 +61,31 @@ class WebViewFragment() :
             title = getString(R.string.terms_condition),
             showUpButton = false
         )*/
-        activity?.setUpToolbar(
-            mBinding.toolbarLayout,
-            resources.getString(R.string.terms_condition),
-            false,
-            showTextButton = false
-        )
+
+        if (arguments?.getString(FRAG_NAME).equals("register")) {
+            activity?.setUpToolbar(
+                mBinding.toolbarLayout,
+                resources.getString(R.string.terms_condition),
+                true,
+                showTextButton = false
+            )
+            mBinding.btnAgree.visibility=View.GONE
+            back=true
+        }
+        else
+        {
+            activity?.setUpToolbar(
+                mBinding.toolbarLayout,
+                resources.getString(R.string.terms_condition),
+                false,
+                showTextButton = false
+            )
+            mBinding.btnAgree.visibility=View.VISIBLE
+            mBinding.toolbarLayout.btnBack.setOnClickListener {
+                back=true
+            }
+            back=false
+        }
         setUpObservers()
 
         val langType = HotSpotApp.prefs!!.getLanguage()
@@ -101,15 +120,7 @@ class WebViewFragment() :
             }
         })
 
-        if (arguments?.getString(FRAG_NAME).equals("register")) {
-            mBinding.btnAgree.visibility=View.GONE
-            back=true
-        }
-        else
-        {
-            mBinding.btnAgree.visibility=View.VISIBLE
-            back=false
-        }
+
     }
 
 
