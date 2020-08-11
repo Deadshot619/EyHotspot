@@ -35,5 +35,5 @@ fun String.isValidMobile(): Boolean{
  * Method to validate
  */
 fun String.isValidName(): Boolean{
-    return Pattern.matches("[a-zA-Z]+", this) && length > 0 && trim().isNotEmpty()
+    return Pattern.matches("[a-zA-Z ]+", this) && length > 0 && trim().isNotEmpty()
 }

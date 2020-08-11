@@ -69,8 +69,8 @@ fun bindExtractDateFromDateTime(textView: TextView, value: String?) {
 @BindingAdapter("bindExtractDateFromDateTime_DDMMYYYY")
 fun bindExtractDateFromDateTimeDDMMYYYY(textView: TextView, value: String?) {
     value?.let {
-        val inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
-        val outputFormat: DateFormat = SimpleDateFormat("dd/MM/yyyy")
+        val inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
+        val outputFormat: DateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
         val date: Date = inputFormat.parse(it.substringBefore("T"))
         val outputDateStr: String = outputFormat.format(date)
         textView.text = outputDateStr
