@@ -68,7 +68,8 @@ class HomeFragmentViewModel(application: Application) : BaseViewModel(applicatio
                                     snippet = i.provider_name,
                                     isfavourite = i.favourite,
                                     itemId = i.id,
-                                    address = i.location
+                                    address = i.location,
+                                    rating = i.average_rating
                                 )
                             }
                             listClusterItem.add(
@@ -80,7 +81,8 @@ class HomeFragmentViewModel(application: Application) : BaseViewModel(applicatio
                                     snippet = i.provider_name,
                                     isfavourite = i.favourite,
                                     itemId = i.id,
-                                    address = i.location
+                                    address = i.location,
+                                    rating = i.average_rating
                                 )
                             )
                         }

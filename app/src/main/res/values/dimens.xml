@@ -57,6 +57,7 @@
     <dimen name="common_padding_24">24dp</dimen>
     <dimen name="common_padding_32">32dp</dimen>
     <dimen name="common_padding_8">8dp</dimen>
+    <dimen name="common_padding_4">4dp</dimen>
 
 
 

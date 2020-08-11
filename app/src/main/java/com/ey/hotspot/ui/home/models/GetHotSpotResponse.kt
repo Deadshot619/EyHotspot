@@ -14,7 +14,7 @@ data class GetHotSpotResponse(
     @SerializedName("location_arabic") val location_arabic: String,
     @SerializedName("type") val _type: String?,
     @SerializedName("type_arabic") val type_arabic: String?,
-    @SerializedName("average_rating") val average_rating: String?,
+    @SerializedName("average_rating") val average_rating: String? = "0",
     @SerializedName("provider_name") val _provider_name: String,
     @SerializedName("provider_name_arabic") val provider_name_arabic: String,
     @SerializedName("distance") val distance: Double,

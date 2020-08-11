@@ -81,6 +81,22 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_wifi_ssid"
                 app:layout_constraintStart_toStartOf="@id/tv_wifi_ssid"/>
 
+            <!-- Average Rating-->
+            <TextView
+                android:id="@+id/tv_average_rating"
+                style="@style/ChipStyleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/star"
+                android:drawablePadding="@dimen/common_padding_4"
+                android:layout_marginStart="@dimen/common_margin_8"
+                app:bindRatingView="@{data.average_rating}"
+                app:layout_constraintStart_toEndOf="@id/tv_service_provider"
+                app:layout_constraintTop_toTopOf="@id/tv_service_provider"
+                app:layout_constraintBottom_toBottomOf="@id/tv_service_provider"
+                tools:text="Riyadh" />
+
+
             <!--Location-->
             <TextView
                 android:id="@+id/tv_location"
