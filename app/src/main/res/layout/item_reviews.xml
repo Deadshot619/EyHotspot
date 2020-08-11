@@ -24,6 +24,7 @@
             android:textColor="@color/colorLightGray"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:textDirection="locale"
             android:text='@{String.format("%s %s", data.firstname, data.lastname)}'
             android:layout_marginEnd="@dimen/common_margin"
             app:layout_constraintEnd_toStartOf="@id/tv_date"
@@ -70,6 +71,8 @@
             android:textColor="@color/colorLightGray"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/common_margin_between_fields"
+            android:textDirection="locale"
+
             app:bindShowDashWhenTextEmpty="@{data.description}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_username"
