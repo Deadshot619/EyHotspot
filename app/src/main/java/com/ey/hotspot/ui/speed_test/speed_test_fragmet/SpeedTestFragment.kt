@@ -107,10 +107,13 @@ class SpeedTestFragment : BaseFragment<FragmentSpeedTestBinding, SpeedTestFragme
 
     fun setUpObservers() {
         mViewModel.hideDataView.observe(viewLifecycleOwner, Observer {
-            if (it)
+            if (it){
                 mBinding.clDataLayout.visibility = View.INVISIBLE
-            else
+                mBinding.tvWifiNotValidated.visibility = View.VISIBLE
+            }else{
                 mBinding.clDataLayout.visibility = View.VISIBLE
+                mBinding.tvWifiNotValidated.visibility = View.GONE
+            }
         })
     }
 

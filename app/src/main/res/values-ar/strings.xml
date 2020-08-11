@@ -122,6 +122,7 @@
     <string name="retest_label">إعادة الاختبار</string>
     <string name="wifi_disabled_label">واي فاي معطل</string>
     <string name="wifi_enable_conformation">يبدو أن wifi الخاص بك معطل ، هل تريد تمكينه؟</string>
+    <string name="wifi_not_validated_label">الشبكة الحالية لا تنتمي إلى KSA Free Wifi</string>
 
 
     <string name="speed_test_result_label">نتيجة اختبار السرعة</string>

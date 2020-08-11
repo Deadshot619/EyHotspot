@@ -20,6 +20,10 @@ class TestResultsViewModel(application: Application) : BaseViewModel(application
     val downloadSpeed: LiveData<BigDecimal>
         get() = _downloadSpeed
 
+    private val _downloadCompleted = MutableLiveData<Boolean>()
+    val downloadCompleted: LiveData<Boolean>
+        get() = _downloadCompleted
+
     private val _wifiData = MutableLiveData<ValidateWifiResponse>()
     val wifiData: LiveData<ValidateWifiResponse>
         get() = _wifiData
@@ -48,10 +52,14 @@ class TestResultsViewModel(application: Application) : BaseViewModel(application
             SpeedTestUtils.calculateSpeed(
                 {
                     _downloadSpeed.postValue(it?.transferRateBit?.convertBpsToMbps())
+                    _downloadCompleted.postValue(true)
                 }, {
                     _downloadSpeed.postValue(it?.transferRateBit?.convertBpsToMbps())
+                    _downloadCompleted.postValue(false)
                 }, {
                     _toastMessage.postValue(Event(it))
+                    _downloadSpeed.postValue(0.toBigDecimal())
+                    _downloadCompleted.postValue(true)
                 }).startDownload(Constants.DOWNLOAD_LINK)
         }
     }

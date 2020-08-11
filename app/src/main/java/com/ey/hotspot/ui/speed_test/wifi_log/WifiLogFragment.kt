@@ -19,7 +19,7 @@ class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>()
 
     companion object {
         fun newInstance(
-           wifilog: WifiLogListResponse
+            wifilog: WifiLogListResponse
         ) = WifiLogFragment().apply {
             arguments = Bundle().apply {
                 putParcelable(WIFI_LOG, wifilog)
@@ -31,7 +31,8 @@ class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>()
 
     }
 
-   lateinit var wifiloglist:WifiLogListResponse
+    lateinit var wifiloglist: WifiLogListResponse
+
     override fun getLayoutId() = R.layout.fragment_wifi_log
     override fun getViewModel() = WifiLogViewModel::class.java
     override fun onBinding() {
@@ -45,26 +46,24 @@ class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>()
 
         setUpListeners()
 
-        mBinding.ivFavourites.setOnClickListener{
+        mBinding.ivFavourites.setOnClickListener {
             if (HotSpotApp.prefs?.getAppLoggedInStatus()!!) {
-                if (wifiloglist.location!=null) {
-                val imgID1: Drawable.ConstantState? =
-                    requireContext().getDrawable(R.drawable.ic_favorite_filled_gray)
-                        ?.getConstantState()
-                val imgID2: Drawable.ConstantState? =
-                    mBinding.ivFavourites.getDrawable().getConstantState()
-                if (imgID1 == imgID2) {
-                    mBinding.ivFavourites.setImageResource(R.drawable.ic_favorite_filled_red)
-                    favouriteType = true
-                } else {
-                    mBinding.ivFavourites.setImageResource(R.drawable.ic_favorite_filled_gray)
-                    favouriteType = false
-                }
+                if (wifiloglist.location != null) {
+                    val imgID1: Drawable.ConstantState? =
+                        requireContext().getDrawable(R.drawable.ic_favorite_filled_gray)
+                            ?.getConstantState()
+                    val imgID2: Drawable.ConstantState? =
+                        mBinding.ivFavourites.getDrawable().getConstantState()
+                    if (imgID1 == imgID2) {
+                        mBinding.ivFavourites.setImageResource(R.drawable.ic_favorite_filled_red)
+                        favouriteType = true
+                    } else {
+                        mBinding.ivFavourites.setImageResource(R.drawable.ic_favorite_filled_gray)
+                        favouriteType = false
+                    }
 
                     mViewModel.markFavouriteItem(wifiloglist.location?.id!!)
-                }
-                else
-                {
+                } else {
                     showMessage("No data Available")
                 }
 
@@ -73,17 +72,18 @@ class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>()
     }
 
     private fun setDataInView() {
-        wifiloglist=arguments?.getParcelable<WifiLogListResponse>(WIFI_LOG)!!
+        wifiloglist = arguments?.getParcelable<WifiLogListResponse>(WIFI_LOG)!!
         if (!wifiloglist?.location?.name.isNullOrEmpty()) {
-            mBinding.tvWifiSsid.text =wifiloglist?.location?.name
+            mBinding.tvWifiSsid.text = wifiloglist?.location?.name
         }
-        mBinding.tvDate.text="Date:${getDate(wifiloglist?.login_at!!.extractDateFromDateTime())}"
-        mBinding.tvStartTimeValue.text=getTime(wifiloglist?.login_at?.extractTimeFromDateTime())
+        mBinding.tvDate.text = "Date:${getDate(wifiloglist?.login_at!!.extractDateFromDateTime())}"
+        mBinding.tvStartTimeValue.text = getTime(wifiloglist?.login_at?.extractTimeFromDateTime())
 
         mBinding.tvEndTimeValue.text =
-                getTime(wifiloglist?.logout_at?.extractTimeFromDateTime().toString())
-        mBinding.tvStartSpeedValue.text=getTime(wifiloglist?.login_at?.extractTimeFromDateTime())
-        mBinding.tvEndSpeedValue.text="${wifiloglist?.location?.average_rating.toString().extractspeed()} mbps"
+            getTime(wifiloglist?.logout_at?.extractTimeFromDateTime().toString())
+        mBinding.tvStartSpeedValue.text = getTime(wifiloglist?.login_at?.extractTimeFromDateTime())
+        mBinding.tvEndSpeedValue.text =
+            "${wifiloglist?.location?.average_rating.toString().extractspeed()} mbps"
     }
 
     private fun getDate(datestring: String?): String {
@@ -93,18 +93,16 @@ class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>()
         val outputDateStr: String = outputFormat.format(date)
         return outputDateStr;
     }
-    private fun getTime(datestring: String?):String
-    {
-        var outputDateStr: String=""
-        if (datestring!=null) {
+
+    private fun getTime(datestring: String?): String {
+        var outputDateStr: String = ""
+        if (datestring != null) {
             val inputFormat: DateFormat = SimpleDateFormat("hh:mm:ss")
             val outputFormat: DateFormat = SimpleDateFormat("hh:mm a")
             val date: Date = inputFormat.parse(datestring)
-             outputDateStr = outputFormat.format(date)
-        }
-        else
-        {
-            outputDateStr="-"
+            outputDateStr = outputFormat.format(date)
+        } else {
+            outputDateStr = "-"
         }
         return outputDateStr;
     }
@@ -112,36 +110,32 @@ class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>()
     private fun setUpListeners() {
         //Rate Now
         mBinding.btnRateNow.setOnClickListener {
-           if (wifiloglist.location!=null) {
-               replaceFragment(
-                   ReviewsFragment.newInstance(
-                       locationId = (wifiloglist.location?.id!!.toString()).toInt(),
-                       wifiSsid =wifiloglist.location?.name!!.toString(),
-                       wifiProvider =wifiloglist.location?.provider_name!!.toString(),
-                       location = wifiloglist.location?.name!!.toString()
-                   ), true
-               )
-           }
-            else
-           {
-               showMessage("No data Available")
-           }
+            if (wifiloglist.location != null) {
+                replaceFragment(
+                    ReviewsFragment.newInstance(
+                        locationId = (wifiloglist.location?.id!!.toString()).toInt(),
+                        wifiSsid = wifiloglist.location?.name!!.toString(),
+                        wifiProvider = wifiloglist.location?.provider_name!!.toString(),
+                        location = wifiloglist.location?.name!!.toString()
+                    ), true
+                )
+            } else {
+                showMessage("No data Available")
+            }
         }
 
         //Report
         mBinding.ivFlag.setOnClickListener {
-            if (wifiloglist.location!=null) {
+            if (wifiloglist.location != null) {
                 replaceFragment(
                     RaiseComplaintFragment.newInstance(
                         locationId = (wifiloglist.location?.id!!.toString()).toInt(),
-                        wifiSsid =wifiloglist.location?.name!!.toString(),
-                        wifiProvider =wifiloglist.location?.provider_name!!.toString(),
+                        wifiSsid = wifiloglist.location?.name!!.toString(),
+                        wifiProvider = wifiloglist.location?.provider_name!!.toString(),
                         location = wifiloglist.location?.name!!.toString()
                     ), true
                 )
-            }
-            else
-            {
+            } else {
                 showMessage("No data Available")
             }
         }

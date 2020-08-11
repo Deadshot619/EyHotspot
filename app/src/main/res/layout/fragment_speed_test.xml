@@ -74,19 +74,24 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
+<!--            Wifi not validated-->
             <TextView
-                android:text="@string/under_construction_label"
+                android:id="@+id/tv_wifi_not_validated"
+                android:text="@string/wifi_not_validated_label"
                 style="@style/TextAppearance.MaterialComponents.Headline6"
-                android:layout_width="wrap_content"
+                android:textColor="@color/colorGrayLight"
+                android:layout_width="0dp"
+                android:layout_margin="@dimen/common_margin"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
+                android:visibility="visible"
+                tools:visibility="visible"
+                android:gravity="center"
                 app:layout_constraintTop_toBottomOf="@id/iv_bg_view"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
-<!--            Data Layout-->
+            <!--            Data Layout-->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_data_layout"
                 android:layout_width="0dp"

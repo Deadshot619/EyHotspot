@@ -40,109 +40,163 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <!--            <com.ey.hotspot.speedTestLib.SpeedView
-                            android:id="@+id/progress1C"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginStart="24dp"
-                            android:layout_marginTop="20dp"
-                            android:layout_marginEnd="24dp"
-                            app:layout_constraintBottom_toBottomOf="@id/iv_bg_view"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/toolbarLayout"
-                            app:sv_centerCircleColor="#D1A00D"
-                            app:sv_centerCircleRadius="14dp"
-                            app:sv_indicatorWidth="16dp"
-                            app:sv_indicatorColor="@color/colorAccent"
-                            app:sv_pointerColor="@android:color/transparent"
-                            app:sv_speedTextColor="@android:color/transparent"
-                            app:sv_speedometerColor="@color/colorWhite"
-                            app:sv_speedometerBackColor="@color/base_gradient"
-                            app:sv_speedometerWidth="1dp"
-                            app:sv_withTremble="false"
-                            app:sv_startDegree="180"
-                            app:sv_endDegree="360"
-                            app:sv_indicator="KiteIndicator"/>-->
-
-            <!--            Speedometer-->
-            <com.ey.hotspot.speedTestLib.ImageSpeedometer
-                android:id="@+id/image_speedometer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:scaleX="1.12"
-                app:chainUseRtl="true"
+            <!--    Speedometer Layout  -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_speedometer_layout"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@id/iv_bg_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/toolbarLayout"
-                app:layout_constraintVertical_bias="1"
-                app:sv_centerCircleColor="#D1A00D"
-                app:sv_centerCircleRadius="10dp"
-                app:sv_startDegree="170"
-                app:sv_endDegree="370"
-                app:sv_image="@drawable/speed_indicator_bitmap"
-                app:sv_indicator="KiteIndicator"
-                app:sv_indicatorColor="@color/colorAccent"
-                app:sv_indicatorWidth="14dp"
-                app:sv_speedTextColor="@android:color/transparent"
-                app:sv_unitTextColor="@android:color/transparent"
-                app:sv_withTremble="false"
+                app:layout_constraintVertical_bias="1">
 
-                />
+                <!--            Speedometer-->
+                <com.ey.hotspot.speedTestLib.ImageSpeedometer
+                    android:id="@+id/image_speedometer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleX="1.12"
+                    app:chainUseRtl="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1"
+                    app:sv_centerCircleColor="#D1A00D"
+                    app:sv_centerCircleRadius="10dp"
+                    app:sv_endDegree="370"
+                    app:sv_image="@drawable/speed_indicator_bitmap"
+                    app:sv_indicator="KiteIndicator"
+                    app:sv_indicatorColor="@color/colorAccent"
+                    app:sv_indicatorWidth="14dp"
+                    app:sv_speedTextColor="@android:color/transparent"
+                    app:sv_startDegree="170"
+                    app:sv_unitTextColor="@android:color/transparent"
+                    app:sv_withTremble="false" />
 
-            <!--Download Speed value-->
-            <TextView
-                android:id="@+id/tv_download_speed_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/common_margin_between_fields_4"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/text_size_24"
-                android:textStyle="bold"
-                tools:text="@string/mbps_label"
-                app:bindSpeedValue="@{viewModel.downloadSpeed}"
-                app:layout_constraintBottom_toTopOf="@id/tv_download_speed"
-                app:layout_constraintEnd_toEndOf="@id/tv_download_speed"
-                app:layout_constraintStart_toStartOf="@id/tv_download_speed" />
+                <!--Download Speed value-->
+                <TextView
+                    android:id="@+id/tv_download_speed_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/common_margin_between_fields_4"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/text_size_24"
+                    android:textStyle="bold"
+                    app:bindSpeedValue="@{viewModel.downloadSpeed}"
+                    app:layout_constraintBottom_toTopOf="@id/tv_download_speed"
+                    app:layout_constraintEnd_toEndOf="@id/tv_download_speed"
+                    app:layout_constraintStart_toStartOf="@id/tv_download_speed"
+                    tools:text="@string/mbps_label" />
 
-            <!--Download Speed-->
-            <TextView
-                android:id="@+id/tv_download_speed"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/download_speed_label"
-                android:textColor="@color/colorWhite"
-                app:layout_constraintBottom_toBottomOf="@id/image_speedometer"
-                app:layout_constraintEnd_toEndOf="@id/image_speedometer"
-                app:layout_constraintStart_toStartOf="@id/image_speedometer"
-                app:layout_constraintTop_toTopOf="@id/image_speedometer"
-                app:layout_constraintVertical_bias="0.9" />
+                <!--Download Speed-->
+                <TextView
+                    android:id="@+id/tv_download_speed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/download_speed_label"
+                    android:textColor="@color/colorWhite"
+                    app:layout_constraintBottom_toBottomOf="@id/image_speedometer"
+                    app:layout_constraintEnd_toEndOf="@id/image_speedometer"
+                    app:layout_constraintStart_toStartOf="@id/image_speedometer"
+                    app:layout_constraintTop_toTopOf="@id/image_speedometer"
+                    app:layout_constraintVertical_bias="0.9" />
 
-            <TextView
-                android:text="@string/under_construction_label"
-                style="@style/TextAppearance.MaterialComponents.Headline6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@id/iv_bg_view"
-                app:layout_constraintBottom_toBottomOf="parent"
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--    Download Completed Layout   -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_download_completed_layout"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@id/iv_bg_view"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@id/toolbarLayout"
+                app:layout_constraintVertical_bias="1">
+
+                <!--Go background from previous layout-->
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_bg_go_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/go_bg"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!--  Completed Download Speed Label  -->
+                <TextView
+                    android:id="@+id/tv_completed_download_speed_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/common_margin_24"
+                    android:layout_marginEnd="@dimen/common_margin_24"
+                    android:gravity="center"
+                    android:text="@string/download_speed_label"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/text_size_18"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_bg_go_view"
+                    app:layout_constraintEnd_toEndOf="@id/iv_bg_go_view"
+                    app:layout_constraintStart_toStartOf="@id/iv_bg_go_view"
+                    app:layout_constraintTop_toTopOf="@id/iv_bg_go_view"
+                    app:layout_constraintVertical_bias="0.4" />
+
+                <!--Completed Download Speed value-->
+                <TextView
+                    android:id="@+id/tv_completed_download_speed_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/common_margin_24"
+                    android:layout_marginTop="@dimen/common_margin_8"
+                    android:layout_marginEnd="@dimen/common_margin_24"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/text_size_24"
+                    android:textStyle="bold"
+
+                    app:bindSpeedValue="@{viewModel.downloadSpeed}"
+                    app:layout_constraintEnd_toEndOf="@id/iv_bg_go_view"
+                    app:layout_constraintStart_toStartOf="@id/iv_bg_go_view"
+                    app:layout_constraintTop_toBottomOf="@id/tv_completed_download_speed_label"
+                    tools:text="@string/mbps_label" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--            Wifi not validated-->
+            <TextView
+                android:id="@+id/tv_wifi_not_validated"
+                style="@style/TextAppearance.MaterialComponents.Headline6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/common_margin"
+                android:gravity="center"
+                android:text="@string/wifi_not_validated_label"
+                android:textColor="@color/colorGrayLight"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_bg_view"
+                tools:visibility="visible" />
 
             <!--            Data Layout-->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_data_layout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintVertical_bias="0"
                 android:paddingBottom="@dimen/common_padding_32"
-                app:layout_constraintTop_toBottomOf="@id/iv_bg_view"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                >
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_bg_view"
+                app:layout_constraintVertical_bias="0"
+                tools:visibility="invisible">
 
                 <!--Number Of users-->
                 <TextView
@@ -196,26 +250,26 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/common_padding_24"
                     android:text="@{viewModel.wifiData.wifi_name}"
-                    tools:text="D-Link"
                     android:textAllCaps="true"
                     android:textColor="@color/textColorHeadline"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="@id/tv_number_of_users"
                     app:layout_constraintStart_toStartOf="@id/tv_number_of_users"
-                    app:layout_constraintTop_toBottomOf="@id/iv_dotted_line" />
+                    app:layout_constraintTop_toBottomOf="@id/iv_dotted_line"
+                    tools:text="D-Link" />
 
                 <!--UserName-->
                 <TextView
                     android:id="@+id/chip_username"
+                    style="@style/ChipStyleTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="Vodafone"
-                    android:text="Vodafone"
-                    style="@style/ChipStyleTextView"
                     android:layout_marginTop="@dimen/common_margin_between_fields"
+                    android:text="Vodafone"
                     app:layout_constraintEnd_toEndOf="@id/tv_wifi_ssid"
                     app:layout_constraintStart_toStartOf="@id/tv_wifi_ssid"
-                    app:layout_constraintTop_toBottomOf="@id/tv_wifi_ssid" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_wifi_ssid"
+                    tools:text="Vodafone" />
 
                 <!--        Address-->
                 <TextView
@@ -227,11 +281,11 @@
                     android:text="@{viewModel.wifiData.average_speed + ``}"
                     android:textColor="@color/colorLightGray"
                     android:textSize="@dimen/text_size_16"
-                    tools:text=""
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@id/iv_dotted_line"
                     app:layout_constraintStart_toStartOf="@id/iv_dotted_line"
                     app:layout_constraintTop_toBottomOf="@id/chip_username"
-                    app:layout_constraintBottom_toBottomOf="parent" />
+                    tools:text="" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
