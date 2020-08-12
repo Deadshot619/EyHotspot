@@ -40,6 +40,21 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <!--Text button-->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tv_text_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/retest_label"
+                style="@style/OutlinedButtonToolbar"
+                android:textSize="@dimen/text_size_12"
+                tools:visibility="visible"
+                android:layout_marginEnd="@dimen/common_margin_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/toolbarLayout"
+                app:layout_constraintBottom_toBottomOf="@id/toolbarLayout" />
+
+
             <!--    Speedometer Layout  -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_speedometer_layout"

@@ -50,7 +50,7 @@ class TestResultsFragment : BaseFragment<FragmentTestResultsBinding, TestResults
 
     private fun setUpListeners() {
 //        Toolbar retest button
-        mBinding.toolbarLayout.tvTextButton.setOnClickListener {
+        mBinding.tvTextButton.setOnClickListener {
             mViewModel.setSpeedValue(BigDecimal.valueOf(0))
             mViewModel.onCheckSpeedClick()
         }

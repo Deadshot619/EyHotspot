@@ -29,16 +29,6 @@ fun Activity.setUpToolbar(
         } else {
             btnBack.visibility = View.INVISIBLE
         }
-
-        //If true, show Text Button, else hide it
-        if (showTextButton) {
-            tvTextButton.visibility = View.VISIBLE
-            tvTextButton.setOnClickListener {
-//                this@setUpToolbar.onBackPressed()
-            }
-        } else {
-            tvTextButton.visibility = View.INVISIBLE
-        }
     }
 }
 
