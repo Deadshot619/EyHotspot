@@ -22,6 +22,7 @@ import com.ey.hotspot.network.request.WifiLogoutRequest
 import com.ey.hotspot.utils.CHANNEL_ID
 import com.ey.hotspot.utils.SpeedTestUtils
 import com.ey.hotspot.utils.constants.Constants
+import com.ey.hotspot.utils.constants.checkWifiContainsKeywords
 import com.ey.hotspot.utils.constants.getDeviceId
 import com.ey.hotspot.utils.extention_functions.convertBpsToMbps
 import com.ey.hotspot.utils.extention_functions.extractWifiName
@@ -158,13 +159,13 @@ class WifiService : Service() {
 
 
             //Wifi Ssid
-            val wifiSsid = wifiManager.connectionInfo.ssid.extractWifiName()+"-Turtlemint"
+            val wifiSsid = wifiManager.connectionInfo.ssid.extractWifiName()/* + "-Turtlemint"*/
             if (!wifiSsid.contains(Constants.UNKNOWN_SSID)) {    //If the wifi is "unknown ssid", then skip it
                 /*
                  *  Check if the wifi name is present in wifi keywords
                  */
-                isItOurWifi = //checkWifiContainsKeywords(wifiSsid)
-                    true   //TODO 27/07/2020: Remove True, when live
+                isItOurWifi = checkWifiContainsKeywords(wifiSsid)
+                    //true   //TODO 27/07/2020: Remove True, when live
             } else {
                 isItOurWifi = false
             }

@@ -17,11 +17,11 @@ data class LocationReviews(
     @SerializedName("created_at") @Expose val created_at: String,
     @SerializedName("description") @Expose val description: String,
     @SerializedName("diff_for_human") @Expose val diff_for_human: String,
-    @SerializedName("firstname") @Expose val _firstname: String,
-    @SerializedName("firstname_arabic") @Expose val firstname_arabic: String?,
+    @SerializedName("firstname") @Expose val firstname: String = "",
+    @SerializedName("firstname_arabic") @Expose val firstname_arabic: String? = "",
     @SerializedName("id") @Expose val id: Int,
-    @SerializedName("lastname") @Expose val _lastname: String,
-    @SerializedName("lastname_arabic") @Expose val lastname_arabic: String?,
+    @SerializedName("lastname") @Expose val lastname: String? = "",
+    @SerializedName("lastname_arabic") @Expose val lastname_arabic: String? = "",
     @SerializedName("location") @Expose val _location: String,
     @SerializedName("location_arabic") @Expose val location_arabic: String,
     @SerializedName("location_name") @Expose val _location_name: String,
@@ -30,11 +30,14 @@ data class LocationReviews(
     @SerializedName("provider_name_arabic") @Expose val provider_name_arabic: String,
     @SerializedName("rating") @Expose val rating: Float
 ): Parcelable {
-    val firstname: String
-        get() = /*if (LANGUAGE == Constants.ARABIC_LANG) firstname_arabic ?: _firstname else*/ _firstname
+/*    val firstname: String
+        get() = *//*if (LANGUAGE == Constants.ARABIC_LANG) firstname_arabic ?: _firstname else*//* _firstname
 
     val lastname: String
-        get() = /*if (LANGUAGE == Constants.ARABIC_LANG) lastname_arabic ?: _lastname else*/ _lastname
+        get() = *//*if (LANGUAGE == Constants.ARABIC_LANG) lastname_arabic ?: _lastname else*//* _lastname ?: ""*/
+
+    val fullname: String
+        get() = "$firstname ${if (lastname.isNullOrEmpty()) "" else lastname}"
 
     val location: String
         get() = if (LANGUAGE == Constants.ARABIC_LANG) location_arabic else _location

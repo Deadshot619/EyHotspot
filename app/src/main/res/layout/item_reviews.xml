@@ -18,6 +18,8 @@
 
 
         <!--UserName-->
+<!--        android:text='@{String.format("%s %s", data.firstname, data.lastname)}'-->
+
         <TextView
             android:id="@+id/tv_username"
             style="@style/Headline7"
@@ -25,7 +27,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textDirection="locale"
-            android:text='@{String.format("%s %s", data.firstname, data.lastname)}'
+            android:text='@{data.fullname}'
+
             android:layout_marginEnd="@dimen/common_margin"
             app:layout_constraintEnd_toStartOf="@id/tv_date"
             app:layout_constraintStart_toStartOf="parent"

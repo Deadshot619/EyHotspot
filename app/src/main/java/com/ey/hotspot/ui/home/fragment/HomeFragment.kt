@@ -4,9 +4,11 @@ import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.IntentSender
 import android.content.pm.PackageManager
 import android.location.Location
+import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -16,6 +18,7 @@ import androidx.lifecycle.Observer
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.app_core_lib.HotSpotApp
+import com.ey.hotspot.broadcast_receivers.GPSCheck
 import com.ey.hotspot.databinding.FragmentHomeBinding
 import com.ey.hotspot.ui.deep_link.model.DeepLinkHotspotDataModel
 import com.ey.hotspot.ui.favourite.model.MarkFavouriteRequest
@@ -84,6 +87,28 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
     private var map: GoogleMap? = null
 
+    private val locationCallback by lazy {
+        object : GPSCheck.LocationCallBack {
+            override fun turnedOn() {
+                requireActivity().applicationContext.getUserLocation { lat, lng ->
+                    if (lat != null && lng != null)
+                        map?.moveCamera(
+                            CameraUpdateFactory.newLatLngZoom(
+                                LatLng(
+                                    lat,
+                                    lng
+                                ), HomeFragment.DEFAULT_ZOOM.toFloat()
+                            )
+                        )
+                }
+            }
+
+            override fun turnedOff() {}
+        }
+    }
+
+    private val locationBR = GPSCheck(locationCallback)
+
     private lateinit var placesClient: PlacesClient
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private val defaultLocation = LatLng(Constants.LATITUDE, Constants.LONGITUDE)
@@ -100,6 +125,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
     private var currentCluster: MyClusterItems? = null
 
+    //Dialog to show to Skipped user to login
     private val dialog by lazy {
         YesNoDialog(requireActivity()).apply {
             setViews(
@@ -149,7 +175,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         placesClient = Places.createClient(requireActivity())
 
         // Construct a FusedLocationProviderClient.
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+        fusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(requireActivity())
 
         //init map
         val myMAPF = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
@@ -206,7 +233,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             }
 
             override fun onClickNavigate(data: WifiInfoModel) {
-                activity?.openNavigateUrl(data.navigate_url, data.lat.toString(), data.lon.toString())
+                activity?.openNavigateUrl(
+                    data.navigate_url,
+                    data.lat.toString(),
+                    data.lon.toString()
+                )
             }
 
             override fun onClickShare(data: WifiInfoModel) {
@@ -289,7 +320,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
     private fun getNearByWifiList(gpsStatus: Boolean) {
         if (gpsStatus) {
-            if(lastKnownLocation !=null) {
+            if (lastKnownLocation != null) {
                 val getHotSpotRequest: GetHotSpotRequest = GetHotSpotRequest(
                     lastKnownLocation!!.latitude,
                     lastKnownLocation!!.longitude, "", true
@@ -362,8 +393,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                             )
                         }
 
-                       // getNearByWifiList(requireActivity().checkLocSaveState())
-                    }else{
+                        // getNearByWifiList(requireActivity().checkLocSaveState())
+                    } else {
                         map?.moveCamera(
                             CameraUpdateFactory.newLatLngZoom(
                                 LatLng(
@@ -373,7 +404,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                             )
                         )
 
-                       // getNearByWifiList(requireActivity().checkLocSaveState())
+                        // getNearByWifiList(requireActivity().checkLocSaveState())
 
                     }
                 } else {
@@ -562,5 +593,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             }
         }
         updateLocationUI()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        activity?.registerReceiver(locationBR, IntentFilter(LocationManager.MODE_CHANGED_ACTION))
+    }
+
+    override fun onPause() {
+        super.onPause()
+        activity?.unregisterReceiver(locationBR)
     }
 }
