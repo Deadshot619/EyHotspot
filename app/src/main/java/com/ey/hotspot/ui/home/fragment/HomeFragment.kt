@@ -4,11 +4,9 @@ import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.content.IntentSender
 import android.content.pm.PackageManager
 import android.location.Location
-import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -597,11 +595,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
     override fun onResume() {
         super.onResume()
-        activity?.registerReceiver(locationBR, IntentFilter(LocationManager.MODE_CHANGED_ACTION))
+//        activity?.registerReceiver(locationBR, IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION))
     }
 
     override fun onPause() {
         super.onPause()
-        activity?.unregisterReceiver(locationBR)
+//        activity?.unregisterReceiver(locationBR)
     }
 }

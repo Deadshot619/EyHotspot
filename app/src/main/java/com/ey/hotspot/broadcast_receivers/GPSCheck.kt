@@ -17,9 +17,15 @@ class GPSCheck(private val locationCallBack: LocationCallBack) :
     override fun onReceive(context: Context, intent: Intent) {
         val locationManager =
             context.getSystemService(LOCATION_SERVICE) as LocationManager
-        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
-            locationCallBack.turnedOn()
-        else
-            locationCallBack.turnedOff()
+
+        intent.action?.let {
+            if (it == LocationManager.PROVIDERS_CHANGED_ACTION) {
+                // Make an action or refresh an already managed state.
+                if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
+                    locationCallBack.turnedOn()
+                else
+                    locationCallBack.turnedOff()
+            }
+        }
     }
 }
