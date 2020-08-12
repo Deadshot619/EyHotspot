@@ -158,12 +158,12 @@ class WifiService : Service() {
 
 
             //Wifi Ssid
-            val wifiSsid = wifiManager.connectionInfo.ssid.extractWifiName()
+            val wifiSsid = wifiManager.connectionInfo.ssid.extractWifiName()+"-Turtlemint"
             if (!wifiSsid.contains(Constants.UNKNOWN_SSID)) {    //If the wifi is "unknown ssid", then skip it
                 /*
                  *  Check if the wifi name is present in wifi keywords
                  */
-                isItOurWifi = /*HotSpotApp.prefs?.getWifiKeywordsPref()?.contains(wifiSsid) ?: false*/
+                isItOurWifi = //checkWifiContainsKeywords(wifiSsid)
                     true   //TODO 27/07/2020: Remove True, when live
             } else {
                 isItOurWifi = false
@@ -193,6 +193,16 @@ class WifiService : Service() {
                                 getString(R.string.calculating_wifi_speed_label),
                                 wifiManager.connectionInfo.ssid
                             )
+                        )
+                    })
+            }
+            else{   //This wifi is not our wifi
+                ContextCompat.startForegroundService(
+                    applicationContext,
+                    Intent(applicationContext, WifiService::class.java).apply {
+                        putExtra(
+                            wifi_notification_key,
+                            getString(R.string.wifi_not_validated_label)
                         )
                     })
             }
@@ -231,11 +241,28 @@ class WifiService : Service() {
                             deviceId = DEVICE_ID
                         )
                     }
-                } else
+                } else{
                     validateWifiSuccessful = false
+                    ContextCompat.startForegroundService(
+                        applicationContext,
+                        Intent(applicationContext, WifiService::class.java).apply {
+                            putExtra(
+                                wifi_notification_key,
+                                getString(R.string.wifi_not_validated_label)
+                            )
+                        })
+                }
             },
             error = {
                 validateWifiSuccessful = false
+                ContextCompat.startForegroundService(
+                    applicationContext,
+                    Intent(applicationContext, WifiService::class.java).apply {
+                        putExtra(
+                            wifi_notification_key,
+                            getString(R.string.wifi_not_validated_label)
+                        )
+                    })
             }
         )
     }

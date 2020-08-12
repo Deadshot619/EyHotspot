@@ -13,6 +13,7 @@ import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentSpeedTestBinding
 import com.ey.hotspot.ui.speed_test.test_result.TestResultsFragment
 import com.ey.hotspot.utils.constants.Constants
+import com.ey.hotspot.utils.constants.checkWifiContainsKeywords
 import com.ey.hotspot.utils.constants.setUpToolbar
 import com.ey.hotspot.utils.dialogs.YesNoDialog
 import com.ey.hotspot.utils.extention_functions.*
@@ -138,10 +139,12 @@ class SpeedTestFragment : BaseFragment<FragmentSpeedTestBinding, SpeedTestFragme
             if (wifiSSid.contains(Constants.UNKNOWN_SSID)) {
                 if (!requireActivity().isLocationEnabled()) {
                     activity?.turnOnGpsDialog()
-                    getUserLocationAndValidateWifi(wifiSSid)
+                    if (checkWifiContainsKeywords(wifiSSid))
+                        getUserLocationAndValidateWifi(wifiSSid)
                 }
-            } else {
-                getUserLocationAndValidateWifi(wifiSSid)
+            } else {//TODO 12/08/20 : Uncomment this & remove turtlemint
+//                if (checkWifiContainsKeywords(wifiSSid))
+                    getUserLocationAndValidateWifi("$wifiSSid-Turtlemint")
             }
         }
     }

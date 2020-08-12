@@ -24,6 +24,13 @@ fun getDeviceId() = Settings.Secure.getString(CoreApp.instance.contentResolver, 
  */
 fun getDeepLinkUrl(id: Int, lat: Double, lon: Double) = "$DL_LINK?$DL_ID=$id&$DL_LAT=$lat&$DL_LON=$lon"
 
+/**
+ * This method will check if the Wifi SSID provided has keywords provided by KSA Free Wifi.
+ * returns true if it does, else false
+ */
+fun checkWifiContainsKeywords(wifiSsid: String): Boolean{
+    return HotSpotApp.prefs?.getWifiKeywordsPref()?.any { wifiSsid.contains(it, true) } ?: false
+}
 
 /**
  * Update shared pref when user Logs in

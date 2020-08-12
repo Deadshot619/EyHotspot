@@ -123,6 +123,7 @@
     <string name="retest_label">إعادة الاختبار</string>
     <string name="wifi_disabled_label">واي فاي معطل</string>
     <string name="wifi_enable_conformation">يبدو أن wifi الخاص بك معطل ، هل تريد تمكينه؟</string>
+    <string name="network_not_validated_label">الشبكة الحالية لا تنتمي إلى KSA Free Wifi</string>
     <string name="wifi_not_validated_label">الشبكة الحالية لا تنتمي إلى KSA Free Wifi</string>
 
 
@@ -254,9 +255,9 @@
     <string name="sms_label">رسالة قصيرة</string>
     <string name="email_label">البريد الإلكتروني</string>
     <string name="choose_verify_option">حدد خيار التحقق</string>
-<!--
-   <string name="captcha_characters">أبجدهـFزحأنايكلاممياصسصسشالخامسثسذضصفرواحدإثنانثلاثةأربعةخمسةستةسبعةثمانيةتسعة</string>
--->
+    <!--
+       <string name="captcha_characters">أبجدهـFزحأنايكلاممياصسصسشالخامسثسذضصفرواحدإثنانثلاثةأربعةخمسةستةسبعةثمانيةتسعة</string>
+    -->
     <string name="forgotpassword_label">هل نسيت كلمة المرور</string>
     <string name="invalid_captcha">كلمة التحقق غير صالحة</string>
     <string name="msg_mandatory_fields"> الحقول الإلزامية</string>

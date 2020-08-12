@@ -114,7 +114,8 @@
     <string name="retest_label">Retest</string>
     <string name="wifi_disabled_label">Wifi Disabled</string>
     <string name="wifi_enable_conformation">Your wifi seems to be disabled, do you want to enable it?</string>
-    <string name="wifi_not_validated_label">The current network does not belong to \n KSA Free Wifi</string>
+    <string name="network_not_validated_label">The current network does not belong to \n KSA Free Wifi</string>
+    <string name="wifi_not_validated_label">The current wifi does not belong to KSA Free Wifi</string>
 
     <string name="speed_test_result_label">Speed Test Result</string>
     <string name="download_label">Download</string>

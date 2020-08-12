@@ -77,7 +77,7 @@
 <!--            Wifi not validated-->
             <TextView
                 android:id="@+id/tv_wifi_not_validated"
-                android:text="@string/wifi_not_validated_label"
+                android:text="@string/network_not_validated_label"
                 style="@style/TextAppearance.MaterialComponents.Headline6"
                 android:textColor="@color/colorGrayLight"
                 android:layout_width="0dp"
