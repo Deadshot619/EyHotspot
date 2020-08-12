@@ -83,7 +83,14 @@ class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>()
         mBinding.tvEndTimeValue.text =
                 getTime(wifiloglist?.logout_at?.extractTimeFromDateTime().toString())
         mBinding.tvStartSpeedValue.text=getTime(wifiloglist?.login_at?.extractTimeFromDateTime())
-        mBinding.tvEndSpeedValue.text="${wifiloglist?.location?.average_rating.toString().extractspeed()} mbps"
+        if (!wifiloglist?.average_speed.toString().equals("null")) {
+            mBinding.tvEndSpeedValue.text =
+                "${wifiloglist?.average_speed.toString().extractspeed()} mbps"
+        }
+        else
+        {
+            mBinding.tvEndSpeedValue.text="-"
+        }
 
         if (wifiloglist.location!!.favourite)
         {

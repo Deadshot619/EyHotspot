@@ -18,6 +18,7 @@ import com.ey.hotspot.utils.constants.Constants
 import com.ey.hotspot.utils.constants.setUpToolbar
 import com.ey.hotspot.utils.constants.updateSharedPreference
 import com.ey.hotspot.utils.extention_functions.goToHomeScreen
+import kotlinx.android.synthetic.main.fragment_web_view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -66,8 +67,7 @@ class WebViewFragment() :
             activity?.setUpToolbar(
                 mBinding.toolbarLayout,
                 resources.getString(R.string.terms_condition),
-                true,
-                showTextButton = false
+                true
             )
             mBinding.btnAgree.visibility=View.GONE
             back=true
@@ -127,6 +127,9 @@ class WebViewFragment() :
 
     private fun openWebview(webView: WebView, url:String)
     {
+        webview.getSettings().setLoadWithOverviewMode(true);
+        webview.getSettings().setUseWideViewPort(true);
+
         webView.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
                 view?.loadUrl(url)

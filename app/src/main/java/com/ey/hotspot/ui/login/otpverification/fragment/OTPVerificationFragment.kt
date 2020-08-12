@@ -85,7 +85,7 @@ class OTPVerificationFragment :
 
         //Change image according to Selected Type
         if ( arguments?.getString(selectedType) == VerificationType.SMS.value)
-            mBinding.ivCheck.setImageResource(R.drawable.ic_mobile_verification)
+            mBinding.ivCheck.setImageResource(R.drawable.ic_email_verification)
         else
             mBinding.ivCheck.setImageResource(R.drawable.ic_email_verification)
 

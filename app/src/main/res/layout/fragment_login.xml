@@ -278,7 +278,6 @@
             <!--        Get Started-->
             <TextView
                 android:id="@+id/tv_get_started"
-
                 style="@style/TextAppearance.MyApp.Headline3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
