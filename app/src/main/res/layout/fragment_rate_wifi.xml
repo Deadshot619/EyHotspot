@@ -30,10 +30,10 @@
             style="@style/Headline7"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textDirection="locale"
             android:layout_margin="@dimen/common_margin_24"
             android:text="@{viewModel.rateWifiData.wifiSsid}"
             android:textColor="?attr/colorOnSecondary"
+            android:textDirection="locale"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,24 +47,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/common_margin_between_fields_4"
-            android:textColor="?attr/colorOnSecondary"
             android:text="@{viewModel.rateWifiData.wifiProvider}"
+            android:textColor="?attr/colorOnSecondary"
             app:layout_constraintStart_toStartOf="@id/tv_wifi_name"
             app:layout_constraintTop_toBottomOf="@id/tv_wifi_name"
             tools:text="Amazenet" />
 
         <!--Wifi Location-->
         <TextView
-                android:id="@+id/tv_wifi_location"
+            android:id="@+id/tv_wifi_location"
             style="@style/TextAppearance.MaterialComponents.Body2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/common_margin_between_fields"
-            android:textAllCaps="true"
-            android:textDirection="locale"
-
             android:text="@{viewModel.rateWifiData.wifiLocation}"
+            android:textAllCaps="true"
+
             android:textColor="@color/colorGrayLight"
+            android:textDirection="locale"
             app:layout_constraintEnd_toEndOf="@id/tv_wifi_name"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="@id/tv_wifi_name"
@@ -88,13 +88,17 @@
             style="@style/GradientRatingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/common_margin_32"
+            android:layout_marginStart="@dimen/common_margin_48"
+            android:layout_marginEnd="@dimen/common_margin_48"
+            android:layout_marginTop="@dimen/common_margin_32"
+            android:layout_marginBottom="@dimen/common_margin_32"
             android:rating="@={viewModel.rateWifiData.rating}"
             android:stepSize="1"
-            tools:rating="3"
             app:layout_constraintEnd_toEndOf="@id/view_horizontal"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="@id/view_horizontal"
-            app:layout_constraintTop_toBottomOf="@id/view_horizontal" />
+            app:layout_constraintTop_toBottomOf="@id/view_horizontal"
+            tools:rating="3" />
 
         <!--Remarks-->
         <com.google.android.material.textfield.TextInputLayout
@@ -114,10 +118,10 @@
                 android:layout_height="wrap_content"
                 android:gravity="top|start"
                 android:inputType="textMultiLine"
-                android:text="@={viewModel.rateWifiData.feedback}"
                 android:lines="10"
                 android:maxLines="15"
-                android:minLines="6" />
+                android:minLines="6"
+                android:text="@={viewModel.rateWifiData.feedback}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <!--Cancel button-->

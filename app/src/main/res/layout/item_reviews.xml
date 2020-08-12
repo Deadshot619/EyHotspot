@@ -28,7 +28,6 @@
             android:layout_height="wrap_content"
             android:textDirection="locale"
             android:text='@{data.fullname}'
-
             android:layout_marginEnd="@dimen/common_margin"
             app:layout_constraintEnd_toStartOf="@id/tv_date"
             app:layout_constraintStart_toStartOf="parent"
