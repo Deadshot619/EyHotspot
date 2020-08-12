@@ -145,6 +145,8 @@ class SpeedTestFragment : BaseFragment<FragmentSpeedTestBinding, SpeedTestFragme
             } else {//TODO 12/08/20 : Uncomment this & remove turtlemint
                 if (checkWifiContainsKeywords(wifiSSid))
                     getUserLocationAndValidateWifi(wifiSSid /*+ "-Turtlemint"*/)
+
+//                showMessage(wifiSSid.contains("link").toString())
             }
         }
     }

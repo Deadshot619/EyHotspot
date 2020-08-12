@@ -75,7 +75,7 @@ fun convertStringFromList(vararg lists: List<String>?): String{
  * Method to logout user & go to Login Page
  */
 fun logoutUser() {
-    clearDataSaveLang()
+    clearDataSaveLangAndKeywords()
 
     //Stop Service
 //    CoreApp.instance.stopService(Intent(CoreApp.instance, WifiService::class.java))
@@ -89,12 +89,23 @@ fun logoutUser() {
 /**
  * This method will clear all the sharedPref data except Language
  */
-fun clearDataSaveLang(){
+fun clearDataSaveLangAndKeywords(){
     val lang = if (ENGLISH_LANG == HotSpotApp.prefs?.getLanguage()) ENGLISH_LANG else ARABIC_LANG
+    val temp = HotSpotApp.prefs?.getWifiKeywordsPref()
 
     //Clear Data
     HotSpotApp.prefs?.clearSharedPrefData()
 
     //Set language
     HotSpotApp.prefs?.setLanguage(lang)
+    temp?.let {
+        //Set keywords
+        HotSpotApp.prefs?.saveWifiKeywordsPref(it)
+    }
+}
+
+fun clearDataSaveWifiKeywords(){
+    val temp = HotSpotApp.prefs?.getWifiKeywordsPref()
+
+
 }

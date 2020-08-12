@@ -150,7 +150,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
                     updateSharedPreference(it.data)
                     activity?.goToHomeScreen()
                 } else {
-                    clearDataSaveLang()
+                    clearDataSaveLangAndKeywords()
                     HotSpotApp.prefs?.setUserDataPref(it.data)
                     replaceFragment(
                         fragment = WebViewFragment.newInstance("login"),
@@ -256,7 +256,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
         //Skip button
         mBinding.btnSkip.setOnClickListener {
-            clearDataSaveLang()
+            clearDataSaveLangAndKeywords()
             setSkippedUserData()
             activity?.goToHomeScreen()
         }

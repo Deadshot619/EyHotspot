@@ -27,11 +27,8 @@ import com.ey.hotspot.app_core_lib.BaseActivity
 import com.ey.hotspot.ui.home.BottomNavHomeActivity
 import com.ey.hotspot.ui.login.LoginActivity
 import com.ey.hotspot.utils.constants.Constants
-import com.ey.hotspot.utils.constants.clearDataSaveLang
-import com.facebook.login.LoginManager
-import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.ey.hotspot.utils.constants.clearDataSaveLangAndKeywords
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.material.snackbar.Snackbar
 import com.karumi.dexter.Dexter
@@ -344,7 +341,7 @@ fun Activity.openNavigateUrl(url: String, lat: String, lon: String) {
  * Method to logout user & go to Login Page
  */
 fun Application.logoutUser(bundle: Bundle? = null) {
-    clearDataSaveLang()
+    clearDataSaveLangAndKeywords()
 
 
 
