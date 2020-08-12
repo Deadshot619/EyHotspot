@@ -32,7 +32,7 @@ class SpeedTestFragmentViewModel(application: Application) : BaseViewModel(appli
             DataProvider.validateWifi(
                 request = request,
                 success = {
-                    showToastFromViewModel(it.message)
+//                    showToastFromViewModel(it.message)
                     if (it.status)
                         _wifiData.value = it.data
 

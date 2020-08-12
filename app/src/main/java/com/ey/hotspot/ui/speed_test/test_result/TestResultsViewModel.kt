@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ey.hotspot.app_core_lib.BaseViewModel
 import com.ey.hotspot.network.response.ValidateWifiResponse
-import com.ey.hotspot.utils.Event
 import com.ey.hotspot.utils.SpeedTestUtils
 import com.ey.hotspot.utils.constants.Constants
 import com.ey.hotspot.utils.extention_functions.convertBpsToMbps
@@ -57,7 +56,7 @@ class TestResultsViewModel(application: Application) : BaseViewModel(application
                     _downloadSpeed.postValue(it?.transferRateBit?.convertBpsToMbps())
                     _downloadCompleted.postValue(false)
                 }, {
-                    _toastMessage.postValue(Event(it))
+//                    _toastMessage.postValue(Event(appInstance.getString(R.string.error_while_calculating_download_speed)))
                     _downloadSpeed.postValue(0.toBigDecimal())
                     _downloadCompleted.postValue(true)
                 }).startDownload(Constants.DOWNLOAD_LINK)

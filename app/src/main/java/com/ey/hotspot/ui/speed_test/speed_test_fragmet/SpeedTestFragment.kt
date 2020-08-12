@@ -143,7 +143,7 @@ class SpeedTestFragment : BaseFragment<FragmentSpeedTestBinding, SpeedTestFragme
                         getUserLocationAndValidateWifi(wifiSSid)
                 }
             } else {//TODO 12/08/20 : Uncomment this & remove turtlemint
-//                if (checkWifiContainsKeywords(wifiSSid))
+                if (checkWifiContainsKeywords(wifiSSid))
                     getUserLocationAndValidateWifi("$wifiSSid-Turtlemint")
             }
         }

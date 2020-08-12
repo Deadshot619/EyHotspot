@@ -54,6 +54,7 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
                     if (it.status)
                         _loginResponseSuccess.value = Event(it.data)
                     else{
+                        _loginResponseFailure.value = Event(null)
                         showToastFromViewModel(it.message)
                         _loginResponseFailure.value = Event(it.data)
                     }
