@@ -28,6 +28,10 @@ import com.ey.hotspot.ui.home.BottomNavHomeActivity
 import com.ey.hotspot.ui.login.LoginActivity
 import com.ey.hotspot.utils.constants.Constants
 import com.ey.hotspot.utils.constants.clearDataSaveLang
+import com.facebook.login.LoginManager
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.material.snackbar.Snackbar
 import com.karumi.dexter.Dexter
@@ -156,6 +160,8 @@ fun Context.checkLocSaveState(): Boolean {
  * @param view The view from which it is called. Used to show SnackBar on
  * @param func The function to be executed when permission is granted
  */
+lateinit var mGoogleSignInClient: GoogleSignInClient
+
 fun Context.checkLocationPermission(view: View, func: (Unit) -> Unit) {
     Dexter.withContext(this)
         .withPermissions(
@@ -339,6 +345,8 @@ fun Activity.openNavigateUrl(url: String, lat: String, lon: String) {
  */
 fun Application.logoutUser(bundle: Bundle? = null) {
     clearDataSaveLang()
+
+
 
     //Stop Service
 //    CoreApp.instance.stopService(Intent(CoreApp.instance, WifiService::class.java))
