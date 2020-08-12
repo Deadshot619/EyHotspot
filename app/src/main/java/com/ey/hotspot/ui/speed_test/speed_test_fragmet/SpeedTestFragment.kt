@@ -151,8 +151,8 @@ class SpeedTestFragment : BaseFragment<FragmentSpeedTestBinding, SpeedTestFragme
         requireActivity().applicationContext.getUserLocation { lat, lng ->
             if (lat != null && lng != null)
                 mViewModel.verifyHotspot(wifiSSid, lat, lng)
-            else
-                mViewModel.verifyHotspot(wifiSSid, Constants.LATITUDE, Constants.LONGITUDE)
+            /*else
+                mViewModel.verifyHotspot(wifiSSid, Constants.LATITUDE, Constants.LONGITUDE)*/
         }
     }
 }

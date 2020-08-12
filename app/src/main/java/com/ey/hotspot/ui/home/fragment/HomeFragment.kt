@@ -147,11 +147,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
         Places.initialize(requireActivity(), getString(R.string.maps_api_key))
         placesClient = Places.createClient(requireActivity())
+
         // Construct a FusedLocationProviderClient.
-        fusedLocationProviderClient =
-            LocationServices.getFusedLocationProviderClient(requireActivity())
-        val myMAPF = childFragmentManager
-            .findFragmentById(R.id.map) as SupportMapFragment?
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+
+        //init map
+        val myMAPF = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         myMAPF?.getMapAsync(this)
 
 
