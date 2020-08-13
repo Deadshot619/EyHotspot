@@ -89,7 +89,7 @@ interface Constants {
         const val API_VALIDATE_WIFI = "wifi/validateWifi"
         const val API_MATCH_WIFI = "wifi/matchWifi"
         const val API_WIFI_LOGS= "wifi/userLogs"
-
+        const val API_WIFI_SPEED_TEST = "wifi/speedTest"
 
         /*    GET    */
         const val UNAUTHORIZED = "unauthorized"
@@ -99,6 +99,7 @@ interface Constants {
         const val API_GET_COMPLAINTS_ISSUE_TYPES = "getComplaintIssueTypes"
         const val API_GET_COUNTRY_CODE_NAME = "getCountryCodeList"
         const val API_GET_WIFI_SEARCH_KEY_WORDS = "wifi/wifiSearchKeywords"
+
 
         /*  Query   */
         const val REVIEW_ORDER = "review_order"

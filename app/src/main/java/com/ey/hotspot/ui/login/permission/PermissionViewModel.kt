@@ -21,7 +21,7 @@ class PermissionViewModel (application: Application): BaseViewModel(application)
         setDialogVisibility(true)
 
         coroutineScope.launch {
-            DataProvider.termsncondition(
+            DataProvider.termsAndConditions(
                 request = termsRequest,
                 success = {
                     _termsResponse.value = it

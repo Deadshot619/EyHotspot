@@ -492,14 +492,27 @@ object DataProvider : RemoteDataProvider {
         }
     }
 
+    override suspend fun wifiSpeedTest(
+        request: SpeedTestRequest,
+        success: (BaseResponse<Any>) -> Unit,
+        error: (Exception) -> Unit
+    ) {
+        try {
+            val result = mServices.setWifiSpeedAsync(request).await()
+            success(result)
+        } catch (e: Exception) {
+            error(e)
+        }
+    }
 
-    suspend fun termsncondition(
+
+    override suspend fun termsAndConditions(
         request: TermsRequest,
         success: (BaseResponse<Any>) -> Unit,
         error: (Exception) -> Unit
     ) {
         try {
-            val result = mServices.getTermsncondition(request).await()
+            val result = mServices.getTermsAndConditionsAsync(request).await()
             success(result)
         } catch (e: Exception) {
             error(e)

@@ -4,9 +4,11 @@ import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.IntentSender
 import android.content.pm.PackageManager
 import android.location.Location
+import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -89,7 +91,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         object : GPSCheck.LocationCallBack {
             override fun turnedOn() {
                 requireActivity().applicationContext.getUserLocation { lat, lng ->
-                    if (lat != null && lng != null)
+                    if (lat != null && lng != null) {
                         map?.moveCamera(
                             CameraUpdateFactory.newLatLngZoom(
                                 LatLng(
@@ -98,7 +100,28 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                                 ), HomeFragment.DEFAULT_ZOOM.toFloat()
                             )
                         )
+
+                    }
                 }
+                /*try {
+                    val locationResult = fusedLocationProviderClient.lastLocation
+                    locationResult.addOnCompleteListener {
+                        if (it.result?.latitude != null && it.result?.longitude != null) {
+                            map?.moveCamera(
+                                CameraUpdateFactory.newLatLngZoom(
+                                    LatLng(
+                                        it.result?.latitude!!,
+                                        it.result?.longitude!!
+                                    ), HomeFragment.DEFAULT_ZOOM.toFloat()
+                                )
+                            )
+
+                        }
+                    }
+                } catch (e: Exception){
+
+                }*/
+                showMessage("Location Callback")
             }
 
             override fun turnedOff() {}
@@ -375,8 +398,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                             map?.moveCamera(
                                 CameraUpdateFactory.newLatLngZoom(
                                     LatLng(
-                                        lastKnownLocation!!.latitude,
-                                        lastKnownLocation!!.longitude
+                                        lastKnownLocation?.latitude ?: Constants.LATITUDE,
+                                        lastKnownLocation?.longitude ?: Constants.LONGITUDE
                                     ), HomeFragment.DEFAULT_ZOOM.toFloat()
                                 )
                             )
@@ -595,11 +618,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
     override fun onResume() {
         super.onResume()
-//        activity?.registerReceiver(locationBR, IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION))
+        requireActivity().registerReceiver(
+            locationBR,
+            IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION).apply { addAction(Intent.ACTION_PROVIDER_CHANGED) }
+        )
     }
 
     override fun onPause() {
         super.onPause()
-//        activity?.unregisterReceiver(locationBR)
+        requireActivity().unregisterReceiver(locationBR)
     }
 }

@@ -194,5 +194,18 @@ interface RemoteDataProvider {
         success: (BaseResponse<List<String>>) -> Unit,
         error: (Exception) -> Unit
     )
+
+    suspend fun wifiSpeedTest(
+        request: SpeedTestRequest,
+        success: (BaseResponse<Any>) -> Unit,
+        error: (Exception) -> Unit
+    )
+
+//    Terms & Conditions
+    suspend fun termsAndConditions(
+        request: TermsRequest,
+        success: (BaseResponse<Any>) -> Unit,
+        error: (Exception) -> Unit
+    )
 }
 

@@ -159,6 +159,9 @@ interface APIInterface {
     @GET(Constants.API_GET_WIFI_SEARCH_KEY_WORDS)
     fun getWifiSearchKeyWordsAsync(): Deferred<BaseResponse<List<String>>>
 
+    @POST(Constants.API_WIFI_SPEED_TEST)
+    fun setWifiSpeedAsync(@Body request: SpeedTestRequest): Deferred<BaseResponse<Any>>
+
     @POST(Constants.API_TERMNCONDITION)
-    fun getTermsncondition(@Body request:TermsRequest):Deferred<BaseResponse<Any>>
+    fun getTermsAndConditionsAsync(@Body request:TermsRequest):Deferred<BaseResponse<Any>>
 }
