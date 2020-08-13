@@ -13,7 +13,10 @@ import com.ey.hotspot.network.response.WifispeedtestData
 import com.ey.hotspot.ui.review_and_complaint.reviews.ReviewsFragment
 import com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment
 import com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogSpeedTestAdapter
-import com.ey.hotspot.utils.extention_functions.*
+import com.ey.hotspot.utils.extention_functions.extractDateFromDateTime
+import com.ey.hotspot.utils.extention_functions.extractTimeFromDateTime
+import com.ey.hotspot.utils.extention_functions.replaceFragment
+import com.ey.hotspot.utils.extention_functions.showMessage
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -84,17 +87,18 @@ class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>()
             mBinding.tvWifiSsid.text =wifiloglist?.location?.name
         }
 
-        mBinding.tvDate.text=String.format(getString(R.string.date_wifi_log_label),getDate(wifiloglist?.login_at!!.extractDateFromDateTime()))
+        mBinding.tvDate.text=String.format(getString(R.string.date_wifi_log_label),getDate(wifiloglist?.created_at!!.extractDateFromDateTime()))
         mBinding.tvStartTimeValue.text=getTime(wifiloglist?.login_at?.extractTimeFromDateTime())
 
         mBinding.tvEndTimeValue.text =
                 getTime(wifiloglist?.logout_at?.extractTimeFromDateTime().toString())
+
         mBinding.tvStartSpeedValue.text=getTime(wifiloglist?.login_at?.extractTimeFromDateTime())
         if (!wifiloglist?.average_speed.toString().equals("null")) {
            /* mBinding.tvEndSpeedValue.text =
                 "${wifiloglist?.average_speed.toString().extractspeed()} mbps"*/
             mBinding.tvEndSpeedValue.text =
-                "${wifiloglist?.average_speed} mbps"
+                "${wifiloglist?.average_speed} Mbps"
         }
         else
         {

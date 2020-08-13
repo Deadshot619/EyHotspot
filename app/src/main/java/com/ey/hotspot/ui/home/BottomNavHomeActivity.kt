@@ -93,7 +93,7 @@ class BottomNavHomeActivity : BaseActivity<ActivityBottomNavHomeBinding, BottomN
         //Start service only if it isn't running already
         if (!WifiService.isRunning)
         //TODO 25/07/2020 : Uncomment this later
-//            startWifiCheckService()
+            startWifiCheckService()
 
         //Set Home as initial fragment
         mBinding.bottomNavigation.menu.run {

@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ey.hotspot.R
 import com.ey.hotspot.network.response.WifispeedtestData
 import com.ey.hotspot.utils.extention_functions.extractTimeFromDateTime
-import com.ey.hotspot.utils.extention_functions.extractspeed
 import kotlinx.android.synthetic.main.fragment_wifi_log.view.*
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -41,12 +40,12 @@ class WifiLogSpeedTestAdapter(
 
         fun bind(wifidata: WifispeedtestData) {
 
-            tvstartSpeedValue.text = getTime(wifidata?.created_at?.extractTimeFromDateTime().toString())
+            tvstartSpeedValue.text = getTime(wifidata.created_at.extractTimeFromDateTime().toString())
             if (!wifidata?.average_speed.toString().equals("null")) {
                 /*tvendSpeedValue.text =
                     "${wifidata?.average_speed.toString().extractspeed()} mbps"*/
                 tvendSpeedValue.text =
-                    "${wifidata?.average_speed} mbps"
+                    "${wifidata?.average_speed} Mbps"
             } else {
                 tvendSpeedValue.text = "-"
             }
