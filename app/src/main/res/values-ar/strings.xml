@@ -44,7 +44,7 @@
     <string name="enter_password">أدخل كلمة المرور</string>
     <string name="enter_captcha">أدخل كلمة التحققق</string>
     <string name="login_credentials_msg">تسجيل الدخول إلى البوابة باستخدام بيانات اعتمادك</string>
-    <string name="login_hotspot_msg">ليس لديك حساب مع KSA Free Wifi؟</string>
+    <string name="login_hotspot_msg">ليس لديك حساب معالسعودية واى فاى مجانى؟</string>
     <string name="get_started_msg">نبدأ الآن!</string>
     <string name="connecting_kingdom_label">ربط \n المملكة العربية السعودية …!</string>
 
@@ -123,8 +123,8 @@
     <string name="retest_label">إعادة الاختبار</string>
     <string name="wifi_disabled_label">واي فاي معطل</string>
     <string name="wifi_enable_conformation">يبدو أن wifi الخاص بك معطل ، هل تريد تمكينه؟</string>
-    <string name="network_not_validated_label">الشبكة الحالية لا تنتمي إلى KSA Free Wifi</string>
-    <string name="wifi_not_validated_label">الشبكة الحالية لا تنتمي إلى KSA Free Wifi</string>
+    <string name="network_not_validated_label">الشبكة الحالية لا تنتمي إلى واي فاي مجاني في المملكة العربية السعودية</string>
+    <string name="wifi_not_validated_label">الشبكة الحالية لا تنتمي إلى واي فاي مجاني في المملكة العربية السعودية</string>
     <string name="error_while_calculating_download_speed">حدث خطأ أثناء حساب سرعة التنزيل</string>
 
 
