@@ -242,7 +242,7 @@
 -->
 
 
-                        <!--Start Time-->
+                        <!--Start Time Value-->
                         <TextView
                             android:id="@+id/tv_start_time_value"
                             style="@style/Headline7"
@@ -259,7 +259,7 @@
                             tools:text="@string/start_time_label" />
 
 
-                        <!--End Time-->
+                        <!--End Time Value-->
                         <TextView
                             android:id="@+id/tv_end_time_value"
                             style="@style/Headline7"
@@ -364,6 +364,7 @@
                             android:layout_marginTop="@dimen/common_margin"/>
 
 
+<!--
                         <LinearLayout
                             android:id="@+id/ll_speedtest"
                             app:layout_constraintTop_toBottomOf="@+id/view_horizontal_speed"
@@ -404,13 +405,47 @@
                                 app:layout_constraintStart_toEndOf="@+id/tv_start_time"
                                 tools:text="@string/end_time_label" />
                         </LinearLayout>
+-->
+
+                        <!--Start Time Value-->
+                        <TextView
+                            android:id="@+id/tv_start_speed_value"
+                            style="@style/Headline7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/common_margin_between_fields"
+                            android:textColor="@color/colorGrayLight"
+                            app:layout_constraintEnd_toStartOf="@+id/tv_end_speed_value"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            android:text="@string/start_time_label"
+                            app:layout_constraintHorizontal_chainStyle="spread_inside"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/view_horizontal_speed"
+                            tools:text="@string/start_time_label" />
+
+
+                        <!--End Time Value-->
+                        <TextView
+                            android:id="@+id/tv_end_speed_value"
+                            style="@style/Headline7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/common_margin_between_fields"
+                            android:textColor="@color/colorGrayLight"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            android:text="@string/end_time_label"
+                            android:layout_marginEnd="@dimen/common_margin_end"
+                            app:layout_constraintStart_toEndOf="@+id/tv_start_speed_value"
+                            app:layout_constraintTop_toBottomOf="@id/view_horizontal_speed"
+                            tools:text="@string/end_time_label" />
 
                         <!--                RecyclerView Connecting logs-->
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rv_speed_test_logs"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            app:layout_constraintTop_toBottomOf="@id/ll_speedtest"
+                            app:layout_constraintTop_toBottomOf="@id/tv_start_speed_value"
                             app:layout_constraintEnd_toEndOf="parent"
                             tools:itemCount="2"
                             tools:listitem="@layout/speed_test_wifilogs_item"
