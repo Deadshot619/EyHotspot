@@ -105,8 +105,8 @@ class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>()
     }
 
     private fun getDate(datestring: String?): String {
-        val inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
-        val outputFormat: DateFormat = SimpleDateFormat("dd-MM-yyyy")
+        val inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
+        val outputFormat: DateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
         val date: Date = inputFormat.parse(datestring)
         val outputDateStr: String = outputFormat.format(date)
         return outputDateStr;
@@ -115,8 +115,8 @@ class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>()
     {
         var outputDateStr: String=""
         if (!datestring.equals("null")) {
-            val inputFormat: DateFormat = SimpleDateFormat("hh:mm:ss")
-            val outputFormat: DateFormat = SimpleDateFormat("hh:mm a")
+            val inputFormat: DateFormat = SimpleDateFormat("hh:mm:ss", Locale.ENGLISH)
+            val outputFormat: DateFormat = SimpleDateFormat("hh:mm a", Locale.ENGLISH)
             val date: Date = inputFormat.parse(datestring)
              outputDateStr = outputFormat.format(date)
         }

@@ -159,7 +159,7 @@ fun Context.checkLocSaveState(): Boolean {
  */
 lateinit var mGoogleSignInClient: GoogleSignInClient
 
-fun Context.checkLocationPermission(view: View, func: (Unit) -> Unit) {
+fun Activity.checkLocationPermission(view: View, func: (Unit) -> Unit) {
     Dexter.withContext(this)
         .withPermissions(
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -194,6 +194,8 @@ fun Context.checkLocationPermission(view: View, func: (Unit) -> Unit) {
                             applicationContext.startActivity(intent)
                         }
                         .show()
+                } else if (p0.deniedPermissionResponses.isNotEmpty()) {
+                    showMessage(getString(R.string.provide_location_permission_label), true)
                 }
             }
 
@@ -263,7 +265,7 @@ fun Activity.goToLoginScreen() {
     startActivity(Intent(this, LoginActivity::class.java))
 }
 
-fun Activity.goToHomeScreen(){
+fun Activity.goToHomeScreen() {
     startActivity(Intent(this, BottomNavHomeActivity::class.java).apply {
         flags =
             Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
@@ -327,7 +329,7 @@ fun Activity.shareWifiHotspotData(id: Int, lat: Double, lon: Double) {
  */
 fun Activity.openNavigateUrl(url: String, lat: String, lon: String) {
     val gmmIntentUri =
-                    Uri.parse("https://www.google.com/maps/dir/?api=1&destination=$lat,$lon&mode=d")
+        Uri.parse("https://www.google.com/maps/dir/?api=1&destination=$lat,$lon&mode=d")
 //        Uri.parse(url)
     val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
 //                mapIntent.setPackage("com.google.android.apps.maps")
@@ -344,13 +346,13 @@ fun Application.logoutUser(bundle: Bundle? = null) {
     clearDataSaveLangAndKeywords()
 
 
-
     //Stop Service
 //    CoreApp.instance.stopService(Intent(CoreApp.instance, WifiService::class.java))
 
     //Redirect user to Login Activity
     this.startActivity(Intent(this, LoginActivity::class.java).apply {
-        flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        flags =
+            Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         putExtra(Constants.LOGIN_BUNDLE, bundle)
     })
 }

@@ -26,7 +26,6 @@ import com.facebook.login.LoginManager
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.readystatesoftware.chuck.internal.ui.MainActivity
 
 
 class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel>() {
@@ -128,9 +127,9 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel
 
         //Change image of language
         if (HotSpotApp.prefs?.getLanguage() == Constants.ARABIC_LANG)
-            mBinding.ivChangeLanguage.setImageResource(R.drawable.ic_active_switch)
+            mBinding.ivChangeLanguage.setImageResource(R.drawable.group13969)
         else
-            mBinding.ivChangeLanguage.setImageResource(R.drawable.ic_inactive_switch)
+            mBinding.ivChangeLanguage.setImageResource(R.drawable.group13966)
     }
 
     private fun setUpListeners() {

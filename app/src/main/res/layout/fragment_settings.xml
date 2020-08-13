@@ -72,10 +72,9 @@
                     <ImageView
                         android:id="@+id/ivChangeLanguage"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="50dp"
                         android:layout_weight="0.5"
-                        android:scaleType="center"
-                        android:src="@drawable/ic_inactive_switch" />
+                        android:src="@drawable/group13969" />
                 </LinearLayout>
 
                 <View

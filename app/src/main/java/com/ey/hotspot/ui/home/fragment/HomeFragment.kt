@@ -92,6 +92,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             override fun turnedOn() {
                 requireActivity().applicationContext.getUserLocation { lat, lng ->
                     if (lat != null && lng != null) {
+
+
                         map?.moveCamera(
                             CameraUpdateFactory.newLatLngZoom(
                                 LatLng(
