@@ -127,8 +127,6 @@ class WebViewFragment() :
 
     }
 
-
-
     private fun openWebview(webView: WebView, url:String)
     {
         webview.getSettings().setLoadWithOverviewMode(true);
@@ -143,7 +141,7 @@ class WebViewFragment() :
         webView.loadUrl(url)
     }
 
-    override fun onBackPressed(): Boolean {
+    override fun onBackPressedfrag(): Boolean {
         return back
     }
 
