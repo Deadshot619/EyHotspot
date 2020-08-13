@@ -56,6 +56,10 @@ class WebViewFragment() :
     }
 
     override fun onBinding() {
+        mBinding.run {
+            lifecycleOwner = viewLifecycleOwner
+            viewModel = mViewModel
+        }
 
        /* setUpToolbar(
             toolbarBinding = mBinding.toolbarLayout,
@@ -65,9 +69,9 @@ class WebViewFragment() :
 
         if (arguments?.getString(FRAG_NAME).equals("register")) {
             activity?.setUpToolbar(
-                mBinding.toolbarLayout,
+               mBinding.toolbarLayout,
                 getString(R.string.terms_condition),
-                true
+                 true
             )
             mBinding.btnAgree.visibility=View.GONE
             back=true
@@ -75,9 +79,9 @@ class WebViewFragment() :
         else
         {
             activity?.setUpToolbar(
-                mBinding.toolbarLayout,
-                getString(R.string.terms_condition),
-                false,
+                toolbarBinding= mBinding.toolbarLayout,
+                title=getString(R.string.terms_condition),
+                showUpButton= false,
                 showTextButton = false
             )
             mBinding.btnAgree.visibility=View.VISIBLE

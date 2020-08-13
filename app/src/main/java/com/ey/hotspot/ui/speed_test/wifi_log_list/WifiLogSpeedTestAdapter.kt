@@ -9,10 +9,12 @@ import com.ey.hotspot.network.response.WifispeedtestData
 import com.ey.hotspot.utils.extention_functions.extractTimeFromDateTime
 import com.ey.hotspot.utils.extention_functions.extractspeed
 import kotlinx.android.synthetic.main.fragment_wifi_log.view.*
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 class WifiLogSpeedTestAdapter(
-    var speeddata: List<WifispeedtestData>,
-    var login_time: String
+    var speeddata: List<WifispeedtestData>
 ) :
     RecyclerView.Adapter<WifiLogSpeedTestAdapter.ViewHolder>() {
 
@@ -28,7 +30,7 @@ class WifiLogSpeedTestAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(speeddata[position], login_time)
+        holder.bind(speeddata[position])
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -37,9 +39,9 @@ class WifiLogSpeedTestAdapter(
         val tvstartSpeedValue = view.tv_start_speed_value
         val tvendSpeedValue = view.tv_end_speed_value
 
-        fun bind(wifidata: WifispeedtestData, logintime: String) {
+        fun bind(wifidata: WifispeedtestData) {
 
-            tvstartSpeedValue.text = logintime
+            tvstartSpeedValue.text = getTime(wifidata?.created_at?.extractTimeFromDateTime().toString())
             if (!wifidata?.average_speed.toString().equals("null")) {
                 /*tvendSpeedValue.text =
                     "${wifidata?.average_speed.toString().extractspeed()} mbps"*/
@@ -50,6 +52,21 @@ class WifiLogSpeedTestAdapter(
             }
 
 
+        }
+        private fun getTime(datestring: String?):String
+        {
+            var outputDateStr: String=""
+            if (!datestring.equals("null")) {
+                val inputFormat: DateFormat = SimpleDateFormat("hh:mm:ss", Locale.ENGLISH)
+                val outputFormat: DateFormat = SimpleDateFormat("hh:mm a", Locale.ENGLISH)
+                val date: Date = inputFormat.parse(datestring)
+                outputDateStr = outputFormat.format(date)
+            }
+            else
+            {
+                outputDateStr="-"
+            }
+            return outputDateStr;
         }
     }
 

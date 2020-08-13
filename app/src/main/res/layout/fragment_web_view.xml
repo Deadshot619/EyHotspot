@@ -2,6 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools">
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.ey.hotspot.ui.login.permission.PermissionViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
