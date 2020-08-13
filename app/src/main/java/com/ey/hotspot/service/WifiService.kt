@@ -159,7 +159,12 @@ class WifiService : Service() {
 
 
             //Wifi Ssid
-            val wifiSsid = wifiManager.connectionInfo.ssid.extractWifiName()/* + "-Turtlemint"*/
+            var wifiSsid = wifiManager.connectionInfo.ssid.extractWifiName()/* + "-Turtlemint"*/
+            if (wifiSsid.contains(Constants.UNKNOWN_SSID)){
+                    Thread.sleep(1000)
+                wifiSsid = wifiManager.connectionInfo.ssid.extractWifiName()/* + "-Turtlemint"*/
+            }
+
             if (!wifiSsid.contains(Constants.UNKNOWN_SSID)) {    //If the wifi is "unknown ssid", then skip it
                 /*
                  *  Check if the wifi name is present in wifi keywords
@@ -179,9 +184,17 @@ class WifiService : Service() {
                             validateWifi(wifiSsid = wifiSsid, lat = lat, lng = lng)
                         }
                     }   //TODO 28/07/2020: What if User Location is not available?
-                    /*else
-//                        mViewModel.verifyHotspot(wifiSSid, Constants.LATITUDE, Constants.LONGITUDE)
-                }*/
+                    else{
+                        //This wifi is not our wifi
+                        ContextCompat.startForegroundService(
+                            applicationContext,
+                            Intent(applicationContext, WifiService::class.java).apply {
+                                putExtra(
+                                    wifi_notification_key,
+                                    getString(R.string.wifi_not_validated_label)
+                                )
+                            })
+                    }
                 }
 
                 //This will initially show the notification as wifi connected
@@ -350,6 +363,7 @@ class WifiService : Service() {
                 callWifiLogout(dbId = data[0].id, wifiId = data[0].wifiId, deviceId = DEVICE_ID, logoutAt = data[0].disconnectedOn!!.time)
         }
     }
+
     /*
      *  Method to Update Logout Time in DB.
      *  Will be called when wifi is disconnected/lost
