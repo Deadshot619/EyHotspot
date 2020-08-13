@@ -7,15 +7,12 @@ import android.content.res.Resources
 import android.os.Build
 import android.os.Bundle
 import android.webkit.WebView
-import androidx.fragment.app.Fragment
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseActivity
 import com.ey.hotspot.app_core_lib.CoreApp
 import com.ey.hotspot.databinding.ActivityLoginBinding
 import com.ey.hotspot.service.WifiService
 import com.ey.hotspot.ui.login.login_fragment.LoginFragment
-import com.ey.hotspot.ui.registration.webview.WebViewFragment
-import com.ey.hotspot.utils.IOnBackPressed
 import com.ey.hotspot.utils.LANGUAGE
 import com.ey.hotspot.utils.constants.Constants
 import java.util.*
@@ -52,25 +49,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
                     ?.getString(Constants.TEMP_TOKEN)
             ), addToBackstack = false, bundle = null
         )
-    }
-
-    override fun onBackPressed() {
-        val instanceFragment: Fragment? = supportFragmentManager.findFragmentById(R.id.container)
-        if (instanceFragment is WebViewFragment) {
-            (instanceFragment as? IOnBackPressed)?.onBackPressed().let {
-                if(it==true) {
-                    super.onBackPressed()
-                }
-                else
-                {
-
-                }
-            }
-        }
-        else
-        {
-            super.onBackPressed()
-        }
     }
 
 
