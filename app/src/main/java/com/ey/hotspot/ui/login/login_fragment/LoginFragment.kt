@@ -400,10 +400,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
                     etPassword.error = resources.getString(R.string.enter_password)
                     isValid = false
                 }
-                if (!password.isValidPassword()) {
+               /* if (!password.isValidPassword()) {
                     etPassword.error = resources.getString(R.string.password_format)
                     isValid = false
-                }
+                }*/
                 if (mEnteredCaptch?.isEmpty()!!) {
                     layoutCaptcha.etCaptcha.error = resources.getString(R.string.empty_captcha)
                     isValid = false

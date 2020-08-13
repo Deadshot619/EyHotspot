@@ -10,6 +10,7 @@ import com.ey.hotspot.ui.favourite.model.MarkFavouriteRequest
 import com.ey.hotspot.ui.favourite.model.MarkFavouriteResponse
 import com.ey.hotspot.ui.home.models.*
 import com.ey.hotspot.utils.Event
+import com.ey.hotspot.utils.extention_functions.checkLocSaveState
 import com.ey.hotspot.utils.extention_functions.parseToDouble
 import kotlinx.coroutines.launch
 
@@ -57,6 +58,7 @@ class HomeFragmentViewModel(application: Application) : BaseViewModel(applicatio
                 success = {
 
                     if (it.status){
+                        setDialogVisibility(false)
                         listClusterItem.clear()
                         for (i in it.data){
                             if (i.id == deepLinkedWifiId){
@@ -91,7 +93,7 @@ class HomeFragmentViewModel(application: Application) : BaseViewModel(applicatio
                     _getHotSpotResponse.value = Event(it)
 
 
-                    setDialogVisibility(false)
+
                 }, error = {
                     checkError(it)
                     setDialogVisibility(false)

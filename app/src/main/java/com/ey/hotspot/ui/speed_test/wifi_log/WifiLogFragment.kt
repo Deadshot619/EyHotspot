@@ -2,13 +2,17 @@ package com.ey.hotspot.ui.speed_test.wifi_log
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.FragmentWifiLogBinding
 import com.ey.hotspot.network.response.WifiLogListResponse
+import com.ey.hotspot.network.response.WifispeedtestData
 import com.ey.hotspot.ui.review_and_complaint.reviews.ReviewsFragment
 import com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment
+import com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogSpeedTestAdapter
 import com.ey.hotspot.utils.extention_functions.*
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -16,6 +20,8 @@ import java.util.*
 
 class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>() {
     private var favouriteType: Boolean = false
+    private lateinit var mAdapter: WifiLogSpeedTestAdapter
+
 
     companion object {
         fun newInstance(
@@ -77,15 +83,18 @@ class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>()
         if (!wifiloglist?.location?.name.isNullOrEmpty()) {
             mBinding.tvWifiSsid.text =wifiloglist?.location?.name
         }
-        mBinding.tvDate.text="Date:${getDate(wifiloglist?.login_at!!.extractDateFromDateTime())}"
+
+        mBinding.tvDate.text=String.format(getString(R.string.date_wifi_log_label),getDate(wifiloglist?.login_at!!.extractDateFromDateTime()))
         mBinding.tvStartTimeValue.text=getTime(wifiloglist?.login_at?.extractTimeFromDateTime())
 
         mBinding.tvEndTimeValue.text =
                 getTime(wifiloglist?.logout_at?.extractTimeFromDateTime().toString())
         mBinding.tvStartSpeedValue.text=getTime(wifiloglist?.login_at?.extractTimeFromDateTime())
         if (!wifiloglist?.average_speed.toString().equals("null")) {
+           /* mBinding.tvEndSpeedValue.text =
+                "${wifiloglist?.average_speed.toString().extractspeed()} mbps"*/
             mBinding.tvEndSpeedValue.text =
-                "${wifiloglist?.average_speed.toString().extractspeed()} mbps"
+                "${wifiloglist?.average_speed} mbps"
         }
         else
         {
@@ -100,9 +109,26 @@ class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>()
         {
             mBinding.ivFavourites.setImageResource(R.drawable.ic_favorite_filled_gray)
         }
-
+        setUpRecyclerView(mBinding.rvSpeedTestLogs)
 
     }
+
+    private fun setUpRecyclerView(recyclerView: RecyclerView) {
+        if (wifiloglist!!.speed_test!!.size> 0) {
+            val speeddata: List<WifispeedtestData> = wifiloglist!!.speed_test!!
+            //Setup Adapter
+            mAdapter =
+                WifiLogSpeedTestAdapter(speeddata, mBinding.tvStartSpeedValue.text.toString())
+
+            recyclerView.run {
+                layoutManager =
+                    LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
+//            addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
+                this.adapter = mAdapter
+            }
+        }
+    }
+
 
     private fun getDate(datestring: String?): String {
         val inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
