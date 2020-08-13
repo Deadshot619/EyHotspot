@@ -48,7 +48,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
     override fun onBackPressed() {
         val instanceFragment: Fragment? = supportFragmentManager.findFragmentById(R.id.container)
         if (instanceFragment is WebViewFragment) {
-            (instanceFragment as? IOnBackPressed)?.onBackPressed().let {
+            (instanceFragment as? IOnBackPressed)?.onBackPressedfrag().let {
                 if(it==true) {
                     super.onBackPressed()
                 }
@@ -62,8 +62,5 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
         {
             super.onBackPressed()
         }
-
-
-
     }
 }
