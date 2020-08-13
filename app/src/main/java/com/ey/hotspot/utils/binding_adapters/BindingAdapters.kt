@@ -89,6 +89,8 @@ fun showDashWhenTextEmpty2(textView: TextView, value: String?) {
 fun ratingView(textView: TextView, value: String?) {
     if (value.isNullOrEmpty())
         textView.visibility = View.GONE
-    else
+    else {
+        textView.visibility = View.VISIBLE
         textView.text = value
+    }
 }
