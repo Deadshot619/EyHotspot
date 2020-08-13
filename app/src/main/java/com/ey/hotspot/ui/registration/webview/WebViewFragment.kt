@@ -66,7 +66,7 @@ class WebViewFragment() :
         if (arguments?.getString(FRAG_NAME).equals("register")) {
             activity?.setUpToolbar(
                 mBinding.toolbarLayout,
-                resources.getString(R.string.terms_condition),
+                getString(R.string.terms_condition),
                 true
             )
             mBinding.btnAgree.visibility=View.GONE
@@ -76,7 +76,7 @@ class WebViewFragment() :
         {
             activity?.setUpToolbar(
                 mBinding.toolbarLayout,
-                resources.getString(R.string.terms_condition),
+                getString(R.string.terms_condition),
                 false,
                 showTextButton = false
             )

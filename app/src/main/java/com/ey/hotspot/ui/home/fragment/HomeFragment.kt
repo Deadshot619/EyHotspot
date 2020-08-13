@@ -10,6 +10,7 @@ import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
@@ -157,7 +158,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         mBinding.toolbarLayout.etSearchBar.isFocusable = false
 
         //Set deep linked wifi id in viewmodel
-        mViewModel.deepLinkedWifiId = dlData?.id ?: -1
+        if (dlData?.id!=null) {
+            mViewModel.deepLinkedWifiId = dlData?.id ?: -1
+        }
 
         // Prompt the user for permission.
         activity?.checkLocationPermission(view = mBinding.root, func = {
@@ -179,6 +182,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         //init map
         val myMAPF = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         myMAPF?.getMapAsync(this)
+
 
 
         setUpObservers()
@@ -347,7 +351,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         updateLocationUI()
 
         // Get the current location of the device and set the position of the map.
-        getDeviceLocation()
+
+            getDeviceLocation()
+
     }
 
     private fun setUpClickListener() {
@@ -365,59 +371,63 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
     private fun getDeviceLocation() {
         try {
+            if (fusedLocationProviderClient.lastLocation!=null) {
             val locationResult = fusedLocationProviderClient.lastLocation
-            locationResult.addOnCompleteListener(requireActivity()) { task ->
-                if (task.isSuccessful) {
-                    // Set the map's camera position to the current location of the device.
-                    lastKnownLocation = task.result
-                    if (lastKnownLocation != null) {
-                        if (requireActivity().checkLocSaveState()) {
-                            map?.moveCamera(
-                                CameraUpdateFactory.newLatLngZoom(
-                                    LatLng(
-                                        lastKnownLocation!!.latitude,
-                                        lastKnownLocation!!.longitude
-                                    ), HomeFragment.DEFAULT_ZOOM.toFloat()
+
+                locationResult.addOnCompleteListener(requireActivity()) { task ->
+                    if (task.isSuccessful) {
+                        // Set the map's camera position to the current location of the device.
+                        lastKnownLocation = task.result
+                        if (lastKnownLocation != null) {
+                            if (requireActivity().checkLocSaveState()) {
+                                map?.moveCamera(
+                                    CameraUpdateFactory.newLatLngZoom(
+                                        LatLng(
+                                            lastKnownLocation!!.latitude,
+                                            lastKnownLocation!!.longitude
+                                        ), HomeFragment.DEFAULT_ZOOM.toFloat()
+                                    )
                                 )
-                            )
+                            } else {
+                                map?.moveCamera(
+                                    CameraUpdateFactory.newLatLngZoom(
+                                        LatLng(
+                                            Constants.LATITUDE,
+                                            Constants.LONGITUDE
+                                        ), HomeFragment.DEFAULT_ZOOM.toFloat()
+                                    )
+                                )
+                            }
+
+                           //  getNearByWifiList(requireActivity().checkLocSaveState())
                         } else {
                             map?.moveCamera(
                                 CameraUpdateFactory.newLatLngZoom(
                                     LatLng(
                                         Constants.LATITUDE,
                                         Constants.LONGITUDE
-                                    ), HomeFragment.DEFAULT_ZOOM.toFloat()
+                                    ), HomeFragment.DEFAULT_ZOOM_COUNTRY.toFloat()
                                 )
                             )
-                        }
 
-                        // getNearByWifiList(requireActivity().checkLocSaveState())
+                            // getNearByWifiList(requireActivity().checkLocSaveState())
+
+                        }
                     } else {
                         map?.moveCamera(
                             CameraUpdateFactory.newLatLngZoom(
                                 LatLng(
                                     Constants.LATITUDE,
                                     Constants.LONGITUDE
-                                ), HomeFragment.DEFAULT_ZOOM_COUNTRY.toFloat()
+                                ), HomeFragment.DEFAULT_ZOOM.toFloat()
                             )
                         )
 
-                        // getNearByWifiList(requireActivity().checkLocSaveState())
-
+                        //getNearByWifiList(requireActivity().checkLocSaveState())
                     }
-                } else {
-                    map?.moveCamera(
-                        CameraUpdateFactory.newLatLngZoom(
-                            LatLng(
-                                Constants.LATITUDE,
-                                Constants.LONGITUDE
-                            ), HomeFragment.DEFAULT_ZOOM.toFloat()
-                        )
-                    )
-
-                    //getNearByWifiList(requireActivity().checkLocSaveState())
                 }
             }
+
 
         } catch (e: SecurityException) {
             Log.e("Exception: %s", e.message, e)
@@ -586,6 +596,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                 ) {
                     locationPermissionGranted = true
                 } else {
+                    Log.d("permission","permission denied")
 
                 }
             }

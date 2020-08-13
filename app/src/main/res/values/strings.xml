@@ -135,6 +135,7 @@
     <string name="speed_test_logs_label">Speed test Logs</string>
     <string name="start_time_label">Start time</string>
     <string name="end_time_label">End time</string>
+    <string name="wifidate">Date: </string>
 
     <!--Rate Wifi-->
     <string name="add_remarks_label">Add your feedback here</string>

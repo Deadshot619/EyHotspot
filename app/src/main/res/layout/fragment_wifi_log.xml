@@ -326,18 +326,9 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             android:layout_marginTop="@dimen/common_margin"/>
 
-                       <!-- &lt;!&ndash;                RecyclerView Connecting logs&ndash;&gt;
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rv_speed_test_logs"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintTop_toBottomOf="@id/view_horizontal_speed"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            tools:itemCount="2"
-                            app:layout_constraintStart_toStartOf="parent"
-                            android:layout_marginTop="@dimen/common_margin"/>-->
 
                         <LinearLayout
+                            android:id="@+id/ll_speedtest"
                             app:layout_constraintTop_toBottomOf="@+id/view_horizontal_speed"
                             android:orientation="horizontal"
                             android:weightSum="2"
@@ -375,6 +366,19 @@
                                 app:layout_constraintStart_toEndOf="@+id/tv_start_time"
                                 tools:text="@string/end_time_label" />
                         </LinearLayout>
+
+                        <!--                RecyclerView Connecting logs-->
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_speed_test_logs"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@id/ll_speedtest"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            tools:itemCount="2"
+                            tools:listitem="@layout/speed_test_wifilogs_item"
+                            app:layout_constraintStart_toStartOf="parent"
+                           />
+
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>

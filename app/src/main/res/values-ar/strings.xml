@@ -144,6 +144,7 @@
     <string name="speed_test_logs_label">سجلات اختبار السرعة</string>
     <string name="start_time_label">وقت البدء</string>
     <string name="end_time_label">وقت النهاية</string>
+    <string name="wifidate">تاريخ:</string>
 
     <!--Rate Wifi-->
     <string name="add_remarks_label">أضف ملاحظاتك هنا</string>
