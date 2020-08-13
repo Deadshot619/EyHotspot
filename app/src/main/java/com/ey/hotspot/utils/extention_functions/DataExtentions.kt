@@ -76,6 +76,7 @@ fun String.extractspeed(): String {
     }
 }
 
+
 /**
  * This method will return a string in  the format [2020/07/03 22:44:22] to send to server
  */

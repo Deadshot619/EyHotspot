@@ -118,7 +118,7 @@ class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>()
             val speeddata: List<WifispeedtestData> = wifiloglist!!.speed_test!!
             //Setup Adapter
             mAdapter =
-                WifiLogSpeedTestAdapter(speeddata, mBinding.tvStartSpeedValue.text.toString())
+                WifiLogSpeedTestAdapter(speeddata)
 
             recyclerView.run {
                 layoutManager =

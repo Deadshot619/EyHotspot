@@ -78,10 +78,10 @@ class OTPVerificationFragment :
     }
 
     private fun setUpViewData() {
-        mBinding.tvCheckEmailLabel.text =
+       /* mBinding.tvCheckEmailLabel.text =
             requireActivity().getString(R.string.otp_title) + " " + arguments?.getString(
                 mSelectedItem
-            ) ?: ""
+            ) ?: ""*/
 
         //Change image according to Selected Type
         if ( arguments?.getString(selectedType) == VerificationType.SMS.value)
