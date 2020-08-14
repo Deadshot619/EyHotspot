@@ -182,6 +182,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/password_bitmap"
                     android:hint="@string/enter_password"
+                    android:textAlignment="viewStart"
                     android:inputType="textPassword"
                     android:text="@={viewModel.password}"
                     android:textDirection="locale" />
