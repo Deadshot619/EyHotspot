@@ -87,7 +87,7 @@ class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>()
             mBinding.tvWifiSsid.text =wifiloglist?.location?.name
         }
 
-        mBinding.tvDate.text=String.format(getString(R.string.date_wifi_log_label),getDate(wifiloglist?.created_at!!.extractDateFromDateTime()))
+        mBinding.tvDate.text=getDate(wifiloglist?.created_at!!.extractDateFromDateTime())
         mBinding.tvStartTimeValue.text=getTime(wifiloglist?.login_at?.extractTimeFromDateTime())
 
         mBinding.tvEndTimeValue.text =
