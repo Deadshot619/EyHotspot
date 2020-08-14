@@ -300,10 +300,14 @@ fun Context.getUserLocation(func: (lat: Double?, lon: Double?) -> Unit) {
             ) {
                 val location = client.lastLocation
                 location.addOnCompleteListener {
-                    func(it.result?.latitude, it.result?.longitude)
+                    if (it.isSuccessful) {
+                        if (it.result?.latitude != null && it.result?.longitude != null) {
+                            Toast.makeText(this,"location "+it.result?.latitude,Toast.LENGTH_SHORT).show()
+                            func(it.result?.latitude, it.result?.longitude)
+                        }
+                    }
                 }
                 location.addOnFailureListener {
-                    func(null, null)
                 }
             }
     } catch (e: Exception) {

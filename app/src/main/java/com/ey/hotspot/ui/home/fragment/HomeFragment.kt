@@ -10,6 +10,7 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import androidx.core.app.ActivityCompat
@@ -90,21 +91,27 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
     private val locationCallback by lazy {
         object : GPSCheck.LocationCallBack {
             override fun turnedOn() {
-                requireActivity().applicationContext.getUserLocation { lat, lng ->
-                    if (lat != null && lng != null) {
+                showMessage("Location Callback")
 
+                val handler = Handler()
+                handler.postDelayed(
+                    Runnable {
+                        requireActivity().applicationContext.getUserLocation { lat, lng ->
+                        if (lat != null && lng != null) {
 
-                        map?.moveCamera(
-                            CameraUpdateFactory.newLatLngZoom(
-                                LatLng(
-                                    lat,
-                                    lng
-                                ), HomeFragment.DEFAULT_ZOOM.toFloat()
+                            map?.moveCamera(
+                                CameraUpdateFactory.newLatLngZoom(
+                                    LatLng(
+                                        lat,
+                                        lng
+                                    ), HomeFragment.DEFAULT_ZOOM.toFloat()
+                                )
                             )
-                        )
-
+                        }
                     }
-                }
+                    },
+                    5000
+                )
                 /*try {
                     val locationResult = fusedLocationProviderClient.lastLocation
                     locationResult.addOnCompleteListener {
@@ -123,7 +130,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                 } catch (e: Exception){
 
                 }*/
-                showMessage("Location Callback")
+
             }
 
             override fun turnedOff() {}
@@ -144,6 +151,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
     lateinit var mGoogleApiClient: GoogleApiClient
     var result: PendingResult<LocationSettingsResult>? = null
     val REQUEST_LOCATION = 199
+    var myMAPF=SupportMapFragment.newInstance()
 
 
     private var currentCluster: MyClusterItems? = null
@@ -202,7 +210,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             LocationServices.getFusedLocationProviderClient(requireActivity())
 
         //init map
-        val myMAPF = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+         myMAPF = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         myMAPF?.getMapAsync(this)
 
 
