@@ -84,6 +84,7 @@
 
         <!--        check email label-->
         <TextView
+            android:visibility="gone"
             android:id="@+id/tv_check_email_label"
             style="@style/TextAppearance.MyApp.Headline3_Profile_Bold"
             android:layout_width="0dp"

@@ -80,9 +80,9 @@ class VerifyOTPFragment :
 
     private fun setUpDataView() {
 
-        mBinding.tvCheckEmailLabel.text = resources.getString(R.string.otp_title) + " " + arguments?.getString(
+       /* mBinding.tvCheckEmailLabel.text = resources.getString(R.string.otp_title) + " " + arguments?.getString(
             mInputData
-        ) ?: ""
+        ) ?: ""*/
 
     }
 

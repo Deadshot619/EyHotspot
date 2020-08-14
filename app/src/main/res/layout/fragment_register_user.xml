@@ -286,6 +286,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
+                    android:textAlignment="viewStart"
                     android:background="@drawable/password_bitmap"
                     android:hint="@string/enter_password"
                     android:text="@={viewModel.password}" />
@@ -344,7 +345,7 @@
                     style="@style/CustomEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
+                    android:textAlignment="viewStart"
                     android:inputType="textPassword"
                     android:background="@drawable/password_bitmap"
                     android:hint="@string/enter_confirm_password"

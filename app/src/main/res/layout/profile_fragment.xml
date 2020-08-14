@@ -298,6 +298,7 @@
                     android:layout_height="match_parent"
                     android:inputType="textPassword"
                     android:textDirection="locale"
+                    android:textAlignment="viewStart"
                     android:background="@drawable/password_bitmap"
                     android:hint="@string/enter_password"
                     android:text="@={viewModel.profileData.password}" />
@@ -347,6 +348,7 @@
                     android:inputType="textPassword"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:textAlignment="viewStart"
                     android:background="@drawable/password_bitmap"
                     android:hint="@string/enter_confirm_password"
                     android:text="@={viewModel.profileData.confirmPassword}" />
