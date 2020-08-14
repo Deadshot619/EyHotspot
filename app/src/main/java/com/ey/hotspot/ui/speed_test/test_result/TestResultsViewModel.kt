@@ -90,7 +90,7 @@ class TestResultsViewModel(application: Application) : BaseViewModel(application
         val request = SpeedTestRequest(wifi_id = wifiId, device_id = deviceId, average_speed = speed)
 
 //        setDialogVisibility(true)
-        coroutineScope.launch {
+            coroutineScope.launch {
             DataProvider.wifiSpeedTest(
                 request = request,
                 success = {
