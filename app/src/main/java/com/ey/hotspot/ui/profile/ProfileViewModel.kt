@@ -87,7 +87,8 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
                 request = updateProfileRequest,
                 success = {
 
-                    showToastFromViewModel(it.message)
+                    if (it.status)
+                        showToastFromViewModel(it.message)
 
                     if (!it.status)
                         _profileError.value = Event(it.data)

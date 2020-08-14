@@ -116,8 +116,6 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
 
                 disableViewsWhenSocialLogin(content.data.provider)
             }
-
-
         })
 
 
