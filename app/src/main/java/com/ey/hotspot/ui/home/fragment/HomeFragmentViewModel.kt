@@ -10,7 +10,6 @@ import com.ey.hotspot.ui.favourite.model.MarkFavouriteRequest
 import com.ey.hotspot.ui.favourite.model.MarkFavouriteResponse
 import com.ey.hotspot.ui.home.models.*
 import com.ey.hotspot.utils.Event
-import com.ey.hotspot.utils.extention_functions.checkLocSaveState
 import com.ey.hotspot.utils.extention_functions.parseToDouble
 import kotlinx.coroutines.launch
 
@@ -71,7 +70,8 @@ class HomeFragmentViewModel(application: Application) : BaseViewModel(applicatio
                                     isfavourite = i.favourite,
                                     itemId = i.id,
                                     address = i.location,
-                                    rating = i.average_rating
+                                    rating = i.average_rating,
+                                    uuid = i.uuid
                                 )
                             }
                             listClusterItem.add(
@@ -84,7 +84,8 @@ class HomeFragmentViewModel(application: Application) : BaseViewModel(applicatio
                                     isfavourite = i.favourite,
                                     itemId = i.id,
                                     address = i.location,
-                                    rating = i.average_rating
+                                    rating = i.average_rating,
+                                    uuid = i.uuid
                                 )
                             )
                         }

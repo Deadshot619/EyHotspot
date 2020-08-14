@@ -10,6 +10,7 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import androidx.core.app.ActivityCompat
@@ -92,46 +93,25 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             override fun turnedOn() {
                 showMessage("Location Callback")
 
-                val handler = Handler()
-                handler.postDelayed(
+                Handler().postDelayed(
                     Runnable {
                         requireActivity().applicationContext.getUserLocation { lat, lng ->
-                        if (lat != null && lng != null) {
+                            if (lat != null && lng != null) {
 
-                            map?.moveCamera(
-                                CameraUpdateFactory.newLatLngZoom(
-                                    LatLng(
-                                        lat,
-                                        lng
-                                    ), HomeFragment.DEFAULT_ZOOM.toFloat()
+                                map?.animateCamera(
+                                    CameraUpdateFactory.newLatLngZoom(
+                                        LatLng(
+                                            lat,
+                                            lng
+                                        ), HomeFragment.DEFAULT_ZOOM.toFloat()
+                                    )
                                 )
-                            )
+                            }
                         }
-                    }
                     },
                     5000
                 )
-                /*try {
-                    val locationResult = fusedLocationProviderClient.lastLocation
-                    locationResult.addOnCompleteListener {
-                        if (it.result?.latitude != null && it.result?.longitude != null) {
-                            map?.moveCamera(
-                                CameraUpdateFactory.newLatLngZoom(
-                                    LatLng(
-                                        it.result?.latitude!!,
-                                        it.result?.longitude!!
-                                    ), HomeFragment.DEFAULT_ZOOM.toFloat()
-                                )
-                            )
-
-                        }
-                    }
-                } catch (e: Exception){
-
-                }*/
-
             }
-
             override fun turnedOff() {}
         }
     }
@@ -150,7 +130,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
     lateinit var mGoogleApiClient: GoogleApiClient
     var result: PendingResult<LocationSettingsResult>? = null
     val REQUEST_LOCATION = 199
-    var myMAPF=SupportMapFragment.newInstance()
+    var myMAPF = SupportMapFragment.newInstance()
 
 
     private var currentCluster: MyClusterItems? = null
@@ -209,7 +189,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             LocationServices.getFusedLocationProviderClient(requireActivity())
 
         //init map
-         myMAPF = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+        myMAPF = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         myMAPF?.getMapAsync(this)
 
 
@@ -271,7 +251,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             }
 
             override fun onClickShare(data: WifiInfoModel) {
-                activity?.shareWifiHotspotData(id = data.id, lat = data.lat, lon = data.lon)
+                activity?.shareWifiHotspotData(hotspotName = data.wifiSsid, operatorName = data.providerName, city = data.location, id = data.uuid)
             }
 
         }
@@ -639,45 +619,45 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
     }
 
 
-    private val locationCallback by lazy {
-        object : GPSCheck.LocationCallBack {
-            override fun turnedOn() {
-                requireActivity().applicationContext.getUserLocation { lat, lng ->
-                    if (lat != null && lng != null) {
-                        map?.animateCamera(
-                            CameraUpdateFactory.newLatLngZoom(
-                                LatLng(
-                                    lat,
-                                    lng
-                                ), HomeFragment.DEFAULT_ZOOM.toFloat()
-                            )
-                        )
-
-                    }
-                }
-
-                /*try {
-                    val locationResult = fusedLocationProviderClient.lastLocation
-                    locationResult.addOnCompleteListener {
-                        if (it.result?.latitude != null && it.result?.longitude != null) {
-                            map?.moveCamera(
-                                CameraUpdateFactory.newLatLngZoom(
-                                    LatLng(
-                                        it.result?.latitude!!,
-                                        it.result?.longitude!!
-                                    ), HomeFragment.DEFAULT_ZOOM.toFloat()
-                                )
-                            )
-
-                        }
-                    }
-                } catch (e: Exception){
-
-                }*/
-                showMessage("Location Callback")
-            }
-
-            override fun turnedOff() {}
-        }
-    }
+//    private val locationCallback by lazy {
+//        object : GPSCheck.LocationCallBack {
+//            override fun turnedOn() {
+//                requireActivity().applicationContext.getUserLocation { lat, lng ->
+//                    if (lat != null && lng != null) {
+//                        map?.animateCamera(
+//                            CameraUpdateFactory.newLatLngZoom(
+//                                LatLng(
+//                                    lat,
+//                                    lng
+//                                ), HomeFragment.DEFAULT_ZOOM.toFloat()
+//                            )
+//                        )
+//
+//                    }
+//                }
+//
+//                /*try {
+//                    val locationResult = fusedLocationProviderClient.lastLocation
+//                    locationResult.addOnCompleteListener {
+//                        if (it.result?.latitude != null && it.result?.longitude != null) {
+//                            map?.moveCamera(
+//                                CameraUpdateFactory.newLatLngZoom(
+//                                    LatLng(
+//                                        it.result?.latitude!!,
+//                                        it.result?.longitude!!
+//                                    ), HomeFragment.DEFAULT_ZOOM.toFloat()
+//                                )
+//                            )
+//
+//                        }
+//                    }
+//                } catch (e: Exception){
+//
+//                }*/
+//                showMessage("Location Callback")
+//            }
+//
+//            override fun turnedOff() {}
+//        }
+//    }
 }

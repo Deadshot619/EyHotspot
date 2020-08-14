@@ -88,7 +88,7 @@ class FavouriteFragment : BaseFragment<FavouriteFragmentBinding, FavouriteViewMo
 
             //Share
             override fun onClickShare(data: GetFavouriteItem) {
-                activity?.shareWifiHotspotData(id = data.id, lat = data.lat, lon = data.lng)
+                activity?.shareWifiHotspotData(hotspotName = data.name, operatorName = data.provider_name, city = data.location, id = data.uuid)
             }
         })
 

@@ -14,6 +14,7 @@ interface Constants {
 
         //Deep Link
         const val DL_LINK = "http://eyhotspot.com"
+        const val DL_LINK_2 = "https://nearbyhs.php-dev.in/EyHotspots/public/dashboard/"
         const val DL_ID = "id"
         const val DL_LAT = "lat"
         const val DL_LON = "lon"

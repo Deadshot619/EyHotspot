@@ -14,7 +14,10 @@ import com.ey.hotspot.ui.search.searchlist.adapter.SearchListAdapter
 import com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment
 import com.ey.hotspot.utils.constants.setUpSearchBar
 import com.ey.hotspot.utils.dialogs.YesNoDialog
-import com.ey.hotspot.utils.extention_functions.*
+import com.ey.hotspot.utils.extention_functions.goToLoginScreen
+import com.ey.hotspot.utils.extention_functions.openNavigateUrl
+import com.ey.hotspot.utils.extention_functions.replaceFragment
+import com.ey.hotspot.utils.extention_functions.shareWifiHotspotData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ObsoleteCoroutinesApi
@@ -114,7 +117,7 @@ class SearchListFragment : BaseFragment<SearchListFragmentBinding, SearchListVie
             }
 
             override fun onClickShare(data: GetHotSpotResponse) {
-                activity?.shareWifiHotspotData(id = data.id, lat = data.lat.parseToDouble(), lon = data.lng.parseToDouble())
+                activity?.shareWifiHotspotData(hotspotName = data.name, operatorName = data.provider_name, city = data.location, id = data.uuid)
             }
         })
 

@@ -20,6 +20,8 @@ class MyClusterItems : ClusterItem {
 
     var mItemID:Int = 0
 
+    var uuid: String = ""
+
     constructor(lat: Double, lng: Double, mItemID: Int) {
         mPosition = LatLng(lat, lng)
         mTitle = "";
@@ -54,7 +56,8 @@ class MyClusterItems : ClusterItem {
         navigateURL: String,
         itemId:Int,
         address:String,
-        rating: String?
+        rating: String?,
+        uuid: String
     ) {
         mPosition = LatLng(lat, lng)
         mTitle = title
@@ -66,6 +69,7 @@ class MyClusterItems : ClusterItem {
         mLat = lat
         mLng = lng
         this.rating = rating
+        this.uuid = uuid
     }
 
 

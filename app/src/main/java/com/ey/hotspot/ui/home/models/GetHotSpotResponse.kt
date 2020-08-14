@@ -19,7 +19,9 @@ data class GetHotSpotResponse(
     @SerializedName("provider_name_arabic") val provider_name_arabic: String,
     @SerializedName("distance") val distance: Double,
     @SerializedName("navigate_url") val navigate_url: String,
-    @SerializedName("favourite") var favourite: Boolean = false
+    @SerializedName("favourite") var favourite: Boolean = false,
+    @SerializedName("uuid") val uuid: String
+
 ) {
     val name: String
         get() = if (LANGUAGE == Constants.ARABIC_LANG) name_arabic else _name

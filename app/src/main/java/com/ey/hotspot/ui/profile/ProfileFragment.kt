@@ -118,7 +118,6 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
             }
         })
 
-
         //Profile Error
         mViewModel.profileError.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let { response ->

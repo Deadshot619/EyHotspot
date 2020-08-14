@@ -28,6 +28,7 @@ import com.ey.hotspot.ui.home.BottomNavHomeActivity
 import com.ey.hotspot.ui.login.LoginActivity
 import com.ey.hotspot.utils.constants.Constants
 import com.ey.hotspot.utils.constants.clearDataSaveLangAndKeywords
+import com.ey.hotspot.utils.constants.getDeepLinkUrl
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.material.snackbar.Snackbar
@@ -319,15 +320,17 @@ fun Context.getUserLocation(func: (lat: Double?, lon: Double?) -> Unit) {
 /**
  * This method will be used to share Wifi Hotspot data to other apps as text message
  */
-fun Activity.shareWifiHotspotData(id: Int, lat: Double, lon: Double) {
-    /*val sendIntent: Intent = Intent().apply {
+fun Activity.shareWifiHotspotData(hotspotName: String, operatorName: String, city: String, id: String) {
+    val data = "Get 2 hours of free access to our public Wi-Fi at $hotspotName, by $operatorName, in $city \n ${getDeepLinkUrl(id = id)}"
+
+    val sendIntent: Intent = Intent().apply {
         action = Intent.ACTION_SEND
-        putExtra(Intent.EXTRA_TEXT, getDeepLinkUrl(id = id, lat = lat, lon = lon))
+        putExtra(Intent.EXTRA_TEXT, data)
         type = "text/plain"
     }
     val shareIntent = Intent.createChooser(sendIntent, null)
-    startActivity(shareIntent)*/
-    showMessage(getString(R.string.under_construction_label))
+    startActivity(shareIntent)
+//    showMessage(getString(R.string.under_construction_label))
 }
 
 /**

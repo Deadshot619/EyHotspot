@@ -1,7 +1,6 @@
 package com.ey.hotspot.ui.login
 
 import android.content.Context
-import android.content.Intent
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Build
@@ -11,7 +10,6 @@ import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseActivity
 import com.ey.hotspot.app_core_lib.CoreApp
 import com.ey.hotspot.databinding.ActivityLoginBinding
-import com.ey.hotspot.service.WifiService
 import com.ey.hotspot.ui.login.login_fragment.LoginFragment
 import com.ey.hotspot.utils.LANGUAGE
 import com.ey.hotspot.utils.constants.Constants
@@ -35,9 +33,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
 //        calculateHashKey("com.ey.hotspot.ey_hotspot")
 
         //If service is running, stop the service
-        if (WifiService.isRunning)
+     /*   if (WifiService.isRunning)
             stopService(Intent(this, WifiService::class.java))
-
+*/
 
         replaceFragment(
             fragment = LoginFragment.newInstance(

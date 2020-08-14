@@ -9,7 +9,8 @@ data class WifiInfoModel(
     val average_rating: String? = "",
     val location: String = "",
     val favourite: Boolean = false,
-    val navigate_url: String = ""
+    val navigate_url: String = "",
+    val uuid: String
 )
 
 fun MyClusterItems.toWifiInfoModel() = WifiInfoModel(
@@ -21,7 +22,8 @@ fun MyClusterItems.toWifiInfoModel() = WifiInfoModel(
     favourite = this.mIsFavourite,
     navigate_url = this.mNavigateURL,
     location = this.mAddress,
-    average_rating = this.rating
+    average_rating = this.rating,
+    uuid = this.uuid
 )
 
 fun WifiInfoModel.toMyClusterItems() = MyClusterItems(
@@ -33,5 +35,6 @@ fun WifiInfoModel.toMyClusterItems() = MyClusterItems(
     isfavourite = this.favourite,
     navigateURL = this.navigate_url,
     address = this.location,
-    rating = this.average_rating
+    rating = this.average_rating,
+    uuid = this.uuid
 )
