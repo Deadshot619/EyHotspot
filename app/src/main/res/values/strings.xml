@@ -17,7 +17,7 @@
     <string name="sign_in_label">Sign In</string>
     <string name="submit_label">Submit</string>
     <string name="next_label">Next</string>
-    <string name="mbps_label">%s Mbps</string>
+    <string name="mbps_label" translatable="false">%s Mbps</string>
     <string name="loading_label">Loading…</string>
     <string name="under_construction_label">Work in progress…</string>
     <string name="press_back_again_label">Press back again to exit</string>

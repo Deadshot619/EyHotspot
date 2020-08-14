@@ -36,6 +36,7 @@ import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
+import timber.log.Timber
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import kotlin.random.Random
@@ -301,12 +302,16 @@ fun Context.getUserLocation(func: (lat: Double?, lon: Double?) -> Unit) {
                 val location = client.lastLocation
                 location.addOnCompleteListener {
                     func(it.result?.latitude, it.result?.longitude)
+                    Timber.tag("Location Complete").i("${it.result?.latitude} ${it.result?.longitude}")
                 }
                 location.addOnFailureListener {
                     func(null, null)
+                    Timber.tag("Location Failed").i("null null")
+
                 }
             }
     } catch (e: Exception) {
+        Timber.tag("Location Exception").i("null null")
     }
 }
 

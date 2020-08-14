@@ -87,50 +87,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
     private var map: GoogleMap? = null
 
-    private val locationCallback by lazy {
-        object : GPSCheck.LocationCallBack {
-            override fun turnedOn() {
-                requireActivity().applicationContext.getUserLocation { lat, lng ->
-                    if (lat != null && lng != null) {
-
-
-                        map?.moveCamera(
-                            CameraUpdateFactory.newLatLngZoom(
-                                LatLng(
-                                    lat,
-                                    lng
-                                ), HomeFragment.DEFAULT_ZOOM.toFloat()
-                            )
-                        )
-
-                    }
-                }
-                /*try {
-                    val locationResult = fusedLocationProviderClient.lastLocation
-                    locationResult.addOnCompleteListener {
-                        if (it.result?.latitude != null && it.result?.longitude != null) {
-                            map?.moveCamera(
-                                CameraUpdateFactory.newLatLngZoom(
-                                    LatLng(
-                                        it.result?.latitude!!,
-                                        it.result?.longitude!!
-                                    ), HomeFragment.DEFAULT_ZOOM.toFloat()
-                                )
-                            )
-
-                        }
-                    }
-                } catch (e: Exception){
-
-                }*/
-                showMessage("Location Callback")
-            }
-
-            override fun turnedOff() {}
-        }
-    }
-
-    private val locationBR = GPSCheck(locationCallback)
+    private val locationBR by lazy { GPSCheck(locationCallback) }
 
     private lateinit var placesClient: PlacesClient
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
@@ -361,7 +318,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
     override fun onMapReady(map: GoogleMap) {
         this.map = map
-
 
         // Prompt the user for permission.
         getLocationPermission()
@@ -629,5 +585,48 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
     override fun onPause() {
         super.onPause()
         requireActivity().unregisterReceiver(locationBR)
+    }
+
+
+    private val locationCallback by lazy {
+        object : GPSCheck.LocationCallBack {
+            override fun turnedOn() {
+                requireActivity().applicationContext.getUserLocation { lat, lng ->
+                    if (lat != null && lng != null) {
+                        map?.animateCamera(
+                            CameraUpdateFactory.newLatLngZoom(
+                                LatLng(
+                                    lat,
+                                    lng
+                                ), HomeFragment.DEFAULT_ZOOM.toFloat()
+                            )
+                        )
+
+                    }
+                }
+
+                /*try {
+                    val locationResult = fusedLocationProviderClient.lastLocation
+                    locationResult.addOnCompleteListener {
+                        if (it.result?.latitude != null && it.result?.longitude != null) {
+                            map?.moveCamera(
+                                CameraUpdateFactory.newLatLngZoom(
+                                    LatLng(
+                                        it.result?.latitude!!,
+                                        it.result?.longitude!!
+                                    ), HomeFragment.DEFAULT_ZOOM.toFloat()
+                                )
+                            )
+
+                        }
+                    }
+                } catch (e: Exception){
+
+                }*/
+                showMessage("Location Callback")
+            }
+
+            override fun turnedOff() {}
+        }
     }
 }

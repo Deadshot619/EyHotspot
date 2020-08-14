@@ -27,7 +27,7 @@
     <string name="sign_in_label">تسجيل الدخول</string>
     <string name="submit_label">إرسال</string>
     <string name="next_label">التالى</string>
-    <string name="mbps_label">%s ميغابت في الثانية</string>
+<!--    <string name="mbps_label">%s ميغابت في الثانية</string>-->
     <string name="loading_label">جار التحميل…</string>
     <string name="under_construction_label">أعمال جارية</string>
     <string name="press_back_again_label">اضغط مرة أخرى للخروج</string>
@@ -65,7 +65,6 @@
     <string name="password_format">الرجاء إدخال كلمة السر الصحيحة</string>
     <string name="select_country_code_error_msg">الرجاء تحديد رمز الدولة!</string>
 
-
     <!--My Profile-->
     <string name="my_profile_label">ملفي</string>
     <string name="update_profile_label">تحديث الملف</string>
@@ -73,7 +72,6 @@
     <string name="updating_profile_label">جارٍ تحديث معلومات الملف الشخصي …</string>
     <string name="logout_label">تسجيل خروج</string>
     <string name="logout_confirm"> هل أنت متأكد أنك تريد تسجيل الخروج؟</string>
-
 
     <!--    Registration Option    -->
     <string name="verify_account_label">التحقق من الحساب</string>
@@ -166,18 +164,16 @@
     <string name="wifi_disconnected_label">تم قطع اتصال واي فاي</string>
     <string name="checking_wifi_connection_label">التحقق من اتصال واي فاي</string>
     <string name="calculating_wifi_speed_label">اتصال واي فاي : %s ، السرعة: حساب …</string>
-    <string name="calculated_wifi_speed_label">اتصال واي فاي: %s ، السرعة: %s ميغابت في الثانية</string>
+    <string name="calculated_wifi_speed_label">اتصال واي فاي: %s ، السرعة: Mbps %s</string>
     <string name="no_internet_connection_label">لا يوجد اتصال بالإنترنت</string>
 
     <!--    Yes/No Dialogs-->
     <string name="login_required">تسجيل الدخول مطلوب</string>
     <string name="need_to_login">تحتاج إلى تسجيل الدخول للوصول إلى هذه الميزة</string>
 
-
     <!--    Location Permission     -->
     <string name="provide_location_permission_label">تحتاج إلى تقديم إذن الموقع / GPS حتى يعمل هذا التطبيق بسلاسة</string>
     <string name="open_label">افتح</string>
-
 
     <string name="btTextNavigateNow">انتقل الآن</string>
     <string name="btTextComment"><![CDATA[التعليق والتقييم]]></string>
