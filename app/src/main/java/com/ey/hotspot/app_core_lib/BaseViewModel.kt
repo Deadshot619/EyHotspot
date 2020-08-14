@@ -58,7 +58,7 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
      * @param show Determine whether to show/hide the dialog
      * @param message The message to be shown in dialog
      */
-    protected fun setDialogVisibility(show: Boolean, message: String? = null){
+    protected fun setDialogVisibility(show: Boolean, message: String? = null) {
         _dialogVisibility.value = show
         _dialogMessage.value = message
     }
@@ -69,9 +69,11 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
      * @param durationLong Determines duration of Toast
      * @param message The message to be shown in Toast
      */
-    protected fun showToastFromViewModel(message: String?, durationLong: Boolean = false){
-        _toastMessage.value = Event(message)
-        toastMessageDuration = durationLong
+    protected fun showToastFromViewModel(message: String?, durationLong: Boolean = false) {
+        if (!message.isNullOrEmpty() && !message.contains("401")) {
+            _toastMessage.value = Event(message)
+            toastMessageDuration = durationLong
+        }
     }
 
     override fun onCleared() {

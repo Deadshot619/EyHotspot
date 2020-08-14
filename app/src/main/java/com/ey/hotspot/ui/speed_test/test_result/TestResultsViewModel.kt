@@ -9,6 +9,7 @@ import com.ey.hotspot.network.request.SpeedTestRequest
 import com.ey.hotspot.network.response.ValidateWifiResponse
 import com.ey.hotspot.utils.SpeedTestUtils
 import com.ey.hotspot.utils.constants.Constants
+import com.ey.hotspot.utils.constants.SpeedTestModes
 import com.ey.hotspot.utils.constants.getDeviceId
 import com.ey.hotspot.utils.extention_functions.convertBpsToMbps
 import com.ey.hotspot.utils.extention_functions.parseToDouble
@@ -87,7 +88,7 @@ class TestResultsViewModel(application: Application) : BaseViewModel(application
 
     //Method to set Wifi Speed Test Data on server
     private fun setWifiSpeedTestData(wifiId: Int, deviceId: String, speed: Double){
-        val request = SpeedTestRequest(wifi_id = wifiId, device_id = deviceId, average_speed = speed)
+        val request = SpeedTestRequest(wifi_id = wifiId, device_id = deviceId, average_speed = speed, mode = SpeedTestModes.BACKGROUND.value)
 
 //        setDialogVisibility(true)
             coroutineScope.launch {

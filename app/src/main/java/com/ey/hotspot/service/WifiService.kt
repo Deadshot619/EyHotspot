@@ -23,6 +23,7 @@ import com.ey.hotspot.network.request.WifiLogoutRequest
 import com.ey.hotspot.utils.CHANNEL_ID
 import com.ey.hotspot.utils.SpeedTestUtils
 import com.ey.hotspot.utils.constants.Constants
+import com.ey.hotspot.utils.constants.SpeedTestModes
 import com.ey.hotspot.utils.constants.checkWifiContainsKeywords
 import com.ey.hotspot.utils.constants.getDeviceId
 import com.ey.hotspot.utils.extention_functions.convertBpsToMbps
@@ -335,7 +336,7 @@ class WifiService : Service() {
      */
     private suspend fun callSetWifiSpeedTestApi(wifiId: Int, deviceId: String, speed: Double) {
         val request =
-            SpeedTestRequest(wifi_id = wifiId, device_id = deviceId, average_speed = speed)
+            SpeedTestRequest(wifi_id = wifiId, device_id = deviceId, average_speed = speed, mode = SpeedTestModes.BACKGROUND.value)
 
         DataProvider.wifiSpeedTest(
             request = request,
