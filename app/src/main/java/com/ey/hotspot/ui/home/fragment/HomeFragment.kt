@@ -87,7 +87,56 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
     private var map: GoogleMap? = null
 
-    private val locationBR by lazy { GPSCheck(locationCallback) }
+    private val locationCallback by lazy {
+        object : GPSCheck.LocationCallBack {
+            override fun turnedOn() {
+                showMessage("Location Callback")
+
+                val handler = Handler()
+                handler.postDelayed(
+                    Runnable {
+                        requireActivity().applicationContext.getUserLocation { lat, lng ->
+                        if (lat != null && lng != null) {
+
+                            map?.moveCamera(
+                                CameraUpdateFactory.newLatLngZoom(
+                                    LatLng(
+                                        lat,
+                                        lng
+                                    ), HomeFragment.DEFAULT_ZOOM.toFloat()
+                                )
+                            )
+                        }
+                    }
+                    },
+                    5000
+                )
+                /*try {
+                    val locationResult = fusedLocationProviderClient.lastLocation
+                    locationResult.addOnCompleteListener {
+                        if (it.result?.latitude != null && it.result?.longitude != null) {
+                            map?.moveCamera(
+                                CameraUpdateFactory.newLatLngZoom(
+                                    LatLng(
+                                        it.result?.latitude!!,
+                                        it.result?.longitude!!
+                                    ), HomeFragment.DEFAULT_ZOOM.toFloat()
+                                )
+                            )
+
+                        }
+                    }
+                } catch (e: Exception){
+
+                }*/
+
+            }
+
+            override fun turnedOff() {}
+        }
+    }
+
+    private val locationBR = GPSCheck(locationCallback)
 
     private lateinit var placesClient: PlacesClient
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
@@ -101,6 +150,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
     lateinit var mGoogleApiClient: GoogleApiClient
     var result: PendingResult<LocationSettingsResult>? = null
     val REQUEST_LOCATION = 199
+    var myMAPF=SupportMapFragment.newInstance()
 
 
     private var currentCluster: MyClusterItems? = null
@@ -159,7 +209,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             LocationServices.getFusedLocationProviderClient(requireActivity())
 
         //init map
-        val myMAPF = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+         myMAPF = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         myMAPF?.getMapAsync(this)
 
 
@@ -318,6 +368,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
     override fun onMapReady(map: GoogleMap) {
         this.map = map
+
 
         // Prompt the user for permission.
         getLocationPermission()

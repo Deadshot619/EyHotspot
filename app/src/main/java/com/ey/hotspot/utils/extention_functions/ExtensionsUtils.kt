@@ -303,6 +303,7 @@ fun Context.getUserLocation(func: (lat: Double?, lon: Double?) -> Unit) {
                 location.addOnCompleteListener {
                     func(it.result?.latitude, it.result?.longitude)
                     Timber.tag("Location Complete").i("${it.result?.latitude} ${it.result?.longitude}")
+//                    if (it.isSuccessful) { }
                 }
                 location.addOnFailureListener {
                     func(null, null)
