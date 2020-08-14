@@ -160,7 +160,7 @@ fun Context.checkLocSaveState(): Boolean {
 lateinit var mGoogleSignInClient: GoogleSignInClient
 
 fun Activity.checkLocationPermission(view: View, func: (Unit) -> Unit) {
-    Dexter.withContext(this)
+    Dexter.withContext(applicationContext)
         .withPermissions(
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 android.Manifest.permission.ACCESS_BACKGROUND_LOCATION

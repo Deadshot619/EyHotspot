@@ -50,21 +50,39 @@
                     style="@style/TextAppearance.MaterialComponents.Headline5"
                     />
 
+                <LinearLayout
+                    android:id="@+id/ll_date"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@id/tv_wifi_ssid"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_height="0dp">
                 <!--Date-->
                 <TextView
-                    android:id="@+id/tv_date"
+                    android:id="@+id/tv_date_str"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/tv_wifi_ssid"
-                    app:layout_constraintStart_toStartOf="@id/tv_wifi_ssid"
-                    app:layout_constraintEnd_toEndOf="@id/tv_wifi_ssid"
-                    tools:text="Date: 69-69-6969"
-                    android:text="Date: "
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:text="@string/wifidate"
+                    android:text="@string/wifidate"
                     android:textColor="@color/colorGrayLight"
                     android:layout_marginTop="@dimen/common_margin_between_fields"
                     style="@style/TextAppearance.MaterialComponents.Headline6"
                     />
-
+                <!--Date-->
+                <TextView
+                    android:textDirection="locale"
+                    android:id="@+id/tv_date"
+                    android:layout_width="wrap_content"
+                    tools:text=""
+                    android:text=""
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorGrayLight"
+                    android:layout_marginTop="@dimen/common_margin_between_fields"
+                    style="@style/TextAppearance.MaterialComponents.Headline6"
+                    />
+                </LinearLayout>
                 <!--        Rate Now-->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_rate_now"
@@ -76,7 +94,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/common_margin_24"
                     android:layout_marginStart="@dimen/common_margin_32"
-                    app:layout_constraintTop_toBottomOf="@id/tv_date"
+                    app:layout_constraintTop_toBottomOf="@id/ll_date"
                     app:layout_constraintStart_toStartOf="parent"/>
 
 
