@@ -95,7 +95,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
 
                 Handler().postDelayed(
                     Runnable {
-                        requireActivity().applicationContext.getUserLocation { lat, lng ->
+
+                       activity?.applicationContext?.getUserLocation { lat, lng ->
                             if (lat != null && lng != null) {
 
                                 map?.animateCamera(
