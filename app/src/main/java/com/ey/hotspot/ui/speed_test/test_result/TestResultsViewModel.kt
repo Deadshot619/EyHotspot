@@ -88,7 +88,7 @@ class TestResultsViewModel(application: Application) : BaseViewModel(application
 
     //Method to set Wifi Speed Test Data on server
     private fun setWifiSpeedTestData(wifiId: Int, deviceId: String, speed: Double){
-        val request = SpeedTestRequest(wifi_id = wifiId, device_id = deviceId, average_speed = speed, mode = SpeedTestModes.BACKGROUND.value)
+        val request = SpeedTestRequest(wifi_id = wifiId, device_id = deviceId, average_speed = speed, mode = SpeedTestModes.FOREGROUND.value)
 
 //        setDialogVisibility(true)
             coroutineScope.launch {
