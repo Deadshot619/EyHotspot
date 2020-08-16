@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
+import com.ey.hotspot.app_core_lib.CoreApp
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.broadcast_receivers.GPSCheck
 import com.ey.hotspot.databinding.FragmentHomeBinding
@@ -96,7 +97,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                 Handler().postDelayed(
                     Runnable {
 
-                       activity?.applicationContext?.getUserLocation { lat, lng ->
+                        activity?.applicationContext?.getUserLocation { lat, lng ->
                             if (lat != null && lng != null) {
 
                                 map?.animateCamera(
@@ -113,6 +114,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                     5000
                 )
             }
+
             override fun turnedOff() {}
         }
     }
@@ -170,7 +172,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         mBinding.toolbarLayout.etSearchBar.isFocusable = false
 
         //Set deep linked wifi id in viewmodel
-        mViewModel.deepLinkedWifiId = dlData?.id ?: -1
+        mViewModel.deepLinkedUuid = dlData?.uuid
+
 
         // Prompt the user for permission.
         activity?.checkLocationPermission(view = mBinding.root, func = {
@@ -252,7 +255,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
             }
 
             override fun onClickShare(data: WifiInfoModel) {
-                activity?.shareWifiHotspotData(hotspotName = data.wifiSsid, operatorName = data.providerName, city = data.location, id = data.uuid)
+                activity?.shareWifiHotspotData(
+                    hotspotName = data.wifiSsid,
+                    operatorName = data.providerName,
+                    city = data.location,
+                    id = data.uuid
+                )
             }
 
         }
@@ -275,27 +283,28 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
     /**
      * This method is when we get the data from Deep Link to move the map to desired location
      */
-    private fun moveCameraToSelectedClustorWhenDeepLink() {
-        mViewModel.goToDeepLinkedLocation.value?.getContentIfNotHandled()?.let {
-            if (it) {
-                //Show deep link data
-                dlData?.let {
-                    map?.moveCamera(
-                        CameraUpdateFactory.newLatLngZoom(
-                            LatLng(
-                                it.lat,
-                                it.lon
-                            ), DL_HOTSPOT_ZOOM.toFloat()
+    private fun moveCameraToSelectedClusterWhenDeepLink() {
+        if (CoreApp.DL_START++ == 0)
+            mViewModel.goToDeepLinkedLocation.value?.getContentIfNotHandled()?.let {
+                if (it) {
+                    //Show deep link data
+                    mViewModel.saveLinkedLocationIfExists.value?.let {
+                        map?.animateCamera(
+                            CameraUpdateFactory.newLatLngZoom(
+                                LatLng(
+                                    it.mLat,
+                                    it.mLng
+                                ), DL_HOTSPOT_ZOOM.toFloat()
+                            )
                         )
-                    )
+                    }
+
+                    setDataOnCusterDialog(mViewModel.saveLinkedLocationIfExists.value?.toWifiInfoModel())
+
+                    mViewModel.goToDeepLinkedLocation.value = Event(false)
                 }
 
-                setDataOnCusterDialog(mViewModel.saveLinkedLocationIfExists.value?.toWifiInfoModel())
-
-                mViewModel.goToDeepLinkedLocation.value = Event(false)
             }
-
-        }
 
     }
 
@@ -463,7 +472,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
                 map?.isMyLocationEnabled = false
                 map?.uiSettings?.isMyLocationButtonEnabled = false
                 lastKnownLocation = null
-               // getLocationPermission()
+                // getLocationPermission()
             }
         } catch (e: SecurityException) {
             Log.e("Exception: %s", e.message, e)
@@ -490,7 +499,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         mClusterManager.addItems(mViewModel.listClusterItem)
         mClusterManager.cluster()
 
-        moveCameraToSelectedClustorWhenDeepLink()
+        moveCameraToSelectedClusterWhenDeepLink()
     }
 
     override fun onClusterItemInfoWindowClick(item: MyClusterItems?) {

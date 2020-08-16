@@ -3,17 +3,14 @@ package com.ey.hotspot.ui.deep_link
 import android.content.Intent
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseActivity
+import com.ey.hotspot.app_core_lib.CoreApp
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.ActivityDeepLinkBinding
 import com.ey.hotspot.ui.deep_link.model.DeepLinkHotspotDataModel
 import com.ey.hotspot.ui.home.BottomNavHomeActivity
 import com.ey.hotspot.ui.login.LoginActivity
 import com.ey.hotspot.utils.constants.Constants.Companion.DL_DATA
-import com.ey.hotspot.utils.constants.Constants.Companion.DL_ID
-import com.ey.hotspot.utils.constants.Constants.Companion.DL_LAT
-import com.ey.hotspot.utils.constants.Constants.Companion.DL_LON
-import com.ey.hotspot.utils.extention_functions.parseToDouble
-import com.ey.hotspot.utils.extention_functions.parseToInt
+import com.ey.hotspot.utils.extention_functions.showMessage
 
 class DeepLinkActivity : BaseActivity<ActivityDeepLinkBinding, DeepLinkViewModel>() {
     lateinit var deepLinkData: DeepLinkHotspotDataModel
@@ -21,12 +18,13 @@ class DeepLinkActivity : BaseActivity<ActivityDeepLinkBinding, DeepLinkViewModel
     override fun getLayoutId(): Int = R.layout.activity_deep_link
     override fun getViewModel() = DeepLinkViewModel::class.java
     override fun onBinding() {
+        CoreApp.DL_START = 0
 
         deepLinkData = DeepLinkHotspotDataModel(
-            id = intent.data?.getQueryParameter(DL_ID).parseToInt(),
-            lat = intent.data?.getQueryParameter(DL_LAT).parseToDouble(),
-            lon = intent.data?.getQueryParameter(DL_LON).parseToDouble()
+            uuid = intent.dataString.toString().substringAfter("dashboard/")
         )
+
+        showMessage(intent.dataString.toString().substringAfter("dashboard/"))
 
         checkAppLoginStatus()
     }

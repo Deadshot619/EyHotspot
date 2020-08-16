@@ -5,7 +5,5 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class DeepLinkHotspotDataModel(
-    val id: Int,
-    val lat: Double,
-    val lon: Double
+    val uuid: String
 ): Parcelable

@@ -321,7 +321,7 @@ fun Context.getUserLocation(func: (lat: Double?, lon: Double?) -> Unit) {
  * This method will be used to share Wifi Hotspot data to other apps as text message
  */
 fun Activity.shareWifiHotspotData(hotspotName: String, operatorName: String, city: String, id: String) {
-    val data = "Get 2 hours of free access to our public Wi-Fi at $hotspotName, by $operatorName, in $city \n ${getDeepLinkUrl(id = id)}"
+    val data = "Get free access to our public Wi-Fi at $hotspotName, by $operatorName, in $city \n ${getDeepLinkUrl(id = id)}"
 
     val sendIntent: Intent = Intent().apply {
         action = Intent.ACTION_SEND

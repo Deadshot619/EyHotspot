@@ -29,8 +29,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data
-                    android:host="eyhotspot.com"
-                    android:scheme="http" />
+                    android:host="nearbyhs.php-dev.in"
+                    android:pathPrefix="/EyHotspots/public/dashboard"
+                    android:scheme="https" />
             </intent-filter>
         </activity>
         <activity android:name=".ui.settings.SettingsActivity" />

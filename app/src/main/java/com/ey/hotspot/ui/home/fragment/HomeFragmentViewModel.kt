@@ -37,7 +37,7 @@ class HomeFragmentViewModel(application: Application) : BaseViewModel(applicatio
     var listClusterItem = mutableListOf<MyClusterItems>()
         private set
 
-    var deepLinkedWifiId: Int = -1  //this variable will store id of wifi obtained from deeplink
+    var deepLinkedUuid: String? = ""
     val goToDeepLinkedLocation = MutableLiveData<Event<Boolean>>(Event(true))
     val saveLinkedLocationIfExists = MutableLiveData<MyClusterItems>()
 
@@ -47,7 +47,7 @@ class HomeFragmentViewModel(application: Application) : BaseViewModel(applicatio
     }
 
     //Get HotSpots
-    fun getHotSpotResponse() {
+    private fun getHotSpotResponse() {
         val request = GetHotSpotRequest(name = "")
 
         setDialogVisibility(true)
@@ -60,7 +60,7 @@ class HomeFragmentViewModel(application: Application) : BaseViewModel(applicatio
                         setDialogVisibility(false)
                         listClusterItem.clear()
                         for (i in it.data){
-                            if (i.id == deepLinkedWifiId){
+                            if (i.uuid == deepLinkedUuid){
                                 saveLinkedLocationIfExists.value = MyClusterItems(
                                     lat = i.lat.parseToDouble(),
                                     lng = i.lng.parseToDouble(),
