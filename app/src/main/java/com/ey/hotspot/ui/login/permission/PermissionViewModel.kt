@@ -31,7 +31,6 @@ class PermissionViewModel (application: Application): BaseViewModel(application)
                 },
                 error = {
                     checkError(it)
-                    setDialogVisibility(false)
                 }
             )
         }

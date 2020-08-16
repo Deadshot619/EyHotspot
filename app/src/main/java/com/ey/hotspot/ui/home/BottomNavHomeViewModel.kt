@@ -3,9 +3,6 @@ package com.ey.hotspot.ui.home
 import android.app.Application
 import android.content.Context
 import android.content.Intent
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
-import android.net.NetworkRequest
 import android.net.wifi.WifiManager
 import androidx.core.content.ContextCompat
 import com.ey.hotspot.R
@@ -30,12 +27,14 @@ import com.ey.hotspot.utils.extention_functions.extractWifiName
 import com.ey.hotspot.utils.extention_functions.getUserLocation
 import com.ey.hotspot.utils.wifi_notification_key
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ObsoleteCoroutinesApi
+import kotlinx.coroutines.channels.ticker
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.*
 
+@ObsoleteCoroutinesApi
 class BottomNavHomeViewModel(application: Application): BaseViewModel(application) {
-    private lateinit var connecManagerWifi: ConnectivityManager        //For Wifi
     private lateinit var wifiManager: WifiManager
     private lateinit var database: WifiInfoDatabaseDao
     private val DEVICE_ID = getDeviceId()
@@ -48,21 +47,21 @@ class BottomNavHomeViewModel(application: Application): BaseViewModel(applicatio
     private var loginSuccessfulWithSpeedZero: Boolean = false
     private var requireApiCall: Boolean = true
 
+    private val DELAY: Long = 1000L
+    var ticker = ticker(DELAY)
+
 
     init {
-        //Get connectivity Manager
-        connecManagerWifi = appInstance.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-
         //Get Wifi Manager
         wifiManager = appInstance.getSystemService(Context.WIFI_SERVICE) as WifiManager
-        val networkRequestWiFi: NetworkRequest = NetworkRequest.Builder()
-            .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
-            .build()
 
         //get instance of database
         database = WifiInfoDatabase.getInstance(appInstance).wifiInfoDatabaseDao
 
-        checkIfUserSkippedOrLoggedInForFirstTime()
+        coroutineScope.launch {
+            ticker.receive()
+            checkIfUserSkippedOrLoggedInForFirstTime()
+        }
     }
 
 
@@ -72,6 +71,10 @@ class BottomNavHomeViewModel(application: Application): BaseViewModel(applicatio
 
             //Wifi Ssid
             var wifiSsid = wifiManager.connectionInfo.ssid.extractWifiName()/* + "-Turtlemint"*/
+            if (wifiSsid.contains(Constants.UNKNOWN_SSID)) {
+                Thread.sleep(1000)
+                wifiSsid = wifiManager.connectionInfo.ssid.extractWifiName()/* + "-Turtlemint"*/
+            }
 
             if (!wifiSsid.contains(Constants.UNKNOWN_SSID)) {    //If the wifi is "unknown ssid", then skip it
                 /*

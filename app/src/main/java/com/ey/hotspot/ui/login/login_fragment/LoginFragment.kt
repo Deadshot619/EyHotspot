@@ -21,7 +21,6 @@ import com.ey.hotspot.utils.constants.*
 import com.ey.hotspot.utils.dialogs.OkDialog
 import com.ey.hotspot.utils.extention_functions.*
 import com.ey.hotspot.utils.validations.isEmailValid
-import com.ey.hotspot.utils.validations.isValidPassword
 import com.facebook.*
 import com.facebook.login.LoginBehavior
 import com.facebook.login.LoginManager
@@ -154,7 +153,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
                     HotSpotApp.prefs?.setUserDataPref(it.data)
                     replaceFragment(
                         fragment = WebViewFragment.newInstance("login"),
-                        addToBackStack = false,
+                        addToBackStack = true,
                         bundle = null
                     )
                 }
@@ -371,7 +370,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
     /*   GOOGLE   */
     private fun setuPGoogelSignIn() {
-
         val gso =
             GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(resources.getString(R.string.google_client_id))
