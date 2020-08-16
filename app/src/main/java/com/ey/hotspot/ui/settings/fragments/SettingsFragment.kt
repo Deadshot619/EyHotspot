@@ -17,7 +17,6 @@ import com.ey.hotspot.utils.MyHotSpotSharedPreference
 import com.ey.hotspot.utils.constants.Constants
 import com.ey.hotspot.utils.dialogs.YesNoDialog
 import com.ey.hotspot.utils.extention_functions.goToLoginScreen
-import com.ey.hotspot.utils.extention_functions.logoutUser
 import com.ey.hotspot.utils.extention_functions.replaceFragment
 import com.facebook.AccessToken
 import com.facebook.GraphRequest
@@ -39,7 +38,8 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel
                 yes = {
                     setuPGoogelSignOut()
                     setUpFacebookSiignOut()
-                    activity?.application?.logoutUser()
+                    mViewModel.wifiLogout()
+//                        activity?.application?.logoutUser()
                 },
                 no = { this.dismiss() }
             )

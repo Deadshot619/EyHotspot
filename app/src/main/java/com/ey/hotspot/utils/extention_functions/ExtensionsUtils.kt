@@ -354,7 +354,6 @@ fun Activity.openNavigateUrl(url: String, lat: String, lon: String) {
 fun Application.logoutUser(bundle: Bundle? = null) {
     clearDataSaveLangAndKeywords()
 
-
     //Stop Service
 //    CoreApp.instance.stopService(Intent(CoreApp.instance, WifiService::class.java))
 

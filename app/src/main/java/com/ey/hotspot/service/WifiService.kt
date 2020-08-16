@@ -482,8 +482,6 @@ class WifiService : Service() {
      *  Will be called when wifi is disconnected/lost
      */
     private suspend fun updateLogoutTimeInDb() {
-
-
         //Update data in table
         withContext(Dispatchers.IO) {
             val lastInsertedData = database.getLastInsertedData()
