@@ -36,6 +36,9 @@ class DeepLinkActivity : BaseActivity<ActivityDeepLinkBinding, DeepLinkViewModel
             }
             else -> {   //Stay on splash screen & show select lang dialogue
                 goToLoginPage()
+    /*                clearDataSaveLangAndKeywords()
+                setSkippedUserData()
+                goToHomePage()*/
             }
         }
     }
