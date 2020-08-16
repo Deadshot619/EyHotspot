@@ -136,6 +136,13 @@ class WifiService : Service() {
         super.onDestroy()
         //indicate EService is not running
         _isRunning = false
+
+        //When wifi is lost/disconnected, add wifi logout time
+        coroutineScope.launch {
+            //Add Logout Time
+            updateLogoutTimeInDb()
+        }
+
         coroutineScope.cancel()
     }
 
@@ -166,7 +173,10 @@ class WifiService : Service() {
                  //Get last inserted data & do things accordingly
                  getLastInsertedData()
              }*/
-
+            /*
+             *  Do not validate wifi if the user logs in or skips for first time
+             */
+            if(HotSpotApp.prefs?.getFirstTimeLoginOrSkipped() != true) return
 
             //Wifi Ssid
             var wifiSsid = wifiManager.connectionInfo.ssid.extractWifiName()/* + "-Turtlemint"*/
@@ -190,8 +200,8 @@ class WifiService : Service() {
                 applicationContext.getUserLocation { lat, lng ->
                     if (lat != null && lng != null) {   //If Location is available
                         coroutineScope.launch {
-                            //Validate WiFi
-                            validateWifi(wifiSsid = wifiSsid, lat = lat, lng = lng)
+                                //Validate WiFi
+                                validateWifi(wifiSsid = wifiSsid, lat = lat, lng = lng)
                         }
                     }   //TODO 28/07/2020: What if User Location is not available?
                     else {
@@ -269,7 +279,7 @@ class WifiService : Service() {
                     coroutineScope.launch {
                         //Call login api with 0.0 average speed & calculate speed
 
-                        getLastInsertedDataForLogin(it.data)
+                        getLastInsertedDataForLogin(it.data, wifiSsid)
 
                         /*callWifiLogin(wifiId = it.data.id, deviceId = DEVICE_ID, averageSpeed = 0.0)
 
@@ -342,7 +352,12 @@ class WifiService : Service() {
      */
     private suspend fun callSetWifiSpeedTestApi(wifiId: Int, deviceId: String, speed: Double) {
         val request =
-            SpeedTestRequest(wifi_id = wifiId, device_id = deviceId, average_speed = speed, mode = SpeedTestModes.BACKGROUND.value)
+            SpeedTestRequest(
+                wifi_id = wifiId,
+                device_id = deviceId,
+                average_speed = speed,
+                mode = SpeedTestModes.BACKGROUND.value
+            )
 
         DataProvider.wifiSpeedTest(
             request = request,
@@ -420,7 +435,7 @@ class WifiService : Service() {
         }
     }
 
-    private suspend fun getLastInsertedDataForLogin(validateData: ValidateWifiResponse) {
+    private suspend fun getLastInsertedDataForLogin(validateData: ValidateWifiResponse, wifiSsid: String) {
         withContext(Dispatchers.IO) {
             //Set this variable to true/
             requireApiCall = true
@@ -429,16 +444,22 @@ class WifiService : Service() {
             val data = database.getLastInsertedData()
 
             //Check if data is present
-            if (data.isNotEmpty()){
+            if (data.isNotEmpty()) {
                 //Check whether user is logged in or not
-                if (HotSpotApp.prefs!!.getAccessToken().isNotEmpty()){  //Logged in user
+                if (HotSpotApp.prefs!!.getAccessToken().isNotEmpty()) {  //Logged in user
                     //If user already has access token stored in db, that means the wifi is logged in for current user
-                    //So if token is present, set this to false, else true
-                    requireApiCall = HotSpotApp.prefs!!.getAccessToken() != data[0].accessToken
+                    //So if token is present && disconnect time is not present, set this to false, else true
+                    if (HotSpotApp.prefs!!.getAccessToken() == data[0].accessToken && (data[0].disconnectedOn.toString() == "null" || data[0].wifiSsid == wifiSsid))
+                        requireApiCall = false
+                    else
+                        requireApiCall = true
                 } else {    //Skipped user
                     //If user already has access token stored in db as null, that means the wifi is logged in for current skipped user
                     //So if token is null, set this to false, else true
-                    requireApiCall= data[0].accessToken != null
+                    if (data[0].accessToken.isNullOrEmpty() && (data[0].disconnectedOn.toString() == "null" || data[0].wifiSsid == wifiSsid))
+                        requireApiCall = false
+                    else
+                        requireApiCall = true
                 }
             }
 
@@ -461,14 +482,24 @@ class WifiService : Service() {
      *  Will be called when wifi is disconnected/lost
      */
     private suspend fun updateLogoutTimeInDb() {
+
+
         //Update data in table
         withContext(Dispatchers.IO) {
-            if (_currentlyInsertedDataId >= 0L) {   //Update data only if key is >= 0
+            val lastInsertedData = database.getLastInsertedData()
+
+            if (lastInsertedData.isNotEmpty() && lastInsertedData[0].disconnectedOn.toString() == "null") {
                 val success = database.updateWifiInfoData(
-                    id = _currentlyInsertedDataId,
+                    id = lastInsertedData[0].id,
                     disconnectedOn = Calendar.getInstance()
                 )
 
+                /*if (_currentlyInsertedDataId >= 0L) {   //Update data only if key is >= 0
+                    val success = database.updateWifiInfoData(
+                        id = _currentlyInsertedDataId,
+                        disconnectedOn = Calendar.getInstance()
+                    )
+    */
                 if (success == 1)       //If row updated successfully, then change current id
                     _currentlyInsertedDataId = -1
             }

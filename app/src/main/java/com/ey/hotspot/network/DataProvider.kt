@@ -438,7 +438,7 @@ object DataProvider : RemoteDataProvider {
 
     override suspend fun wifiLogin(
         request: WifiLoginRequest,
-        success: (BaseResponse<WifiLoginResponse>) -> Unit,
+        success: (BaseResponse<ValidateWifiResponse>) -> Unit,
         error: (Exception) -> Unit
     ) {
         try {

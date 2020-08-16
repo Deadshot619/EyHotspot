@@ -146,7 +146,7 @@ interface APIInterface {
     fun validateWifiAsync(@Body request: ValidateWifiRequest): Deferred<BaseResponse<ValidateWifiResponse>>
 
     @POST(Constants.API_WIFI_LOGIN)
-    fun wifiLoginAsync(@Body request: WifiLoginRequest): Deferred<BaseResponse<WifiLoginResponse>>
+    fun wifiLoginAsync(@Body request: WifiLoginRequest): Deferred<BaseResponse<ValidateWifiResponse>>
 
     @POST(Constants.API_WIFI_LOGOUT)
     fun wifiLogoutAsync(@Body request: WifiLogoutRequest): Deferred<BaseResponse<WifiLogoutResponse>>

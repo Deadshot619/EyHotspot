@@ -64,6 +64,17 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
     }
 
     /**
+     * Method to show/hide dialog & set its message
+     *
+     * @param show Determine whether to show/hide the dialog
+     * @param message The message to be shown in dialog
+     */
+    protected fun setDialogVisibilityPost(show: Boolean, message: String? = null) {
+        _dialogVisibility.postValue(show)
+        _dialogMessage.postValue(message)
+    }
+
+    /**
      * Method to show a toast from viewModel
      *
      * @param durationLong Determines duration of Toast

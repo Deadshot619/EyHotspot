@@ -150,7 +150,7 @@ class BottomNavHomeViewModel(application: Application): BaseViewModel(applicatio
                     coroutineScope.launch {
                         //Call login api with 0.0 average speed & calculate speed
 
-                        getLastInsertedDataForLogin(it.data)
+                        getLastInsertedDataForLogin(it.data, wifiSsid)
 
                         /*callWifiLogin(wifiId = it.data.id, deviceId = DEVICE_ID, averageSpeed = 0.0)
 
@@ -185,7 +185,7 @@ class BottomNavHomeViewModel(application: Application): BaseViewModel(applicatio
         )
     }
 
-    private suspend fun getLastInsertedDataForLogin(validateData: ValidateWifiResponse) {
+    private suspend fun getLastInsertedDataForLogin(validateData: ValidateWifiResponse, wifiSsid: String) {
         withContext(Dispatchers.IO) {
             //Set this variable to true/
             requireApiCall = true
@@ -194,16 +194,22 @@ class BottomNavHomeViewModel(application: Application): BaseViewModel(applicatio
             val data = database.getLastInsertedData()
 
             //Check if data is present
-            if (data.isNotEmpty()){
+            if (data.isNotEmpty()) {
                 //Check whether user is logged in or not
-                if (HotSpotApp.prefs!!.getAccessToken().isNotEmpty()){  //Logged in user
+                if (HotSpotApp.prefs!!.getAccessToken().isNotEmpty()) {  //Logged in user
                     //If user already has access token stored in db, that means the wifi is logged in for current user
-                    //So if token is present, set this to false, else true
-                    requireApiCall = HotSpotApp.prefs!!.getAccessToken() != data[0].accessToken
+                    //So if token is present && disconnect time is not present, set this to false, else true
+                    if (HotSpotApp.prefs!!.getAccessToken() == data[0].accessToken && (data[0].disconnectedOn.toString() == "null" || data[0].wifiSsid == wifiSsid))
+                        requireApiCall = false
+                    else
+                        requireApiCall = true
                 } else {    //Skipped user
                     //If user already has access token stored in db as null, that means the wifi is logged in for current skipped user
                     //So if token is null, set this to false, else true
-                    requireApiCall= data[0].accessToken != null
+                    if (data[0].accessToken.isNullOrEmpty() && (data[0].disconnectedOn.toString() == "null" || data[0].wifiSsid == wifiSsid))
+                        requireApiCall = false
+                    else
+                        requireApiCall = true
                 }
             }
 
