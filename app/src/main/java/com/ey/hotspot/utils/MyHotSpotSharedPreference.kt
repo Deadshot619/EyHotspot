@@ -8,6 +8,7 @@ import com.ey.hotspot.utils.constants.Constants.Companion.ACCESS_TOKEN
 import com.ey.hotspot.utils.constants.Constants.Companion.APP_LOGGED_IN
 import com.ey.hotspot.utils.constants.Constants.Companion.DELEGATE_ENGLISH_LANG
 import com.ey.hotspot.utils.constants.Constants.Companion.ENABLED_GPS_LOCATION
+import com.ey.hotspot.utils.constants.Constants.Companion.FIRST_TIME_LOGIN_OR_SKIPPED
 import com.ey.hotspot.utils.constants.Constants.Companion.FORGOT_PASSWORD_FIELD
 import com.ey.hotspot.utils.constants.Constants.Companion.LANGUAGE_SELECTED
 import com.ey.hotspot.utils.constants.Constants.Companion.REGISTRATION_EMAIL_ID
@@ -84,7 +85,6 @@ class MyHotSpotSharedPreference(context: Context) {
 
     fun setGPSEnabledStatus(value: Boolean) {
         CoreApp.sharedPreferences.edit().putBoolean(ENABLED_GPS_LOCATION, value).apply()
-
     }
 
     fun getGPSEnabledStatus(): Boolean? {
@@ -144,6 +144,17 @@ class MyHotSpotSharedPreference(context: Context) {
     fun setRegistrationEmailID(emailID: String) {
         CoreApp.sharedPreferences.edit().putString(REGISTRATION_EMAIL_ID, emailID).apply()
 
+    }
+
+    /*
+     *  These getter & setter methods will help to determine whether user was logged in for first time or not
+     */
+    fun setFirstTimeLoginOrSkipped(value: Boolean){
+        CoreApp.sharedPreferences.edit().putBoolean(FIRST_TIME_LOGIN_OR_SKIPPED, value).apply()
+    }
+
+    fun getFirstTimeLoginOrSkipped(): Boolean{
+        return CoreApp.sharedPreferences.getBoolean(FIRST_TIME_LOGIN_OR_SKIPPED, false)
     }
 
     /*

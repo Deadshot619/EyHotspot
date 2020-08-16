@@ -50,6 +50,7 @@ interface Constants {
         const val  TERMS_AND_CONDITION="termscondition"
         const val  REGISTRATION_EMAIL_ID="REGISTRATION_EMAIL_ID"
         const val WIFI_KEYWORDS = "wifi_keywords"
+        const val FIRST_TIME_LOGIN_OR_SKIPPED = "first_time_login_or_skipped"
 
         //APIS
 

@@ -38,6 +38,7 @@ fun updateSharedPreference(loginResponse: LoginResponse) {
         setAppLoggedInStatus(true)
         setSkipStatus(false)
         setUserDataPref(loginResponse)
+        setFirstTimeLoginOrSkipped(true)
     }
 }
 
@@ -48,6 +49,7 @@ fun setSkippedUserData(){
     HotSpotApp.prefs?.run {
         setAppLoggedInStatus(false)
         setSkipStatus(true)
+        setFirstTimeLoginOrSkipped(true)
     }
 }
 
