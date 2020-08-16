@@ -27,7 +27,10 @@ data class WifiInformationTable(
     val wifiId: Int,
 
     @ColumnInfo(name = "synced")
-    val synced: Boolean = false
+    val synced: Boolean = false,
+
+    @ColumnInfo(name = "access_token")
+    val accessToken: String?
     
 /*    @ColumnInfo(name = "upload_speed")
     val uploadSpeed: String*/

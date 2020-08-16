@@ -12,6 +12,7 @@ import android.os.Build
 import android.os.IBinder
 import androidx.core.content.ContextCompat
 import com.ey.hotspot.R
+import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.database.wifi_info.WifiInfoDatabase
 import com.ey.hotspot.database.wifi_info.WifiInfoDatabaseDao
 import com.ey.hotspot.database.wifi_info.WifiInformationTable
@@ -20,6 +21,7 @@ import com.ey.hotspot.network.request.SpeedTestRequest
 import com.ey.hotspot.network.request.ValidateWifiRequest
 import com.ey.hotspot.network.request.WifiLoginRequest
 import com.ey.hotspot.network.request.WifiLogoutRequest
+import com.ey.hotspot.network.response.ValidateWifiResponse
 import com.ey.hotspot.utils.CHANNEL_ID
 import com.ey.hotspot.utils.SpeedTestUtils
 import com.ey.hotspot.utils.constants.Constants
@@ -66,11 +68,12 @@ class WifiService : Service() {
         false  //True, if wifi is validated successfully, else false
 
     private var loginSuccessfulWithSpeedZero: Boolean = false
+    private var requireApiCall: Boolean = true
 
 
     //Create a Coroutine Scope & job
-    private val serviceJjob = Job()
-    private val coroutineScope = CoroutineScope(serviceJjob + Dispatchers.Main)
+    private val serviceJob = Job()
+    private val coroutineScope = CoroutineScope(serviceJob + Dispatchers.Main)
 
     override fun onCreate() {
         super.onCreate()
@@ -262,15 +265,18 @@ class WifiService : Service() {
                 if (it.status) {
                     validateWifiSuccessful = true
                     _currentWifiId = it.data.id
+
                     coroutineScope.launch {
                         //Call login api with 0.0 average speed & calculate speed
 
-                        callWifiLogin(wifiId = it.data.id, deviceId = DEVICE_ID, averageSpeed = 0.0)
+                        getLastInsertedDataForLogin(it.data)
+
+                        /*callWifiLogin(wifiId = it.data.id, deviceId = DEVICE_ID, averageSpeed = 0.0)
 
                         calculateSpeed(
                             wifiId = it.data.id,
                             deviceId = DEVICE_ID
-                        )
+                        )*/
                     }
                 } else {
                     validateWifiSuccessful = false
@@ -389,7 +395,8 @@ class WifiService : Service() {
                         wifiSsid = wifiManager.connectionInfo.ssid.extractWifiName(),
                         connectedOn = Calendar.getInstance(),
                         downloadSpeed = averageSpeed.toString(),
-                        wifiId = wifiId
+                        wifiId = wifiId,
+                        accessToken = HotSpotApp.prefs?.getAccessToken()
                     )
                 )
             }
@@ -410,6 +417,42 @@ class WifiService : Service() {
                     deviceId = DEVICE_ID,
                     logoutAt = data[0].disconnectedOn!!.time
                 )
+        }
+    }
+
+    private suspend fun getLastInsertedDataForLogin(validateData: ValidateWifiResponse) {
+        withContext(Dispatchers.IO) {
+            //Set this variable to true/
+            requireApiCall = true
+
+            //Get wifi login data from db
+            val data = database.getLastInsertedData()
+
+            //Check if data is present
+            if (data.isNotEmpty()){
+                //Check whether user is logged in or not
+                if (HotSpotApp.prefs!!.getAccessToken().isNotEmpty()){  //Logged in user
+                    //If user already has access token stored in db, that means the wifi is logged in for current user
+                    //So if token is present, set this to false, else true
+                    requireApiCall = HotSpotApp.prefs!!.getAccessToken() != data[0].accessToken
+                } else {    //Skipped user
+                    //If user already has access token stored in db as null, that means the wifi is logged in for current skipped user
+                    //So if token is null, set this to false, else true
+                    requireApiCall= data[0].accessToken != null
+                }
+            }
+
+            //If wifi is already logged in, then don't call Wifi Login Api & set the flag to true
+            if (requireApiCall)
+                callWifiLogin(wifiId = validateData.id, deviceId = DEVICE_ID, averageSpeed = 0.0)
+            else
+                loginSuccessfulWithSpeedZero = true
+
+            //Calculate speed anyways
+            calculateSpeed(
+                wifiId = validateData.id,
+                deviceId = DEVICE_ID
+            )
         }
     }
 

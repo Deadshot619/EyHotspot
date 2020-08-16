@@ -10,7 +10,6 @@ import com.ey.hotspot.ui.deep_link.model.DeepLinkHotspotDataModel
 import com.ey.hotspot.ui.home.BottomNavHomeActivity
 import com.ey.hotspot.ui.login.LoginActivity
 import com.ey.hotspot.utils.constants.Constants.Companion.DL_DATA
-import com.ey.hotspot.utils.extention_functions.showMessage
 
 class DeepLinkActivity : BaseActivity<ActivityDeepLinkBinding, DeepLinkViewModel>() {
     lateinit var deepLinkData: DeepLinkHotspotDataModel
@@ -23,8 +22,6 @@ class DeepLinkActivity : BaseActivity<ActivityDeepLinkBinding, DeepLinkViewModel
         deepLinkData = DeepLinkHotspotDataModel(
             uuid = intent.dataString.toString().substringAfter("dashboard/")
         )
-
-        showMessage(intent.dataString.toString().substringAfter("dashboard/"))
 
         checkAppLoginStatus()
     }

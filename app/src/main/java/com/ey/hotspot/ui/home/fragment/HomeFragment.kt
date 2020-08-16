@@ -92,7 +92,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
     private val locationCallback by lazy {
         object : GPSCheck.LocationCallBack {
             override fun turnedOn() {
-                showMessage("Location Callback")
+//                showMessage("Location Callback")
 
                 Handler().postDelayed(
                     Runnable {
