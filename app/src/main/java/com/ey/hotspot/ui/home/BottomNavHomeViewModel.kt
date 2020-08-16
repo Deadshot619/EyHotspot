@@ -72,7 +72,7 @@ class BottomNavHomeViewModel(application: Application): BaseViewModel(applicatio
             //Wifi Ssid
             var wifiSsid = wifiManager.connectionInfo.ssid.extractWifiName()/* + "-Turtlemint"*/
             if (wifiSsid.contains(Constants.UNKNOWN_SSID)) {
-                Thread.sleep(1000)
+//                Thread.sleep(1000)
                 wifiSsid = wifiManager.connectionInfo.ssid.extractWifiName()/* + "-Turtlemint"*/
             }
 
