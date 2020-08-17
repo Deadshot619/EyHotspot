@@ -48,7 +48,6 @@ fun NotificationManager.sendNotification(
         applicationContext,
         channelId
     )
-
         .setContentTitle(messageTitle)
         .setContentText(messageBody)
 
@@ -95,12 +94,12 @@ fun createNotificationChannel(context: Context, channelId: String, channelName: 
         val notificationChannel = NotificationChannel(
             channelId,
             channelName,
-            NotificationManager.IMPORTANCE_DEFAULT
+            NotificationManager.IMPORTANCE_LOW
         )
 
         notificationChannel.enableLights(true)
         notificationChannel.lightColor = Color.RED
-//        notificationChannel.enableVibration(true)
+        notificationChannel.enableVibration(false)
 //            notificationChannel.description = "Time for breakfast"
 
 
