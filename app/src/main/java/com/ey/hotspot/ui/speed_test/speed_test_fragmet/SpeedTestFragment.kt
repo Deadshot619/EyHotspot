@@ -137,11 +137,11 @@ class SpeedTestFragment : BaseFragment<FragmentSpeedTestBinding, SpeedTestFragme
             //get wifi ssid
             val wifiSSid = wifiManager.connectionInfo.ssid.extractWifiName()
             if (wifiSSid.contains(Constants.UNKNOWN_SSID)) {
-                if (!requireActivity().isLocationEnabled()) {
+                /*if (!requireActivity().isLocationEnabled()) {
                     activity?.turnOnGpsDialog()
                     if (checkWifiContainsKeywords(wifiSSid))
                         getUserLocationAndValidateWifi(wifiSSid)
-                }
+                }*/
             } else {//TODO 12/08/20 : Uncomment this & remove turtlemint
                 if (checkWifiContainsKeywords(wifiSSid))
                     getUserLocationAndValidateWifi(wifiSSid /*+ "-Turtlemint"*/)

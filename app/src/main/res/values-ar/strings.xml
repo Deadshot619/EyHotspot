@@ -32,7 +32,7 @@
     <string name="under_construction_label">أعمال جارية</string>
     <string name="press_back_again_label">اضغط مرة أخرى للخروج</string>
     <string name="gps_enable_conformation">يبدو أن GPS الخاص بك معطل ، هل تريد تمكينه؟</string>
-
+    <string name="share_hotspot_data">احصل على وصول مجاني إلى شبكة واي فاي العامة لدينا على %s, بواسطة %s, في %s</string>
 
     <!--Toolbar-->
     <string name="search_locations_label">مواقع البحث</string>

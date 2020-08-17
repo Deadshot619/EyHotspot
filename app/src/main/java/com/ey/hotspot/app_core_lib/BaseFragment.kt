@@ -59,11 +59,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
         //Dialog Visibility
         mViewModel.dialogVisibility.observe(viewLifecycleOwner, Observer { show ->
             dialog.run {
-                if (show)
-                    show()
-                else
-                    hide()
-                dismiss()
+                if (show) show() else dismiss()
             }
         })
 
