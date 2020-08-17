@@ -165,9 +165,9 @@ fun Activity.checkLocationPermission(view: View, func: (Unit) -> Unit) {
     Dexter.withContext(applicationContext)
         .withPermissions(
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                android.Manifest.permission.ACCESS_BACKGROUND_LOCATION
+                Manifest.permission.ACCESS_BACKGROUND_LOCATION
+                Manifest.permission.ACCESS_COARSE_LOCATION
                 android.Manifest.permission.ACCESS_FINE_LOCATION
-                android.Manifest.permission.ACCESS_COARSE_LOCATION
             } else {
                 android.Manifest.permission.ACCESS_FINE_LOCATION
                 android.Manifest.permission.ACCESS_COARSE_LOCATION
@@ -321,7 +321,8 @@ fun Context.getUserLocation(func: (lat: Double?, lon: Double?) -> Unit) {
  * This method will be used to share Wifi Hotspot data to other apps as text message
  */
 fun Activity.shareWifiHotspotData(hotspotName: String, operatorName: String, city: String, id: String) {
-    val data = "Get free access to our public Wi-Fi at $hotspotName, by $operatorName, in $city \n ${getDeepLinkUrl(id = id)}"
+//    val data = "Get free access to our public Wi-Fi at $hotspotName, by $operatorName, in $city \n ${getDeepLinkUrl(id = id)}"
+    val data = "${String.format(getString(R.string.share_hotspot_data), hotspotName, operatorName, city)} \n ${getDeepLinkUrl(id = id)}"
 
     val sendIntent: Intent = Intent().apply {
         action = Intent.ACTION_SEND
