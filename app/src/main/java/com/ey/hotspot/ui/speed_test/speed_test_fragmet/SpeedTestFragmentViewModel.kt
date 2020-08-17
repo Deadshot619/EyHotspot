@@ -110,7 +110,6 @@ class SpeedTestFragmentViewModel(application: Application) : BaseViewModel(appli
             DataProvider.validateWifi(
                 request = request,
                 success = {
-                    _hideDataView.value = !it.status
 
 
                     if (it.status) {
@@ -132,6 +131,8 @@ class SpeedTestFragmentViewModel(application: Application) : BaseViewModel(appli
                                     appInstance.getString(R.string.wifi_not_validated_label)
                                 )
                             })
+
+                        _hideDataView.value = !it.status
                     }
                 },
                 error = {
@@ -144,6 +145,8 @@ class SpeedTestFragmentViewModel(application: Application) : BaseViewModel(appli
                                 appInstance.getString(R.string.wifi_not_validated_label)
                             )
                         })
+
+                    _hideDataView.value = true
                 }
             )
         }

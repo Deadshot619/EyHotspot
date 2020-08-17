@@ -1,6 +1,5 @@
 package com.ey.hotspot.app_core_lib
 
-import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -59,7 +58,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
         //Dialog Visibility
         mViewModel.dialogVisibility.observe(viewLifecycleOwner, Observer { show ->
             dialog.run {
-                if (show) show() else hide()
+                if (show) show() else dismiss()
             }
         })
 
