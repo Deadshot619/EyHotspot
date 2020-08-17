@@ -120,7 +120,8 @@ class WifiService : Service() {
                 getNotification(
                     this,
                     getString(R.string.wifi_service_label),
-                    input,
+//                    input,
+                    getString(R.string.monitoring_wifi),
                     CHANNEL_ID
                 )
             )
