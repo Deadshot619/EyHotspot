@@ -83,13 +83,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:paddingStart="@dimen/margin_20"
-                android:paddingEnd="@dimen/margin_20"
+                android:paddingStart="@dimen/margin_10"
+                android:paddingEnd="@dimen/margin_10"
                 android:text="@string/sms_label"
                 android:buttonTint="@color/colorPrimary"
                 tools:checked="true"
                 android:textDirection="locale"
-                android:textSize="18sp" />
+                android:textSize="@dimen/text_size_16" />
 
             <RadioButton
                 android:id="@+id/rb_email"
@@ -97,11 +97,11 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:buttonTint="@color/colorPrimary"
-                android:paddingStart="@dimen/margin_20"
-                android:paddingEnd="@dimen/margin_20"
+                android:paddingStart="@dimen/margin_10"
+                android:paddingEnd="@dimen/margin_10"
                 android:text="@string/email_label"
                 android:textDirection="locale"
-                android:textSize="18sp" />
+                android:textSize="@dimen/text_size_16" />
 
         </RadioGroup>
 

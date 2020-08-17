@@ -1,7 +1,6 @@
 package com.ey.hotspot.ui.home.fragment
 
 import android.Manifest
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
@@ -13,6 +12,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
@@ -179,7 +179,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
         activity?.checkLocationPermission(view = mBinding.root, func = {
             locationPermissionGranted = true
             if (!requireActivity().isLocationEnabled()) {
-                activity?.turnOnGpsDialog()
+               // activity?.turnOnGpsDialog()
+                AlertDialog.Builder(requireContext())
+                    .setMessage(getString(R.string.gps_enable_conformation))
+                    .setCancelable(false)
+                    .setPositiveButton(R.string.yes_label) { dialog, id ->
+                        startActivityForResult(Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS),1)
+                    }
+                    .setNegativeButton(getString(R.string.no_label)) { dialog, id ->
+                        dialog.cancel()
+                    }
+                    .show()
             }
             updateLocationUI()
         })
@@ -564,18 +574,48 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>(),
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         Log.d("onActivityResult()", Integer.toString(resultCode))
-        when (requestCode) {
+
+
+            when (requestCode) {
+                1 -> {
+                   // showMessage("Location Callback")
+                    Handler().postDelayed(
+                        Runnable {
+
+                            activity?.applicationContext?.getUserLocation { lat, lng ->
+                                if (lat != null && lng != null) {
+
+                                    map?.animateCamera(
+                                        CameraUpdateFactory.newLatLngZoom(
+                                            LatLng(
+                                                lat,
+                                                lng
+                                            ), HomeFragment.DEFAULT_ZOOM.toFloat()
+                                        )
+                                    )
+                                }
+                            }
+                        },
+                        5000
+                    )
+                }
+
+        }
+        /*when (requestCode) {
             REQUEST_LOCATION -> when (resultCode) {
                 Activity.RESULT_OK -> {
+
                     Log.d("location", "Location enabled")
+
                 }
                 Activity.RESULT_CANCELED -> {
                     Log.d("location", "Location not enabled, user canceled")
                 }
                 else -> {
+
                 }
             }
-        }
+        }*/
     }
 
     private fun getLocationPermission() {

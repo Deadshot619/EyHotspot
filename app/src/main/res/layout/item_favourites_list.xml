@@ -163,7 +163,6 @@
                 android:textDirection="locale"
                 android:visibility="visible"
                 android:onClick="@{() -> clickListener.onClickShare(data)}"
-
                 app:layout_constraintStart_toStartOf="@id/tv_location"
                 app:layout_constraintTop_toTopOf="@id/btn_rate_now"
                 app:layout_constraintBottom_toBottomOf="@id/btn_rate_now"/>

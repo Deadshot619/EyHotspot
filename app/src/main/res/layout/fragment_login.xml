@@ -115,8 +115,7 @@
                 android:text="@string/login_credentials_msg"
                 android:textColor="@color/textColorHeadline"
                 android:textDirection="locale"
-                android:textSize="@dimen/text_size_14"
-
+                android:textSize="@dimen/text_size_12"
                 app:layout_constraintEnd_toEndOf="@id/tv_hotspot"
                 app:layout_constraintStart_toStartOf="@id/tv_hotspot"
                 app:layout_constraintTop_toBottomOf="@id/iv_bg_header"

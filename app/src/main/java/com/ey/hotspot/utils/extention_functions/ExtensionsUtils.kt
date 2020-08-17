@@ -219,7 +219,7 @@ fun Activity.turnOnGpsDialog() {
         .setMessage(getString(R.string.gps_enable_conformation))
         .setCancelable(false)
         .setPositiveButton(R.string.yes_label) { dialog, id ->
-            startActivity(Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS))
+            startActivityForResult(Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS),1)
         }
         .setNegativeButton(getString(R.string.no_label)) { dialog, id ->
             dialog.cancel()

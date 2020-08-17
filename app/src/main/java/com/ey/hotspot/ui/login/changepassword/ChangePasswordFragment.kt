@@ -239,7 +239,7 @@ class ChangePasswordFragment :
 
                 if (!password.trim().isValidPassword()) {
                     edtPassword.error = resources.getString(R.string.password_format)
-                    edtConfirmPassword.error = resources.getString(R.string.password_format)
+                    //edtConfirmPassword.error = resources.getString(R.string.password_format)
                     isValid = false
                 } else if (password != confirmPassword) {
                     edtPassword.error = resources.getString(R.string.pwd_not_match)
