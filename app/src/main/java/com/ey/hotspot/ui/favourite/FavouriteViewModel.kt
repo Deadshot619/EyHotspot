@@ -29,12 +29,13 @@ class FavouriteViewModel(application: Application) : BaseViewModel(application) 
             DataProvider.markFavourite(
                 request = MarkFavouriteRequest(locationId = locationId),
                 success = {
-                    setDialogVisibility(false)
+
                     if (it.status)
                         getFavouriteList()
                     else
+                        setDialogVisibility(false)
 
-                        showToastFromViewModel(it.message)
+                    showToastFromViewModel(it.message)
                 }, error = {
                     checkError(it)
                 }
