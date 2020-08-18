@@ -81,6 +81,10 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(),
                 goToHomePage()
 
             }
+            HotSpotApp.prefs?.getLanguageFirstTime()!! ->{
+                mBinding.mbLanguageSelection.visibility = View.GONE
+                goToLoginPage()
+            }
             else -> {   //Stay on splash screen & show select lang dialogue
                 mBinding.mbLanguageSelection.visibility = View.VISIBLE
                 setUpListeners()
@@ -92,6 +96,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(),
     fun setUpListeners() {
         //Arabic
         mBinding.btArabic.setOnClickListener {
+            HotSpotApp.prefs?.setLanguageFirstTime(true)
 
             val langType = HotSpotApp.prefs!!.getLanguage()
             if (langType == Constants.ENGLISH_LANG) {
@@ -104,6 +109,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(),
 
         //English
         mBinding.btEnglish.setOnClickListener {
+            HotSpotApp.prefs?.setLanguageFirstTime(true)
 
             val langType = HotSpotApp.prefs!!.getLanguage()
             if (langType == Constants.ARABIC_LANG) {

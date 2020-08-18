@@ -7,6 +7,7 @@ interface Constants {
         const val DELEGATE_ENGLISH_LANG = "en"
         const val ENGLISH_LANG: String = "en"
         const val ARABIC_LANG: String = "ar"
+        const val LANGUAGE_SELECTED_FIRST_TIME = "language_selected_first_time"
 
         //Default Location Lat Lng of Saudi Arabia
         const val LATITUDE: Double = 23.8859

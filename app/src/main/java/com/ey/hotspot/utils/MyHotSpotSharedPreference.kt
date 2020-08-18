@@ -4,6 +4,7 @@ import android.content.Context
 import com.ey.hotspot.app_core_lib.CoreApp
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.network.response.LoginResponse
+import com.ey.hotspot.utils.constants.Constants
 import com.ey.hotspot.utils.constants.Constants.Companion.ACCESS_TOKEN
 import com.ey.hotspot.utils.constants.Constants.Companion.APP_LOGGED_IN
 import com.ey.hotspot.utils.constants.Constants.Companion.DELEGATE_ENGLISH_LANG
@@ -35,6 +36,12 @@ class MyHotSpotSharedPreference(context: Context) {
         return CoreApp.sharedPreferences.getString(LANGUAGE_SELECTED, DELEGATE_ENGLISH_LANG)
             ?: DELEGATE_ENGLISH_LANG
     }
+
+    fun setLanguageFirstTime(value: Boolean){
+        CoreApp.sharedPreferences.edit().putBoolean(Constants.LANGUAGE_SELECTED_FIRST_TIME, value).apply()
+    }
+
+    fun getLanguageFirstTime(): Boolean = CoreApp.sharedPreferences.getBoolean(Constants.LANGUAGE_SELECTED_FIRST_TIME, false) ?: false
 
     /*save user access token for api calls*/
     fun saveAccessToken(value: String?) {
