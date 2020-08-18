@@ -153,7 +153,7 @@ class SpeedTestFragment : BaseFragment<FragmentSpeedTestBinding, SpeedTestFragme
 
     //Method to get User Location & validate Wifi
     private fun getUserLocationAndValidateWifi(wifiSSid: String) {
-        requireActivity().applicationContext.getUserLocation { lat, lng ->
+        activity?.applicationContext?.getUserLocation { lat, lng ->
             if (lat != null && lng != null)
                 mViewModel.validateWifi(wifiSSid, lat, lng)
             /*else

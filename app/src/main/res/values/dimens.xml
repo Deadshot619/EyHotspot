@@ -46,6 +46,7 @@
     <dimen name="common_margin_48">48dp</dimen>
     <dimen name="common_margin_64">64dp</dimen>
     <dimen name="common_margin_8">8dp</dimen>
+    <dimen name="common_margin_end_toolbar">76dp</dimen>
 
 
     <!--Padding-->

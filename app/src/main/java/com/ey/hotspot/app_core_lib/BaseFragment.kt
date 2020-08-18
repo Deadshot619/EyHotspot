@@ -1,6 +1,5 @@
 package com.ey.hotspot.app_core_lib
 
-import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.ey.hotspot.databinding.LayoutCustomToolbarBinding
-import com.ey.hotspot.databinding.LayoutCustomToolbarDarkBinding
 import com.ey.hotspot.utils.dialogs.LoadingDialog
 import com.ey.hotspot.utils.extention_functions.showMessage
 
@@ -84,7 +82,6 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
         toolbarBinding: LayoutCustomToolbarBinding,
         title: String,
         showUpButton: Boolean = false,
-        endButtonTitle: String = "",
         showSettingButton: Boolean = false,
         showShadow: Boolean = true
     ) {
@@ -102,10 +99,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
                 btnBack.visibility = View.INVISIBLE
             }
 
-//                Text Button
-            tvTextButton.text = ""
-
-//                Settings
+            //Settings
             if (showSettingButton) {
                 ivSettings.visibility = View.VISIBLE
             } else {
@@ -117,33 +111,6 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
                 toolbar.elevation = 10f
             else
                 toolbar.elevation = 0f
-
         }
     }
-
-
-    fun setUpToolbarfordark(
-        toolbarBinding: LayoutCustomToolbarDarkBinding,
-        title: String,
-        showUpButton: Boolean = false,
-        showTextButton: Boolean = false
-    ) {
-        toolbarBinding.run {
-            //Toolbar title
-            tvTitle.text = title
-
-            //If true, show Back Button, else hide it
-            if (showUpButton) {
-                btnBack.visibility = View.VISIBLE
-                btnBack.setOnClickListener {
-                    activity?.onBackPressed()
-
-                }
-            } else {
-                btnBack.visibility = View.INVISIBLE
-            }
-        }
-    }
-
-
 }
