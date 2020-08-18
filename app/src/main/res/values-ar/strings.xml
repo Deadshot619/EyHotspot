@@ -63,7 +63,8 @@
     <string name="password_format_str">يجب أن تحتوي كلمة المرور على 8-32 حرفًا واحدًا كبيرًا ،
         حرف صغير واحد
         أرقام عشرية (0-9) ،
-        حرف خاص (# ، $ ،٪)</string>
+        حرف خاص
+    (@, $ !, %, *, ?, &amp;, #)</string>
     <string name="password_format">الرجاء إدخال كلمة السر الصحيحة</string>
     <string name="select_country_code_error_msg">الرجاء تحديد رمز الدولة!</string>
 

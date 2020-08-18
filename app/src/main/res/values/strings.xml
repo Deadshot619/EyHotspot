@@ -44,7 +44,7 @@
     <string name="password_format_str">Password Must Contain 8-32 characters One upper case letter,
         One lower case letter,
         Decimal digits(0-9),
-        Special character (#, $, % ) </string>
+        Special character (@, $ !, %, *, ?, &amp;, #) </string>
     <string name="password_format">Please enter a valid password </string>
     <string name="select_country_code_error_msg">Please select Country code!</string>
 
