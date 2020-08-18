@@ -24,7 +24,8 @@
     <string name="gps_enable_conformation">Your GPS seems to be disabled, do you want to enable it?</string>
     <string name="share_hotspot_data">Get free access to our public Wi-Fi at %s, by %s, in %s</string>
     <string name="monitoring_wifi">Monitoring Wifi</string>
-
+    <string name="no_internet_connection_error">No Internet Connection</string>
+    <string name="something_went_wrong_error">Something went wrong</string>
 
     <!--Toolbar-->
     <string name="search_locations_label">Search Locations</string>

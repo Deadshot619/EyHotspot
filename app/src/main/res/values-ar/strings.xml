@@ -33,6 +33,9 @@
     <string name="press_back_again_label">اضغط مرة أخرى للخروج</string>
     <string name="gps_enable_conformation">يبدو أن GPS الخاص بك معطل ، هل تريد تمكينه؟</string>
     <string name="share_hotspot_data">احصل على وصول مجاني إلى شبكة واي فاي العامة لدينا على %s, بواسطة %s, في %s</string>
+    <string name="no_internet_connection_error">لا يوجد اتصال بالإنترنت</string>
+    <string name="something_went_wrong_error">هناك خطأ ما</string>
+
 
     <!--Toolbar-->
     <string name="search_locations_label">مواقع البحث</string>

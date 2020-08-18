@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.ey.hotspot.R
 import com.ey.hotspot.utils.Event
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -46,7 +47,9 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
         _dialogVisibility.value = false
         e.message?.let {
             if (it.contains("500") || it.contains("Socket"))
-                showToastFromViewModel("No Internet Connection $it", true)
+                showToastFromViewModel(appInstance.getString(R.string.no_internet_connection_error), true)
+            else if (it.contains("Unable to resolve host") || it.contains("timeout"))
+                showToastFromViewModel(appInstance.getString(R.string.something_went_wrong_error), true)
             else
                 showToastFromViewModel(it, true)
         }
