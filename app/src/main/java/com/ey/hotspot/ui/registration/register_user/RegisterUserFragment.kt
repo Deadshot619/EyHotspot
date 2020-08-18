@@ -95,9 +95,6 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
         mViewModel.registrationResponse.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             it.getContentIfNotHandled()?.let {
                 if (it.status) {
-
-                    showMessage(it.message, true)
-
                     //If Mobile no. is not present then directly go to OTP verification Page.
                     if (mViewModel.mobileNumber.isEmpty()) {
                         replaceFragment(
@@ -107,6 +104,8 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
                             ), addToBackStack = true
                         )
                     } else {
+                        showMessage(it.message, true)
+
                         replaceFragment(
                             fragment = RegistrationOptionFragment.newInstance(
                                 emailID = mViewModel.emailId,

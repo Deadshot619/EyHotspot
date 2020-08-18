@@ -158,7 +158,7 @@
     <!--    <string name="comment_and_evaluate_label">التعليق والتقييم</string>-->
 
     <!--WiFi Service-->
-    <string name="wifi_service_label">خدمة واي فاي</string>
+<!--    <string name="wifi_service_label">خدمة واي فاي</string>-->
     <string name="wifi_connected_label">تم توصيل واي فاي</string>
     <string name="wifi_disconnected_label">تم قطع اتصال واي فاي</string>
     <string name="checking_wifi_connection_label">التحقق من اتصال واي فاي</string>
