@@ -211,7 +211,9 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel
         if (HotSpotApp.prefs!!.getSkipStatus())
             mBinding.run {
                 llProfileList.visibility = View.GONE
+                viewProfileHorizontal.visibility = View.GONE
                 llLogout.visibility = View.GONE
+                viewLogoutHorizontal.visibility = View.GONE
                 llLogin.visibility = View.VISIBLE
 
             }

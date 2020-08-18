@@ -99,8 +99,6 @@
 
                 </LinearLayout>
 
-
-
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -123,6 +121,7 @@
                 </LinearLayout>
 
                 <View
+                    android:id="@+id/view_profile_horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/colorLightestGray" />
@@ -165,6 +164,7 @@
                 </LinearLayout>
 
                 <View
+                    android:id="@+id/view_logout_horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/colorLightestGray" />
