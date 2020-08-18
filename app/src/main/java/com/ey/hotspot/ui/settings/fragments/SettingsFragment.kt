@@ -127,9 +127,9 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel
 
         //Change image of language
         if (HotSpotApp.prefs?.getLanguage() == Constants.ARABIC_LANG)
-            mBinding.ivChangeLanguage.setImageResource(R.drawable.group13969)
-        else
             mBinding.ivChangeLanguage.setImageResource(R.drawable.group13966)
+        else
+            mBinding.ivChangeLanguage.setImageResource(R.drawable.group13969)
     }
 
     private fun setUpListeners() {

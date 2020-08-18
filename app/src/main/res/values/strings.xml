@@ -44,7 +44,7 @@
     <string name="password_format_str">Password Must Contain 8-32 characters One upper case letter,
         One lower case letter,
         Decimal digits(0-9),
-        Special character (#, $, % etc) </string>
+        Special character (#, $, % ) </string>
     <string name="password_format">Please enter a valid password </string>
     <string name="select_country_code_error_msg">Please select Country code!</string>
 
@@ -108,7 +108,7 @@
     <string name="discard_complaint">Do you want to discard your complaint? </string>
 
     <!--Favourite Wifi-->
-    <string name="favoutite_wifi_label">Favourite Wifi</string>
+    <string name="favoutite_wifi_label">Favourites</string>
 
     <!--Speed Test-->
     <string name="speed_test_label">Speed Test</string>
@@ -197,8 +197,8 @@
     <string name="first_last_name_label">Firstname           Lastname</string>
     <string name="enter_confirm_password">Re-enter password</string>
     <string name="sign_agree_msg">By signing up  you agree to the  </string>
-    <string name="terms_condition"><u>Terms &amp; Conditions</u></string>
-    <string name="get_started">" GET STARTED NOW"</string>
+    <string name="terms_condition"><u>Accept Terms &amp; Conditions</u></string>
+    <string name="get_started">" Register "</string>
     <string name="or">OR</string>
     <string name="otp_title">Please enter OTP sent to</string>
     <string name="resend_otp_label">RESEND OTP</string>
