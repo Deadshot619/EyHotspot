@@ -24,6 +24,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbarLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/common_padding_24"
+        tools:context="com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment">
+
         <!--Wifi SSid-->
         <TextView
             android:id="@+id/tv_wifi_name"
@@ -37,7 +52,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbarLayout"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="D-Zone Wifi" />
 
         <!--        Wifi Provider-->
@@ -145,5 +160,9 @@
             app:layout_constraintBottom_toBottomOf="@+id/btn_cancel_button"
             app:layout_constraintEnd_toEndOf="@id/input_remarks_layout"
             app:layout_constraintTop_toTopOf="@+id/btn_cancel_button" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
