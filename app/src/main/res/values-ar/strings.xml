@@ -57,10 +57,10 @@
     <string name="confirm_password_label">اتأكيد كلمة المرور</string>
     <string name="captcha_label">أدخل كلمة التحقق المبينة أدناه</string>
     <string name="accept_terms_and_condition_label">تحتاج إلى قبول الشروط والأحكام للمتابعة</string>
-    <string name="password_format_str">يجب أن تحتوي كلمة المرور على 8-32 حرفًا وحرف كبير واحد ،
-        حرف واحد صغير ،
-        الأرقام العشرية (0-9) ،
-        حرف خاص (# ، $ ،٪) إلخ</string>
+    <string name="password_format_str">يجب أن تحتوي كلمة المرور على 8-32 حرفًا واحدًا كبيرًا ،
+        حرف صغير واحد
+        أرقام عشرية (0-9) ،
+        حرف خاص (# ، $ ،٪)</string>
     <string name="password_format">الرجاء إدخال كلمة السر الصحيحة</string>
     <string name="select_country_code_error_msg">الرجاء تحديد رمز الدولة!</string>
 
@@ -184,8 +184,8 @@
 
     <string name="enter_confirm_password">اعادة ادخال كلمة السر</string>
     <string name="sign_agree_msg">بالتسجيل أنت توافق على</string>
-    <string name="terms_condition">البنود و الظروف</string>
-    <string name="get_started">نبدأ الآن</string>
+    <string name="terms_condition">أوافق على الشروط و الأحكام</string>
+    <string name="get_started">تسجيل</string>
     <string name="or">أو</string>
     <string name="otp_title">الرجاء إدخال كلمة المرور OTP المرسلة إلى </string>
     <string name="resend_otp_label">إعادة إرسال OTP</string>

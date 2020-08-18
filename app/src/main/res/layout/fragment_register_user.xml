@@ -422,13 +422,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_30"
-                android:gravity="center"
-                android:text="@string/sign_agree_msg"
+                android:text="@string/terms_condition"
                 android:textDirection="locale"
                 app:layout_constraintEnd_toEndOf="@id/guideline_right"
                 app:layout_constraintStart_toStartOf="@id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@id/tvPasswordMsg" />
+                app:layout_constraintTop_toBottomOf="@id/tvPasswordMsg"
+                />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/AsterikEditText"
+               android:layout_marginStart="@dimen/margin_10"
+                android:layout_marginEnd="@dimen/margin_10"
+                app:layout_constraintTop_toTopOf="@id/tvSignAgree"
+                app:layout_constraintStart_toEndOf="@id/tvSignAgree"
+                />
             <!--T&C-->
             <TextView
                 android:id="@+id/tvTermsCondition"
@@ -436,6 +445,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:visibility="gone"
                 android:text="@string/terms_condition"
                 android:textDirection="locale"
                 app:layout_constraintEnd_toEndOf="@+id/tvSignAgree"
