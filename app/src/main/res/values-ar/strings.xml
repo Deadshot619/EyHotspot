@@ -133,7 +133,7 @@
     <string name="rate_wifi_label">قيم واي فاي</string>
 
     <!--Wifi Log List-->
-    <string name="empty_log_list_label">قائمة السجل فارغة</string>
+    <string name="empty_log_list_label">لم يتم العثور على سجلات</string>
     <string name="wifi_log_list_label">قائمة سجل واي فاي</string>
     <string name="wifi_log_label">سجل واي فاي</string>
     <string name="date_label">تاريخ</string>

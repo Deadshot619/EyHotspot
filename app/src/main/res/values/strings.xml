@@ -129,7 +129,7 @@
     <string name="rate_wifi_label">Rate Wifi</string>
 
     <!--Wifi Log List-->
-    <string name="empty_log_list_label">Log list is Empty</string>
+    <string name="empty_log_list_label">No logs found</string>
     <string name="wifi_log_list_label">Wifi Log List</string>
     <string name="wifi_log_label">Wifi Log</string>
     <string name="date_label">Date</string>

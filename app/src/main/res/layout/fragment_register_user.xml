@@ -438,6 +438,7 @@
                 app:layout_constraintTop_toTopOf="@id/tvSignAgree"
                 app:layout_constraintStart_toEndOf="@id/tvSignAgree"
                 />
+
             <!--T&C-->
             <TextView
                 android:id="@+id/tvTermsCondition"
