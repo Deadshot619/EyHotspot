@@ -108,7 +108,7 @@
     <string name="discard_complaint">هل تريد تجاهل شكواك؟ </string>
 
     <!--Favourite Wifi-->
-    <string name="favoutite_wifi_label">واي فاي المفضلة</string>
+    <string name="favoutite_wifi_label">المفضلة</string>
 
     <!--Speed Test-->
     <string name="speed_test_label">اختبار السرعة</string>

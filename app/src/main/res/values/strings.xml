@@ -107,7 +107,7 @@
     <string name="discard_complaint">Do you want to discard your complaint? </string>
 
     <!--Favourite Wifi-->
-    <string name="favoutite_wifi_label">Favourite Wifi</string>
+    <string name="favoutite_wifi_label">Favourites</string>
 
     <!--Speed Test-->
     <string name="speed_test_label">Speed Test</string>
