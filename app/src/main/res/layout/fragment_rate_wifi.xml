@@ -36,8 +36,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/common_padding_24"
-        tools:context="com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment">
+        android:paddingBottom="@dimen/common_padding_24">
 
         <!--Wifi SSid-->
         <TextView
