@@ -12,6 +12,8 @@ interface Constants {
         const val LATITUDE: Double = 23.8859
         const val LONGITUDE: Double = 45.0792
 
+        const val WIFI_LOGOUT_TIME = 7200000    //2 hours
+
         //Deep Link
         const val DL_LINK = "http://eyhotspot.com"
         const val DL_LINK_2 = "https://nearbyhs.php-dev.in/EyHotspots/public/dashboard/"

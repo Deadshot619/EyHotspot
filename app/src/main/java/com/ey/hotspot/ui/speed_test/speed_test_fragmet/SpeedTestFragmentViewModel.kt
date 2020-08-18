@@ -166,14 +166,16 @@ class SpeedTestFragmentViewModel(application: Application) : BaseViewModel(appli
                 if (HotSpotApp.prefs!!.getAccessToken().isNotEmpty()) {  //Logged in user
                     //If user already has access token stored in db, that means the wifi is logged in for current user
                     //So if token is present && disconnect time is not present, set this to false, else true
-                    if (HotSpotApp.prefs!!.getAccessToken() == data[0].accessToken && (data[0].disconnectedOn.toString() == "null" && data[0].wifiSsid == wifiSsid))
+                    if (HotSpotApp.prefs!!.getAccessToken() == data[0].accessToken && (data[0].disconnectedOn.toString() == "null" &&
+                                data[0].wifiSsid == wifiSsid && (Calendar.getInstance().timeInMillis - data[0].connectedOn.timeInMillis) <= Constants.WIFI_LOGOUT_TIME))
                         requireApiCall = false
                     else
                         requireApiCall = true
                 } else {    //Skipped user
                     //If user already has access token stored in db as null, that means the wifi is logged in for current skipped user
                     //So if token is null, set this to false, else true
-                    if (data[0].accessToken.isNullOrEmpty() && (data[0].disconnectedOn.toString() == "null" && data[0].wifiSsid == wifiSsid))
+                    if (data[0].accessToken.isNullOrEmpty() && (data[0].disconnectedOn.toString() == "null" &&
+                                data[0].wifiSsid == wifiSsid && (Calendar.getInstance().timeInMillis - data[0].connectedOn.timeInMillis) <= Constants.WIFI_LOGOUT_TIME))
                         requireApiCall = false
                     else
                         requireApiCall = true
