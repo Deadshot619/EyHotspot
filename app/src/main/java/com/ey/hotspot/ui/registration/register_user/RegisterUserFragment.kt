@@ -12,13 +12,15 @@ import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentRegisterUserBinding
 import com.ey.hotspot.network.request.RegisterRequest
+import com.ey.hotspot.ui.login.otpverification.fragment.OTPVerificationFragment
 import com.ey.hotspot.ui.registration.registration_option.RegistrationOptionFragment
 import com.ey.hotspot.ui.registration.webview.WebViewFragment
 import com.ey.hotspot.utils.constants.Constants
+import com.ey.hotspot.utils.constants.VerificationType
 import com.ey.hotspot.utils.constants.convertStringFromList
 import com.ey.hotspot.utils.dialogs.OkDialog
-import com.ey.hotspot.utils.extention_functions.parseToInt
 import com.ey.hotspot.utils.extention_functions.generateCaptchaCode
+import com.ey.hotspot.utils.extention_functions.parseToInt
 import com.ey.hotspot.utils.extention_functions.replaceFragment
 import com.ey.hotspot.utils.extention_functions.showMessage
 import com.ey.hotspot.utils.validations.isEmailValid
@@ -60,6 +62,7 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
     var accessToken = ""
     var mCaptcha: String? = null
     var mEnteredCaptch: String? = null
+
     //Google Sign In
     lateinit var mGoogleSignInClient: GoogleSignInClient
     private val RC_SIGN_IN = 9001
@@ -95,14 +98,24 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
 
                     showMessage(it.message, true)
 
-                    replaceFragment(
-                        fragment = RegistrationOptionFragment.newInstance(
-                            emailID = mViewModel.emailId,
-                            phoneNo = mViewModel.mobileNumber
-                        ),
-                        addToBackStack = true
+                    //If Mobile no. is not present then directly go to OTP verification Page.
+                    if (mViewModel.mobileNumber.isEmpty()) {
+                        replaceFragment(
+                            fragment = OTPVerificationFragment.newInstance(
+                                selectedOption = VerificationType.EMAIL,
+                                selectedItem = mViewModel.emailId
+                            ), addToBackStack = true
+                        )
+                    } else {
+                        replaceFragment(
+                            fragment = RegistrationOptionFragment.newInstance(
+                                emailID = mViewModel.emailId,
+                                phoneNo = mViewModel.mobileNumber
+                            ),
+                            addToBackStack = true
 
-                    )
+                        )
+                    }
                 } else {
                     try {
                         dialog.setViews(
@@ -158,11 +171,13 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
         setUpFacebookLogin()
         setuPGoogelSignIn()
     }
+
     private fun setUpCaptcha() {
         mCaptcha = activity?.generateCaptchaCode(5)
-        mBinding.run {  layout_captcha.et_captcha_text.setText(mCaptcha) }
+        mBinding.run { layout_captcha.et_captcha_text.setText(mCaptcha) }
 
     }
+
     private fun setuPGoogelSignIn() {
         val gso =
             GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -210,10 +225,10 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
                 }
             }
 
-           layout_captcha.ivRefreshCaptchaCode.setOnClickListener {
+            layout_captcha.ivRefreshCaptchaCode.setOnClickListener {
 
                 mCaptcha = activity?.generateCaptchaCode(5)
-               layout_captcha.et_captcha_text.setText(mCaptcha)
+                layout_captcha.et_captcha_text.setText(mCaptcha)
 
             }
             //T&C
@@ -458,14 +473,14 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
                     }
 
                     //Country Code
-                    if (coutrycode.parseToInt() < 0){
+                    if (coutrycode.parseToInt() < 0) {
                         showMessage(getString(R.string.select_country_code_error_msg))
                         isValid = false
                     }
                 }
                 if (!password.trim().isValidPassword()) {
                     edtPassword.error = resources.getString(R.string.password_format)
-                  //  edtConfirmPassword.error = resources.getString(R.string.password_format)
+                    //  edtConfirmPassword.error = resources.getString(R.string.password_format)
                     isValid = false
                 } else if (password != confirmPassword) {
                     edtPassword.error = resources.getString(R.string.pwd_not_match)
@@ -474,7 +489,7 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
                 }
 
                 if (isValid)
-                    //Terms & Conditions
+                //Terms & Conditions
                     if (!cbTermsConditions.isChecked) {
                         showMessage(getString(R.string.accept_terms_and_condition_label))
                         isValid = false
