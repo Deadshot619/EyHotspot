@@ -31,7 +31,7 @@
             android:id="@+id/tv_date_label"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="1.2"
             app:bindExtractDateFromDateTime_DDMMYYYY="@{data.created_at}"
             android:textSize="@dimen/text_size_18"
             tools:text="69-69-0420" />
@@ -41,7 +41,8 @@
             android:id="@+id/tv_name_label"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1.5"
+            android:layout_weight="1.3"
+            android:textDirection="locale"
             android:text="@{data.location.name}"
             android:textSize="@dimen/text_size_18"
             tools:text="Hong Kong" />
@@ -54,6 +55,6 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="0.5"
             android:backgroundTint="?colorOnSecondary"
-            android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
+            android:src="@drawable/ic_baseline_keyboard_arrow_right_24" />
     </LinearLayout>
 </layout>
