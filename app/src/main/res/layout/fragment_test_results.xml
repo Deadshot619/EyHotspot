@@ -40,16 +40,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <!--Text button-->
-            <com.google.android.material.button.MaterialButton
+            <!-- Retest Text button-->
+            <TextView
                 android:id="@+id/tv_text_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/retest_label"
-                style="@style/OutlinedButtonToolbar"
+                android:textAllCaps="true"
+                android:background="@drawable/chip_style_background_toolbar"
                 android:textSize="@dimen/text_size_12"
+                android:textColor="@color/colorWhite"
                 tools:visibility="visible"
-                android:layout_marginEnd="@dimen/common_margin_24"
+                android:layout_marginEnd="@dimen/common_margin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/toolbarLayout"
                 app:layout_constraintBottom_toBottomOf="@id/toolbarLayout" />
