@@ -9,6 +9,7 @@ import com.ey.hotspot.app_core_lib.BaseViewModel
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.database.wifi_info.WifiInfoDatabase
 import com.ey.hotspot.database.wifi_info.WifiInfoDatabaseDao
+import com.ey.hotspot.database.wifi_info.WifiInformationTable
 import com.ey.hotspot.network.DataProvider
 import com.ey.hotspot.network.request.WifiLogoutRequest
 import com.ey.hotspot.utils.constants.Constants
@@ -54,10 +55,13 @@ class SettingsViewModel (application: Application): BaseViewModel(application){
             //Get wifi login data from db
             val data = database.getLastInsertedData()
 
-            if (data.isNotEmpty() && data[0].disconnectedOn.toString() == "null")
+            /*
+             *  Check whether data is present, if it is then check whether it is synced, If yes then
+             */
+            if (data.isNotEmpty() && !data[0].synced)
                 callWifiLogout(data[0].id, data[0].wifiId, DEVICE_ID, Calendar.getInstance().time)
 
-            updateLogoutTimeInDb()
+            updateLogoutTimeInDb(data)
 
             appInstance.logoutUser()
         }
@@ -67,16 +71,17 @@ class SettingsViewModel (application: Application): BaseViewModel(application){
      *  Method to Update Logout Time in DB.
      *  Will be called when wifi is disconnected/lost
      */
-    private suspend fun updateLogoutTimeInDb() {
+    private suspend fun updateLogoutTimeInDb(lastInsertedData: List<WifiInformationTable>) {
         //Update data in table
         withContext(Dispatchers.IO) {
-            val lastInsertedData = database.getLastInsertedData()
+//            val lastInsertedData: List<WifiInformationTable> = database.getLastInsertedData()
 
             if (lastInsertedData.isNotEmpty() && lastInsertedData[0].disconnectedOn.toString() == "null") {
                 database.updateWifiInfoData(
                     id = lastInsertedData[0].id,
                     disconnectedOn = Calendar.getInstance()
                 )
+
 
                 /*
                 if (_currentlyInsertedDataId >= 0L) {   //Update data only if key is >= 0
