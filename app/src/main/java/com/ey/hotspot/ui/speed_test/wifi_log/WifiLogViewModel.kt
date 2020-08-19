@@ -5,10 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ey.hotspot.app_core_lib.BaseViewModel
 import com.ey.hotspot.network.DataProvider
-import com.ey.hotspot.network.request.GetFavoriteRequest
 import com.ey.hotspot.network.response.BaseResponse
 import com.ey.hotspot.ui.favourite.model.GetFavouriteItem
 import com.ey.hotspot.ui.favourite.model.MarkFavouriteRequest
+import com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListFragment
 import kotlinx.coroutines.launch
 
 class WifiLogViewModel(application: Application) : BaseViewModel(application) {
@@ -24,8 +24,11 @@ class WifiLogViewModel(application: Application) : BaseViewModel(application) {
                 request = MarkFavouriteRequest(locationId = locationId),
                 success = {
 
-                    if (it.status)
+                    if (it.status){
                         showToastFromViewModel(it.message)
+                        WifiLogListFragment.RELOAD = true
+                    }
+
                     setDialogVisibility(false)
                 }, error = {
                     checkError(it)

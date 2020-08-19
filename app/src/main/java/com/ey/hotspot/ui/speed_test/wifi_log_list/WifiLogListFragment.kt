@@ -12,6 +12,7 @@ class WifiLogListFragment : BaseFragment<FragmentWifiLogListBinding, WifiLogList
 
     companion object {
         fun newInstance() = WifiLogListFragment()
+        var RELOAD = false
     }
 
     private lateinit var mAdapter: WifiLogListAdapter
@@ -30,22 +31,21 @@ class WifiLogListFragment : BaseFragment<FragmentWifiLogListBinding, WifiLogList
         )
 
         setUpRecyclerView(mBinding.rvWifiLogList)
+
+        if (RELOAD){
+            mViewModel.callWifiLogListResponse(mViewModel.deviceId)
+        }
     }
 
     private fun setUpRecyclerView(recyclerView: RecyclerView) {
         //Setup Adapter
         mAdapter = WifiLogListAdapter(WifiLogListAdapter.OnClickListener {
-
             replaceFragment(
                     fragment = WifiLogFragment.newInstance(
                             it
                     ),
                     addToBackStack = true
                 )
-
-
-
-
         })
 
         recyclerView.run {

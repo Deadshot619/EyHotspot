@@ -24,10 +24,11 @@ class WifiLogListViewModel(application: Application) : BaseViewModel(application
     }
 
 
-    private fun callWifiLogListResponse(deviceId: String) {
+    fun callWifiLogListResponse(deviceId: String) {
         val request = WifiLogListRequest(deviceId = deviceId)
 
         setDialogVisibility(true)
+        WifiLogListFragment.RELOAD = false
 
         coroutineScope.launch {
             DataProvider.wifiLogList(
@@ -42,7 +43,6 @@ class WifiLogListViewModel(application: Application) : BaseViewModel(application
                 }
             )
         }
-
     }
 }
 
