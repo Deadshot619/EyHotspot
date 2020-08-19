@@ -18,6 +18,7 @@ import com.ey.hotspot.utils.constants.Constants
 import com.ey.hotspot.utils.constants.setUpToolbar
 import com.ey.hotspot.utils.constants.updateSharedPreference
 import com.ey.hotspot.utils.extention_functions.goToHomeScreen
+import com.ey.hotspot.utils.extention_functions.showMessage
 import kotlinx.android.synthetic.main.fragment_web_view.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -115,7 +116,7 @@ class WebViewFragment() :
         mViewModel.termsResponse.observe(viewLifecycleOwner, Observer {
 
             if (it.status) {
-                //showMessage(it.message, true)
+                showMessage(it.message, true)
                 arguments?.getParcelable<LoginResponse>(LOGIN_DATA)?.let { data ->
                     updateSharedPreference(data)
                 }
