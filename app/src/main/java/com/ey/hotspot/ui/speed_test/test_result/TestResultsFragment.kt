@@ -69,9 +69,11 @@ class TestResultsFragment : BaseFragment<FragmentTestResultsBinding, TestResults
             if (it) {
                 mBinding.clSpeedometerLayout.visibility = View.INVISIBLE
                 mBinding.clDownloadCompletedLayout.visibility = View.VISIBLE
+                mBinding.tvTextButton.isEnabled = true
             } else {
                 mBinding.clSpeedometerLayout.visibility = View.VISIBLE
                 mBinding.clDownloadCompletedLayout.visibility = View.INVISIBLE
+                mBinding.tvTextButton.isEnabled = false
             }
         })
 
