@@ -97,6 +97,8 @@ fun clearDataSaveLangAndKeywords(){
 
     //Set language
     HotSpotApp.prefs?.setLanguage(lang)
+    HotSpotApp.prefs?.setLanguageFirstTime(true)
+
     temp?.let {
         //Set keywords
         HotSpotApp.prefs?.saveWifiKeywordsPref(it)

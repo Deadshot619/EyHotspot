@@ -145,7 +145,7 @@ class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>()
     {
         var outputDateStr: String=""
         if (!datestring.equals("null")) {
-            val inputFormat: DateFormat = SimpleDateFormat("hh:mm:ss", Locale.ENGLISH)
+            val inputFormat: DateFormat = SimpleDateFormat("HH:mm:ss", Locale.ENGLISH)
             val outputFormat: DateFormat = SimpleDateFormat("hh:mm a", Locale.ENGLISH)
             val date: Date = inputFormat.parse(datestring)
              outputDateStr = outputFormat.format(date)
