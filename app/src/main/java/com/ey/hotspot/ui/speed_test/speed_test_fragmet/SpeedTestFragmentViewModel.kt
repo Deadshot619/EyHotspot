@@ -62,34 +62,6 @@ class SpeedTestFragmentViewModel(application: Application) : BaseViewModel(appli
     val hideDataView: LiveData<Boolean>
         get() = _hideDataView
 
-    //Method to verify Wifi Hotspot
-    fun verifyHotspot(wifiSsid: String, lat: Double, lng: Double) {
-        val request = ValidateWifiRequest(
-            wifi_name = wifiSsid,
-            lat = lat,
-            lng = lng
-        )
-
-        setDialogVisibility(true)
-        coroutineScope.launch {
-            DataProvider.validateWifi(
-                request = request,
-                success = {
-//                    showToastFromViewModel(it.message)
-                    if (it.status)
-                        _wifiData.value = it.data
-
-                    _hideDataView.value = !it.status
-
-                },
-                error = {
-                    checkError(it)
-                }
-            )
-        }
-    }
-
-
     /*
    * Method to validate if the wifi is company's WiFi. If yes, then Calculate wifi download speed
    */
