@@ -102,6 +102,7 @@ class SpeedTestFragmentViewModel(application: Application) : BaseViewModel(appli
                             })
 
                         _hideDataView.value = !it.status
+                        setDialogVisibility(false)
                     }
                 },
                 error = {

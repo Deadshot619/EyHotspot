@@ -26,8 +26,9 @@ class WifiLogViewModel(application: Application) : BaseViewModel(application) {
                     if (it.status){
                         showToastFromViewModel(it.message)
                         WifiLogListFragment.RELOAD = true
-                        _favouriteStatus.value = !(isFavourite ?: true)
+                        _favouriteStatus.value = it.data.mark
                     }
+
 
                     setDialogVisibility(false)
                 }, error = {
