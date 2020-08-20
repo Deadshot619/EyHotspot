@@ -225,12 +225,13 @@ class BottomNavHomeViewModel(application: Application) : BaseViewModel(applicati
 
             //If wifi is already logged in, then don't call Wifi Login Api & set the flag to true
             if (requireApiCall)
-                callWifiLogin(wifiId = validateData.id, deviceId = DEVICE_ID, averageSpeed = 0.0)
+                callWifiLogin(wifiSsid = wifiSsid, wifiId = validateData.id, deviceId = DEVICE_ID, averageSpeed = 0.0)
             else
                 loginSuccessfulWithSpeedZero = true
 
             //Calculate speed anyways
             calculateSpeed(
+                wifiSsid = wifiSsid,
                 wifiId = validateData.id,
                 deviceId = DEVICE_ID
             )
@@ -238,7 +239,7 @@ class BottomNavHomeViewModel(application: Application) : BaseViewModel(applicati
     }
 
     //Method to call WifiLogin Api
-    private suspend fun callWifiLogin(wifiId: Int, averageSpeed: Double, deviceId: String) {
+    private suspend fun callWifiLogin(wifiSsid: String, wifiId: Int, averageSpeed: Double, deviceId: String) {
         val request = WifiLoginRequest(
             wifi_id = wifiId,
             average_speed = averageSpeed.toInt(),
@@ -255,7 +256,7 @@ class BottomNavHomeViewModel(application: Application) : BaseViewModel(applicati
 
                     //When login is successful, Delete & Insert data into table
                     coroutineScope.launch {
-                        deleteAndInsertData(wifiId = wifiId, averageSpeed = averageSpeed)
+                        deleteAndInsertData(wifiSsid = wifiSsid, wifiId = wifiId, averageSpeed = averageSpeed)
                     }
 
                 } else {
@@ -273,7 +274,7 @@ class BottomNavHomeViewModel(application: Application) : BaseViewModel(applicati
     /*
      *  Method to calculate speed
      */
-    private suspend fun calculateSpeed(wifiId: Int, deviceId: String) {
+    private suspend fun calculateSpeed(wifiSsid: String, wifiId: Int, deviceId: String) {
         withContext(Dispatchers.IO) {
             SpeedTestUtils.calculateSpeed(
                 onCompletedReport = {       //When speed test is completed successfully
@@ -308,6 +309,7 @@ class BottomNavHomeViewModel(application: Application) : BaseViewModel(applicati
                     //When download is successful, & login api hasn't been called before, call Login wifi
                         coroutineScope.launch {
                             callWifiLogin(
+                                wifiSsid = wifiSsid,
                                 wifiId = wifiId,
                                 averageSpeed = downloadSpeed!!.toDouble(),
                                 deviceId = deviceId
@@ -347,6 +349,7 @@ class BottomNavHomeViewModel(application: Application) : BaseViewModel(applicati
                     //When download is successful, & login api hasn't been called before, call Login wifi
                         coroutineScope.launch {
                             callWifiLogin(
+                                wifiSsid = wifiSsid,
                                 wifiId = wifiId,
                                 averageSpeed = 0.0,
                                 deviceId = deviceId
@@ -382,7 +385,7 @@ class BottomNavHomeViewModel(application: Application) : BaseViewModel(applicati
  *  This method will delete all data from DB then insert a new row.
  *  This will be called when user's wifi data has been successfully logged in on Server.
  */
-    private suspend fun deleteAndInsertData(wifiId: Int, averageSpeed: Double) {
+    private suspend fun deleteAndInsertData(wifiSsid: String, wifiId: Int, averageSpeed: Double) {
         withContext(Dispatchers.IO) {
             synchronized(this) {
                 //First delete data from DB
@@ -391,7 +394,7 @@ class BottomNavHomeViewModel(application: Application) : BaseViewModel(applicati
                 //Then insert new data  from DB
                 database.insert(
                     WifiInformationTable(
-                        wifiSsid = wifiManager.connectionInfo.ssid.extractWifiName(),
+                        wifiSsid = wifiSsid,
                         connectedOn = Calendar.getInstance(),
                         downloadSpeed = averageSpeed.toString(),
                         wifiId = wifiId,

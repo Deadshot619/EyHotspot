@@ -13,7 +13,7 @@ data class ValidateWifiResponse(
     @SerializedName("distance") @Expose val  distance: Double = 0.0,
     @SerializedName("id") @Expose val  id: Int = 0,
     @SerializedName("number_of_users_connected") @Expose val  number_of_users_connected: Int = 0,
-    @SerializedName("wifi_name") @Expose val  _wifi_name: String? = "-",
+    @SerializedName("wifi_name") @Expose val  _wifi_name: String = "-",
     @SerializedName("wifi_name_arabic") @Expose val  wifi_name_arabic: String? = "-",
     @SerializedName("city") @Expose val  _city: String? = "-",
     @SerializedName("city_arabic") @Expose val  city_arabic: String? = "-",
