@@ -116,7 +116,7 @@ class RateWifiFragment : BaseFragment<FragmentRateWifiBinding, RateWifiViewModel
         mViewModel.rateWifiData.value?.run {
             mBinding.run {
                 return if (rating <= 0f) {
-                    showMessage("Please provide a rating")
+                    showMessage(resources.getString(R.string.enter_remark_error_label))
                     false
                 } else if (feedback.trim().isEmpty()) {
 //                    edtRemarks.error = resources.getString(R.string.enter_remark_error_label)

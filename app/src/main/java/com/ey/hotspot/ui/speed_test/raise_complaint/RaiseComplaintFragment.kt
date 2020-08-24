@@ -127,8 +127,6 @@ class RaiseComplaintFragment :
                 if (status)
                    // activity?.onBackPressed()
                     removeFragment(this)
-
-
             }
         })
     }
