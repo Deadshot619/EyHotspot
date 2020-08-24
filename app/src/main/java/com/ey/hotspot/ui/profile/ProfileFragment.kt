@@ -179,9 +179,9 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
         mViewModel.profileData.value?.run {
             mBinding.run {
 
-
+                //First Name
                 if (firstName.trim().isEmpty()) {
-                    edtFirstName.error = resources.getString(R.string.empty_firstName)
+                    edtFirstName.error = resources.getString(R.string.first_name_required_label)
                     isValid = false
 
                 } else if (!firstName.trim().isValidName()) {
@@ -198,6 +198,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
                     isValid = false
                 }*/
 
+                //Last Name
                 if (lastName.trim().isNotEmpty() && !lastName.trim().isValidName()) {
                     edtLastName.error = resources.getString(R.string.invalid_Name)
                     isValid = false
@@ -215,7 +216,10 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
                     */
 
                 //Email
-                if (!emailId.isEmailValid()) {
+                if(emailId.trim().isEmpty()){
+                    edtEmail.error = resources.getString(R.string.email_required_label)
+                    isValid = false
+                } else if (!emailId.isEmailValid()) {
                     edtEmail.error = resources.getString(R.string.invalid_email_label)
                     isValid = false
                 }
@@ -280,6 +284,5 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
 
     override fun onDestroyView() {
         super.onDestroyView()
-
     }
 }

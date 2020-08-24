@@ -331,100 +331,6 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
             }
     }
 
-
-    /**
-     * Method to validate input fields
-     */
-    private fun validate(): Boolean {
-        var firstName: Boolean = false
-        var lastName: Boolean = false
-        var mobileNo: Boolean = true
-        var emailId: Boolean = false
-        var password: Boolean = false
-        var confirmPassword: Boolean = false
-        var checkPasswordConfirmPassword = false
-
-
-        if (mViewModel.firstName.trim().isEmpty()) {
-            mBinding.edtFirstName.error = resources.getString(R.string.invalid_firstName)
-            firstName = false
-        } else {
-            firstName = true
-        }
-
-        if (mViewModel.lastName.trim().isEmpty()) {
-            mBinding.edtLastName.error = resources.getString(R.string.invalid_last_name_label)
-            lastName = false
-        } else {
-            lastName = true
-        }
-
-
-
-
-        if (mViewModel.mobileNumber.trim().isNotEmpty())
-            if (!mViewModel.mobileNumber.isValidMobile()) {
-                edtMobileNo.error = resources.getString(R.string.invalid_mobile)
-                mobileNo = false
-            } else {
-                mobileNo = true
-            }
-
-        if (!mViewModel.emailId.isEmailValid()) {
-            mBinding.edtEmail.error = resources.getString(R.string.invalid_email_label)
-            emailId = false
-        } else {
-            emailId = true
-        }
-
-        if (mViewModel.password.trim().isEmpty()) {
-            mBinding.edtPassword.error = resources.getString(R.string.invalid_password)
-            password = false
-        } else if (!mViewModel.password.isValidPassword()) {
-            mBinding.edtPassword.error = resources.getString(R.string.password_format)
-            password = false
-        } else {
-            password = true
-        }
-
-        if (mViewModel.confirmPassword.trim().isEmpty()) {
-            mBinding.edtConfirmPassword.error =
-                resources.getString(R.string.invalid_confirm_password)
-            confirmPassword = false
-        } else {
-            confirmPassword = true
-        }
-
-        if (mViewModel.password.equals(mViewModel.confirmPassword)) {
-            if ((mViewModel.password.isEmpty() && mViewModel.confirmPassword.isEmpty())) {
-                mBinding.edtPassword.error = resources.getString(R.string.pwd_confirm_pwd_empty)
-                mBinding.edtConfirmPassword.error =
-                    resources.getString(R.string.pwd_confirm_pwd_empty)
-                checkPasswordConfirmPassword = false
-            } else {
-                checkPasswordConfirmPassword = true
-                mBinding.edtPassword.error = null
-                mBinding.edtConfirmPassword.error = null
-            }
-        } else {
-            mBinding.edtPassword.error = resources.getString(R.string.pwd_not_match)
-            mBinding.edtConfirmPassword.error = resources.getString(R.string.pwd_not_match)
-            checkPasswordConfirmPassword = false
-        }
-
-        if (firstName == true && lastName == true &&
-            mobileNo == true && emailId == true &&
-            password == true && confirmPassword == true &&
-            checkPasswordConfirmPassword == true
-        ) {
-            return true
-        } else {
-            return false
-        }
-
-
-    }
-
     /**
      * Method to validate input fields
      */
@@ -436,8 +342,10 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
 
                 mEnteredCaptch = layout_captcha.et_captcha.text.toString()
                 mCaptcha = layout_captcha.et_captcha_text.text.toString()
+
+                //First Name
                 if (firstName.trim().isEmpty()) {
-                    edtFirstName.error = resources.getString(R.string.empty_firstName)
+                    edtFirstName.error = resources.getString(R.string.first_name_required_label)
                     isValid = false
                 } else if (!firstName.trim().isValidName()) {
                     edtFirstName.error = resources.getString(R.string.invalid_Name)
@@ -452,6 +360,8 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
                     edtLastName.error = resources.getString(R.string.invalid_Name)
                     isValid = false
                 }*/
+
+                //Last Name
                 if (lastName.trim().isNotEmpty()) {
                     if (!lastName.trim().isValidName()) {
                         edtLastName.error = resources.getString(R.string.invalid_Name)
@@ -459,11 +369,15 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
                     }
                 }
 
-
-                if (!emailId.isEmailValid()) {
+                //Email ID
+                if(emailId.trim().isEmpty()){
+                    edtEmail.error = resources.getString(R.string.email_required_label)
+                    isValid = false
+                } else if (!emailId.isEmailValid()) {
                     edtEmail.error = resources.getString(R.string.invalid_email_label)
                     isValid = false
                 }
+
                 //Mobile No.
                 if (mobileNumber.trim().isNotEmpty()) {
                     if (!mobileNumber.isValidMobile()) {
@@ -477,7 +391,12 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
                         isValid = false
                     }
                 }
-                if (!password.trim().isValidPassword()) {
+
+                //Password & Confirm Password
+                if(password.trim().isEmpty()){
+                    edtPassword.error = resources.getString(R.string.password_required_label)
+                    isValid = false
+                } else if (!password.trim().isValidPassword()) {
                     edtPassword.error = resources.getString(R.string.password_format)
                     //  edtConfirmPassword.error = resources.getString(R.string.password_format)
                     isValid = false
@@ -487,13 +406,15 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
                     isValid = false
                 }
 
-                if (isValid)
-                //Terms & Conditions
+
+                if (isValid)    //When everything else is filled, check for this
+                    //Terms & Conditions
                     if (!cbTermsConditions.isChecked) {
                         showMessage(getString(R.string.accept_terms_and_condition_label))
                         isValid = false
                     }
 
+                //Captcha
                 if (layout_captcha.et_captcha.text?.isEmpty()!!) {
                     layout_captcha.et_captcha.error = resources.getString(R.string.empty_captcha)
                     isValid = false

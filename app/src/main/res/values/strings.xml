@@ -23,9 +23,10 @@
     <string name="press_back_again_label">Press back again to exit</string>
     <string name="gps_enable_conformation">Your GPS seems to be disabled, do you want to enable it?</string>
     <string name="share_hotspot_data">Get free access to our public Wi-Fi at %s, by %s, in %s</string>
-    <string name="monitoring_wifi">Monitoring Wifi</string>
+    <string name="monitoring_wifi" translatable="false">Monitoring Wifi</string>
     <string name="no_internet_connection_error">No Internet Connection</string>
     <string name="something_went_wrong_error">Something went wrong</string>
+
 
     <!--Toolbar-->
     <string name="search_locations_label">Search Locations</string>
@@ -47,7 +48,9 @@
         Special character (@, $ !, %, *, ?, &amp;, #) </string>
     <string name="password_format">Please enter a valid password </string>
     <string name="select_country_code_error_msg">Please select Country code!</string>
-
+    <string name="email_required_label">Email field is required</string>
+    <string name="password_required_label">Password field is required</string>
+    <string name="first_name_required_label">First Name field is required</string>
 
     <!--My Profile-->
     <string name="my_profile_label">My Profile</string>
@@ -91,7 +94,7 @@
     <string name="submit_button">Submit</string>
     <string name="forgotpassword">Forgot Password?</string>
     <string name="email_id_hint">Enter Email Id</string>
-    <string name="enter_password">Enter  Password</string>
+    <string name="enter_password">Enter Password</string>
     <string name="enter_captcha">Enter captcha</string>
     <string name="login_credentials_msg">Login to the portal with your credentials</string>
     <string name="connecting_kingdom_label">Connecting the \n Kingdom of Saudi Arabia…!</string>
@@ -269,7 +272,7 @@
     <string name="msg_mandatory_fields">mandatory fields</string>
     <string name="otp_sent_msg">An OTP has been sent to your registered Mobile number</string>
     <string name="empty_firstName">First name field is mandatory</string>
-    <string name="invalid_Name">Numeric values are not accepted in this field</string>
+    <string name="invalid_Name">Numeric and Special Characters are not accepted in this field</string>
     <string name="empty_lastName">"Last name field is required "</string>
     <string name="empty_captcha">"Captcha code is required "</string>
 

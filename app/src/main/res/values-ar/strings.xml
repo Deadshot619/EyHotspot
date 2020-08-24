@@ -42,7 +42,7 @@
     <string name="empty_query_alert_label">يرجى إدخال استفسار</string>
 
     <!--Login screen-->
-    <string name="email_id_hint">أدخل معرف البريد</string>
+    <string name="email_id_hint">أدخل معرف البريد الإلكتروني</string>
     <string name="enter_password">أدخل كلمة المرور</string>
     <string name="enter_captcha">أدخل كلمة التحققق</string>
     <string name="login_credentials_msg">تسجيل الدخول إلى البوابة باستخدام بيانات اعتمادك</string>
@@ -67,6 +67,11 @@
     (@, $ !, %, *, ?, &amp;, #)</string>
     <string name="password_format">الرجاء إدخال كلمة السر الصحيحة</string>
     <string name="select_country_code_error_msg">الرجاء تحديد رمز الدولة!</string>
+    <string name="email_required_label">حقل البريد الإلكتروني مطلوب</string>
+    <string name="password_required_label">حقل كلمة المرور مطلوب</string>
+    <string name="first_name_required_label">حقل الاسم الأول مطلوب</string>
+
+
 
     <!--My Profile-->
     <string name="my_profile_label">ملفي</string>
@@ -260,7 +265,7 @@
     <string name="invalid_captcha">كلمة التحقق غير صالحة</string>
     <string name="msg_mandatory_fields"> الحقول الإلزامية</string>
     <string name="empty_firstName">حقل الاسم الأول إلزامي</string>
-    <string name="invalid_Name">القيم الرقمية غير مقبولة في هذا المجال</string>
+    <string name="invalid_Name">لا يتم قبول الأحرف الرقمية والخاصة في هذا المجال</string>
     <string name="empty_lastName">حقل اسم العائلة مطلوب</string>
     <string name="empty_captcha">رمز الكابتشا مطلوب</string>
 

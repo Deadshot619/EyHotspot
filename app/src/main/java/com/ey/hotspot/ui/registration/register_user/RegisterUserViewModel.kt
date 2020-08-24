@@ -69,7 +69,6 @@ class RegisterUserViewModel(application: Application) : BaseViewModel(applicatio
         }
     }
 
-
     //Method to get Country code list
     private fun getCountryCodeList() {
         setDialogVisibility(true)
@@ -92,10 +91,6 @@ class RegisterUserViewModel(application: Application) : BaseViewModel(applicatio
     }
 
     private fun saveRegistrationTokenInSharedPreference(tempToken: String) {
-
         HotSpotApp.prefs!!.setRegistrationTempToken(tempToken)
-
     }
-
-
 }

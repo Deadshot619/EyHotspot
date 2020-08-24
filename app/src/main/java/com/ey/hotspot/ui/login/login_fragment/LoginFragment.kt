@@ -390,18 +390,27 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
         mViewModel.run {
             mBinding.run {
-                if (!emailId.isEmailValid()) {
+                //Email
+                if(emailId.trim().isEmpty()){
+                    etEmailId.error = resources.getString(R.string.email_required_label)
+                    isValid = false
+                } else if (!emailId.isEmailValid()) {
                     etEmailId.error = resources.getString(R.string.invalid_email)
                     isValid = false
                 }
-                if (password.trim().isEmpty()) {
-                    etPassword.error = resources.getString(R.string.enter_password)
+
+                //Password
+                if(password.trim().isEmpty()){
+                    etPassword.error = resources.getString(R.string.password_required_label)
                     isValid = false
                 }
+
                /* if (!password.isValidPassword()) {
                     etPassword.error = resources.getString(R.string.password_format)
                     isValid = false
                 }*/
+
+                //Captcha
                 if (mEnteredCaptch?.isEmpty()!!) {
                     layoutCaptcha.etCaptcha.error = resources.getString(R.string.empty_captcha)
                     isValid = false
