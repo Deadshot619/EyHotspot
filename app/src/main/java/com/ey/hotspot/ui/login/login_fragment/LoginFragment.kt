@@ -395,7 +395,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
                     etEmailId.error = resources.getString(R.string.email_required_label)
                     isValid = false
                 } else if (!emailId.isEmailValid()) {
-                    etEmailId.error = resources.getString(R.string.invalid_email)
+                    etEmailId.error = resources.getString(R.string.invalid_email_label)
                     isValid = false
                 }
 
