@@ -63,7 +63,7 @@
 
     <!--    Registration Option    -->
     <string name="verify_account_label">Verify Account</string>
-    <string name="verification_method_label">Please Select Option  To Verify Your Account</string>
+    <string name="verification_method_label">Please Select Option To Verify Your Account</string>
     <string name="otp_sms_label">Verfiy OTP using SMS</string>
     <string name="email_link_label">Verify OTP using Email</string>
 
@@ -275,7 +275,7 @@
     <string name="empty_firstName">First name field is mandatory</string>
     <string name="invalid_Name">Numeric and Special Characters are not accepted in this field</string>
     <string name="empty_lastName">"Last name field is required "</string>
-    <string name="empty_captcha">"Captcha code is required "</string>
+    <string name="empty_captcha">Captcha code is required</string>
 
 
     <!--Demo issue type string-->

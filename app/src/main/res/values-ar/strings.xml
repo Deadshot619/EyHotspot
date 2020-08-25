@@ -83,7 +83,7 @@
 
     <!--    Registration Option    -->
     <string name="verify_account_label">التحقق من الحساب</string>
-    <string name="verification_method_label">حدد طريقة التحقق</string>
+    <string name="verification_method_label">يرجى تحديد خيار للتحقق من حسابك</string>
     <string name="otp_sms_label">Verfiy OTP باستخدام الرسائل القصيرة</string>
     <string name="email_link_label">تحقق باستخدام البريد الإلكتروني</string>
 
@@ -155,7 +155,8 @@
     <string name="cancel_label">إلغاء</string>
     <string name="submit_feedback_label">إرسال ملاحظات</string>
     <string name="enter_remark_error_label">يرجى تقديم ملاحظات</string>
-    <string name="provide_rating_label">الرجاء تقديم تصنيف</string>
+    <string name="provide_rating_label">الرجاء تحديد تصنيف</string>
+
 
 
     <!--Raise Complaint-->
@@ -195,7 +196,7 @@
 
     <string name="enter_confirm_password">اعادة ادخال كلمة السر</string>
     <string name="sign_agree_msg">بالتسجيل أنت توافق على</string>
-    <string name="terms_condition">أوافق على الشروط و الأحكام</string>
+    <string name="terms_condition">قبول الشروط والأحكام</string>
     <string name="get_started">تسجيل</string>
     <string name="or">أو</string>
     <string name="otp_title">الرجاء إدخال كلمة المرور OTP المرسلة إلى </string>
@@ -269,7 +270,7 @@
     <string name="empty_firstName">حقل الاسم الأول إلزامي</string>
     <string name="invalid_Name">لا يتم قبول الأحرف الرقمية والخاصة في هذا المجال</string>
     <string name="empty_lastName">حقل اسم العائلة مطلوب</string>
-    <string name="empty_captcha">رمز الكابتشا مطلوب</string>
+    <string name="empty_captcha">مطلوب كود كلمة التحقق</string>
 
     <string-array name="otp_sent_msg">تم إرسال OTP إلى رقم هاتفك المحمول المسجل</string-array>
 
