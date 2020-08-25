@@ -332,6 +332,7 @@
 
             <!--            Asterik-->
             <TextView
+                android:id="@+id/tv_password_asterik"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/AsterikEditText"
@@ -390,6 +391,7 @@
 
             <!--            Asterik-->
             <TextView
+                android:id="@+id/tv_confirm_password_asterik"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/AsterikEditText"

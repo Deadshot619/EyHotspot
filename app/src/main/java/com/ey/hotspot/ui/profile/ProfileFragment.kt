@@ -270,10 +270,12 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>()
                 //Password
                 passwordInputLayout.visibility = View.GONE
                 tvPasswordHint.visibility = View.GONE
+                tvPasswordAsterik.visibility = View.GONE
 
                 //Confirm Password
                 confirmPasswordInputLayout.visibility = View.GONE
                 tvConfirmPasswordHint.visibility = View.GONE
+                tvConfirmPasswordAsterik.visibility = View.GONE
 
                 //Password Info
                 tvPasswordMsg.visibility = View.GONE
