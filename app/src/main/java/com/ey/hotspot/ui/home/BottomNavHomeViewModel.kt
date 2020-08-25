@@ -50,7 +50,6 @@ class BottomNavHomeViewModel(application: Application) : BaseViewModel(applicati
     private val DELAY: Long = 1000L
     var ticker = ticker(DELAY)
 
-
     init {
         //Get Wifi Manager
         wifiManager = appInstance.getSystemService(Context.WIFI_SERVICE) as WifiManager
@@ -66,7 +65,7 @@ class BottomNavHomeViewModel(application: Application) : BaseViewModel(applicati
 
 
     private fun checkIfUserSkippedOrLoggedInForFirstTime() {
-        if (HotSpotApp.prefs!!.getFirstTimeLoginOrSkipped()) {
+//        if (HotSpotApp.prefs!!.getFirstTimeLoginOrSkipped()) {
             HotSpotApp.prefs?.setFirstTimeLoginOrSkipped(false)
 
             //Wifi Ssid
@@ -131,7 +130,7 @@ class BottomNavHomeViewModel(application: Application) : BaseViewModel(applicati
                         )
                     })
             }
-        }
+//        }
     }
 
     /*

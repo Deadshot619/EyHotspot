@@ -42,15 +42,25 @@ class SettingsViewModel (application: Application): BaseViewModel(application){
 
     }
 
+    //Method to logout user
+    private suspend fun logoutUser(){
+        DataProvider.logout(
+                success = {},
+                error = {
+                    checkError(it)
+                }
+            )
 
-    fun wifiLogout(){
+            appInstance.logoutUser()
+    }
+
+    fun logout(){
         coroutineScope.launch {
             getLastInsertedData()
         }
     }
 
-
-    suspend fun getLastInsertedData(){
+    private suspend fun getLastInsertedData(){
         withContext(Dispatchers.IO){
             //Get wifi login data from db
             val data = database.getLastInsertedData()
@@ -63,7 +73,11 @@ class SettingsViewModel (application: Application): BaseViewModel(application){
 
             updateLogoutTimeInDb(data)
 
-            appInstance.logoutUser()
+            coroutineScope.launch {
+                logoutUser()
+            }
+
+//            appInstance.logoutUser()
         }
     }
 
@@ -110,7 +124,7 @@ class SettingsViewModel (application: Application): BaseViewModel(application){
             request = request,
             success = {
                 if (it.status) {
-                    //If logout is successful, then update sync status of the data in DB
+                    //If Wifi logout is successful, then update sync status of the data in DB
                     coroutineScope.launch {
                         updateSyncStatusOfDataInDb(dbId = dbId, syncStatus = it.status)
                     }

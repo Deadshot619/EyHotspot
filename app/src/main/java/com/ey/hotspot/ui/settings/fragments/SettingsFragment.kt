@@ -38,7 +38,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel
                 yes = {
                     setuPGoogelSignOut()
                     setUpFacebookSiignOut()
-                    mViewModel.wifiLogout()
+                    mViewModel.logout()
 //                        activity?.application?.logoutUser()
                 },
                 no = { this.dismiss() }

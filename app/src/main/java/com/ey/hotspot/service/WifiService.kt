@@ -249,11 +249,25 @@ class WifiService : Service() {
      */
     private var anyNetworkCallback = object : ConnectivityManager.NetworkCallback() {
         override fun onAvailable(network: Network) {
-            coroutineScope.launch {
+            /*coroutineScope.launch {
                 Timber.tag("NETWORK CALLBACK : ").d(network.toString())
                 //Get last inserted data & do things accordingly
                 getLastInsertedData()
-            }
+            }*/
+        }
+
+        override fun onCapabilitiesChanged(
+            network: Network,
+            networkCapabilities: NetworkCapabilities
+        ) {
+//            super.onCapabilitiesChanged(network, networkCapabilities)
+            val connected = networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+            if(connected)
+                coroutineScope.launch {
+                    Timber.tag("NETWORK CALLBACK : ").d(network.toString())
+                    //Get last inserted data & do things accordingly
+                    getLastInsertedData()
+                }
         }
 
         override fun onLost(network: Network) {
