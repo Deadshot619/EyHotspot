@@ -8,7 +8,6 @@ import com.ey.hotspot.ui.favourite.model.MarkFavouriteRequest
 import com.ey.hotspot.ui.favourite.model.MarkFavouriteResponse
 import com.ey.hotspot.ui.home.models.GetHotSpotRequest
 import com.ey.hotspot.ui.home.models.GetHotSpotResponse
-import com.ey.hotspot.ui.login.logout.LogoutResponse
 import com.ey.hotspot.ui.login.verifyotp.model.ResendForgotPasswordOTP
 import com.ey.hotspot.utils.constants.ReviewSortType
 import com.google.gson.JsonArray
@@ -83,15 +82,12 @@ object DataProvider : RemoteDataProvider {
     }
 
     override suspend fun logout(
-        success: (BaseResponse<LogoutResponse>) -> Unit,
+        success: (BaseResponse<Any>) -> Unit,
         error: (Exception) -> Unit
     ) {
-
         withContext(Dispatchers.Main) {
-
             try {
-
-                val result = mServices.logOut().await()
+                val result = mServices.logOutAsync().await()
                 success(result)
 
             } catch (e: Exception) {
