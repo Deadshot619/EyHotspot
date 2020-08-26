@@ -105,6 +105,7 @@ class WebViewFragment() :
             val termsResponse: TermsRequest = TermsRequest(
                 true
             )
+
             mViewModel.callTAndC(termsResponse)
             //removeFragment(this)
         }
@@ -115,10 +116,12 @@ class WebViewFragment() :
         //terms and condition Response
         mViewModel.termsResponse.observe(viewLifecycleOwner, Observer {
             if (it.status) {
-                showMessage(it.message, true)
                 arguments?.getParcelable<LoginResponse>(LOGIN_DATA)?.let { data ->
                     updateSharedPreference(data)
                 }
+
+                showMessage(it.message, true)
+
                 activity?.goToHomeScreen()
             }
         })

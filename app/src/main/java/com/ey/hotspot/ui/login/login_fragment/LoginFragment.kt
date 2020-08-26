@@ -152,7 +152,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
                     clearDataSaveLangAndKeywords()
                     HotSpotApp.prefs?.setUserDataPref(it.data)
                     replaceFragment(
-                        fragment = WebViewFragment.newInstance("login"),
+                        fragment = WebViewFragment.newInstance("login", it.data),
                         addToBackStack = true,
                         bundle = null
                     )

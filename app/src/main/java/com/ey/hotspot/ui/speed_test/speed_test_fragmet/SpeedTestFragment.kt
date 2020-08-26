@@ -1,11 +1,14 @@
 package com.ey.hotspot.ui.speed_test.speed_test_fragmet
 
 import android.content.Context
+import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import android.net.wifi.WifiManager
+import android.os.Build
+import android.provider.Settings
 import android.view.View
 import androidx.lifecycle.Observer
 import com.ey.hotspot.R
@@ -31,7 +34,11 @@ class SpeedTestFragment : BaseFragment<FragmentSpeedTestBinding, SpeedTestFragme
                 title = getString(R.string.wifi_disabled_label),
                 description = getString(R.string.wifi_enable_conformation),
                 yes = {
-                    wifiManager.isWifiEnabled = true
+                    if(Build.VERSION.SDK_INT < Build.VERSION_CODES.Q)
+                        wifiManager.isWifiEnabled = true
+                    else
+                        startActivityForResult(Intent(Settings.Panel.ACTION_WIFI), 69)
+
                     this.dismiss()
                 },
                 no = {
