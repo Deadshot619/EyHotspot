@@ -89,6 +89,21 @@ class SpeedTestFragmentViewModel(application: Application) : BaseViewModel(appli
                             //Call login api with 0.0 average speed & calculate speed
 
                             getLastInsertedDataForLogin(it.data, wifiSsid)
+
+                            /*WifiLogUtils.getLastInsertedDataForLogin(
+                                wifiSsid = it.data._wifi_name,
+                                database = database,
+                                validateData = it.data,
+                                callWifiLogin = { _, _, _, _ ->
+                                    callWifiLogin(wifiSsid = wifiSsid, wifiId = it.data.id, deviceId = DEVICE_ID, averageSpeed = 0.0)},
+                                calculateSpeed = { _, _, _ ->
+                                    calculateSpeed(
+                                        wifiSsid = wifiSsid,
+                                        wifiId = it.data.id,
+                                        deviceId = DEVICE_ID
+                                    )},
+                                wifiLoginNotRequired = {_ -> wifiLoginNotRequired(it.data) }
+                            )*/
                         }
                     } else {
                         validateWifiSuccessful = false
@@ -168,7 +183,7 @@ class SpeedTestFragmentViewModel(application: Application) : BaseViewModel(appli
                 //Set data to view
                 _wifiData.postValue(validateData)
                 setDialogVisibilityPost(false)
-                _hideDataView.postValue(requireApiCall)
+                _hideDataView.postValue(false)
             }
 
             //Calculate speed anyways
@@ -179,59 +194,69 @@ class SpeedTestFragmentViewModel(application: Application) : BaseViewModel(appli
         }
     }
 
+    private fun wifiLoginNotRequired(validateData: ValidateWifiResponse){
+        //Set data to view
+        _wifiData.postValue(validateData)
+        setDialogVisibilityPost(false)
+        _hideDataView.postValue(false)
+    }
+
     //Method to call WifiLogin Api
-    private suspend fun callWifiLogin(
+    private fun callWifiLogin(
         wifiSsid: String,
         wifiId: Int,
         averageSpeed: Double,
         deviceId: String
     ) {
-        val request = WifiLoginRequest(
-            wifi_id = wifiId,
-            average_speed = averageSpeed.toInt(),
-            device_id = deviceId
-        )
+        coroutineScope.launch {
 
-        DataProvider.wifiLogin(
-            request = request,
-            success = {
-                if (it.status) {
+            val request = WifiLoginRequest(
+                wifi_id = wifiId,
+                average_speed = averageSpeed.toInt(),
+                device_id = deviceId
+            )
 
-                    //Set this login status accordingly
-                    loginSuccessfulWithSpeedZero = averageSpeed == 0.0
+            DataProvider.wifiLogin(
+                request = request,
+                success = {
+                    if (it.status) {
 
-                    //When login is successful, Delete & Insert data into table
-                    coroutineScope.launch {
-                        deleteAndInsertData(
-                            wifiSsid = wifiSsid,
-                            wifiId = wifiId,
-                            averageSpeed = averageSpeed
-                        )
+                        //Set this login status accordingly
+                        loginSuccessfulWithSpeedZero = averageSpeed == 0.0
+
+                        //When login is successful, Delete & Insert data into table
+                        coroutineScope.launch {
+                            deleteAndInsertData(
+                                wifiSsid = wifiSsid,
+                                wifiId = wifiId,
+                                averageSpeed = averageSpeed
+                            )
+                        }
+
+                        //Set data to view
+                        _wifiData.postValue(it.data)
+                        setDialogVisibilityPost(false)
+
+                    } else {
+                        //Set login status to false as login wasn't successful
+                        loginSuccessfulWithSpeedZero = false
                     }
 
-                    //Set data to view
-                    _wifiData.postValue(it.data)
-                    setDialogVisibilityPost(false)
-
-                } else {
+                    _hideDataView.postValue(!it.status)
+                },
+                error = {
                     //Set login status to false as login wasn't successful
                     loginSuccessfulWithSpeedZero = false
                 }
-
-                _hideDataView.postValue(!it.status)
-            },
-            error = {
-                //Set login status to false as login wasn't successful
-                loginSuccessfulWithSpeedZero = false
-            }
-        )
+            )
+        }
     }
 
     /*
      *  Method to calculate speed
      */
-    private suspend fun calculateSpeed(wifiSsid: String, wifiId: Int, deviceId: String) {
-        withContext(Dispatchers.IO) {
+    private fun calculateSpeed(wifiSsid: String, wifiId: Int, deviceId: String) {
+        coroutineScope.launch (Dispatchers.IO) {
             SpeedTestUtils.calculateSpeed(
                 onCompletedReport = {       //When speed test is completed successfully
                     //get download speed

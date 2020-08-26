@@ -45,6 +45,8 @@ class WifiService : Service() {
         private var _isRunning = false
         val isRunning: Boolean
             get() = _isRunning
+
+        var callingLoginApiFromSpeedTest = false
     }
 
     private lateinit var connecManagerWifi: ConnectivityManager        //For Wifi
@@ -296,6 +298,21 @@ class WifiService : Service() {
 
                         getLastInsertedDataForLogin(it.data, it.data._wifi_name)
 
+                        /*WifiLogUtils.getLastInsertedDataForLogin(
+                            wifiSsid = it.data._wifi_name,
+                            database = database,
+                            validateData = it.data,
+                            callWifiLogin = { _, _, _, _ ->
+                                callWifiLogin(wifiSsid = wifiSsid, wifiId = it.data.id, deviceId = DEVICE_ID, averageSpeed = 0.0)},
+                            calculateSpeed = { _, _, _ ->
+                                calculateSpeed(
+                                    wifiSsid = wifiSsid,
+                                    wifiId = it.data.id,
+                                    deviceId = DEVICE_ID
+                                )},
+                            wifiLoginNotRequired = {}
+                        )*/
+
                         /*callWifiLogin(wifiId = it.data.id, deviceId = DEVICE_ID, averageSpeed = 0.0)
 
                         calculateSpeed(
@@ -330,40 +347,42 @@ class WifiService : Service() {
     }
 
     //Method to call WifiLogin Api
-    private suspend fun callWifiLogin(wifiSsid: String, wifiId: Int, averageSpeed: Double, deviceId: String) {
-        val request = WifiLoginRequest(
-            wifi_id = wifiId,
-            average_speed = averageSpeed.toInt(),
-            device_id = deviceId
-        )
+    private fun callWifiLogin(wifiSsid: String, wifiId: Int, averageSpeed: Double, deviceId: String) {
+        coroutineScope.launch {
+            val request = WifiLoginRequest(
+                wifi_id = wifiId,
+                average_speed = averageSpeed.toInt(),
+                device_id = deviceId
+            )
 
-        DataProvider.wifiLogin(
-            request = request,
-            success = {
-                if (it.status) {
+            DataProvider.wifiLogin(
+                request = request,
+                success = {
+                    if (it.status) {
 
-                    //Set this login status accordingly
-                    loginSuccessfulWithSpeedZero = averageSpeed == 0.0
+                        //Set this login status accordingly
+                        loginSuccessfulWithSpeedZero = averageSpeed == 0.0
 
-                    //When login is successful, Delete & Insert data into table
-                    coroutineScope.launch {
-                        deleteAndInsertData(
-                            wifiSsid = wifiSsid,
-                            wifiId = wifiId,
-                            averageSpeed = averageSpeed
-                        )
+                        //When login is successful, Delete & Insert data into table
+                        coroutineScope.launch {
+                            deleteAndInsertData(
+                                wifiSsid = wifiSsid,
+                                wifiId = wifiId,
+                                averageSpeed = averageSpeed
+                            )
+                        }
+
+                    } else {
+                        //Set login status to false as login wasn't successful
+                        loginSuccessfulWithSpeedZero = false
                     }
-
-                } else {
+                },
+                error = {
                     //Set login status to false as login wasn't successful
                     loginSuccessfulWithSpeedZero = false
                 }
-            },
-            error = {
-                //Set login status to false as login wasn't successful
-                loginSuccessfulWithSpeedZero = false
-            }
-        )
+            )
+        }
     }
 
     /*
@@ -485,17 +504,24 @@ class WifiService : Service() {
             }
 
             //If wifi is already logged in, then don't call Wifi Login Api & set the flag to true
-            if (requireApiCall)
-                callWifiLogin(wifiSsid = wifiSsid, wifiId = validateData.id, deviceId = DEVICE_ID, averageSpeed = 0.0)
+            if (requireApiCall && !callingLoginApiFromSpeedTest){
+                callWifiLogin(
+                    wifiSsid = wifiSsid,
+                    wifiId = validateData.id,
+                    deviceId = DEVICE_ID,
+                    averageSpeed = 0.0
+                )
+
+                //Calculate speed anyways
+                calculateSpeed(
+                    wifiSsid = wifiSsid,
+                    wifiId = validateData.id,
+                    deviceId = DEVICE_ID
+                )}
             else
                 loginSuccessfulWithSpeedZero = true
 
-            //Calculate speed anyways
-            calculateSpeed(
-                wifiSsid = wifiSsid,
-                wifiId = validateData.id,
-                deviceId = DEVICE_ID
-            )
+
         }
     }
 
@@ -539,8 +565,8 @@ class WifiService : Service() {
     /*
      *  Method to calculate speed
      */
-    private suspend fun calculateSpeed(wifiSsid: String, wifiId: Int, deviceId: String) {
-        withContext(Dispatchers.IO) {
+    private fun calculateSpeed(wifiSsid: String, wifiId: Int, deviceId: String) {
+        coroutineScope.launch(Dispatchers.IO) {
             SpeedTestUtils.calculateSpeed(
                 onCompletedReport = {       //When speed test is completed successfully
                     //get download speed

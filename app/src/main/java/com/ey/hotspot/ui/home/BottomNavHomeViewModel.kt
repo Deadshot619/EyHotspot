@@ -66,70 +66,70 @@ class BottomNavHomeViewModel(application: Application) : BaseViewModel(applicati
 
     private fun checkIfUserSkippedOrLoggedInForFirstTime() {
 //        if (HotSpotApp.prefs!!.getFirstTimeLoginOrSkipped()) {
-            HotSpotApp.prefs?.setFirstTimeLoginOrSkipped(false)
+        HotSpotApp.prefs?.setFirstTimeLoginOrSkipped(false)
 
-            //Wifi Ssid
-            var wifiSsid = wifiManager.connectionInfo.ssid.extractWifiName()/* + "-Turtlemint"*/
-            if (wifiSsid.contains(Constants.UNKNOWN_SSID)) {
+        //Wifi Ssid
+        var wifiSsid = wifiManager.connectionInfo.ssid.extractWifiName()/* + "-Turtlemint"*/
+        if (wifiSsid.contains(Constants.UNKNOWN_SSID)) {
 //                Thread.sleep(1000)
-                wifiSsid = wifiManager.connectionInfo.ssid.extractWifiName()/* + "-Turtlemint"*/
-            }
+            wifiSsid = wifiManager.connectionInfo.ssid.extractWifiName()/* + "-Turtlemint"*/
+        }
 
-            if (!wifiSsid.contains(Constants.UNKNOWN_SSID)) {    //If the wifi is "unknown ssid", then skip it
-                /*
-                 *  Check if the wifi name is present in wifi keywords
-                 */
-                isItOurWifi = checkWifiContainsKeywords(wifiSsid)
-                //true   //TODO 27/07/2020: Remove True, when live
-            } else {
-                isItOurWifi = false
-            }
+        if (!wifiSsid.contains(Constants.UNKNOWN_SSID)) {    //If the wifi is "unknown ssid", then skip it
+            /*
+             *  Check if the wifi name is present in wifi keywords
+             */
+            isItOurWifi = checkWifiContainsKeywords(wifiSsid)
+            //true   //TODO 27/07/2020: Remove True, when live
+        } else {
+            isItOurWifi = false
+        }
 
 
-            //If the wifi contains some special keywords i.e it belongs to current wifi then validate current wifi
-            if (isItOurWifi) {
-                appInstance.getUserLocation { lat, lng ->
-                    if (lat != null && lng != null) {   //If Location is available
-                        coroutineScope.launch {
-                            //Validate WiFi
-                            validateWifi(wifiSsid = wifiSsid, lat = lat, lng = lng)
-                        }
-                    }   //TODO 28/07/2020: What if User Location is not available?
-                    else {
-                        //This wifi is not our wifi
-                        ContextCompat.startForegroundService(
-                            appInstance,
-                            Intent(appInstance, WifiService::class.java).apply {
-                                putExtra(
-                                    wifi_notification_key,
-                                    appInstance.getString(R.string.wifi_not_validated_label)
-                                )
-                            })
+        //If the wifi contains some special keywords i.e it belongs to current wifi then validate current wifi
+        if (isItOurWifi) {
+            appInstance.getUserLocation { lat, lng ->
+                if (lat != null && lng != null) {   //If Location is available
+                    coroutineScope.launch {
+                        //Validate WiFi
+                        validateWifi(wifiSsid = wifiSsid, lat = lat, lng = lng)
                     }
-                }
-
-                //This will initially show the notification as wifi connected
-                ContextCompat.startForegroundService(
-                    appInstance,
-                    Intent(appInstance, WifiService::class.java).apply {
-                        putExtra(
-                            wifi_notification_key,
-                            String.format(
-                                appInstance.getString(R.string.calculating_wifi_speed_label),
-                                wifiManager.connectionInfo.ssid
+                }   //TODO 28/07/2020: What if User Location is not available?
+                else {
+                    //This wifi is not our wifi
+                    ContextCompat.startForegroundService(
+                        appInstance,
+                        Intent(appInstance, WifiService::class.java).apply {
+                            putExtra(
+                                wifi_notification_key,
+                                appInstance.getString(R.string.wifi_not_validated_label)
                             )
-                        )
-                    })
-            } else {   //This wifi is not our wifi
-                ContextCompat.startForegroundService(
-                    appInstance,
-                    Intent(appInstance, WifiService::class.java).apply {
-                        putExtra(
-                            wifi_notification_key,
-                            appInstance.getString(R.string.wifi_not_validated_label)
-                        )
-                    })
+                        })
+                }
             }
+
+            //This will initially show the notification as wifi connected
+            ContextCompat.startForegroundService(
+                appInstance,
+                Intent(appInstance, WifiService::class.java).apply {
+                    putExtra(
+                        wifi_notification_key,
+                        String.format(
+                            appInstance.getString(R.string.calculating_wifi_speed_label),
+                            wifiManager.connectionInfo.ssid
+                        )
+                    )
+                })
+        } else {   //This wifi is not our wifi
+            ContextCompat.startForegroundService(
+                appInstance,
+                Intent(appInstance, WifiService::class.java).apply {
+                    putExtra(
+                        wifi_notification_key,
+                        appInstance.getString(R.string.wifi_not_validated_label)
+                    )
+                })
+        }
 //        }
     }
 
@@ -151,7 +151,6 @@ class BottomNavHomeViewModel(application: Application) : BaseViewModel(applicati
 
                     coroutineScope.launch {
                         //Call login api with 0.0 average speed & calculate speed
-
                         getLastInsertedDataForLogin(it.data, wifiSsid)
 
                         /*callWifiLogin(wifiId = it.data.id, deviceId = DEVICE_ID, averageSpeed = 0.0)
@@ -223,22 +222,34 @@ class BottomNavHomeViewModel(application: Application) : BaseViewModel(applicati
             }
 
             //If wifi is already logged in, then don't call Wifi Login Api & set the flag to true
-            if (requireApiCall)
-                callWifiLogin(wifiSsid = wifiSsid, wifiId = validateData.id, deviceId = DEVICE_ID, averageSpeed = 0.0)
-            else
+            if (requireApiCall) {
+                callWifiLogin(
+                    wifiSsid = wifiSsid,
+                    wifiId = validateData.id,
+                    deviceId = DEVICE_ID,
+                    averageSpeed = 0.0
+                )
+
+                //Calculate speed anyways
+                calculateSpeed(
+                    wifiSsid = wifiSsid,
+                    wifiId = validateData.id,
+                    deviceId = DEVICE_ID
+                )
+            } else
                 loginSuccessfulWithSpeedZero = true
 
-            //Calculate speed anyways
-            calculateSpeed(
-                wifiSsid = wifiSsid,
-                wifiId = validateData.id,
-                deviceId = DEVICE_ID
-            )
+
         }
     }
 
     //Method to call WifiLogin Api
-    private suspend fun callWifiLogin(wifiSsid: String, wifiId: Int, averageSpeed: Double, deviceId: String) {
+    private suspend fun callWifiLogin(
+        wifiSsid: String,
+        wifiId: Int,
+        averageSpeed: Double,
+        deviceId: String
+    ) {
         val request = WifiLoginRequest(
             wifi_id = wifiId,
             average_speed = averageSpeed.toInt(),
@@ -255,7 +266,11 @@ class BottomNavHomeViewModel(application: Application) : BaseViewModel(applicati
 
                     //When login is successful, Delete & Insert data into table
                     coroutineScope.launch {
-                        deleteAndInsertData(wifiSsid = wifiSsid, wifiId = wifiId, averageSpeed = averageSpeed)
+                        deleteAndInsertData(
+                            wifiSsid = wifiSsid,
+                            wifiId = wifiId,
+                            averageSpeed = averageSpeed
+                        )
                     }
 
                 } else {

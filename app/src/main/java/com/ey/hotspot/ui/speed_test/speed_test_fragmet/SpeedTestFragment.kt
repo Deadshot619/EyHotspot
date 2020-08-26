@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentSpeedTestBinding
+import com.ey.hotspot.service.WifiService
 import com.ey.hotspot.ui.speed_test.test_result.TestResultsFragment
 import com.ey.hotspot.utils.constants.Constants
 import com.ey.hotspot.utils.constants.checkWifiContainsKeywords
@@ -97,6 +98,7 @@ class SpeedTestFragment : BaseFragment<FragmentSpeedTestBinding, SpeedTestFragme
         //Receiver for wifi
         connec.registerNetworkCallback(networkRequestWiFi, networkCallbackWiFi)
 
+        WifiService.callingLoginApiFromSpeedTest = true
         //Receiver for GPS
 //        activity?.registerReceiver(gpsReceiver, IntentFilter(LocationManager.MODE_CHANGED_ACTION))
     }
@@ -127,7 +129,7 @@ class SpeedTestFragment : BaseFragment<FragmentSpeedTestBinding, SpeedTestFragme
 
     override fun onStop() {
         super.onStop()
-
+        WifiService.callingLoginApiFromSpeedTest = false
         connec.unregisterNetworkCallback(networkCallbackWiFi)
 //        activity?.unregisterReceiver(gpsReceiver)
     }
