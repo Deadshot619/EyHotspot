@@ -59,7 +59,6 @@ class HotSpotApp : CoreApp() {
     override fun attachBaseContext(base: Context?) {
 
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N_MR1) {
-
             if (base != null) {
 
                 CoreApp.sharedPreferences =
@@ -73,6 +72,7 @@ class HotSpotApp : CoreApp() {
         } else {
             super.attachBaseContext(base)
         }
+
         MultiDex.install(this)
     }
 

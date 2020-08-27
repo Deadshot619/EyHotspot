@@ -2,10 +2,7 @@ package com.ey.hotspot.ui.home
 
 import android.app.Application
 import android.content.Context
-import android.content.Intent
 import android.net.wifi.WifiManager
-import androidx.core.content.ContextCompat
-import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseViewModel
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.database.wifi_info.WifiInfoDatabase
@@ -15,8 +12,8 @@ import com.ey.hotspot.network.DataProvider
 import com.ey.hotspot.network.request.SpeedTestRequest
 import com.ey.hotspot.network.request.ValidateWifiRequest
 import com.ey.hotspot.network.request.WifiLoginRequest
+import com.ey.hotspot.network.request.WifiLogoutRequest
 import com.ey.hotspot.network.response.ValidateWifiResponse
-import com.ey.hotspot.service.WifiService
 import com.ey.hotspot.utils.SpeedTestUtils
 import com.ey.hotspot.utils.constants.Constants
 import com.ey.hotspot.utils.constants.SpeedTestModes
@@ -25,7 +22,7 @@ import com.ey.hotspot.utils.constants.getDeviceId
 import com.ey.hotspot.utils.extention_functions.convertBpsToMbps
 import com.ey.hotspot.utils.extention_functions.extractWifiName
 import com.ey.hotspot.utils.extention_functions.getUserLocation
-import com.ey.hotspot.utils.wifi_notification_key
+import com.ey.hotspot.utils.extention_functions.toServerFormat
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlinx.coroutines.channels.ticker
@@ -97,38 +94,12 @@ class BottomNavHomeViewModel(application: Application) : BaseViewModel(applicati
                 }   //TODO 28/07/2020: What if User Location is not available?
                 else {
                     //This wifi is not our wifi
-                    ContextCompat.startForegroundService(
-                        appInstance,
-                        Intent(appInstance, WifiService::class.java).apply {
-                            putExtra(
-                                wifi_notification_key,
-                                appInstance.getString(R.string.wifi_not_validated_label)
-                            )
-                        })
+
                 }
             }
 
-            //This will initially show the notification as wifi connected
-            ContextCompat.startForegroundService(
-                appInstance,
-                Intent(appInstance, WifiService::class.java).apply {
-                    putExtra(
-                        wifi_notification_key,
-                        String.format(
-                            appInstance.getString(R.string.calculating_wifi_speed_label),
-                            wifiManager.connectionInfo.ssid
-                        )
-                    )
-                })
         } else {   //This wifi is not our wifi
-            ContextCompat.startForegroundService(
-                appInstance,
-                Intent(appInstance, WifiService::class.java).apply {
-                    putExtra(
-                        wifi_notification_key,
-                        appInstance.getString(R.string.wifi_not_validated_label)
-                    )
-                })
+
         }
 //        }
     }
@@ -153,35 +124,13 @@ class BottomNavHomeViewModel(application: Application) : BaseViewModel(applicati
                         //Call login api with 0.0 average speed & calculate speed
                         getLastInsertedDataForLogin(it.data, wifiSsid)
 
-                        /*callWifiLogin(wifiId = it.data.id, deviceId = DEVICE_ID, averageSpeed = 0.0)
-
-                        calculateSpeed(
-                            wifiId = it.data.id,
-                            deviceId = DEVICE_ID
-                        )*/
                     }
                 } else {
                     validateWifiSuccessful = false
-                    ContextCompat.startForegroundService(
-                        appInstance,
-                        Intent(appInstance, WifiService::class.java).apply {
-                            putExtra(
-                                wifi_notification_key,
-                                appInstance.getString(R.string.wifi_not_validated_label)
-                            )
-                        })
                 }
             },
             error = {
                 validateWifiSuccessful = false
-                ContextCompat.startForegroundService(
-                    appInstance,
-                    Intent(appInstance, WifiService::class.java).apply {
-                        putExtra(
-                            wifi_notification_key,
-                            appInstance.getString(R.string.wifi_not_validated_label)
-                        )
-                    })
             }
         )
     }
@@ -295,20 +244,6 @@ class BottomNavHomeViewModel(application: Application) : BaseViewModel(applicati
                     //get download speed
                     val downloadSpeed = it?.transferRateBit?.convertBpsToMbps()
 
-                    //Start Service
-                    ContextCompat.startForegroundService(
-                        appInstance,
-                        Intent(appInstance, WifiService::class.java).apply {
-                            putExtra(
-                                wifi_notification_key,
-                                String.format(
-                                    appInstance.getString(R.string.calculated_wifi_speed_label),
-                                    wifiManager.connectionInfo.ssid.extractWifiName(),
-                                    downloadSpeed
-                                )
-                            )
-                        })
-
                     //Check if login has been done before
                     if (loginSuccessfulWithSpeedZero)
                     //When download is successful, & login api has been called before successfully, call Speed Test Wifi Api
@@ -336,17 +271,6 @@ class BottomNavHomeViewModel(application: Application) : BaseViewModel(applicati
 
                 },
                 onErrorReport = {
-                    //Start Service
-                    ContextCompat.startForegroundService(
-                        appInstance,
-                        Intent(appInstance, WifiService::class.java).apply {
-                            putExtra(
-                                wifi_notification_key,
-//                                    "No Internet Connection"
-                                appInstance.getString(R.string.no_internet_connection_label)
-                            )
-                        })
-
                     //When download is unsuccessful, try calling Speed Test or Login wifi with 0 speed
 
                     //Check if login has been done before
@@ -418,5 +342,64 @@ class BottomNavHomeViewModel(application: Application) : BaseViewModel(applicati
             }
         }
     }
+
+
+
+
+
+    private suspend fun getLastInsertedData(){
+        withContext(Dispatchers.IO){
+            //Get wifi login data from db
+            val data = database.getLastInsertedData()
+
+            /*
+             *  Check whether data is present, if it is then check whether it is synced, If yes then
+             */
+            if (data.isNotEmpty() && !data[0].synced)
+                callWifiLogout(data[0].id, data[0].wifiId, DEVICE_ID, Calendar.getInstance().time)
+
+//            updateLogoutTimeInDb(data)
+        }
+    }
+
+
+    /*
+     *  Method to call WifiLogout Api.
+     *  This api will be called when a wifi connection will be available
+     */
+    private suspend fun callWifiLogout(dbId: Long, wifiId: Int, deviceId: String, logoutAt: Date) {
+        val request = WifiLogoutRequest(
+            wifi_id = wifiId,
+            device_id = deviceId,
+            logout_at = logoutAt.toServerFormat()
+        )
+
+        setDialogVisibilityPost(true)
+        DataProvider.wifiLogout(
+            request = request,
+            success = {
+                if (it.status) {
+                    //If Wifi logout is successful, then update sync status of the data in DB
+                    coroutineScope.launch {
+                        updateSyncStatusOfDataInDb(dbId = dbId, syncStatus = it.status)
+                    }
+                }
+            },
+            error = {
+            }
+        )
+    }
+
+    /*
+     *  This method will update current sync status of Data in DB.
+     *  Will be called when WiFi logout api has been called & wifi has successfully logged out
+     */
+    private suspend fun updateSyncStatusOfDataInDb(dbId: Long, syncStatus: Boolean) {
+        withContext(Dispatchers.IO) {
+            database.updateSyncStatus(id = dbId, sync = syncStatus)
+        }
+    }
+
+
 
 }

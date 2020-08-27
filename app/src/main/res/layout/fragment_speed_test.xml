@@ -165,7 +165,7 @@
                     app:layout_constraintStart_toStartOf="@id/tv_number_of_users"
                     app:layout_constraintTop_toBottomOf="@id/iv_dotted_line" />
 
-                <!--UserName-->
+                <!--Provider-->
                 <TextView
                     android:id="@+id/chip_username"
                     android:layout_width="wrap_content"
@@ -178,7 +178,7 @@
                     app:layout_constraintStart_toStartOf="@id/tv_wifi_ssid"
                     app:layout_constraintTop_toBottomOf="@id/tv_wifi_ssid" />
 
-                <!--        Address-->
+                <!--        Address     -->
                 <TextView
                     android:id="@+id/tv_address"
                     android:layout_width="0dp"

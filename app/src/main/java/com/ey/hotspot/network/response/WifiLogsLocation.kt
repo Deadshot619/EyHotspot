@@ -6,7 +6,6 @@ import com.ey.hotspot.utils.constants.Constants
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
-import java.text.DecimalFormat
 
 @Parcelize
 data class WifiLogsLocation(
@@ -32,7 +31,6 @@ data class WifiLogsLocation(
 
     val location: String
         get() = if (LANGUAGE == Constants.ARABIC_LANG) location_arabic else _location
-
 
     val provider_name: String
         get() = if (LANGUAGE == Constants.ARABIC_LANG) provider_name_arabic else _provider_name

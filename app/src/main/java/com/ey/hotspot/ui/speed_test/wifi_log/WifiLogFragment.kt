@@ -62,6 +62,12 @@ class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>()
             mBinding.tvWifiSsid.text = wifiloglist?.location?.name
         }
 
+        //Provider
+        mBinding.chipUsername.text = wifiloglist.location?.provider_name ?: ""
+
+        //City
+        mBinding.tvAddress.text = wifiloglist.location?.location ?: ""
+
         mBinding.tvDate.text = getDate(wifiloglist?.created_at!!.extractDateFromDateTime())
         mBinding.tvStartTimeValue.text = getTime(wifiloglist?.login_at?.extractTimeFromDateTime())
 
