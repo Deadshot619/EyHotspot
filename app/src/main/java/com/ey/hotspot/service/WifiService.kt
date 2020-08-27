@@ -153,17 +153,6 @@ class WifiService : Service() {
     //Network callback for WIFI
     private var wifiNetworkCallback = object : ConnectivityManager.NetworkCallback() {
         override fun onLost(network: Network?) {
-            //Start Service
-            ContextCompat.startForegroundService(
-                applicationContext,
-                Intent(applicationContext, WifiService::class.java).apply {
-                    putExtra(
-                        wifi_notification_key,
-                        getString(R.string.wifi_disconnected_label)
-                    )
-                }
-            )
-
             //When wifi is lost/disconnected, add wifi logout time
             coroutineScope.launch {
                 //Add Logout Time
@@ -179,7 +168,7 @@ class WifiService : Service() {
             /*
              *  Do not validate wifi if the user logs in or skips for first time
              */
-            if(HotSpotApp.prefs?.getFirstTimeLoginOrSkipped() == true) return
+            if (HotSpotApp.prefs?.getFirstTimeLoginOrSkipped() == true) return
 
             //Wifi Ssid
             var wifiSsid = wifiManager.connectionInfo.ssid.extractWifiName()/* + "-Turtlemint"*/
@@ -203,8 +192,8 @@ class WifiService : Service() {
                 applicationContext.getUserLocation { lat, lng ->
                     if (lat != null && lng != null) {   //If Location is available
                         coroutineScope.launch {
-                                //Validate WiFi
-                                validateWifi(wifiSsid = wifiSsid, lat = lat, lng = lng)
+                            //Validate WiFi
+                            validateWifi(wifiSsid = wifiSsid, lat = lat, lng = lng)
                         }
                     }   //TODO 28/07/2020: What if User Location is not available?
                     else {
@@ -263,8 +252,9 @@ class WifiService : Service() {
             networkCapabilities: NetworkCapabilities
         ) {
 //            super.onCapabilitiesChanged(network, networkCapabilities)
-            val connected = networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
-            if(connected)
+            val connected =
+                networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+            if (connected)
                 coroutineScope.launch {
                     Timber.tag("NETWORK CALLBACK : ").d(network.toString())
                     //Get last inserted data & do things accordingly
@@ -347,8 +337,18 @@ class WifiService : Service() {
     }
 
     //Method to call WifiLogin Api
-    private fun callWifiLogin(wifiSsid: String, wifiId: Int, averageSpeed: Double, deviceId: String) {
+    private fun callWifiLogin(
+        wifiSsid: String,
+        wifiId: Int,
+        averageSpeed: Double,
+        deviceId: String
+    ) {
         coroutineScope.launch {
+            withContext(Dispatchers.IO) {
+                //First delete data from DB
+                database.deleteAllDataFromDb()
+            }
+
             val request = WifiLoginRequest(
                 wifi_id = wifiId,
                 average_speed = averageSpeed.toInt(),
@@ -473,7 +473,10 @@ class WifiService : Service() {
         }
     }
 
-    private suspend fun getLastInsertedDataForLogin(validateData: ValidateWifiResponse, wifiSsid: String) {
+    private suspend fun getLastInsertedDataForLogin(
+        validateData: ValidateWifiResponse,
+        wifiSsid: String
+    ) {
         withContext(Dispatchers.IO) {
             //Set this variable to true/
             requireApiCall = true
@@ -488,7 +491,8 @@ class WifiService : Service() {
                     //If user already has access token stored in db, that means the wifi is logged in for current user
                     //So if token is present && disconnect time is not present, set this to false, else true
                     if (HotSpotApp.prefs!!.getAccessToken() == data[0].accessToken && (data[0].disconnectedOn.toString() == "null" &&
-                                data[0].wifiId == validateData.id && (Calendar.getInstance().timeInMillis - data[0].connectedOn.timeInMillis) <= Constants.WIFI_LOGOUT_TIME))
+                                data[0].wifiId == validateData.id && (Calendar.getInstance().timeInMillis - data[0].connectedOn.timeInMillis) <= Constants.WIFI_LOGOUT_TIME)
+                    )
                         requireApiCall = false
                     else
                         requireApiCall = true
@@ -496,7 +500,8 @@ class WifiService : Service() {
                     //If user already has access token stored in db as null, that means the wifi is logged in for current skipped user
                     //So if token is null, set this to false, else true
                     if (data[0].accessToken.isNullOrEmpty() && (data[0].disconnectedOn.toString() == "null" &&
-                                data[0].wifiId == validateData.id && (Calendar.getInstance().timeInMillis - data[0].connectedOn.timeInMillis) <= Constants.WIFI_LOGOUT_TIME))
+                                data[0].wifiId == validateData.id && (Calendar.getInstance().timeInMillis - data[0].connectedOn.timeInMillis) <= Constants.WIFI_LOGOUT_TIME)
+                    )
                         requireApiCall = false
                     else
                         requireApiCall = true
@@ -504,7 +509,7 @@ class WifiService : Service() {
             }
 
             //If wifi is already logged in, then don't call Wifi Login Api & set the flag to true
-            if (requireApiCall && !callingLoginApiFromSpeedTest){
+            if (requireApiCall && !callingLoginApiFromSpeedTest) {
                 callWifiLogin(
                     wifiSsid = wifiSsid,
                     wifiId = validateData.id,
@@ -517,8 +522,8 @@ class WifiService : Service() {
                     wifiSsid = wifiSsid,
                     wifiId = validateData.id,
                     deviceId = DEVICE_ID
-                )}
-            else
+                )
+            } else
                 loginSuccessfulWithSpeedZero = true
 
 

@@ -12,7 +12,6 @@ import com.ey.hotspot.network.DataProvider
 import com.ey.hotspot.network.request.SpeedTestRequest
 import com.ey.hotspot.network.request.ValidateWifiRequest
 import com.ey.hotspot.network.request.WifiLoginRequest
-import com.ey.hotspot.network.request.WifiLogoutRequest
 import com.ey.hotspot.network.response.ValidateWifiResponse
 import com.ey.hotspot.utils.SpeedTestUtils
 import com.ey.hotspot.utils.constants.Constants
@@ -22,7 +21,6 @@ import com.ey.hotspot.utils.constants.getDeviceId
 import com.ey.hotspot.utils.extention_functions.convertBpsToMbps
 import com.ey.hotspot.utils.extention_functions.extractWifiName
 import com.ey.hotspot.utils.extention_functions.getUserLocation
-import com.ey.hotspot.utils.extention_functions.toServerFormat
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlinx.coroutines.channels.ticker
@@ -152,18 +150,16 @@ class BottomNavHomeViewModel(application: Application) : BaseViewModel(applicati
                 if (HotSpotApp.prefs!!.getAccessToken().isNotEmpty()) {  //Logged in user
                     //If user already has access token stored in db, that means the wifi is logged in for current user
                     //So if token is present && disconnect time is not present, set this to false, else true
-                    if (HotSpotApp.prefs!!.getAccessToken() == data[0].accessToken && (data[0].disconnectedOn.toString() == "null" &&
+                    if (HotSpotApp.prefs!!.getAccessToken() == data[0].accessToken && data[0].disconnectedOn.toString() == "null" &&
                                 data[0].wifiId == validateData.id && (Calendar.getInstance().timeInMillis - data[0].connectedOn.timeInMillis) <= Constants.WIFI_LOGOUT_TIME)
-                    )
                         requireApiCall = false
                     else
                         requireApiCall = true
                 } else {    //Skipped user
                     //If user already has access token stored in db as null, that means the wifi is logged in for current skipped user
                     //So if token is null, set this to false, else true
-                    if (data[0].accessToken.isNullOrEmpty() && (data[0].disconnectedOn.toString() == "null" &&
+                    if (data[0].accessToken.isNullOrEmpty() && data[0].disconnectedOn.toString() == "null" &&
                                 data[0].wifiId == validateData.id && (Calendar.getInstance().timeInMillis - data[0].connectedOn.timeInMillis) <= Constants.WIFI_LOGOUT_TIME)
-                    )
                         requireApiCall = false
                     else
                         requireApiCall = true
@@ -283,16 +279,7 @@ class BottomNavHomeViewModel(application: Application) : BaseViewModel(applicati
                                 speed = 0.0
                             )
                         }
-                    else
-                    //When download is successful, & login api hasn't been called before, call Login wifi
-                        coroutineScope.launch {
-                            callWifiLogin(
-                                wifiSsid = wifiSsid,
-                                wifiId = wifiId,
-                                averageSpeed = 0.0,
-                                deviceId = deviceId
-                            )
-                        }
+                    else{}
                 }).startDownload(Constants.DOWNLOAD_LINK)
         }
 
@@ -342,64 +329,4 @@ class BottomNavHomeViewModel(application: Application) : BaseViewModel(applicati
             }
         }
     }
-
-
-
-
-
-    private suspend fun getLastInsertedData(){
-        withContext(Dispatchers.IO){
-            //Get wifi login data from db
-            val data = database.getLastInsertedData()
-
-            /*
-             *  Check whether data is present, if it is then check whether it is synced, If yes then
-             */
-            if (data.isNotEmpty() && !data[0].synced)
-                callWifiLogout(data[0].id, data[0].wifiId, DEVICE_ID, Calendar.getInstance().time)
-
-//            updateLogoutTimeInDb(data)
-        }
-    }
-
-
-    /*
-     *  Method to call WifiLogout Api.
-     *  This api will be called when a wifi connection will be available
-     */
-    private suspend fun callWifiLogout(dbId: Long, wifiId: Int, deviceId: String, logoutAt: Date) {
-        val request = WifiLogoutRequest(
-            wifi_id = wifiId,
-            device_id = deviceId,
-            logout_at = logoutAt.toServerFormat()
-        )
-
-        setDialogVisibilityPost(true)
-        DataProvider.wifiLogout(
-            request = request,
-            success = {
-                if (it.status) {
-                    //If Wifi logout is successful, then update sync status of the data in DB
-                    coroutineScope.launch {
-                        updateSyncStatusOfDataInDb(dbId = dbId, syncStatus = it.status)
-                    }
-                }
-            },
-            error = {
-            }
-        )
-    }
-
-    /*
-     *  This method will update current sync status of Data in DB.
-     *  Will be called when WiFi logout api has been called & wifi has successfully logged out
-     */
-    private suspend fun updateSyncStatusOfDataInDb(dbId: Long, syncStatus: Boolean) {
-        withContext(Dispatchers.IO) {
-            database.updateSyncStatus(id = dbId, sync = syncStatus)
-        }
-    }
-
-
-
 }
