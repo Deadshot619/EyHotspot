@@ -24,7 +24,6 @@ import com.ey.hotspot.utils.constants.Constants
 import com.ey.hotspot.utils.constants.SpeedTestModes
 import com.ey.hotspot.utils.constants.getDeviceId
 import com.ey.hotspot.utils.extention_functions.convertBpsToMbps
-import com.ey.hotspot.utils.extention_functions.extractWifiName
 import com.ey.hotspot.utils.wifi_notification_key
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -173,24 +172,28 @@ class SpeedTestFragmentViewModel(application: Application) : BaseViewModel(appli
             }
 
             //If wifi is already logged in, then don't call Wifi Login Api & set the flag to true
-            if (requireApiCall)
+            if (requireApiCall){
                 callWifiLogin(
-                    wifiSsid = wifiSsid, wifiId = validateData.id, deviceId = DEVICE_ID, averageSpeed = 0.0
+                    wifiSsid = wifiSsid,
+                    wifiId = validateData.id,
+                    deviceId = DEVICE_ID,
+                    averageSpeed = 0.0
                 )
+
+                calculateSpeed(
+                    wifiSsid = wifiSsid,
+                    wifiId = validateData.id,
+                    deviceId = DEVICE_ID
+                )
+            }
             else {
                 loginSuccessfulWithSpeedZero = true
 
                 //Set data to view
-                _wifiData.postValue(validateData)
-                setDialogVisibilityPost(false)
-                _hideDataView.postValue(false)
+                wifiLoginNotRequired(validateData = validateData)
             }
 
             //Calculate speed anyways
-            /*calculateSpeed(
-                wifiId = validateData.id,
-                deviceId = DEVICE_ID
-            )*/
         }
     }
 
@@ -262,20 +265,6 @@ class SpeedTestFragmentViewModel(application: Application) : BaseViewModel(appli
                     //get download speed
                     val downloadSpeed = it?.transferRateBit?.convertBpsToMbps()
 
-                    //Start Service
-                    ContextCompat.startForegroundService(
-                        appInstance,
-                        Intent(appInstance, WifiService::class.java).apply {
-                            putExtra(
-                                wifi_notification_key,
-                                String.format(
-                                    appInstance.getString(R.string.calculated_wifi_speed_label),
-                                    wifiManager.connectionInfo.ssid.extractWifiName(),
-                                    downloadSpeed
-                                )
-                            )
-                        })
-
                     //Check if login has been done before
                     if (loginSuccessfulWithSpeedZero)
                     //When download is successful, & login api has been called before successfully, call Speed Test Wifi Api
@@ -296,24 +285,10 @@ class SpeedTestFragmentViewModel(application: Application) : BaseViewModel(appli
                                 deviceId = deviceId
                             )
                         }
-
-
                 },
                 onProgressReport = {
-
                 },
                 onErrorReport = {
-                    //Start Service
-                    ContextCompat.startForegroundService(
-                        appInstance,
-                        Intent(appInstance, WifiService::class.java).apply {
-                            putExtra(
-                                wifi_notification_key,
-//                                    "No Internet Connection"
-                                appInstance.getString(R.string.no_internet_connection_label)
-                            )
-                        })
-
                     //When download is unsuccessful, try calling Speed Test or Login wifi with 0 speed
 
                     //Check if login has been done before

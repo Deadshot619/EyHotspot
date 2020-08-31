@@ -145,10 +145,7 @@ class HomeFragmentViewModel(application: Application) : BaseViewModel(applicatio
         }
     }
 
-
-
-
-
+        
     private suspend fun getLastInsertedData(){
         withContext(Dispatchers.IO){
             //Get wifi login data from db

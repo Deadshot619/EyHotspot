@@ -155,7 +155,7 @@ class SpeedTestFragment : BaseFragment<FragmentSpeedTestBinding, SpeedTestFragme
                 if (checkWifiContainsKeywords(wifiSSid))
                     getUserLocationAndValidateWifi(wifiSSid /*+ "-Turtlemint"*/)
 
-//                showMessage(wifiSSid.contains("Tplink").toString())
+//                showMessage(wifiSSid.contains("KSA Free Wifi", true).toString())
             }
         }
     }
