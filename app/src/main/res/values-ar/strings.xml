@@ -74,7 +74,7 @@
 
 
     <!--My Profile-->
-    <string name="my_profile_label">ملفي</string>
+    <string name="my_profile_label">ملفي الشخصي</string>
     <string name="update_profile_label">تحديث الملف</string>
     <string name="retrieving_profile_details_label">جارٍ استرداد معلومات الملف الشخصي …</string>
     <string name="updating_profile_label">جارٍ تحديث معلومات الملف الشخصي …</string>
@@ -84,7 +84,7 @@
     <!--    Registration Option    -->
     <string name="verify_account_label">التحقق من الحساب</string>
     <string name="verification_method_label">يرجى تحديد خيار للتحقق من حسابك</string>
-    <string name="otp_sms_label">Verfiy OTP باستخدام الرسائل القصيرة</string>
+    <string name="otp_sms_label">تحقق من كلمة المرور لمرة واحدة باستخدام الرسائل القصيرة</string>
     <string name="email_link_label">تحقق باستخدام البريد الإلكتروني</string>
 
     <!--Email verification-->
@@ -95,7 +95,7 @@
 
     <!--Mobile Number verification-->
     <string name="mobile_no_verification_label">التحقق من رقم الهاتف المحمول</string>
-    <string name="otp_sent_label">الرجاء إدخال OTP المرسلة إلى %s</string>
+    <string name="otp_sent_label">الرجاء إدخال  كلمة المرور الصالحة لمرة واحدة المرسلة إلى %s</string>
     <string name="resend_label">إعادة إرسال</string>
 
     <!--Incomplete registration-->
@@ -104,7 +104,7 @@
     <string name="complete_registration_label">أكمل تسجيلك بتحديد الخيار أدناه</string>
 
     <!--    OTP-->
-    <string name="invalid_otp_label">OTP غير صحيح</string>
+    <string name="invalid_otp_label">كلمة المرور الصالحة لمرة واحدة غير صحيح</string>
 
     <!--Review & Complaint-->
     <string name="reviews_and_complaint">التعليقات والشكاوى</string>
@@ -197,17 +197,17 @@
     <string name="terms_condition">قبول الشروط والأحكام</string>
     <string name="get_started">تسجيل</string>
     <string name="or">أو</string>
-    <string name="otp_title">الرجاء إدخال كلمة المرور OTP المرسلة إلى </string>
-    <string name="resend_otp_label">إعادة إرسال OTP</string>
+    <string name="otp_title">الرجاء إدخال كلمة المرور لمرة واحدة المرسلة إلى </string>
+    <string name="resend_otp_label">إعادة إرسال كلمة المرور الصالحة لمرة واحدة</string>
     <string name="btn_verify">تحقق</string>
-    <string name="receive_otp">لم تتلق OTP؟</string>
+    <string name="receive_otp">لم تستلم كلمة المرور لمرة واحدة؟</string>
     <string name="loginHeaderName">نقطة اتصال</string>
     <string name="loginHeaderNameSub">يربط العالم ...!</string>
     <string name="navigate_label">التنقل</string>
     <string name="navigate_now_label">التنقل</string>
     <string name="register_with_us">سجل معنا</string>
     <string name="skip">تخطى</string>
-    <string name="otp_label">OTP</string>
+    <string name="otp_label">كلمة المرور الصالحة لمرة واحدة</string>
     <string name="recently_search_label">البحث الأخير</string>
     <string name="rate_now_label">قيم واي فاي</string>
     <!--    <string name="arabic">عربى</string>-->
@@ -242,14 +242,14 @@
     <string name="google_sign_failed">فشل تسجيل الدخول جوجل</string>
     <string name="facebook">facebook</string>
     <string name="no_data_available">لا تتوافر بيانات</string>
-    <string name="enter_valid_otp">أدخل ملف otp صالحًا</string>
+    <string name="enter_valid_otp">أدخل كلمة المرور الصالحة لمرة واحدة صالح</string>
     <string name="invalid_confirm_password">تأكيد كلمة المرور غير صالحة</string>
     <string name="pwd_confirm_pwd_empty">يجب ألا يكون حقل كلمة المرور وتأكيد كلمة المرور فارغًا</string>
     <string name="email_id_mobil_no">معرف البريد الإلكتروني / رقم الجوال</string>
     <string name="enter_email_mobile">أدخل معرف البريد الإلكتروني الخاص بك / رقم الجوال</string>
-    <string name="send_otp">إرسال OTP</string>
+    <string name="send_otp">أرسل كلمة المرور لمرة واحدة</string>
     <string name="verify_otp">تحقق </string>
-    <string name="btnResendOTP">إعادة إرسال OTP</string>
+    <string name="btnResendOTP">إعادة إرسال كلمة المرور الصالحة لمرة واحدة</string>
     <string name="verify_account">التحقق من الحساب</string>
     <string name="secure_password">إنشاء كلمة مرور جديدة</string>
     <string name="password_reset_label">إعادة تعيين كلمة المرور</string>
@@ -269,8 +269,6 @@
     <string name="invalid_Name">لا يتم قبول الأحرف الرقمية والخاصة في هذا المجال</string>
     <string name="empty_lastName">حقل اسم العائلة مطلوب</string>
     <string name="empty_captcha">مطلوب كود كلمة التحقق</string>
-
-    <string-array name="otp_sent_msg">تم إرسال OTP إلى رقم هاتفك المحمول المسجل</string-array>
 
     <!--    Reviews & Complaints Sort Type string  -->
     <string-array name="review_complaint_sort_type">
