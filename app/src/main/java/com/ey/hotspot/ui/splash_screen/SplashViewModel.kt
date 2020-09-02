@@ -5,6 +5,8 @@ import com.ey.hotspot.app_core_lib.BaseViewModel
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.network.DataProvider
 import com.ey.hotspot.utils.WIFI_KEYWORDS
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class SplashViewModel(application: Application): BaseViewModel(application) {
@@ -15,7 +17,7 @@ class SplashViewModel(application: Application): BaseViewModel(application) {
 
     //Retrieve & store Wifi key words
     private fun getWifiSearchKeywords(){
-        coroutineScope.launch {
+        CoroutineScope(Dispatchers.Main).launch {
             DataProvider.wifiSearchKeyWords(
                 success = {
                     if (it.status){
