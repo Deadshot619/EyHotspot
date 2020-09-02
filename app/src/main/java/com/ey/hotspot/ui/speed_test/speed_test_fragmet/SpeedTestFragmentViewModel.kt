@@ -2,12 +2,9 @@ package com.ey.hotspot.ui.speed_test.speed_test_fragmet
 
 import android.app.Application
 import android.content.Context
-import android.content.Intent
 import android.net.wifi.WifiManager
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseViewModel
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.database.wifi_info.WifiInfoDatabase
@@ -17,14 +14,14 @@ import com.ey.hotspot.network.DataProvider
 import com.ey.hotspot.network.request.SpeedTestRequest
 import com.ey.hotspot.network.request.ValidateWifiRequest
 import com.ey.hotspot.network.request.WifiLoginRequest
+import com.ey.hotspot.network.request.WifiLogoutRequest
 import com.ey.hotspot.network.response.ValidateWifiResponse
-import com.ey.hotspot.service.WifiService
 import com.ey.hotspot.utils.SpeedTestUtils
 import com.ey.hotspot.utils.constants.Constants
 import com.ey.hotspot.utils.constants.SpeedTestModes
 import com.ey.hotspot.utils.constants.getDeviceId
 import com.ey.hotspot.utils.extention_functions.convertBpsToMbps
-import com.ey.hotspot.utils.wifi_notification_key
+import com.ey.hotspot.utils.extention_functions.toServerFormat
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -106,29 +103,17 @@ class SpeedTestFragmentViewModel(application: Application) : BaseViewModel(appli
                         }
                     } else {
                         validateWifiSuccessful = false
-                        ContextCompat.startForegroundService(
-                            appInstance,
-                            Intent(appInstance, WifiService::class.java).apply {
-                                putExtra(
-                                    wifi_notification_key,
-                                    appInstance.getString(R.string.wifi_not_validated_label)
-                                )
-                            })
 
                         _hideDataView.value = !it.status
                         setDialogVisibility(false)
+
+                        coroutineScope.launch {
+                            getLastInsertedData()
+                        }
                     }
                 },
                 error = {
                     validateWifiSuccessful = false
-                    ContextCompat.startForegroundService(
-                        appInstance,
-                        Intent(appInstance, WifiService::class.java).apply {
-                            putExtra(
-                                wifi_notification_key,
-                                appInstance.getString(R.string.wifi_not_validated_label)
-                            )
-                        })
 
                     _hideDataView.value = true
                 }
@@ -358,6 +343,91 @@ class SpeedTestFragmentViewModel(application: Application) : BaseViewModel(appli
                     )
                 )
             }
+        }
+    }
+
+
+
+
+
+    private suspend fun getLastInsertedData(){
+        withContext(Dispatchers.IO){
+            //Get wifi login data from db
+            val data = database.getLastInsertedData()
+
+            /*
+             *  Check whether data is present, if it is then check whether it is synced, If yes then
+             */
+            if (data.isNotEmpty() && !data[0].synced)
+                callWifiLogout(data[0].id, data[0].wifiId, DEVICE_ID, Calendar.getInstance().time)
+
+            updateLogoutTimeInDb(data)
+        }
+    }
+
+    /*
+     *  Method to Update Logout Time in DB.
+     *  Will be called when wifi is disconnected/lost
+     */
+    private suspend fun updateLogoutTimeInDb(lastInsertedData: List<WifiInformationTable>) {
+        //Update data in table
+        withContext(Dispatchers.IO) {
+//            val lastInsertedData: List<WifiInformationTable> = database.getLastInsertedData()
+
+            if (lastInsertedData.isNotEmpty() && lastInsertedData[0].disconnectedOn.toString() == "null") {
+                database.updateWifiInfoData(
+                    id = lastInsertedData[0].id,
+                    disconnectedOn = Calendar.getInstance()
+                )
+
+
+                /*
+                if (_currentlyInsertedDataId >= 0L) {   //Update data only if key is >= 0
+                    val success = database.updateWifiInfoData(
+                        id = _currentlyInsertedDataId,
+                        disconnectedOn = Calendar.getInstance()
+                    )
+                */
+            }
+        }
+    }
+
+    /*
+     *  Method to call WifiLogout Api.
+     *  This api will be called when a wifi connection will be available
+     */
+    private suspend fun callWifiLogout(dbId: Long, wifiId: Int, deviceId: String, logoutAt: Date) {
+        val request = WifiLogoutRequest(
+            wifi_id = wifiId,
+            device_id = deviceId,
+            logout_at = logoutAt.toServerFormat()
+        )
+
+        setDialogVisibilityPost(true)
+        DataProvider.wifiLogout(
+            request = request,
+            success = {
+                if (it.status) {
+                    //If Wifi logout is successful, then update sync status of the data in DB
+                    coroutineScope.launch {
+                        updateSyncStatusOfDataInDb(dbId = dbId, syncStatus = it.status)
+                    }
+                }
+
+                setDialogVisibilityPost(false)
+            },
+            error = {
+            }
+        )
+    }
+
+    /*
+     *  This method will update current sync status of Data in DB.
+     *  Will be called when WiFi logout api has been called & wifi has successfully logged out
+     */
+    private suspend fun updateSyncStatusOfDataInDb(dbId: Long, syncStatus: Boolean) {
+        withContext(Dispatchers.IO) {
+            database.updateSyncStatus(id = dbId, sync = syncStatus)
         }
     }
 
