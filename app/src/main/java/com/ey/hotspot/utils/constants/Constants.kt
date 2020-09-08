@@ -33,8 +33,8 @@ interface Constants {
 
 
         //Download Link
-        const val DOWNLOAD_LINK =
-            "https://images.apple.com/v/imac-with-retina/a/images/overview/5k_image.jpg"
+        const val DOWNLOAD_LINK = "http://nearbyhs.php-dev.in/EyHotspots/public/images/5k_image.jpg"
+//            "https://images.apple.com/v/imac-with-retina/a/images/overview/5k_image.jpg"
 
         //Country Code
         const val SAUDI_ARABIA_COUNTRY_CODE = /*966*/ 187
