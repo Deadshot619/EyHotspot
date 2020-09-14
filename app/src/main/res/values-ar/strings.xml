@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE resources [<!ELEMENT resources (string|string-array)*><!ELEMENT string (#PCDATA)><!ATTLIST stringname CDATA #REQUIRED><!ELEMENT string-array (item)*><!ATTLIST string-arrayname CDATA #REQUIRED><!ELEMENT item (#PCDATA)>]>
 <resources>
 
     <!--    <string name="app_name">هوت سبوت</string>-->
@@ -44,20 +44,20 @@
     <!--Login screen-->
     <string name="email_id_hint">أدخل معرف البريد الإلكتروني</string>
     <string name="enter_password">أدخل كلمة المرور</string>
-    <string name="enter_captcha">أدخل كلمة التحققق</string>
-    <string name="login_credentials_msg">تسجيل الدخول إلى البوابة باستخدام بيانات اعتمادك</string>
-    <string name="login_hotspot_msg">ليس لديك حساب معالسعودية واى فاى مجانى؟</string>
-    <string name="get_started_msg">نبدأ الآن!</string>
+    <string name="enter_captcha">أدخل كلمة التحقق</string>
+    <string name="login_credentials_msg">تسجيل الدخول إلى البوابة</string>
+    <string name="login_hotspot_msg">هل لديك حساب في نقطة اتصال (هوت سبوت)؟</string>
+    <string name="get_started_msg">ابدأ الآن</string>
     <string name="connecting_kingdom_label">ربط \n المملكة العربية السعودية …!</string>
 
     <!--    Register User   -->
     <string name="first_name_label">الاسم الاول</string>
     <string name="last_name_label">الكنية</string>
-    <string name="email_id_label">عنوان الايميل</string>
-    <string name="country_code_label">الرقم الدولي</string>
-    <string name="mobile_number_label">رقم الهاتف المحمول</string>
-    <string name="password_label">كلمه السر</string>
-    <string name="confirm_password_label">اتأكيد كلمة المرور</string>
+    <string name="email_id_label">عنوان البريد الالكتروني</string>
+    <string name="country_code_label">رمز البلد</string>
+    <string name="mobile_number_label">رقم الجوال</string>
+    <string name="password_label">كلمه المرور</string>
+    <string name="confirm_password_label">تأكيد كلمة المرور</string>
     <string name="captcha_label">أدخل كلمة التحقق المبينة أدناه</string>
     <string name="accept_terms_and_condition_label">تحتاج إلى قبول الشروط والأحكام للمتابعة</string>
     <string name="password_format_str">يجب أن تحتوي كلمة المرور على 8-32 حرفًا واحدًا كبيرًا ،
@@ -268,7 +268,7 @@
     <string name="empty_firstName">حقل الاسم الأول إلزامي</string>
     <string name="invalid_Name">لا يتم قبول الأحرف الرقمية والخاصة في هذا المجال</string>
     <string name="empty_lastName">حقل اسم العائلة مطلوب</string>
-    <string name="empty_captcha">مطلوب كود كلمة التحقق</string>
+    <string name="empty_captcha">رمز كلمة التحقق مطلوب</string>
 
     <!--    Reviews & Complaints Sort Type string  -->
     <string-array name="review_complaint_sort_type">
