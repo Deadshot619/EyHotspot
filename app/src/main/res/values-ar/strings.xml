@@ -78,7 +78,7 @@
     <string name="update_profile_label">تحديث الملف</string>
     <string name="retrieving_profile_details_label">جارٍ استرداد معلومات الملف الشخصي …</string>
     <string name="updating_profile_label">جارٍ تحديث معلومات الملف الشخصي …</string>
-    <string name="logout_label">تسجيل خروج</string>
+    <string name="logout_label">تسجيل الخروج</string>
     <string name="logout_confirm"> هل أنت متأكد أنك تريد تسجيل الخروج؟</string>
 
     <!--    Registration Option    -->
@@ -107,7 +107,7 @@
     <string name="invalid_otp_label">كلمة المرور الصالحة لمرة واحدة غير صحيح</string>
 
     <!--Review & Complaint-->
-    <string name="reviews_and_complaint">التعليقات والشكاوى</string>
+    <string name="reviews_and_complaint">المراجعة والشكاوي</string>
     <string name="reviews_label">المراجعات</string>
     <string name="complaint_label">شكاوي</string>
     <string name="all_label">الكل</string>
@@ -135,7 +135,7 @@
     <string name="speed_test_result_label">نتيجة اختبار السرعة</string>
     <string name="download_label">تحميل</string>
     <string name="comment_and_evaluate_label">التعليق والتقييم</string>
-    <string name="rate_wifi_label">قيم واي فاي</string>
+    <string name="rate_wifi_label">تقييم الشبكة</string>
 
     <!--Wifi Log List-->
     <string name="empty_log_list_label">لم يتم العثور على سجلات</string>
@@ -181,9 +181,6 @@
     <string name="provide_location_permission_label">تحتاج إلى تقديم إذن الموقع / GPS حتى يعمل هذا التطبيق بسلاسة</string>
     <string name="open_label">افتح</string>
 
-    <string name="btTextNavigateNow">انتقل الآن</string>
-    <string name="btTextComment"><![CDATA[التعليق والتقييم]]></string>
-    <string name="btTextRateWifi">معدل واي فاي</string>
     <string name="wifi_name">اسم واي فاي</string>
     <string name="issue_type">نوع القضية</string>
     <string name="invalid_email">اسم مستخدم غير صالح</string>
@@ -203,13 +200,11 @@
     <string name="receive_otp">لم تستلم كلمة المرور لمرة واحدة؟</string>
     <string name="loginHeaderName">نقطة اتصال</string>
     <string name="loginHeaderNameSub">يربط العالم ...!</string>
-    <string name="navigate_label">التنقل</string>
     <string name="navigate_now_label">التنقل</string>
     <string name="register_with_us">سجل معنا</string>
     <string name="skip">تخطى</string>
     <string name="otp_label">كلمة المرور الصالحة لمرة واحدة</string>
     <string name="recently_search_label">البحث الأخير</string>
-    <string name="rate_now_label">قيم واي فاي</string>
     <!--    <string name="arabic">عربى</string>-->
     <!--    <string name="english">الإنجليزية</string>-->
     <string name="save_settings_label">احفظ التغييرات</string>

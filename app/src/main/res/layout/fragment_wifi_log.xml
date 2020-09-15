@@ -121,7 +121,7 @@
                     android:layout_marginTop="@dimen/common_margin_24"
                     android:paddingStart="@dimen/common_padding"
                     android:paddingEnd="@dimen/common_padding"
-                    android:text="@string/rate_now_label"
+                    android:text="@string/rate_wifi_label"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/ll_date" />
 

@@ -187,9 +187,6 @@
     <string name="change_password">Change Password</string>
     <string name="newPassword">New Password</string>
     <string name="confirm_password">Confirm Password</string>
-    <string name="btTextNavigateNow">Navigate Now</string>
-    <string name="btTextComment"><![CDATA[Comment & Evaluate]]></string>
-    <string name="btTextRateWifi">Rate Wifi</string>
     <string name="wifi_name">Wifi Name</string>
     <string name="issue_type">Issue type</string>
     <string name="login_hotspot_msg">Don\'t have an account with KSA Free Wifi?</string>
@@ -210,13 +207,12 @@
     <string name="receive_otp">Didn\'t receive OTP?</string>
     <string name="loginHeaderName">Hotspot</string>
     <string name="loginHeaderNameSub">Connecting world...!</string>
-    <string name="navigate_label">NAVIGATING</string>
+
     <string name="navigate_now_label">NAVIGATE</string>
     <string name="register_with_us">Register With Us</string>
     <string name="skip">SKIP</string>
     <string name="otp_label">OTP</string>
     <string name="recently_search_label">Recent  Search</string>
-    <string name="rate_now_label">RATE WIFI</string>
     <!--    <string name="arabic">Arabic</string>-->
     <string name="arabic">عربى</string>
     <string name="english">English</string>

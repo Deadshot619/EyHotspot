@@ -185,7 +185,7 @@
             <!--Rate Now-->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_rate_now"
-                android:text="@string/rate_now_label"
+                android:text="@string/rate_wifi_label"
                 android:onClick="@{() -> clickListener.onClickRateNow(data)}"
                 style="@style/OutlinedButtonNormal"
                 android:layout_width="wrap_content"

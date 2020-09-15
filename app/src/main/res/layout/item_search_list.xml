@@ -192,7 +192,7 @@
                 android:layout_marginEnd="@dimen/common_margin_between_fields"
                 android:onClick="@{() -> clickListener.onClickRateNow(data)}"
 
-                android:text="@string/rate_now_label"
+                android:text="@string/rate_wifi_label"
                 android:textDirection="locale"
                 app:layout_constraintEnd_toStartOf="@id/btn_navigate_now"
                 app:layout_constraintTop_toBottomOf="@id/tv_location" />
