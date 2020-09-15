@@ -38,6 +38,8 @@
                 <!--            Language    -->
                 <LinearLayout
                     style="@style/SettingsStyle"
+                    android:paddingTop="@dimen/common_padding"
+                    android:paddingBottom="@dimen/common_padding"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
