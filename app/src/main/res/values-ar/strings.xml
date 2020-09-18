@@ -66,7 +66,7 @@
         حرف خاص
     (@, $ !, %, *, ?, &amp;, #)</string>
     <string name="password_format">الرجاء إدخال كلمة السر الصحيحة</string>
-    <string name="select_country_code_error_msg">الرجاء تحديد رمز الدولة!</string>
+    <string name="select_country_code_error_msg">يرجى تحديد رمز البلد</string>
     <string name="email_required_label">حقل البريد الإلكتروني مطلوب</string>
     <string name="password_required_label">حقل كلمة المرور مطلوب</string>
     <string name="first_name_required_label">حقل الاسم الأول مطلوب</string>
@@ -108,8 +108,8 @@
 
     <!--Review & Complaint-->
     <string name="reviews_and_complaint">المراجعة والشكاوي</string>
-    <string name="reviews_label">المراجعات</string>
-    <string name="complaint_label">شكاوي</string>
+    <string name="reviews_label">التقييم</string>
+    <string name="complaint_label"> شكاوي</string>
     <string name="all_label">الكل</string>
     <string name="confirm_complaint">هل تريد تقديم شكواك؟</string>
     <string name="confirm_review">هل تريد تقديم تصويتك؟</string>
@@ -268,7 +268,7 @@
 
     <!--    Reviews & Complaints Sort Type string  -->
     <string-array name="review_complaint_sort_type">
-        <item>آخر</item>
+        <item>الاخير</item>
         <item>الأقدم</item>
     </string-array>
 
