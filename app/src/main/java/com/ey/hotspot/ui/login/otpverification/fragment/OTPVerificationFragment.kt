@@ -52,7 +52,7 @@ class OTPVerificationFragment :
 
         activity?.setUpToolbar(
             mBinding.toolbarLayout,
-            resources.getString(R.string.otp_label),
+            resources.getString(R.string.verify_account_label),
             true,
             showTextButton = false
         )

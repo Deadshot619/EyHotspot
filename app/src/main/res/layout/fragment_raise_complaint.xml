@@ -83,7 +83,6 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_wifi_provider"
                     tools:text="D-Zone Wifi" />
 
-
                 <!--Spinner-->
                 <androidx.appcompat.widget.AppCompatSpinner
                     android:id="@+id/spinner_issue"

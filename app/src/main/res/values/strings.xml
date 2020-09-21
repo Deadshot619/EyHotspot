@@ -107,8 +107,8 @@
     <string name="all_label">All</string>
     <string name="confirm_complaint">Do you want to submit your complaint?</string>
     <string name="confirm_review">Do you want to submit your rating?</string>
-    <string name="discard_review">Do you want to discard your review? </string>
-    <string name="discard_complaint">Do you want to discard your complaint? </string>
+    <string name="discard_review">Do you want to discard your review?</string>
+    <string name="discard_complaint">Do you want to discard your complaint?</string>
 
     <!--Favourite Wifi-->
     <string name="favoutite_wifi_label">Favourites</string>
@@ -145,7 +145,7 @@
     <string name="wifidate">Date: </string>
 
     <!--Rate Wifi-->
-    <string name="add_remarks_label">Add your feedback here</string>
+    <string name="add_remarks_label">Add Your Remarks / Feedbacks Here</string>
     <string name="cancel_label">Cancel</string>
     <string name="submit_feedback_label">Submit Feedback</string>
     <string name="enter_remark_error_label">Please provide feedback</string>
@@ -157,7 +157,6 @@
     <string name="select_issue_type_label">Select issue type</string>
     <string name="please_select_issue_type_label">Please Select issue type</string>
     <!--    <string name="comment_and_evaluate_label">Comment and Evaluate</string>-->
-
 
     <!--WiFi Service-->
     <string name="wifi_service_label">WiFi Service</string>
@@ -176,7 +175,7 @@
 
 
     <!--    Location Permission     -->
-    <string name="provide_location_permission_label">You need to provide Location/GPS permission for this app to run smoothly</string>
+    <string name="provide_location_permission_label">Please Enable The Location Tracking To See Near By Hotspots</string>
     <string name="open_label">Open</string>
 
     <string name="maps_api_key" translatable="false">AIzaSyAyKP89tXni4J32JCJw60dVTShBXqR_ieU</string>
@@ -192,7 +191,7 @@
     <string name="wifi_name">Wifi Name</string>
     <string name="issue_type">Issue type</string>
     <string name="login_hotspot_msg">Don\'t have an account with KSA Free Wifi?</string>
-    <string name="get_started_msg">GET STARTED NOW!</string>
+    <string name="get_started_msg">GET STARTED NOW</string>
     <string name="invalid_email">Invalid User Name</string>
     <string name="verify_link_msg">"A verification link has been sent to "</string>
     <string name="ok_label">OK</string>
@@ -252,7 +251,7 @@
     <string name="email_id_mobil_no">Email Id /Mobile Number</string>
     <string name="enter_email_mobile">Enter Email Id or Mobile Number</string>
     <string name="send_otp">SEND OTP</string>
-    <string name="verify_otp">VERIFY </string>
+    <string name="verify_otp">VERIFY OTP</string>
     <string name="btnResendOTP">RESEND OTP</string>
     <string name="verify_account">Verify Account</string>
     <string name="secure_password">Create New Password</string>
@@ -266,7 +265,7 @@
     <string name="captcha_characters">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789</string>
     <string name="forgotpassword_label">Forgot Password</string>
     <string name="invalid_captcha">Invalid Captcha</string>
-    <string name="msg_mandatory_fields">mandatory fields</string>
+    <string name="msg_mandatory_fields">fields are mandatory</string>
     <string name="otp_sent_msg">An OTP has been sent to your registered Mobile number</string>
     <string name="empty_firstName">First name field is mandatory</string>
     <string name="invalid_Name">Numeric and Special Characters are not accepted in this field</string>

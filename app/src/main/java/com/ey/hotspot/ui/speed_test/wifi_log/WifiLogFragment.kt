@@ -90,7 +90,6 @@ class WifiLogFragment : BaseFragment<FragmentWifiLogBinding, WifiLogViewModel>()
             mBinding.ivFavourites.setImageResource(R.drawable.ic_favorite_filled_gray)
         }
         setUpRecyclerView(mBinding.rvSpeedTestLogs)
-
     }
 
     private fun setUpRecyclerView(recyclerView: RecyclerView) {

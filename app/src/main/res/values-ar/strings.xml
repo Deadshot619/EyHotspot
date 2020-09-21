@@ -44,17 +44,17 @@
     <!--Login screen-->
     <string name="email_id_hint">ادخل عنوان البريد الالكتروني</string>
     <string name="enter_password">ادخل كلمة المرور</string>
-    <string name="enter_captcha">أدخل كلمة التحقق</string>
+    <string name="enter_captcha">أدخل رمز التحقق</string>
     <string name="login_credentials_msg">تسجيل الدخول إلى البوابة</string>
-    <string name="login_hotspot_msg">هل لديك حساب في نقطة اتصال (هوت سبوت)؟</string>
+    <string name="login_hotspot_msg">ليس لديك حساب في شبكة الواي فاي المجانية؟</string>
     <string name="get_started_msg">ابدأ الآن</string>
     <string name="connecting_kingdom_label">ربط \n المملكة العربية السعودية …!</string>
 
     <!--    Register User   -->
     <string name="first_name_label">الاسم الاول</string>
-    <string name="last_name_label">الكنية</string>
+    <string name="last_name_label">الاسم الاخير</string>
     <string name="email_id_label">عنوان البريد الالكتروني</string>
-    <string name="country_code_label">رمز البلد</string>
+    <string name="country_code_label">رمز الدولة</string>
     <string name="mobile_number_label">رقم الجوال</string>
     <string name="password_label">كلمه المرور</string>
     <string name="confirm_password_label">تأكيد كلمة المرور</string>
@@ -107,14 +107,14 @@
     <string name="invalid_otp_label">كلمة المرور الصالحة لمرة واحدة غير صحيح</string>
 
     <!--Review & Complaint-->
-    <string name="reviews_and_complaint">المراجعة والشكاوي</string>
+    <string name="reviews_and_complaint">التقييم والشكاوي</string>
     <string name="reviews_label">التقييم</string>
     <string name="complaint_label"> شكاوي</string>
     <string name="all_label">الكل</string>
-    <string name="confirm_complaint">هل تريد تقديم شكواك؟</string>
-    <string name="confirm_review">هل تريد تقديم تصويتك؟</string>
-    <string name="discard_review">هل تريد تجاهل رأيك؟ </string>
-    <string name="discard_complaint">هل تريد تجاهل شكواك؟ </string>
+    <string name="confirm_complaint">هل تريد تقديم الشكوى؟</string>
+    <string name="confirm_review">هل تريد تقديم تقييمك؟</string>
+    <string name="discard_review">هل تريد تجاهل رأيك؟</string>
+    <string name="discard_complaint">هل تريد تجاهل شكواك؟</string>
 
     <!--Favourite Wifi-->
     <string name="favoutite_wifi_label">المفضلة</string>
@@ -151,14 +151,14 @@
     <string name="wifidate">تاريخ:</string>
 
     <!--Rate Wifi-->
-    <string name="add_remarks_label">أضف ملاحظاتك هنا</string>
+    <string name="add_remarks_label">أضف ملاحظاتك / ملاحظاتك هنا</string>
     <string name="cancel_label">إلغاء</string>
     <string name="submit_feedback_label">إرسال الملاحظات</string>
     <string name="enter_remark_error_label">يرجى تقديم ملاحظات</string>
     <string name="provide_rating_label">يرجى وضع علامة على التقييم</string>
 
     <!--Raise Complaint-->
-    <string name="explain_problem_label">اشرح مشكلتك بالتفصيل هنا</string>
+    <string name="explain_problem_label">شرح مشكلتك بالتفصيل هنا</string>
     <string name="raise_complaint_label">رفع شكوى</string>
     <string name="select_issue_type_label">نوع القضية</string>
     <string name="please_select_issue_type_label">يرجى تحديد نوع المشكلة</string>
@@ -180,7 +180,7 @@
     <string name="yes_label">نعم</string>
 
     <!--    Location Permission     -->
-    <string name="provide_location_permission_label">تحتاج إلى تقديم إذن الموقع / GPS حتى يعمل هذا التطبيق بسلاسة</string>
+    <string name="provide_location_permission_label">يرجى تفعيل نظام تتبع الخرائط حتى تتمكن من رؤية المواقع التي تحتوي على شبكة الواي فاي المجانية</string>
     <string name="open_label">افتح</string>
 
     <string name="wifi_name">اسم واي فاي</string>
@@ -243,8 +243,8 @@
     <string name="pwd_confirm_pwd_empty">يجب ألا يكون حقل كلمة المرور وتأكيد كلمة المرور فارغًا</string>
     <string name="email_id_mobil_no">معرف البريد الإلكتروني / رقم الجوال</string>
     <string name="enter_email_mobile">أدخل معرف البريد الإلكتروني الخاص بك / رقم الجوال</string>
-    <string name="send_otp">أرسل كلمة المرور لمرة واحدة</string>
-    <string name="verify_otp">تحقق </string>
+    <string name="send_otp">تحقق من كلمة المرور الصالحة لمرة واحدة</string>
+    <string name="verify_otp">تحقق من كلمة المرور الصالحة لمرة واحدة</string>
     <string name="btnResendOTP">إعادة إرسال كلمة المرور الصالحة لمرة واحدة</string>
     <string name="verify_account">التحقق من الحساب</string>
     <string name="secure_password">إنشاء كلمة مرور جديدة</string>
@@ -260,7 +260,7 @@
     -->
     <string name="forgotpassword_label">هل نسيت كلمة المرور</string>
     <string name="invalid_captcha">كلمة التحقق غير صالحة</string>
-    <string name="msg_mandatory_fields"> الحقول الإلزامية</string>
+    <string name="msg_mandatory_fields">الحقول إلزامية</string>
     <string name="empty_firstName">حقل الاسم الأول إلزامي</string>
     <string name="invalid_Name">لا يتم قبول الأحرف الرقمية والخاصة في هذا المجال</string>
     <string name="empty_lastName">حقل اسم العائلة مطلوب</string>
