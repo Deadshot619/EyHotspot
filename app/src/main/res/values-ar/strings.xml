@@ -15,7 +15,7 @@
     <string name="searchplace">بحث</string>
     <string name="permission_description">Lorem ipsum dolor sit na aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
     <string name="agree_terms">أنا موافق</string>
-    <string name="enter_register_mobile">أدخل رقم هاتفك المحمول المسجل</string>
+    <string name="enter_register_mobile">ادخل رقم الجوال الخاص بك</string>
     <string name="back_to_login_msg">العودة إلى شاشة تسجيل الدخول</string>
     <string name="enter_register_email">أدخل معرف بريدك الإلكتروني المسجل</string>
     <string name="change_password">غير كلمة السر</string>
@@ -42,8 +42,8 @@
     <string name="empty_query_alert_label">يرجى إدخال استفسار</string>
 
     <!--Login screen-->
-    <string name="email_id_hint">أدخل معرف البريد الإلكتروني</string>
-    <string name="enter_password">أدخل كلمة المرور</string>
+    <string name="email_id_hint">ادخل عنوان البريد الالكتروني</string>
+    <string name="enter_password">ادخل كلمة المرور</string>
     <string name="enter_captcha">أدخل كلمة التحقق</string>
     <string name="login_credentials_msg">تسجيل الدخول إلى البوابة</string>
     <string name="login_hotspot_msg">هل لديك حساب في نقطة اتصال (هوت سبوت)؟</string>
@@ -65,7 +65,7 @@
         أرقام عشرية (0-9) ،
         حرف خاص
     (@, $ !, %, *, ?, &amp;, #)</string>
-    <string name="password_format">الرجاء إدخال كلمة السر الصحيحة</string>
+    <string name="password_format">الرجاء إدخال كلمة مرور صالحة</string>
     <string name="select_country_code_error_msg">يرجى تحديد رمز البلد</string>
     <string name="email_required_label">حقل البريد الإلكتروني مطلوب</string>
     <string name="password_required_label">حقل كلمة المرور مطلوب</string>
@@ -124,11 +124,11 @@
     <string name="users_connected_label">المستخدمون متصلون</string>
     <string name="go_label">اذهب</string>
     <string name="download_speed_label">سرعة التنزيل</string>
-    <string name="retest_label">إعادة الاختبار</string>
+    <string name="retest_label">اعد الضبط</string>
     <string name="wifi_disabled_label">واي فاي معطل</string>
     <string name="wifi_enable_conformation">يبدو أن wifi الخاص بك معطل ، هل تريد تمكينه؟</string>
-    <string name="network_not_validated_label">الشبكة الحالية لا تنتمي إلى واي فاي مجاني في المملكة العربية السعودية</string>
-    <string name="wifi_not_validated_label">الشبكة الحالية لا تنتمي إلى واي فاي مجاني في المملكة العربية السعودية</string>
+    <string name="network_not_validated_label">الشبكة الحالية لاتنتمي لشبكة الواي فاي المجانية</string>
+    <string name="wifi_not_validated_label">الشبكة الحالية لاتنتمي لشبكة الواي فاي المجانية</string>
     <string name="error_while_calculating_download_speed">حدث خطأ أثناء حساب سرعة التنزيل</string>
 
 
@@ -191,7 +191,7 @@
     <string name="completeRegistration">أكمل تسجيلك بإعادة إرسال الرابط</string>
     <string name="first_last_name_label">الاسم الاول الاسم الاخير</string>
 
-    <string name="enter_confirm_password">اعادة ادخال كلمة السر</string>
+    <string name="enter_confirm_password">اعد كتابة كلمة المرور</string>
     <string name="sign_agree_msg">بالتسجيل أنت توافق على</string>
     <string name="terms_condition">قبول الشروط والأحكام</string>
     <string name="get_started">تسجيل</string>
@@ -214,7 +214,7 @@
     <string name="dummytext">Lorem lpsum هو ببساطة نص وهمي</string>
     <string name="language_label">لغة</string>
     <string name="gps_status_label">كشف GPS</string>
-    <string name="get_wifi_label">احصل على السجلات واي فاي</string>
+    <string name="get_wifi_label">احصل على سجلات الواي فاي</string>
     <string name="notifications_label">إشعارات</string>
     <string name="setting_label">اعداداتي</string>
     <string name="setting_title_label">أنت متأكد من أنك تريد حفظ الإعدادات.</string>
@@ -251,7 +251,7 @@
     <string name="password_reset_label">إعادة تعيين كلمة المرور</string>
     <string name="enter_email_or_password">أدخل معرف البريد الإلكتروني أو رقم الجوال</string>
     <string name="sign_in_issue">أدخل عنوان البريد الإلكتروني المرتبط بحسابك</string>
-    <string name="reenter_confirm_password">اعادة ادخال كلمة السر</string>
+    <string name="reenter_confirm_password">اعد كتابة كلمة المرور</string>
     <string name="sms_label">رسالة قصيرة</string>
     <string name="email_label">البريد الإلكتروني</string>
     <string name="choose_verify_option">حدد خيار التحقق</string>
