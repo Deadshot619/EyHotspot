@@ -120,7 +120,6 @@ class VerifyOTPFragment :
 
     private fun setUpObserver() {
 
-
         mViewModel.forgotPasswordVerifyOTPResponse.observe(viewLifecycleOwner, Observer {
 
             it.getContentIfNotHandled()?.let {

@@ -52,7 +52,7 @@
 
     <!--    Register User   -->
     <string name="first_name_label">الاسم الاول</string>
-    <string name="last_name_label">الاسم الاخير</string>
+    <string name="last_name_label">الاسم الاحدث</string>
     <string name="email_id_label">عنوان البريد الالكتروني</string>
     <string name="country_code_label">رمز الدولة</string>
     <string name="mobile_number_label">رقم الجوال</string>
@@ -107,9 +107,9 @@
     <string name="invalid_otp_label">كلمة المرور الصالحة لمرة واحدة غير صحيح</string>
 
     <!--Review & Complaint-->
-    <string name="reviews_and_complaint">التقييم والشكاوي</string>
+    <string name="reviews_and_complaint">التقييم والالشكاوي</string>
     <string name="reviews_label">التقييم</string>
-    <string name="complaint_label"> شكاوي</string>
+    <string name="complaint_label"> الشكاوي</string>
     <string name="all_label">الكل</string>
     <string name="confirm_complaint">هل تريد تقديم الشكوى؟</string>
     <string name="confirm_review">هل تريد تقديم تقييمك؟</string>
@@ -121,7 +121,7 @@
 
     <!--Speed Test-->
     <string name="speed_test_label">اختبار السرعة</string>
-    <string name="users_connected_label">المستخدمون متصلون</string>
+    <string name="users_connected_label">المستخدمون المتصلون</string>
     <string name="go_label">اذهب</string>
     <string name="download_speed_label">سرعة التنزيل</string>
     <string name="retest_label">اعد الضبط</string>
@@ -160,7 +160,7 @@
     <!--Raise Complaint-->
     <string name="explain_problem_label">شرح مشكلتك بالتفصيل هنا</string>
     <string name="raise_complaint_label">رفع شكوى</string>
-    <string name="select_issue_type_label">نوع القضية</string>
+    <string name="select_issue_type_label">نوع الشكوى</string>
     <string name="please_select_issue_type_label">يرجى تحديد نوع المشكلة</string>
     <!--    <string name="comment_and_evaluate_label">التعليق والتقييم</string>-->
 
@@ -184,12 +184,12 @@
     <string name="open_label">افتح</string>
 
     <string name="wifi_name">اسم واي فاي</string>
-    <string name="issue_type">نوع القضية</string>
+    <string name="issue_type">نوع الشكوى</string>
     <string name="invalid_email">اسم مستخدم غير صالح</string>
     <string name="verify_link_msg">تم إرسال رابط التحقق إلى</string>
     <string name="ok_label">حسنا</string>
     <string name="completeRegistration">أكمل تسجيلك بإعادة إرسال الرابط</string>
-    <string name="first_last_name_label">الاسم الاول الاسم الاخير</string>
+    <string name="first_last_name_label">الاسم الاول الاسم الاحدث</string>
 
     <string name="enter_confirm_password">اعد كتابة كلمة المرور</string>
     <string name="sign_agree_msg">بالتسجيل أنت توافق على</string>
@@ -268,7 +268,7 @@
 
     <!--    Reviews & Complaints Sort Type string  -->
     <string-array name="review_complaint_sort_type">
-        <item>الاخير</item>
+        <item>الاحدث</item>
         <item>الأقدم</item>
     </string-array>
 
