@@ -286,7 +286,7 @@
                     android:textAlignment="viewStart"
 
                     android:background="@drawable/password_bitmap"
-                    android:hint="@string/enter_password"
+                    android:hint="@string/password_mandatory"
                     android:text="@={viewModel.password}" />
 
             </com.google.android.material.textfield.TextInputLayout>
