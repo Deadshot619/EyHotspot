@@ -6,6 +6,7 @@ import android.os.Build
 import androidx.multidex.MultiDex
 import com.crashlytics.android.BuildConfig
 import com.crashlytics.android.Crashlytics
+import com.ey.hotspot.service.WifiService
 import com.ey.hotspot.utils.LanguageManager
 import com.ey.hotspot.utils.MyHotSpotSharedPreference
 import com.ey.hotspot.utils.constants.Constants
@@ -16,7 +17,6 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase
 import io.fabric.sdk.android.Fabric
-import org.intellij.lang.annotations.Language
 
 class HotSpotApp : CoreApp() {
 
@@ -50,14 +50,15 @@ class HotSpotApp : CoreApp() {
         //Set global variable Language of app as its default to 'en'
         prefs?.setLanguage(prefs?.getLanguage() ?: Constants.ENGLISH_LANG)
 
-       // FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true);
+        WifiService.callingLoginApiFromSpeedTest = false
+
+        // FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true);
     }
 
 
     override fun attachBaseContext(base: Context?) {
 
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N_MR1) {
-
             if (base != null) {
 
                 CoreApp.sharedPreferences =
@@ -71,6 +72,7 @@ class HotSpotApp : CoreApp() {
         } else {
             super.attachBaseContext(base)
         }
+
         MultiDex.install(this)
     }
 

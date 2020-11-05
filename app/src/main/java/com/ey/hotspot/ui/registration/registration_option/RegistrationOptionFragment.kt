@@ -8,8 +8,11 @@ import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentRegistrationOptionBinding
 import com.ey.hotspot.ui.login.otpverification.fragment.OTPVerificationFragment
-import com.ey.hotspot.utils.replaceFragment
-import com.ey.hotspot.utils.showMessage
+import com.ey.hotspot.utils.constants.VerificationType
+import com.ey.hotspot.utils.constants.setUpToolbar
+import com.ey.hotspot.utils.extention_functions.generateCaptchaCode
+import com.ey.hotspot.utils.extention_functions.replaceFragment
+import com.ey.hotspot.utils.extention_functions.showMessage
 
 class RegistrationOptionFragment :
     BaseFragment<FragmentRegistrationOptionBinding, RegistrationOptionViewModel>() {
@@ -31,18 +34,27 @@ class RegistrationOptionFragment :
     }
 
     lateinit var TYPE_VALUE: String
-    var selectedOption: String = ""
+    var selectedOption: VerificationType? = null
     lateinit var phoneNo: String
     lateinit var emailID: String
+
+    var mCaptcha: String? = null
+    var mEnteredCaptch: String? = null
 
     override fun getLayoutId() = R.layout.fragment_registration_option
     override fun getViewModel() = RegistrationOptionViewModel::class.java
     override fun onBinding() {
 
-        setUpToolbar(
+        /*setUpToolbar(
             toolbarBinding = mBinding.toolbarLayout,
-            title = getString(R.string.registration_label),
+            title = getString(R.string.verify_account_label),
             showUpButton = true
+        )*/
+        activity?.setUpToolbar(
+            mBinding.toolbarLayout,
+            resources.getString(R.string.verify_account_label),
+            true,
+            showTextButton = false
         )
         TYPE_VALUE = getDataFromArguments(this, TYPE_KEY)
         phoneNo = arguments?.getString(mPhoneNO)?.trim() ?: ""
@@ -51,11 +63,28 @@ class RegistrationOptionFragment :
 //        if (TYPE_VALUE == OptionType.TYPE_REGISTRATION.name)
 //            else
 
+        setUpDataViews()
+
         setUpListeners()
 
+
         //If phone no. id empty, then hide the selection
-       if(phoneNo.isEmpty())
-           mBinding.rbSms.visibility = View.GONE
+        if (phoneNo.isEmpty())
+            mBinding.rbSms.visibility = View.GONE
+
+        //Set Email selected
+        mBinding.rbSms.isChecked = true
+    }
+
+    private fun setUpDataViews() {
+
+        setUpCaptcha()
+
+    }
+
+    private fun setUpCaptcha() {
+        mCaptcha = activity?.generateCaptchaCode(5)
+        mBinding.layoutCaptcha.etCaptchaText.setText(mCaptcha)
     }
 
 
@@ -70,11 +99,11 @@ class RegistrationOptionFragment :
                 RadioGroup.OnCheckedChangeListener { group, checkedId ->
                     val radio: RadioButton? = group?.findViewById(checkedId)
 
-                    if (radio?.text.toString() == "SMS") {
-                        selectedOption = SMS
+                    if (radio?.text.toString() == getString(R.string.sms_label)) {
+                        selectedOption = VerificationType.SMS
                     }
-                    if (radio?.text.toString() == "Email") {
-                        selectedOption = EMAIL
+                    if (radio?.text.toString() == getString(R.string.email_label)) {
+                        selectedOption = VerificationType.EMAIL
                     }
 
                 })
@@ -83,13 +112,12 @@ class RegistrationOptionFragment :
             //Submit
             btnSubmit.setOnClickListener {
 
-                if(selectedOption.trim().isEmpty()){
-                    showMessage(resources.getString(R.string.choose_verify_option))
-                }else{
+                if (validate()) {
+                    setUpCaptcha()
                     replaceFragment(
                         fragment = OTPVerificationFragment.newInstance(
-                            selectedOption = selectedOption,
-                            selectedItem = if(selectedOption == SMS) phoneNo else emailID
+                            selectedOption = selectedOption!!,
+                            selectedItem = if (selectedOption == VerificationType.SMS) phoneNo else emailID
                         ),
                         addToBackStack = true
                     )
@@ -97,6 +125,36 @@ class RegistrationOptionFragment :
 
             }
         }
+
+        mBinding.layoutCaptcha.ivRefreshCaptchaCode.setOnClickListener {
+
+            mCaptcha = activity?.generateCaptchaCode(5)
+            mBinding.layoutCaptcha.etCaptchaText.setText(mCaptcha)
+
+        }
+
+    }
+
+    private fun validate(): Boolean {
+        var isValid = true
+        mEnteredCaptch = mBinding.layoutCaptcha.etCaptcha.text.toString()
+        mCaptcha = mBinding.layoutCaptcha.etCaptchaText.text.toString()
+
+        if (selectedOption == null) {
+            showMessage(resources.getString(R.string.choose_verify_option))
+            isValid = false
+        }
+
+        if (mBinding.layoutCaptcha.etCaptcha.text?.isEmpty()!!) {
+            mBinding.layoutCaptcha.etCaptcha.error = resources.getString(R.string.empty_captcha)
+            isValid = true
+        } else if (!(mEnteredCaptch == mCaptcha)) {
+            mBinding.layoutCaptcha.etCaptcha.error = resources.getString(R.string.invalid_captcha)
+            isValid = true
+        }
+
+
+        return isValid
 
     }
 }

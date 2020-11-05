@@ -19,11 +19,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minWidth="400dp"
+            android:clipToPadding="false"
             android:paddingTop="@dimen/common_padding_24"
             android:paddingBottom="@dimen/common_padding_24"
             android:paddingStart="@dimen/common_padding_24"
-            android:paddingEnd="@dimen/common_padding_24"
-            >
+            android:paddingEnd="@dimen/common_padding_24">
 
             <!--            Title-->
             <TextView

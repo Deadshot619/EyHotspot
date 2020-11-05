@@ -7,16 +7,39 @@ interface Constants {
         const val DELEGATE_ENGLISH_LANG = "en"
         const val ENGLISH_LANG: String = "en"
         const val ARABIC_LANG: String = "ar"
+        const val LANGUAGE_SELECTED_FIRST_TIME = "language_selected_first_time"
 
-        //Default Location Lat Lng
-        const val LATITUDE:Double=19.1403509
-        const val  LONGITUDE:Double=72.8096671
+        //Default Location Lat Lng of Saudi Arabia
+        const val LATITUDE: Double = 23.8859
+        const val LONGITUDE: Double = 45.0792
+
+        const val WIFI_LOGOUT_TIME = 7200000    //2 hours
+
+        //Deep Link
+        const val DL_LINK = "http://eyhotspot.com"
+        const val DL_LINK_2 = "https://nearbyhs.php-dev.in/EyHotspots/public/dashboard/"
+        const val DL_ID = "id"
+        const val DL_LAT = "lat"
+        const val DL_LON = "lon"
+        const val DL_DATA = "deep_link_hotspot_data"
+
 
         //Intent
-        const val AUTHENTICATION_FAILED = "authentication_failed"   //used when user's authticaition is failed while refreshing token
+        const val AUTHENTICATION_FAILED = "authentication_failed"   //used when user's authentication is failed while refreshing token
+        const val LOGIN_BUNDLE = "login_bundle"
+        const val GO_TO_VERIFICATION_FRAGMENT = "go_to_verification_fragment"
+        const val EMAIL_ID = "email_id"
+        const val TEMP_TOKEN = "temp_token"
+
 
         //Download Link
-        const val DOWNLOAD_LINK = "https://images.apple.com/v/imac-with-retina/a/images/overview/5k_image.jpg"
+        const val DOWNLOAD_LINK = "http://nearbyhs.php-dev.in/EyHotspots/public/images/5k_image.jpg"
+//            "https://images.apple.com/v/imac-with-retina/a/images/overview/5k_image.jpg"
+
+        //Country Code
+        const val SAUDI_ARABIA_COUNTRY_CODE = /*966*/ 187
+
+        const val UNKNOWN_SSID = "unknown ssid"
 
         //SharedPreference
         const val ACCESS_TOKEN: String = "access_token"
@@ -27,6 +50,10 @@ interface Constants {
         const val SKIP_STATUS = "skip_status"
         const val VERIFY_FORGOT_PASSWORD="verify_forgot_password"
         const val FORGOT_PASSWORD_FIELD="forgot_password_field"
+        const val  TERMS_AND_CONDITION="termscondition"
+        const val  REGISTRATION_EMAIL_ID="REGISTRATION_EMAIL_ID"
+        const val WIFI_KEYWORDS = "wifi_keywords"
+        const val FIRST_TIME_LOGIN_OR_SKIPPED = "first_time_login_or_skipped"
 
         //APIS
 
@@ -35,7 +62,7 @@ interface Constants {
         const val HEADER_X_LOCALIZATION = "X-localization"
         const val HEADER_REFRESH_TOKEN = "Refresh-Token"
 
-        //POST
+        /*    POST    */
         const val API_LOGIN = "login"
         const val API_SOCIAL_LOGIN = "socialLogin"
 
@@ -50,21 +77,39 @@ interface Constants {
         const val API_FAVOURITE_LIST = "getFavourites"
         const val API_ADD_REVIEW = "addReview"
         const val API_ADD_COMPLAINT = "addComplaint"
-        const val API_SEND_OTP="sendOTP"
-        const val API_VERIFY_OTP="verifyOTP"
-        const val  API_FORGOT_PASSWORD="forgotPassword"
-        const val  API_FORGOT_PASSWORD_VERIFY_OTP="forgotPassword/verifyOtp"
-        const val API_RESET_PASSWORD="resetPassword"
-        const val  API_RESEND_FORGOT_PASSWORD_OTP="forgotPassword/resendOtp"
+        const val API_SEND_OTP = "sendOTP"
+        const val API_VERIFY_OTP = "verifyOTP"
+        const val API_FORGOT_PASSWORD = "forgotPassword"
+        const val API_FORGOT_PASSWORD_VERIFY_OTP = "forgotPassword/verifyOtp"
+        const val API_RESET_PASSWORD = "resetPassword"
+        const val API_RESEND_FORGOT_PASSWORD_OTP = "forgotPassword/resendOtp"
         const val API_LOCATION_REVIEWS = "getLocationReviews"
+        const val API_TERMNCONDITION="acceptTermsConditions"
+        const val TANDC_UR_ENGLISH="https://nearbyhs.php-dev.in/EyHotspots/public/acceptTermsConditions"
+        const val TANDC_UR_ARABIC="https://nearbyhs.php-dev.in/EyHotspots/public/acceptTermsConditions/ar"
 
-        //GET
+        //Wifi
+        const val API_WIFI_LOGIN = "wifi/login"
+        const val API_WIFI_LOGOUT = "wifi/logout"
+        const val API_VALIDATE_WIFI = "wifi/validateWifi"
+        const val API_MATCH_WIFI = "wifi/matchWifi"
+        const val API_WIFI_LOGS= "wifi/userLogs"
+        const val API_WIFI_SPEED_TEST = "wifi/speedTest"
+
+        /*    GET    */
         const val UNAUTHORIZED = "unauthorized"
         const val API_GET_USER_LIST = "userList"
         const val API_GET_REVIEWS = "getReviews"
         const val API_GET_COMPLAINTS = "getComplaints"
         const val API_GET_COMPLAINTS_ISSUE_TYPES = "getComplaintIssueTypes"
-        const val API_GET_COUNTRY_CODE_NAME="getCountryCodeList"
+        const val API_GET_COUNTRY_CODE_NAME = "getCountryCodeList"
+        const val API_GET_WIFI_SEARCH_KEY_WORDS = "wifi/wifiSearchKeywords"
+
+
+        /*  Query   */
+        const val REVIEW_ORDER = "review_order"
+        const val COMPLAINT_ORDER = "complaint_order"
+
 
     }
 }

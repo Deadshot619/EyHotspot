@@ -4,20 +4,28 @@ import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentRegisterUserBinding
 import com.ey.hotspot.network.request.RegisterRequest
-import com.ey.hotspot.ui.login.permission.PermissionFragment
-import com.ey.hotspot.ui.registration.register_user.model.RegistrationResponse
+import com.ey.hotspot.ui.login.otpverification.fragment.OTPVerificationFragment
 import com.ey.hotspot.ui.registration.registration_option.RegistrationOptionFragment
+import com.ey.hotspot.ui.registration.webview.WebViewFragment
+import com.ey.hotspot.utils.constants.Constants
+import com.ey.hotspot.utils.constants.VerificationType
 import com.ey.hotspot.utils.constants.convertStringFromList
 import com.ey.hotspot.utils.dialogs.OkDialog
-import com.ey.hotspot.utils.replaceFragment
-import com.ey.hotspot.utils.showMessage
+import com.ey.hotspot.utils.extention_functions.generateCaptchaCode
+import com.ey.hotspot.utils.extention_functions.parseToInt
+import com.ey.hotspot.utils.extention_functions.replaceFragment
+import com.ey.hotspot.utils.extention_functions.showMessage
 import com.ey.hotspot.utils.validations.isEmailValid
 import com.ey.hotspot.utils.validations.isValidMobile
+import com.ey.hotspot.utils.validations.isValidName
 import com.ey.hotspot.utils.validations.isValidPassword
 import com.facebook.*
 import com.facebook.login.LoginManager
@@ -28,9 +36,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
-import com.google.gson.Gson
-import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_register_user.*
+import kotlinx.android.synthetic.main.item_layout_captcha.view.*
 import java.util.*
 
 
@@ -53,6 +60,8 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
     lateinit var callbackManager: CallbackManager
     var name = ""
     var accessToken = ""
+    var mCaptcha: String? = null
+    var mEnteredCaptch: String? = null
 
     //Google Sign In
     lateinit var mGoogleSignInClient: GoogleSignInClient
@@ -77,29 +86,36 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
         setUpListeners()
 
         setUpObservers()
+        setUpCaptcha()
     }
 
+
     private fun setUpObservers() {
-
-
+        //Registration Response
         mViewModel.registrationResponse.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-
             it.getContentIfNotHandled()?.let {
-
                 if (it.status) {
+                    //If Mobile no. is not present then directly go to OTP verification Page.
+                    if (mViewModel.mobileNumber.isEmpty()) {
+                        replaceFragment(
+                            fragment = OTPVerificationFragment.newInstance(
+                                selectedOption = VerificationType.EMAIL,
+                                selectedItem = mViewModel.emailId
+                            ), addToBackStack = true
+                        )
+                    } else {
+                        showMessage(it.message, true)
 
-                    showMessage(it.message, true)
+                        replaceFragment(
+                            fragment = RegistrationOptionFragment.newInstance(
+                                emailID = mViewModel.emailId,
+                                phoneNo = mViewModel.mobileNumber
+                            ),
+                            addToBackStack = true
 
-                    replaceFragment(
-                        fragment = RegistrationOptionFragment.newInstance(
-                            emailID = mViewModel.emailId,
-                            phoneNo = mViewModel.mobileNumber
-                        ),
-                        addToBackStack = true
-
-                    )
+                        )
+                    }
                 } else {
-
                     try {
                         dialog.setViews(
                             convertStringFromList(
@@ -118,34 +134,56 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
                     }
                 }
             }
-            })
+        })
 
 
+        //Country Code
+        mViewModel.getCountryCodeList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            it.peekContent()?.let {
+                val adapter = ArrayAdapter<String>(
+                    requireContext(),
+                    R.layout.item_country_code,
+                    it.country_codes.map { it.value }.toList()
+                )
+
+                mBinding.spinnerCountryCode.adapter = adapter
+
+                mBinding.spinnerCountryCode.setSelection(
+                    mViewModel.getCountryCodeList.value?.peekContent()?.country_codes?.indexOfFirst { it.key == Constants.SAUDI_ARABIA_COUNTRY_CODE }
+                        ?: -1
+                )
+            }
+
+        })
     }
 
-
+    //Method to setup UI data
     private fun setUpUIData() {
-
         setUpToolbar(
             toolbarBinding = mBinding.toolbarLayout,
             title = getString(R.string.register_with_us),
             showUpButton = true
         )
+
         tvTermsCondition.paintFlags = tvTermsCondition.paintFlags or Paint.UNDERLINE_TEXT_FLAG
 
         setUpFacebookLogin()
         setuPGoogelSignIn()
     }
 
-    private fun setuPGoogelSignIn() {
+    private fun setUpCaptcha() {
+        mCaptcha = activity?.generateCaptchaCode(5)
+        mBinding.run { layout_captcha.et_captcha_text.setText(mCaptcha) }
 
+    }
+
+    private fun setuPGoogelSignIn() {
         val gso =
             GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(resources.getString(R.string.google_client_id))
                 .requestEmail()
                 .build()
         mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
-
     }
 
     private fun setUpFacebookLogin() {
@@ -167,34 +205,35 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
      */
     private fun setUpListeners() {
         mBinding.run {
-
             //Sign In button
             btnGetStarted.setOnClickListener {
-
-
-                val status:Boolean = validate()
-                if (validate()) {
+                if (validate2()) {
+                    setUpCaptcha()
                     val register: RegisterRequest =
                         RegisterRequest(
-                            mViewModel.firstName,
-                            mViewModel.lastName,
-                            "91",
+                            mViewModel.firstName.trim(),
+                            mViewModel.lastName.trim(),
+                            mViewModel.coutrycode,
                             mViewModel.mobileNumber,
                             mViewModel.emailId,
                             mViewModel.password,
-                            mViewModel.confirmPassword
+                            mViewModel.confirmPassword,
+                            mBinding.cbTermsConditions.isChecked
                         )
-
-
                     mViewModel.registerUser(register)
-
-
                 }
             }
 
-            tvTermsCondition.setOnClickListener {
+            layout_captcha.ivRefreshCaptchaCode.setOnClickListener {
+
+                mCaptcha = activity?.generateCaptchaCode(5)
+                layout_captcha.et_captcha_text.setText(mCaptcha)
+
+            }
+            //T&C
+            tvSignAgree.setOnClickListener {
                 replaceFragment(
-                    fragment = PermissionFragment.newInstance(),
+                    fragment = WebViewFragment.newInstance("register"),
                     addToBackStack = true,
                     bundle = null
                 )
@@ -212,6 +251,21 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
             }
 
 
+            //Country Code
+            mBinding.spinnerCountryCode.onItemSelectedListener =
+                object : AdapterView.OnItemSelectedListener {
+                    override fun onNothingSelected(p0: AdapterView<*>?) {
+                    }
+
+                    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                        //set country code in profile
+                        mViewModel.coutrycode =
+                            mViewModel.getCountryCodeList.value?.peekContent()?.country_codes?.find {
+                                it.value == mBinding.spinnerCountryCode.selectedItem.toString()
+                            }?.key.toString() ?: "-1"
+                    }
+
+                }
         }
     }
 
@@ -277,97 +331,102 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
             }
     }
 
-
     /**
      * Method to validate input fields
      */
-    private fun validate(): Boolean {
-        var firstName: Boolean = false
-        var lastName: Boolean = false
-        var mobileNo: Boolean = true
-        var emailId: Boolean = false
-        var password: Boolean = false
-        var confirmPassword: Boolean = false
-        var checkPasswordConfirmPassword = false
+    private fun validate2(): Boolean {
+        var isValid = true
+
+        mViewModel.run {
+            mBinding.run {
+
+                mEnteredCaptch = layout_captcha.et_captcha.text.toString()
+                mCaptcha = layout_captcha.et_captcha_text.text.toString()
+
+                //First Name
+                if (firstName.trim().isEmpty()) {
+                    edtFirstName.error = resources.getString(R.string.first_name_required_label)
+                    isValid = false
+                } else if (!firstName.trim().isValidName()) {
+                    edtFirstName.error = resources.getString(R.string.invalid_Name)
+                    isValid = false
+                }
 
 
-        if (mViewModel.firstName.trim().isEmpty()) {
-            mBinding.edtFirstName.error = resources.getString(R.string.invalid_firstName)
-            firstName = false
-        } else {
-            firstName = true
-        }
+                /*if(lastName.isEmpty()){
+                    edtLastName.error = resources.getString(R.string.empty_lastName)
+                    isValid = false
+                }else if(!lastName.isValidName()){
+                    edtLastName.error = resources.getString(R.string.invalid_Name)
+                    isValid = false
+                }*/
 
-        if (mViewModel.lastName.trim().isEmpty()) {
-            mBinding.edtLastName.error = resources.getString(R.string.invalid_last_name_label)
-            lastName = false
-        } else {
-            lastName = true
-        }
+                //Last Name
+                if (lastName.trim().isNotEmpty()) {
+                    if (!lastName.trim().isValidName()) {
+                        edtLastName.error = resources.getString(R.string.invalid_Name)
+                        isValid = false
+                    }
+                }
 
-        if (mViewModel.mobileNumber.trim().isNotEmpty())
-            if (!mViewModel.mobileNumber.isValidMobile()) {
-                edtMobileNo.error = resources.getString(R.string.invalid_mobile)
-                mobileNo = false
-            } else {
-                mobileNo = true
+                //Email ID
+                if(emailId.trim().isEmpty()){
+                    edtEmail.error = resources.getString(R.string.email_required_label)
+                    isValid = false
+                } else if (!emailId.isEmailValid()) {
+                    edtEmail.error = resources.getString(R.string.invalid_email_label)
+                    isValid = false
+                }
+
+                //Mobile No.
+                if (mobileNumber.trim().isNotEmpty()) {
+                    if (!mobileNumber.isValidMobile()) {
+                        edtMobileNo.error = resources.getString(R.string.invalid_mobile)
+                        isValid = false
+                    }
+
+                    //Country Code
+                    if (coutrycode.parseToInt() < 0) {
+                        showMessage(getString(R.string.select_country_code_error_msg))
+                        isValid = false
+                    }
+                }
+
+                //Password & Confirm Password
+                if(password.trim().isEmpty()){
+                    edtPassword.error = resources.getString(R.string.password_required_label)
+                    isValid = false
+                } else if (!password.trim().isValidPassword()) {
+                    edtPassword.error = resources.getString(R.string.password_format)
+                    //  edtConfirmPassword.error = resources.getString(R.string.password_format)
+                    isValid = false
+                } else if (password != confirmPassword) {
+                    edtPassword.error = resources.getString(R.string.pwd_not_match)
+                    edtConfirmPassword.error = resources.getString(R.string.pwd_not_match)
+                    isValid = false
+                }
+
+
+                if (isValid)    //When everything else is filled, check for this
+                    //Terms & Conditions
+                    if (!cbTermsConditions.isChecked) {
+                        showMessage(getString(R.string.accept_terms_and_condition_label))
+                        isValid = false
+                    }
+
+                //Captcha
+                if (layout_captcha.et_captcha.text?.isEmpty()!!) {
+                    layout_captcha.et_captcha.error = resources.getString(R.string.empty_captcha)
+                    isValid = false
+                } else if (!(mEnteredCaptch == mCaptcha)) {
+                    layout_captcha.et_captcha.error = resources.getString(R.string.invalid_captcha)
+                    isValid = false
+                }
             }
+        } ?: return false
 
-        if (!mViewModel.emailId.isEmailValid()) {
-            mBinding.edtEmail.error = resources.getString(R.string.invalid_email_label)
-            emailId = false
-        } else {
-            emailId = true
-        }
-
-        if (mViewModel.password.trim().isEmpty()) {
-            mBinding.edtPassword.error = resources.getString(R.string.invalid_password)
-            password = false
-        } else if (!mViewModel.password.isValidPassword()){
-            mBinding.edtPassword.error = resources.getString(R.string.password_format)
-            password = false
-        } else {
-            password = true
-        }
-
-        if (mViewModel.confirmPassword.trim().isEmpty()) {
-            mBinding.edtConfirmPassword.error =
-                resources.getString(R.string.invalid_confirm_password)
-            confirmPassword = false
-        } else {
-            confirmPassword = true
-        }
-
-        if (mViewModel.password.equals(mViewModel.confirmPassword)) {
-            if ((mViewModel.password.isEmpty() && mViewModel.confirmPassword.isEmpty())) {
-                mBinding.edtPassword.error = resources.getString(R.string.pwd_confirm_pwd_empty)
-                mBinding.edtConfirmPassword.error =
-                    resources.getString(R.string.pwd_confirm_pwd_empty)
-                checkPasswordConfirmPassword = false
-            } else {
-                checkPasswordConfirmPassword = true
-                mBinding.edtPassword.error = null
-                mBinding.edtConfirmPassword.error = null
-            }
-        } else {
-            mBinding.edtPassword.error = resources.getString(R.string.pwd_not_match)
-            mBinding.edtConfirmPassword.error = resources.getString(R.string.pwd_not_match)
-            checkPasswordConfirmPassword = false
-        }
-
-        if (firstName == true && lastName == true &&
-            mobileNo == true && emailId == true &&
-            password == true && confirmPassword == true &&
-            checkPasswordConfirmPassword == true
-        ) {
-            return true
-        } else {
-            return false
-        }
-
-
+        return isValid
     }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         callbackManager.onActivityResult(requestCode, resultCode, data)
@@ -385,7 +444,6 @@ class RegisterUserFragment : BaseFragment<FragmentRegisterUserBinding, RegisterU
         val isLoggedIn = accessToken != null && !accessToken.isExpired
         return isLoggedIn
     }
-
 
     fun logOutUser() {
         LoginManager.getInstance().logOut()

@@ -6,6 +6,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
 import com.ey.hotspot.R
 import java.math.BigDecimal
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -46,9 +47,50 @@ fun bindShowTextViewListEmpty(textView: TextView, list: List<Any>?, value: Strin
     }
 }
 
+/**
+ * This adapter will hide the views associated with its particular recyclerview if the list is empty
+ */
+@BindingAdapter("bindHideViewListEmpty")
+fun bindHideViewListEmpty(view: View, list: List<Any>?) {
+    if (list.isNullOrEmpty()) {
+        view.visibility = View.GONE
+    } else {
+        view.visibility = View.VISIBLE
+    }
+}
+
 @BindingAdapter("bindExtractDateFromDateTime")
-fun bindExtractDateFromDateTime(textView: TextView, value: String?){
+fun bindExtractDateFromDateTime(textView: TextView, value: String?) {
     value?.let {
         textView.text = it.substringBefore("T")
+    }
+}
+
+@BindingAdapter("bindExtractDateFromDateTime_DDMMYYYY")
+fun bindExtractDateFromDateTimeDDMMYYYY(textView: TextView, value: String?) {
+    value?.let {
+        val inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
+        val outputFormat: DateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
+        val date: Date = inputFormat.parse(it.substringBefore("T"))
+        val outputDateStr: String = outputFormat.format(date)
+        textView.text = outputDateStr
+    }
+}
+
+
+@BindingAdapter("bindShowDashWhenTextEmpty")
+fun showDashWhenTextEmpty2(textView: TextView, value: String?) {
+    textView.text = value?.let {
+        if (it.trim().isEmpty()) "-" else value
+    } ?: "-"
+}
+
+@BindingAdapter("bindRatingView")
+fun ratingView(textView: TextView, value: String?) {
+    if (value.isNullOrEmpty())
+        textView.visibility = View.GONE
+    else {
+        textView.visibility = View.VISIBLE
+        textView.text = value
     }
 }

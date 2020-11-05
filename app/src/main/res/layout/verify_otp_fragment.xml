@@ -14,9 +14,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingStart="@dimen/common_padding_start"
-        android:paddingTop="@dimen/common_padding_top"
-        android:paddingEnd="@dimen/common_padding_end"
+
         tools:context=".ui.registration.email_verification.EmailVerificationFragment">
 
         <androidx.constraintlayout.widget.Guideline
@@ -37,7 +35,7 @@
         <!--Toolbar-->
         <include
             android:id="@+id/toolbarLayout"
-            layout="@layout/layout_custom_toolbar"
+            layout="@layout/layout_custom_toolbar_dark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -49,8 +47,8 @@
             android:id="@+id/iv_name"
             android:layout_width="200dp"
             android:layout_height="190dp"
-            android:layout_gravity="center"
             android:scaleType="fitXY"
+            android:layout_marginTop="@dimen/common_margin_top"
             android:src="@drawable/ic_email_verification"
             app:layout_constraintEnd_toEndOf="@+id/guideline_right"
             app:layout_constraintStart_toStartOf="@+id/guideline_left"
@@ -86,12 +84,14 @@
 
         <!--        check email label-->
         <TextView
+            android:visibility="gone"
             android:id="@+id/tv_check_email_label"
             style="@style/TextAppearance.MyApp.Headline3_Profile_Bold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textDirection="locale"
+            android:layout_marginTop="@dimen/common_margin_top"
             android:textStyle="normal"
             app:layout_constraintEnd_toEndOf="@id/guideline_right"
             app:layout_constraintStart_toStartOf="@id/guideline_left"
@@ -118,7 +118,7 @@
             android:id="@+id/btnVerify"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_30"
+            android:layout_marginTop="@dimen/common_margin_48"
             android:layout_marginBottom="@dimen/common_margin_bottom"
             android:background="@drawable/sign_btn_gradient"
             android:paddingStart="@dimen/margin_60"
@@ -139,7 +139,7 @@
             android:id="@+id/tvreceviedotp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_20"
+            android:layout_marginTop="@dimen/common_margin_24"
             android:text="@string/receive_otp"
             android:textDirection="locale"
             android:textSize="@dimen/text_size_15"
@@ -147,7 +147,7 @@
             app:layout_constraintEnd_toEndOf="@id/guideline_right"
             app:layout_constraintStart_toStartOf="@id/guideline_left"
              />
-        />
+
 
         <!--        Resend OTP-->
         <TextView
@@ -158,12 +158,11 @@
             android:textColor="@color/colorPrimarySub"
             android:textDirection="locale"
             android:textSize="@dimen/text_size_15"
-            android:layout_marginTop="@dimen/margin_20"
+            android:layout_marginTop="@dimen/common_margin_8"
             app:layout_constraintTop_toBottomOf="@id/tvreceviedotp"
             app:layout_constraintEnd_toEndOf="@id/guideline_right"
             app:layout_constraintStart_toStartOf="@id/guideline_left"
             />
-
 
         <!--Sign In-->
         <androidx.appcompat.widget.AppCompatButton
@@ -182,7 +181,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvResendOTP"
             app:layout_constraintVertical_bias="1" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

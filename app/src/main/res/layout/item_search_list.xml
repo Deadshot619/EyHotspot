@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="data"
             type="com.ey.hotspot.ui.home.models.GetHotSpotResponse" />
@@ -16,9 +17,9 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="8dp"
+        android:layout_margin="@dimen/common_margin"
         android:elevation="1dp"
-        android:layout_margin="@dimen/common_margin">
+        app:cardCornerRadius="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -29,74 +30,88 @@
             <!--    Wifi Ssid   -->
             <TextView
                 android:id="@+id/tv_wifi_ssid"
+                style="@style/TextAppearance.MaterialComponents.Headline5"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                tools:text="D-zone"
-                android:textDirection="locale"
                 android:text="@{data.name}"
                 android:textColor="@color/colorGrayLight"
-                style="@style/TextAppearance.MaterialComponents.Headline5"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                android:textDirection="locale"
                 app:layout_constraintEnd_toStartOf="@id/iv_favourites"
-                />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="D-zone" />
 
             <!--heart-->
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_favourites"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_favorite_filled_gray"
                 android:layout_margin="@dimen/common_margin_32"
+                android:onClick="@{() -> clickListener.onClickAddFavourite(data)}"
+                android:src="@drawable/ic_favorite_filled_gray"
                 android:textDirection="locale"
                 app:bindAddFavourite="@{data.favourite}"
-                android:onClick="@{() -> clickListener.onClickAddFavourite(data)}"
-                app:layout_constraintTop_toTopOf="@id/iv_flag"
+                app:layout_constraintBottom_toBottomOf="@id/iv_flag"
                 app:layout_constraintEnd_toStartOf="@id/iv_flag"
-                app:layout_constraintStart_toEndOf="@id/tv_wifi_ssid"
                 app:layout_constraintHorizontal_bias="1"
-                app:layout_constraintBottom_toBottomOf="@id/iv_flag"/>
+                app:layout_constraintStart_toEndOf="@id/tv_wifi_ssid"
+                app:layout_constraintTop_toTopOf="@id/iv_flag" />
 
             <!--Flag-->
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_flag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textDirection="locale"
-
-                android:src="@drawable/ic_group"
                 android:onClick="@{() -> clickListener.onClickReport(data)}"
+
+                android:src="@drawable/flag_icon_bitmap"
+                android:textDirection="locale"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <!-- Service Provider Name-->
             <TextView
                 android:id="@+id/tv_service_provider"
+                style="@style/ChipStyleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/ChipStyleTextView"
-                tools:text="Riyadh"
-                android:text="@{data.provider_name}"
                 android:layout_marginTop="@dimen/common_margin_between_fields_6"
+                android:text="@{data.provider_name}"
+                app:layout_constraintStart_toStartOf="@id/tv_wifi_ssid"
                 app:layout_constraintTop_toBottomOf="@id/tv_wifi_ssid"
-                app:layout_constraintStart_toStartOf="@id/tv_wifi_ssid"/>
+                tools:text="Riyadh" />
+
+            <!-- Average Rating-->
+            <TextView
+                android:id="@+id/tv_average_rating"
+                style="@style/ChipStyleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/star"
+                android:drawablePadding="@dimen/common_padding_4"
+                android:layout_marginStart="@dimen/common_margin_8"
+                app:bindRatingView="@{data.average_rating}"
+                app:layout_constraintStart_toEndOf="@id/tv_service_provider"
+                app:layout_constraintTop_toTopOf="@id/tv_service_provider"
+                app:layout_constraintBottom_toBottomOf="@id/tv_service_provider"
+                tools:text="Riyadh" />
+
 
             <!--Location-->
             <TextView
                 android:id="@+id/tv_location"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_size_14"
-                android:textDirection="locale"
                 android:layout_marginTop="@dimen/common_margin_12"
-                android:textAllCaps="true"
-                app:layout_constraintTop_toBottomOf="@id/tv_service_provider"
-                app:layout_constraintStart_toStartOf="@id/tv_service_provider"
-                app:layout_constraintEnd_toEndOf="@id/iv_flag"
-                tools:text="Mumbai"
                 android:text="@{data.location}"
+                android:textAllCaps="true"
                 android:textColor="@color/colorLightGray"
-                />
+                android:textDirection="locale"
+                android:textSize="@dimen/text_size_14"
+                app:layout_constraintEnd_toEndOf="@id/iv_flag"
+                app:layout_constraintStart_toStartOf="@id/tv_service_provider"
+                app:layout_constraintTop_toBottomOf="@id/tv_service_provider"
+                tools:text="Mumbai" />
 
             <!--
                         &lt;!&ndash;Horizontal Line&ndash;&gt;
@@ -138,47 +153,49 @@
                             tools:text="hola hola hola hola hola hola hola hola hola hola hola "
                             />-->
 
-            <!--heart-->
+            <!--Share-->
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_share"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="@{() -> clickListener.onClickShare(data)}"
                 android:src="@drawable/baseline_share_24"
                 android:textDirection="locale"
-                android:visibility="gone"
+                android:visibility="visible"
+
+                app:layout_constraintBottom_toBottomOf="@id/btn_rate_now"
                 app:layout_constraintStart_toStartOf="@id/tv_location"
-                app:layout_constraintTop_toTopOf="@id/btn_rate_now"
-                app:layout_constraintBottom_toBottomOf="@id/btn_rate_now"/>
+                app:layout_constraintTop_toTopOf="@id/btn_rate_now" />
 
 
             <!--Navigate Now-->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_navigate_now"
-                android:text="@string/navigate_now_label"
                 style="@style/GradientButton"
-                android:onClick="@{() -> clickListener.onClickNavigate(data)}"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
+                android:onClick="@{() -> clickListener.onClickNavigate(data)}"
+                android:text="@string/navigate_now_label"
                 android:textDirection="locale"
 
-                app:layout_constraintTop_toTopOf="@id/btn_rate_now"
                 app:layout_constraintBottom_toBottomOf="@id/btn_rate_now"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/btn_rate_now" />
 
             <!--Rate Now-->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_rate_now"
-                android:text="@string/rate_now_label"
-                android:onClick="@{() -> clickListener.onClickRateNow(data)}"
                 style="@style/OutlinedButtonNormal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textDirection="locale"
-
                 android:layout_marginTop="@dimen/common_margin_between_fields"
                 android:layout_marginEnd="@dimen/common_margin_between_fields"
-                app:layout_constraintTop_toBottomOf="@id/tv_location"
-                app:layout_constraintEnd_toStartOf="@id/btn_navigate_now"/>
+                android:onClick="@{() -> clickListener.onClickRateNow(data)}"
+
+                android:text="@string/rate_wifi_label"
+                android:textDirection="locale"
+                app:layout_constraintEnd_toStartOf="@id/btn_navigate_now"
+                app:layout_constraintTop_toBottomOf="@id/tv_location" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

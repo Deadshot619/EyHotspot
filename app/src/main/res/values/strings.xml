@@ -1,15 +1,11 @@
 <resources>
-    <string name="app_name">HotSpot</string>
+    <string name="app_name" translatable="false">KSA Free Wifi</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="login_button">Login</string>
     <string name="registration_button">Register</string>
 
 
-
-
     <string name="google_client_id">701065953910-ua0p0sl83t7r04n0fh317p17pnpfouem.apps.googleusercontent.com</string>
-
-
 
 
     <string name="facebook_app_id">2495789184045739</string>
@@ -21,9 +17,16 @@
     <string name="sign_in_label">Sign In</string>
     <string name="submit_label">Submit</string>
     <string name="next_label">Next</string>
-    <string name="mbps_label">%s Mbps</string>
+    <string name="mbps_label" translatable="false">%s Mbps</string>
     <string name="loading_label">Loading…</string>
     <string name="under_construction_label">Work in progress…</string>
+    <string name="press_back_again_label">Press back again to exit</string>
+    <string name="gps_enable_conformation">Your GPS seems to be disabled, do you want to enable it?</string>
+    <string name="share_hotspot_data">Get free access to our public Wi-Fi at %s, by %s, in %s</string>
+    <string name="monitoring_wifi" translatable="false">Monitoring Wifi</string>
+    <string name="no_internet_connection_error">No Internet Connection</string>
+    <string name="something_went_wrong_error">Something went wrong</string>
+
 
     <!--Toolbar-->
     <string name="search_locations_label">Search Locations</string>
@@ -37,9 +40,17 @@
     <string name="mobile_number_label">Mobile Number</string>
     <string name="password_label">Password</string>
     <string name="confirm_password_label">Confirm Password</string>
-    <string name="captcha_label">Enter the message shown below</string>
-    <string name="password_format">Password must contain atleast 8 characters including 1 Small letter,
-        1 capital letter, 1 number and 1 special character</string>
+    <string name="captcha_label">Enter the captcha shown below</string>
+    <string name="accept_terms_and_condition_label">You need to accept Terms and Conditions to continue</string>
+    <string name="password_format_str">Password Must Contain 8-32 characters One upper case letter,
+        One lower case letter,
+        Decimal digits(0-9),
+        Special character (@, $ !, %, *, ?, &amp;, #) </string>
+    <string name="password_format">Please enter a valid password </string>
+    <string name="select_country_code_error_msg">Please select Country code!</string>
+    <string name="email_required_label">Email field is required</string>
+    <string name="password_required_label">Password field is required</string>
+    <string name="first_name_required_label">First Name field is required</string>
 
     <!--My Profile-->
     <string name="my_profile_label">My Profile</string>
@@ -51,8 +62,9 @@
 
 
     <!--    Registration Option    -->
-    <string name="verification_method_label">Please Select Option  To Verify Your Account</string>
-    <string name="otp_sms_label">Verfiy OTP using SMS</string>
+    <string name="verify_account_label">Verify Account</string>
+    <string name="verification_method_label">Please Select Option To Verify Your Account</string>
+    <string name="otp_sms_label">Verify OTP using SMS</string>
     <string name="email_link_label">Verify OTP using Email</string>
 
     <!--Email verification-->
@@ -71,6 +83,8 @@
     <string name="already_registered_label">You have already registered with</string>
     <string name="complete_registration_label">Complete your registration by selecting below option</string>
 
+    <!--    OTP-->
+    <string name="invalid_otp_label">Invalid OTP</string>
 
     <!--Login-->
     <string name="welcome">Welcome</string>
@@ -80,8 +94,10 @@
     <string name="submit_button">Submit</string>
     <string name="forgotpassword">Forgot Password?</string>
     <string name="email_id_hint">Enter Email Id</string>
-    <string name="enter_password">Enter  Password</string>
-    <string name="enter_captcha">Enter Captcha</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="password_mandatory">Enter Password</string>
+
+    <string name="enter_captcha">Enter captcha</string>
     <string name="login_credentials_msg">Login to the portal with your credentials</string>
     <string name="connecting_kingdom_label">Connecting the \n Kingdom of Saudi Arabia…!</string>
 
@@ -91,9 +107,13 @@
     <string name="reviews_label">Reviews</string>
     <string name="complaint_label">Complaints</string>
     <string name="all_label">All</string>
+    <string name="confirm_complaint">Do you want to submit your complaint?</string>
+    <string name="confirm_review">Do you want to submit your rating?</string>
+    <string name="discard_review">Do you want to discard your review?</string>
+    <string name="discard_complaint">Do you want to discard your complaint?</string>
 
     <!--Favourite Wifi-->
-    <string name="favoutite_wifi_label">Favourite Wifi</string>
+    <string name="favoutite_wifi_label">Favourites</string>
 
     <!--Speed Test-->
     <string name="speed_test_label">Speed Test</string>
@@ -101,6 +121,12 @@
     <string name="go_label">Go</string>
     <string name="download_speed_label">Download Speed</string>
     <string name="retest_label">Retest</string>
+    <string name="wifi_disabled_label">Wifi Disabled</string>
+    <string name="wifi_enable_conformation">Your wifi seems to be disabled, do you want to enable it?</string>
+    <string name="network_not_validated_label">The current network does not belong to \n KSA Free Wifi</string>
+    <string name="wifi_not_validated_label">The current wifi does not belong to KSA Free Wifi</string>
+    <string name="error_while_calculating_download_speed">Error occurred while calculating download speed</string>
+
 
     <string name="speed_test_result_label">Speed Test Result</string>
     <string name="download_label">Download</string>
@@ -108,6 +134,7 @@
     <string name="rate_wifi_label">Rate Wifi</string>
 
     <!--Wifi Log List-->
+    <string name="empty_log_list_label">No logs found</string>
     <string name="wifi_log_list_label">Wifi Log List</string>
     <string name="wifi_log_label">Wifi Log</string>
     <string name="date_label">Date</string>
@@ -117,18 +144,21 @@
     <string name="speed_test_logs_label">Speed test Logs</string>
     <string name="start_time_label">Start time</string>
     <string name="end_time_label">End time</string>
+    <string name="wifidate">Date: </string>
 
     <!--Rate Wifi-->
-    <string name="add_remarks_label">Add your remarks / feedbacks here</string>
+    <string name="add_remarks_label">Add Your Remarks / Feedbacks Here</string>
     <string name="cancel_label">Cancel</string>
     <string name="submit_feedback_label">Submit Feedback</string>
     <string name="enter_remark_error_label">Please provide feedback</string>
+    <string name="provide_rating_label">Please provide a rating</string>
 
     <!--Raise Complaint-->
     <string name="explain_problem_label">Explain your problem in detail here</string>
     <string name="raise_complaint_label">Raise Complaint</string>
-<!--    <string name="comment_and_evaluate_label">Comment and Evaluate</string>-->
-
+    <string name="select_issue_type_label">Select issue type</string>
+    <string name="please_select_issue_type_label">Please Select issue type</string>
+    <!--    <string name="comment_and_evaluate_label">Comment and Evaluate</string>-->
 
     <!--WiFi Service-->
     <string name="wifi_service_label">WiFi Service</string>
@@ -142,10 +172,12 @@
     <!--    Yes/No Dialogs-->
     <string name="login_required">Login Required</string>
     <string name="need_to_login">You need to login to access this feature</string>
+    <string name="no_label">NO</string>
+    <string name="yes_label">YES</string>
 
 
     <!--    Location Permission     -->
-    <string name="provide_location_permission_label">You need to provide Location/GPS permission for this app to run smoothly</string>
+    <string name="provide_location_permission_label">Please Enable The Location Tracking To See Near By Hotspots</string>
     <string name="open_label">Open</string>
 
     <string name="maps_api_key" translatable="false">AIzaSyAyKP89tXni4J32JCJw60dVTShBXqR_ieU</string>
@@ -158,57 +190,52 @@
     <string name="change_password">Change Password</string>
     <string name="newPassword">New Password</string>
     <string name="confirm_password">Confirm Password</string>
-    <string name="btTextNavigateNow">Navigate Now</string>
-    <string name="btTextComment"><![CDATA[Comment & Evaluate]]></string>
-    <string name="btTextRateWifi">Rate Wifi</string>
     <string name="wifi_name">Wifi Name</string>
     <string name="issue_type">Issue type</string>
-    <string name="login_hotspot_msg">Don\'t have an account with Hotspot?</string>
-    <string name="get_started_msg">GET STARTED NOW!</string>
+    <string name="login_hotspot_msg">Don\'t have an account with KSA Free Wifi?</string>
+    <string name="get_started_msg">GET STARTED NOW</string>
     <string name="invalid_email">Invalid User Name</string>
     <string name="verify_link_msg">"A verification link has been sent to "</string>
     <string name="ok_label">OK</string>
     <string name="completeRegistration">Complete your registration by resending the link</string>
     <string name="first_last_name_label">Firstname           Lastname</string>
-    <string name="enter_confirm_password">Enter the password again!</string>
+    <string name="enter_confirm_password">Re-enter password</string>
     <string name="sign_agree_msg">By signing up  you agree to the  </string>
-    <string name="terms_condition"><u>terms &amp; conditions</u></string>
-    <string name="get_started">" GET STARTED NOW"</string>
+    <string name="terms_condition"><u>Accept Terms &amp; Conditions</u></string>
+    <string name="get_started">" Register "</string>
     <string name="or">OR</string>
     <string name="otp_title">Please enter OTP sent to</string>
     <string name="resend_otp_label">RESEND OTP</string>
     <string name="btn_verify">VERIFY</string>
-    <string name="receive_otp">Didn\'t received OTP?</string>
+    <string name="receive_otp">Didn\'t receive OTP?</string>
     <string name="loginHeaderName">Hotspot</string>
     <string name="loginHeaderNameSub">Connecting world...!</string>
-    <string name="navigate_label">NAVIGATING</string>
-    <string name="navigate_now_label">NAVIGATE NOW</string>
+
+    <string name="navigate_now_label">NAVIGATE</string>
     <string name="register_with_us">Register With Us</string>
     <string name="skip">SKIP</string>
     <string name="otp_label">OTP</string>
     <string name="recently_search_label">Recent  Search</string>
-    <string name="rate_now_label">RATE NOW</string>
-    <string name="arabic">Arabic</string>
+    <!--    <string name="arabic">Arabic</string>-->
+    <string name="arabic">عربى</string>
     <string name="english">English</string>
     <string name="save_settings_label">SAVE SETTINGS</string>
     <string name="notification_label">NOTIFICATION</string>
     <string name="dummytext">Lorem lpsum is simply dummy text</string>
     <string name="language_label">LANGUAGE</string>
     <string name="gps_status_label">GPS DETECTION</string>
-    <string name="get_wifi_label">GET WIFI LOG</string>
+    <string name="get_wifi_label">GET WIFI LOGS</string>
     <string name="notifications_label">NOTIFICATIONS</string>
     <string name="setting_label">My Settings</string>
     <string name="setting_title_label">You are sure you want to save the settings.</string>
     <string name="setting_saving_msg">lorem lpsum is simply dummy text of the  printing and typesetting industries. Lorem</string>
-    <string name="no_label">NO</string>
-    <string name="yes_label">YES</string>
     <string name="permission_label">Permission</string>
-    <string name="invalid_firstName">Invalid First Name</string>
-    <string name="invalid_last_name_label">Invalid Last Name</string>
+    <string name="invalid_firstName">First name Field is required</string>
+    <string name="invalid_last_name_label">Last name field is required</string>
     <string name="invalid_email_label">Invalid Email Id</string>
     <string name="invalid_mobile">Invalid Mobile Number</string>
     <string name="invalid_password">Invalid Password</string>
-    <string name="pwd_not_match">Passwords do not match</string>
+    <string name="pwd_not_match">Password confirmation does not match</string>
     <string name="registering_new_user">Registering the new user</string>
     <string name="gettting_hotspots_list">Getting the Hotspots List</string>
     <string name="getting_favourite_hotspot_list">Getting favourite hotspot list</string>
@@ -226,19 +253,26 @@
     <string name="email_id_mobil_no">Email Id /Mobile Number</string>
     <string name="enter_email_mobile">Enter Email Id or Mobile Number</string>
     <string name="send_otp">SEND OTP</string>
-    <string name="verify_otp">VERIFY </string>
+    <string name="verify_otp">VERIFY OTP</string>
     <string name="btnResendOTP">RESEND OTP</string>
     <string name="verify_account">Verify Account</string>
     <string name="secure_password">Create New Password</string>
     <string name="password_reset_label">Reset Password</string>
     <string name="enter_email_or_password">Enter  email id or  mobile no</string>
-    <string name="sign_in_issue">HAVING  TROUBLE SIGINING  IN?</string>
+    <string name="sign_in_issue">Enter the email address associated with your account</string>
     <string name="reenter_confirm_password">Re-enter Password</string>
     <string name="sms_label">SMS</string>
     <string name="email_label">Email</string>
     <string name="choose_verify_option">Select Verification Option</string>
     <string name="captcha_characters">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789</string>
     <string name="forgotpassword_label">Forgot Password</string>
+    <string name="invalid_captcha">Invalid Captcha</string>
+    <string name="msg_mandatory_fields">fields are mandatory</string>
+    <string name="otp_sent_msg">An OTP has been sent to your registered Mobile number</string>
+    <string name="empty_firstName">First name field is mandatory</string>
+    <string name="invalid_Name">Numeric and Special Characters are not accepted in this field</string>
+    <string name="empty_lastName">"Last name field is required "</string>
+    <string name="empty_captcha">Captcha code is required</string>
 
 
     <!--Demo issue type string-->
@@ -249,6 +283,11 @@
         <item>Issue 4</item>
     </string-array>
 
+    <!--    Reviews & Complaints Sort Type string  -->
+    <string-array name="review_complaint_sort_type">
+        <item>Latest</item>
+        <item>Oldest</item>
+    </string-array>
 
     <string-array name="CountryCode">
         <item>Countryone</item>

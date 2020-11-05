@@ -140,7 +140,7 @@
                     android:layout_marginEnd="@dimen/margin_5"
                     android:layout_weight="1.1"
                     android:outlineAmbientShadowColor="@color/colorPrimarySub"
-                    android:text="@string/rate_now_label"
+                    android:text="@string/rate_wifi_label"
                     android:textColor="@color/colorPrimarySub"
                     android:textSize="@dimen/text_size_15"
                     android:textDirection="locale"

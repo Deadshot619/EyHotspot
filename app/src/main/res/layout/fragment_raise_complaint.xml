@@ -45,6 +45,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/common_margin_24"
+                    android:textDirection="locale"
                     android:text="@{viewModel.raiseComplaintData.wifiSsid}"
                     android:textColor="?attr/colorOnSecondary"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -72,6 +73,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/common_margin_between_fields"
+                    android:textDirection="locale"
                     android:text="@{viewModel.raiseComplaintData.wifiLocation}"
                     android:textAllCaps="true"
                     android:textColor="@color/colorGrayLight"
@@ -80,7 +82,6 @@
                     app:layout_constraintStart_toStartOf="@id/tv_wifi_name"
                     app:layout_constraintTop_toBottomOf="@id/tv_wifi_provider"
                     tools:text="D-Zone Wifi" />
-
 
                 <!--Spinner-->
                 <androidx.appcompat.widget.AppCompatSpinner
@@ -154,7 +155,7 @@
                     style="@style/GradientButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/comment_and_evaluate_label"
+                    android:text="@string/submit_label"
                     app:layout_constraintBottom_toBottomOf="@+id/btn_cancel_button"
                     app:layout_constraintEnd_toEndOf="@id/input_remarks_layout"
                     app:layout_constraintHorizontal_bias="0.5"

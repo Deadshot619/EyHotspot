@@ -24,6 +24,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbarLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/common_padding_24">
+
         <!--Wifi SSid-->
         <TextView
             android:id="@+id/tv_wifi_name"
@@ -33,10 +47,11 @@
             android:layout_margin="@dimen/common_margin_24"
             android:text="@{viewModel.rateWifiData.wifiSsid}"
             android:textColor="?attr/colorOnSecondary"
+            android:textDirection="locale"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbarLayout"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="D-Zone Wifi" />
 
         <!--        Wifi Provider-->
@@ -46,22 +61,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/common_margin_between_fields_4"
-            android:textColor="?attr/colorOnSecondary"
             android:text="@{viewModel.rateWifiData.wifiProvider}"
+            android:textColor="?attr/colorOnSecondary"
             app:layout_constraintStart_toStartOf="@id/tv_wifi_name"
             app:layout_constraintTop_toBottomOf="@id/tv_wifi_name"
             tools:text="Amazenet" />
 
         <!--Wifi Location-->
         <TextView
-                android:id="@+id/tv_wifi_location"
+            android:id="@+id/tv_wifi_location"
             style="@style/TextAppearance.MaterialComponents.Body2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/common_margin_between_fields"
-            android:textAllCaps="true"
             android:text="@{viewModel.rateWifiData.wifiLocation}"
+            android:textAllCaps="true"
+
             android:textColor="@color/colorGrayLight"
+            android:textDirection="locale"
             app:layout_constraintEnd_toEndOf="@id/tv_wifi_name"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="@id/tv_wifi_name"
@@ -85,13 +102,17 @@
             style="@style/GradientRatingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/common_margin_32"
+            android:layout_marginStart="@dimen/common_margin_48"
+            android:layout_marginEnd="@dimen/common_margin_48"
+            android:layout_marginTop="@dimen/common_margin_32"
+            android:layout_marginBottom="@dimen/common_margin_32"
             android:rating="@={viewModel.rateWifiData.rating}"
             android:stepSize="1"
-            tools:rating="3"
             app:layout_constraintEnd_toEndOf="@id/view_horizontal"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="@id/view_horizontal"
-            app:layout_constraintTop_toBottomOf="@id/view_horizontal" />
+            app:layout_constraintTop_toBottomOf="@id/view_horizontal"
+            tools:rating="3" />
 
         <!--Remarks-->
         <com.google.android.material.textfield.TextInputLayout
@@ -111,10 +132,10 @@
                 android:layout_height="wrap_content"
                 android:gravity="top|start"
                 android:inputType="textMultiLine"
-                android:text="@={viewModel.rateWifiData.feedback}"
                 android:lines="10"
                 android:maxLines="15"
-                android:minLines="6" />
+                android:minLines="6"
+                android:text="@={viewModel.rateWifiData.feedback}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <!--Cancel button-->
@@ -138,5 +159,9 @@
             app:layout_constraintBottom_toBottomOf="@+id/btn_cancel_button"
             app:layout_constraintEnd_toEndOf="@id/input_remarks_layout"
             app:layout_constraintTop_toTopOf="@+id/btn_cancel_button" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

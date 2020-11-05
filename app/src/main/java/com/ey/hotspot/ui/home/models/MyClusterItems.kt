@@ -10,6 +10,7 @@ class MyClusterItems : ClusterItem {
     private val mPosition: LatLng
     private val mTitle: String
     private val mSnippet: String
+     var rating: String? = "0"
     var mIsFavourite by Delegates.notNull<Boolean>()
     lateinit var mNavigateURL: String
     lateinit var mAddress:String
@@ -19,6 +20,8 @@ class MyClusterItems : ClusterItem {
 
     var mItemID:Int = 0
 
+    var uuid: String = ""
+
     constructor(lat: Double, lng: Double, mItemID: Int) {
         mPosition = LatLng(lat, lng)
         mTitle = "";
@@ -26,6 +29,7 @@ class MyClusterItems : ClusterItem {
         this.mItemID = mItemID
         mLat = lat
         mLng = lng
+
     }
 
     constructor(
@@ -51,7 +55,9 @@ class MyClusterItems : ClusterItem {
         isfavourite: Boolean,
         navigateURL: String,
         itemId:Int,
-        address:String
+        address:String,
+        rating: String?,
+        uuid: String
     ) {
         mPosition = LatLng(lat, lng)
         mTitle = title
@@ -62,6 +68,8 @@ class MyClusterItems : ClusterItem {
         mAddress=address
         mLat = lat
         mLng = lng
+        this.rating = rating
+        this.uuid = uuid
     }
 
 
@@ -83,3 +91,4 @@ class MyClusterItems : ClusterItem {
         this.mIsFavourite = isFavourite
     }
 }
+

@@ -1,6 +1,5 @@
 package com.ey.hotspot.ui.home.models
 
-import android.provider.SyncStateContract
 import com.ey.hotspot.utils.LANGUAGE
 import com.ey.hotspot.utils.constants.Constants
 import com.google.gson.annotations.SerializedName
@@ -15,12 +14,14 @@ data class GetHotSpotResponse(
     @SerializedName("location_arabic") val location_arabic: String,
     @SerializedName("type") val _type: String?,
     @SerializedName("type_arabic") val type_arabic: String?,
-    @SerializedName("average_rating") val average_rating: String?,
+    @SerializedName("average_rating") val average_rating: String? = "0",
     @SerializedName("provider_name") val _provider_name: String,
     @SerializedName("provider_name_arabic") val provider_name_arabic: String,
     @SerializedName("distance") val distance: Double,
     @SerializedName("navigate_url") val navigate_url: String,
-    @SerializedName("favourite") val favourite: Boolean = false
+    @SerializedName("favourite") var favourite: Boolean = false,
+    @SerializedName("uuid") val uuid: String
+
 ) {
     val name: String
         get() = if (LANGUAGE == Constants.ARABIC_LANG) name_arabic else _name

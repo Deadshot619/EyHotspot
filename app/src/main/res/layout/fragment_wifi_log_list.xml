@@ -31,7 +31,8 @@
             tools:context="com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListFragment"
             android:orientation="horizontal"
             android:weightSum="3"
-            android:visibility="gone"
+            app:bindHideViewListEmpty="@{viewModel.wifiLogListResponse.data}"
+            android:visibility="visible"
             android:layout_marginStart="@dimen/common_margin_24"
             android:layout_marginEnd="@dimen/common_margin_24"
             android:layout_marginTop="@dimen/common_margin_top"
@@ -44,7 +45,7 @@
                 android:id="@+id/tv_date_label"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="1.2"
                 android:textColor="?attr/colorOnSecondary"
                 android:textSize="@dimen/text_size_14"
                 android:text="@string/date_label"/>
@@ -55,7 +56,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textColor="?attr/colorOnSecondary"
-                android:layout_weight="1.5"
+                android:layout_weight="1.3"
                 android:textSize="@dimen/text_size_14"
                 android:text="@string/name_label"/>
         </LinearLayout>
@@ -64,20 +65,33 @@
             android:id="@+id/rv_wifi_log_list"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:visibility="gone"
-            app:listWifiLogList="@{viewModel.wifiLogList}"
+            android:visibility="visible"
+            app:listWifiLogList="@{viewModel.wifiLogListResponse.data}"
             tools:listitem="@layout/item_wifi_log_list"
             app:layout_constraintTop_toBottomOf="@id/ll_header"
             app:layout_constraintStart_toStartOf="@id/ll_header"
             app:layout_constraintEnd_toEndOf="@id/ll_header"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
+        <!--        Empty List Error Text-->
+        <TextView
+            android:id="@+id/tv_empty_list_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:bindShowTextViewListEmpty="@{viewModel.wifiLogListResponse.data}"
+            app:bindShowEmptyListMessage="@{@string/empty_log_list_label}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <TextView
             android:text="@string/under_construction_label"
             style="@style/TextAppearance.MaterialComponents.Headline6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

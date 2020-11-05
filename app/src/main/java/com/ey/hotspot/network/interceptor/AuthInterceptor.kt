@@ -7,6 +7,7 @@ import com.ey.hotspot.network.APIClient
 import com.ey.hotspot.network.DataProvider
 import com.ey.hotspot.ui.login.LoginActivity
 import com.ey.hotspot.utils.constants.Constants
+import com.ey.hotspot.utils.extention_functions.logoutUser
 import kotlinx.coroutines.runBlocking
 import okhttp3.Authenticator
 import okhttp3.Request
@@ -48,7 +49,7 @@ class AuthInterceptor : Authenticator {
                         HotSpotApp.prefs?.getAccessTypeAndToken() ?: ""
                     )?.build()
                 else {
-                    returnToLoginScreen()
+                    CoreApp.instance.logoutUser()
                     null
                 }
             }

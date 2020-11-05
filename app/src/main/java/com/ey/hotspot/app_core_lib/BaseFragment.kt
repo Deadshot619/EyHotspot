@@ -1,7 +1,5 @@
 package com.ey.hotspot.app_core_lib
 
-import android.content.Context
-import android.location.LocationManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.ey.hotspot.databinding.LayoutCustomToolbarBinding
 import com.ey.hotspot.utils.dialogs.LoadingDialog
-import com.ey.hotspot.utils.showMessage
+import com.ey.hotspot.utils.extention_functions.showMessage
 
 abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment(),
     UICallbacks<V> {
@@ -59,7 +57,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
         //Dialog Visibility
         mViewModel.dialogVisibility.observe(viewLifecycleOwner, Observer { show ->
             dialog.run {
-                if (show) show() else hide()
+                if (show) show() else dismiss()
             }
         })
 
@@ -84,7 +82,6 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
         toolbarBinding: LayoutCustomToolbarBinding,
         title: String,
         showUpButton: Boolean = false,
-        endButtonTitle: String = "",
         showSettingButton: Boolean = false,
         showShadow: Boolean = true
     ) {
@@ -102,10 +99,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
                 btnBack.visibility = View.INVISIBLE
             }
 
-//                Text Button
-            tvTextButton.text = ""
-
-//                Settings
+            //Settings
             if (showSettingButton) {
                 ivSettings.visibility = View.VISIBLE
             } else {
@@ -117,44 +111,6 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
                 toolbar.elevation = 10f
             else
                 toolbar.elevation = 0f
-
         }
     }
-
-
-
-
-    open fun checkLocSaveState(): Boolean {
-
-        var status: Boolean = false
-        val lm =
-            requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        var gps_enabled = false
-        var network_enabled = false
-        try {
-            gps_enabled = lm != null && lm.isProviderEnabled(LocationManager.GPS_PROVIDER)
-        } catch (ex: Exception) {
-            ex.printStackTrace()
-        }
-        try {
-            network_enabled = lm != null && lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
-        } catch (ex: Exception) {
-            ex.printStackTrace()
-        }
-
-        if (gps_enabled && network_enabled) {
-            status = true
-        } else if (gps_enabled && network_enabled) {
-            status = false
-        } else if (gps_enabled && network_enabled) {
-            status = false
-        } else if (gps_enabled && network_enabled) {
-            status = false
-        }
-
-        return status
-
-    }
-
-
 }

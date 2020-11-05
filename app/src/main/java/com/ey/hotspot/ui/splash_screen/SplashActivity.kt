@@ -6,19 +6,16 @@ import android.content.IntentSender.SendIntentException
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
-import com.crashlytics.android.Crashlytics
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseActivity
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.ActivitySplashBinding
 import com.ey.hotspot.ui.home.BottomNavHomeActivity
 import com.ey.hotspot.ui.login.LoginActivity
-import com.ey.hotspot.utils.checkLocationPermission
 import com.ey.hotspot.utils.constants.Constants
-import com.ey.hotspot.utils.isLocationEnabled
-import com.ey.hotspot.utils.turnOnGpsDialog
+import com.ey.hotspot.utils.extention_functions.checkLocationPermission
+import com.ey.hotspot.utils.extention_functions.isLocationEnabled
+import com.ey.hotspot.utils.extention_functions.turnOnGpsDialog
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.common.api.PendingResult
@@ -64,7 +61,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(),
     }
 
     private fun setUpGoogleAPIClient() {
-
         mGoogleApiClient = GoogleApiClient.Builder(this)
             .addApi(LocationServices.API)
             .addConnectionCallbacks(this)
@@ -85,6 +81,10 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(),
                 goToHomePage()
 
             }
+            HotSpotApp.prefs?.getLanguageFirstTime()!! ->{
+                mBinding.mbLanguageSelection.visibility = View.GONE
+                goToLoginPage()
+            }
             else -> {   //Stay on splash screen & show select lang dialogue
                 mBinding.mbLanguageSelection.visibility = View.VISIBLE
                 setUpListeners()
@@ -96,6 +96,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(),
     fun setUpListeners() {
         //Arabic
         mBinding.btArabic.setOnClickListener {
+            HotSpotApp.prefs?.setLanguageFirstTime(true)
 
             val langType = HotSpotApp.prefs!!.getLanguage()
             if (langType == Constants.ENGLISH_LANG) {
@@ -108,6 +109,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(),
 
         //English
         mBinding.btEnglish.setOnClickListener {
+            HotSpotApp.prefs?.setLanguageFirstTime(true)
 
             val langType = HotSpotApp.prefs!!.getLanguage()
             if (langType == Constants.ARABIC_LANG) {

@@ -7,7 +7,10 @@ import androidx.lifecycle.MutableLiveData
 import com.ey.hotspot.app_core_lib.BaseViewModel
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.network.DataProvider
+import com.ey.hotspot.network.request.ForgotPasswordResendOTPRequest
+import com.ey.hotspot.network.request.ForgotPasswordVerifyOTPRequest
 import com.ey.hotspot.network.response.BaseResponse
+import com.ey.hotspot.network.response.ForgotPasswordVerifyOTPResponse
 import com.ey.hotspot.network.response.LoginResponse
 import com.ey.hotspot.ui.login.verifyotp.model.*
 import com.ey.hotspot.utils.Event

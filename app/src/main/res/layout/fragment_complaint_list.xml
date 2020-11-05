@@ -15,6 +15,18 @@
         tools:context=".ui.review_and_complaint.review_list.ReviewListFragment"
         >
 
+        <!--        Sort-->
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/spinner_sort"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/common_margin"
+            android:entries="@array/review_complaint_sort_type"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:bindHideViewListEmpty="@{viewModel.complaintList.data}"
+            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_complaint_list"
@@ -23,7 +35,7 @@
             tools:listitem="@layout/item_complaint_list"
             tools:itemCount="3"
             app:listComplaintList="@{viewModel.complaintList.data}"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spinner_sort"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>

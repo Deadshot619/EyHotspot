@@ -10,8 +10,10 @@ abstract class CoreApp : Application() {
     companion object {
         lateinit var instance: CoreApp
         lateinit var sharedPreferences: SharedPreferences
-    }
 
+        //Variable to store deep link start status
+        var DL_START = 0
+    }
 
     override fun onCreate() {
         super.onCreate()

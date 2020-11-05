@@ -76,6 +76,7 @@ class FavouriteListAdapter(val listener: OnClickListener) :
         fun onClickReport(data: GetFavouriteItem)
         fun onClickAddFavourite(data: GetFavouriteItem)
         fun onClickNavigate(data: GetFavouriteItem)
+        fun onClickShare(data:GetFavouriteItem)
     }
 
 }

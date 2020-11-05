@@ -6,14 +6,15 @@ import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.VerifyOtpFragmentBinding
+import com.ey.hotspot.network.request.ForgotPasswordResendOTPRequest
+import com.ey.hotspot.network.request.ForgotPasswordVerifyOTPRequest
+import com.ey.hotspot.network.response.ForgotPasswordVerifyOTPResponse
 import com.ey.hotspot.ui.login.changepassword.ChangePasswordFragment
-import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordResendOTPRequest
-import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordVerifyOTPRequest
-import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordVerifyOTPResponse
 import com.ey.hotspot.ui.login.verifyotp.model.ResendForgotPasswordOTP
+import com.ey.hotspot.utils.constants.setUpToolbar
 import com.ey.hotspot.utils.dialogs.OkDialog
-import com.ey.hotspot.utils.replaceFragment
-import com.ey.hotspot.utils.showMessage
+import com.ey.hotspot.utils.extention_functions.replaceFragment
+import com.ey.hotspot.utils.extention_functions.showMessage
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 
@@ -34,13 +35,15 @@ class VerifyOTPFragment :
     lateinit var otp: String
 
     companion object {
-        fun newInstance(inputData: String) = VerifyOTPFragment().apply {
+        fun newInstance(inputData: String, otp: String) = VerifyOTPFragment().apply {
             arguments = Bundle().apply {
                 putString(mInputData, inputData)
+                putString(mOTP, otp)
             }
         }
 
         public const val mInputData = "inputData"
+        public const val mOTP = "OTP"
 
 
     }
@@ -55,10 +58,17 @@ class VerifyOTPFragment :
             viewModel = mViewModel
         }
 
-        setUpToolbar(
+        /*setUpToolbar(
             toolbarBinding = mBinding.toolbarLayout,
             title = getString(R.string.verify_account),
             showUpButton = true
+        )*/
+
+        activity?.setUpToolbar(
+            mBinding.toolbarLayout,
+            resources.getString(R.string.verify_account),
+            true,
+            showTextButton = false
         )
 
         setUpDataView()
@@ -70,27 +80,17 @@ class VerifyOTPFragment :
 
     private fun setUpDataView() {
 
-        mBinding.tvCheckEmailLabel.setText(
-            resources.getString(R.string.otp_title) + " " + arguments?.getString(
-                mInputData
-            ) ?: ""
-        )
-
+       /* mBinding.tvCheckEmailLabel.text = resources.getString(R.string.otp_title) + " " + arguments?.getString(
+            mInputData
+        ) ?: ""*/
 
     }
 
     private fun setUpListener() {
-
-
-        mBinding.otpView.setOtpCompletionListener {
-            otp = it
-
-        }
-
         mBinding.btnVerify.setOnClickListener {
-
+            otp = mBinding.otpView.text.toString()
             try {
-                if (!(otp.isEmpty()) && (otp.length == 5)) {
+                if (otp.isNotEmpty() && otp.length == 5) {
                     val verifyOTPRequest: ForgotPasswordVerifyOTPRequest =
                         ForgotPasswordVerifyOTPRequest(
                             otp.toInt(),
@@ -98,10 +98,8 @@ class VerifyOTPFragment :
                         )
                     mViewModel.verifyForgotPasswordOTP(verifyOTPRequest)
                 } else {
-                    showMessage(requireActivity().getString(R.string.enter_valid_otp))
+                    showMessage(requireActivity().getString(R.string.invalid_otp_label))
                 }
-
-
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -122,14 +120,12 @@ class VerifyOTPFragment :
 
     private fun setUpObserver() {
 
-
         mViewModel.forgotPasswordVerifyOTPResponse.observe(viewLifecycleOwner, Observer {
 
             it.getContentIfNotHandled()?.let {
                 if (it.status) {
 
                     showMessage(it.message, true)
-
                     replaceFragment(
                         fragment = ChangePasswordFragment.newInstance(
                             otp = otp
@@ -158,9 +154,7 @@ class VerifyOTPFragment :
             it.getContentIfNotHandled()?.let {
 
                 if (it.status == true) {
-
                     showMessage(it.message, true)
-
                 } else {
                     try {
                         dialog.setViews(

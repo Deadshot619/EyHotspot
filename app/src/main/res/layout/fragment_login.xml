@@ -33,14 +33,15 @@
                 android:id="@+id/tv_hotspot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_margin_32"
                 android:src="@drawable/ic_hotspot_logo"
                 android:textColor="@color/colorWhite"
                 android:textDirection="locale"
+                app:layout_constraintVertical_bias="0.4"
                 android:textSize="@dimen/txt_size_45"
                 app:layout_constraintEnd_toEndOf="@id/iv_bg_header"
                 app:layout_constraintStart_toStartOf="@id/iv_bg_header"
-                app:layout_constraintTop_toTopOf="@id/iv_bg_header" />
+                app:layout_constraintTop_toTopOf="@id/iv_bg_header"
+                app:layout_constraintBottom_toBottomOf="@id/iv_bg_header"/>
 
             <!--            Skip button-->
             <Button
@@ -61,16 +62,15 @@
                 android:id="@+id/iv_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="@dimen/common_margin_24"
                 android:src="@drawable/ic_baseline_arrow_back_24_primary"
                 android:text="@string/skip"
-                android:visibility="gone"
-                android:padding="@dimen/common_margin_24"
                 android:tint="@color/colorSecondary"
-                app:layout_constraintHorizontal_bias="0"
+                android:visibility="gone"
                 app:layout_constraintEnd_toStartOf="@id/tv_hotspot"
+                app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
 
 
             <!--
@@ -104,7 +104,7 @@
                 app:layout_constraintEnd_toEndOf="@id/tv_hotspot"
                 app:layout_constraintStart_toStartOf="@id/tv_hotspot"
                 app:layout_constraintTop_toBottomOf="@id/tv_hotspot"
-                app:layout_constraintVertical_bias="0.70" />
+                app:layout_constraintVertical_bias="0.60" />
 
             <!--        Login to Portal     -->
             <TextView
@@ -116,7 +116,6 @@
                 android:textColor="@color/textColorHeadline"
                 android:textDirection="locale"
                 android:textSize="@dimen/text_size_14"
-
                 app:layout_constraintEnd_toEndOf="@id/tv_hotspot"
                 app:layout_constraintStart_toStartOf="@id/tv_hotspot"
                 app:layout_constraintTop_toBottomOf="@id/iv_bg_header"
@@ -177,11 +176,12 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_password"
+                    style="@style/CustomEditText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    style="@style/CustomEditText"
                     android:background="@drawable/password_bitmap"
                     android:hint="@string/enter_password"
+                    android:textAlignment="viewStart"
                     android:inputType="textPassword"
                     android:text="@={viewModel.password}"
                     android:textDirection="locale" />
@@ -225,61 +225,18 @@
                 app:layout_constraintStart_toStartOf="@id/password_input_layout"
                 app:layout_constraintTop_toBottomOf="@id/tv_forgot_password" />
 
-
-            <!--Captcha input-->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/captcha_input_layout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+<!--            Captcha Layout-->
+            <include
+                android:id="@+id/layout_captcha"
+                layout="@layout/item_layout_captcha"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_margin_between_fields_4"
-                android:textDirection="locale"
-                app:layout_constraintEnd_toStartOf="@+id/tvCaptach"
-                app:layout_constraintHorizontal_weight="6"
+                android:layout_marginTop="@dimen/common_margin_8"
+                app:layout_constraintEnd_toEndOf="@id/input_email_id"
                 app:layout_constraintStart_toStartOf="@id/input_email_id"
-                app:layout_constraintTop_toBottomOf="@id/tv_enter_message_shown">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_captcha"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/enter_captcha"
-                    android:imeOptions="actionDone"
-                    android:maxHeight="@dimen/margin_20"
-                    android:maxLines="1"
-                    android:nextFocusForward="@+id/btn_sign_in"
-                    android:singleLine="true"
-                    android:textDirection="locale" />
-            </com.google.android.material.textfield.TextInputLayout>
+                app:layout_constraintTop_toBottomOf="@id/tv_enter_message_shown"/>
 
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvCaptach"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/margin_10"
-                android:gravity="center"
-                android:text="CDCDER"
-                android:textSize="@dimen/txt_size_16"
-                android:visibility="gone"
-                app:drawableTintMode="screen"
-                app:layout_constraintEnd_toEndOf="@+id/tv_forgot_password"
-                app:layout_constraintHorizontal_weight="4"
-                app:layout_constraintStart_toEndOf="@+id/captcha_input_layout"
-                app:layout_constraintTop_toTopOf="@+id/captcha_input_layout" />
-
-
-            <ImageView
-                android:id="@+id/ivCaptcha"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="@dimen/margin_10"
-                android:src="@drawable/ic_gray_heart"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="@+id/password_input_layout"
-                app:layout_constraintStart_toEndOf="@+id/captcha_input_layout"
-                app:layout_constraintTop_toBottomOf="@+id/tv_enter_message_shown" />
 
             <!--        Sign  In-->
             <androidx.appcompat.widget.AppCompatButton
@@ -299,7 +256,7 @@
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="@id/password_input_layout"
                 app:layout_constraintStart_toStartOf="@id/password_input_layout"
-                app:layout_constraintTop_toBottomOf="@id/captcha_input_layout" />
+                app:layout_constraintTop_toBottomOf="@id/layout_captcha" />
 
             <!--        Don't have account-->
             <TextView
@@ -321,7 +278,6 @@
             <!--        Get Started-->
             <TextView
                 android:id="@+id/tv_get_started"
-
                 style="@style/TextAppearance.MyApp.Headline3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -342,6 +298,7 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="@drawable/ic_facebook_"
+                android:tint="@color/com_facebook_blue"
                 app:layout_constraintBottom_toBottomOf="@+id/ivGoogleSignIn"
                 app:layout_constraintEnd_toStartOf="@+id/ivGoogleSignIn"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -355,6 +312,7 @@
                 android:layout_height="30dp"
                 android:layout_marginTop="@dimen/common_margin_32"
                 android:layout_marginBottom="@dimen/common_margin_32"
+                android:tint="@color/colorRed"
                 android:src="@drawable/ic_google_sign_in"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

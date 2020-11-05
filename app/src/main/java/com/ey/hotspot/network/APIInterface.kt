@@ -8,15 +8,7 @@ import com.ey.hotspot.ui.favourite.model.MarkFavouriteRequest
 import com.ey.hotspot.ui.favourite.model.MarkFavouriteResponse
 import com.ey.hotspot.ui.home.models.GetHotSpotRequest
 import com.ey.hotspot.ui.home.models.GetHotSpotResponse
-import com.ey.hotspot.ui.login.changepassword.model.ResetPasswordRequest
-import com.ey.hotspot.ui.login.changepassword.model.ResetPasswordResponse
-import com.ey.hotspot.ui.login.logout.LogoutResponse
-import com.ey.hotspot.ui.login.otpverification.fragment.model.SendOTPRequest
-import com.ey.hotspot.ui.login.otpverification.fragment.model.VerifyOTPRequest
-import com.ey.hotspot.ui.login.verifyotp.model.*
-import com.ey.hotspot.ui.profile.fragment.model.ProfileResponse
-import com.ey.hotspot.ui.profile.fragment.model.UpdateProfileRequest
-import com.ey.hotspot.ui.registration.register_user.model.RegistrationResponse
+import com.ey.hotspot.ui.login.verifyotp.model.ResendForgotPasswordOTP
 import com.ey.hotspot.utils.constants.Constants
 import com.google.gson.JsonArray
 import kotlinx.coroutines.Deferred
@@ -30,7 +22,7 @@ interface APIInterface {
     fun register(@Body registerRequest: RegisterRequest): Deferred<BaseResponse<RegistrationResponse>>
 
     @POST(Constants.API_LOGIN)
-    fun login(@Body loginRequest: LoginRequest): Deferred<BaseResponse<LoginResponse?>>
+    fun loginAsync(@Body loginRequest: LoginRequest): Deferred<BaseResponse<LoginResponse?>>
 
     @POST(Constants.API_SOCIAL_LOGIN)
     fun socialLogin(@Body socialLoginRequest: SocialLoginRequest): Deferred<BaseResponse<LoginResponse?>>
@@ -43,11 +35,8 @@ interface APIInterface {
     fun getProfile(
     ): Deferred<BaseResponse<ProfileResponse>>
 
-
     @POST(Constants.API_LOGOUT)
-    fun logOut(
-    ): Deferred<BaseResponse<LogoutResponse>>
-
+    fun logOutAsync(): Deferred<BaseResponse<Any>>
 
     //Refresh Token
     @POST(Constants.API_REFRESH_TOKEN)
@@ -84,13 +73,13 @@ interface APIInterface {
 
     //    Reviews & Complaints
     @GET(Constants.API_GET_REVIEWS)    //Reviews List
-    fun getReviewsAsync(): Deferred<BaseResponse<List<ReviewsList>>>
+    fun getReviewsAsync(@Query(Constants.REVIEW_ORDER) reviewOrder: String): Deferred<BaseResponse<List<LocationReviews>>>
 
     @GET(Constants.API_GET_COMPLAINTS)    //Complaints
-    fun getComplaintsAsync(): Deferred<BaseResponse<List<ComplaintsList>>>
+    fun getComplaintsAsync(@Query(Constants.COMPLAINT_ORDER) complaintOrder: String): Deferred<BaseResponse<List<ComplaintsList>>>
 
     @POST(Constants.API_LOCATION_REVIEWS)    //Location Reviews List
-    fun getLocationReviewsAsync(@Body request: GetLocationReviewsRequest): Deferred<BaseResponse<List<ReviewsList>>>
+    fun getLocationReviewsAsync(@Body request: GetLocationReviewsRequest): Deferred<BaseResponse<ReviewsList>>
 
 
     @GET(Constants.API_GET_COMPLAINTS_ISSUE_TYPES)
@@ -101,7 +90,6 @@ interface APIInterface {
 
     @POST(Constants.API_ADD_COMPLAINT)
     fun apiAddComplaint(@Body request: AddComplaintRequest): Deferred<BaseResponse<Any>>
-
 
 
     //OTP
@@ -139,9 +127,37 @@ interface APIInterface {
 
     @POST(Constants.API_RESEND_FORGOT_PASSWORD_OTP + "/" + "{id}")
     fun resendForgotPasswordOTP(
-        @Path("id") id: String?,@Body forgotPasswordResendOTPRequest: ForgotPasswordResendOTPRequest
+        @Path("id") id: String?,
+        @Body forgotPasswordResendOTPRequest: ForgotPasswordResendOTPRequest
     ): Deferred<BaseResponse<ResendForgotPasswordOTP>>
 
     @GET(Constants.API_GET_COUNTRY_CODE_NAME)
-    fun getCountryList():Deferred<BaseResponse<CoutryCode>>
+    fun getCountryListAsync(): Deferred<BaseResponse<CoutryCode>>
+
+    //Wifi APis
+    @POST(Constants.API_MATCH_WIFI)
+    fun matchWifiNameAsync(): Deferred<BaseResponse<Any>>
+
+    @POST(Constants.API_VALIDATE_WIFI)
+    fun validateWifiAsync(@Body request: ValidateWifiRequest): Deferred<BaseResponse<ValidateWifiResponse>>
+
+    @POST(Constants.API_WIFI_LOGIN)
+    fun wifiLoginAsync(@Body request: WifiLoginRequest): Deferred<BaseResponse<ValidateWifiResponse>>
+
+    @POST(Constants.API_WIFI_LOGOUT)
+    fun wifiLogoutAsync(@Body request: WifiLogoutRequest): Deferred<BaseResponse<WifiLogoutResponse>>
+
+    @POST(Constants.API_WIFI_LOGS)
+    fun wifiLogsList(
+        @Body wifiLogListRequest: WifiLogListRequest
+    ): Deferred<BaseResponse<List<WifiLogListResponse>>>
+
+    @GET(Constants.API_GET_WIFI_SEARCH_KEY_WORDS)
+    fun getWifiSearchKeyWordsAsync(): Deferred<BaseResponse<List<String>>>
+
+    @POST(Constants.API_WIFI_SPEED_TEST)
+    fun setWifiSpeedAsync(@Body request: SpeedTestRequest): Deferred<BaseResponse<Any>>
+
+    @POST(Constants.API_TERMNCONDITION)
+    fun getTermsAndConditionsAsync(@Body request:TermsRequest):Deferred<BaseResponse<Any>>
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">هوت سبوت</string>
+    <!--    <string name="app_name">هوت سبوت</string>-->
     <string name="hello_blank_fragment">مرحبًا بجزء فارغ</string>
 
     <string name="login_button">تسجيل الدخول</string>
@@ -15,7 +15,7 @@
     <string name="searchplace">بحث</string>
     <string name="permission_description">Lorem ipsum dolor sit na aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
     <string name="agree_terms">أنا موافق</string>
-    <string name="enter_register_mobile">أدخل رقم هاتفك المحمول المسجل</string>
+    <string name="enter_register_mobile">ادخل رقم الجوال الخاص بك</string>
     <string name="back_to_login_msg">العودة إلى شاشة تسجيل الدخول</string>
     <string name="enter_register_email">أدخل معرف بريدك الإلكتروني المسجل</string>
     <string name="change_password">غير كلمة السر</string>
@@ -27,51 +27,66 @@
     <string name="sign_in_label">تسجيل الدخول</string>
     <string name="submit_label">إرسال</string>
     <string name="next_label">التالى</string>
-    <string name="mbps_label">%s ميغابت في الثانية</string>
+<!--    <string name="mbps_label">%s ميغابت في الثانية</string>-->
     <string name="loading_label">جار التحميل…</string>
     <string name="under_construction_label">أعمال جارية</string>
+    <string name="press_back_again_label">اضغط مرة أخرى للخروج</string>
+    <string name="gps_enable_conformation">يبدو ان جهاز تتبع الخرائط الخاص بك متوقف، هل تريد تشغيله الآن؟</string>
+    <string name="share_hotspot_data">احصل على وصول مجاني إلى شبكة واي فاي العامة لدينا على %s, بواسطة %s, في %s</string>
+    <string name="no_internet_connection_error">لا يوجد اتصال بالإنترنت</string>
+    <string name="something_went_wrong_error">هناك خطأ ما</string>
 
 
     <!--Toolbar-->
     <string name="search_locations_label">مواقع البحث</string>
     <string name="empty_query_alert_label">يرجى إدخال استفسار</string>
 
-
     <!--Login screen-->
-    <string name="email_id_hint">أدخل معرف البريد</string>
-    <string name="enter_password">أدخل كلمة المرور</string>
-    <string name="enter_captcha">أدخل كلمة التحقق</string>
-    <string name="login_credentials_msg">تسجيل الدخول إلى البوابة باستخدام بيانات اعتمادك</string>
-    <string name="login_hotspot_msg">أليس لديك حساب على Hotspot؟</string>
-    <string name="get_started_msg">نبدأ الآن!</string>
+    <string name="email_id_hint">ادخل عنوان البريد الالكتروني</string>
+    <string name="enter_password">ادخل كلمة المرور</string>
+    <string name="enter_captcha">أدخل رمز التحقق</string>
+    <string name="login_credentials_msg">تسجيل الدخول إلى البوابة</string>
+    <string name="login_hotspot_msg">ليس لديك حساب في شبكة الواي فاي المجانية؟</string>
+    <string name="get_started_msg">ابدأ الآن</string>
     <string name="connecting_kingdom_label">ربط \n المملكة العربية السعودية …!</string>
-
-
 
     <!--    Register User   -->
     <string name="first_name_label">الاسم الاول</string>
-    <string name="last_name_label">الكنية</string>
-    <string name="email_id_label">عنوان الايميل</string>
-    <string name="country_code_label">الرقم الدولي</string>
-    <string name="mobile_number_label">رقم الهاتف المحمول</string>
-    <string name="password_label">كلمه السر</string>
+    <string name="password_mandatory">حقل كلمة المرور إلزامي</string>
+    <string name="last_name_label">الاسم الاخير</string>
+    <string name="email_id_label">عنوان البريد الالكتروني</string>
+    <string name="country_code_label">رمز الدولة</string>
+    <string name="mobile_number_label">رقم الجوال</string>
+    <string name="password_label">كلمه المرور</string>
     <string name="confirm_password_label">تأكيد كلمة المرور</string>
-    <string name="captcha_label">أدخل الرسالة الموضحة أدناه</string>
-    <string name="password_format">يجب أن تحتوي كلمة المرور على 8 أحرف على الأقل بما في ذلك حرف صغير واحد وحرف كبير ورقم واحد وحرف خاص واحد</string>
+    <string name="captcha_label">أدخل كلمة التحقق المبينة أدناه</string>
+    <string name="accept_terms_and_condition_label">تحتاج إلى قبول الشروط والأحكام للمتابعة</string>
+    <string name="password_format_str">يجب أن تحتوي كلمة المرور على 8-32 حرفًا واحدًا كبيرًا ،
+        حرف صغير واحد
+        أرقام عشرية (0-9) ،
+        حرف خاص
+    (@, $ !, %, *, ?, &amp;, #)</string>
+    <string name="password_format">الرجاء إدخال كلمة مرور صالحة</string>
+    <string name="select_country_code_error_msg">يرجى تحديد رمز البلد</string>
+    <string name="email_required_label">حقل البريد الإلكتروني إلزامي</string>
+    <string name="password_required_label">يجب كتابة كلمة المرور</string>
+    <string name="first_name_required_label">حقل الاسم الأول إلزامي</string>
+
+
+
 
     <!--My Profile-->
-    <string name="my_profile_label">ملفي</string>
+    <string name="my_profile_label">ملفي الشخصي</string>
     <string name="update_profile_label">تحديث الملف</string>
     <string name="retrieving_profile_details_label">جارٍ استرداد معلومات الملف الشخصي …</string>
     <string name="updating_profile_label">جارٍ تحديث معلومات الملف الشخصي …</string>
-    <string name="logout_label">تسجيل خروج</string>
+    <string name="logout_label">تسجيل الخروج</string>
     <string name="logout_confirm"> هل أنت متأكد أنك تريد تسجيل الخروج؟</string>
 
-
-
     <!--    Registration Option    -->
-    <string name="verification_method_label">حدد طريقة التحقق</string>
-    <string name="otp_sms_label">Verfiy OTP باستخدام الرسائل القصيرة</string>
+    <string name="verify_account_label">التحقق من الحساب</string>
+    <string name="verification_method_label">يرجى تحديد خيار للتحقق من حسابك</string>
+    <string name="otp_sms_label">تحقق من كلمة المرور لمرة واحدة باستخدام الرسائل القصيرة</string>
     <string name="email_link_label">تحقق باستخدام البريد الإلكتروني</string>
 
     <!--Email verification-->
@@ -82,7 +97,7 @@
 
     <!--Mobile Number verification-->
     <string name="mobile_no_verification_label">التحقق من رقم الهاتف المحمول</string>
-    <string name="otp_sent_label">الرجاء إدخال OTP المرسلة إلى %s</string>
+    <string name="otp_sent_label">الرجاء إدخال  كلمة المرور الصالحة لمرة واحدة المرسلة إلى %s</string>
     <string name="resend_label">إعادة إرسال</string>
 
     <!--Incomplete registration-->
@@ -90,28 +105,42 @@
     <string name="already_registered_label">لقد سجلت بالفعل مع %s و %s</string>
     <string name="complete_registration_label">أكمل تسجيلك بتحديد الخيار أدناه</string>
 
+    <!--    OTP-->
+    <string name="invalid_otp_label">كلمة المرور الصالحة لمرة واحدة غير صحيحة.</string>
+
     <!--Review & Complaint-->
-    <string name="reviews_and_complaint">التعليقات والشكاوى</string>
-    <string name="reviews_label">المراجعات</string>
-    <string name="complaint_label">شكاوي</string>
+    <string name="reviews_and_complaint">التقييم والشكاوي</string>
+    <string name="reviews_label">التقييم</string>
+    <string name="complaint_label"> الشكاوي</string>
     <string name="all_label">الكل</string>
+    <string name="confirm_complaint">هل تريد تقديم الشكوى؟</string>
+    <string name="confirm_review">هل تريد ارسال تقييمك؟</string>
+    <string name="discard_review">هل تريد تجاهل رأيك؟</string>
+    <string name="discard_complaint">هل تريد تجاهل شكواك؟</string>
 
     <!--Favourite Wifi-->
-    <string name="favoutite_wifi_label">واي فاي المفضلة</string>
+    <string name="favoutite_wifi_label">المفضلة</string>
 
     <!--Speed Test-->
     <string name="speed_test_label">اختبار السرعة</string>
-    <string name="users_connected_label">المستخدمون متصلون</string>
-    <string name="go_label">اذهب</string>
+    <string name="users_connected_label">المستخدمون المتصلون</string>
+    <string name="go_label">ابدأ</string>
     <string name="download_speed_label">سرعة التنزيل</string>
-    <string name="retest_label">إعادة الاختبار</string>
+    <string name="retest_label">اعد الضبط</string>
+    <string name="wifi_disabled_label">واي فاي معطل</string>
+    <string name="wifi_enable_conformation">يبدو أن wifi الخاص بك معطل ، هل تريد تمكينه؟</string>
+    <string name="network_not_validated_label">الشبكة الحالية لاتنتمي لشبكة الواي فاي المجانية</string>
+    <string name="wifi_not_validated_label">الشبكة الحالية لاتنتمي لشبكة الواي فاي المجانية</string>
+    <string name="error_while_calculating_download_speed">حدث خطأ أثناء حساب سرعة التنزيل</string>
+
 
     <string name="speed_test_result_label">نتيجة اختبار السرعة</string>
     <string name="download_label">تحميل</string>
     <string name="comment_and_evaluate_label">التعليق والتقييم</string>
-    <string name="rate_wifi_label">قيم واي فاي</string>
+    <string name="rate_wifi_label">تقييم الشبكة</string>
 
     <!--Wifi Log List-->
+    <string name="empty_log_list_label">لم يتم العثور على سجلات</string>
     <string name="wifi_log_list_label">قائمة سجل واي فاي</string>
     <string name="wifi_log_label">سجل واي فاي</string>
     <string name="date_label">تاريخ</string>
@@ -121,86 +150,85 @@
     <string name="speed_test_logs_label">سجلات اختبار السرعة</string>
     <string name="start_time_label">وقت البدء</string>
     <string name="end_time_label">وقت النهاية</string>
+    <string name="wifidate">تاريخ:</string>
 
     <!--Rate Wifi-->
-    <string name="add_remarks_label">أضف ملاحظاتك / ملاحظاتك هنا</string>
+    <string name="add_remarks_label">اضف ملاحظاتك هنا</string>
     <string name="cancel_label">إلغاء</string>
-    <string name="submit_feedback_label">إرسال ملاحظات</string>
+    <string name="submit_feedback_label">إرسال الملاحظات</string>
+    <string name="enter_remark_error_label">يرجى تقديم ملاحظات</string>
+    <string name="provide_rating_label">يرجى وضع علامة على التقييم</string>
 
     <!--Raise Complaint-->
-    <string name="explain_problem_label">اشرح مشكلتك بالتفصيل هنا</string>
+    <string name="explain_problem_label">اشرح مشكلتك هنا بالتفصيل.</string>
     <string name="raise_complaint_label">رفع شكوى</string>
-<!--    <string name="comment_and_evaluate_label">التعليق والتقييم</string>-->
+    <string name="select_issue_type_label">نوع الشكوى</string>
+    <string name="please_select_issue_type_label">يرجى تحديد نوع المشكلة</string>
+    <!--    <string name="comment_and_evaluate_label">التعليق والتقييم</string>-->
 
     <!--WiFi Service-->
-    <string name="wifi_service_label">خدمة واي فاي</string>
-    <string name="wifi_connected_label">تم توصيل WiFi</string>
-    <string name="wifi_disconnected_label">تم قطع اتصال WiFi</string>
-    <string name="checking_wifi_connection_label">التحقق من اتصال WiFi</string>
-    <string name="calculating_wifi_speed_label">اتصال WiFi : %s ، السرعة: حساب …</string>
-    <string name="calculated_wifi_speed_label">اتصال WiFi:٪ s ، السرعة:٪ s ميغابت في الثانية</string>
+<!--    <string name="wifi_service_label">خدمة واي فاي</string>-->
+    <string name="wifi_connected_label">تم توصيل واي فاي</string>
+    <string name="wifi_disconnected_label">تم قطع اتصال واي فاي</string>
+    <string name="checking_wifi_connection_label">التحقق من اتصال واي فاي</string>
+    <string name="calculating_wifi_speed_label">اتصال واي فاي : %s ، السرعة: حساب …</string>
+    <string name="calculated_wifi_speed_label">اتصال واي فاي: %s ، السرعة: Mbps %s</string>
     <string name="no_internet_connection_label">لا يوجد اتصال بالإنترنت</string>
 
     <!--    Yes/No Dialogs-->
     <string name="login_required">تسجيل الدخول مطلوب</string>
     <string name="need_to_login">تحتاج إلى تسجيل الدخول للوصول إلى هذه الميزة</string>
-
+    <string name="no_label">لا</string>
+    <string name="yes_label">نعم</string>
 
     <!--    Location Permission     -->
-    <string name="provide_location_permission_label">تحتاج إلى تقديم إذن الموقع / GPS حتى يعمل هذا التطبيق بسلاسة</string>
+    <string name="provide_location_permission_label">يرجى تفعيل نظام تتبع الخرائط حتى تتمكن من رؤية المواقع التي تحتوي على شبكة الواي فاي المجانية</string>
     <string name="open_label">افتح</string>
 
-
-    <string name="btTextNavigateNow">انتقل الآن</string>
-    <string name="btTextComment"><![CDATA[التعليق والتقييم]]></string>
-    <string name="btTextRateWifi">معدل واي فاي</string>
     <string name="wifi_name">اسم واي فاي</string>
-    <string name="issue_type">نوع القضية</string>
+    <string name="issue_type">نوع الشكوى</string>
     <string name="invalid_email">اسم مستخدم غير صالح</string>
     <string name="verify_link_msg">تم إرسال رابط التحقق إلى</string>
     <string name="ok_label">حسنا</string>
     <string name="completeRegistration">أكمل تسجيلك بإعادة إرسال الرابط</string>
-    <string name="first_last_name_label">الاسم الاول الاسم الاخير</string>
+    <string name="first_last_name_label">الاسم الاول الاسم الاحدث</string>
 
-    <string name="enter_confirm_password">أدخل كلمة المرور مرة أخرى!</string>
+    <string name="enter_confirm_password">اعد كتابة كلمة المرور</string>
     <string name="sign_agree_msg">بالتسجيل أنت توافق على</string>
-    <string name="terms_condition">البنود و الظروف</string>
-    <string name="get_started">نبدأ الآن</string>
+    <string name="terms_condition">قبول الشروط والأحكام</string>
+    <string name="get_started">تسجيل</string>
     <string name="or">أو</string>
-    <string name="otp_title">الرجاء إدخال كلمة المرور OTP المرسلة إلى </string>
-    <string name="resend_otp_label">إعادة إرسال OTP</string>
+    <string name="otp_title">الرجاء إدخال كلمة المرور لمرة واحدة المرسلة إلى </string>
+    <string name="resend_otp_label">إعادة إرسال كلمة المرور الصالحة لمرة واحدة</string>
     <string name="btn_verify">تحقق</string>
-    <string name="receive_otp">لم تتلق OTP؟</string>
+    <string name="receive_otp">لم يتم استلام كلمة المرور الصالحة لمرة واحدة؟</string>
     <string name="loginHeaderName">نقطة اتصال</string>
     <string name="loginHeaderNameSub">يربط العالم ...!</string>
-    <string name="navigate_label">التنقل</string>
-    <string name="navigate_now_label">التنقل الآن</string>
+    <string name="navigate_now_label">التنقل</string>
     <string name="register_with_us">سجل معنا</string>
     <string name="skip">تخطى</string>
-    <string name="otp_label">OTP</string>
+    <string name="otp_label">كلمة المرور الصالحة لمرة واحدة</string>
     <string name="recently_search_label">البحث الأخير</string>
-    <string name="rate_now_label">قيم الآن</string>
-    <string name="arabic">عربى</string>
-    <string name="english">الإنجليزية</string>
+    <!--    <string name="arabic">عربى</string>-->
+    <!--    <string name="english">الإنجليزية</string>-->
     <string name="save_settings_label">احفظ التغييرات</string>
     <string name="notification_label">تنبيه</string>
     <string name="dummytext">Lorem lpsum هو ببساطة نص وهمي</string>
     <string name="language_label">لغة</string>
     <string name="gps_status_label">كشف GPS</string>
-    <string name="get_wifi_label">احصل على سجل WIFI</string>
+    <string name="get_wifi_label">احصل على سجلات الواي فاي</string>
     <string name="notifications_label">إشعارات</string>
-    <string name="setting_label">اعداداتي</string>
+    <string name="setting_label">الاعدادات</string>
     <string name="setting_title_label">أنت متأكد من أنك تريد حفظ الإعدادات.</string>
     <string name="setting_saving_msg">lorem lpsum is simply dummy text of the  printing and typesetting industries. Lorem</string>
-    <string name="no_label">لا</string>
-    <string name="yes_label">نعم</string>
+
     <string name="permission_label">الإذن</string>
-    <string name="invalid_firstName">الاسم الأول غير صالح</string>
-    <string name="invalid_last_name_label">الاسم الأخير غير صالح</string>
+    <string name="invalid_firstName">حقل الاسم الأول مطلوب</string>
+    <string name="invalid_last_name_label">حقل اسم العائلة مطلوب</string>
     <string name="invalid_email_label">البريد الإلكتروني غير صالح</string>
     <string name="invalid_mobile">رقم الجوال غير صالح</string>
     <string name="invalid_password">رمز مرور خاطئ</string>
-    <string name="pwd_not_match">كلمة المرور غير مطابقة</string>
+    <string name="pwd_not_match">تأكيد كلمة المرور لا يتطابق</string>
     <string name="registering_new_user">تسجيل المستخدم الجديد</string>
     <string name="gettting_hotspots_list">الحصول على قائمة النقاط الساخنة</string>
     <string name="getting_favourite_hotspot_list">الحصول على قائمة النقاط الساخنة المفضلة</string>
@@ -212,23 +240,38 @@
     <string name="google_sign_failed">فشل تسجيل الدخول جوجل</string>
     <string name="facebook">facebook</string>
     <string name="no_data_available">لا تتوافر بيانات</string>
-    <string name="enter_valid_otp">أدخل ملف otp صالحًا</string>
+    <string name="enter_valid_otp">أدخل كلمة المرور الصالحة لمرة واحدة صالح</string>
     <string name="invalid_confirm_password">تأكيد كلمة المرور غير صالحة</string>
     <string name="pwd_confirm_pwd_empty">يجب ألا يكون حقل كلمة المرور وتأكيد كلمة المرور فارغًا</string>
     <string name="email_id_mobil_no">معرف البريد الإلكتروني / رقم الجوال</string>
     <string name="enter_email_mobile">أدخل معرف البريد الإلكتروني الخاص بك / رقم الجوال</string>
-    <string name="send_otp">إرسال OTP</string>
-    <string name="verify_otp">تحقق </string>
-    <string name="btnResendOTP">إعادة إرسال OTP</string>
+    <string name="send_otp">إرسال كلمة المرور الصالحة لمرة واحدة</string>
+    <string name="verify_otp">تحقق من كلمة المرور الصالحة لمرة واحدة</string>
+    <string name="btnResendOTP">إعادة إرسال كلمة المرور الصالحة لمرة واحدة</string>
     <string name="verify_account">التحقق من الحساب</string>
     <string name="secure_password">إنشاء كلمة مرور جديدة</string>
     <string name="password_reset_label">إعادة تعيين كلمة المرور</string>
     <string name="enter_email_or_password">أدخل معرف البريد الإلكتروني أو رقم الجوال</string>
-    <string name="sign_in_issue">هل تواجه مشاكل في التوقيع؟</string>
-    <string name="reenter_confirm_password">اعادة ادخال كلمة السر</string>
+    <string name="sign_in_issue">أدخل عنوان البريد الإلكتروني المرتبط بحسابك</string>
+    <string name="reenter_confirm_password">اعد كتابة كلمة المرور</string>
     <string name="sms_label">رسالة قصيرة</string>
     <string name="email_label">البريد الإلكتروني</string>
     <string name="choose_verify_option">حدد خيار التحقق</string>
-    <string name="captcha_characters">أبجدهـFزحأنايكلاممياصسصسشالخامسثسذضصفرواحدإثنانثلاثةأربعةخمسةستةسبعةثمانيةتسعة</string>
+    <!--
+       <string name="captcha_characters">أبجدهـFزحأنايكلاممياصسصسشالخامسثسذضصفرواحدإثنانثلاثةأربعةخمسةستةسبعةثمانيةتسعة</string>
+    -->
     <string name="forgotpassword_label">هل نسيت كلمة المرور</string>
+    <string name="invalid_captcha">كلمة التحقق غير صالحة</string>
+    <string name="msg_mandatory_fields">الحقول إلزامية</string>
+    <string name="empty_firstName">حقل الاسم الأول إلزامي</string>
+    <string name="invalid_Name">لا يتم قبول الأحرف الرقمية والخاصة في هذا المجال</string>
+    <string name="empty_lastName">حقل اسم العائلة مطلوب</string>
+    <string name="empty_captcha">يجب كتابة رمز كلمة التحقق</string>
+
+    <!--    Reviews & Complaints Sort Type string  -->
+    <string-array name="review_complaint_sort_type">
+        <item>الاحدث</item>
+        <item>الأقدم</item>
+    </string-array>
+
 </resources>

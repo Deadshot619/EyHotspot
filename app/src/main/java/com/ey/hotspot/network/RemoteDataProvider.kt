@@ -7,15 +7,8 @@ import com.ey.hotspot.ui.favourite.model.MarkFavouriteRequest
 import com.ey.hotspot.ui.favourite.model.MarkFavouriteResponse
 import com.ey.hotspot.ui.home.models.GetHotSpotRequest
 import com.ey.hotspot.ui.home.models.GetHotSpotResponse
-import com.ey.hotspot.ui.login.changepassword.model.ResetPasswordRequest
-import com.ey.hotspot.ui.login.changepassword.model.ResetPasswordResponse
-import com.ey.hotspot.ui.login.logout.LogoutResponse
-import com.ey.hotspot.ui.login.otpverification.fragment.model.SendOTPRequest
-import com.ey.hotspot.ui.login.otpverification.fragment.model.VerifyOTPRequest
-import com.ey.hotspot.ui.login.verifyotp.model.*
-import com.ey.hotspot.ui.profile.fragment.model.ProfileResponse
-import com.ey.hotspot.ui.profile.fragment.model.UpdateProfileRequest
-import com.ey.hotspot.ui.registration.register_user.model.RegistrationResponse
+import com.ey.hotspot.ui.login.verifyotp.model.ResendForgotPasswordOTP
+import com.ey.hotspot.utils.constants.ReviewSortType
 import com.google.gson.JsonArray
 
 interface RemoteDataProvider {
@@ -44,7 +37,7 @@ interface RemoteDataProvider {
     )
 
     suspend fun logout(
-        success: (BaseResponse<LogoutResponse>) -> Unit,
+        success: (BaseResponse<Any>) -> Unit,
         error: (Exception) -> Unit
     )
 
@@ -87,18 +80,20 @@ interface RemoteDataProvider {
 
     //Reviews & Complaints
     suspend fun getReviews(     //Reviews
-        success: (BaseResponse<List<ReviewsList>>) -> Unit,
+        request: ReviewSortType,
+        success: (BaseResponse<List<LocationReviews>>) -> Unit,
         error: (Exception) -> Unit
     )
 
     suspend fun getCompaints(   //Compaints
+        request: ReviewSortType,
         success: (BaseResponse<List<ComplaintsList>>) -> Unit,
         error: (Exception) -> Unit
     )
 
     suspend fun getLocationReviews(     //Reviews
         request: GetLocationReviewsRequest,
-        success: (BaseResponse<List<ReviewsList>>) -> Unit,
+        success: (BaseResponse<ReviewsList>) -> Unit,
         error: (Exception) -> Unit
     )
 
@@ -159,7 +154,7 @@ interface RemoteDataProvider {
     )
 
     suspend fun resendForgotPasswordOTP(
-        request:ForgotPasswordResendOTPRequest,
+        request: ForgotPasswordResendOTPRequest,
         success: (BaseResponse<ResendForgotPasswordOTP>) -> Unit,
         error: (Exception) -> Unit
     )
@@ -168,4 +163,48 @@ interface RemoteDataProvider {
         success: (BaseResponse<CoutryCode>) -> Unit,
         error: (Exception) -> Unit
     )
+
+    //Wifi
+    suspend fun validateWifi(
+        request: ValidateWifiRequest,
+        success: (BaseResponse<ValidateWifiResponse>) -> Unit,
+        error: (Exception) -> Unit
+    )
+
+    suspend fun wifiLogin(
+        request: WifiLoginRequest,
+        success: (BaseResponse<ValidateWifiResponse>) -> Unit,
+        error: (Exception) -> Unit
+    )
+
+    suspend fun wifiLogout(
+        request: WifiLogoutRequest,
+        success: (BaseResponse<WifiLogoutResponse>) -> Unit,
+        error: (Exception) -> Unit
+    )
+
+    suspend fun wifiLogList(
+        request:WifiLogListRequest,
+        success: (BaseResponse<List<WifiLogListResponse>>) -> Unit,
+        error: (Exception) -> Unit
+    )
+
+    suspend fun wifiSearchKeyWords(
+        success: (BaseResponse<List<String>>) -> Unit,
+        error: (Exception) -> Unit
+    )
+
+    suspend fun wifiSpeedTest(
+        request: SpeedTestRequest,
+        success: (BaseResponse<Any>) -> Unit,
+        error: (Exception) -> Unit
+    )
+
+//    Terms & Conditions
+    suspend fun termsAndConditions(
+        request: TermsRequest,
+        success: (BaseResponse<Any>) -> Unit,
+        error: (Exception) -> Unit
+    )
 }
+

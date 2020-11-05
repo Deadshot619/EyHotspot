@@ -2,7 +2,6 @@ package com.ey.hotspot.ui.login.login_fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.ey.hotspot.R
@@ -11,16 +10,17 @@ import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.FragmentLoginBinding
 import com.ey.hotspot.network.request.LoginRequest
 import com.ey.hotspot.network.request.SocialLoginRequest
-import com.ey.hotspot.ui.home.BottomNavHomeActivity
+import com.ey.hotspot.network.response.LoginResponse
+import com.ey.hotspot.network.response.VerificationPending
 import com.ey.hotspot.ui.login.forgorpassword.ForgotPasswordFragment
+import com.ey.hotspot.ui.login.otpverification.fragment.OTPVerificationFragment
 import com.ey.hotspot.ui.registration.register_user.RegisterUserFragment
-import com.ey.hotspot.utils.constants.convertStringFromList
-import com.ey.hotspot.utils.constants.setSkippedUserData
+import com.ey.hotspot.ui.registration.registration_option.RegistrationOptionFragment
+import com.ey.hotspot.ui.registration.webview.WebViewFragment
+import com.ey.hotspot.utils.constants.*
 import com.ey.hotspot.utils.dialogs.OkDialog
-import com.ey.hotspot.utils.replaceFragment
-import com.ey.hotspot.utils.showMessage
+import com.ey.hotspot.utils.extention_functions.*
 import com.ey.hotspot.utils.validations.isEmailValid
-import com.ey.hotspot.utils.validations.isValidPassword
 import com.facebook.*
 import com.facebook.login.LoginBehavior
 import com.facebook.login.LoginManager
@@ -54,15 +54,32 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
 
     companion object {
-        fun newInstance() = LoginFragment()
+        fun newInstance(
+            goToVerificationFragment: Boolean,
+            email: String? = null,
+            tempToken: String? = null
+        ) = LoginFragment().apply {
+            arguments = Bundle().apply {
+                putBoolean(GO_TO_VERIFICATION_FRAGMENT, goToVerificationFragment)
+                putString(EMAIL_ID, email)
+                putString(TEMP_TOKEN, tempToken)
+            }
+        }
+
+        private const val GO_TO_VERIFICATION_FRAGMENT = "go_to_verification_fragment"
+        private const val EMAIL_ID = "email_id"
+        private const val TEMP_TOKEN = "temp_token"
     }
 
     override fun getLayoutId() = R.layout.fragment_login
     override fun getViewModel() = LoginFragmentViewModel::class.java
 
+    var mCaptcha: String? = null
+    var mEnteredCaptch: String? = null
+    var countGoToVerification = 0
+
+
     override fun onBinding() {
-
-
         mBinding.run {
             lifecycleOwner = viewLifecycleOwner
             viewModel = mViewModel
@@ -72,49 +89,126 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
         setUpListeners()
         setUpObservers()
 
-        if (HotSpotApp.prefs!!.getSkipStatus())
-            mBinding.ivBack.visibility = View.VISIBLE
+        //If true, go to verification fragment
+        if (arguments?.getBoolean(GO_TO_VERIFICATION_FRAGMENT)!!) {
+            if (countGoToVerification++ < 1)
+                callVerificationFragment(
+                    token = arguments?.getString(TEMP_TOKEN)!!,
+                    email = arguments?.getString(EMAIL_ID)!!,
+                    callOtpApi = false
+                )
+        }
+
+/*        if (HotSpotApp.prefs!!.getSkipStatus())
+            mBinding.ivBack.visibility = View.VISIBLE*/
     }
 
     private fun setUpUIData() {
-
         setUpFacebookLogin()
         setuPGoogelSignIn()
         setUpCaptcha()
     }
 
     private fun setUpCaptcha() {
-
-
+        mCaptcha = activity?.generateCaptchaCode(5)
+        mBinding.layoutCaptcha.etCaptchaText.setText(mCaptcha)
     }
 
     private fun setUpObservers() {
-
         //Login Response
-        mViewModel.loginResponse.observe(viewLifecycleOwner, Observer {
-            showMessage(it.message, true)
-            goToHomePage()
+
+        mViewModel.loginResponseSuccess.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let { response ->
+
+                setUpCaptcha()
+//                showMessage(response.message, true)
+
+                verifyAccount(response)
+            }
+        })
+
+        mViewModel.loginResponseFailure.observe(viewLifecycleOwner, Observer {
+
+            it.getContentIfNotHandled()?.let { response ->
+
+                setUpCaptcha()
+//                showMessage(response.message, true)
+
+                verifyAccount(response)
+
+            }
         })
 
         //Social Login Response
         mViewModel.socialLoginResponse.observe(viewLifecycleOwner, Observer {
 
+            showMessage(it.message, true)
+
             if (it.status) {
-                showMessage(it.message, true)
-                goToHomePage()
-            } else {
-                showMessage(it.message, true)
+                if (it.data?.istcaccepted!!) {
+                    updateSharedPreference(it.data)
+                    activity?.goToHomeScreen()
+                } else {
+                    clearDataSaveLangAndKeywords()
+                    HotSpotApp.prefs?.setUserDataPref(it.data)
+                    replaceFragment(
+                        fragment = WebViewFragment.newInstance("login", it.data),
+                        addToBackStack = true,
+                        bundle = null
+                    )
+                }
             }
         })
 
         //Login Error
         mViewModel.loginError.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let { response ->
-                dialog.setViews(convertStringFromList(response.email, response.password))
+                dialog.setViews(convertStringFromList(response.email_error, response.password))
                 dialog.show()
             }
         })
     }
+
+    private fun verifyAccount(data: LoginResponse) {
+        if (data.mobile_no.isNullOrEmpty() && !data.email_id.isNullOrEmpty()) {
+            callVerificationFragment(
+                token = data.tmpToken!!,
+                email = data.email_id,
+                callOtpApi = true
+            )
+        } else {
+            callVerificationOptionSelectionFragment(data.toVerificationPending())
+        }
+    }
+
+    private fun callVerificationFragment(token: String, email: String, callOtpApi: Boolean) {
+        HotSpotApp.prefs!!.setRegistrationTempToken(token)
+        HotSpotApp.prefs!!.setRegistrationEmailID(email)
+
+        replaceFragment(
+            fragment = OTPVerificationFragment.newInstance(
+                selectedOption = VerificationType.EMAIL,
+                selectedItem = email,
+                callOtpApi = callOtpApi
+            ), addToBackStack = true
+        )
+    }
+
+    private fun callVerificationOptionSelectionFragment(response: VerificationPending) {
+
+        HotSpotApp.prefs!!.setRegistrationTempToken(response.tmpToken!!)
+        HotSpotApp.prefs!!.setRegistrationEmailID(response.email_id!!)
+
+        replaceFragment(
+            fragment = RegistrationOptionFragment.newInstance(
+                emailID = response.email_id!!,
+                phoneNo = response.mobile_no!!
+            ),
+            addToBackStack = true
+        )
+
+    }
+
 
     private fun setUpListeners() {
         //Submit
@@ -122,13 +216,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
             if (validate()) {
 
+                setUpCaptcha()
+
                 val loginRequest: LoginRequest =
                     LoginRequest(
                         mViewModel.emailId,
                         mViewModel.password
                     )
                 mViewModel.callLogin(loginRequest)
-
             }
 
         }
@@ -160,32 +255,24 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
         //Skip button
         mBinding.btnSkip.setOnClickListener {
+            clearDataSaveLangAndKeywords()
             setSkippedUserData()
-            goToHomePage()
+            activity?.goToHomeScreen()
         }
 
 
         mBinding.tvForgotPassword.setOnClickListener {
-
-
             replaceFragment(
                 fragment = ForgotPasswordFragment.newInstance(),
                 addToBackStack = true,
                 bundle = null
             )
         }
+
+        mBinding.layoutCaptcha.ivRefreshCaptchaCode.setOnClickListener {
+            setUpCaptcha()
+        }
     }
-
-    //Method to redirect user to home page
-    private fun goToHomePage() {
-        startActivity(Intent(activity, BottomNavHomeActivity::class.java).apply {
-            flags =
-                Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-        })
-
-        activity?.finish()
-    }
-
 
     /*   FACEBOOK   */
     private fun facebookSign() {
@@ -276,8 +363,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
     }
 
     private fun setUpFacebookLogin() {
-
-
         callbackManager = CallbackManager.Factory.create()
         FacebookSdk.setApplicationId(resources.getString(R.string.facebook_app_id))
         FacebookSdk.setIsDebugEnabled(true)
@@ -285,7 +370,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
     /*   GOOGLE   */
     private fun setuPGoogelSignIn() {
-
         val gso =
             GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(resources.getString(R.string.google_client_id))
@@ -301,17 +385,37 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
     private fun validate(): Boolean {
         var isValid = true
 
+        mEnteredCaptch = mBinding.layoutCaptcha.etCaptcha.text.toString()
+        mCaptcha = mBinding.layoutCaptcha.etCaptchaText.text.toString()
+
         mViewModel.run {
             mBinding.run {
-                if (!emailId.isEmailValid()) {
-                    etEmailId.error = resources.getString(R.string.invalid_email)
+                //Email
+                if(emailId.trim().isEmpty()){
+                    etEmailId.error = resources.getString(R.string.email_required_label)
+                    isValid = false
+                } else if (!emailId.isEmailValid()) {
+                    etEmailId.error = resources.getString(R.string.invalid_email_label)
                     isValid = false
                 }
-                if (password.trim().isEmpty()) {
-                    etPassword.error = resources.getString(R.string.enter_password)
+
+                //Password
+                if(password.trim().isEmpty()){
+                    etPassword.error = resources.getString(R.string.password_required_label)
                     isValid = false
-                } else if (!password.isValidPassword()) {
+                }
+
+               /* if (!password.isValidPassword()) {
                     etPassword.error = resources.getString(R.string.password_format)
+                    isValid = false
+                }*/
+
+                //Captcha
+                if (mEnteredCaptch?.isEmpty()!!) {
+                    layoutCaptcha.etCaptcha.error = resources.getString(R.string.empty_captcha)
+                    isValid = false
+                } else if (mEnteredCaptch != mCaptcha) {
+                    layoutCaptcha.etCaptcha.error = resources.getString(R.string.invalid_captcha)
                     isValid = false
                 }
             }
@@ -388,10 +492,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
             )
 
             mViewModel.callSocialLogin(socialLoginRequest)
-
-
         } catch (e: ApiException) {
-
             e.printStackTrace()
             showMessage(resources.getString(R.string.google_sign_failed), true)
         }

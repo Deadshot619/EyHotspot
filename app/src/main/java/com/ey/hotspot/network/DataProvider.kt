@@ -8,15 +8,8 @@ import com.ey.hotspot.ui.favourite.model.MarkFavouriteRequest
 import com.ey.hotspot.ui.favourite.model.MarkFavouriteResponse
 import com.ey.hotspot.ui.home.models.GetHotSpotRequest
 import com.ey.hotspot.ui.home.models.GetHotSpotResponse
-import com.ey.hotspot.ui.login.changepassword.model.ResetPasswordRequest
-import com.ey.hotspot.ui.login.changepassword.model.ResetPasswordResponse
-import com.ey.hotspot.ui.login.logout.LogoutResponse
-import com.ey.hotspot.ui.login.otpverification.fragment.model.SendOTPRequest
-import com.ey.hotspot.ui.login.otpverification.fragment.model.VerifyOTPRequest
-import com.ey.hotspot.ui.login.verifyotp.model.*
-import com.ey.hotspot.ui.profile.fragment.model.ProfileResponse
-import com.ey.hotspot.ui.profile.fragment.model.UpdateProfileRequest
-import com.ey.hotspot.ui.registration.register_user.model.RegistrationResponse
+import com.ey.hotspot.ui.login.verifyotp.model.ResendForgotPasswordOTP
+import com.ey.hotspot.utils.constants.ReviewSortType
 import com.google.gson.JsonArray
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -43,23 +36,18 @@ object DataProvider : RemoteDataProvider {
         }
     }
 
-
     override suspend fun login(
         request: LoginRequest,
         success: (BaseResponse<LoginResponse?>) -> Unit,
         error: (Exception) -> Unit
     ) {
-
-        withContext(Dispatchers.Main) {
-            try {
-                val result = mServices.login(request).await()
-                success(result)
-            } catch (e: Exception) {
-                error(e)
-            }
+        try {
+            val result = mServices.loginAsync(request).await()
+            success(result)
+        } catch (e: Exception) {
+            error(e)
         }
     }
-
 
     override suspend fun getUserList(
         success: (JsonArray) -> Unit,
@@ -94,15 +82,12 @@ object DataProvider : RemoteDataProvider {
     }
 
     override suspend fun logout(
-        success: (BaseResponse<LogoutResponse>) -> Unit,
+        success: (BaseResponse<Any>) -> Unit,
         error: (Exception) -> Unit
     ) {
-
         withContext(Dispatchers.Main) {
-
             try {
-
-                val result = mServices.logOut().await()
+                val result = mServices.logOutAsync().await()
                 success(result)
 
             } catch (e: Exception) {
@@ -144,11 +129,13 @@ object DataProvider : RemoteDataProvider {
         success: (BaseResponse<List<GetHotSpotResponse>>) -> Unit,
         error: (Exception) -> Unit
     ) {
-        try {
-            val result = mServices.getHotSpots(request).await()
-            success(result)
-        } catch (e: Exception) {
-            error(e)
+        withContext(Dispatchers.Main) {
+            try {
+                val result = mServices.getHotSpots(request).await()
+                success(result)
+            } catch (e: Exception) {
+                error(e)
+            }
         }
     }
 
@@ -205,12 +192,13 @@ object DataProvider : RemoteDataProvider {
 
     //Reviews
     override suspend fun getReviews(
-        success: (BaseResponse<List<ReviewsList>>) -> Unit,
+        request: ReviewSortType,
+        success: (BaseResponse<List<LocationReviews>>) -> Unit,
         error: (Exception) -> Unit
     ) {
         withContext(Dispatchers.Main) {
             try {
-                val result = mServices.getReviewsAsync().await()
+                val result = mServices.getReviewsAsync(reviewOrder = request.value).await()
                 success(result)
             } catch (e: Exception) {
                 error(e)
@@ -220,12 +208,13 @@ object DataProvider : RemoteDataProvider {
 
     //Complaints
     override suspend fun getCompaints(
+        request: ReviewSortType,
         success: (BaseResponse<List<ComplaintsList>>) -> Unit,
         error: (Exception) -> Unit
     ) {
         withContext(Dispatchers.Main) {
             try {
-                val result = mServices.getComplaintsAsync().await()
+                val result = mServices.getComplaintsAsync(complaintOrder = request.value).await()
                 success(result)
             } catch (e: Exception) {
                 error(e)
@@ -236,7 +225,7 @@ object DataProvider : RemoteDataProvider {
     //Reviews
     override suspend fun getLocationReviews(
         request: GetLocationReviewsRequest,
-        success: (BaseResponse<List<ReviewsList>>) -> Unit,
+        success: (BaseResponse<ReviewsList>) -> Unit,
         error: (Exception) -> Unit
     ) {
         withContext(Dispatchers.Main) {
@@ -399,14 +388,14 @@ object DataProvider : RemoteDataProvider {
     }
 
     override suspend fun resendForgotPasswordOTP(
-        request:ForgotPasswordResendOTPRequest,
+        request: ForgotPasswordResendOTPRequest,
         success: (BaseResponse<ResendForgotPasswordOTP>) -> Unit,
         error: (Exception) -> Unit
     ) {
 
         try {
             val result = mServices.resendForgotPasswordOTP(
-                HotSpotApp.prefs!!.getRegistrationTempToken(),request
+                HotSpotApp.prefs!!.getRegistrationTempToken(), request
             ).await()
 
             success(result)
@@ -420,7 +409,7 @@ object DataProvider : RemoteDataProvider {
         error: (Exception) -> Unit
     ) {
         try {
-            val result = mServices.getCountryList().await()
+            val result = mServices.getCountryListAsync().await()
             success(result)
         } catch (e: Exception) {
             error(e)
@@ -428,5 +417,102 @@ object DataProvider : RemoteDataProvider {
 
     }
 
+    //Wifi
+    override suspend fun validateWifi(
+        request: ValidateWifiRequest,
+        success: (BaseResponse<ValidateWifiResponse>) -> Unit,
+        error: (Exception) -> Unit
+    ) {
+        try {
+            val result = mServices.validateWifiAsync(request).await()
+            success(result)
+        } catch (e: Exception) {
+            error(e)
+        }
 
+    }
+
+    override suspend fun wifiLogin(
+        request: WifiLoginRequest,
+        success: (BaseResponse<ValidateWifiResponse>) -> Unit,
+        error: (Exception) -> Unit
+    ) {
+        try {
+            val result = mServices.wifiLoginAsync(request).await()
+            success(result)
+        } catch (e: Exception) {
+            error(e)
+        }
+
+    }
+
+    override suspend fun wifiLogout(
+        request: WifiLogoutRequest,
+        success: (BaseResponse<WifiLogoutResponse>) -> Unit,
+        error: (Exception) -> Unit
+    ) {
+        try {
+            val result = mServices.wifiLogoutAsync(request).await()
+            success(result)
+        } catch (e: Exception) {
+            error(e)
+        }
+
+    }
+
+    override suspend fun wifiLogList(
+        request: WifiLogListRequest,
+        success: (BaseResponse<List<WifiLogListResponse>>) -> Unit,
+        error: (Exception) -> Unit
+    ) {
+
+        try {
+            val result = mServices.wifiLogsList(request).await()
+            success(result)
+
+        } catch (e: Exception) {
+            error(e)
+        }
+
+    }
+
+    override suspend fun wifiSearchKeyWords(
+        success: (BaseResponse<List<String>>) -> Unit,
+        error: (Exception) -> Unit
+    ) {
+        try {
+            val result = mServices.getWifiSearchKeyWordsAsync().await()
+            success(result)
+        } catch (e: Exception) {
+            error(e)
+        }
+    }
+
+    override suspend fun wifiSpeedTest(
+        request: SpeedTestRequest,
+        success: (BaseResponse<Any>) -> Unit,
+        error: (Exception) -> Unit
+    ) {
+        try {
+            val result = mServices.setWifiSpeedAsync(request).await()
+            success(result)
+        } catch (e: Exception) {
+            error(e)
+        }
+    }
+
+
+    override suspend fun termsAndConditions(
+        request: TermsRequest,
+        success: (BaseResponse<Any>) -> Unit,
+        error: (Exception) -> Unit
+    ) {
+        try {
+            val result = mServices.getTermsAndConditionsAsync(request).await()
+            success(result)
+        } catch (e: Exception) {
+            error(e)
+        }
+
+    }
 }

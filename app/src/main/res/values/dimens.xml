@@ -46,6 +46,7 @@
     <dimen name="common_margin_48">48dp</dimen>
     <dimen name="common_margin_64">64dp</dimen>
     <dimen name="common_margin_8">8dp</dimen>
+    <dimen name="common_margin_end_toolbar">76dp</dimen>
 
 
     <!--Padding-->
@@ -57,6 +58,7 @@
     <dimen name="common_padding_24">24dp</dimen>
     <dimen name="common_padding_32">32dp</dimen>
     <dimen name="common_padding_8">8dp</dimen>
+    <dimen name="common_padding_4">4dp</dimen>
 
 
 
@@ -74,5 +76,6 @@
     <dimen name="custom_edt_dimen">48dp</dimen>
     <dimen name="margin_100">100dp</dimen>
     <dimen name="margin_200">200dp</dimen>
+    <dimen name="margin_120">120dp</dimen>
 
 </resources>

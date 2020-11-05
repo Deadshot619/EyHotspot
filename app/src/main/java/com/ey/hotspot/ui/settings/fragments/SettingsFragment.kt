@@ -2,34 +2,102 @@ package com.ey.hotspot.ui.settings.fragments
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Build
 import android.view.View
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.FragmentSettingsBinding
+import com.ey.hotspot.ui.login.LoginActivity
 import com.ey.hotspot.ui.profile.ProfileFragment
+import com.ey.hotspot.ui.speed_test.wifi_log_list.WifiLogListFragment
 import com.ey.hotspot.utils.LanguageManager
 import com.ey.hotspot.utils.MyHotSpotSharedPreference
 import com.ey.hotspot.utils.constants.Constants
-import com.ey.hotspot.utils.constants.logoutUser
 import com.ey.hotspot.utils.dialogs.YesNoDialog
-import com.ey.hotspot.utils.replaceFragment
-import com.ey.hotspot.utils.showMessage
+import com.ey.hotspot.utils.extention_functions.goToLoginScreen
+import com.ey.hotspot.utils.extention_functions.replaceFragment
+import com.facebook.AccessToken
+import com.facebook.GraphRequest
+import com.facebook.HttpMethod
+import com.facebook.login.LoginManager
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+
 
 class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel>() {
-
+    lateinit var mGoogleSignInClient: GoogleSignInClient
     //Create 'OK' Dialog
     val dialog by lazy {
         YesNoDialog(requireContext()).apply {
             setViews(
                 title = getString(R.string.logout_confirm),
                 description = "",
-                yes = { logoutUser() },
+                yes = {
+                    setuPGoogelSignOut()
+                    setUpFacebookSiignOut()
+                    mViewModel.logout()
+//                        activity?.application?.logoutUser()
+                },
                 no = { this.dismiss() }
             )
         }
     }
+
+    private fun setUpFacebookSiignOut()
+    {
+        GraphRequest(
+            AccessToken.getCurrentAccessToken(),
+            "/me/permissions/",
+            null,
+            HttpMethod.DELETE,
+            GraphRequest.Callback {
+                val pref: SharedPreferences =
+                    requireActivity().getPreferences(Context.MODE_PRIVATE)
+                val editor = pref.edit()
+                editor.clear()
+                editor.commit()
+                LoginManager.getInstance().logOut()
+            }).executeAsync()
+    }
+
+
+
+    private fun setuPGoogelSignOut() {
+
+        val gso =
+            GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(resources.getString(R.string.google_client_id))
+                .requestEmail()
+                .build()
+        mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
+        mGoogleSignInClient.signOut()
+            .addOnCompleteListener(requireActivity()) {
+                // Update your UI here
+            }
+
+    }
+    private val dialogForGuest by lazy {
+        YesNoDialog(requireContext()).apply {
+            setViews(
+                title = getString(R.string.login_required),
+                description = getString(R.string.need_to_login),
+                yes = {
+                    goToLoginScreen()
+                    this.dismiss()
+                },
+                no = {
+                    this.dismiss()
+                }
+            )
+        }
+    }
+    fun goToLoginScreen() {
+        startActivity(Intent(requireContext(), LoginActivity::class.java))
+    }
+
 
     companion object {
         fun newInstance() = SettingsFragment()
@@ -58,18 +126,23 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel
         hideViewsIfSkippedUser()
 
         //Change image of language
-        if(HotSpotApp.prefs?.getLanguage() == Constants.ARABIC_LANG)
-            mBinding.ivChangeLanguage.setImageResource(R.drawable.ic_active_switch)
+        if (HotSpotApp.prefs?.getLanguage() == Constants.ARABIC_LANG)
+            mBinding.ivChangeLanguage.setImageResource(R.drawable.group13966)
         else
-            mBinding.ivChangeLanguage.setImageResource(R.drawable.ic_inactive_switch)
+            mBinding.ivChangeLanguage.setImageResource(R.drawable.group13969)
     }
 
     private fun setUpListeners() {
-
         //Wifi Log List
         mBinding.llWifiLogList.setOnClickListener {
-            showMessage(resources.getString(R.string.under_construction_label))
-            //replaceFragment(WifiLogListFragment(), true)
+           // showMessage(resources.getString(R.string.under_construction_label))
+            if (HotSpotApp.prefs?.getAppLoggedInStatus()!!) {
+                replaceFragment(WifiLogListFragment(), true)
+            }
+            else
+            {
+                dialogForGuest.show()
+            }
         }
 
         /*Submit click*/
@@ -101,6 +174,11 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel
         mBinding.llLogout.setOnClickListener {
             dialog.show()
         }
+
+        //Login
+        mBinding.llLogin.setOnClickListener {
+            activity?.goToLoginScreen()
+        }
     }
 
 
@@ -129,11 +207,15 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel
     }
 
 
-    private fun hideViewsIfSkippedUser(){
-        if(HotSpotApp.prefs!!.getSkipStatus())
+    private fun hideViewsIfSkippedUser() {
+        if (HotSpotApp.prefs!!.getSkipStatus())
             mBinding.run {
                 llProfileList.visibility = View.GONE
+                viewProfileHorizontal.visibility = View.GONE
                 llLogout.visibility = View.GONE
+                viewLogoutHorizontal.visibility = View.GONE
+                llLogin.visibility = View.VISIBLE
+
             }
     }
 }

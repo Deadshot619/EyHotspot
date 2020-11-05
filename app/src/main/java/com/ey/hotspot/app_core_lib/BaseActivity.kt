@@ -25,8 +25,8 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
     protected lateinit var mContext: Context
 
     //  protected lateinit var mPref: PreferencesHelper
-    private lateinit var mManager: FragmentManager
-
+    protected lateinit var mManager: FragmentManager
+        private set
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,8 +50,9 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
         bundle?.let {
             fragment.arguments = bundle
         }
-        supportFragmentManager.beginTransaction().apply {
-            add(R.id.container, fragment)
+        mManager.beginTransaction().apply {
+            add(R.id.container, fragment, fragment.javaClass.name)
+
             if (addToBackstack) {
                 addToBackStack(fragment::class.java.simpleName)
             }
@@ -67,8 +68,9 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
             fragment.arguments = bundle
         }
 
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.container, fragment)
+        mManager.beginTransaction().apply {
+            replace(R.id.container, fragment, fragment.javaClass.name)
+
             if (addToBackstack) {
                 addToBackStack(fragment::class.java.simpleName)
             }
@@ -80,11 +82,11 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
      * Method to remove fragment from backStack
      */
     fun removeFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction().apply {
+        mManager.beginTransaction().apply {
             remove(fragment)
             commit()
         }
-        supportFragmentManager.popBackStack()
+        mManager.popBackStack()
     }
 
     fun restartApplication(context: Context?, thobeSharedPreference: MyHotSpotSharedPreference) {
@@ -110,13 +112,6 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
         finish()
         startActivity(i)
     }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        if (supportFragmentManager.fragments.isEmpty())
-            finish()
-    }
-
 
     open fun checkLocSaveState(): Boolean {
 

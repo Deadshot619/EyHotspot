@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.ey.hotspot.R
 import com.ey.hotspot.utils.Event
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -46,7 +47,9 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
         _dialogVisibility.value = false
         e.message?.let {
             if (it.contains("500") || it.contains("Socket"))
-                showToastFromViewModel("No Internet Connection $it", true)
+                showToastFromViewModel(appInstance.getString(R.string.no_internet_connection_error), true)
+            else if (it.contains("Unable to resolve host") || it.contains("timeout"))
+                showToastFromViewModel(appInstance.getString(R.string.something_went_wrong_error), true)
             else
                 showToastFromViewModel(it, true)
         }
@@ -58,9 +61,20 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
      * @param show Determine whether to show/hide the dialog
      * @param message The message to be shown in dialog
      */
-    protected fun setDialogVisibility(show: Boolean, message: String? = null){
+    protected fun setDialogVisibility(show: Boolean, message: String? = null) {
         _dialogVisibility.value = show
         _dialogMessage.value = message
+    }
+
+    /**
+     * Method to show/hide dialog & set its message
+     *
+     * @param show Determine whether to show/hide the dialog
+     * @param message The message to be shown in dialog
+     */
+    protected fun setDialogVisibilityPost(show: Boolean, message: String? = null) {
+        _dialogVisibility.postValue(show)
+        _dialogMessage.postValue(message)
     }
 
     /**
@@ -69,9 +83,11 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
      * @param durationLong Determines duration of Toast
      * @param message The message to be shown in Toast
      */
-    protected fun showToastFromViewModel(message: String?, durationLong: Boolean = false){
-        _toastMessage.value = Event(message)
-        toastMessageDuration = durationLong
+    protected fun showToastFromViewModel(message: String?, durationLong: Boolean = false) {
+        if (!message.isNullOrEmpty() && !message.contains("401")) {
+            _toastMessage.value = Event(message)
+            toastMessageDuration = durationLong
+        }
     }
 
     override fun onCleared() {

@@ -8,10 +8,15 @@ import androidx.lifecycle.Observer
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentRaiseComplaintBinding
-import com.ey.hotspot.utils.showMessage
+import com.ey.hotspot.utils.dialogs.YesNoDialog
+import com.ey.hotspot.utils.extention_functions.removeFragment
+import com.ey.hotspot.utils.extention_functions.showMessage
 
 class RaiseComplaintFragment :
     BaseFragment<FragmentRaiseComplaintBinding, RaiseComplaintViewModel>() {
+
+
+
 
     companion object {
         fun newInstance(locationId: Int, wifiSsid: String, wifiProvider: String, location: String) =
@@ -29,6 +34,7 @@ class RaiseComplaintFragment :
         private const val WIFI_PROVIDER = "wifi_provider"
         private const val LOCATION = "location"
     }
+
 
     override fun getLayoutId() = R.layout.fragment_raise_complaint
     override fun getViewModel() = RaiseComplaintViewModel::class.java
@@ -59,18 +65,31 @@ class RaiseComplaintFragment :
             wifiLocation = arguments?.getString(RaiseComplaintFragment.LOCATION) ?: ""
         }
     }
+    //Create 'OK' Dialog
+    val dialog by lazy {
+        YesNoDialog(requireContext()).apply {
+            setViews(
+                title = getString(R.string.confirm_complaint),
+                description = "",
+                yes = { mViewModel.addComplaint()
+                this.dismiss()},
+                no = { this.dismiss() }
+            )
+        }
+    }
 
     private fun setUpListeners() {
         mBinding.run {
             //Cancel Button
             btnCancelButton.setOnClickListener {
                 edtRemarks.setText("")
+                activity?.onBackPressed()
             }
 
 //            Submit Feedback
             btnSubmitComplaint.setOnClickListener {
                 if (validate())
-                    mViewModel.addComplaint()
+               dialog.show()
             }
 
             //Issues Spinner
@@ -106,7 +125,8 @@ class RaiseComplaintFragment :
         mViewModel.goBack.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let { status ->
                 if (status)
-                    activity?.onBackPressed()
+                   // activity?.onBackPressed()
+                    removeFragment(this)
             }
         })
     }
@@ -119,8 +139,8 @@ class RaiseComplaintFragment :
         mViewModel.raiseComplaintData.value?.run {
             mBinding.run {
                 return when {
-                    issueType.trim().isEmpty() -> {
-                        showMessage("Please select a issue")
+                    issueType.isEmpty() || issueType == "0" -> {
+                        showMessage(getString(R.string.please_select_issue_type_label))
                         false
                     }
                     issueType.toLowerCase() == "others" && feedback.trim().isEmpty() -> {

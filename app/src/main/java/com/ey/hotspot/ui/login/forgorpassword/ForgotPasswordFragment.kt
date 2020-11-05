@@ -4,12 +4,15 @@ import androidx.lifecycle.Observer
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentForgotPasswordMobileBinding
+import com.ey.hotspot.network.request.ForgotPasswordRequest
+import com.ey.hotspot.network.response.ForgotPasswordResponse
 import com.ey.hotspot.ui.login.verifyotp.VerifyOTPFragment
-import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordRequest
-import com.ey.hotspot.ui.login.verifyotp.model.ForgotPasswordResponse
+import com.ey.hotspot.utils.constants.setUpToolbar
 import com.ey.hotspot.utils.dialogs.OkDialog
-import com.ey.hotspot.utils.replaceFragment
-import com.ey.hotspot.utils.showMessage
+import com.ey.hotspot.utils.extention_functions.generateCaptchaCode
+import com.ey.hotspot.utils.extention_functions.replaceFragment
+import com.ey.hotspot.utils.extention_functions.showMessage
+import com.ey.hotspot.utils.validations.isEmailValid
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 
@@ -31,6 +34,9 @@ class ForgotPasswordFragment :
         fun newInstance() = ForgotPasswordFragment()
     }
 
+    var mCaptcha: String? = null
+    var mEnteredCaptch: String? = null
+
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_forgot_password_mobile
@@ -47,10 +53,17 @@ class ForgotPasswordFragment :
             viewModel = mViewModel
         }
 
-        setUpToolbar(
+        /*setUpToolbar(
             toolbarBinding = mBinding.toolbarLayout,
             title = getString(R.string.forgotpassword_label),
             showUpButton = true
+
+        )*/
+        activity?.setUpToolbar(
+            mBinding.toolbarLayout,
+            resources.getString(R.string.forgotpassword_label),
+            true,
+            showTextButton = false
         )
 
         setUpViewData()
@@ -60,22 +73,28 @@ class ForgotPasswordFragment :
     }
 
     private fun setUpViewData() {
+        setUpCaptcha()
+    }
 
-
+    private fun setUpCaptcha() {
+        mCaptcha = activity?.generateCaptchaCode(5)
+        mBinding.layoutCaptcha.etCaptchaText.setText(mCaptcha)
     }
 
     private fun setUpObserver() {
 
         mViewModel.forgotPasswordResponse.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let {
+                setUpCaptcha()
+
                 if (it.status) {
                     showMessage(it.message, true)
                     replaceFragment(
                         fragment = VerifyOTPFragment.newInstance(
-                            inputData = mViewModel.mEmailIdOrPassword
+                            inputData = mViewModel.mEmailIdOrPassword,
+                            otp = it.message
                         ),
                         addToBackStack = true
-
                     )
                 } else {
                     try {
@@ -117,13 +136,20 @@ class ForgotPasswordFragment :
             btnSendOtp.setOnClickListener {
 
                 if (validate()) {
-
+                    setUpCaptcha()
                     val forgotPasswordRequest: ForgotPasswordRequest =
                         ForgotPasswordRequest(mViewModel.mEmailIdOrPassword)
                     mViewModel.callForgotPasswordAPI(forgotPasswordRequest)
 
                 }
             }
+        }
+
+        mBinding.layoutCaptcha.ivRefreshCaptchaCode.setOnClickListener {
+
+            mCaptcha = activity?.generateCaptchaCode(5)
+            mBinding.layoutCaptcha.etCaptchaText.setText(mCaptcha)
+
         }
     }
 
@@ -134,17 +160,30 @@ class ForgotPasswordFragment :
     private fun validate(): Boolean {
         var isValid = true
 
+        mEnteredCaptch = mBinding.layoutCaptcha.etCaptcha.text.toString()
+        mCaptcha = mBinding.layoutCaptcha.etCaptchaText.text.toString()
+
         mViewModel.run {
             mBinding.run {
 
                 if (mEmailIdOrPassword.trim().isEmpty()) {
-                    edtMobileNo.error = resources.getString(R.string.enter_email_or_password)
+                    edtMobileNo.error = resources.getString(R.string.email_id_hint)
+                    isValid = false
+                } else if (!mEmailIdOrPassword.isEmailValid()) {
+                    edtMobileNo.error = resources.getString(R.string.invalid_email_label)
+                    isValid = false
+                }
+
+                if (layoutCaptcha.etCaptcha.text.isNullOrEmpty()) {
+                    layoutCaptcha.etCaptcha.error = resources.getString(R.string.empty_captcha)
+                    isValid = false
+                } else if (layoutCaptcha.etCaptcha.text.toString() != layoutCaptcha.etCaptchaText.text.toString()) {
+                    layoutCaptcha.etCaptcha.error = resources.getString(R.string.invalid_captcha)
                     isValid = false
                 }
             }
         }
         return isValid
+
     }
-
-
 }

@@ -1,18 +1,17 @@
 package com.ey.hotspot.ui.login.otpverification.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
-import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.databinding.OTPVerificationFragmentBinding
-import com.ey.hotspot.ui.home.BottomNavHomeActivity
-import com.ey.hotspot.ui.login.otpverification.fragment.model.SendOTPRequest
-import com.ey.hotspot.ui.login.otpverification.fragment.model.VerifyOTPRequest
-import com.ey.hotspot.ui.speed_test.rate_wifi.RateWifiFragment
-import com.ey.hotspot.utils.replaceFragment
-import com.ey.hotspot.utils.showMessage
+import com.ey.hotspot.network.request.SendOTPRequest
+import com.ey.hotspot.network.request.VerifyOTPRequest
+import com.ey.hotspot.utils.constants.VerificationType
+import com.ey.hotspot.utils.constants.setUpToolbar
+import com.ey.hotspot.utils.extention_functions.goToHomeScreen
+import com.ey.hotspot.utils.extention_functions.replaceFragment
+import com.ey.hotspot.utils.extention_functions.showMessage
 import com.facebook.login.LoginFragment
 
 class OTPVerificationFragment :
@@ -20,18 +19,19 @@ class OTPVerificationFragment :
 
 
     companion object {
-        fun newInstance(selectedOption: String, selectedItem: String) =
+        fun newInstance(selectedOption: VerificationType, selectedItem: String, callOtpApi: Boolean = true) =
             OTPVerificationFragment().apply {
 
                 arguments = Bundle().apply {
-
-                    putString(selectedType, selectedOption)
+                    putString(selectedType, selectedOption.value)
                     putString(mSelectedItem, selectedItem)
+                    putBoolean(CALL_OTP_API, callOtpApi)
                 }
             }
 
-        private const val selectedType = "selectedoption"
-        private const val mSelectedItem = "selecteditem"
+        private const val selectedType = "selected_type"
+        private const val mSelectedItem = "selected_item"
+        private const val CALL_OTP_API = "call_otp_api"
     }
 
     override fun getLayoutId(): Int {
@@ -44,10 +44,17 @@ class OTPVerificationFragment :
     }
 
     override fun onBinding() {
-        setUpToolbar(
+        /*setUpToolbar(
             toolbarBinding = mBinding.toolbarLayout,
             title = getString(R.string.otp_label),
             showUpButton = true
+        )*/
+
+        activity?.setUpToolbar(
+            mBinding.toolbarLayout,
+            resources.getString(R.string.verify_account_label),
+            true,
+            showTextButton = false
         )
 
         mBinding.run {
@@ -59,7 +66,11 @@ class OTPVerificationFragment :
         val sendOTPRequest: SendOTPRequest = SendOTPRequest(
             arguments?.getString(selectedType) ?: ""
         )
-        mViewModel.callSendOTPRequest(sendOTPRequest)
+
+        //Call the APi, only if its true
+        if (arguments?.getBoolean(CALL_OTP_API)!!)
+            mViewModel.callSendOTPRequest(sendOTPRequest)
+
         setUpViewData()
         setUpObserver()
         setUpClickListener()
@@ -67,28 +78,29 @@ class OTPVerificationFragment :
     }
 
     private fun setUpViewData() {
-
-
-        mBinding.tvCheckEmailLabel.setText(
+       /* mBinding.tvCheckEmailLabel.text =
             requireActivity().getString(R.string.otp_title) + " " + arguments?.getString(
                 mSelectedItem
-            ) ?: ""
-        )
+            ) ?: ""*/
+
+        //Change image according to Selected Type
+        if ( arguments?.getString(selectedType) == VerificationType.SMS.value)
+            mBinding.ivCheck.setImageResource(R.drawable.ic_email_verification)
+        else
+            mBinding.ivCheck.setImageResource(R.drawable.ic_email_verification)
+
     }
 
     private fun setUpClickListener() {
-
-        var otp: String = ""
-        mBinding.otpView.setOtpCompletionListener {
-            otp = it
-        }
-
+        //Verify
         mBinding.btnVerify.setOnClickListener {
+            val otp = mBinding.otpView.text.toString()
+
             if (otp.isNotEmpty() && (otp.length == 5)) {
                 val verifyOTPRequest: VerifyOTPRequest = VerifyOTPRequest(otp.toInt())
                 mViewModel.verfiyOTPRequest(verifyOTPRequest)
             } else {
-                showMessage(requireActivity().getString(R.string.enter_valid_otp))
+                showMessage(requireActivity().getString(R.string.invalid_otp_label))
             }
 
         }
@@ -101,48 +113,30 @@ class OTPVerificationFragment :
             )
         }
 
+        //Resend Otp
         mBinding.tvResendOTP.setOnClickListener {
             val sendOTPRequest: SendOTPRequest = SendOTPRequest(
                 arguments?.getString(selectedType) ?: ""
             )
             mViewModel.callSendOTPRequest(sendOTPRequest)
-
         }
-
     }
 
     private fun setUpObserver() {
 
         mViewModel.sendOTPResponse.observe(viewLifecycleOwner, Observer {
-
-            if (it.status == true) {
-
-                showMessage(it.message)
-            } else {
-                showMessage(it.message)
-            }
-
+            showMessage(it.message)
         })
 
         mViewModel.verifyResponse.observe(viewLifecycleOwner, Observer {
 
             if (it.status) {
                 showMessage(it.message)
-                goToHomeScreen()
+                requireActivity().goToHomeScreen()
             } else {
                 showMessage(it.message)
             }
         })
 
     }
-
-
-    fun goToHomeScreen(){
-        startActivity(Intent(activity, BottomNavHomeActivity::class.java).apply {
-            flags =
-                Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-        })
-        activity?.finish()
-    }
-
 }

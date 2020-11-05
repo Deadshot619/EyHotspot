@@ -15,7 +15,7 @@
         <!--Toolbar-->
         <include
             android:id="@+id/toolbarLayout"
-            layout="@layout/layout_custom_toolbar"
+            layout="@layout/layout_custom_toolbar_dark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -53,8 +53,8 @@
             style="@style/TextAppearance.MyApp.Headline5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/common_margin"
             android:layout_gravity="center"
+            android:layout_marginTop="@dimen/common_margin"
             android:gravity="center"
             android:text="@string/verification_method_label"
             app:layout_constraintEnd_toEndOf="@id/guideline_right"
@@ -66,11 +66,8 @@
             android:id="@+id/rgSelectedMethod"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/common_margin"
             android:orientation="horizontal"
-            android:layout_marginTop="@dimen/margin_10"
-            android:paddingEnd="@dimen/margin_30"
-            android:paddingStart="@dimen/margin_30"
             android:textDirection="locale"
             android:weightSum="2"
             app:layout_constraintEnd_toEndOf="@id/guideline_right"
@@ -82,23 +79,28 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:paddingStart="@dimen/margin_20"
-                android:paddingEnd="@dimen/margin_20"
-                android:layout_gravity="center"
+                android:layout_gravity="end"
+                android:layout_marginStart="@dimen/common_margin"
+                android:paddingStart="@dimen/margin_10"
+                android:paddingEnd="@dimen/margin_10"
                 android:text="@string/sms_label"
+                android:buttonTint="@color/colorPrimary"
+                tools:checked="true"
                 android:textDirection="locale"
-                android:textSize="18sp" />
+                android:textSize="@dimen/text_size_16" />
 
             <RadioButton
                 android:id="@+id/rb_email"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:paddingStart="@dimen/margin_20"
-                android:paddingEnd="@dimen/margin_20"
+                android:layout_marginStart="@dimen/common_margin"
+                android:buttonTint="@color/colorPrimary"
+                android:paddingStart="@dimen/margin_10"
+                android:paddingEnd="@dimen/margin_10"
                 android:text="@string/email_label"
                 android:textDirection="locale"
-                android:textSize="18sp" />
+                android:textSize="@dimen/text_size_16" />
 
         </RadioGroup>
 
@@ -108,56 +110,47 @@
             style="@style/TextAppearance.MyApp.Headline5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_14"
             android:layout_marginTop="@dimen/common_margin_24"
+            android:visibility="gone"
             android:text="@string/captcha_label"
             android:textDirection="locale"
+            android:textSize="@dimen/text_size_14"
             app:layout_constraintEnd_toEndOf="@+id/guideline_right"
             app:layout_constraintStart_toStartOf="@id/guideline_left"
             app:layout_constraintTop_toBottomOf="@id/rgSelectedMethod" />
 
 
-        <!--Captcha input-->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/captcha_input_layout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        <!--            Captcha Layout-->
+        <include
+            android:visibility="gone"
+            android:id="@+id/layout_captcha"
+            layout="@layout/item_layout_captcha"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/common_margin_between_fields_4"
-            android:textDirection="locale"
-            app:layout_constraintEnd_toEndOf="@id/guideline_right"
-            app:layout_constraintStart_toStartOf="@id/guideline_left"
-            app:layout_constraintTop_toBottomOf="@id/tv_enter_message_shown">
+            android:layout_marginTop="@dimen/common_margin_8"
+            app:layout_constraintEnd_toEndOf="@id/rgSelectedMethod"
+            app:layout_constraintStart_toStartOf="@id/rgSelectedMethod"
+            app:layout_constraintTop_toBottomOf="@id/tv_enter_message_shown"/>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_captcha"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:imeOptions="actionDone"
-                android:maxHeight="@dimen/margin_20"
-                android:maxLines="1"
-                android:nextFocusForward="@+id/btnSubmit"
-                android:singleLine="true"
-                android:hint="@string/enter_captcha"
-                android:textDirection="locale" />
-        </com.google.android.material.textfield.TextInputLayout>
+
+
 
 
 
         <!--otp on sms-->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSubmit"
+            style="@style/GradientButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_20"
-            style="@style/GradientButton"
+            android:layout_marginTop="@dimen/common_margin_32"
             android:gravity="center"
             android:paddingStart="@dimen/margin_40"
             android:paddingEnd="@dimen/margin_40"
             android:text="@string/submit_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/captcha_input_layout" />
+            app:layout_constraintTop_toBottomOf="@id/layout_captcha" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,30 +1,31 @@
 package com.ey.hotspot.ui.login.login_fragment
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ey.hotspot.app_core_lib.BaseViewModel
-import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.network.DataProvider
 import com.ey.hotspot.network.request.LoginRequest
 import com.ey.hotspot.network.request.SocialLoginRequest
 import com.ey.hotspot.network.response.BaseResponse
 import com.ey.hotspot.network.response.LoginResponse
 import com.ey.hotspot.utils.Event
-import com.ey.hotspot.utils.constants.updateSharedPreference
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class LoginFragmentViewModel(application: Application) : BaseViewModel(application) {
 
-
     var emailId = ""
     var password = ""
+    var captcha = ""
 
-    private val _loginResponse = MutableLiveData<BaseResponse<LoginResponse?>>()
-    val loginResponse: LiveData<BaseResponse<LoginResponse?>>
-        get() = _loginResponse
+    private val _loginResponseSuccess = MutableLiveData<Event<LoginResponse?>>()
+    val loginResponseSuccess: LiveData<Event<LoginResponse?>>
+        get() = _loginResponseSuccess
+
+    private val _loginResponseFailure = MutableLiveData<Event<LoginResponse?>>()
+    val loginResponseFailure: LiveData<Event<LoginResponse?>>
+        get() = _loginResponseFailure
+
 
     //This variable will handle Login Errors
     private val _loginError = MutableLiveData<Event<LoginResponse?>>()
@@ -37,6 +38,7 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
         get() = _socialLoginRespinse
 
 
+
     //Call this method from fragment/layout
     fun callLogin(loginRequest: LoginRequest) {
         setDialogVisibility(true)
@@ -45,29 +47,24 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
             DataProvider.login(
                 request = loginRequest,
                 success = {
+                    setDialogVisibility(false)
 
+//                    showToastFromViewModel(it.message)
 
-                    if (it.status) {
-                        _loginResponse.value = it
-
-                        Timber.tag("Bearer_Token").d(it.data?.accessToken)
-                        updateSharedPreference(it.data!!)
-
-                    } else {
-                        setDialogVisibility(false)
-//                        _loginError.value = Event(it.data)
+                    if (it.status)
+                        _loginResponseSuccess.value = Event(it.data)
+                    else{
+                        _loginResponseFailure.value = Event(null)
                         showToastFromViewModel(it.message)
+                        _loginResponseFailure.value = Event(it.data)
                     }
-
-
                 },
                 error = {
-                        checkError(it)
+                    checkError(it)
                 }
             )
         }
     }
-
 
     fun callSocialLogin(socialLoginRequest: SocialLoginRequest) {
         setDialogVisibility(true)
@@ -78,9 +75,8 @@ class LoginFragmentViewModel(application: Application) : BaseViewModel(applicati
                 success = {
                     setDialogVisibility(false)
                     _socialLoginRespinse.value = it
-                    updateSharedPreference(it.data!!)
 
-                    Log.d("TOKEN",it.data.accessToken)
+//                    updateSharedPreference(it.data!!)
 
                 }, error = {
                     checkError(it)

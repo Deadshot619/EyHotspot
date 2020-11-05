@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.ey.hotspot.ui.settings.fragments.SettingsViewModel" />
@@ -37,16 +38,19 @@
                 <!--            Language    -->
                 <LinearLayout
                     style="@style/SettingsStyle"
+                    android:paddingTop="@dimen/common_padding"
+                    android:paddingBottom="@dimen/common_padding"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:gravity="center"
                     android:weightSum="2">
 
                     <LinearLayout
-
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.5"
+                        android:scaleType="center"
                         android:orientation="vertical">
 
                         <!--Language -->
@@ -58,21 +62,43 @@
 
                         <!--                        Language sub Text-->
                         <TextView
+                            android:visibility="gone"
                             android:id="@+id/tv_selected_language"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            tools:text="English"
                             android:text="@{viewModel.currentLanguage}"
-                            android:textColor="@color/colorLightGray" />
+                            android:textColor="@color/colorLightGray"
+                            tools:text="English" />
                     </LinearLayout>
 
                     <ImageView
                         android:id="@+id/ivChangeLanguage"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="50dp"
                         android:layout_weight="0.5"
-                        android:scaleType="center"
-                        android:src="@drawable/ic_inactive_switch" />
+                        android:src="@drawable/group13969" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorLightestGray" />
+
+
+                <!--                Get Wifi Log-->
+                <LinearLayout
+                    android:id="@+id/ll_wifi_log_list"
+                    style="@style/SettingsStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TextAppearance.MyApp.Headline3_Setting_Normal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/get_wifi_label" />
+
                 </LinearLayout>
 
                 <View
@@ -97,51 +123,31 @@
                 </LinearLayout>
 
                 <View
+                    android:id="@+id/view_profile_horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/colorLightestGray" />
 
-                <!--                Get Wifi Log-->
-                <LinearLayout
-                    android:id="@+id/ll_wifi_log_list"
-                    style="@style/SettingsStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                <!--
+                                &lt;!&ndash;                Notification&ndash;&gt;
+                                <LinearLayout
+                                    style="@style/SettingsStyle"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
 
-                    <TextView
-                        style="@style/TextAppearance.MyApp.Headline3_Setting_Normal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/get_wifi_label" />
+                                    <TextView
+                                        style="@style/TextAppearance.MyApp.Headline3_Setting_Normal"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/notifications_label" />
+                                </LinearLayout>
 
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/colorLightestGray" />
-
-<!--
-                &lt;!&ndash;                Notification&ndash;&gt;
-                <LinearLayout
-                    style="@style/SettingsStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/TextAppearance.MyApp.Headline3_Setting_Normal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/notifications_label" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/colorLightestGray" />
--->
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="@color/colorLightestGray" />
+                -->
 
 
                 <!--  Logout-->
@@ -160,12 +166,37 @@
                 </LinearLayout>
 
                 <View
+                    android:id="@+id/view_logout_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorLightestGray" />
+
+
+                <!--  Login-->
+                <LinearLayout
+                    android:id="@+id/llLogin"
+                    style="@style/SettingsStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        style="@style/TextAppearance.MyApp.Headline3_Setting_Normal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/login_button" />
+                </LinearLayout>
+
+                <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/colorLightestGray" />
 
 
             </LinearLayout>
+
+
         </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

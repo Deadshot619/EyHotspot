@@ -17,11 +17,12 @@ class GetFavouriteItem(
     @SerializedName("location_arabic") val location_arabic : String,
     @SerializedName("type") val _type : String,
     @SerializedName("type_arabic") val type_arabic : String,
-    @SerializedName("average_rating") val average_rating : String,
+    @SerializedName("average_rating") val average_rating : String? = "",
     @SerializedName("provider_name") val _provider_name : String,
     @SerializedName("provider_name_arabic") val provider_name_arabic : String,
     @SerializedName("navigate_url") val navigate_url : String,
-    @SerializedName("favourite") val favourite : Boolean
+    @SerializedName("favourite") val favourite : Boolean,
+    @SerializedName("uuid") val uuid: String
 ) {
 
     val name: String

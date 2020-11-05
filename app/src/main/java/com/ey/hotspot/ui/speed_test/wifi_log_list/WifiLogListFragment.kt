@@ -6,12 +6,13 @@ import com.ey.hotspot.R
 import com.ey.hotspot.app_core_lib.BaseFragment
 import com.ey.hotspot.databinding.FragmentWifiLogListBinding
 import com.ey.hotspot.ui.speed_test.wifi_log.WifiLogFragment
-import com.ey.hotspot.utils.replaceFragment
+import com.ey.hotspot.utils.extention_functions.replaceFragment
 
 class WifiLogListFragment : BaseFragment<FragmentWifiLogListBinding, WifiLogListViewModel>() {
 
     companion object {
         fun newInstance() = WifiLogListFragment()
+        var RELOAD = false
     }
 
     private lateinit var mAdapter: WifiLogListAdapter
@@ -23,15 +24,28 @@ class WifiLogListFragment : BaseFragment<FragmentWifiLogListBinding, WifiLogList
         mBinding.lifecycleOwner = viewLifecycleOwner
         mBinding.viewModel = mViewModel
 
-        setUpToolbar(toolbarBinding = mBinding.toolbarLayout, title = getString(R.string.wifi_log_list_label), showUpButton = true)
+        setUpToolbar(
+            toolbarBinding = mBinding.toolbarLayout,
+            title = getString(R.string.wifi_log_list_label),
+            showUpButton = true
+        )
 
         setUpRecyclerView(mBinding.rvWifiLogList)
+
+        if (RELOAD){
+            mViewModel.callWifiLogListResponse(mViewModel.deviceId)
+        }
     }
 
-    private fun setUpRecyclerView(recyclerView: RecyclerView){
+    private fun setUpRecyclerView(recyclerView: RecyclerView) {
         //Setup Adapter
         mAdapter = WifiLogListAdapter(WifiLogListAdapter.OnClickListener {
-            replaceFragment(WifiLogFragment.newInstance(it.wifiSsid), true)
+            replaceFragment(
+                    fragment = WifiLogFragment.newInstance(
+                            it
+                    ),
+                    addToBackStack = true
+                )
         })
 
         recyclerView.run {

@@ -4,33 +4,44 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ey.hotspot.app_core_lib.BaseViewModel
-import com.ey.hotspot.database.WifiInfoDatabase
-import com.ey.hotspot.database.WifiInfoDatabaseDao
-import com.ey.hotspot.database.WifiInformationTable
-import kotlinx.coroutines.Dispatchers
+import com.ey.hotspot.network.DataProvider
+import com.ey.hotspot.network.request.WifiLogListRequest
+import com.ey.hotspot.network.response.BaseResponse
+import com.ey.hotspot.network.response.WifiLogListResponse
+import com.ey.hotspot.utils.constants.getDeviceId
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+
 class WifiLogListViewModel(application: Application) : BaseViewModel(application) {
 
-    var database: WifiInfoDatabaseDao = WifiInfoDatabase.getInstance(application).wifiInfoDatabaseDao
+    private val _wifiLogListResponse = MutableLiveData<BaseResponse<List<WifiLogListResponse>>>()
+    val wifiLogListResponse: LiveData<BaseResponse<List<WifiLogListResponse>>>
+        get() = _wifiLogListResponse
 
-    private val _wifiLogList = MutableLiveData<List<WifiInformationTable>>()
-    val wifiLogList: LiveData<List<WifiInformationTable>>
-        get() = _wifiLogList
+    val deviceId = getDeviceId()
 
     init {
-        getDataFromDb()
+        callWifiLogListResponse(deviceId)
     }
 
-    private fun getDataFromDb(){
+
+    fun callWifiLogListResponse(deviceId: String) {
+        val request = WifiLogListRequest(deviceId = deviceId)
+
+        setDialogVisibility(true)
+        WifiLogListFragment.RELOAD = false
+
         coroutineScope.launch {
-            retrieveDataFromDb(database)
-        }
-    }
-
-    private suspend fun retrieveDataFromDb(wifiInfoDatabaseDao: WifiInfoDatabaseDao) {
-        withContext(Dispatchers.IO){
-            _wifiLogList.postValue(wifiInfoDatabaseDao.getAllWifiInfoData())
+            DataProvider.wifiLogList(
+                request,
+                success = {
+                    _wifiLogListResponse.value = it
+                    setDialogVisibility(false)
+                },
+                error = {
+                    showToastFromViewModel(it.message)
+                    setDialogVisibility(false)
+                }
+            )
         }
     }
 }

@@ -11,7 +11,7 @@ import com.ey.hotspot.ui.home.models.GetHotSpotRequest
 import com.ey.hotspot.ui.home.models.GetHotSpotResponse
 import kotlinx.coroutines.launch
 
-class SearchListViewModel(application: Application): BaseViewModel(application){
+class SearchListViewModel(application: Application) : BaseViewModel(application) {
 
     //Skipped user
     private val _getHotSpotResponse = MutableLiveData<BaseResponse<List<GetHotSpotResponse>>>()
@@ -21,30 +21,35 @@ class SearchListViewModel(application: Application): BaseViewModel(application){
     //Variable to store search string
     private var searchString = ""
 
+    init {
+        getHotSpotResponse("")
+    }
+
     //Method to get hotspots list for non-logged in user
     fun getHotSpotResponse(value: String) {
         val request = GetHotSpotRequest(
             name = value,
-            latitude = 19.1403509,
-            longitude = 72.8096671,
-            locationEnabled = true
+            latitude = 0.0,
+            longitude = 0.0,
+            locationEnabled = false
         )
 
         searchString = value
-
+        setDialogVisibility(true)
         coroutineScope.launch {
             DataProvider.getHotspot(
                 request = request,
                 success = {
 
-                    if (it.status){
+                    if (it.status) {
                         _getHotSpotResponse.value = it
                     } else {
                         showToastFromViewModel(it.message)
                     }
+                    setDialogVisibility(false)
+
 
                 }, error = {
-
                     checkError(it)
                 }
             )
@@ -53,7 +58,7 @@ class SearchListViewModel(application: Application): BaseViewModel(application){
 
 
     fun markFavouriteItem(locationId: Int) {
-        setDialogVisibility(true,null)
+        setDialogVisibility(true, null)
         coroutineScope.launch {
             DataProvider.markFavourite(
                 request = MarkFavouriteRequest(locationId = locationId),
@@ -61,9 +66,10 @@ class SearchListViewModel(application: Application): BaseViewModel(application){
 
                     if (it.status)
                         getHotSpotResponse(searchString)
+                    else
+                        setDialogVisibility(false)
 
                     showToastFromViewModel(it.message)
-                    setDialogVisibility(false)
                 }, error = {
                     checkError(it)
                 }

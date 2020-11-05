@@ -41,6 +41,31 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+<!--            Asterik-->
+            <TextView
+                android:id="@+id/asterik"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/AsterikEditText"
+                android:layout_marginTop="@dimen/margin_20"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@+id/toolbarLayout"
+                />
+
+<!--            Mandatory field-->
+            <TextView
+                android:id="@+id/tvMandatoryFieldMsg"
+                android:layout_width="0dp"
+                android:textSize="@dimen/txt_size_16"
+                android:textStyle="italic"
+                android:layout_marginStart="@dimen/margin_5"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_20"
+                app:layout_constraintStart_toEndOf="@+id/asterik"
+                android:text="@string/msg_mandatory_fields"
+                app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                app:layout_constraintTop_toBottomOf="@+id/toolbarLayout" />
+
             <!--Name View-->
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_name"
@@ -51,7 +76,7 @@
                 android:src="@drawable/user_bitmap"
                 app:layout_constraintEnd_toEndOf="@id/input_mobile_number"
                 app:layout_constraintStart_toStartOf="@id/input_mobile_number"
-                app:layout_constraintTop_toBottomOf="@+id/toolbarLayout" />
+                app:layout_constraintTop_toBottomOf="@+id/tvMandatoryFieldMsg" />
 
             <!--Name Hint-->
             <TextView
@@ -82,9 +107,8 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/first_name_label"
                 android:singleLine="true"
-                android:textDirection="locale"
-
                 android:text="@={viewModel.firstName}"
+                android:textDirection="locale"
                 app:layout_constraintBottom_toBottomOf="@id/iv_name"
                 app:layout_constraintEnd_toStartOf="@+id/edt_last_name"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -99,14 +123,54 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/last_name_label"
-                android:textDirection="locale"
-
                 android:text="@={viewModel.lastName}"
+                android:textDirection="locale"
                 app:layout_constraintBottom_toBottomOf="@id/iv_name"
                 app:layout_constraintEnd_toEndOf="@id/iv_name"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/edt_first_name"
                 app:layout_constraintTop_toTopOf="@id/iv_name" />
+
+
+            <!--Spinner-->
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinner_country_code"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/common_padding"
+                android:layout_marginEnd="@dimen/common_padding"
+                tools:entries="@array/CountryCode"
+                android:dropDownSelector="@color/colorPrimary"
+                android:paddingStart="@dimen/common_padding_24"
+                android:paddingEnd="@dimen/common_padding_24"
+                app:layout_constraintBottom_toBottomOf="@id/iv_countryCode"
+                app:layout_constraintEnd_toEndOf="@id/iv_countryCode"
+                app:layout_constraintStart_toStartOf="@id/iv_countryCode"
+                app:layout_constraintTop_toTopOf="@id/iv_countryCode" />
+
+            <!--Issue bg View-->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_countryCode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_margin_32"
+                android:scaleType="fitXY"
+                android:src="@drawable/mobile_number_bitmap"
+                app:layout_constraintEnd_toEndOf="@id/iv_name"
+                app:layout_constraintStart_toStartOf="@id/iv_name"
+                app:layout_constraintTop_toBottomOf="@id/edt_last_name" />
+
+            <!--Country Code-->
+            <TextView
+                android:id="@+id/tv_country_code_hint"
+                style="@style/EditTextHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/country_code_label"
+                app:layout_constraintBottom_toTopOf="@id/iv_countryCode"
+                app:layout_constraintEnd_toEndOf="@id/iv_countryCode"
+                app:layout_constraintStart_toStartOf="@id/iv_countryCode"
+                app:layout_constraintTop_toTopOf="@id/iv_countryCode" />
 
             <!--Mobile Number input-->
             <com.google.android.material.textfield.TextInputLayout
@@ -117,18 +181,18 @@
                 android:layout_marginTop="@dimen/common_margin_32"
                 app:layout_constraintEnd_toEndOf="@id/guideline_right"
                 app:layout_constraintStart_toStartOf="@id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@id/iv_name">
+                app:layout_constraintTop_toBottomOf="@id/iv_countryCode">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtMobileNo"
                     style="@style/CustomEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textDirection="locale"
-                    android:inputType="phone"
                     android:background="@drawable/mobile_number_bitmap"
                     android:hint="@string/enter_register_mobile"
-                    android:text="@={viewModel.mobileNumber}" />
+                    android:inputType="phone"
+                    android:text="@={viewModel.mobileNumber}"
+                    android:textDirection="locale" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -219,8 +283,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
+                    android:textAlignment="viewStart"
+
                     android:background="@drawable/password_bitmap"
-                    android:hint="@string/enter_password"
+                    android:hint="@string/password_mandatory"
                     android:text="@={viewModel.password}" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -277,7 +343,7 @@
                     style="@style/CustomEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
+                    android:textAlignment="viewStart"
                     android:inputType="textPassword"
                     android:background="@drawable/password_bitmap"
                     android:hint="@string/enter_confirm_password"
@@ -285,6 +351,23 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+
+            <TextView
+                android:id="@+id/tvPasswordMsg"
+                android:layout_width="0dp"
+                android:textSize="12sp"
+                android:textStyle="italic"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_20"
+                android:text="@string/password_format_str"
+                app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@+id/confirm_password_input_layout" />
+
+
+
+
+            <!--Confirm Password Hint-->
           <!--  &lt;!&ndash;Confirm Password Hint&ndash;&gt;
             <TextView
                 android:id="@+id/tv_confirm_password_hint"
@@ -320,34 +403,84 @@
                 />
 
 
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cb_terms_conditions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/tvSignAgree"
+                app:layout_constraintBottom_toBottomOf="@id/tvTermsCondition"
+                app:layout_constraintEnd_toStartOf="@id/tvSignAgree"/>
+
+<!--            By signing up-->
             <TextView
                 android:id="@+id/tvSignAgree"
                 style="@style/TextAppearance.MyApp.Headline3_Profile_Normal_Dark"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_30"
-                android:gravity="center"
+                android:text="@string/terms_condition"
                 android:textDirection="locale"
-
-                android:text="@string/sign_agree_msg"
                 app:layout_constraintEnd_toEndOf="@id/guideline_right"
                 app:layout_constraintStart_toStartOf="@id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@id/confirm_password_input_layout" />
+                app:layout_constraintTop_toBottomOf="@id/tvPasswordMsg"
+                />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/AsterikEditText"
+               android:layout_marginStart="@dimen/margin_10"
+                android:layout_marginEnd="@dimen/margin_10"
+                app:layout_constraintTop_toTopOf="@id/tvSignAgree"
+                app:layout_constraintStart_toEndOf="@id/tvSignAgree"
+                />
 
+            <!--T&C-->
             <TextView
                 android:id="@+id/tvTermsCondition"
                 style="@style/TextAppearance.MyApp.Headline3_Profile_Bold"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:visibility="gone"
                 android:text="@string/terms_condition"
                 android:textDirection="locale"
-
-                app:layout_constraintEnd_toEndOf="@id/guideline_right"
-                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintEnd_toEndOf="@+id/tvSignAgree"
+                app:layout_constraintStart_toStartOf="@id/tvSignAgree"
                 app:layout_constraintTop_toBottomOf="@id/tvSignAgree" />
 
+
+            <!--Enter message-->
+            <TextView
+                android:id="@+id/tv_enter_message_shown"
+                style="@style/TextAppearance.MyApp.Headline5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_margin_24"
+                android:text="@string/captcha_label"
+                android:textDirection="locale"
+                android:textSize="@dimen/text_size_14"
+                app:layout_constraintEnd_toEndOf="@+id/guideline_right"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@id/tvTermsCondition" />
+
+
+            <!--            Captcha Layout-->
+            <include
+                android:id="@+id/layout_captcha"
+                layout="@layout/item_layout_captcha"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_margin_8"
+                app:layout_constraintEnd_toEndOf="@+id/guideline_right"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@id/tv_enter_message_shown"/>
+
+
+
+
+            <!--            Get Started now-->
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnGetStarted"
                 android:layout_width="wrap_content"
@@ -360,13 +493,13 @@
                 android:paddingEnd="@dimen/margin_60"
                 android:paddingBottom="@dimen/margin_10"
                 android:text="@string/get_started"
-                android:textDirection="locale"
-
                 android:textColor="@color/colorWhite"
+
+                android:textDirection="locale"
                 android:textSize="@dimen/text_size_15"
                 app:layout_constraintEnd_toEndOf="@+id/guideline_right"
                 app:layout_constraintStart_toStartOf="@+id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@+id/tvTermsCondition" />
+                app:layout_constraintTop_toBottomOf="@+id/layout_captcha" />
 
 
             <LinearLayout

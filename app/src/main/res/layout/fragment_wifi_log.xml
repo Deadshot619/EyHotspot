@@ -39,45 +39,91 @@
                 <!--Wifi ssid-->
                 <TextView
                     android:id="@+id/tv_wifi_ssid"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    tools:text="StarBucks WiFi"
-                    android:textColor="?attr/colorOnSecondary"
-                    android:layout_marginTop="@dimen/common_margin_24"
                     style="@style/TextAppearance.MaterialComponents.Headline5"
-                    />
-
-                <!--Date-->
-                <TextView
-                    android:id="@+id/tv_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/tv_wifi_ssid"
-                    app:layout_constraintStart_toStartOf="@id/tv_wifi_ssid"
-                    app:layout_constraintEnd_toEndOf="@id/tv_wifi_ssid"
-                    tools:text="Date: 69-69-6969"
-                    android:text="Date: "
-                    android:textColor="@color/colorGrayLight"
-                    android:layout_marginTop="@dimen/common_margin_between_fields"
-                    style="@style/TextAppearance.MaterialComponents.Headline6"
-                    />
+                    android:layout_marginTop="@dimen/common_margin_24"
+                    android:textColor="?attr/colorOnSecondary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="StarBucks WiFi" />
 
+                <!--Provider-->
+                <TextView
+                    android:id="@+id/chip_username"
+                    style="@style/ChipStyleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/common_margin_between_fields"
+                    android:layout_marginEnd="@dimen/common_margin"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_address"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_wifi_ssid"
+                    tools:text="Vodafone" />
+
+                <!--        Address     -->
+                <TextView
+                    android:id="@+id/tv_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/colorLightGray"
+                    android:textSize="@dimen/text_size_16"
+                    app:layout_constraintBottom_toBottomOf="@+id/chip_username"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/chip_username"
+                    app:layout_constraintTop_toTopOf="@+id/chip_username"
+                    tools:text="Mumbai" />
+
+                <LinearLayout
+                    android:id="@+id/ll_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@id/tv_address">
+                    <!--Date-->
+                    <TextView
+                        android:id="@+id/tv_date_str"
+                        style="@style/TextAppearance.MaterialComponents.Headline6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/common_margin_between_fields"
+                        android:text="@string/wifidate"
+                        android:textColor="@color/colorGrayLight"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:text="@string/wifidate" />
+                    <!--Date-->
+                    <TextView
+                        android:id="@+id/tv_date"
+                        style="@style/TextAppearance.MaterialComponents.Headline6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/common_margin_8"
+                        android:layout_marginTop="@dimen/common_margin_between_fields"
+                        android:text=""
+                        android:textColor="@color/colorGrayLight"
+                        android:textDirection="locale"
+                        tools:text="69/69/6969" />
+                </LinearLayout>
                 <!--        Rate Now-->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_rate_now"
-                    android:text="@string/rate_now_label"
                     style="@style/OutlinedButtonNormal"
-                    android:paddingStart="@dimen/common_padding"
-                    android:paddingEnd="@dimen/common_padding"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/common_margin_24"
                     android:layout_marginStart="@dimen/common_margin_32"
-                    app:layout_constraintTop_toBottomOf="@id/tv_date"
-                    app:layout_constraintStart_toStartOf="parent"/>
+                    android:layout_marginTop="@dimen/common_margin_24"
+                    android:paddingStart="@dimen/common_padding"
+                    android:paddingEnd="@dimen/common_padding"
+                    android:text="@string/rate_wifi_label"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ll_date" />
 
 
                 <!--heart-->
@@ -85,36 +131,36 @@
                     android:id="@+id/iv_favourites"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
-                    android:src="@drawable/ic_favorite_filled_gray"
                     android:layout_marginEnd="@dimen/common_margin_24"
-                    app:layout_constraintTop_toTopOf="@id/iv_flag"
+                    android:src="@drawable/ic_favorite_filled_gray"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_flag"
                     app:layout_constraintEnd_toStartOf="@id/iv_flag"
-                    app:layout_constraintStart_toEndOf="@id/tv_wifi_ssid"
                     app:layout_constraintHorizontal_bias="1"
-                    app:layout_constraintBottom_toBottomOf="@id/iv_flag"/>
+                    app:layout_constraintStart_toEndOf="@id/tv_wifi_ssid"
+                    app:layout_constraintTop_toTopOf="@id/iv_flag" />
 
                 <!--Flag-->
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_flag"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
-                    android:src="@drawable/ic_group"
                     android:layout_marginEnd="@dimen/common_margin_32"
+                    android:src="@drawable/flag_icon_bitmap"
+                    app:layout_constraintBottom_toBottomOf="@id/btn_rate_now"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/btn_rate_now"
-                    app:layout_constraintBottom_toBottomOf="@id/btn_rate_now"/>
+                    app:layout_constraintTop_toTopOf="@id/btn_rate_now" />
 
                 <!--Connecting logs-->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cv_connecting_logs"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/btn_rate_now"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:strokeColor="@color/colorLightestGray"
+                    android:layout_margin="@dimen/common_margin_24"
                     app:cardCornerRadius="8dp"
-                    android:layout_margin="@dimen/common_margin_24">
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btn_rate_now"
+                    app:strokeColor="@color/colorLightestGray">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -127,6 +173,7 @@
                             style="@style/TextAppearance.MaterialComponents.Headline6"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:text="@string/connection_logs_label"
                             android:textColor="?attr/colorOnSecondary"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0"
@@ -141,10 +188,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/common_margin_between_fields"
+                            android:text="@string/start_time_label"
                             android:textColor="@color/colorGrayLight"
                             app:layout_constraintEnd_toStartOf="@+id/tv_end_time"
                             app:layout_constraintHorizontal_bias="0.5"
-                            android:text="@string/start_time_label"
                             app:layout_constraintHorizontal_chainStyle="spread_inside"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/tv_connecting_logs"
@@ -167,11 +214,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/common_margin_between_fields"
+                            android:layout_marginEnd="@dimen/common_margin_end"
+                            android:text="@string/end_time_label"
                             android:textColor="@color/colorGrayLight"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.5"
-                            android:text="@string/end_time_label"
-                            android:layout_marginEnd="@dimen/common_margin_end"
                             app:layout_constraintStart_toEndOf="@+id/tv_start_time"
                             app:layout_constraintTop_toBottomOf="@id/tv_connecting_logs"
                             tools:text="@string/end_time_label" />
@@ -181,13 +228,13 @@
                             android:id="@+id/view_horizontal"
                             android:layout_width="0dp"
                             android:layout_height="1dp"
+                            android:layout_marginTop="@dimen/common_margin"
                             android:background="@color/colorLightestGray"
-                            app:layout_constraintTop_toBottomOf="@id/tv_start_time"
-                            app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            android:layout_marginTop="@dimen/common_margin"/>
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_start_time" />
 
-                        <!--                RecyclerView Connecting logs-->
+                        <!-- &lt;!&ndash;                RecyclerView Connecting logs&ndash;&gt;
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rv_connecting_logs"
                             android:layout_width="0dp"
@@ -196,8 +243,83 @@
                             app:layout_constraintTop_toBottomOf="@id/view_horizontal"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            android:layout_marginTop="@dimen/common_margin"/>
+                            android:layout_marginTop="@dimen/common_margin"/>-->
 
+                        <!--
+                        <LinearLayout
+                            app:layout_constraintTop_toBottomOf="@+id/view_horizontal"
+                            android:orientation="horizontal"
+                            android:weightSum="2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            tools:ignore="MissingConstraints">
+                            <TextView
+                                android:layout_weight="1"
+                                android:id="@+id/tv_start_time_value"
+                                style="@style/Headline7"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/common_margin_between_fields"
+                                android:textColor="@color/colorGrayLight"
+                                app:layout_constraintEnd_toStartOf="@+id/tv_end_time"
+                                app:layout_constraintHorizontal_bias="0.5"
+                                android:text="@string/start_time_label"
+                                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                                app:layout_constraintStart_toStartOf="parent"
+                                tools:text="@string/start_time_label" />
+
+                            <TextView
+                                android:gravity="end"
+                                android:layout_weight="1"
+                                android:id="@+id/tv_end_time_value"
+                                style="@style/Headline7"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/common_margin_between_fields"
+                                android:textColor="@color/colorGrayLight"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.5"
+                                android:text="@string/end_time_label"
+                                android:layout_marginEnd="@dimen/common_margin_end"
+                                app:layout_constraintStart_toEndOf="@+id/tv_start_time"
+                                tools:text="@string/end_time_label" />
+
+                        </LinearLayout>
+-->
+
+
+                        <!--Start Time Value-->
+                        <TextView
+                            android:id="@+id/tv_start_time_value"
+                            style="@style/Headline7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/common_margin_between_fields"
+                            android:text="@string/start_time_label"
+                            android:textColor="@color/colorGrayLight"
+                            app:layout_constraintEnd_toStartOf="@+id/tv_end_time_value"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintHorizontal_chainStyle="spread_inside"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/view_horizontal"
+                            tools:text="@string/start_time_label" />
+
+
+                        <!--End Time Value-->
+                        <TextView
+                            android:id="@+id/tv_end_time_value"
+                            style="@style/Headline7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/common_margin_between_fields"
+                            android:layout_marginEnd="@dimen/common_margin_end"
+                            android:text="@string/end_time_label"
+                            android:textColor="@color/colorGrayLight"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/tv_start_time_value"
+                            app:layout_constraintTop_toBottomOf="@id/view_horizontal"
+                            tools:text="@string/end_time_label" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
 
@@ -206,14 +328,14 @@
                     android:id="@+id/cv_speed_test_logs"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/common_margin_24"
                     android:clipToPadding="false"
-                    app:cardUseCompatPadding="true"
-                    app:layout_constraintTop_toBottomOf="@id/cv_connecting_logs"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:strokeColor="@color/colorLightestGray"
                     app:cardCornerRadius="8dp"
-                    android:layout_margin="@dimen/common_margin_24">
+                    app:cardUseCompatPadding="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cv_connecting_logs"
+                    app:strokeColor="@color/colorLightestGray">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -226,6 +348,7 @@
                             style="@style/TextAppearance.MaterialComponents.Headline6"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:text="@string/speed_test_logs_label"
                             android:textColor="?attr/colorOnSecondary"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0"
@@ -239,8 +362,8 @@
                             style="@style/Headline7"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/start_time_label"
                             android:layout_marginTop="@dimen/common_margin_between_fields"
+                            android:text="@string/start_time_label"
                             android:textColor="@color/colorGrayLight"
                             app:layout_constraintEnd_toStartOf="@+id/tv_download"
                             app:layout_constraintHorizontal_bias="0.5"
@@ -266,11 +389,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/common_margin_between_fields"
+                            android:layout_marginEnd="@dimen/common_margin_end"
+                            android:text="@string/download_label"
                             android:textColor="@color/colorGrayLight"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.5"
-                            android:text="@string/download_label"
-                            android:layout_marginEnd="@dimen/common_margin_end"
                             app:layout_constraintStart_toEndOf="@+id/tv_start_time_speed"
                             app:layout_constraintTop_toBottomOf="@id/tv_speed_test_logs"
                             tools:text="@string/download_label" />
@@ -280,22 +403,102 @@
                             android:id="@+id/view_horizontal_speed"
                             android:layout_width="0dp"
                             android:layout_height="1dp"
+                            android:layout_marginTop="@dimen/common_margin"
                             android:background="@color/colorLightestGray"
-                            app:layout_constraintTop_toBottomOf="@id/tv_start_time_speed"
-                            app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            android:layout_marginTop="@dimen/common_margin"/>
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_start_time_speed" />
+
+
+                        <!--
+                        <LinearLayout
+                            android:id="@+id/ll_speedtest"
+                            app:layout_constraintTop_toBottomOf="@+id/view_horizontal_speed"
+                            android:orientation="horizontal"
+                            android:weightSum="2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            tools:ignore="MissingConstraints">
+                            <TextView
+                                android:gravity="start"
+                                android:layout_weight="1"
+                                android:id="@+id/tv_start_speed_value"
+                                style="@style/Headline7"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/common_margin_between_fields"
+                                android:textColor="@color/colorGrayLight"
+                                app:layout_constraintEnd_toStartOf="@+id/tv_end_time"
+                                app:layout_constraintHorizontal_bias="0.5"
+                                android:text="@string/start_time_label"
+                                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                                app:layout_constraintStart_toStartOf="parent"
+                                tools:text="@string/start_time_label" />
+
+                            <TextView
+                                android:gravity="end"
+                                android:layout_weight="1"
+                                android:id="@+id/tv_end_speed_value"
+                                style="@style/Headline7"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/common_margin_between_fields"
+                                android:textColor="@color/colorGrayLight"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.5"
+                                android:text="@string/end_time_label"
+                                android:layout_marginEnd="@dimen/common_margin_end"
+                                app:layout_constraintStart_toEndOf="@+id/tv_start_time"
+                                tools:text="@string/end_time_label" />
+                        </LinearLayout>
+-->
+
+                        <!--Start Time Value-->
+                        <TextView
+                            android:id="@+id/tv_start_speed_value"
+                            style="@style/Headline7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/common_margin_between_fields"
+                            android:text="@string/start_time_label"
+                            android:textColor="@color/colorGrayLight"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toStartOf="@+id/tv_end_speed_value"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintHorizontal_chainStyle="spread_inside"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/view_horizontal_speed"
+                            tools:text="@string/start_time_label" />
+
+
+                        <!--End Time Value-->
+                        <TextView
+                            android:id="@+id/tv_end_speed_value"
+                            style="@style/Headline7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/common_margin_between_fields"
+                            android:layout_marginEnd="@dimen/common_margin_end"
+                            android:text="@string/end_time_label"
+                            android:textColor="@color/colorGrayLight"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/tv_start_speed_value"
+                            app:layout_constraintTop_toBottomOf="@id/view_horizontal_speed"
+                            tools:text="@string/end_time_label" />
 
                         <!--                RecyclerView Connecting logs-->
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rv_speed_test_logs"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            app:layout_constraintTop_toBottomOf="@id/view_horizontal_speed"
                             app:layout_constraintEnd_toEndOf="parent"
-                            tools:itemCount="2"
                             app:layout_constraintStart_toStartOf="parent"
-                            android:layout_marginTop="@dimen/common_margin"/>
+                            app:layout_constraintTop_toBottomOf="@id/tv_start_speed_value"
+                            tools:itemCount="2"
+                            tools:listitem="@layout/speed_test_wifilogs_item" />
+
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>

@@ -1,7 +1,5 @@
 package com.ey.hotspot.ui.favourite
 
-import android.content.Intent
-import android.net.Uri
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ey.hotspot.R
@@ -11,7 +9,9 @@ import com.ey.hotspot.ui.favourite.model.GetFavouriteItem
 import com.ey.hotspot.ui.review_and_complaint.reviews.ReviewsFragment
 import com.ey.hotspot.ui.speed_test.raise_complaint.RaiseComplaintFragment
 import com.ey.hotspot.utils.constants.setUpSearchBar
-import com.ey.hotspot.utils.replaceFragment
+import com.ey.hotspot.utils.extention_functions.openNavigateUrl
+import com.ey.hotspot.utils.extention_functions.replaceFragment
+import com.ey.hotspot.utils.extention_functions.shareWifiHotspotData
 
 class FavouriteFragment : BaseFragment<FavouriteFragmentBinding, FavouriteViewModel>() {
 
@@ -41,7 +41,7 @@ class FavouriteFragment : BaseFragment<FavouriteFragmentBinding, FavouriteViewMo
             toolbarBinding = mBinding.toolbarLayout2,
             showUpButton = false,
             showShadow = false
-        ){
+        ) {
             mViewModel.getFavouriteList(value = it)
         }
 
@@ -83,11 +83,12 @@ class FavouriteFragment : BaseFragment<FavouriteFragmentBinding, FavouriteViewMo
 
             //Navigate Now
             override fun onClickNavigate(data: GetFavouriteItem) {
-                val url = data.navigate_url
+                activity?.openNavigateUrl(data.navigate_url, data.lat.toString(), data.lng.toString())
+            }
 
-                val i = Intent(Intent.ACTION_VIEW)
-                i.data = Uri.parse(url)
-                startActivity(i)
+            //Share
+            override fun onClickShare(data: GetFavouriteItem) {
+                activity?.shareWifiHotspotData(hotspotName = data.name, operatorName = data.provider_name, city = data.location, id = data.uuid)
             }
         })
 

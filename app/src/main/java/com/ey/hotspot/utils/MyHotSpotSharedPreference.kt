@@ -4,15 +4,21 @@ import android.content.Context
 import com.ey.hotspot.app_core_lib.CoreApp
 import com.ey.hotspot.app_core_lib.HotSpotApp
 import com.ey.hotspot.network.response.LoginResponse
+import com.ey.hotspot.utils.constants.Constants
 import com.ey.hotspot.utils.constants.Constants.Companion.ACCESS_TOKEN
 import com.ey.hotspot.utils.constants.Constants.Companion.APP_LOGGED_IN
 import com.ey.hotspot.utils.constants.Constants.Companion.DELEGATE_ENGLISH_LANG
 import com.ey.hotspot.utils.constants.Constants.Companion.ENABLED_GPS_LOCATION
+import com.ey.hotspot.utils.constants.Constants.Companion.FIRST_TIME_LOGIN_OR_SKIPPED
 import com.ey.hotspot.utils.constants.Constants.Companion.FORGOT_PASSWORD_FIELD
 import com.ey.hotspot.utils.constants.Constants.Companion.LANGUAGE_SELECTED
+import com.ey.hotspot.utils.constants.Constants.Companion.REGISTRATION_EMAIL_ID
 import com.ey.hotspot.utils.constants.Constants.Companion.REGISTRATION_TMP_TOKEN
 import com.ey.hotspot.utils.constants.Constants.Companion.SKIP_STATUS
+import com.ey.hotspot.utils.constants.Constants.Companion.TERMS_AND_CONDITION
 import com.ey.hotspot.utils.constants.Constants.Companion.USER_DATA
+import com.ey.hotspot.utils.constants.Constants.Companion.WIFI_KEYWORDS
+import com.ey.hotspot.utils.extention_functions.fromJson
 import com.google.gson.Gson
 
 class MyHotSpotSharedPreference(context: Context) {
@@ -30,6 +36,12 @@ class MyHotSpotSharedPreference(context: Context) {
         return CoreApp.sharedPreferences.getString(LANGUAGE_SELECTED, DELEGATE_ENGLISH_LANG)
             ?: DELEGATE_ENGLISH_LANG
     }
+
+    fun setLanguageFirstTime(value: Boolean){
+        CoreApp.sharedPreferences.edit().putBoolean(Constants.LANGUAGE_SELECTED_FIRST_TIME, value).apply()
+    }
+
+    fun getLanguageFirstTime(): Boolean = CoreApp.sharedPreferences.getBoolean(Constants.LANGUAGE_SELECTED_FIRST_TIME, false) ?: false
 
     /*save user access token for api calls*/
     fun saveAccessToken(value: String?) {
@@ -80,7 +92,6 @@ class MyHotSpotSharedPreference(context: Context) {
 
     fun setGPSEnabledStatus(value: Boolean) {
         CoreApp.sharedPreferences.edit().putBoolean(ENABLED_GPS_LOCATION, value).apply()
-
     }
 
     fun getGPSEnabledStatus(): Boolean? {
@@ -112,7 +123,6 @@ class MyHotSpotSharedPreference(context: Context) {
     }
 
 
-
     fun setForgotPasswordField(field: String) {
         CoreApp.sharedPreferences.edit().putString(FORGOT_PASSWORD_FIELD, field).apply()
     }
@@ -126,5 +136,47 @@ class MyHotSpotSharedPreference(context: Context) {
      */
     fun clearSharedPrefData() {
         CoreApp.sharedPreferences.edit().clear().apply()
+    }
+
+    fun setTermsConditionStatus(value: Boolean) {
+        CoreApp.sharedPreferences.edit().putBoolean(TERMS_AND_CONDITION, value).apply()
+
+    }
+
+    fun getTermsAndConditionStatus(): Boolean? {
+        return CoreApp.sharedPreferences.getBoolean(TERMS_AND_CONDITION, false)
+
+    }
+
+    fun setRegistrationEmailID(emailID: String) {
+        CoreApp.sharedPreferences.edit().putString(REGISTRATION_EMAIL_ID, emailID).apply()
+
+    }
+
+    /*
+     *  These getter & setter methods will help to determine whether user was logged in for first time or not
+     */
+    fun setFirstTimeLoginOrSkipped(value: Boolean){
+        CoreApp.sharedPreferences.edit().putBoolean(FIRST_TIME_LOGIN_OR_SKIPPED, value).apply()
+    }
+
+    fun getFirstTimeLoginOrSkipped(): Boolean{
+        return CoreApp.sharedPreferences.getBoolean(FIRST_TIME_LOGIN_OR_SKIPPED, false)
+    }
+
+    /*
+     *  Method to save & retrieve Wifi Keywords from SharedPref that we get in Splash Activity
+     */
+    fun saveWifiKeywordsPref(list: List<String>) {
+        CoreApp.sharedPreferences.edit().putString(WIFI_KEYWORDS, Gson().toJson(list)).apply()
+    }
+
+    fun getWifiKeywordsPref(): List<String>? {
+        return Gson().fromJson<List<String>>(
+            CoreApp.sharedPreferences.getString(
+                WIFI_KEYWORDS,
+                null
+            ) ?: ""
+        )
     }
 }

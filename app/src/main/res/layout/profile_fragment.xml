@@ -16,9 +16,9 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:clipToPadding="false"
-            android:paddingBottom="@dimen/common_padding_8"
-            android:layout_height="wrap_content">
+            android:paddingBottom="@dimen/common_padding_8">
 
             <!--Toolbar-->
             <include
@@ -27,6 +27,38 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+               android:layout_margin="@dimen/margin_20"
+                app:layout_constraintTop_toBottomOf="@+id/toolbarLayout">
+
+<!--                Asterik-->
+                <TextView
+                android:id="@+id/asterik"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/AsterikEditText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:ignore="MissingConstraints" />
+
+<!--                Mandatory field-->
+            <TextView
+                android:id="@+id/tvMandatoryFieldMsg"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_5"
+                android:text="@string/msg_mandatory_fields"
+                android:textSize="@dimen/txt_size_16"
+                android:textStyle="italic"
+                app:layout_constraintStart_toEndOf="@id/asterik"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:ignore="MissingConstraints" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
             <!--Name View-->
             <androidx.appcompat.widget.AppCompatImageView
@@ -38,7 +70,7 @@
                 android:src="@drawable/user_bitmap"
                 app:layout_constraintEnd_toEndOf="@id/input_mobile_no"
                 app:layout_constraintStart_toStartOf="@id/input_mobile_no"
-                app:layout_constraintTop_toBottomOf="@+id/toolbarLayout" />
+                app:layout_constraintTop_toBottomOf="@+id/layout" />
 
             <!--First Name-->
             <com.google.android.material.textfield.TextInputEditText
@@ -109,8 +141,7 @@
 
 
 
-<!--
-            &lt;!&ndash;Spinner&ndash;&gt;
+            <!--Spinner-->
             <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/spinner_issue"
                 android:layout_width="0dp"
@@ -126,7 +157,7 @@
                 app:layout_constraintStart_toStartOf="@id/iv_countryCode"
                 app:layout_constraintTop_toTopOf="@id/iv_countryCode" />
 
-            &lt;!&ndash;Issue bg View&ndash;&gt;
+            <!--Issue bg View-->
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_countryCode"
                 android:layout_width="0dp"
@@ -138,7 +169,7 @@
                 app:layout_constraintStart_toStartOf="@id/iv_name"
                 app:layout_constraintTop_toBottomOf="@id/edt_last_name" />
 
-            &lt;!&ndash;Country Code&ndash;&gt;
+            <!--Country Code-->
             <TextView
                 android:id="@+id/tv_country_code_hint"
                 style="@style/EditTextHint"
@@ -149,7 +180,6 @@
                 app:layout_constraintEnd_toEndOf="@id/iv_countryCode"
                 app:layout_constraintStart_toStartOf="@id/iv_countryCode"
                 app:layout_constraintTop_toTopOf="@id/iv_countryCode" />
--->
 
 
             <!--Mobile No-->
@@ -164,7 +194,7 @@
                 app:hintEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_name">
+                app:layout_constraintTop_toBottomOf="@id/iv_countryCode">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_mobile_no"
@@ -242,6 +272,7 @@
 
             <!--            Asterik-->
             <TextView
+                android:id="@+id/email_asterik"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/AsterikEditText"
@@ -267,6 +298,7 @@
                     android:layout_height="match_parent"
                     android:inputType="textPassword"
                     android:textDirection="locale"
+                    android:textAlignment="viewStart"
                     android:background="@drawable/password_bitmap"
                     android:hint="@string/enter_password"
                     android:text="@={viewModel.profileData.password}" />
@@ -300,6 +332,7 @@
 
             <!--            Asterik-->
             <TextView
+                android:id="@+id/tv_password_asterik"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/AsterikEditText"
@@ -324,6 +357,7 @@
                     android:inputType="textPassword"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:textAlignment="viewStart"
                     android:background="@drawable/password_bitmap"
                     android:hint="@string/enter_confirm_password"
                     android:text="@={viewModel.profileData.confirmPassword}" />
@@ -354,14 +388,34 @@
                 app:layout_constraintStart_toStartOf="@id/confirm_password_input_layout"
                 app:layout_constraintTop_toTopOf="@id/confirm_password_input_layout" />
 
+
             <!--            Asterik-->
             <TextView
+                android:id="@+id/tv_confirm_password_asterik"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/AsterikEditText"
                 app:layout_constraintTop_toTopOf="@id/tv_confirm_password_hint"
                 app:layout_constraintStart_toEndOf="@id/tv_confirm_password_hint"
                 />
+<!--            Password info-->
+            <TextView
+                android:id="@+id/tvPasswordMsg"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_20"
+                android:text="@string/password_format_str"
+                android:textSize="12sp"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="@id/iv_countryCode"
+                app:layout_constraintStart_toStartOf="@id/iv_countryCode"
+                app:layout_constraintTop_toBottomOf="@+id/confirm_password_input_layout" />
+
+
+
+
+
+
 
 
             <!--Update Profile-->
@@ -374,7 +428,7 @@
                 android:text="@string/update_profile_label"
                 android:textSize="@dimen/text_size_14"
                 app:layout_constraintEnd_toEndOf="@id/input_email_id"
-                app:layout_constraintTop_toBottomOf="@id/confirm_password_input_layout" />
+                app:layout_constraintTop_toBottomOf="@id/tvPasswordMsg" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
