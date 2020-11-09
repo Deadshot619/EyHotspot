@@ -128,7 +128,7 @@
     <string name="download_speed_label">سرعة التنزيل</string>
     <string name="retest_label">اعد الضبط</string>
     <string name="wifi_disabled_label">واي فاي معطل</string>
-    <string name="wifi_enable_conformation">يبدو أن wifi الخاص بك معطل ، هل تريد تمكينه؟</string>
+    <string name="wifi_enable_conformation">يبدو أن الواي فاي الخاص بك معطل ، هل تريد تمكينه؟</string>
     <string name="network_not_validated_label">الشبكة الحالية لاتنتمي لشبكة الواي فاي المجانية</string>
     <string name="wifi_not_validated_label">الشبكة الحالية لاتنتمي لشبكة الواي فاي المجانية</string>
     <string name="error_while_calculating_download_speed">حدث خطأ أثناء حساب سرعة التنزيل</string>

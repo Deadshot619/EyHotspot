@@ -113,7 +113,7 @@ class RaiseComplaintFragment :
             it?.let {
                 val adapter = ArrayAdapter<String>(
                     requireContext(),
-                    R.layout.support_simple_spinner_dropdown_item,
+                    R.layout.spinner_complaint,
                     it.types.map { it.value }.toList()
                 )
 
